@@ -189,30 +189,30 @@ export const menuItems = [
         key: 'management',
         perms: ['view_user', 'view_role', 'view_company', 'view_team', 'view_pseudo'],
         subItems: [
-            // {
-            //     label: 'Users',
-            //     link: '/users',
-            //     svg: UserIcon,
-            //     perms: ['view_user'],
-            // },
-            // {
-            //     label: 'Companies',
-            //     link: '/companies',
-            //     svg: CompaniesIcon,
-            //     perms: ['view_company'],
-            // },
-            // {
-            //     label: 'Roles',
-            //     link: '/roles',
-            //     svg: RolesIcon,
-            //     perms: ['view_role'],
-            // },
-            // {
-            //     label: 'Teams',
-            //     link: '/teams',
-            //     svg: TeamsIcon,
-            //     perms: ['view_team'],
-            // },
+            {
+                label: 'Users',
+                link: '/users',
+                svg: UserIcon,
+                perms: ['view_user'],
+            },
+            {
+                label: 'Companies',
+                link: '/companies',
+                svg: CompaniesIcon,
+                perms: ['view_company'],
+            },
+            {
+                label: 'Roles',
+                link: '/roles',
+                svg: RolesIcon,
+                perms: ['view_role'],
+            },
+            {
+                label: 'Teams',
+                link: '/teams',
+                svg: TeamsIcon,
+                perms: ['view_team'],
+            },
             {
                 label: 'Pseudos',
                 link: '/pseudos',
@@ -272,12 +272,12 @@ export const menuItems = [
                 svg: RegionIcon,
                 perms: ['view_region'],
             },
-            // {
-            //     label: 'Permissions',
-            //     link: '/permissions',
-            //     svg: PermissionsIcon,
-            //     perms: ['view_permission'],
-            // },
+            {
+                label: 'Permissions',
+                link: '/permissions',
+                svg: PermissionsIcon,
+                perms: ['view_permission'],
+            },
             {
                 label: 'Tech Stacks Categories',
                 link: '/tech-stacks-categories',
