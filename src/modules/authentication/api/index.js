@@ -1,7 +1,7 @@
-import http from '@utils/http'
+import { http } from '@utils/http'
 import { getMsg, saveToken, saveRefreshToken } from '@utils/helpers'
 
-export const login = (email, password) =>
+export const loginUser = (email, password) =>
     http
         .post('api/auth/login/', { email, password })
         .then(res => {
