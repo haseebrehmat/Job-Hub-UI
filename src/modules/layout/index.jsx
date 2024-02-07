@@ -1,5 +1,6 @@
 import { memo } from 'react'
-import SideBar from './sidebar'
+import SideBar from '@modules/layout/sidebar'
+import Navbar from '@modules/layout/navbar'
 
 const layout = memo(({ children }) => (
     <main className='min-h-screen w-fit'>
@@ -11,6 +12,7 @@ const layout = memo(({ children }) => (
             </div>
         </header>
         <div className='flex p-3'>
+            <Navbar />
             <SideBar />
             <div className='w-full pl-3'>{children}</div>
         </div>

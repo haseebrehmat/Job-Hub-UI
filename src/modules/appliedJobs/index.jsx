@@ -7,6 +7,7 @@ import { fetchAppliedJobs } from '@modules/appliedJobs/api'
 import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
 
 import { tableHeads } from '@constants/appliedJobs'
+import { formatDate, timeSince } from '@/utils/helpers'
 
 const AppliedJobs = memo(() => {
     const [page, setPage] = useState(1)
@@ -32,8 +33,11 @@ const AppliedJobs = memo(() => {
                 <tbody>
                     {data?.jobs?.length > 0 ? (
                         data.jobs.map((job, index) => (
-                            <tr className='bg-white border-b  hover:bg-gray-50' key={index}>
-                                <th className='px-6 py-4'>{job.job_posted_date}</th>
+                            <tr className='bg-white border-b hover:bg-gray-50' key={index}>
+                                <td className='px-6 py-4'>
+                                    <span className='font-bold'>{timeSince(job.job_posted_date)}</span>
+                                    <div>{formatDate(job.job_posted_date)}</div>
+                                </td>
                                 <td className='px-6 py-4'>{job.company_name}</td>
                                 <td className='px-6 py-4'>{job.job_title}</td>
                                 <td className='px-6 py-4'>{job.job_source}</td>
