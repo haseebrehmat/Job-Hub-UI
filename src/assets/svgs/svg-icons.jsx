@@ -98,4 +98,3 @@ export const OctagonLogo = () => (
         </defs>
     </svg>
 )
-
