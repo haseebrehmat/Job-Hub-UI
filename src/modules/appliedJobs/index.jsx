@@ -1,78 +1,30 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Input } from '@components'
 import { fetchAppliedJobs } from '@modules/appliedJobs/api'
+import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
+
+import { tableHeads } from '@constants/appliedJobs'
 
 const AppliedJobs = memo(() => {
     const [page, setPage] = useState(1)
     const { data, error, isLoading } = useSWR(page, fetchAppliedJobs)
 
-    if (error) return <div>failed to load</div>
-    if (isLoading) return <div>loading...</div>
-
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
-    return isLoading ? (
-        <h1>Loading...</h1>
+    return isLoading || error ? (
+        <h1>loading...</h1>
     ) : (
         <div className='m-2 overflow-x-auto shadow-md sm:rounded-lg'>
-            <div className='p-4 float-right'>
-                <label htmlFor='table-search' className='sr-only'>
-                    Search
-                </label>
-                <div className='relative'>
-                    <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
-                        <svg
-                            className='w-5 h-5 text-gray-500 dark:text-gray-400'
-                            aria-hidden='true'
-                            fill='currentColor'
-                            viewBox='0 0 20 20'
-                            xmlns='http://www.w3.org/2000/svg'
-                        >
-                            <path
-                                fillRule='evenodd'
-                                d='M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z'
-                                clipRule='evenodd'
-                            />
-                        </svg>
-                    </div>
-                    <Input ph='Search for items' classes='block p-2 pl-10' />
-                </div>
-            </div>
+            <Searchbox />
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
                     <tr>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Created At
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Company Name
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Job Title
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Job Source
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Assign To
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Status
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Agent (BD)
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Tech Stack
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Job Budget
-                        </th>
-                        <th scope='col' className='px-3 py-4 text-[#006366]'>
-                            Notes
-                        </th>
+                        {tableHeads.map(heading => (
+                            <th scope='col' className='px-3 py-4 text-[#006366]' key={heading}>
+                                {heading}
+                            </th>
+                        ))}
                     </tr>
                 </thead>
                 <tbody>
@@ -92,64 +44,11 @@ const AppliedJobs = memo(() => {
                             </tr>
                         ))
                     ) : (
-                        <tr>
-                            <td colSpan={10} className='text-center pt-4'>
-                                No Applied Jobs found yet!
-                            </td>
-                        </tr>
+                        <EmptyTable />
                     )}
                 </tbody>
             </table>
-            <nav className='flex items-center justify-between p-4' aria-label='Table navigation'>
-                <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
-                    Showing <span className='font-semibold text-gray-900 dark:text-white'>1-12</span> of{' '}
-                    <span className='font-semibold text-gray-900 dark:text-white'>{data?.total}</span>
-                </span>
-                <ul className='inline-flex items-center -space-x-px'>
-                    <li>
-                        <button
-                            disabled={!data?.prev}
-                            className='block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700'
-                            onClick={() => handleClick('prev')}
-                        >
-                            <svg
-                                className='w-5 h-5'
-                                aria-hidden='true'
-                                fill='currentColor'
-                                viewBox='0 0 20 20'
-                                xmlns='http://www.w3.org/2000/svg'
-                            >
-                                <path
-                                    fillRule='evenodd'
-                                    d='M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z'
-                                    clipRule='evenodd'
-                                />
-                            </svg>
-                        </button>
-                    </li>
-                    <li>
-                        <button
-                            disabled={!data?.next}
-                            className='block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700'
-                            onClick={() => handleClick('next')}
-                        >
-                            <svg
-                                className='w-5 h-5'
-                                aria-hidden='true'
-                                fill='currentColor'
-                                viewBox='0 0 20 20'
-                                xmlns='http://www.w3.org/2000/svg'
-                            >
-                                <path
-                                    fillRule='evenodd'
-                                    d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z'
-                                    clipRule='evenodd'
-                                />
-                            </svg>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
+            <TableNavigate data={data} handleClick={handleClick} />
         </div>
     )
 })
