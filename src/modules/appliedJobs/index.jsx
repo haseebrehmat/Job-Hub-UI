@@ -1,6 +1,8 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
+import { Loading } from '@components'
+
 import { fetchAppliedJobs } from '@modules/appliedJobs/api'
 import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
 
@@ -13,9 +15,9 @@ const AppliedJobs = memo(() => {
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     return isLoading || error ? (
-        <h1>loading...</h1>
+        <Loading />
     ) : (
-        <div className='m-2 overflow-x-auto shadow-md sm:rounded-lg'>
+        <div className='overflow-x-auto shadow-md sm:rounded-lg'>
             <Searchbox />
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-gray-50'>

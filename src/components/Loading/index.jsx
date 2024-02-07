@@ -1,6 +1,7 @@
-import { OctagonLogo } from '@/assets/svgs'
+import { OctagonLogo } from '@svgs'
+import { memo } from 'react'
 
-export const Loading = () => (
+const Loading = memo(() => (
     <button
         disabled
         type='button'
@@ -9,7 +10,6 @@ export const Loading = () => (
         <OctagonLogo />
         &nbsp;&nbsp;&nbsp;
         <svg
-            ariaHidden='true'
             role='status'
             className='inline w-[40px] h-[40px] mr-2 text-center text-gray-200 animate-spin dark:text-gray-600'
             viewBox='0 0 100 101'
@@ -26,4 +26,6 @@ export const Loading = () => (
         </svg>
         <br />
     </button>
-)
+))
+
+export default Loading

@@ -2,7 +2,7 @@ import { memo } from 'react'
 import SideBar from './sidebar'
 
 const layout = memo(({ children }) => (
-    <main className='min-h-screen w-full'>
+    <main className='min-h-screen w-fit'>
         <header className='flex w-full items-center justify-between bg-[#EDFFFB]'>
             <div className='flex items-center space-x-2'>
                 <button type='button' className='text-3xl'>
@@ -10,9 +10,9 @@ const layout = memo(({ children }) => (
                 </button>
             </div>
         </header>
-        <div className='flex p-5'>
+        <div className='flex p-3'>
             <SideBar />
-            <div className='w-full p-4'>{children}</div>
+            <div className='w-full pl-3'>{children}</div>
         </div>
     </main>
 ))
