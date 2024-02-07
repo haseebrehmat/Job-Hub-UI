@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
-import { menuItems } from '@/utils/constants/menu-items'
+import { menuItems } from '@constants/menuItems'
 
 import { CloseIcon, NavigationIcon } from '@icons'
 import { OctagonLogo } from '@svgs'
 
 const SideBar = () => {
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState(true)
 
     return (
-        <div className='m-5 rounded-lg'>
+        <aside className='flex m-5 rounded-lg'>
             <button
                 className='fixed top-0 left-0 w-20px p-4 overflow-y-auto transition-transform bg-gray-2'
                 onClick={() => setToggle(!toggle)}
@@ -57,7 +57,7 @@ const SideBar = () => {
             ) : (
                 ''
             )}
-        </div>
+        </aside>
     )
 }
 

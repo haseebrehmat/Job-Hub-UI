@@ -1,9 +1,10 @@
-import { createBrowserRouter, Link, Navigate } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 
-import { Protected, } from '@components'
+import { Protected } from '@components'
 
-import { AppliedJobs, Login } from '@modules'
-import SideBar from '@/modules/layout/Sidebar'
+import { AppliedJobs, Login, AppLayout } from '@modules'
+
+import App from './App'
 
 const router = createBrowserRouter([
     {
@@ -13,20 +14,18 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: (
-            <div className='flex h-screen'>
-                <SideBar />
-                <div className='m-auto'>
-                    <p>Welcome to Octagon Crm</p>
-                    <Link to='applied-jobs'>Go to Jobs</Link>
-                </div>
-            </div>
+            <AppLayout>
+                <App />
+            </AppLayout>
         ),
     },
     {
         path: 'applied-jobs',
         element: (
             <Protected>
-                <AppliedJobs />
+                <AppLayout>
+                    <AppliedJobs />
+                </AppLayout>
             </Protected>
         ),
     },

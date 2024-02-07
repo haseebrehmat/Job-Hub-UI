@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
@@ -17,7 +16,7 @@ const AppliedJobs = memo(() => {
     return isLoading ? (
         <h1>Loading...</h1>
     ) : (
-        <div className='relative m-4 overflow-x-auto shadow-md sm:rounded-lg'>
+        <div className='m-2 overflow-x-auto shadow-md sm:rounded-lg'>
             <div className='p-4 float-right'>
                 <label htmlFor='table-search' className='sr-only'>
                     Search

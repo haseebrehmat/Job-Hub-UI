@@ -1,13 +1,13 @@
 import {
-  DashboardIcon,
-  LogoutIcon,
-  NewUserIcon,
-  NotificationIcon,
-  ReportIcon,
-  RoleIcon,
-  SecurityIcon,
-  SettingIcon,
-  UsersIcon,
+    DashboardIcon,
+    LogoutIcon,
+    NewUserIcon,
+    NotificationIcon,
+    ReportIcon,
+    RoleIcon,
+    SecurityIcon,
+    SettingIcon,
+    UsersIcon,
 } from '@icons'
 
 export const menuItems = [
