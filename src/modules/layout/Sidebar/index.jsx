@@ -1,67 +1,11 @@
-import { OctagonLogo } from '@/assets/svgs'
-import React, { useState } from 'react'
-import {
-    CloseIcon,
-    DashboardIcon,
-    LogoutIcon,
-    NavigationIcon,
-    NewUserIcon,
-    NotificationIcon,
-    ReportIcon,
-    RoleIcon,
-    SecurityIcon,
-    SettingIcon,
-    UsersIcon,
-} from '@/assets/icons'
+import { useState } from 'react'
+
+import { menuItems } from '@/utils/constants/menu-items'
+
+import { CloseIcon, NavigationIcon } from '@icons'
+import { OctagonLogo } from '@svgs'
 
 const SideBar = () => {
-    const menuItems = [
-        {
-            label: 'Dashboard',
-            link: '#',
-            svg: DashboardIcon,
-        },
-        {
-            label: 'Report',
-            link: '#',
-            svg: ReportIcon,
-        },
-        {
-            label: 'Users',
-            link: '#',
-            svg: UsersIcon,
-        },
-        {
-            label: 'Roles',
-            link: '#',
-            svg: RoleIcon,
-        },
-        {
-            label: 'New User',
-            link: '#',
-            svg: NewUserIcon,
-        },
-        {
-            label: 'Settings',
-            link: '#',
-            svg: SettingIcon,
-        },
-        {
-            label: 'Notification',
-            link: '#',
-            svg: NotificationIcon,
-        },
-        {
-            label: 'Security',
-            link: '#',
-            svg: SecurityIcon,
-        },
-        {
-            label: 'Logout',
-            link: '#',
-            svg: LogoutIcon,
-        },
-    ]
     const [toggle, setToggle] = useState(false)
 
     return (

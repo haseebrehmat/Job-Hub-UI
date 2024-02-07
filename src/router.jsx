@@ -3,7 +3,7 @@ import { createBrowserRouter, Link, Navigate } from 'react-router-dom'
 import { Protected, } from '@components'
 
 import { AppliedJobs, Login } from '@modules'
-import SideBar from './components/SideBar'
+import SideBar from '@/modules/layout/Sidebar'
 
 const router = createBrowserRouter([
     {
