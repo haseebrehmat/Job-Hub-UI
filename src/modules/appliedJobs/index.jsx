@@ -14,7 +14,9 @@ const AppliedJobs = memo(() => {
 
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
-    return (
+    return isLoading ? (
+        <h1>Loading...</h1>
+    ) : (
         <div className='relative m-4 overflow-x-auto shadow-md sm:rounded-lg'>
             <div className='p-4 float-right'>
                 <label htmlFor='table-search' className='sr-only'>
@@ -75,8 +77,8 @@ const AppliedJobs = memo(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.length > 0 ? (
-                        data.map((job, index) => (
+                    {data?.jobs?.length > 0 ? (
+                        data.jobs.map((job, index) => (
                             <tr className='bg-white border-b  hover:bg-gray-50' key={index}>
                                 <th className='px-6 py-4'>{job.job_posted_date}</th>
                                 <td className='px-6 py-4'>{job.company_name}</td>
@@ -92,20 +94,22 @@ const AppliedJobs = memo(() => {
                         ))
                     ) : (
                         <tr>
-                            <td rowSpan={10}>No Applied Jobs</td>
+                            <td colSpan={10} className='text-center pt-4'>
+                                No Applied Jobs found yet!
+                            </td>
                         </tr>
                     )}
                 </tbody>
             </table>
             <nav className='flex items-center justify-between p-4' aria-label='Table navigation'>
                 <span className='text-sm font-normal text-gray-500 dark:text-gray-400'>
-                    Showing <span className='font-semibold text-gray-900 dark:text-white'>1-10</span> of{' '}
-                    <span className='font-semibold text-gray-900 dark:text-white'>1000</span>
+                    Showing <span className='font-semibold text-gray-900 dark:text-white'>1-12</span> of{' '}
+                    <span className='font-semibold text-gray-900 dark:text-white'>{data?.total}</span>
                 </span>
                 <ul className='inline-flex items-center -space-x-px'>
                     <li>
-                        <a
-                            href='#'
+                        <button
+                            disabled={!data?.prev}
                             className='block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700'
                             onClick={() => handleClick('prev')}
                         >
@@ -122,11 +126,11 @@ const AppliedJobs = memo(() => {
                                     clipRule='evenodd'
                                 />
                             </svg>
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a
-                            href='#'
+                        <button
+                            disabled={!data?.next}
                             className='block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700'
                             onClick={() => handleClick('next')}
                         >
@@ -143,7 +147,7 @@ const AppliedJobs = memo(() => {
                                     clipRule='evenodd'
                                 />
                             </svg>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </nav>
