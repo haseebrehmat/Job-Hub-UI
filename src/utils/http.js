@@ -8,7 +8,7 @@ const http = axios.create({
 })
 
 const scrapperHttp = axios.create({
-    baseURL: 'http://147.34.6.116:8000/',
+    baseURL: 'http://54.183.171.9/',
     headers: {
         Accept: 'application/json',
     },

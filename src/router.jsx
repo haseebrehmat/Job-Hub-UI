@@ -1,38 +1,22 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 
 import { Protected } from '@components'
 
-import { AppliedJobs, Login, AppLayout } from '@modules'
+import { AppLayout } from '@modules'
 
-import App from './App'
+import { routes, authRoutes } from './routes'
 
-const router = createBrowserRouter([
-    {
-        path: 'login',
-        element: <Login />,
-    },
-    {
-        path: '/',
-        element: (
-            <AppLayout>
-                <App />
-            </AppLayout>
-        ),
-    },
-    {
-        path: 'applied-jobs',
-        element: (
-            <Protected>
-                <AppLayout>
-                    <AppliedJobs />
-                </AppLayout>
-            </Protected>
-        ),
-    },
-    {
-        path: '*',
-        element: <Navigate to='/' />,
-    },
-])
+const browserRoutes = routes.map(({ path, protect, component }) => ({
+    path,
+    element: protect ? (
+        <Protected>
+            <AppLayout>{component}</AppLayout>
+        </Protected>
+    ) : (
+        <AppLayout>{component}</AppLayout>
+    ),
+}))
+
+const router = createBrowserRouter([...browserRoutes, ...authRoutes])
 
 export default router
