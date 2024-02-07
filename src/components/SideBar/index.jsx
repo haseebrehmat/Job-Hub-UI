@@ -1,52 +1,65 @@
-import { CloseIcon, DashboardIcon, LogoutIcon, NavigationIcon, OctagonLogo } from '@/assets/svg-icons'
+import { OctagonLogo } from '@/assets/svgs'
 import React, { useState } from 'react'
+import {
+    CloseIcon,
+    DashboardIcon,
+    LogoutIcon,
+    NavigationIcon,
+    NewUserIcon,
+    NotificationIcon,
+    ReportIcon,
+    RoleIcon,
+    SecurityIcon,
+    SettingIcon,
+    UsersIcon,
+} from '@/assets/icons'
 
 const SideBar = () => {
     const menuItems = [
         {
             label: 'Dashboard',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: DashboardIcon,
         },
         {
             label: 'Report',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: ReportIcon,
         },
         {
             label: 'Users',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: UsersIcon,
         },
         {
             label: 'Roles',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: RoleIcon,
         },
         {
             label: 'New User',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: NewUserIcon,
         },
         {
             label: 'Settings',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: SettingIcon,
         },
         {
             label: 'Notification',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: NotificationIcon,
         },
         {
             label: 'Security',
             link: '#',
-            svg: <DashboardIcon />,
+            svg: SecurityIcon,
         },
         {
             label: 'Logout',
             link: '#',
-            svg: <LogoutIcon />,
+            svg: LogoutIcon,
         },
     ]
     const [toggle, setToggle] = useState(false)
@@ -57,7 +70,7 @@ const SideBar = () => {
                 className='fixed top-0 left-0 w-20px p-4 overflow-y-auto transition-transform bg-gray-2'
                 onClick={() => setToggle(!toggle)}
             >
-                <NavigationIcon />
+                {NavigationIcon}
             </button>
             {toggle ? (
                 <div
@@ -76,13 +89,13 @@ const SideBar = () => {
                         onClick={() => setToggle(!toggle)}
                         className='bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:text-white'
                     >
-                        <CloseIcon />
+                        {CloseIcon}
                         <span className='sr-only'>Close menu</span>
                     </button>
                     <div className='py-4 overflow-y-auto'>
                         <ul className='space-y-2'>
                             {menuItems.length > 0 &&
-                                menuItems.map((item) => (
+                                menuItems.map(item => (
                                     <li key={item.label}>
                                         <a
                                             href={item.link}
