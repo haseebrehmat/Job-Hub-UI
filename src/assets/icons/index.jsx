@@ -1,4 +1,4 @@
-import { MdSpaceDashboard, MdNotifications, MdOutlineLogout, MdClose, MdMenu } from 'react-icons/md'
+import { MdSpaceDashboard, MdNotifications, MdOutlineLogout, MdClose } from 'react-icons/md'
 import { BsFillFileTextFill, BsShieldShaded } from 'react-icons/bs'
 import { HiUser, HiUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
