@@ -1,4 +1,3 @@
-// eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
