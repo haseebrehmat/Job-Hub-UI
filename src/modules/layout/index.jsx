@@ -10,10 +10,10 @@ const layout = memo(({ children }) => {
             <SideBar toggle={toggle} setToggle={setToggle} />
             <div className='w-[85%] flex-1'>
                 <div className='flex flex-col space-y-1 h-screen'>
-                    <div className='h-1/6'>
-                        <Navbar toggle={toggle} setToggle={setToggle} />
+                    <div className='h-fit'>
+                        <Navbar />
                     </div>
-                    <div className='h-5/6 p-2'>{children}</div>
+                    <div className='h-max p-2'>{children}</div>
                 </div>
             </div>
         </main>

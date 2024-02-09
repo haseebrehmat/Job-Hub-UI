@@ -2,9 +2,10 @@ import { MdSpaceDashboard, MdNotifications, MdOutlineLogout, MdClose } from 'rea
 import { BsFillFileTextFill, BsShieldShaded, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
 import { HiUser, HiUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
-import { IoMdSettings } from 'react-icons/io'
+import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineSearch } from 'react-icons/ai'
+import { ImSearch } from 'react-icons/im'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -20,3 +21,7 @@ export const SecurityIcon = <BsShieldShaded style={{ fontSize: '18px' }} />
 export const PaginateNext = <BsArrowRightCircle style={{ fontSize: '18px' }} />
 export const PaginatePrev = <BsArrowLeftCircle style={{ fontSize: '18px' }} />
 export const SearchIcon = <AiOutlineSearch />
+export const NavbarSearchIcon = <ImSearch className='w-5 h-5 text-gray-500' />
+export const NavSettingIcon = <IoIosSettings fontSize='1.5em' />
+export const NavContactIcon = <IoMdContact fontSize='1.5em' />
+export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
