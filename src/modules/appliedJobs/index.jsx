@@ -11,7 +11,8 @@ import { formatDate, timeSince } from '@utils/helpers'
 
 const AppliedJobs = memo(() => {
     const [page, setPage] = useState(1)
-    const { data, error, isLoading } = useSWR(page, fetchAppliedJobs)
+    const [query, setQuery] = useState()
+    const { data, error, isLoading } = useSWR([page, query], () => fetchAppliedJobs(page, query))
 
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
@@ -21,7 +22,7 @@ const AppliedJobs = memo(() => {
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg'>
             <div className='flex items-center justify-between'>
                 <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs</p>
-                <Searchbox />
+                <Searchbox query={query} setQuery={setQuery} />
             </div>
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
