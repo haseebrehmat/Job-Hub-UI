@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
 
-const Button = memo(({ label, type = 'button', onClick = null }) => (
+const Button = memo(({ label, type = 'button', onClick = null, disabled = false }) => (
     <button
         type={type}
         className='w-full text-[#048C8C] border border-cyan-600 font-medium rounded-lg text-sm px-5 py-2 text-center'
         onClick={onClick}
+        disabled={disabled}
     >
         {label}
     </button>

@@ -9,10 +9,10 @@ export const routes = [
     {
         path: '/',
         component: <App />,
-        protect: false,
+        protect: true,
     },
     {
-        path: 'applied-jobs',
+        path: '/applied-jobs',
         component: <AppliedJobs />,
         protect: true,
     },
