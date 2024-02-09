@@ -8,8 +8,10 @@ import { RememberMe, TermsOfService } from '@modules/authentication/components'
 
 import signinLogo from '@images/signin-logo.png'
 import devsincLogo from '@images/devsinc-logo.png'
+import { useNavigate } from 'react-router-dom'
 
 const Login = memo(() => {
+    const navigate = useNavigate()
     const [user, setUser] = useState({ email: '', password: '' })
 
     const handleSubmit = async e => {
@@ -19,6 +21,7 @@ const Login = memo(() => {
             toast.error(response.message)
         } else {
             toast.success(response.message)
+            navigate(0)
         }
     }
 

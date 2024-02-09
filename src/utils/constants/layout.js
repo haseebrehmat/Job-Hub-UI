@@ -1,6 +1,5 @@
 import {
     DashboardIcon,
-    // LogoutIcon,
     // NewUserIcon,
     // NotificationIcon,
     ReportIcon,
@@ -55,10 +54,5 @@ export const menuItems = [
     //     label: 'Security',
     //     link: '#',
     //     svg: SecurityIcon,
-    // },
-    // {
-    //     label: 'Logout',
-    //     link: '#',
-    //     svg: LogoutIcon,
     // },
 ]
