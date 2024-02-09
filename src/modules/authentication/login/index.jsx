@@ -1,4 +1,5 @@
 import { memo, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 import { Button, Input } from '@components'
 
@@ -15,9 +16,9 @@ const Login = memo(() => {
         e.preventDefault()
         const response = await loginUser(user.email, user.password)
         if (response.status === 'error') {
-            alert(response.message)
+            toast.error(response.message)
         } else {
-            console.log('success => ', response.message)
+            toast.success(response.message)
         }
     }
 
@@ -46,6 +47,7 @@ const Login = memo(() => {
                             </div>
                             <Button label='SIGN IN' type='submit' />
                             <TermsOfService />
+                            <Toaster />
                         </form>
                     </div>
                 </div>
