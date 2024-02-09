@@ -1,39 +1,36 @@
+import { Input } from '@components'
 import { memo } from 'react'
-import { IoMdContact, IoIosSettings, IoIosNotifications, IoMdHome } from 'react-icons/io'
+import { IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
 
-const Navbar = memo(() => (
-    <header className='bg-white w-screen px-8 pt-9'>
+const Navbar = memo(({ toggle }) => (
+    <header className='bg-white w-full px-8 pt-3'>
         <nav className='relative flex flex-row-reverse justify-between'>
             <ul className='flex text-white space-x-5 justify-end'>
                 <div className='relative'>
-                    <li>
-                        <div className='absolute inset-y-0 left-0 flex items-center pl-3 pb-2 pointer-events-none'>
-                            <svg
-                                aria-hidden='true'
-                                className='w-5 h-5 text-gray-500 dark:text-gray-400'
-                                fill='none'
-                                stroke='currentColor'
-                                viewBox='0 0 24 24'
-                                xmlns='http://www.w3.org/2000/svg'
-                            >
-                                <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    strokeWidth='2'
-                                    d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-                                />
-                            </svg>
-                        </div>
-                        <form>
-                            <input
-                                type='search'
-                                id='search'
-                                className='block w-full p-4 pl-10 text-sm text-teal-800 border  border-teal-800 rounded-lg bg-gray-50 '
-                                placeholder='Search Here'
-                                required
+                    <div className='absolute inset-y-0 left-0 flex items-center pl-3 pb-2 pointer-events-none'>
+                        <svg
+                            aria-hidden='true'
+                            className='w-5 h-5 text-gray-500 dark:text-gray-400'
+                            fill='none'
+                            stroke='currentColor'
+                            viewBox='0 0 24 24'
+                            xmlns='http://www.w3.org/2000/svg'
+                        >
+                            <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
+                                d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
                             />
+                        </svg>
+                    </div>
+                    {toggle ? (
+                        <form className='hidden md:block'>
+                            <Input name='Search' type='text' ph='Search Here' classes='pl-10 p-4' />
                         </form>
-                    </li>
+                    ) : (
+                        ''
+                    )}
                 </div>
                 <li className='mx-2 my-4 cursor-pointer text-teal-800'>
                     <a href='#'>
@@ -55,26 +52,6 @@ const Navbar = memo(() => (
                         </div>
                     </a>
                 </li>
-            </ul>
-            <ul className='justify-start text-sm text-teal-800'>
-                <div className='flex space-x-2'>
-                    <IoMdHome fontSize='1.2em' />
-                    <span>&#47;</span>
-                    <li>
-                        <a href='#'>Pages</a>
-                    </li>
-                    <span>&#47;</span>
-                    <li>
-                        <a href='#'>Account</a>
-                    </li>
-                    <span>&#47;</span>
-                    <li>
-                        <a href='#'>Billing</a>
-                    </li>
-                </div>
-                <div className='relative font-bold text-2xl leading-loose'>
-                    <a href='#'>Billing</a>
-                </div>
             </ul>
         </nav>
     </header>

@@ -18,9 +18,9 @@ const AppliedJobs = memo(() => {
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='overflow-x-auto shadow-md sm:rounded-lg'>
+        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg'>
             <Searchbox />
-            <table className='table-auto w-full text-sm text-left text-gray-500'>
+            <table className='table-auto w-full text-sm text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
                     <tr>
                         {tableHeads.map(heading => (

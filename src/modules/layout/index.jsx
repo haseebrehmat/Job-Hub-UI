@@ -1,21 +1,23 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import SideBar from '@modules/layout/sidebar'
 import Navbar from '@modules/layout/navbar'
 
-const layout = memo(({ children }) => (
-    <main className='min-h-screen w-fit'>
-        <header className='flex w-full items-center justify-between bg-[#EDFFFB]'>
-            <div className='flex items-center space-x-2'>
-                <button type='button' className='text-3xl'>
-                    <i className='bx bx-menu' />
-                </button>
+const layout = memo(({ children }) => {
+    const [toggle, setToggle] = useState(true)
+
+    return (
+        <main className='flex h-screen'>
+            <SideBar toggle={toggle} setToggle={setToggle} />
+            <div className='w-[85%] flex-1'>
+                <div className='flex flex-col space-y-1 h-screen'>
+                    <div className='h-1/6'>
+                        <Navbar toggle={toggle} setToggle={setToggle} />
+                    </div>
+                    <div className='h-5/6 p-2'>{children}</div>
+                </div>
             </div>
-        </header>
-        <div className='flex p-3'>
-            <Navbar />
-            <SideBar />
-            <div className='w-full pl-3'>{children}</div>
-        </div>
-    </main>
-))
+        </main>
+    )
+})
+
 export default layout
