@@ -6,7 +6,7 @@ import { Loading, Badge } from '@components'
 import { fetchAppliedJobs } from '@modules/appliedJobs/api'
 import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
 
-import { tableHeads } from '@constants/appliedJobs'
+import { tableHeads, jobStatus } from '@constants/appliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
 
 const AppliedJobs = memo(() => {
@@ -25,7 +25,7 @@ const AppliedJobs = memo(() => {
                 <Searchbox query={query} setQuery={setQuery} />
             </div>
             <table className='table-auto w-full text-sm text-left text-gray-500'>
-                <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
+                <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
                         {tableHeads.map(heading => (
                             <th scope='col' className='px-3 py-4 text-[#006366]' key={heading}>
@@ -37,7 +37,7 @@ const AppliedJobs = memo(() => {
                 <tbody>
                     {data?.jobs?.length > 0 ? (
                         data.jobs.map((job, index) => (
-                            <tr className='bg-white border-b hover:bg-gray-100' key={index}>
+                            <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
                                     <span className='font-bold'>{timeSince(job.job_posted_date)}</span>
                                     <div>{formatDate(job.job_posted_date)}</div>
@@ -46,7 +46,9 @@ const AppliedJobs = memo(() => {
                                 <td className='px-3 py-4'>{job.job_title}</td>
                                 <td className='px-3 py-4'>{job.job_source}</td>
                                 <td className='px-3 py-4'>Me</td>
-                                <td className='px-3 py-4'>{job.job_status}</td>
+                                <td className='px-3 py-4'>
+                                    <Badge label={jobStatus[job.job_status]} type='success' />
+                                </td>
                                 <td className='px-3 py-4'>BD</td>
                                 <td className='px-3 py-4'>
                                     <Badge label={job.tech_keywords} />

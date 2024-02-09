@@ -13,7 +13,7 @@ const layout = memo(({ children }) => {
                     <div className='h-fit'>
                         <Navbar />
                     </div>
-                    <div className='h-max p-2'>{children}</div>
+                    <div className='h-max p-3'>{children}</div>
                 </div>
             </div>
         </main>
