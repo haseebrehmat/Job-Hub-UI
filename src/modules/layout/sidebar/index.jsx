@@ -34,6 +34,14 @@ const SideBar = ({ toggle, setToggle }) => (
                 </a>
             ))}
         <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
+        <div className='flex flex-row h-[100%]'>
+            <button className='flex w-full p-2.5 bg-[#048C8C] rounded-xl self-end'>
+                <p align='justify' className='text-white float-left text-sm'>
+                    &copy; 2023 Octagon.inc <br />
+                    Terms Of Service - Privacy Policy
+                </p>
+            </button>
+        </div>
     </aside>
 )
 
