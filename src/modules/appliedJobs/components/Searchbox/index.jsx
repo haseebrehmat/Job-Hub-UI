@@ -5,7 +5,7 @@ import { Input } from '@components'
 import { SearchIcon } from '@icons'
 
 const Searchbox = memo(() => (
-    <div className='p-4 float-right'>
+    <div className='p-4'>
         <label htmlFor='table-search' className='sr-only'>
             Search
         </label>

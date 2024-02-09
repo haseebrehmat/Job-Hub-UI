@@ -1,6 +1,6 @@
 import { Input } from '@components'
 import { memo } from 'react'
-import { NavbarSearchIcon, NavBellIcon, NavContactIcon, NavSettingIcon } from '@/assets/icons'
+import { NavbarSearchIcon, NavBellIcon, NavContactIcon, NavSettingIcon } from '@icons'
 
 const Navbar = memo(() => (
     <header className='bg-white w-full px-8 pt-3'>
