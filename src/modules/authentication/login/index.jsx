@@ -44,7 +44,7 @@ const Login = memo(() => {
                                 value={user.password}
                                 ph='Password'
                             />
-                            <div className='flex items-center justify-between'>
+                            <div className='flex flex-col md:items-center justify-between md:flex-row'>
                                 <RememberMe />
                                 <a className='text-sm text-[#048C8C] hover:underline'>Forgot password?</a>
                             </div>
