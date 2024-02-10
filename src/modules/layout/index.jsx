@@ -1,7 +1,8 @@
 import { memo, useState } from 'react'
+
 import SideBar from '@modules/layout/sidebar'
 import Navbar from '@modules/layout/navbar'
-import Overlay from './overlay'
+import Overlay from '@modules/layout/overlay'
 
 const layout = memo(({ children }) => {
     const [toggle, setToggle] = useState(true)
