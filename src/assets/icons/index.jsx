@@ -6,6 +6,7 @@ import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 're
 import { FiMenu } from 'react-icons/fi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { ImSearch } from 'react-icons/im'
+import { CgSidebarOpen } from 'react-icons/cg'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -25,4 +26,5 @@ export const NavbarSearchIcon = <ImSearch className='w-5 h-5 text-gray-500' />
 export const NavSettingIcon = <IoIosSettings fontSize='1.5em' />
 export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
+export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />

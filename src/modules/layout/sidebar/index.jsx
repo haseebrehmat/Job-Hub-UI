@@ -3,7 +3,7 @@ import { menuItems } from '@constants/layout'
 
 import { NavigationIcon, LogoutIcon } from '@icons'
 import { OctagonLogo } from '@svgs'
-import { removeToken } from '@/utils/helpers'
+import { removeToken } from '@utils/helpers'
 import { memo } from 'react'
 
 const SideBar = ({ toggle, setToggle }) => {

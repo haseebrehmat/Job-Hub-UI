@@ -1,8 +1,8 @@
 import { Input } from '@components'
 import { memo } from 'react'
-import { NavbarSearchIcon, NavBellIcon, NavContactIcon, NavSettingIcon } from '@icons'
+import { NavbarSearchIcon, NavBellIcon, NavContactIcon, NavSettingIcon, OpenSidebarIcon } from '@icons'
 
-const Navbar = memo(() => (
+const Navbar = memo(({ setShow }) => (
     <header className='bg-white w-full px-8 pt-3'>
         <nav className='relative flex flex-row-reverse justify-between'>
             <ul className='flex text-white space-x-5 justify-end'>
@@ -14,6 +14,11 @@ const Navbar = memo(() => (
                         <Input name='Search' type='text' ph='Search Here' classes='pl-10 p-2' />
                     </form>
                 </div>
+                <li className='block mx-2 my-2 cursor-pointer text-teal-800 sm:hidden md:hidden'>
+                    <a href='#' onClick={() => setShow(true)}>
+                        {OpenSidebarIcon}
+                    </a>
+                </li>
                 <li className='mx-2 my-2 cursor-pointer text-teal-800'>
                     <a href='#'>{NavContactIcon}</a>
                 </li>

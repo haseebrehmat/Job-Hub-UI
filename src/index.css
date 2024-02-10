@@ -22,6 +22,10 @@
     background: #048c8c;
 }
 
+.slide-pane__content{
+    padding: 0 !important;
+}
+
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
