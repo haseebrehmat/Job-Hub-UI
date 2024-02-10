@@ -11,7 +11,7 @@ const Loading = memo(() => (
         &nbsp;&nbsp;&nbsp;
         <svg
             role='status'
-            className='inline w-[40px] h-[40px] mr-2 text-center text-gray-200 animate-spin dark:text-gray-600'
+            className='inline w-[40px] h-[40px] mr-2 text-center text-gray-200 animate-spin'
             viewBox='0 0 100 101'
             xmlns='http://www.w3.org/2000/svg'
         >

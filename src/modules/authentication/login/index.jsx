@@ -33,7 +33,7 @@ const Login = memo(() => {
                 <a className='flex items-center bg-[#EDFFFB] rounded-lg shadow-[0px_1px_5px_rgba(4,131,131,0.5)] px-12 py-2 -mb-12 z-[1]'>
                     <img className='w-42' src={signinLogo} alt='logo' />
                 </a>
-                <div className='w-full bg-white dark:border md:mt-0 sm:max-w-md xl:p-0 shadow-[0px_1px_8px_rgba(0,99,102,0.4)] rounded-xl'>
+                <div className='w-full bg-white md:mt-0 sm:max-w-md xl:p-0 shadow-[0px_1px_8px_rgba(0,99,102,0.4)] rounded-xl'>
                     <div className='p-6 mt-10 space-y-4 md:space-y-6 sm:p-8'>
                         <form className='space-y-2 md:space-y-4' action='#' onSubmit={handleSubmit}>
                             <Input name='email' type='email' onChange={handleChange} value={user.email} ph='Email' />

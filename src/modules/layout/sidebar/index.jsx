@@ -38,7 +38,7 @@ const SideBar = ({ toggle, setToggle }) => {
                     <Link
                         key={item.label}
                         to={item.link}
-                        className='flex items-center text-sm p-4 text-[#003C40] rounded dark:text-white border-2 hover:text-[#003C40] border-solid border-[#EDFFFB] hover:border-2 hover:border-solid hover:border-[#048C8C] active:border-2 active:border-solid active:border-[#048C8C]'
+                        className='flex items-center text-sm p-4 text-[#003C40] rounded border-2 hover:text-[#003C40] border-solid border-[#EDFFFB] hover:border-2 hover:border-solid hover:border-[#048C8C] active:border-2 active:border-solid active:border-[#048C8C]'
                     >
                         {item.svg}
                         {toggle ? <span className='ml-3 hidden lg:block'>{item.label}</span> : ''}
@@ -46,7 +46,7 @@ const SideBar = ({ toggle, setToggle }) => {
                 ))}
             <button
                 onClick={() => logout('/login')}
-                className='flex items-center text-sm p-4 text-[#003C40] rounded dark:text-white border-2 hover:text-[#003C40] border-solid border-[#EDFFFB] hover:border-2 hover:border-solid hover:border-[#048C8C] active:border-2 active:border-solid active:border-[#048C8C]'
+                className='flex items-center text-sm p-4 text-[#003C40] rounded border-2 hover:text-[#003C40] border-solid border-[#EDFFFB] hover:border-2 hover:border-solid hover:border-[#048C8C] active:border-2 active:border-solid active:border-[#048C8C]'
             >
                 {LogoutIcon}
                 {toggle ? <span className='ml-3 hidden lg:block'>Logout</span> : ''}
