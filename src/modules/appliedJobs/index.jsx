@@ -22,7 +22,7 @@ const AppliedJobs = memo(() => {
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg'>
             <div className='flex items-center justify-between'>
                 <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs</p>
-                <Searchbox query={query} setQuery={setQuery} />
+                <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
             </div>
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>

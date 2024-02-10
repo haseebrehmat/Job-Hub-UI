@@ -4,10 +4,13 @@ import { Input } from '@components'
 
 import { SearchIcon } from '@icons'
 
-const Searchbox = memo(({ query = '', setQuery }) => {
+const Searchbox = memo(({ query = '', setQuery, setPage }) => {
     const [value, setValue] = useState(query)
     const handleChange = e => setValue(e.target.value)
-    const handleClick = () => setQuery(value)
+    const handleClick = () => {
+        setQuery(value)
+        setPage(1)
+    }
 
     return (
         <div className='p-4'>
