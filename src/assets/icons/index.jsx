@@ -1,4 +1,4 @@
-import { MdSpaceDashboard, MdNotifications, MdOutlineLogout, MdClose } from 'react-icons/md'
+import { MdSpaceDashboard, MdNotifications, MdOutlineLogout, MdClose, MdClear } from 'react-icons/md'
 import { BsFillFileTextFill, BsShieldShaded, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
 import { HiUser, HiUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
@@ -25,3 +25,4 @@ export const NavbarSearchIcon = <ImSearch className='w-5 h-5 text-gray-500' />
 export const NavSettingIcon = <IoIosSettings fontSize='1.5em' />
 export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
+export const SearchClearIcon = <MdClear fontSize='1.5em' />
