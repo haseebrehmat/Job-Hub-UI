@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom'
 
-import { AppliedJobs, Login } from '@modules'
+import { AppliedJobs, Login, Jobs } from '@modules'
 
 import { getToken } from '@utils/helpers'
 import App from './App'
@@ -14,6 +14,11 @@ export const routes = [
     {
         path: '/applied-jobs',
         component: <AppliedJobs />,
+        protect: true,
+    },
+    {
+        path: '/jobs',
+        component: <Jobs />,
         protect: true,
     },
 ]
