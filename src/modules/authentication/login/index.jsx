@@ -12,6 +12,7 @@ import { loginSchema } from '@utils/schemas'
 
 import signinLogo from '@images/signin-logo.png'
 import devsincLogo from '@images/devsinc-logo.png'
+import { ValidateTrueIcon, ValidateFalseIcon } from '@icons'
 
 const Login = memo(() => {
     const navigate = useNavigate()
@@ -39,25 +40,37 @@ const Login = memo(() => {
                 </a>
                 <div className='w-full bg-white md:mt-0 sm:max-w-md xl:p-0 shadow-[0px_1px_8px_rgba(0,99,102,0.4)] rounded-xl'>
                     <div className='p-6 mt-10 space-y-4 md:space-y-6 sm:p-8'>
-                        <form className='space-y-2 md:space-y-4' action='#' onSubmit={handleSubmit}>
-                            <Input
-                                name='email'
-                                type='email'
-                                onChange={handleChange}
-                                value={values.email}
-                                ph='Email'
-                                onBlur={handleBlur}
-                            />
-                            {errors.email && <small className='ml-2 text-sm text-red-500'>{errors.email}</small>}
-                            <Input
-                                name='password'
-                                type='password'
-                                onChange={handleChange}
-                                value={values.password}
-                                ph='Password'
-                                onBlur={handleBlur}
-                            />
-                            {errors.password && <small className='ml-2 text-sm text-red-500'>{errors.password}</small>}
+                        <form className='space-y-2 md:space-y-4' onSubmit={handleSubmit}>
+                            <div className='relative'>
+                                <Input
+                                    name='email'
+                                    type='email'
+                                    onChange={handleChange}
+                                    value={values.email}
+                                    ph='Email'
+                                    onBlur={handleBlur}
+                                    label='Email'
+                                />
+                                <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2 pointer-events-none'>
+                                    {errors.email ? ValidateFalseIcon : ValidateTrueIcon}
+                                </div>
+                            </div>
+                            {errors.email && <small className='ml-2 text-sm text-red-400'>{errors.email}</small>}
+                            <div className='relative'>
+                                <Input
+                                    name='password'
+                                    type='password'
+                                    onChange={handleChange}
+                                    value={values.password}
+                                    ph='Password'
+                                    onBlur={handleBlur}
+                                    label='Password'
+                                />
+                                <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2 pointer-events-none'>
+                                    {errors.password ? ValidateFalseIcon : ValidateTrueIcon}
+                                </div>
+                            </div>
+                            {errors.password && <small className='ml-2 text-sm text-red-400'>{errors.password}</small>}
                             <div className='flex flex-col justify-between sm:flex-row'>
                                 <RememberMe />
                                 <a className='text-sm text-[#048C8C] hover:underline'>Forgot password?</a>

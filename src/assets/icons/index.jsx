@@ -1,5 +1,5 @@
 import { MdSpaceDashboard, MdNotifications, MdOutlineLogout, MdClose, MdClear } from 'react-icons/md'
-import { BsFillFileTextFill, BsShieldShaded, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
+import { BsFillFileTextFill, BsShieldShaded, BsArrowLeftCircle, BsArrowRightCircle, BsCheck2 } from 'react-icons/bs'
 import { HiUser, HiUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
@@ -7,6 +7,7 @@ import { FiMenu } from 'react-icons/fi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
+import { CiCircleMinus } from 'react-icons/ci'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -28,3 +29,5 @@ export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
+export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
+export const ValidateFalseIcon = <CiCircleMinus fontSize='1.1em' color='red' />
