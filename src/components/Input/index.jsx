@@ -15,8 +15,8 @@ const Input = memo(
             <input
                 type={type}
                 name={name}
-                className={`block px-2.5 pb-2.5 pt-${
-                    label ? '4' : '2.5'
+                className={`block px-2.5 pb-2.5 ${
+                    label ? 'pt-4' : 'pt-2.5'
                 } w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer ${classes}`}
                 placeholder={ph}
                 required=''

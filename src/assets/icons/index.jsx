@@ -4,7 +4,7 @@ import { HiUser, HiUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
 import { FiMenu } from 'react-icons/fi'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { CiCircleMinus } from 'react-icons/ci'
@@ -31,3 +31,5 @@ export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
 export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
 export const ValidateFalseIcon = <CiCircleMinus fontSize='1.1em' color='red' />
+export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />
+export const HidePassIcon = <AiOutlineEyeInvisible fontSize='1.4em' color='#048C8C' />

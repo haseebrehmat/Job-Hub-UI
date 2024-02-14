@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
@@ -10,18 +10,18 @@ import { RememberMe, TermsOfService } from '@modules/authentication/components'
 
 import { loginSchema } from '@utils/schemas'
 
-import signinLogo from '@images/signin-logo.png'
+import signinLogo from '@images/signin-logo.webp'
 import devsincLogo from '@images/devsinc-logo.png'
-import { ValidateTrueIcon, ValidateFalseIcon } from '@icons'
+import { ValidateTrueIcon, ValidateFalseIcon, SeePassIcon, HidePassIcon } from '@icons'
 
 const Login = memo(() => {
     const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false)
 
     const { values, errors, handleBlur, handleSubmit, handleChange } = useFormik({
         initialValues: { email: '', password: '' },
         validationSchema: loginSchema,
         onSubmit: async formValues => {
-            console.log(formValues)
             const { status, message } = await loginUser(formValues.email, formValues.password)
             if (status === 'error') {
                 toast.error(message)
@@ -31,6 +31,8 @@ const Login = memo(() => {
             }
         },
     })
+
+    const togglePassword = () => setShowPassword(!showPassword)
 
     return (
         <div className='bg-[url(@images/signin-bg.webp)] bg-no-repeat bg-cover bg-center'>
@@ -59,19 +61,22 @@ const Login = memo(() => {
                             <div className='relative'>
                                 <Input
                                     name='password'
-                                    type='password'
+                                    type={showPassword ? 'text' : 'password'}
                                     onChange={handleChange}
                                     value={values.password}
                                     ph='Password'
                                     onBlur={handleBlur}
                                     label='Password'
                                 />
-                                <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2 pointer-events-none'>
+                                <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2'>
+                                    <span className='mr-1 cursor-pointer' onClick={togglePassword}>
+                                        {showPassword ? HidePassIcon : SeePassIcon}
+                                    </span>
                                     {errors.password ? ValidateFalseIcon : ValidateTrueIcon}
                                 </div>
                             </div>
                             {errors.password && <small className='ml-2 text-sm text-red-400'>{errors.password}</small>}
-                            <div className='flex flex-col justify-between sm:flex-row'>
+                            <div className='flex justify-between'>
                                 <RememberMe />
                                 <a className='text-sm text-[#048C8C] hover:underline'>Forgot password?</a>
                             </div>
