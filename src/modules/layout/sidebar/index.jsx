@@ -45,7 +45,7 @@ const SideBar = ({ toggle, setToggle }) => {
                     </Link>
                 ))}
             <button
-                onClick={() => logout('/login')}
+                onClick={() => logout()}
                 className='flex items-center text-sm p-4 text-[#003C40] rounded border-2 hover:text-[#003C40] border-solid border-[#EDFFFB] hover:border-2 hover:border-solid hover:border-[#048C8C] active:border-2 active:border-solid active:border-[#048C8C]'
             >
                 {LogoutIcon}

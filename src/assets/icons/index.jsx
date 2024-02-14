@@ -24,10 +24,10 @@ import {
     AiOutlineEyeInvisible,
     AiOutlineFall,
     AiOutlineCloseCircle,
+    AiOutlineMinusCircle,
 } from 'react-icons/ai'
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
-import { CiCircleMinus } from 'react-icons/ci'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaHotjar, FaFilter } from 'react-icons/fa'
 
@@ -52,7 +52,7 @@ export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
 export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
-export const ValidateFalseIcon = <CiCircleMinus fontSize='1.1em' color='red' />
+export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
 export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />
 export const HidePassIcon = <AiOutlineEyeInvisible fontSize='1.4em' color='#048C8C' />
 export const TotalIcon = <AiOutlineFall fontSize='1.4em' color='white' />

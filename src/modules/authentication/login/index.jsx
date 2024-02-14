@@ -24,10 +24,12 @@ const Login = memo(() => {
         onSubmit: async formValues => {
             const { status, message } = await loginUser(formValues.email, formValues.password)
             if (status === 'error') {
-                toast.error(message)
+                toast.error(message || 'Something gone wrong')
             } else {
                 toast.success(message)
-                navigate(0)
+                setTimeout(() => {
+                    navigate('/')
+                }, 3000)
             }
         },
     })
