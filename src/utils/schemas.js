@@ -4,3 +4,7 @@ export const loginSchema = Yup.object({
     email: Yup.string().email().required(),
     password: Yup.string().required(),
 })
+
+export const forgotPasswordSchema = Yup.object({
+    email: Yup.string().email().required(),
+})
