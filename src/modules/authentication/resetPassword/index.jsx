@@ -10,7 +10,7 @@ import { resetPassword } from '@modules/authentication/api'
 import { resetPasswordSchema } from '@utils/schemas'
 
 import signinLogo from '@images/signin-logo.webp'
-import devsincLogo from '@images/devsinc-logo.png'
+import devsincLogo from '@images/poweredBy.svg'
 import { ValidateTrueIcon, ValidateFalseIcon, SeePassIcon, HidePassIcon } from '@icons'
 
 const ForgetPassword = memo(() => {
@@ -38,7 +38,7 @@ const ForgetPassword = memo(() => {
 
     return (
         <div className='bg-[url(@images/signin-bg.webp)] bg-no-repeat bg-cover bg-center'>
-            <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
+            <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0'>
                 <a className='flex items-center bg-[#EDFFFB] rounded-lg shadow-[0px_1px_5px_rgba(4,131,131,0.5)] px-12 py-2 -mb-12 z-[1]'>
                     <img className='w-42' src={signinLogo} alt='logo' />
                 </a>
@@ -90,8 +90,10 @@ const ForgetPassword = memo(() => {
                     </div>
                 </div>
             </div>
-            <div className='absolute bottom-0 right-0 p-5'>
-                <img src={devsincLogo} alt='logo' />
+            <div className='absolute bottom-0 right-10 p-5'>
+                <a href='https://devsinc.com/' target='_blank' rel='noreferrer'>
+                    <img src={devsincLogo} alt='logo' />
+                </a>
             </div>
             <Toaster />
         </div>
