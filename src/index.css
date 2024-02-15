@@ -62,6 +62,11 @@
     padding: 0 !important;
 }
 
+body{
+    max-height: 100vh !important;
+    overflow: auto !important;
+}
+
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;

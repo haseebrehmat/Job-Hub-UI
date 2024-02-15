@@ -19,17 +19,20 @@ const ForgetPassword = memo(() => {
     const email = new URLSearchParams(search).get('email')
     const code = new URLSearchParams(search).get('code')
     const [showPassword, setShowPassword] = useState(false)
+    const [disabled, setDisabled] = useState(false)
 
     const { values, errors, handleBlur, handleSubmit, handleChange } = useFormik({
         initialValues: { password: '', passwordConfirmation: '' },
         validationSchema: resetPasswordSchema,
         onSubmit: async ({ password, passwordConfirmation }) => {
+            setDisabled(true)
             const { status, message } = await resetPassword(password, passwordConfirmation, email, code)
             if (status === 'error') toast.error(message)
             else {
                 toast.success(message)
                 setTimeout(() => navigate('/login'), 3000)
             }
+            setDisabled(false)
         },
     })
 
@@ -84,8 +87,8 @@ const ForgetPassword = memo(() => {
                             {errors.passwordConfirmation && (
                                 <small className='ml-2 text-sm text-red-400'>{errors.passwordConfirmation}</small>
                             )}
-                            <Button label='Reset Password' type='submit' />
-                            <Button label='Back to login' onClick={handleClick} />
+                            <Button label='Reset Password' type='submit' disabled={disabled} />
+                            <Button label='Back to login' onClick={handleClick} disabled={disabled} />
                         </form>
                     </div>
                 </div>
