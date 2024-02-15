@@ -1,9 +1,7 @@
 import { memo } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
-import { dumyLeads as data } from '../data'
-
-const Leads = () => (
+const Leads = ({ data }) => (
     <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
         <ResponsiveContainer
             width='98%'
@@ -31,13 +29,13 @@ const Leads = () => (
                     domain={[0, 'auto']}
                 />
                 <Tooltip />
-                <Line dataKey='prospects' stroke='#fac635' strokeWidth='2' activeDot={{ r: 3 }} />
-                <Line dataKey='rejected' stroke='#ef554d' strokeWidth='2' activeDot={{ r: 3 }} />
+                <Line dataKey='prospects' stroke='#ffd000' strokeWidth='2' activeDot={{ r: 3 }} />
+                <Line dataKey='rejected' stroke='#b40008' strokeWidth='2' activeDot={{ r: 3 }} />
                 {import.meta.env.VITE_LEADS_ALL === 'true' && (
                     <>
-                        <Line dataKey='cold' stroke='#9addfc' strokeWidth='2' activeDot={{ r: 3 }} />
-                        <Line dataKey='warm' stroke='#f6e194' strokeWidth='2' activeDot={{ r: 3 }} />
-                        <Line dataKey='hot' stroke='#ee9f37' strokeWidth='2' activeDot={{ r: 3 }} />
+                        <Line dataKey='cold' stroke='#77b2f4' strokeWidth='2' activeDot={{ r: 3 }} />
+                        <Line dataKey='warm' stroke='#fcee8c' strokeWidth='2' activeDot={{ r: 3 }} />
+                        <Line dataKey='hot' stroke='#ff2000' strokeWidth='2' activeDot={{ r: 3 }} />
                     </>
                 )}
             </LineChart>

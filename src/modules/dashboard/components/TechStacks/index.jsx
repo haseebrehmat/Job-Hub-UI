@@ -10,8 +10,6 @@ import {
     ResponsiveContainer,
 } from 'recharts'
 
-import { dumyTechs as data } from '../data'
-
 function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
     return (
         <Text {...rest} verticalAnchor='middle' y={y + (y - cy) / 8} x={x + (x - cx) / 10}>
@@ -20,7 +18,7 @@ function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
     )
 }
 
-const TechStacks = () => (
+const TechStacks = ({ data }) => (
     <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
         <ResponsiveContainer
             width='98%'
@@ -31,7 +29,7 @@ const TechStacks = () => (
             <RadarChart outerRadius={150} width={600} height={400} data={data}>
                 <PolarGrid stroke='#037571' strokeWidth='0.5' />
                 <PolarAngleAxis
-                    dataKey='techStacks'
+                    dataKey='name'
                     stroke='#037571'
                     strokeWidth='0.5'
                     tick={props => renderPolarAngleAxis(props)}
@@ -48,7 +46,7 @@ const TechStacks = () => (
                 />
                 <Radar
                     name='Tech Jobs'
-                    dataKey='Jobs'
+                    dataKey='value'
                     stroke='#037571'
                     fill='#037571'
                     fillOpacity={0.2}

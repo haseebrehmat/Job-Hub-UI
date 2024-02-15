@@ -1,7 +1,6 @@
 import { BarChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Bar } from 'recharts'
-import { dumyLeads as data } from '../data'
 
-const WarmLeads = () => (
+const WarmLeads = ({ data }) => (
     <div className='border rounded-lg _shadow-2 bg-[#EDFFFB] py-4 overflow-x-auto'>
         <p className='pl-8 text-xl text-[#037571]'>Warm Leads</p>
         <ResponsiveContainer width='100%' height={450} minWidth={800}>
@@ -37,8 +36,8 @@ const WarmLeads = () => (
                         marginTop: '15px',
                     }}
                 />
-                <Bar fill='#8884d8' dataKey='warm' stackId='abc' barSize={15} />
-                <Bar fill='#82ca9d' dataKey='cold' stackId='abc' barSize={15} />
+                <Bar fill='#fcee8c' dataKey='warm' stackId='abc' barSize={15} />
+                <Bar fill='#77b2f4' dataKey='cold' stackId='abc' barSize={15} />
             </BarChart>
         </ResponsiveContainer>
     </div>

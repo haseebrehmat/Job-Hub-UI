@@ -2,13 +2,19 @@ import { memo } from 'react'
 
 import { StatCard } from '@components'
 
-import { dumyStats as stats } from '../data'
+import { statsIcons } from '@constants/dashboard'
 
-const Statistics = () => (
+const Statistics = ({ data }) => (
     <div className='flex flex-col space-y-8'>
-        {stats.length > 0 &&
-            stats.map(({ label, value, icon }, index) => (
-                <StatCard label={label} value={value} icon={icon} key={label} index={index} />
+        {data.length > 0 &&
+            data.map(({ name, value }, index) => (
+                <StatCard
+                    label={name.charAt(0).toUpperCase() + name.slice(1)}
+                    value={value}
+                    icon={statsIcons[name]}
+                    key={name}
+                    index={index}
+                />
             ))}
     </div>
 )
