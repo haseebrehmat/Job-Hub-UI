@@ -2,7 +2,7 @@ import { BarChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Bar } fro
 import { dumyLeads as data } from '../data'
 
 const WarmLeads = () => (
-    <div className='border rounded-lg shadow-md py-4 overflow-x-auto'>
+    <div className='border rounded-lg _shadow-2 bg-[#EDFFFB] py-4 overflow-x-auto'>
         <p className='pl-8 text-xl text-[#037571]'>Warm Leads</p>
         <ResponsiveContainer width='100%' height={450} minWidth={800}>
             <BarChart

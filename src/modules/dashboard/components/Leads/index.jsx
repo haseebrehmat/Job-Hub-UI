@@ -6,7 +6,7 @@ import { dumyLeads as data } from '../data'
 const Leads = () => (
     <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
         <ResponsiveContainer
-            width='99%'
+            width='98%'
             height={450}
             minWidth={800}
             className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto -mt-8'
@@ -31,8 +31,15 @@ const Leads = () => (
                     domain={[0, 'auto']}
                 />
                 <Tooltip />
-                <Line dataKey='hired' stroke='#006366' strokeWidth='2' activeDot={{ r: 3 }} />
-                <Line dataKey='prospects' stroke='#007369' strokeWidth='2' activeDot={{ r: 3 }} />
+                <Line dataKey='prospects' stroke='#fac635' strokeWidth='2' activeDot={{ r: 3 }} />
+                <Line dataKey='rejected' stroke='#ef554d' strokeWidth='2' activeDot={{ r: 3 }} />
+                {import.meta.env.VITE_LEADS_ALL === 'true' && (
+                    <>
+                        <Line dataKey='cold' stroke='#9addfc' strokeWidth='2' activeDot={{ r: 3 }} />
+                        <Line dataKey='warm' stroke='#f6e194' strokeWidth='2' activeDot={{ r: 3 }} />
+                        <Line dataKey='hot' stroke='#ee9f37' strokeWidth='2' activeDot={{ r: 3 }} />
+                    </>
+                )}
             </LineChart>
         </ResponsiveContainer>
         <div className='text-[#006366] px-5 pt-5 pb-4'>
