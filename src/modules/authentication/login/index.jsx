@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { memo, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { useFormik } from 'formik'
@@ -57,7 +58,7 @@ const Login = memo(() => {
                                     label='Email'
                                 />
                                 <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2 pointer-events-none'>
-                                    {errors.email ? ValidateFalseIcon : ValidateTrueIcon}
+                                    {errors.email ? ValidateFalseIcon : values.email.length > 0 ? ValidateTrueIcon : ''}
                                 </div>
                             </div>
                             {errors.email && <small className='ml-2 text-sm text-red-400'>{errors.email}</small>}
@@ -75,7 +76,11 @@ const Login = memo(() => {
                                     <span className='mr-1 cursor-pointer' onClick={togglePassword}>
                                         {showPassword ? HidePassIcon : SeePassIcon}
                                     </span>
-                                    {errors.password ? ValidateFalseIcon : ValidateTrueIcon}
+                                    {errors.password
+                                        ? ValidateFalseIcon
+                                        : values.password.length > 0
+                                        ? ValidateTrueIcon
+                                        : ''}
                                 </div>
                             </div>
                             {errors.password && <small className='ml-2 text-sm text-red-400'>{errors.password}</small>}
