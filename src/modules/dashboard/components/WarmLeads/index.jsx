@@ -30,13 +30,13 @@ const WarmLeads = () => (
                     type='number'
                     domain={[0, 'auto']}
                 />
+                <Tooltip />
                 <Legend
                     wrapperStyle={{
                         paddingTop: '35px',
                         marginTop: '15px',
                     }}
                 />
-                <Tooltip />
                 <Bar fill='#8884d8' dataKey='warm' stackId='abc' barSize={15} />
                 <Bar fill='#82ca9d' dataKey='cold' stackId='abc' barSize={15} />
             </BarChart>

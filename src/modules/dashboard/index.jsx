@@ -1,4 +1,4 @@
-import { Filters, Statistics, Leads, WarmLeads } from '@modules/dashboard/components'
+import { Filters, Statistics, Leads, WarmLeads, TechStacks } from '@modules/dashboard/components'
 
 const Dashboard = () => (
     <div className='flex flex-col w-full space-y-14'>
@@ -7,6 +7,7 @@ const Dashboard = () => (
             <div className='flex flex-col w-4/5 space-y-8'>
                 <Leads />
                 <WarmLeads />
+                <TechStacks />
             </div>
             <Statistics />
         </div>
