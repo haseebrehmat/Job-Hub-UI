@@ -1,14 +1,19 @@
 import axios from 'axios'
 import { getToken } from './helpers'
 
-const token = getToken() || null
+const token = getToken()
+
+const headers = {
+    Accept: 'application/json',
+}
+
+if (token !== null) {
+    headers.Authorization = `Bearer ${token}`
+}
 
 const http = axios.create({
     baseURL: import.meta.env.VITE_AUTH_API_URL,
-    headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`,
-    },
+    headers,
 })
 
 const scrapperHttp = axios.create({
