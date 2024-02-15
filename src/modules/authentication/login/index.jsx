@@ -17,15 +17,12 @@ import { ValidateTrueIcon, ValidateFalseIcon, SeePassIcon, HidePassIcon } from '
 const Login = memo(() => {
     const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
-    const [disabled, setDisabled] = useState(false)
 
-    const { values, errors, handleBlur, handleSubmit, handleChange } = useFormik({
+    const { values, errors, handleBlur, handleSubmit, handleChange, isSubmitting } = useFormik({
         initialValues: { email: '', password: '' },
         validationSchema: loginSchema,
-        onSubmit: async formValues => {
-            debugger
-            setDisabled(true)
-            const { status, message } = await loginUser(formValues.email, formValues.password)
+        onSubmit: async ({ email, password, setSubmitting }) => {
+            const { status, message } = await loginUser(email, password)
             if (status === 'error') {
                 toast.error(message)
             } else {
@@ -34,7 +31,7 @@ const Login = memo(() => {
                     navigate('/')
                 }, 3000)
             }
-            setDisabled(false)
+            setSubmitting(false)
         },
     })
 
@@ -94,7 +91,11 @@ const Login = memo(() => {
                                     Forgot password?
                                 </a>
                             </div>
-                            <Button label='SIGN IN' type='submit' disabled={disabled} />
+                            <Button
+                                label={isSubmitting ? 'SIGNING IN....' : 'SIGN IN'}
+                                type='submit'
+                                disabled={isSubmitting}
+                            />
                             <TermsOfService />
                         </form>
                     </div>

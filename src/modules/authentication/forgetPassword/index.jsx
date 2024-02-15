@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
@@ -15,20 +15,17 @@ import { ValidateTrueIcon, ValidateFalseIcon } from '@icons'
 
 const ForgetPassword = memo(() => {
     const navigate = useNavigate()
-    const [disabled, setDisabled] = useState(false)
-
-    const { values, errors, handleBlur, handleSubmit, handleChange } = useFormik({
+    const { values, errors, handleBlur, handleSubmit, handleChange, isSubmitting } = useFormik({
         initialValues: { email: '' },
         validationSchema: forgotPasswordSchema,
-        onSubmit: async formValues => {
-            setDisabled(true)
-            const { status, message } = await sendResetPasswordLink(formValues.email)
+        onSubmit: async ({ email, setSubmitting }) => {
+            const { status, message } = await sendResetPasswordLink(email)
             if (status === 'error') toast.error(message || 'Something gone wrong')
             else {
                 toast.success(message)
                 setTimeout(() => navigate('/login'), 3000)
             }
-            setDisabled(false)
+            setSubmitting(false)
         },
     })
 
@@ -58,8 +55,12 @@ const ForgetPassword = memo(() => {
                                 </div>
                             </div>
                             {errors.email && <small className='ml-2 text-sm text-red-400'>{errors.email}</small>}
-                            <Button label='Send Reset Password Link' type='submit' disabled={disabled} />
-                            <Button label='Back to login' onClick={handleClick} disabled={disabled} />
+                            <Button
+                                label={isSubmitting ? 'Sending ...' : 'Send Reset Password Link'}
+                                type='submit'
+                                disabled={isSubmitting}
+                            />
+                            <Button label='Back to login' onClick={handleClick} disabled={isSubmitting} />
                         </form>
                     </div>
                 </div>

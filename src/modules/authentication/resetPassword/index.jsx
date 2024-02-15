@@ -19,20 +19,18 @@ const ForgetPassword = memo(() => {
     const email = new URLSearchParams(search).get('email')
     const code = new URLSearchParams(search).get('code')
     const [showPassword, setShowPassword] = useState(false)
-    const [disabled, setDisabled] = useState(false)
 
-    const { values, errors, handleBlur, handleSubmit, handleChange } = useFormik({
+    const { values, errors, handleBlur, handleSubmit, handleChange, isSubmitting } = useFormik({
         initialValues: { password: '', passwordConfirmation: '' },
         validationSchema: resetPasswordSchema,
-        onSubmit: async ({ password, passwordConfirmation }) => {
-            setDisabled(true)
+        onSubmit: async ({ password, passwordConfirmation, setSubmitting }) => {
             const { status, message } = await resetPassword(password, passwordConfirmation, email, code)
             if (status === 'error') toast.error(message)
             else {
                 toast.success(message)
                 setTimeout(() => navigate('/login'), 3000)
             }
-            setDisabled(false)
+            setSubmitting(false)
         },
     })
 
@@ -87,8 +85,16 @@ const ForgetPassword = memo(() => {
                             {errors.passwordConfirmation && (
                                 <small className='ml-2 text-sm text-red-400'>{errors.passwordConfirmation}</small>
                             )}
-                            <Button label='Reset Password' type='submit' disabled={disabled} />
-                            <Button label='Back to login' onClick={handleClick} disabled={disabled} />
+                            <Button
+                                label={isSubmitting ? 'Reseting' : 'Reset Password'}
+                                type='submit'
+                                disabled={isSubmitting}
+                            />
+                            <Button
+                                label={isSubmitting ? 'Wait for response' : 'Back to login'}
+                                onClick={handleClick}
+                                disabled={isSubmitting}
+                            />
                         </form>
                     </div>
                 </div>
