@@ -1,41 +1,40 @@
 import { memo, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { useFormik } from 'formik'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import { Button, Input } from '@components'
 
-import { loginUser } from '@modules/authentication/api'
-import { RememberMe, TermsOfService } from '@modules/authentication/components'
+import { resetPassword } from '@modules/authentication/api'
 
-import { loginSchema } from '@utils/schemas'
+import { resetPasswordSchema } from '@utils/schemas'
 
 import signinLogo from '@images/signin-logo.webp'
 import devsincLogo from '@images/devsinc-logo.png'
 import { ValidateTrueIcon, ValidateFalseIcon, SeePassIcon, HidePassIcon } from '@icons'
 
-const Login = memo(() => {
+const ForgetPassword = memo(() => {
     const navigate = useNavigate()
+    const { search } = useLocation()
+    const email = new URLSearchParams(search).get('email')
+    const code = new URLSearchParams(search).get('code')
     const [showPassword, setShowPassword] = useState(false)
 
     const { values, errors, handleBlur, handleSubmit, handleChange } = useFormik({
-        initialValues: { email: '', password: '' },
-        validationSchema: loginSchema,
-        onSubmit: async formValues => {
-            const { status, message } = await loginUser(formValues.email, formValues.password)
-            if (status === 'error') {
-                toast.error(message)
-            } else {
+        initialValues: { password: '', passwordConfirmation: '' },
+        validationSchema: resetPasswordSchema,
+        onSubmit: async ({ password, passwordConfirmation }) => {
+            const { status, message } = await resetPassword(password, passwordConfirmation, email, code)
+            if (status === 'error') toast.error(message)
+            else {
                 toast.success(message)
-                setTimeout(() => {
-                    navigate('/')
-                }, 3000)
+                setTimeout(() => navigate('/login'), 3000)
             }
         },
     })
 
+    const handleClick = () => navigate('/login')
     const togglePassword = () => setShowPassword(!showPassword)
-    const handleClick = () => navigate('/forget-password')
 
     return (
         <div className='bg-[url(@images/signin-bg.webp)] bg-no-repeat bg-cover bg-center'>
@@ -46,21 +45,6 @@ const Login = memo(() => {
                 <div className='w-full bg-white md:mt-0 sm:max-w-md xl:p-0 shadow-[0px_1px_8px_rgba(0,99,102,0.4)] rounded-xl'>
                     <div className='p-6 mt-10 space-y-4 md:space-y-6 sm:p-8'>
                         <form className='space-y-2 md:space-y-4' onSubmit={handleSubmit}>
-                            <div className='relative'>
-                                <Input
-                                    name='email'
-                                    type='email'
-                                    onChange={handleChange}
-                                    value={values.email}
-                                    ph='Email'
-                                    onBlur={handleBlur}
-                                    label='Email'
-                                />
-                                <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2 pointer-events-none'>
-                                    {errors.email ? ValidateFalseIcon : values.email.length > 0 && ValidateTrueIcon}
-                                </div>
-                            </div>
-                            {errors.email && <small className='ml-2 text-sm text-red-400'>{errors.email}</small>}
                             <div className='relative'>
                                 <Input
                                     name='password'
@@ -81,17 +65,27 @@ const Login = memo(() => {
                                 </div>
                             </div>
                             {errors.password && <small className='ml-2 text-sm text-red-400'>{errors.password}</small>}
-                            <div className='flex justify-between'>
-                                <RememberMe />
-                                <a
-                                    className='text-sm text-[#048C8C] hover:underline cursor-pointer'
-                                    onClick={handleClick}
-                                >
-                                    Forgot password?
-                                </a>
+                            <div className='relative'>
+                                <Input
+                                    name='passwordConfirmation'
+                                    type={showPassword ? 'text' : 'password'}
+                                    onChange={handleChange}
+                                    value={values.passwordConfirmation}
+                                    ph='Confirm Password'
+                                    onBlur={handleBlur}
+                                    label='Confirm Password'
+                                />
+                                <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2'>
+                                    {errors.passwordConfirmation
+                                        ? ValidateFalseIcon
+                                        : values.passwordConfirmation.length > 0 && ValidateTrueIcon}
+                                </div>
                             </div>
-                            <Button label='SIGN IN' type='submit' />
-                            <TermsOfService />
+                            {errors.passwordConfirmation && (
+                                <small className='ml-2 text-sm text-red-400'>{errors.passwordConfirmation}</small>
+                            )}
+                            <Button label='Reset Password' type='submit' />
+                            <Button label='Back to login' onClick={handleClick} />
                         </form>
                     </div>
                 </div>
@@ -104,4 +98,4 @@ const Login = memo(() => {
     )
 })
 
-export default Login
+export default ForgetPassword

@@ -14,6 +14,11 @@ export const loginUser = (email, password) =>
 export const sendResetPasswordLink = email =>
     http
         .get(`api/auth/password/reset?email=${email}`)
-        .then(res => console.log(res))
-        // .then(res => ({ status: 'success', message: 'Check your inbox to get reset password link' }))
+        .then(({ data }) => ({ status: 'success', message: data.detail }))
+        .catch(error => ({ status: 'error', message: getMsg(error) }))
+
+export const resetPassword = (password, confirm_password, email, code) =>
+    http
+        .post(`api/auth/password/reset`, { password, confirm_password, email, code })
+        .then(({ data }) => ({ status: 'success', message: data.detail }))
         .catch(error => ({ status: 'error', message: getMsg(error) }))

@@ -20,15 +20,11 @@ const ForgetPassword = memo(() => {
         initialValues: { email: '' },
         validationSchema: forgotPasswordSchema,
         onSubmit: async formValues => {
-            console.log(formValues)
             const { status, message } = await sendResetPasswordLink(formValues.email)
-            if (status === 'error') {
-                toast.error(message || 'Something gone wrong')
-            } else {
+            if (status === 'error') toast.error(message || 'Something gone wrong')
+            else {
                 toast.success(message)
-                setTimeout(() => {
-                    navigate('/login')
-                }, 3000)
+                setTimeout(() => navigate('/login'), 3000)
             }
         },
     })
@@ -55,7 +51,7 @@ const ForgetPassword = memo(() => {
                                     label='Email'
                                 />
                                 <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2 pointer-events-none'>
-                                    {errors.email ? ValidateFalseIcon : ValidateTrueIcon}
+                                    {errors.email ? ValidateFalseIcon : values.email.length > 0 && ValidateTrueIcon}
                                 </div>
                             </div>
                             {errors.email && <small className='ml-2 text-sm text-red-400'>{errors.email}</small>}

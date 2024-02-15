@@ -10,7 +10,7 @@ export const removeToken = () => localStorage.removeItem('token')
 
 export const decodeJwt = () => (getToken() ? jwt_decode(getToken()) : { user: null })
 
-export const getMsg = error => error?.response?.data?.detail
+export const getMsg = error => error?.response?.data?.detail || 'Something went wrong'
 
 export const timeSince = date => {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000)
