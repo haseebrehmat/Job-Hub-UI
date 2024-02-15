@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 
 import { Button, Input } from '@components'
 
@@ -50,7 +50,6 @@ const Login = memo(() => {
                             </div>
                             <Button label='SIGN IN' type='submit' />
                             <TermsOfService />
-                            <Toaster />
                         </form>
                     </div>
                 </div>

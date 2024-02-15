@@ -1,7 +1,7 @@
 import { scrapperHttp } from '@utils/http'
 import { getMsg } from '@utils/helpers'
 
-export const fetchAppliedJobs = (page, query = '') => {
+export const fetchAppliedJobs = (page, query = '') =>
     scrapperHttp
         .get(`applied_job_details/?ordering=-job_posted_date&page=${page}&page_size=12&search=${query}`)
         .then(({ data: { data, links, filtered_jobs } }) => ({
@@ -11,4 +11,3 @@ export const fetchAppliedJobs = (page, query = '') => {
             total: filtered_jobs,
         }))
         .catch(error => ({ status: 'error', message: getMsg(error) }))
-}

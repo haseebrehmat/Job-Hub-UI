@@ -1,9 +1,16 @@
-import { scrapperHttp } from '@utils/http'
+import { teamAppliedJobsHttp } from '@utils/http'
 import { getMsg } from '@utils/helpers'
 
-export const fetchAppliedJobs = (page, query = '') =>
-    scrapperHttp
-        .get(`applied_job_details/?job_status=1&ordering=-job_posted_date&page=${page}&page_size=12&search=${query}`)
+export const fetchTeamAppliedJobs = (page, query = '') =>
+    teamAppliedJobsHttp
+        .get(
+            `api/job_portal/team_applied_job_details/?applied_by=223dc6ca-e97a-4cc4-85c8-0b290192b25c&ordering=-job_posted_date&page=${page}&page_size=12&search=${query}`,
+            {
+                headers: {
+                    Authorization: import.meta.env.AUTHORIZATION,
+                },
+            }
+        )
         .then(({ data: { data, links, filtered_jobs } }) => ({
             jobs: data,
             next: links.next,

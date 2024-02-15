@@ -3,16 +3,17 @@ import useSWR from 'swr'
 
 import { Loading, Badge } from '@components'
 
-import { fetchAppliedJobs } from '@modules/appliedJobs/api'
+import { fetchTeamAppliedJobs } from '@modules/jobs/api'
 import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
 
 import { tableHeads, jobStatus } from '@constants/jobs'
 import { formatDate, timeSince } from '@utils/helpers'
+import toast from 'react-hot-toast'
 
 const Jobs = memo(() => {
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
-    const { data, error, isLoading, mutate } = useSWR([page, query], () => fetchAppliedJobs(page, query))
+    const { data, error, isLoading, mutate } = useSWR([page, query], () => fetchTeamAppliedJobs(page, query))
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
     const jobsStatusTypes = Object.entries(jobStatus)
     const apiUrl = import.meta.env.VITE_SCRAPPER_API_URL
@@ -23,7 +24,12 @@ const Jobs = memo(() => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: stausValue, job: data.jobs[id].id }),
         })
-            .then(resp => resp.json())
+            .then(resp => {
+                if (!resp.ok) {
+                    throw Error(resp)
+                }
+                return resp.json()
+            })
             .then(resp => {
                 mutate(
                     {
@@ -32,6 +38,10 @@ const Jobs = memo(() => {
                     },
                     false
                 )
+                toast.success('Job status updated successfully!')
+            })
+            .catch(error => {
+                toast.error('Server error!')
             })
     }
 

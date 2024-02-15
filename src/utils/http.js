@@ -14,4 +14,11 @@ const scrapperHttp = axios.create({
     },
 })
 
-export { http, scrapperHttp }
+const teamAppliedJobsHttp = axios.create({
+    baseURL: 'http://147.34.6.116:8000/',
+    headers: {
+        Accept: 'application/json',
+    },
+})
+
+export { http, scrapperHttp, teamAppliedJobsHttp }
