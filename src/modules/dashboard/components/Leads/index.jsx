@@ -43,7 +43,7 @@ const Leads = () => (
                 />
                 <Area type='monotone' dataKey='total' stroke='#037571' fill='#037571' />
                 <Line type='monotone' dataKey='hired' stroke='#33FF58' strokeWidth='2' activeDot={{ r: 3 }} />
-                <Line type='monotone' dataKey='prospects' stroke='yellow' strokeWidth='2' activeDot={{ r: 3 }} />
+                <Line type='monotone' dataKey='prospects' stroke='gray' strokeWidth='2' activeDot={{ r: 3 }} />
             </ComposedChart>
         </ResponsiveContainer>
     </div>
