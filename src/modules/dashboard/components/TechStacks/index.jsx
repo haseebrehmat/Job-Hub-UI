@@ -1,55 +1,6 @@
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, Tooltip, Text } from 'recharts'
 
-const data = [
-    {
-        techStacks: 'Mean',
-        Jobs: 120,
-    },
-    {
-        techStacks: 'Mern',
-        Jobs: 98,
-    },
-    {
-        techStacks: 'Python',
-        Jobs: 86,
-    },
-    {
-        techStacks: 'Django',
-        Jobs: 99,
-    },
-    {
-        techStacks: 'ROR',
-        Jobs: 85,
-    },
-    {
-        techStacks: 'Android',
-        Jobs: 65,
-    },
-    {
-        techStacks: 'Kotlin',
-        Jobs: 120,
-    },
-    {
-        techStacks: 'JAVA',
-        Jobs: 98,
-    },
-    {
-        techStacks: 'Flutter',
-        Jobs: 86,
-    },
-    {
-        techStacks: 'Devops',
-        Jobs: 99,
-    },
-    {
-        techStacks: 'React',
-        Jobs: 85,
-    },
-    {
-        techStacks: 'Native',
-        Jobs: 65,
-    },
-]
+import { dumyTechs as data } from '../data'
 
 function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
     return (

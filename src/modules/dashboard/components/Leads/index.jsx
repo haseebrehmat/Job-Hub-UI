@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
-import data from '../data'
+import { dumyLeads as data } from '../data'
 
 const Leads = () => (
     <div className='flex flex-col bg-white _shadow-1 rounded-xl'>

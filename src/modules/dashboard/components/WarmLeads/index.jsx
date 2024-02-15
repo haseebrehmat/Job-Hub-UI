@@ -1,5 +1,5 @@
 import { BarChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Bar } from 'recharts'
-import data from '../data'
+import { dumyLeads as data } from '../data'
 
 const WarmLeads = () => (
     <div className='border rounded-lg shadow-md py-4 overflow-x-auto'>
