@@ -55,10 +55,10 @@ export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
 export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
 export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />
 export const HidePassIcon = <AiOutlineEyeInvisible fontSize='1.4em' color='#048C8C' />
-export const TotalIcon = <AiOutlineFall fontSize='1.4em' color='white' />
-export const ProspectsIcon = <IoNewspaperSharp fontSize='1.4em' color='white' />
-export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='white' />
-export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='white' />
-export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='white' />
-export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='white' />
+export const TotalIcon = <AiOutlineFall fontSize='1.4em' color='#048C8C' />
+export const ProspectsIcon = <IoNewspaperSharp fontSize='1.4em' color='#048C8C' />
+export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='#048C8C' />
+export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='#048C8C' />
+export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C' />
+export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
 export const FilterIcon = <FaFilter fontSize='1.5em' color='#048C8C' />

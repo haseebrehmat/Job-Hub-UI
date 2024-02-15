@@ -21,7 +21,6 @@ const WarmLeads = () => (
                     stroke='#037571'
                     interval='preserveStart'
                     textAnchor='end'
-                    allowDuplicatedCategory={false}
                     padding={{ right: 5 }}
                     fontSize={14}
                 />

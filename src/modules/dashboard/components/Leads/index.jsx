@@ -1,19 +1,17 @@
-import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area, ResponsiveContainer } from 'recharts'
+import { memo } from 'react'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+
 import data from '../data'
 
 const Leads = () => (
-    <div className='border rounded-lg shadow-md py-4 overflow-x-auto'>
-        <p className='pl-8 text-xl text-[#037571]'>Leads</p>
-        <ResponsiveContainer width='100%' height={450} minWidth={800}>
-            <ComposedChart
-                data={data}
-                margin={{
-                    top: 40,
-                    right: 0,
-                    bottom: 40,
-                    left: 0,
-                }}
-            >
+    <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
+        <ResponsiveContainer
+            width='99%'
+            height={450}
+            minWidth={800}
+            className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto -mt-8'
+        >
+            <LineChart data={data} margin={{ top: 40, bottom: 40, right: 30, left: 10 }}>
                 <CartesianGrid stroke='#037571' strokeDasharray='3 3' vertical={false} />
                 <XAxis
                     dataKey='name'
@@ -33,20 +31,16 @@ const Leads = () => (
                     domain={[0, 'auto']}
                 />
                 <Tooltip />
-                <Legend
-                    verticalAlign='top'
-                    layout='vertical'
-                    align='right'
-                    wrapperStyle={{
-                        paddingLeft: '10px',
-                    }}
-                />
-                <Area type='monotone' dataKey='total' stroke='#037571' fill='#037571' />
-                <Line type='monotone' dataKey='hired' stroke='#33FF58' strokeWidth='2' activeDot={{ r: 3 }} />
-                <Line type='monotone' dataKey='prospects' stroke='gray' strokeWidth='2' activeDot={{ r: 3 }} />
-            </ComposedChart>
+                <Line dataKey='hired' stroke='#006366' strokeWidth='2' activeDot={{ r: 3 }} />
+                <Line dataKey='prospects' stroke='#007369' strokeWidth='2' activeDot={{ r: 3 }} />
+            </LineChart>
         </ResponsiveContainer>
+        <div className='text-[#006366] px-5 pt-5 pb-4'>
+            <span className='text-lg'>Leads</span>
+            <hr className='w-[80%] h-0.5 bg-[#048C8C] my-3 border-0 rounded' />
+            <span>This chart shows prospects, warm, cold, hot and rejected leads</span>
+        </div>
     </div>
 )
 
-export default Leads
+export default memo(Leads)

@@ -1,46 +1,53 @@
 import { memo } from 'react'
 
 import { StatCard } from '@components'
-import { ColdLeadsIcon, HiredIcon, ProspectsIcon, RejectedIcon, TotalIcon, WarmLeadsIcon } from '@icons'
+import { Cold, Hired, Prospect, Rejected, Total, Warm, Hot } from '@svgs'
 
 const Statistics = () => {
     const stats = [
         {
             label: 'Total',
             value: 1000,
-            icon: TotalIcon,
+            icon: Total,
         },
         {
-            label: 'Prospects',
+            label: 'Prospect',
             value: 230,
-            icon: ProspectsIcon,
+            icon: Prospect,
         },
         {
-            label: 'Warm Leads',
-            value: 400,
-            icon: WarmLeadsIcon,
-        },
-        {
-            label: 'Cold Leads',
+            label: 'Cold',
             value: 100,
-            icon: ColdLeadsIcon,
+            icon: Cold,
         },
         {
-            label: 'Hired',
+            label: 'Warm',
+            value: 400,
+            icon: Warm,
+        },
+        {
+            label: 'Hot',
             value: 10,
-            icon: HiredIcon,
+            icon: Hot,
         },
         {
             label: 'Rejected',
             value: 90,
-            icon: RejectedIcon,
+            icon: Rejected,
+        },
+        {
+            label: 'Hired',
+            value: 10,
+            icon: Hired,
         },
     ]
 
     return (
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8'>
+        <div className='flex flex-col space-y-8 w-1/5 pl-5'>
             {stats.length > 0 &&
-                stats.map(({ label, value, icon }) => <StatCard label={label} value={value} icon={icon} key={label} />)}
+                stats.map(({ label, value, icon }, index) => (
+                    <StatCard label={label} value={value} icon={icon} key={label} index={index} />
+                ))}
         </div>
     )
 }

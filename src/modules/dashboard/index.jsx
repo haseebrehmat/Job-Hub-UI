@@ -1,12 +1,15 @@
-import { Filters, Statistics, Leads, WeeklyLeads, WarmLeads } from '@modules/dashboard/components'
+import { Filters, Statistics, Leads, WarmLeads } from '@modules/dashboard/components'
 
 const Dashboard = () => (
-    <div className='flex flex-col w-full space-y-8'>
+    <div className='flex flex-col w-full space-y-14'>
         <Filters />
-        <Statistics />
-        <Leads />
-        <WarmLeads />
-        <WeeklyLeads />
+        <div className='flex items-start justify-between'>
+            <div className='flex flex-col w-4/5 space-y-8'>
+                <Leads />
+                <WarmLeads />
+            </div>
+            <Statistics />
+        </div>
     </div>
 )
 
