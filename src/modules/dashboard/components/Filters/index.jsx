@@ -3,7 +3,7 @@ import SlidingPane from 'react-sliding-pane'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
 
 import { Input, Button } from '@components'
-import { FilterIcon } from '@icons'
+import { FilterIcon, NavbarSearchIcon } from '@icons'
 import { filtersSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
 import { useFormik } from 'formik'
@@ -28,17 +28,16 @@ const Filters = ({ filters, setFilters }) => {
 
     return (
         <>
-            <div className='grid grid-cols-2 gap-3 max-w-fit'>
-                <Input name='bd' ph='BD' />
-                <span className='flex gap-3'>
-                    <Button label='Search' fit />
-                    <span
-                        className='p-2 cursor-pointer max-w-fit border border-[#048C8C] rounded-lg'
-                        onClick={toggleFilters}
-                    >
-                        {FilterIcon}
-                    </span>
-                </span>
+            <div className='grid grid-cols-3 gap-3 max-w-fit'>
+                <div className='relative hidden md:block'>
+                    <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
+                        {NavbarSearchIcon}
+                    </div>
+                    <form>
+                        <Input name='bd' ph='Search' />
+                    </form>
+                </div>
+                <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
             </div>
             <SlidingPane isOpen={show} from='right' width='250px' onRequestClose={() => setShow(!show)} hideHeader>
                 <div className='text-[#048C8C] p-3 h-full'>

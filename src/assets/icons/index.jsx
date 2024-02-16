@@ -45,7 +45,7 @@ export const SecurityIcon = <BsShieldShaded style={{ fontSize: '18px' }} />
 export const PaginateNext = <BsArrowRightCircle style={{ fontSize: '18px' }} />
 export const PaginatePrev = <BsArrowLeftCircle style={{ fontSize: '18px' }} />
 export const SearchIcon = <AiOutlineSearch />
-export const NavbarSearchIcon = <ImSearch className='w-5 h-5 text-gray-500' />
+export const NavbarSearchIcon = <ImSearch className='w-4 h-4 text-[#048C8C]' />
 export const NavSettingIcon = <IoIosSettings fontSize='1.5em' />
 export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
@@ -61,4 +61,4 @@ export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='#048C8C' />
 export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='#048C8C' />
 export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C' />
 export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
-export const FilterIcon = <FaFilter fontSize='1.5em' color='#048C8C' />
+export const FilterIcon = <FaFilter fontSize='1.1em' color='#048C8C' />
