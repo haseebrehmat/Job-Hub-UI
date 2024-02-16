@@ -33,7 +33,7 @@ const WarmLeads = ({ data }) => (
                     type='number'
                     domain={[0, 'auto']}
                 />
-                <Tooltip />
+                <Tooltip cursor={{ fill: 'transparent' }} />
                 <Legend
                     wrapperStyle={{
                         paddingTop: '35px',
