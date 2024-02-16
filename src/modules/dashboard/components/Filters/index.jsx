@@ -49,7 +49,7 @@ const Filters = ({ filters, setFilters }) => {
                 <div className='text-[#048C8C] p-3 h-full'>
                     <form onSubmit={handleSubmit}>
                         <div className='grid grid-flow-row gap-2'>
-                            <p className='p-2 font-medium text-xl'>Filters</p>
+                            <p className='font-medium text-xl'>Filters</p>
                             {/* <Input name='bd' ph='BD' /> */}
                             <span className='text-sm'>From</span>
                             <Input
