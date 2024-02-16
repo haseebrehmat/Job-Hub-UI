@@ -14,10 +14,10 @@ import {
     BsCheck2,
     BsSnow3,
 } from 'react-icons/bs'
-import { HiUser, HiUsers } from 'react-icons/hi'
+import { HiUser, HiUsers, HiOutlineFilter } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
-import { FiMenu } from 'react-icons/fi'
+import { FiMenu, FiRefreshCw } from 'react-icons/fi'
 import {
     AiOutlineSearch,
     AiOutlineEye,
@@ -29,7 +29,7 @@ import {
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaFilter } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar } from 'react-icons/fa'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -62,4 +62,5 @@ export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='#048C8C' />
 export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='#048C8C' />
 export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C' />
 export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
-export const FilterIcon = <FaFilter fontSize='1.1em' color='#048C8C' />
+export const FilterIcon = <HiOutlineFilter fontSize='1.5em' color='#048C8C' />
+export const ResetIcon = <FiRefreshCw fontSize='1.5em' color='#048C8C' />

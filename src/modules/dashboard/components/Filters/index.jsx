@@ -7,6 +7,7 @@ import { FilterIcon, NavbarSearchIcon } from '@icons'
 import { filtersSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
 import { useFormik } from 'formik'
+import { ResetIcon } from '@/assets/icons'
 
 const Filters = ({ filters, setFilters }) => {
     const [show, setShow] = useState(false)
@@ -28,7 +29,7 @@ const Filters = ({ filters, setFilters }) => {
 
     return (
         <>
-            <div className='grid grid-cols-3 gap-3 max-w-fit'>
+            <div className='grid grid-cols-2 gap-3 max-w-fit'>
                 <div className='relative hidden md:block'>
                     <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
                         {NavbarSearchIcon}
@@ -37,7 +38,10 @@ const Filters = ({ filters, setFilters }) => {
                         <Input name='bd' ph='Search' />
                     </form>
                 </div>
-                <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
+                <div className='flex space-x-3'>
+                    <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
+                    <Button fit icon={ResetIcon} onClick={resetFilters} />
+                </div>
             </div>
             <SlidingPane isOpen={show} from='right' width='250px' onRequestClose={() => setShow(!show)} hideHeader>
                 <div className='text-[#048C8C] p-3 h-full'>
@@ -66,7 +70,6 @@ const Filters = ({ filters, setFilters }) => {
                             )}
                             {errors.to_date && <small className='ml-2 text-sm text-red-400'>{errors.to_date}</small>}
                             <Button label='Apply' type='submit' />
-                            <Button label='Clear' type='button' onClick={resetFilters} />
                         </div>
                     </form>
                 </div>
