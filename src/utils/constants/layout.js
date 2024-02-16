@@ -3,6 +3,7 @@ import {
     // NewUserIcon,
     // NotificationIcon,
     ReportIcon,
+    Jobs,
     // RoleIcon,
     // SecurityIcon,
     // SettingIcon,
@@ -19,6 +20,11 @@ export const menuItems = [
         label: 'Applied Jobs',
         link: '/applied-jobs',
         svg: ReportIcon,
+    },
+    {
+        label: 'Jobs',
+        link: 'jobs',
+        svg: Jobs,
     },
     // {
     //     label: 'Report',

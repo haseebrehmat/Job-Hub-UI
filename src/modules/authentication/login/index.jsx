@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
 
@@ -106,7 +106,6 @@ const Login = memo(() => {
                     <img src={devsincLogo} alt='logo' />
                 </a>
             </div>
-            <Toaster />
         </div>
     )
 })

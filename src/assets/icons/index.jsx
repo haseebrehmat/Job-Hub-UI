@@ -29,7 +29,7 @@ import {
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaHotjar, FaFilter } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaFilter } from 'react-icons/fa'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -51,6 +51,7 @@ export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
+export const Jobs = <FaBriefcase />
 export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
 export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
 export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />

@@ -23,4 +23,11 @@ const scrapperHttp = axios.create({
     },
 })
 
-export { http, scrapperHttp }
+const teamAppliedJobsHttp = axios.create({
+    baseURL: import.meta.env.VITE_SCRAPPER_API_URL,
+    headers: {
+        Accept: 'application/json',
+    },
+})
+
+export { http, scrapperHttp, teamAppliedJobsHttp }
