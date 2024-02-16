@@ -7,6 +7,7 @@ import { FilterIcon } from '@icons'
 import { filtersSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
 import { useFormik } from 'formik'
+import { ResetIcon } from '@/assets/icons'
 
 const Filters = ({ filters, setFilters }) => {
     const [show, setShow] = useState(false)
@@ -38,6 +39,14 @@ const Filters = ({ filters, setFilters }) => {
                     >
                         {FilterIcon}
                     </span>
+                    <span
+                        className='p-2 cursor-pointer max-w-fit border border-[#048C8C] rounded-lg'
+                        onClick={toggleFilters}
+                    >
+                        <span className='flex text-[#048C8C]' onClick={resetFilters}>
+                            {ResetIcon}
+                        </span>
+                    </span>
                 </span>
             </div>
             <SlidingPane isOpen={show} from='right' width='250px' onRequestClose={() => setShow(!show)} hideHeader>
@@ -67,7 +76,7 @@ const Filters = ({ filters, setFilters }) => {
                             )}
                             {errors.to_date && <small className='ml-2 text-sm text-red-400'>{errors.to_date}</small>}
                             <Button label='Apply' type='submit' />
-                            <Button label='Clear' type='button' onClick={resetFilters} />
+                            {/* <Button label='Clear' type='button' onClick={resetFilters} /> */}
                         </div>
                     </form>
                 </div>
