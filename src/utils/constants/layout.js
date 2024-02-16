@@ -17,7 +17,7 @@ export const menuItems = [
     },
     {
         label: 'Applied Jobs',
-        link: 'applied-jobs',
+        link: '/applied-jobs',
         svg: ReportIcon,
     },
     // {
