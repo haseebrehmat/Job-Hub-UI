@@ -57,7 +57,12 @@ const JobsFilter = memo(() => {
         }
         url = params_count > 0 ? url + `?${params.toString()}` : url
         setData([])
-        fetch(url)
+        fetch(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
+            },
+        })
             .then(resp => {
                 if (!resp.ok) {
                     throw Error(resp)
@@ -271,19 +276,15 @@ const JobsFilter = memo(() => {
                 </div>
             </div>
 
-            <table
-                className='border border-slate-400 table-auto w-full text-sm border-collapse my-2'
-                id='job_portal_table'
-            >
+            <table className='border border-slate-400 table-auto w-full text-sm border-collapse my-2'>
                 <thead className='bg-slate-50 dark:bg-slate-700'>
-                    <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold p-4 text-slate-900 dark:text-slate-200 text-left'>
-                        <th>Job Title</th>
+                    <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold text-slate-900 dark:text-slate-200 text-left'>
+                        <th className='p-2'>Job Title</th>
                         <th className='d-sm-table-cell d-none'>Company</th>
                         <th>Job Source</th>
                         <th>Tech Stack</th>
                         <th>Job Type</th>
                         <th>Date Posted</th>
-                        <th className='d-sm-table-cell d-none'>Template</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -291,10 +292,10 @@ const JobsFilter = memo(() => {
                     {data.length > 0 &&
                         data.map((item, key) => (
                             <tr
-                                className='border border-slate-300 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400'
+                                className='border border-slate-300 dark:border-slate-700  text-slate-500 dark:text-slate-400'
                                 key={key}
                             >
-                                <td className='text-start '>{item.job_title}</td>
+                                <td className='text-start p-2 rounded text-sm shadow-sm'>{item.job_title}</td>
                                 <td className='d-sm-table-cell d-none text-start'>{item.company_name}</td>
                                 <td>
                                     <a href={item.job_source_url}>{item.job_source}</a>
@@ -302,10 +303,12 @@ const JobsFilter = memo(() => {
                                 <td>{item.tech_keywords}</td>
                                 <td>{item.job_type}</td>
                                 <td>{item.job_posted_date.slice(0, 10)}</td>
-                                <td className='d-sm-table-cell d-none'>Template</td>
                                 <td>
                                     {item.job_status === 0 ? (
-                                        <button className='btn btn-success btn-sm' onClick={() => updateJobStatus(key)}>
+                                        <button
+                                            className='block rounded px-2 py-1 bg-green-700 text-white'
+                                            onClick={() => updateJobStatus(key)}
+                                        >
                                             {jobStatusChoice[item.job_status]}
                                         </button>
                                     ) : (

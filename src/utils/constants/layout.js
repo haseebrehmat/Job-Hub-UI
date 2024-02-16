@@ -4,6 +4,7 @@ import {
     // NotificationIcon,
     ReportIcon,
     Jobs,
+    JobsUploaderIcon,
     // RoleIcon,
     // SecurityIcon,
     // SettingIcon,
@@ -28,8 +29,13 @@ export const menuItems = [
     },
     {
         label: 'Jobs Portal',
-        link: 'jobs_portal',
+        link: 'jobs-portal',
         svg: Jobs,
+    },
+    {
+        label: 'Jobs Uploader',
+        link: 'jobs-uploader',
+        svg: JobsUploaderIcon,
     },
     // {
     //     label: 'Report',

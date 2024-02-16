@@ -8,6 +8,7 @@ import {
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
+    BsCloudUpload,
     BsShieldShaded,
     BsArrowLeftCircle,
     BsArrowRightCircle,
@@ -51,7 +52,7 @@ export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
-export const Jobs = <FaBriefcase />
+export const Jobs = <FaBriefcase fontSize='1.1em' color='green' />
 export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
 export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
 export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />
@@ -63,3 +64,4 @@ export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='#048C8C' />
 export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C' />
 export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
 export const FilterIcon = <FaFilter fontSize='1.5em' color='#048C8C' />
+export const JobsUploaderIcon = <BsCloudUpload fontSize='1.5em' color='#048C8C' />
