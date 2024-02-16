@@ -5,6 +5,7 @@ import {
     ReportIcon,
     Jobs,
     JobsUploaderIcon,
+    TeamAppliedJobsIcon,
     // RoleIcon,
     // SecurityIcon,
     // SettingIcon,
@@ -23,9 +24,9 @@ export const menuItems = [
         svg: ReportIcon,
     },
     {
-        label: 'Jobs',
+        label: 'Team Applied Jobs',
         link: 'jobs',
-        svg: Jobs,
+        svg: TeamAppliedJobsIcon,
     },
     {
         label: 'Jobs Portal',
