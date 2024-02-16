@@ -1,10 +1,16 @@
-import { Input } from '@components'
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
+
+import { Input } from '@components'
+
 import { NavbarSearchIcon, NavBellIcon, NavContactIcon, NavSettingIcon, OpenSidebarIcon } from '@icons'
 
 const Navbar = memo(({ setShow }) => (
     <header className='bg-white w-full px-8 pt-3'>
-        <nav className='relative flex flex-row-reverse justify-between'>
+        <nav className='relative flex flex-row justify-between'>
+            <Link to='applied-jobs' className='text-[#006366] font-medium text-2xl'>
+                Welcome to Octagon
+            </Link>
             <ul className='flex text-white space-x-5 justify-end'>
                 <div className='relative hidden md:block'>
                     <div className='absolute inset-y-0 left-0 flex items-center pl-3 p-2 pointer-events-none'>

@@ -11,17 +11,25 @@ import { formatDate, timeSince } from '@utils/helpers'
 import toast from 'react-hot-toast'
 
 const Jobs = memo(() => {
+    const apiUrl = import.meta.env.VITE_SCRAPPER_API_URL
     const [page, setPage] = useState(1)
-    const [query, setQuery] = useState()
-    const { data, error, isLoading, mutate } = useSWR([page, query], () => fetchTeamAppliedJobs(page, query))
+    const [bd, setBD] = useState('all')
+    const { data, error, isLoading, mutate } = useSWR([page, bd], () =>
+        fetchTeamAppliedJobs(page, bd === 'all' ? '' : bd)
+    )
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
     const jobsStatusTypes = Object.entries(jobStatus)
-    const apiUrl = import.meta.env.VITE_SCRAPPER_API_URL
 
+    const handleBdChange = e => {
+        setBD(e.target.value)
+    }
     const updateJobStatus = (id, stausValue) => {
-        fetch(`${apiUrl}job_status/`, {
+        fetch(`${apiUrl}api/job_portal/job_status/`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
+            },
             body: JSON.stringify({ status: stausValue, job: data.jobs[id].id }),
         })
             .then(resp => {
@@ -51,7 +59,19 @@ const Jobs = memo(() => {
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg'>
             <div className='flex items-center justify-between'>
                 <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs</p>
-                <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
+                <select
+                    className='block py-2 px-4 text-sm text-gray-900 border border-gray-300 rounded-lg'
+                    value={bd}
+                    onChange={handleBdChange}
+                >
+                    <option value='all'>All</option>
+                    {data?.team_memmbers?.length > 0 &&
+                        data.team_memmbers.map((item, key) => (
+                            <option value={item.id} key={key}>
+                                {item.username}
+                            </option>
+                        ))}
+                </select>
             </div>
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
@@ -73,8 +93,9 @@ const Jobs = memo(() => {
                                 </td>
                                 <td className='px-3 py-4'>{job.company_name}</td>
                                 <td className='px-3 py-4'>{job.job_title}</td>
-                                <td className='px-3 py-4'>{job.job_source}</td>
-                                <td className='px-3 py-4'>Me</td>
+                                <td className='px-3 py-4'>
+                                    <a href={job.job_source_url}>{job.job_source}</a>
+                                </td>
                                 <td className='px-3 py-4'>
                                     <select
                                         name='job_status'
@@ -84,7 +105,7 @@ const Jobs = memo(() => {
                                     >
                                         {jobsStatusTypes.length > 0 &&
                                             jobsStatusTypes.map((status, key) => (
-                                                <option value={status[0]} key={key}>
+                                                <option disabled={status[0] === '0'} value={status[0]} key={key}>
                                                     {status[1]}
                                                 </option>
                                             ))}

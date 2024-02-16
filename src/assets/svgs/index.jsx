@@ -1,1 +1,1 @@
-export { OctagonLogo } from '@svgs/svg-icons'
+export { OctagonLogo, OctagonSmallIcon } from '@svgs/svg-icons'

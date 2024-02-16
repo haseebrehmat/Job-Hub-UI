@@ -1,11 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Dashboard } from '@modules'
 
 const App = () => (
-    <div className='flex'>
-        <div className='m-auto'>
-            <p>Welcome to Octagon Crm</p>
-            <Link to='applied-jobs'>Go to Jobs</Link>
-        </div>
+    <div className='block px-2'>
+        <Dashboard />
     </div>
 )
 

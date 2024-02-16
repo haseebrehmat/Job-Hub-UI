@@ -6,5 +6,6 @@ import Protected from '@components/Protected'
 import Pagination from '@components/Pagination'
 import Limits from '@components/Limits'
 import Loading from '@components/Loading'
+import StatCard from '@components/StatCard'
 
-export { Badge, Button, Input, Switch, Protected, Pagination, Limits, Loading }
+export { Badge, Button, Input, Switch, Protected, Pagination, Limits, Loading, StatCard }

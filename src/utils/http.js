@@ -15,7 +15,7 @@ const scrapperHttp = axios.create({
 })
 
 const teamAppliedJobsHttp = axios.create({
-    baseURL: 'http://147.34.6.116:8000/',
+    baseURL: import.meta.env.VITE_SCRAPPER_API_URL,
     headers: {
         Accept: 'application/json',
     },

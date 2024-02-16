@@ -1,13 +1,35 @@
-import { MdSpaceDashboard, MdNotifications, MdOutlineLogout, MdClose, MdClear } from 'react-icons/md'
-import { BsFillFileTextFill, BsShieldShaded, BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs'
+import {
+    MdSpaceDashboard,
+    MdNotifications,
+    MdOutlineLogout,
+    MdClose,
+    MdClear,
+    MdOutlineVerifiedUser,
+} from 'react-icons/md'
+import {
+    BsFillFileTextFill,
+    BsShieldShaded,
+    BsArrowLeftCircle,
+    BsArrowRightCircle,
+    BsCheck2,
+    BsSnow3,
+} from 'react-icons/bs'
 import { HiUser, HiUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
 import { FiMenu } from 'react-icons/fi'
-import { AiOutlineSearch } from 'react-icons/ai'
+import {
+    AiOutlineSearch,
+    AiOutlineEye,
+    AiOutlineEyeInvisible,
+    AiOutlineFall,
+    AiOutlineCloseCircle,
+    AiOutlineMinusCircle,
+} from 'react-icons/ai'
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
-import { FaBriefcase } from 'react-icons/fa'
+import { IoNewspaperSharp } from 'react-icons/io5'
+import { FaBriefcase, FaHotjar, FaFilter } from 'react-icons/fa'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -30,3 +52,14 @@ export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
 export const Jobs = <FaBriefcase />
+export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
+export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
+export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />
+export const HidePassIcon = <AiOutlineEyeInvisible fontSize='1.4em' color='#048C8C' />
+export const TotalIcon = <AiOutlineFall fontSize='1.4em' color='white' />
+export const ProspectsIcon = <IoNewspaperSharp fontSize='1.4em' color='white' />
+export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='white' />
+export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='white' />
+export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='white' />
+export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='white' />
+export const FilterIcon = <FaFilter fontSize='1.5em' color='#048C8C' />

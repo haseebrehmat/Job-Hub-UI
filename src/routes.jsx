@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom'
 
-import { AppliedJobs, Login, Jobs } from '@modules'
+import { AppliedJobs, Login, Jobs, ForgetPassword } from '@modules'
 
 import { getToken } from '@utils/helpers'
 import App from './App'
@@ -27,6 +27,10 @@ export const authRoutes = [
     {
         path: 'login',
         element: getToken() ? <Navigate to='/' /> : <Login />,
+    },
+    {
+        path: 'forget-password',
+        element: getToken() ? <Navigate to='/' /> : <ForgetPassword />,
     },
     {
         path: '*',
