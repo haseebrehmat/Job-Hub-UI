@@ -1,9 +1,13 @@
 import { BarChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Bar } from 'recharts'
 
 const WarmLeads = ({ data }) => (
-    <div className='border rounded-lg _shadow-2 bg-[#EDFFFB] py-4 overflow-x-auto'>
-        <p className='pl-8 text-xl text-[#037571]'>Warm Leads</p>
-        <ResponsiveContainer width='100%' height={450} minWidth={800}>
+    <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
+        <ResponsiveContainer
+            width='98%'
+            height={450}
+            minWidth={800}
+            className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto -mt-8'
+        >
             <BarChart
                 data={data}
                 margin={{
@@ -40,6 +44,11 @@ const WarmLeads = ({ data }) => (
                 <Bar fill='#77b2f4' dataKey='cold' stackId='abc' barSize={15} />
             </BarChart>
         </ResponsiveContainer>
+        <div className='text-[#006366] px-5 pt-5 pb-4'>
+            <span className='text-lg'>Warm / Cold Leads</span>
+            <hr className='w-[80%] h-0.5 bg-[#048C8C] my-3 border-0 rounded' />
+            <span>This chart shows leads of warm and cold leads</span>
+        </div>
     </div>
 )
 

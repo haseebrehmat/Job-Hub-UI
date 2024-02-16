@@ -15,3 +15,12 @@ export const year = date.getFullYear().toString().padStart(4, '0')
 export const month = (date.getMonth() + 1).toString().padStart(2, '0')
 export const day = date.getDate().toString().padStart(2, '0')
 export const today = `${year}-${month}-${day}`
+
+export const options = [
+    { value: 'total', label: 'Total' },
+    { value: 'prospect', label: 'Propect' },
+    { value: 'cold', label: 'Cold' },
+    { value: 'warm', label: 'Warm' },
+    { value: 'hot', label: 'Hot' },
+    { value: 'rejected', label: 'Rejected' },
+]

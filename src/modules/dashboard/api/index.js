@@ -8,5 +8,6 @@ export const fetchDashboardData = (from, to) =>
             leads,
             statistics,
             tech_jobs: tech_keywords_count_list,
+            status: 'success',
         }))
         .catch(error => ({ status: 'error', message: getMsg(error) }))

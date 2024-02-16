@@ -2,7 +2,6 @@ import {
     Radar,
     RadarChart,
     PolarGrid,
-    Legend,
     PolarAngleAxis,
     PolarRadiusAxis,
     Tooltip,
@@ -38,7 +37,7 @@ const TechStacks = ({ data }) => (
                 <Tooltip />
                 <PolarRadiusAxis
                     angle={90}
-                    domain={[0, 200]}
+                    domain={[0, 'auto']}
                     interval={3}
                     stroke='#00000'
                     orientation='middle'
@@ -51,14 +50,6 @@ const TechStacks = ({ data }) => (
                     fill='#037571'
                     fillOpacity={0.2}
                     strokeWidth='1'
-                />
-                <Legend
-                    verticalAlign='top'
-                    layout='vertical'
-                    align='right'
-                    wrapperStyle={{
-                        paddingLeft: '10px',
-                    }}
                 />
             </RadarChart>
         </ResponsiveContainer>
