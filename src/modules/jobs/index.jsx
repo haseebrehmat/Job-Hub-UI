@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading } from '@components'
+import { Loading, Badge } from '@components'
 
 import { fetchTeamAppliedJobs } from '@modules/jobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'

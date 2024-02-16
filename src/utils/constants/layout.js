@@ -26,6 +26,11 @@ export const menuItems = [
         link: 'jobs',
         svg: Jobs,
     },
+    {
+        label: 'Jobs Portal',
+        link: 'jobs_portal',
+        svg: Jobs,
+    },
     // {
     //     label: 'Report',
     //     link: '#',
