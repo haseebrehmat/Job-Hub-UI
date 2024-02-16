@@ -9,5 +9,6 @@ export const fetchAppliedJobs = (page, query = '') =>
             next: links.next,
             prev: links.previous,
             total: filtered_jobs,
+            status: 'success',
         }))
         .catch(error => ({ status: 'error', message: getMsg(error) }))

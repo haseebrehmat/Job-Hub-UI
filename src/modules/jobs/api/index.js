@@ -1,8 +1,8 @@
-import { teamAppliedJobsHttp } from '@utils/http'
+import { http } from '@utils/http'
 import { getMsg } from '@utils/helpers'
 
 export const fetchTeamAppliedJobs = (page, applied_by = '') =>
-    teamAppliedJobsHttp
+    http
         .get(
             `api/job_portal/team_applied_job_details/?applied_by=${applied_by}&ordering=-job_posted_date&page=${page}&page_size=12`,
             {

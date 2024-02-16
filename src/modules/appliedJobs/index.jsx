@@ -35,7 +35,7 @@ const AppliedJobs = memo(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.jobs?.length > 0 ? (
+                    {data?.jobs?.length > 0 && data.status === 'success' ? (
                         data.jobs.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
