@@ -1,13 +1,15 @@
 import { memo, useState } from 'react'
+import { useFormik } from 'formik'
 import SlidingPane from 'react-sliding-pane'
-import 'react-sliding-pane/dist/react-sliding-pane.css'
 
 import { Input, Button } from '@components'
-import { FilterIcon, NavbarSearchIcon } from '@icons'
+
 import { filtersSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
-import { useFormik } from 'formik'
-import { ResetIcon } from '@/assets/icons'
+
+import { NavbarSearchIcon, ResetIcon } from '@icons'
+import { Filters as FilterSvg } from '@svgs'
+import 'react-sliding-pane/dist/react-sliding-pane.css'
 
 const Filters = ({ filters, setFilters }) => {
     const [show, setShow] = useState(false)
@@ -39,7 +41,7 @@ const Filters = ({ filters, setFilters }) => {
                     </form>
                 </div>
                 <div className='flex space-x-3'>
-                    <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
+                    <Button label='Filter' fit svg={FilterSvg} onClick={toggleFilters} />
                     <Button fit icon={ResetIcon} onClick={resetFilters} />
                 </div>
             </div>

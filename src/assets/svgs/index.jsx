@@ -5,7 +5,8 @@ import Prospects from '@svgs/prospects.svg'
 import Hot from '@svgs/hot.svg'
 import Warm from '@svgs/warm.svg'
 import Total from '@svgs/total.svg'
+import Filters from '@svgs/filters.svg'
 
 export { OctagonLogo, OctagonSmallIcon } from '@svgs/svg-icons'
 
-export { Cold, Hired, Rejected, Prospects, Hot, Warm, Total }
+export { Cold, Hired, Rejected, Prospects, Hot, Warm, Total, Filters }
