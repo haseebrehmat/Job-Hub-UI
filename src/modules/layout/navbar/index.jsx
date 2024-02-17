@@ -1,19 +1,12 @@
-import { Input } from '@components'
 import { memo } from 'react'
-import { NavbarSearchIcon, NavBellIcon, NavContactIcon, NavSettingIcon, OpenSidebarIcon } from '@icons'
+
+import { NavBellIcon, NavContactIcon, NavSettingIcon, OpenSidebarIcon } from '@icons'
 
 const Navbar = memo(({ setShow }) => (
     <header className='bg-white w-full px-8 pt-3'>
-        <nav className='relative flex flex-row-reverse justify-between'>
+        <nav className='relative flex flex-row justify-between'>
+            <p className='text-[#006366] not-italic font-bold text-5xl leading-[58px] font-gruppo'>Octagon</p>
             <ul className='flex text-white space-x-5 justify-end'>
-                <div className='relative hidden md:block'>
-                    <div className='absolute inset-y-0 left-0 flex items-center pl-3 p-2 pointer-events-none'>
-                        {NavbarSearchIcon}
-                    </div>
-                    <form>
-                        <Input name='Search' type='text' ph='Search Here' classes='pl-10 p-2' />
-                    </form>
-                </div>
                 <li className='block mx-2 my-2 cursor-pointer text-teal-800 sm:hidden md:hidden'>
                     <a href='#' onClick={() => setShow(true)}>
                         {OpenSidebarIcon}

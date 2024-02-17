@@ -1,13 +1,4 @@
-import {
-    DashboardIcon,
-    // NewUserIcon,
-    // NotificationIcon,
-    ReportIcon,
-    // RoleIcon,
-    // SecurityIcon,
-    // SettingIcon,
-    // UsersIcon,
-} from '@icons'
+import { DashboardIcon, ReportIcon, Jobs, JobsUploaderIcon, TeamAppliedJobsIcon } from '@icons'
 
 export const menuItems = [
     {
@@ -17,8 +8,23 @@ export const menuItems = [
     },
     {
         label: 'Applied Jobs',
-        link: 'applied-jobs',
+        link: '/applied-jobs',
         svg: ReportIcon,
+    },
+    {
+        label: 'Team Applied Jobs',
+        link: '/jobs',
+        svg: TeamAppliedJobsIcon,
+    },
+    {
+        label: 'Jobs Portal',
+        link: '/jobs-portal',
+        svg: Jobs,
+    },
+    {
+        label: 'Jobs Uploader',
+        link: '/jobs-uploader',
+        svg: JobsUploaderIcon,
     },
     // {
     //     label: 'Report',

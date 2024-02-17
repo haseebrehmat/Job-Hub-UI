@@ -8,7 +8,6 @@ export const tableHeads = [
     'Agent (BD)',
     'Tech Stack',
     'Job Budget',
-    'Notes',
 ]
 
 export const jobStatus = {
@@ -16,6 +15,8 @@ export const jobStatus = {
     1: 'Applied',
     2: 'Hired',
     3: 'Rejected',
-    4: 'Warm Lead',
-    5: 'Hot Lead',
+    4: 'Cold Lead',
+    5: 'Warm Lead',
+    6: 'Hot Lead',
+    7: 'Prospect',
 }

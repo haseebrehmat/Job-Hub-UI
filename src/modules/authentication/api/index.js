@@ -10,3 +10,15 @@ export const loginUser = (email, password) =>
             return { status: 'success', message: 'User logged in successfully!' }
         })
         .catch(error => ({ status: 'error', message: getMsg(error) }))
+
+export const sendResetPasswordLink = email =>
+    http
+        .get(`api/auth/password/reset?email=${email}`)
+        .then(({ data }) => ({ status: 'success', message: data.detail }))
+        .catch(error => ({ status: 'error', message: getMsg(error) }))
+
+export const resetPassword = (password, confirm_password, email, code) =>
+    http
+        .post(`api/auth/password/reset`, { password, confirm_password, email, code })
+        .then(({ data }) => ({ status: 'success', message: data.detail }))
+        .catch(error => ({ status: 'error', message: getMsg(error) }))

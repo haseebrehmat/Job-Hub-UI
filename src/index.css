@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+._shadow-1 {
+    @apply shadow-[0px_1px_8px_rgba(0,99,102,0.4)];
+}
+
+._shadow-2 {
+    @apply shadow-[0px_1px_5px_rgba(4,131,131,0.5)];
+}
+
+._gradient-0 {
+    @apply bg-[linear-gradient(to_left,#048C8C_0%,#5DB7B7_16.46%,#A2DCDC_31.56%,#BDE1E1_46.15%,#FFFFFF_100%)];
+}
+
+._gradient-1 {
+    @apply bg-[linear-gradient(to_left,#FFC61B_0%,#FFD350_15.94%,#FFE185_32.08%,#FFF0C4_47.19%,#FFFFFF_100%)];
+}
+
+._gradient-2 {
+    @apply bg-[linear-gradient(to_left,#99DDFF_0%,#B4E6FF_25%,#D1F0FF_50%,#EAF8FF_75%,#FFFFFF_100%)];
+}
+
+._gradient-3 {
+    @apply bg-[linear-gradient(to_left,#FEE187_0%,#FFF2C9_15.42%,#FFF6D9_30.52%,#FFF9E5_44.58%,#FFFFFF_100%)];
+}
+
+._gradient-4 {
+    @apply bg-[linear-gradient(to_left,#FF961A_0%,#FEC98B_14.9%,#FCD8AE_29.48%,#FFEDD8_44.06%,#FFFFFF_100%)];
+}
+
+._gradient-5 {
+    @apply bg-[linear-gradient(to_left,#F15249_0%,#F47C75_14.37%,#F7A19C_27.92%,#FBC9C6_41.46%,#FFFFFF_100%)];
+}
+
+._gradient-6 {
+    @apply bg-[linear-gradient(to_left,#32BA7C_0%,#93DEBC_14.9%,#AFE2CB_30%,#C7ECDB_44.06%,#FFFFFF_100%)];
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
@@ -24,6 +60,11 @@
 
 .slide-pane__content{
     padding: 0 !important;
+}
+
+body{
+    max-height: 100vh !important;
+    overflow: auto !important;
 }
 
 /* :root {
