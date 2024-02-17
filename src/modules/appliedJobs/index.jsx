@@ -19,7 +19,7 @@ const AppliedJobs = memo(() => {
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg'>
+        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
             <div className='flex items-center justify-between'>
                 <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs</p>
                 <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
@@ -46,7 +46,7 @@ const AppliedJobs = memo(() => {
                                 <td className='px-3 py-4'>{job.job_title}</td>
                                 <td className='px-3 py-4'>{job.job_source}</td>
                                 <td className='px-3 py-4'>Me</td>
-                                <td className='px-3 py-4'>
+                                <td className='w-28 py-4'>
                                     <Badge label={jobStatus[job.job_status]} type='success' />
                                 </td>
                                 <td className='px-3 py-4'>BD</td>
@@ -54,9 +54,6 @@ const AppliedJobs = memo(() => {
                                     <Badge label={job.tech_keywords} />
                                 </td>
                                 <td className='px-3 py-4'>$100</td>
-                                <td className='px-3 py-4 font-light'>
-                                    The Best Toast in Town. Smoking hot React notifications.
-                                </td>
                             </tr>
                         ))
                     ) : (

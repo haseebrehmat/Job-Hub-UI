@@ -18,9 +18,10 @@ export const today = `${year}-${month}-${day}`
 
 export const options = [
     { value: 'total', label: 'Total' },
-    { value: 'prospect', label: 'Propect' },
+    { value: 'prospect', label: 'Prospects' },
     { value: 'cold', label: 'Cold' },
     { value: 'warm', label: 'Warm' },
     { value: 'hot', label: 'Hot' },
     { value: 'rejected', label: 'Rejected' },
+    { value: 'hired', label: 'Hired' },
 ]

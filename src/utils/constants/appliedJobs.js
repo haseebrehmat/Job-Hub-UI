@@ -8,7 +8,6 @@ export const tableHeads = [
     'Agent (BD)',
     'Tech Stack',
     'Job Budget',
-    'Notes',
 ]
 
 export const jobStatus = {

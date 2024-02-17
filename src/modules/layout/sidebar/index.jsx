@@ -2,7 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { menuItems } from '@constants/layout'
 
 import { OpenSidebarIcon, LogoutIcon } from '@icons'
-import { OctagonLogo, OctagonSmallIcon } from '@svgs'
+import logo from '@images/signin-logo.svg'
+import smallLogo from '@images/signin-small-logo.svg'
 import { removeToken } from '@utils/helpers'
 import { memo } from 'react'
 
@@ -21,9 +22,15 @@ const SideBar = ({ toggle, setToggle }) => {
             } flex-col space-y-2 border-2 py-2 sm:p-2 my-2 ml-2 text-[#048C8C] bg-[#EDFFFB] rounded-lg fix`}
         >
             <div className={`p-2 flex justify-center md:justify-${toggle ? 'center' : 'between'}`}>
-                <span className='hidden lg:block'>{toggle ? <OctagonLogo /> : <OctagonSmallIcon />}</span>
+                <span className='hidden lg:block'>
+                    {toggle ? (
+                        <img src={logo} alt='' width='120' height='59' />
+                    ) : (
+                        <img src={smallLogo} alt='' width='50' height='50' />
+                    )}
+                </span>
                 <span className='block lg:hidden'>
-                    <OctagonSmallIcon />
+                    <img src={smallLogo} alt='' width='50' height='50' />
                 </span>
             </div>
             <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
@@ -47,13 +54,13 @@ const SideBar = ({ toggle, setToggle }) => {
             </button>
             <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
             <div className='h-[100%] flex flex-col justify-end items-center'>
-                <span className='cursor-pointer p-2 flex' onClick={() => setToggle(!toggle)}>
+                <span className='cursor-pointer p-2 flex mb-1' onClick={() => setToggle(!toggle)}>
                     {OpenSidebarIcon}
                     {toggle && <span className='hidden lg:flex ml-1'>Toggle Sidebar</span>}
                 </span>
                 {toggle && (
-                    <button className='hidden lg:flex w-full p-2.5 bg-[#048C8C] rounded-xl self-end'>
-                        <p align='justify' className='text-white float-left text-sm'>
+                    <button className='hidden lg:flex w-full p-2.5 bg-[#048C8C] rounded-xl self-end my-2'>
+                        <p align='justify' className='text-white float-left text-xs'>
                             &copy; 2023 Octagon.inc <br />
                             Terms Of Service - Privacy Policy
                         </p>

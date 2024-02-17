@@ -88,13 +88,21 @@ const Leads = ({ data }) => {
                             dot={{ stroke: '#b40008', strokeWidth: 4, r: 2 }}
                         />
                     )}
+                    {selectedOption.value === 'hired' && (
+                        <Line
+                            dataKey='hired'
+                            stroke='#32BA7C'
+                            strokeWidth='2'
+                            dot={{ stroke: '#32BA7C', strokeWidth: 4, r: 2 }}
+                        />
+                    )}
                 </LineChart>
             </ResponsiveContainer>
             <div className='flex justify-between px-5 pt-5 pb-4'>
                 <div className='text-[#006366] w-5/6'>
                     <span className='text-lg'>Leads</span>
                     <hr className='w-[80%] h-0.5 bg-[#048C8C] my-3 border-0 rounded' />
-                    <span>This chart shows total, prospects, warm, cold, hot and rejected leads</span>
+                    <span>This chart shows total, prospects, warm, cold, hot, hired and rejected leads</span>
                 </div>
                 <div className='text-[#006366] w-1/6'>
                     <SelectBox options={options} selected={selectedOption} handleChange={handleChange} />
