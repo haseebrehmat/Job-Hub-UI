@@ -15,7 +15,9 @@ const SideBar = ({ toggle, setToggle }) => {
         const menu_items_arr = []
         for (let i = 0; i < menuItems.length; i++) {
             if (role === 'TL') {
-                menu_items_arr.push(menuItems[i])
+                if (menuItems[i].link !== '/jobs-portal') {
+                    menu_items_arr.push(menuItems[i])
+                }
             } else if (menuItems[i].link !== '/jobs') {
                 menu_items_arr.push(menuItems[i])
             }
