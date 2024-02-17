@@ -3,10 +3,11 @@ import Selector from './components/Selector'
 import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import toast from 'react-hot-toast'
+import jwt_decode from 'jwt-decode'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${import.meta.env.VITE_SCRAPPER_API_URL}api/job_portal/`
-
+    const role = jwt_decode(localStorage.getItem('token')).role
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const [techStackData, setTechStackData] = useState([])
@@ -306,6 +307,7 @@ const JobsFilter = memo(() => {
                                 <td>
                                     {item.job_status === 0 ? (
                                         <button
+                                            disabled={role === 'TL'}
                                             className='block rounded px-2 py-1 bg-green-700 text-white'
                                             onClick={() => updateJobStatus(key)}
                                         >
