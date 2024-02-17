@@ -193,6 +193,7 @@ const JobsFilter = memo(() => {
                         <input
                             className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
                             type='date'
+                            max={new Date().toISOString().slice(0, 10)}
                             value={dates.from_date}
                             onChange={event => setDates({ ...dates, from_date: event.target.value })}
                         />
@@ -202,6 +203,7 @@ const JobsFilter = memo(() => {
                         <input
                             className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
                             type='date'
+                            max={new Date().toISOString().slice(0, 10)}
                             value={dates.to_date}
                             onChange={event => setDates({ ...dates, to_date: event.target.value })}
                         />

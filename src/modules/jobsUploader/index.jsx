@@ -66,7 +66,7 @@ const JobsUploader = memo(() => {
                             <div className='m-2'>
                                 <FileUploader
                                     handleChange={handleChange}
-                                    label='Upload or drop a file right here'
+                                    label='Upload or drop a file right here .'
                                     name='file'
                                     hoverTitle='Drop Files Here'
                                     multiple={true}
