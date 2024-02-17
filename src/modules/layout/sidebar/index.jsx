@@ -1,14 +1,30 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { menuItems } from '@constants/layout'
+import { menuItems as menuItemsList } from '@constants/layout'
 
 import { OpenSidebarIcon, LogoutIcon } from '@icons'
 import logo from '@images/signin-logo.svg'
 import smallLogo from '@images/signin-small-logo.svg'
 import { removeToken } from '@utils/helpers'
-import { memo } from 'react'
+import { memo, useState, useEffect } from 'react'
+import jwt_decode from 'jwt-decode'
 
 const SideBar = ({ toggle, setToggle }) => {
     const navigate = useNavigate()
+    const role = jwt_decode(localStorage.getItem('token')).role
+    const [menuItems, setMenuItems] = useState(menuItemsList)
+    useEffect(() => {
+        const menu_items_arr = []
+        for (let i = 0; i < menuItems.length; i++) {
+            if (role === 'TL') {
+                if (menuItems[i].link !== '/jobs-portal') {
+                    menu_items_arr.push(menuItems[i])
+                }
+            } else if (menuItems[i].link !== '/jobs') {
+                menu_items_arr.push(menuItems[i])
+            }
+        }
+        setMenuItems(menu_items_arr)
+    }, [])
 
     const logout = () => {
         removeToken()

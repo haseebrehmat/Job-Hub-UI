@@ -8,11 +8,13 @@ import {
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
+    BsCloudUpload,
     BsShieldShaded,
     BsArrowLeftCircle,
     BsArrowRightCircle,
     BsCheck2,
     BsSnow3,
+    BsCollectionFill,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineFilter } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
@@ -51,7 +53,7 @@ export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
-export const Jobs = <FaBriefcase />
+export const Jobs = <FaBriefcase style={{ fontSize: '22px' }} />
 export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
 export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
 export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />
@@ -64,3 +66,5 @@ export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C'
 export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
 export const FilterIcon = <HiOutlineFilter fontSize='1.5em' color='#048C8C' />
 export const ResetIcon = <FiRefreshCw fontSize='1.5em' color='#048C8C' />
+export const JobsUploaderIcon = <BsCloudUpload style={{ fontSize: '22px' }} />
+export const TeamAppliedJobsIcon = <BsCollectionFill style={{ fontSize: '22px' }} />

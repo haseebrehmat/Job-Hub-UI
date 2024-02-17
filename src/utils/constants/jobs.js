@@ -6,5 +6,7 @@ export const jobStatus = {
     2: 'Hired',
     3: 'Rejected',
     4: 'Warm Lead',
-    5: 'Hot Lead',
+    5: 'Warm Lead',
+    6: 'Hot Lead',
+    7: 'Prospect',
 }

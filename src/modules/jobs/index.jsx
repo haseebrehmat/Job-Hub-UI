@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading } from '@components'
+import { Loading, Badge } from '@components'
 
 import { fetchTeamAppliedJobs } from '@modules/jobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
@@ -56,9 +56,9 @@ const Jobs = memo(() => {
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg'>
+        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
             <div className='flex items-center justify-between'>
-                <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs</p>
+                <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Team Applied Jobs</p>
                 <select
                     className='block py-2 px-4 text-sm text-gray-900 border border-gray-300 rounded-lg'
                     value={bd}
