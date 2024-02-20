@@ -2,6 +2,8 @@ import axios from 'axios'
 import { getMsg, getToken } from './helpers'
 import { toast } from 'react-hot-toast'
 
+const token = getToken()
+
 const http = axios.create({
     baseURL: import.meta.env.VITE_AUTH_API_URL,
     headers: {
@@ -10,7 +12,6 @@ const http = axios.create({
 })
 
 http.interceptors.request.use(request => {
-    const token = getToken()
     if (token !== null) request.headers.Authorization = `Bearer ${token}`
     return request
 })
@@ -20,6 +21,7 @@ http.interceptors.response.use(
     error => {
         toast.error(getMsg(error))
         Promise.reject(error)
+        if (token === null) window.location.href = '/login'
     }
 )
 
