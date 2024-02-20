@@ -1,5 +1,5 @@
 import { http } from '@utils/http'
-import { getMsg, saveToken, saveRefreshToken } from '@utils/helpers'
+import { saveToken, saveRefreshToken } from '@utils/helpers'
 
 export const loginUser = (email, password) =>
     http.post('api/auth/login/', { email, password }).then(res => {
@@ -15,4 +15,3 @@ export const resetPassword = (password, confirm_password, email, code) =>
     http
         .post(`api/auth/password/reset`, { password, confirm_password, email, code })
         .then(({ data }) => ({ status: 'success', message: data.detail }))
-        .catch(error => ({ status: 'error', message: getMsg(error) }))
