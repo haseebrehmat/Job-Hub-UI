@@ -7,6 +7,7 @@ import Jobs from '@modules/jobs'
 import Dashboard from '@modules/dashboard'
 import JobsFilter from '@modules/jobsFilter'
 import JobsUploader from '@modules/jobsUploader'
+import Companies from '@modules/userManagement/companies'
 
 export {
     Jobs,
@@ -18,4 +19,5 @@ export {
     ForgetPassword,
     ResetPassword,
     Layout as AppLayout,
+    Companies,
 }
