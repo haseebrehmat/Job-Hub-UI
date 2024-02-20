@@ -9,10 +9,7 @@ export const loginUser = (email, password) =>
     })
 
 export const sendResetPasswordLink = email =>
-    http
-        .get(`api/auth/password/reset?email=${email}`)
-        .then(({ data }) => ({ status: 'success', message: data.detail }))
-        .catch(error => ({ status: 'error', message: getMsg(error) }))
+    http.get(`api/auth/password/reset?email=${email}`).then(({ data }) => ({ status: 'success', message: data.detail }))
 
 export const resetPassword = (password, confirm_password, email, code) =>
     http
