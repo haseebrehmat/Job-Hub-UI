@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
+
 import { OpenSubMenuIcon } from '@icons'
 
 const Item = ({ item, setSubMenu, show, subMenu }) => {
@@ -21,7 +22,7 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
             {item?.subItems && (
                 <div className='hidden lg:block'>
                     {subMenu[item.key] &&
-                        item.subItems.map(subItem => (
+                        item?.subItems.map(subItem => (
                             <Link
                                 key={subItem.label}
                                 to={subItem.link}
