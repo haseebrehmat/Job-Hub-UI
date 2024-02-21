@@ -1,5 +1,4 @@
 import { http } from '@utils/http'
-import { getMsg } from '@utils/helpers'
 
 export const fetchDashboardData = (from, to) =>
     http
@@ -10,4 +9,3 @@ export const fetchDashboardData = (from, to) =>
             tech_jobs: tech_keywords_count_list,
             status: 'success',
         }))
-        .catch(error => ({ status: 'error', message: getMsg(error) }))

@@ -1,5 +1,4 @@
 import { http } from '@utils/http'
-import { getMsg } from '@utils/helpers'
 
 export const fetchAppliedJobs = (page, query = '') =>
     http
@@ -11,4 +10,3 @@ export const fetchAppliedJobs = (page, query = '') =>
             total: filtered_jobs,
             status: 'success',
         }))
-        .catch(error => ({ status: 'error', message: getMsg(error) }))

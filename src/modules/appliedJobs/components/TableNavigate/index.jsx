@@ -7,10 +7,12 @@ const TableNavigate = memo(({ data, page, handleClick }) => {
     const to = from + data.jobs.length - 1
 
     return (
-        <nav className='flex items-center justify-between p-4' aria-label='Table navigation'>
-            <Limits total={data?.total} from={from} to={to} />
-            <Pagination handleClick={handleClick} next={!data?.next} prev={!data?.prev} />
-        </nav>
+        data?.jobs?.length > 0 && (
+            <nav className='flex items-center justify-between p-4' aria-label='Table navigation'>
+                <Limits total={data?.total} from={from} to={to} />
+                <Pagination handleClick={handleClick} next={!data?.next} prev={!data?.prev} />
+            </nav>
+        )
     )
 })
 

@@ -15,15 +15,11 @@ const AppliedJobs = memo(() => {
     const { data, error, isLoading } = useSWR([page, query], () => fetchAppliedJobs(page, query))
 
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
+    if (isLoading) return <Loading />
 
-    return isLoading || error ? (
-        <Loading />
-    ) : (
+    return (
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
-            <div className='flex items-center justify-between'>
-                <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs</p>
-                <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
-            </div>
+            <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
@@ -35,7 +31,7 @@ const AppliedJobs = memo(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.jobs?.length > 0 && data.status === 'success' ? (
+                    {data?.jobs?.length > 0 && !error ? (
                         data.jobs.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
@@ -61,7 +57,7 @@ const AppliedJobs = memo(() => {
                     )}
                 </tbody>
             </table>
-            {data?.jobs?.length > 0 && <TableNavigate data={data} page={page} handleClick={handleClick} />}
+            {!error && <TableNavigate data={data} page={page} handleClick={handleClick} />}
         </div>
     )
 })
