@@ -5,6 +5,7 @@ import {
     MdClose,
     MdClear,
     MdOutlineVerifiedUser,
+    MdOutlineKeyboardArrowDown,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -68,3 +69,4 @@ export const FilterIcon = <HiOutlineFilter fontSize='1.5em' color='#048C8C' />
 export const ResetIcon = <FiRefreshCw fontSize='1.5em' color='#048C8C' />
 export const JobsUploaderIcon = <BsCloudUpload style={{ fontSize: '22px' }} />
 export const TeamAppliedJobsIcon = <BsCollectionFill style={{ fontSize: '22px' }} />
+export const OpenSubMenuIcon = <MdOutlineKeyboardArrowDown style={{ fontSize: '22px' }} />

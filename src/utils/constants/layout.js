@@ -7,25 +7,34 @@ export const menuItems = [
         svg: DashboardIcon,
     },
     {
-        label: 'Applied Jobs',
-        link: '/applied-jobs',
+        label: 'Jobs',
+        link: '#',
         svg: ReportIcon,
+        key: 'jobs',
+        subItems: [
+            {
+                label: 'Applied Jobs',
+                link: '/applied-jobs',
+                svg: ReportIcon,
+            },
+            {
+                label: 'Team Applied Jobs',
+                link: '/jobs',
+                svg: TeamAppliedJobsIcon,
+            },
+            {
+                label: 'Jobs Portal',
+                link: '/jobs-portal',
+                svg: Jobs,
+            },
+            {
+                label: 'Jobs Uploader',
+                link: '/jobs-uploader',
+                svg: JobsUploaderIcon,
+            },
+        ],
     },
-    {
-        label: 'Team Applied Jobs',
-        link: '/jobs',
-        svg: TeamAppliedJobsIcon,
-    },
-    {
-        label: 'Jobs Portal',
-        link: '/jobs-portal',
-        svg: Jobs,
-    },
-    {
-        label: 'Jobs Uploader',
-        link: '/jobs-uploader',
-        svg: JobsUploaderIcon,
-    },
+
     // {
     //     label: 'Report',
     //     link: '#',
