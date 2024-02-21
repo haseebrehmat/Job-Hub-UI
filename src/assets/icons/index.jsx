@@ -17,10 +17,10 @@ import {
     BsSnow3,
     BsCollectionFill,
 } from 'react-icons/bs'
-import { HiUser, HiUsers, HiOutlineFilter } from 'react-icons/hi'
+import { HiUser, HiUsers, HiOutlineFilter, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
-import { FiMenu, FiRefreshCw } from 'react-icons/fi'
+import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
 import {
     AiOutlineSearch,
     AiOutlineEye,
@@ -32,7 +32,7 @@ import {
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaUsers } from 'react-icons/fa'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -52,6 +52,7 @@ export const NavbarSearchIcon = <ImSearch className='w-4 h-4 text-[#048C8C]' />
 export const NavSettingIcon = <IoIosSettings fontSize='1.5em' />
 export const NavContactIcon = <IoMdContact fontSize='1.5em' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
+export const ManagementIcon = <HiOutlineUsers style={{ fontSize: '20px' }} />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
 export const Jobs = <FaBriefcase style={{ fontSize: '22px' }} />
@@ -70,3 +71,5 @@ export const ResetIcon = <FiRefreshCw fontSize='1.5em' color='#048C8C' />
 export const JobsUploaderIcon = <BsCloudUpload style={{ fontSize: '22px' }} />
 export const TeamAppliedJobsIcon = <BsCollectionFill style={{ fontSize: '22px' }} />
 export const OpenSubMenuIcon = <MdOutlineKeyboardArrowDown style={{ fontSize: '22px' }} />
+export const UserIcon = <FiUser style={{ fontSize: '22px' }} />
+export const CompaniesIcon = <FaUsers style={{ fontSize: '22px' }} />

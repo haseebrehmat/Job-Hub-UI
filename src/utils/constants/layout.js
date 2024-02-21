@@ -1,4 +1,39 @@
-import { DashboardIcon, ReportIcon, Jobs, JobsUploaderIcon, TeamAppliedJobsIcon } from '@icons'
+import {
+    DashboardIcon,
+    ReportIcon,
+    Jobs,
+    JobsUploaderIcon,
+    TeamAppliedJobsIcon,
+    ManagementIcon,
+    UserIcon,
+    CompaniesIcon,
+} from '@icons'
+import { decodeJwt } from '@utils/helpers'
+
+const user = decodeJwt()
+
+const jobsSubItems = role => {
+    switch (role) {
+        case 'TL':
+            return [
+                {
+                    label: 'Team Applied Jobs',
+                    link: '/jobs',
+                    svg: TeamAppliedJobsIcon,
+                },
+            ]
+        case 'BD':
+            return [
+                {
+                    label: 'Jobs Portal',
+                    link: '/jobs-portal',
+                    svg: Jobs,
+                },
+            ]
+        default:
+            return []
+    }
+}
 
 export const menuItems = [
     {
@@ -8,7 +43,7 @@ export const menuItems = [
     },
     {
         label: 'Jobs',
-        link: '#',
+        link: '#!',
         svg: ReportIcon,
         key: 'jobs',
         subItems: [
@@ -18,56 +53,29 @@ export const menuItems = [
                 svg: ReportIcon,
             },
             {
-                label: 'Team Applied Jobs',
-                link: '/jobs',
-                svg: TeamAppliedJobsIcon,
-            },
-            {
-                label: 'Jobs Portal',
-                link: '/jobs-portal',
-                svg: Jobs,
-            },
-            {
                 label: 'Jobs Uploader',
                 link: '/jobs-uploader',
                 svg: JobsUploaderIcon,
             },
+            ...jobsSubItems(user.role),
         ],
     },
-
-    // {
-    //     label: 'Report',
-    //     link: '#',
-    //     svg: ReportIcon,
-    // },
-    // {
-    //     label: 'Users',
-    //     link: '#',
-    //     svg: UsersIcon,
-    // },
-    // {
-    //     label: 'Roles',
-    //     link: '#',
-    //     svg: RoleIcon,
-    // },
-    // {
-    //     label: 'New User',
-    //     link: '#',
-    //     svg: NewUserIcon,
-    // },
-    // {
-    //     label: 'Settings',
-    //     link: '#',
-    //     svg: SettingIcon,
-    // },
-    // {
-    //     label: 'Notification',
-    //     link: '#',
-    //     svg: NotificationIcon,
-    // },
-    // {
-    //     label: 'Security',
-    //     link: '#',
-    //     svg: SecurityIcon,
-    // },
+    {
+        label: 'Management',
+        link: '#!',
+        svg: ManagementIcon,
+        key: 'management',
+        subItems: [
+            {
+                label: 'Users',
+                link: '/applied-jobs',
+                svg: UserIcon,
+            },
+            {
+                label: 'Companies',
+                link: '/jobs-uploader',
+                svg: CompaniesIcon,
+            },
+        ],
+    },
 ]

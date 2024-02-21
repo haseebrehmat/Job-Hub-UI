@@ -12,7 +12,7 @@ import smallLogo from '@images/signin-small-logo.svg'
 
 const SideBar = ({ toggle, setToggle }) => {
     const navigate = useNavigate()
-    const [subMenu, setSubMenu] = useState({ jobs: false, users: false })
+    const [subMenu, setSubMenu] = useState({ jobs: false, management: false })
 
     return (
         <aside
