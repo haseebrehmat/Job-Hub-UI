@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getMsg, getToken } from './helpers'
+import { checkToken, getMsg, getToken } from './helpers'
 import { toast } from 'react-hot-toast'
 
 const token = getToken()
@@ -12,7 +12,10 @@ const http = axios.create({
 })
 
 http.interceptors.request.use(request => {
-    if (token !== null) request.headers.Authorization = `Bearer ${token}`
+    if (token !== null) {
+        checkToken()
+        request.headers.Authorization = `Bearer ${token}`
+    }
     return request
 })
 
