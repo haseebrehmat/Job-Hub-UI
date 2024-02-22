@@ -11,9 +11,11 @@ import SelectBox from '@components/Select'
 import Searchbox from '@components/Searchbox'
 import EmptyTable from '@components/EmptyTable'
 import Filters from '@components/Filters'
+import Drawer from '@components/Drawer'
 
 export {
     Badge,
+    Drawer,
     Button,
     Input,
     Switch,
