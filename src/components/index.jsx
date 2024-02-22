@@ -12,10 +12,12 @@ import Searchbox from '@components/Searchbox'
 import EmptyTable from '@components/EmptyTable'
 import Filters from '@components/Filters'
 import Drawer from '@components/Drawer'
+import Checkbox from '@components/Checkbox'
 
 export {
     Badge,
     Drawer,
+    Checkbox,
     Button,
     Input,
     Switch,

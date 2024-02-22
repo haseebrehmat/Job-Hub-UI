@@ -3,6 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Badge, Searchbox, EmptyTable, Filters, Button } from '@components'
 
+import { CompanyForm } from '@modules/userManagement/components'
 import { fetchCompanies } from '@modules/userManagement/api'
 
 import { comapnyHeads, comapnyStatus } from '@constants/userManagement'
@@ -11,6 +12,7 @@ import { CreateIcon, ActionsIcons } from '@icons'
 
 const Companies = () => {
     const [query, setQuery] = useState()
+    const [show, setShow] = useState(false)
     const { data, error, isLoading } = useSWR([query], fetchCompanies)
 
     if (isLoading) return <Loading />
@@ -20,7 +22,7 @@ const Companies = () => {
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
                 <Filters />
-                <Button label='Create Company' fit icon={CreateIcon} />
+                <Button label='Create Company' fit icon={CreateIcon} onClick={() => setShow(!show)} />
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -54,6 +56,7 @@ const Companies = () => {
                     )}
                 </tbody>
             </table>
+            <CompanyForm show={show} setShow={setShow} />
         </div>
     )
 }

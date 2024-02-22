@@ -1,12 +1,21 @@
 import React, { memo } from 'react'
 
 const Button = memo(
-    ({ label, type = 'button', onClick = null, disabled = false, fit = false, icon = null, svg = null }) => (
+    ({
+        label,
+        type = 'button',
+        onClick = null,
+        disabled = false,
+        fit = false,
+        icon = null,
+        svg = null,
+        fill = false,
+    }) => (
         <button
             type={type}
-            className={`w-${
-                fit ? 'fit' : 'full'
-            } text-[#048C8C] border border-cyan-600 font-medium rounded-lg text-sm px-2 py-2 text-center ${
+            className={`w-${fit ? 'fit' : 'full'} ${
+                fill ? 'text-white bg-[#048C8C]' : 'text-[#048C8C]'
+            } border border-cyan-600 font-medium rounded-lg text-sm px-2 py-2 text-center ${
                 icon || svg ? 'flex items-center justify-center' : 'hover:text-white hover:bg-[#048C8C]'
             }`}
             onClick={onClick}
