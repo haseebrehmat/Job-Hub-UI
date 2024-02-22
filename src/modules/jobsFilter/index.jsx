@@ -5,9 +5,14 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import toast from 'react-hot-toast'
 import jwt_decode from 'jwt-decode'
 
+// import Select from 'react-select'
+// import { MySelect } from './components/MySelect'
+
+import { CustomContentAndDropdown } from './components/CustomDropDownSelect'
+
 const JobsFilter = memo(() => {
     const apiUrl = `${import.meta.env.VITE_SCRAPPER_API_URL}api/job_portal/`
-    const role = jwt_decode(localStorage.getItem('token')).role
+    const { role } = jwt_decode(localStorage.getItem('token'))
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const [techStackData, setTechStackData] = useState([])
@@ -48,14 +53,16 @@ const JobsFilter = memo(() => {
     const [recordFound, setRecordFound] = useState(true)
 
     const fetchJobsData = url => {
-        let params = new URLSearchParams()
+        const params = new URLSearchParams()
         let params_count = 0
-        for (let i in jobsFilterParams) {
+
+        for (const i in jobsFilterParams) {
             if (jobsFilterParams[i] !== '') {
                 params.append(i, jobsFilterParams[i])
                 params_count += 1
             }
         }
+
         url = params_count > 0 ? `${url}?${params.toString()}` : url
         setData([])
         fetch(url, {
@@ -257,6 +264,37 @@ const JobsFilter = memo(() => {
                             <option value='asc'>Ascending</option>
                             <option value='desc'>Descending</option>
                         </select>
+                    </div>
+                    <div className='my-2'>
+                        {/* <Select
+                            isMulti
+                            options={[
+                                { value: 'chocolate', label: <h1>Chocolate</h1> },
+                                { value: 'strawberry', label: 'Strawberry' },
+                                { value: 'vanilla', label: 'Vanilla' },
+                                { value: 'python', label: 'Pythn' },
+                                { value: 'java', label: 'Java' },
+                                { value: 'html', label: 'HTML' },
+                                { value: 'CSS', label: 'CSS' },
+                                { value: 'jQuery', label: 'jQuery' },
+                                { value: 'react', label: 'React' },
+                            ]}
+                        /> */}
+
+                        {/* <MySelect /> */}
+                        <CustomContentAndDropdown
+                            options={[
+                                { value: 'chocolate', label: 'Chocolate' },
+                                { value: 'strawberry', label: 'Strawberry' },
+                                { value: 'vanilla', label: 'Vanilla' },
+                                { value: 'python', label: 'Pythn' },
+                                { value: 'java', label: 'Java' },
+                                { value: 'html', label: 'HTML' },
+                                { value: 'CSS', label: 'CSS' },
+                                { value: 'jQuery', label: 'jQuery' },
+                                { value: 'react', label: 'React' },
+                            ]}
+                        />
                     </div>
                 </div>
 
