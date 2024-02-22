@@ -4,7 +4,7 @@ import SideBar from '@modules/layout/sidebar'
 import Navbar from '@modules/layout/navbar'
 import Overlay from '@modules/layout/overlay'
 
-const layout = memo(({ children }) => {
+const layout = memo(({ children, title }) => {
     const [toggle, setToggle] = useState(true)
     const [show, setShow] = useState(false)
 
@@ -15,7 +15,7 @@ const layout = memo(({ children }) => {
             <div className='w-[85%] flex-1'>
                 <div className='flex flex-col space-y-1 h-screen'>
                     <div className='h-fit'>
-                        <Navbar setShow={setShow} />
+                        <Navbar setShow={setShow} title={title} />
                     </div>
                     <div className='max-h-screen overflow-auto p-3'>{children}</div>
                 </div>
