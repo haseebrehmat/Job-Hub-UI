@@ -1,13 +1,13 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Badge } from '@components'
+import { Loading, Badge, Searchbox, EmptyTable, Filters, Button } from '@components'
 
 import { fetchCompanies } from '@modules/userManagement/api'
-import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
+import { TableNavigate } from '@modules/appliedJobs/components'
 
 import { comapnyHeads, comapnyStatus } from '@constants/userManagement'
-import { formatDate, timeSince } from '@utils/helpers'
+import { CreateIcon } from '@icons'
 
 const Companies = () => {
     const [page, setPage] = useState(1)
@@ -19,7 +19,11 @@ const Companies = () => {
 
     return (
         <div className='max-w-full overflow-x-auto mb-14'>
-            <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
+            <div className='flex items-center space-x-4 pb-6'>
+                <Searchbox query={query} setQuery={setQuery} />
+                <Filters />
+                <Button label='Create Company' fit icon={CreateIcon} />
+            </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
@@ -34,10 +38,6 @@ const Companies = () => {
                     {data?.jobs?.length > 0 && !error ? (
                         data.jobs.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
-                                <td className='px-3 py-4'>
-                                    <span className='font-bold'>{timeSince(job.job_posted_date)}</span>
-                                    <div>{formatDate(job.job_posted_date)}</div>
-                                </td>
                                 <td className='px-3 py-4'>{job.company_name}</td>
                                 <td className='px-3 py-4'>{job.job_title}</td>
                                 <td className='px-3 py-4'>{job.job_source}</td>
@@ -45,15 +45,11 @@ const Companies = () => {
                                 <td className='w-28 py-4'>
                                     <Badge label={comapnyStatus[job.job_status]} type='success' />
                                 </td>
-                                <td className='px-3 py-4'>BD</td>
-                                <td className='px-3 py-4'>
-                                    <Badge label={job.tech_keywords} />
-                                </td>
                                 <td className='px-3 py-4'>$100</td>
                             </tr>
                         ))
                     ) : (
-                        <EmptyTable />
+                        <EmptyTable cols={6} />
                     )}
                 </tbody>
             </table>
