@@ -32,7 +32,7 @@ export const routes = [
         protect: true,
     },
     {
-        path: '/users',
+        path: '/companies',
         component: <Companies />,
         protect: true,
     },

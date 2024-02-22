@@ -73,7 +73,7 @@ export const menuItems = [
             },
             {
                 label: 'Companies',
-                link: '/jobs-uploader',
+                link: '/companies',
                 svg: CompaniesIcon,
             },
         ],

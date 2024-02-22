@@ -52,7 +52,7 @@ export const formatDate = date => new Date(date).toLocaleString()
 
 export const checkToken = () => {
     const { exp } = decodeJwt()
-    if (new Date(exp) < new Date()) {
+    if (Date(exp) < new Date()) {
         removeToken()
         window.location.href = '/login'
     }
