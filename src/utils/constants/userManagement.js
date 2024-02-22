@@ -1,6 +1,6 @@
-export const comapnyHeads = ['#', 'ID', 'Name', 'Company COde', 'Status', 'Actions']
+export const comapnyHeads = ['#', 'ID', 'Name', 'Company COde', 'Status', '']
 
 export const comapnyStatus = {
-    0: 'disable',
-    1: 'enable',
+    0: 'Enable',
+    1: 'Disable',
 }

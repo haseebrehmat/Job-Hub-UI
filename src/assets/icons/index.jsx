@@ -16,6 +16,7 @@ import {
     BsCheck2,
     BsSnow3,
     BsCollectionFill,
+    BsThreeDotsVertical,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineFilter, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
@@ -75,3 +76,4 @@ export const OpenSubMenuIcon = <MdOutlineKeyboardArrowDown style={{ fontSize: '2
 export const UserIcon = <FiUser style={{ fontSize: '22px' }} />
 export const CompaniesIcon = <FaUsers style={{ fontSize: '22px' }} />
 export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
+export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
