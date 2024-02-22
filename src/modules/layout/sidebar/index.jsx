@@ -1,41 +1,24 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { menuItems as menuItemsList } from '@constants/layout'
+import { memo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { Item } from '@modules/layout/components'
+
+import { menuItems } from '@constants/layout'
+import { removeToken } from '@utils/helpers'
 
 import { OpenSidebarIcon, LogoutIcon } from '@icons'
 import logo from '@images/signin-logo.svg'
 import smallLogo from '@images/signin-small-logo.svg'
-import { removeToken } from '@utils/helpers'
-import { memo, useState, useEffect } from 'react'
-import jwt_decode from 'jwt-decode'
 
 const SideBar = ({ toggle, setToggle }) => {
     const navigate = useNavigate()
-    const role = jwt_decode(localStorage.getItem('token')).role
-    const [menuItems, setMenuItems] = useState(menuItemsList)
-    useEffect(() => {
-        const menu_items_arr = []
-        for (let i = 0; i < menuItems.length; i++) {
-            if (role === 'TL') {
-                if (menuItems[i].link !== '/jobs-portal') {
-                    menu_items_arr.push(menuItems[i])
-                }
-            } else if (menuItems[i].link !== '/jobs') {
-                menu_items_arr.push(menuItems[i])
-            }
-        }
-        setMenuItems(menu_items_arr)
-    }, [])
-
-    const logout = () => {
-        removeToken()
-        navigate(0)
-    }
+    const [subMenu, setSubMenu] = useState({ jobs: false, management: false })
 
     return (
         <aside
             className={`sm:flex hidden ${
                 toggle ? 'w-auto lg:w-[15%]' : 'w-fit'
-            } flex-col space-y-2 border-2 py-2 sm:p-2 my-2 ml-2 text-[#048C8C] bg-[#EDFFFB] rounded-lg fix`}
+            } flex-col space-y-2 border-2 py-2 sm:px-2 my-2 ml-2 text-[#048C8C] bg-[#EDFFFB] rounded-lg`}
         >
             <div className={`p-2 flex justify-center md:justify-${toggle ? 'center' : 'between'}`}>
                 <span className='hidden lg:block'>
@@ -52,17 +35,13 @@ const SideBar = ({ toggle, setToggle }) => {
             <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
             {menuItems?.length > 0 &&
                 menuItems?.map(item => (
-                    <Link
-                        key={item.label}
-                        to={item.link}
-                        className='flex items-center text-sm p-4 text-[#003C40] rounded border-2 hover:text-[#003C40] border-solid border-[#EDFFFB] hover:border-2 hover:border-solid hover:border-[#048C8C] active:border-2 active:border-solid active:border-[#048C8C]'
-                    >
-                        {item.svg}
-                        {toggle ? <span className='ml-3 hidden lg:block'>{item.label}</span> : ''}
-                    </Link>
+                    <Item item={item} subMenu={subMenu} setSubMenu={setSubMenu} show={toggle} key={item.label} />
                 ))}
             <button
-                onClick={() => logout()}
+                onClick={() => {
+                    removeToken()
+                    navigate(0)
+                }}
                 className='flex items-center text-sm p-4 text-[#003C40] rounded border-2 hover:text-[#003C40] border-solid border-[#EDFFFB] hover:border-2 hover:border-solid hover:border-[#048C8C] active:border-2 active:border-solid active:border-[#048C8C]'
             >
                 {LogoutIcon}
