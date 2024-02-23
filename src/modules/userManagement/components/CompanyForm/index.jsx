@@ -1,27 +1,26 @@
 import { memo } from 'react'
 import { useFormik } from 'formik'
 import useSWRMutation from 'swr/mutation'
+import { toast } from 'react-hot-toast'
 
-import { Drawer, Input, Button, Checkbox } from '@/components'
-import { companySchema } from '@/utils/schemas'
-import { saveCompany } from '../../api'
-import { decodeJwt } from '@/utils/helpers'
+import { Button, Checkbox, Drawer, Input } from '@components'
+import { saveCompany } from '@modules/userManagement/api'
+
+import { companySchema } from '@utils/schemas'
+import { decodeJwt, getMsg } from '@utils/helpers'
 
 const CompanyForm = ({ show, setShow, mutate }) => {
-    const { trigger, isMutating, error } = useSWRMutation('/api/auth/company/', saveCompany)
     const { user_id } = decodeJwt()
-
-    const { values, errors, handleSubmit, handleChange } = useFormik({
-        initialValues: { name: '', code: '', status: true, user: user_id },
+    const { trigger } = useSWRMutation('/api/auth/company/', saveCompany, {
+        onError: error => toast.error(getMsg(error)),
+        onSuccess: () => mutate('/api/auth/company/'),
+    })
+    const { values, errors, handleSubmit, handleChange, resetForm } = useFormik({
+        initialValues: { name: '', status: true, user: user_id },
         validationSchema: companySchema,
-        enableReinitialize: true,
         onSubmit: async formValues => {
             trigger(formValues)
-            console.log(error)
-            // if (isMutating) {
-            //     mutate('/api/auth/company/')
-            //     setShow(false)
-            // }
+            resetForm()
         },
     })
 
@@ -34,9 +33,6 @@ const CompanyForm = ({ show, setShow, mutate }) => {
                     <span className='text-sm'>Name*</span>
                     <Input name='name' value={values.name} onChange={handleChange} ph='Name' />
                     {errors.name && <small className='ml-1 text-xs text-red-600'>{errors.name}</small>}
-                    <span className='text-sm'>Code*</span>
-                    <Input name='code' value={values.code} onChange={handleChange} ph='Code' />
-                    {errors.code && <small className='ml-1 text-xs text-red-600'>{errors.code}</small>}
                     <div className='pt-3 flex flex-col'>
                         <Checkbox name='status' label='Enabled' onChange={handleChange} />
                         {errors.status && <small className='ml-1 text-xs text-red-600'>{errors.status}</small>}

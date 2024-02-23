@@ -14,7 +14,6 @@ const Companies = () => {
     const [query, setQuery] = useState()
     const [show, setShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR('/api/auth/company/', fetchCompanies)
-    console.log(data)
 
     if (isLoading) return <Loading />
 

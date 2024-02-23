@@ -22,6 +22,5 @@ export const filtersSchema = Yup.object().shape({
 
 export const companySchema = Yup.object().shape({
     name: Yup.string().required('Company name is required'),
-    code: Yup.string().required('Company code is required'),
     status: Yup.boolean().required('Status is required'),
 })

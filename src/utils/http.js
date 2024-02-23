@@ -27,6 +27,21 @@ http.interceptors.response.use(
     }
 )
 
+const httpDev = axios.create({
+    baseURL: import.meta.env.VITE_DEV_API_URL,
+    headers: {
+        Accept: 'application/json',
+    },
+})
+
+httpDev.interceptors.request.use(request => {
+    if (token !== null) {
+        checkToken()
+        request.headers.Authorization = `Bearer ${token}`
+    }
+    return request
+})
+
 const scrapperHttp = axios.create({
     baseURL: import.meta.env.VITE_SCRAPPER_API_URL,
     headers: {
@@ -41,4 +56,4 @@ const teamAppliedJobsHttp = axios.create({
     },
 })
 
-export { http, scrapperHttp, teamAppliedJobsHttp }
+export { http, httpDev, scrapperHttp, teamAppliedJobsHttp }

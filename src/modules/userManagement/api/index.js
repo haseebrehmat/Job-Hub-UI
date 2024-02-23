@@ -1,6 +1,7 @@
-import { http } from '@utils/http'
+import { http, httpDev } from '@utils/http'
+import { toast } from 'react-hot-toast'
 
 export const fetchCompanies = url => http.get(url).then(({ data }) => ({ companies: data, status: 'success' }))
 
 export const saveCompany = (url, { arg: company }) =>
-    http.post(url, company).then(({ data }) => ({ msg: data.detail, status: 'success' }))
+    httpDev.post(url, company).then(({ data }) => toast.success(data.detail))
