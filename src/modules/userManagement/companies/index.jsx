@@ -13,7 +13,8 @@ import { CreateIcon, ActionsIcons } from '@icons'
 const Companies = () => {
     const [query, setQuery] = useState()
     const [show, setShow] = useState(false)
-    const { data, error, isLoading } = useSWR([query], fetchCompanies)
+    const { data, error, isLoading, mutate } = useSWR('/api/auth/company/', fetchCompanies)
+    console.log(data)
 
     if (isLoading) return <Loading />
 
@@ -56,7 +57,7 @@ const Companies = () => {
                     )}
                 </tbody>
             </table>
-            <CompanyForm show={show} setShow={setShow} />
+            <CompanyForm show={show} setShow={setShow} mutate={mutate} />
         </div>
     )
 }

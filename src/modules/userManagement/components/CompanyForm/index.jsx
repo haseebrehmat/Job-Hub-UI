@@ -1,16 +1,27 @@
 import { memo } from 'react'
 import { useFormik } from 'formik'
+import useSWRMutation from 'swr/mutation'
 
 import { Drawer, Input, Button, Checkbox } from '@/components'
 import { companySchema } from '@/utils/schemas'
+import { saveCompany } from '../../api'
+import { decodeJwt } from '@/utils/helpers'
 
-const CompanyForm = ({ show, setShow }) => {
+const CompanyForm = ({ show, setShow, mutate }) => {
+    const { trigger, isMutating, error } = useSWRMutation('/api/auth/company/', saveCompany)
+    const { user_id } = decodeJwt()
+
     const { values, errors, handleSubmit, handleChange } = useFormik({
-        initialValues: { name: '', code: '', status: false },
+        initialValues: { name: '', code: '', status: true, user: user_id },
         validationSchema: companySchema,
+        enableReinitialize: true,
         onSubmit: async formValues => {
-            console.log(formValues)
-            setShow(false)
+            trigger(formValues)
+            console.log(error)
+            // if (isMutating) {
+            //     mutate('/api/auth/company/')
+            //     setShow(false)
+            // }
         },
     })
 
