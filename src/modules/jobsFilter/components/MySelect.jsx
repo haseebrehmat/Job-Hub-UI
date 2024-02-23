@@ -1,34 +1,23 @@
-import Select from 'react-select'
+import Multiselect from '@khanacademy/react-multi-select'
+import { useState } from 'react'
 
-export const MySelect = () => {
-    const colourOptions = [
-        {
-            value: 'ocean1',
-            label: (
-                <label>
-                    <input type='checkbox' className='text-cyan-400' /> Ocean
-                </label>
-            ),
-        },
-        { value: 'blue', label: 'Blue' },
-        { value: 'purple', label: 'Purple' },
-        { value: 'red', label: 'Red' },
-        { value: 'orange', label: 'Orange' },
-        { value: 'yellow', label: 'Yellow' },
-        { value: 'green', label: 'Green' },
-        { value: 'forest', label: 'Forest' },
-        { value: 'slate', label: 'Slate' },
-        { value: 'silver', label: 'Silver' },
-    ]
+export const MySelect = ({ options, handleChange }) => {
+    const [selected, setSelected] = useState([])
+    const handleSelectedChanged = option => {
+        handleChange(option)
+        setSelected(option)
+    }
     return (
-        <Select
-            options={colourOptions}
-            isMulti
-            closeMenuOnSelect={false}
-            hideSelectedOptions={false}
-            // onChange={this.handleChange}
-            allowSelectAll
-            // value={this.state.optionSelected}
+        <Multiselect
+            options={options}
+            onSelectedChanged={handleSelectedChanged}
+            selected={selected}
+            overrideStrings={{
+                selectSomeItems: 'Select Tech Stacks',
+                allItemsAreSelected: 'All items selected',
+                selectAll: 'Select all',
+                search: 'Search',
+            }}
         />
     )
 }
