@@ -6,7 +6,7 @@ const Textarea = memo(({ name, onChange = null, value, ph = '', classes = null, 
         name={name}
         onChange={onChange}
         placeholder={ph}
-        defaultValue={value}
+        value={value}
         rows={rows}
     />
 ))
