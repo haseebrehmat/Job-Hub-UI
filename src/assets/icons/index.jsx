@@ -33,7 +33,7 @@ import {
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
 import { RiUserSettingsLine } from 'react-icons/ri'
 
@@ -79,3 +79,4 @@ export const CompaniesIcon = <FaUsers style={{ fontSize: '22px' }} />
 export const RolesIcon = <RiUserSettingsLine style={{ fontSize: '22px' }} />
 export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
 export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
+export const TrashIcon = <FaRegTrashAlt style={{ fontSize: '16px' }} />
