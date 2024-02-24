@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { toast } from 'react-hot-toast'
 import useSwr from 'swr'
 
-import { Button, Drawer, Input, Textarea } from '@components'
+import { Button, Drawer, Input, Textarea, SelectBox } from '@components'
 import { saveRole, fetchFixRoles } from '@modules/userManagement/api'
 
 import { useMutate } from '@/hooks'
@@ -10,7 +10,6 @@ import { roleSchema } from '@utils/schemas'
 import { getMsg, parseFixedRoles, parseSelectedRole } from '@utils/helpers'
 
 import { TrashIcon } from '@icons'
-import { SelectBox } from '@/components'
 
 const CompanyForm = ({ show, setShow, mutate, role }) => {
     const { data, isLoading } = useSwr('/api/auth/user_roles/', fetchFixRoles)
@@ -26,7 +25,6 @@ const CompanyForm = ({ show, setShow, mutate, role }) => {
         error => toast.error(getMsg(error)),
         () => role?.id && mutate('/api/auth/role_association/')
     )
-
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
