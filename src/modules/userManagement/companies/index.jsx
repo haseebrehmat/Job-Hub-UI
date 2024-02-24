@@ -48,7 +48,6 @@ const Companies = () => {
                         data.companies.map((comp, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{comp?.id}</td>
                                 <td className='px-3 py-6'>{comp?.name}</td>
                                 <td className='px-3 py-6'>{comp?.code}</td>
                                 <td className='px-1 py-6'>
