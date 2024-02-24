@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Searchbox, EmptyTable, Filters, Button } from '@components'
 
 import { RoleForm } from '@modules/userManagement/components'
-import { fetchCompanies } from '@modules/userManagement/api'
+import { fetchRoles } from '@modules/userManagement/api'
 
 import { roleHeads } from '@constants/userManagement'
 
@@ -12,11 +12,11 @@ import { CreateIcon, ActionsIcons } from '@icons'
 
 const Roles = () => {
     const [query, setQuery] = useState()
-    const [company, setCompany] = useState()
+    const [role, setRole] = useState()
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/company/', fetchCompanies)
-    const handleClick = ({ name, status, id }) => {
-        setCompany({ name, status, id })
+    const { data, error, isLoading, mutate } = useSWR('/api/auth/role_association/', fetchRoles)
+    const handleClick = ({ name, code, description, id }) => {
+        setRole({ name, code, description, id })
         setShow(!show)
     }
     if (isLoading) return <Loading />
@@ -43,14 +43,14 @@ const Roles = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.companies?.length > 0 && !error ? (
-                        data.companies.map((comp, idx) => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
+                    {data?.roles?.length > 0 && !error ? (
+                        data?.roles?.map((row, idx) => (
+                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{comp?.name}</td>
-                                <td className='px-3 py-6'>{comp?.name}</td>
-                                <td className='px-3 py-6'>{comp?.code}</td>
-                                <td className='px-3 py-6 float-right' onClick={() => handleClick(comp)}>
+                                <td className='px-3 py-6'>{row?.name}</td>
+                                <td className='px-3 py-6'>{row?.description}</td>
+                                <td className='px-3 text-2xl italic font-mono'>{row?.code}</td>
+                                <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {ActionsIcons}
                                 </td>
                             </tr>
@@ -60,7 +60,7 @@ const Roles = () => {
                     )}
                 </tbody>
             </table>
-            {show && <RoleForm show={show} setShow={setShow} mutate={mutate} company={company} />}
+            {show && <RoleForm show={show} setShow={setShow} mutate={mutate} role={role} />}
         </div>
     )
 }
