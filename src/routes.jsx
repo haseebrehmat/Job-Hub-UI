@@ -1,6 +1,16 @@
 import { Navigate } from 'react-router-dom'
 
-import { AppliedJobs, Login, Jobs, JobsFilter, JobsUploader, ForgetPassword, ResetPassword, Companies } from '@modules'
+import {
+    AppliedJobs,
+    Login,
+    Jobs,
+    JobsFilter,
+    JobsUploader,
+    ForgetPassword,
+    ResetPassword,
+    Companies,
+    Roles,
+} from '@modules'
 
 import { getToken } from '@utils/helpers'
 import App from './App'
@@ -41,6 +51,12 @@ export const routes = [
         component: <Companies />,
         protect: true,
         title: 'Companies Management',
+    },
+    {
+        path: '/roles',
+        component: <Roles />,
+        protect: true,
+        title: 'Roles Management',
     },
 ]
 
