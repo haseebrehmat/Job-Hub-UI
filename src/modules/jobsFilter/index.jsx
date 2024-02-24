@@ -5,16 +5,18 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import toast from 'react-hot-toast'
 import jwt_decode from 'jwt-decode'
 
+import { MySelect } from './components/MySelect'
+
 const JobsFilter = memo(() => {
-    const apiUrl = `${import.meta.env.VITE_SCRAPPER_API_URL}api/job_portal/`
-    const role = jwt_decode(localStorage.getItem('token')).role
+    const apiUrl = `http://54.215.158.128/api/job_portal/`
+    const { role } = jwt_decode(localStorage.getItem('token'))
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const [techStackData, setTechStackData] = useState([])
     const [jobSourceData, setJobSourceData] = useState([])
     const [jobTypeData, setJobTypeData] = useState([])
     const [jobSourceSelector, setJobSourceSelector] = useState('all')
-    const [techStackSelector, setTechStack] = useState('all')
+    const [techStackSelector, setTechStack] = useState([])
     const [jobTypeSelector, setJobTypeSelector] = useState('all')
     const [stats, setStats] = useState({ total_jobs: 0, filtered_jobs: 0 })
     const [jobStatusChoice, setJobStatusChoice] = useState({})
@@ -37,7 +39,7 @@ const JobsFilter = memo(() => {
 
     const resetFilters = () => {
         setJobSourceSelector('all')
-        setTechStack('all')
+        setTechStack('')
         setJobTypeSelector('all')
         setDates({ from_date: '', to_date: '' })
         setJobTitle('')
@@ -48,20 +50,23 @@ const JobsFilter = memo(() => {
     const [recordFound, setRecordFound] = useState(true)
 
     const fetchJobsData = url => {
-        let params = new URLSearchParams()
+        const params = new URLSearchParams()
         let params_count = 0
-        for (let i in jobsFilterParams) {
+
+        for (const i in jobsFilterParams) {
             if (jobsFilterParams[i] !== '') {
                 params.append(i, jobsFilterParams[i])
                 params_count += 1
             }
         }
+
         url = params_count > 0 ? `${url}?${params.toString()}` : url
+        console.log(url)
         setData([])
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
+                // Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
             },
         })
             .then(resp => {
@@ -97,21 +102,18 @@ const JobsFilter = memo(() => {
         setJobSourceSelector(event.target.value)
     }
 
-    const handleTechStack = event => {
-        setTechStack(event.target.value)
-    }
-
     const handleJobType = event => {
         setJobTypeSelector(event.target.value)
     }
 
     const updateParams = title => {
         const job_source = jobSourceSelector !== 'all' ? jobSourceSelector : ''
-        const tech_keyword = techStackSelector !== 'all' ? techStackSelector : ''
         const job_type = jobTypeSelector !== 'all' ? jobTypeSelector : ''
+        const techStackValues = techStackSelector.join(',')
+        console.log(techStackValues)
         setJobsFilterParams({
             ...jobsFilterParams,
-            tech_keywords: tech_keyword,
+            tech_keywords: techStackValues,
             job_source,
             page: 1,
             ordering: sortBy === 'asc' ? ordering : `-${ordering}`,
@@ -125,7 +127,6 @@ const JobsFilter = memo(() => {
     const runJobFilter = () => {
         updateParams('')
     }
-
     useEffect(() => {
         fetchJobsData(jobDetailsUrl)
     }, [jobsFilterParams])
@@ -162,6 +163,9 @@ const JobsFilter = memo(() => {
             page: data.selected + 1,
         })
     }
+
+    const formatOptions = options_arr =>
+        options_arr.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
     return (
         <div className='my-2'>
@@ -227,11 +231,7 @@ const JobsFilter = memo(() => {
 
                     <div className='my-2'>
                         Tech Stack
-                        <Selector
-                            data={techStackData}
-                            selectorValue={techStackSelector}
-                            handleSelectChange={handleTechStack}
-                        />
+                        <MySelect options={formatOptions(techStackData)} handleChange={setTechStack} />
                     </div>
                     <div className='my-2'>
                         Order By
