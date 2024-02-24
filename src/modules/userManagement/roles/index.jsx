@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Searchbox, EmptyTable, Filters, Button } from '@components'
 
-import { CompanyForm } from '@modules/userManagement/components'
+import { RoleForm } from '@modules/userManagement/components'
 import { fetchCompanies } from '@modules/userManagement/api'
 
 import { roleHeads } from '@constants/userManagement'
@@ -48,6 +48,7 @@ const Roles = () => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{comp?.name}</td>
+                                <td className='px-3 py-6'>{comp?.name}</td>
                                 <td className='px-3 py-6'>{comp?.code}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(comp)}>
                                     {ActionsIcons}
@@ -59,7 +60,7 @@ const Roles = () => {
                     )}
                 </tbody>
             </table>
-            {show && <CompanyForm show={show} setShow={setShow} mutate={mutate} company={company} />}
+            {show && <RoleForm show={show} setShow={setShow} mutate={mutate} company={company} />}
         </div>
     )
 }
