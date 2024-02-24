@@ -1,30 +1,28 @@
 import { memo } from 'react'
-import { useFormik } from 'formik'
-import useSWRMutation from 'swr/mutation'
 import { toast } from 'react-hot-toast'
 
 import { Button, Checkbox, Drawer, Input } from '@components'
 import { saveCompany } from '@modules/userManagement/api'
 
+import { useMutate } from '@/hooks'
 import { companySchema } from '@utils/schemas'
 import { decodeJwt, getMsg } from '@utils/helpers'
 
 const CompanyForm = ({ show, setShow, mutate, company }) => {
     const { user_id } = decodeJwt()
-    const { trigger } = useSWRMutation(`/api/auth/company${company?.id ? `/${company?.id}/` : '/'}`, saveCompany, {
-        onError: error => toast.error(getMsg(error)),
-        onSuccess: () => mutate('/api/auth/company/'),
-    })
-    const { values, errors, handleSubmit, handleChange, resetForm } = useFormik({
-        initialValues: { name: company?.name || '', status: company?.status, user: company?.user || user_id },
-        validationSchema: companySchema,
-        validateOnChange: true,
-        enableReinitialize: true,
-        onSubmit: async formValues => {
+    const { values, errors, handleSubmit, handleChange, resetForm, trigger } = useMutate(
+        `/api/auth/company${company?.id ? `/${company?.id}/` : '/'}`,
+        saveCompany,
+        { name: company?.name || '', status: company?.status, user: company?.user || user_id },
+        companySchema,
+        async formValues => {
             trigger({ ...formValues, id: company?.id })
-            if (company?.id) resetForm()
+            if (!company?.id) resetForm()
         },
-    })
+        error => toast.error(getMsg(error)),
+        () => company?.id && mutate('/api/auth/company')
+    )
+
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
