@@ -4,8 +4,7 @@ import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import toast from 'react-hot-toast'
 import jwt_decode from 'jwt-decode'
-
-import { MySelect } from './components/MySelect'
+import MySelect from './components/MySelect'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${import.meta.env.VITE_SCRAPPER_API_URL}api/job_portal/`
@@ -231,8 +230,8 @@ const JobsFilter = memo(() => {
                     </div>
 
                     <div className='my-2'>
-                        Tech Stack
-                        <MySelect options={formatOptions(techStackData)} handleChange={setTechStack} />
+                      Tech Stack
+                        <MySelect />
                     </div>
                     <div className='my-2'>
                         Order By
