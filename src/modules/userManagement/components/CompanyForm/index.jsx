@@ -20,7 +20,7 @@ const CompanyForm = ({ show, setShow, mutate, company }) => {
             if (!company?.id) resetForm()
         },
         error => toast.error(getMsg(error)),
-        () => company?.id && mutate('/api/auth/company')
+        () => company?.id && mutate('/api/auth/company/')
     )
 
     return (

@@ -4,16 +4,25 @@ import Select from 'react-select'
 const customStyles = {
     control: provided => ({
         ...provided,
-        border: '1px solid #048C8C',
-        boxShadow: '0 0 0 1px #048C8C',
+        border: '0.5px solid #048C8C',
+        borderRadius: '0.5rem',
+        padding: '0.20rem',
+        boxShadow: '0 0 0 0px #048C8C',
         '&:hover': {
-            border: '1px solid #048C8C',
+            border: '0.5px solid #048C8C',
         },
     }),
 }
 
-const SelectBox = memo(({ options, selected = '', handleChange }) => (
-    <Select options={options} styles={customStyles} defaultValue={selected} onChange={value => handleChange(value)} />
+const SelectBox = memo(({ options, selected = '', handleChange, classes = null }) => (
+    <Select
+        className={classes}
+        options={options}
+        styles={customStyles}
+        defaultValue={selected}
+        // onChange={handleChange}
+        onChange={value => handleChange(value)}
+    />
 ))
 
 export default SelectBox

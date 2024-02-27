@@ -11,3 +11,14 @@ export const saveCompany = (url, { arg: company }) => {
     }
     return httpDev.post(url, company).then(({ data }) => toast.success(data.detail))
 }
+
+export const fetchRoles = url => http.get(url).then(({ data }) => ({ roles: data, status: 'success' }))
+
+export const fetchFixRoles = url => http.get(url).then(({ data }) => ({ fixedRoles: data, status: 'success' }))
+
+export const saveRole = (url, { arg: role }) => {
+    if (role?.id) {
+        return httpDev.put(url, role).then(({ data }) => toast.success(data.detail || 'Role updated successfully'))
+    }
+    return httpDev.post(url, role).then(({ data }) => toast.success(data.detail))
+}

@@ -7,7 +7,7 @@ const useMutate = (url, api, initial, schema, onSubmit, onError, onSuccess) => {
         onSuccess,
     })
 
-    const { values, errors, handleSubmit, handleChange, resetForm } = useFormik({
+    const { values, errors, handleSubmit, handleChange, resetForm, setFieldValue } = useFormik({
         initialValues: initial,
         validationSchema: schema,
         validateOnChange: true,
@@ -21,6 +21,7 @@ const useMutate = (url, api, initial, schema, onSubmit, onError, onSuccess) => {
         handleSubmit,
         handleChange,
         resetForm,
+        setFieldValue,
         trigger,
     }
 }

@@ -24,3 +24,9 @@ export const companySchema = Yup.object().shape({
     name: Yup.string().required('Company name is required'),
     status: Yup.boolean().required('Status is required'),
 })
+
+export const roleSchema = Yup.object().shape({
+    name: Yup.string().required('Role name is required'),
+    description: Yup.string().nullable().max(255, 'Description must be less than 255 characters'),
+    code: Yup.number('Code must be a number').positive('Code must be a positive number').required('Code is required'),
+})

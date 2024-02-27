@@ -10,6 +10,7 @@ const Button = memo(
         icon = null,
         svg = null,
         fill = false,
+        classes = null,
     }) => (
         <button
             type={type}
@@ -17,7 +18,7 @@ const Button = memo(
                 fill ? 'text-white bg-[#048C8C]' : 'text-[#048C8C]'
             } border border-cyan-600 font-medium rounded-lg text-sm px-2 py-2 text-center ${
                 icon || svg ? 'flex items-center justify-center' : 'hover:text-white hover:bg-[#048C8C]'
-            }`}
+            } ${classes}`}
             onClick={onClick}
             disabled={disabled}
         >

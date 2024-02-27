@@ -1,6 +1,7 @@
 import Button from '@components/Button'
 import Badge from '@components/Badge'
 import Input from '@components/Input'
+import Textarea from '@components/Textarea'
 import Switch from '@components/Switch'
 import Protected from '@components/Protected'
 import Pagination from '@components/Pagination'
@@ -20,6 +21,7 @@ export {
     Checkbox,
     Button,
     Input,
+    Textarea,
     Switch,
     Protected,
     Pagination,

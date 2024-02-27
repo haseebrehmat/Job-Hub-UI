@@ -7,6 +7,7 @@ import {
     ManagementIcon,
     UserIcon,
     CompaniesIcon,
+    RolesIcon,
 } from '@icons'
 import { decodeJwt } from '@utils/helpers'
 
@@ -75,6 +76,11 @@ export const menuItems = [
                 label: 'Companies',
                 link: '/companies',
                 svg: CompaniesIcon,
+            },
+            {
+                label: 'Roles',
+                link: '/roles',
+                svg: RolesIcon,
             },
         ],
     },

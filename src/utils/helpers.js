@@ -57,3 +57,14 @@ export const checkToken = () => {
         window.location.href = '/login'
     }
 }
+
+export const parseFixedRoles = roles =>
+    roles.map(role => ({ value: role.code, label: `${role.code} -- ${role.description}` }))
+
+export const parseSelectedRole = (code, roles) => {
+    if (code) {
+        const role = roles.find(row => row?.code === code)
+        return { value: role?.code, label: `${role?.code} -- ${role?.description}` }
+    }
+    return null
+}

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
