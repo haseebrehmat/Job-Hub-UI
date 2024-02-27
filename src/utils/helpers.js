@@ -49,3 +49,11 @@ export const timeSince = date => {
 }
 
 export const formatDate = date => new Date(date).toLocaleString()
+
+export const checkToken = () => {
+    const { exp } = decodeJwt()
+    if (Date(exp) < new Date()) {
+        removeToken()
+        window.location.href = '/login'
+    }
+}

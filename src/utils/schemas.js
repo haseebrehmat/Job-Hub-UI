@@ -19,3 +19,8 @@ export const filtersSchema = Yup.object().shape({
     from_date: Yup.date().max(today, 'Please choose future date'),
     to_date: Yup.date().min(Yup.ref('from_date'), "End date can't be before Start date"),
 })
+
+export const companySchema = Yup.object().shape({
+    name: Yup.string().required('Company name is required'),
+    status: Yup.boolean().required('Status is required'),
+})

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getMsg, getToken } from './helpers'
+import { checkToken, getMsg, getToken } from './helpers'
 import { toast } from 'react-hot-toast'
 
 const token = getToken()
@@ -12,7 +12,10 @@ const http = axios.create({
 })
 
 http.interceptors.request.use(request => {
-    if (token !== null) request.headers.Authorization = `Bearer ${token}`
+    if (token !== null) {
+        checkToken()
+        request.headers.Authorization = `Bearer ${token}`
+    }
     return request
 })
 
@@ -23,6 +26,21 @@ http.interceptors.response.use(
         Promise.reject(error)
     }
 )
+
+const httpDev = axios.create({
+    baseURL: import.meta.env.VITE_DEV_API_URL,
+    headers: {
+        Accept: 'application/json',
+    },
+})
+
+httpDev.interceptors.request.use(request => {
+    if (token !== null) {
+        checkToken()
+        request.headers.Authorization = `Bearer ${token}`
+    }
+    return request
+})
 
 const scrapperHttp = axios.create({
     baseURL: import.meta.env.VITE_SCRAPPER_API_URL,
@@ -38,4 +56,4 @@ const teamAppliedJobsHttp = axios.create({
     },
 })
 
-export { http, scrapperHttp, teamAppliedJobsHttp }
+export { http, httpDev, scrapperHttp, teamAppliedJobsHttp }

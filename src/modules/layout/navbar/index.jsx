@@ -2,10 +2,10 @@ import { memo } from 'react'
 
 import { NavBellIcon, NavContactIcon, NavSettingIcon, OpenSidebarIcon } from '@icons'
 
-const Navbar = memo(({ setShow }) => (
+const Navbar = memo(({ setShow, title = 'Octagon' }) => (
     <header className='bg-white w-full px-8 pt-3'>
         <nav className='relative flex flex-row justify-between'>
-            <p className='text-[#006366] not-italic font-bold text-5xl leading-[58px] font-gruppo'>Octagon</p>
+            <p className='text-[#006366] not-italic font-bold text-5xl leading-[58px] font-gruppo'>{title}</p>
             <ul className='flex text-white space-x-5 justify-end'>
                 <li className='block mx-2 my-2 cursor-pointer text-teal-800 sm:hidden md:hidden'>
                     <a href='#' onClick={() => setShow(true)}>

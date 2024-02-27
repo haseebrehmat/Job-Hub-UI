@@ -16,6 +16,7 @@ import {
     BsCheck2,
     BsSnow3,
     BsCollectionFill,
+    BsThreeDotsVertical,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineFilter, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
@@ -33,6 +34,7 @@ import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers } from 'react-icons/fa'
+import { BiPlusCircle } from 'react-icons/bi'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -73,3 +75,5 @@ export const TeamAppliedJobsIcon = <BsCollectionFill style={{ fontSize: '22px' }
 export const OpenSubMenuIcon = <MdOutlineKeyboardArrowDown style={{ fontSize: '22px' }} />
 export const UserIcon = <FiUser style={{ fontSize: '22px' }} />
 export const CompaniesIcon = <FaUsers style={{ fontSize: '22px' }} />
+export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
+export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />

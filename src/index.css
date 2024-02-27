@@ -62,10 +62,15 @@
     padding: 0 !important;
 }
 
+.slide-pane__overlay.overlay-after-open{
+    backdrop-filter: blur(5px);
+}
+
 body{
     max-height: 100vh !important;
     overflow: auto !important;
 }
+
 
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
