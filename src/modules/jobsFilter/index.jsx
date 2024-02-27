@@ -8,7 +8,8 @@ import jwt_decode from 'jwt-decode'
 import { MySelect } from './components/MySelect'
 
 const JobsFilter = memo(() => {
-    const apiUrl = `http://54.215.158.128/api/job_portal/`
+    const apiUrl = `${import.meta.env.VITE_SCRAPPER_API_URL}api/job_portal/`
+    // const apiUrl = `http://54.215.158.128/api/job_portal/`
     const { role } = jwt_decode(localStorage.getItem('token'))
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
@@ -66,7 +67,7 @@ const JobsFilter = memo(() => {
         fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
-                // Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
+                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
             },
         })
             .then(resp => {
