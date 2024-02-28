@@ -39,7 +39,7 @@ const JobsFilter = memo(() => {
 
     const resetFilters = () => {
         setJobSourceSelector('all')
-        setTechStack('')
+        setTechStack([])
         setJobTypeSelector('all')
         setDates({ from_date: '', to_date: '' })
         setJobTitle('')
@@ -109,8 +109,9 @@ const JobsFilter = memo(() => {
     const updateParams = title => {
         const job_source = jobSourceSelector !== 'all' ? jobSourceSelector : ''
         const job_type = jobTypeSelector !== 'all' ? jobTypeSelector : ''
-        const techStackValues = techStackSelector.join(',')
-        console.log(techStackValues)
+        const techStackValues = techStackSelector.map(obj => obj.value).join(',')
+        // console.log(techStackSelector)
+        // console.log(techStackSelector)
         setJobsFilterParams({
             ...jobsFilterParams,
             tech_keywords: techStackValues,
@@ -230,8 +231,12 @@ const JobsFilter = memo(() => {
                     </div>
 
                     <div className='my-2'>
-                      Tech Stack
-                        <MySelect />
+                        Tech Stack
+                        <MySelect
+                            options={formatOptions(techStackData)}
+                            handleChange={setTechStack}
+                            selectorValue={techStackSelector}
+                        />
                     </div>
                     <div className='my-2'>
                         Order By

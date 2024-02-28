@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Select, { components } from 'react-select'
 import './styles.css'
 
-export default function MySelect() {
-    const [selectedOptions, setSelectedOptions] = useState()
+export default function MySelect({ options, handleChange, selectorValue }) {
+    const VALUE_LIMIT = 2
 
     const chipStyles = {
         fontSize: '14px',
@@ -15,7 +15,6 @@ export default function MySelect() {
         padding: '4px 8px',
         margin: '2px',
     }
-
     const MultiValue = props => {
         const { index, getValue } = props
 
@@ -40,6 +39,7 @@ export default function MySelect() {
         { value: 'white', label: 'White' },
         { value: 'orange', label: 'Orange' },
     ]
+    const [selectedOptions, setSelectedOptions] = useState([])
 
     const ClearIndicator = props => (
         <div {...props.innerProps}>
@@ -93,13 +93,19 @@ export default function MySelect() {
 
     function handleSelect(data) {
         setSelectedOptions(data)
+        handleChange(data)
     }
+
+    useEffect(() => {
+        setSelectedOptions(selectorValue)
+    }, [selectorValue])
+
     return (
         <div className='app'>
             <div className='dropdown-container'>
                 <Select
                     components={{ ClearIndicator, MultiValue }}
-                    options={optionList}
+                    options={options}
                     maxMenuHeight={200}
                     placeholder='Search Tech'
                     value={selectedOptions}
