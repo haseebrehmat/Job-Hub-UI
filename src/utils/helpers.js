@@ -71,6 +71,14 @@ export const checkToken = () => {
     }
 }
 
+export const handle401 = error => {
+    const { status, statusText } = error.response
+    if (status === 401 && statusText === 'Unauthorized') {
+        removeToken()
+        window.location.href = '/login'
+    }
+}
+
 export const parseFixedRoles = roles =>
     roles.map(role => ({ value: role.code, label: `${role.code} -- ${role.description}` }))
 
