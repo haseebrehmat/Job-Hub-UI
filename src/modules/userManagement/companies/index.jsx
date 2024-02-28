@@ -29,7 +29,7 @@ const Companies = () => {
                     label='Create Company'
                     fit
                     icon={CreateIcon}
-                    onClick={() => handleClick({ name: '', status: true, user: '' })}
+                    onClick={() => handleClick({ name: '', status: true })}
                 />
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>

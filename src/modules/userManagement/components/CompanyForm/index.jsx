@@ -6,14 +6,13 @@ import { saveCompany } from '@modules/userManagement/api'
 
 import { useMutate } from '@/hooks'
 import { companySchema } from '@utils/schemas'
-import { decodeJwt, getMsg } from '@utils/helpers'
+import { getMsg } from '@utils/helpers'
 
 const CompanyForm = ({ show, setShow, mutate, company }) => {
-    const { user_id } = decodeJwt()
     const { values, errors, handleSubmit, handleChange, resetForm, trigger } = useMutate(
         `/api/auth/company${company?.id ? `/${company?.id}/` : '/'}`,
         saveCompany,
-        { name: company?.name || '', status: company?.status, user: company?.user || user_id },
+        { name: company?.name || '', status: company?.status },
         companySchema,
         async formValues => {
             trigger({ ...formValues, id: company?.id })
