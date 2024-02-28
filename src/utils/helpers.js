@@ -68,3 +68,7 @@ export const parseSelectedRole = (code, roles) => {
     }
     return null
 }
+
+export const parseRoles = roles => roles.map(role => ({ value: role.id, label: role.name }))
+
+export const parseComapnies = companies => companies.map(company => ({ value: company.id, label: company.name }))

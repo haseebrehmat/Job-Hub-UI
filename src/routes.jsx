@@ -10,6 +10,7 @@ import {
     ResetPassword,
     Companies,
     Roles,
+    Users,
 } from '@modules'
 
 import { getToken } from '@utils/helpers'
@@ -57,6 +58,12 @@ export const routes = [
         component: <Roles />,
         protect: true,
         title: 'Roles Management',
+    },
+    {
+        path: '/users',
+        component: <Users />,
+        protect: true,
+        title: 'Users Management',
     },
 ]
 
