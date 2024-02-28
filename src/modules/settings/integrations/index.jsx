@@ -10,7 +10,7 @@ import { comapnyHeads, comapnyStatus } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
 
-const Companies = () => {
+const Integrations = () => {
     const [query, setQuery] = useState()
     const [company, setCompany] = useState()
     const [show, setShow] = useState(false)
@@ -32,8 +32,8 @@ const Companies = () => {
                     onClick={() => handleClick({ name: '', status: true, user: '' })}
                 />
             </div>
-            <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
-                <thead className='text-xs uppercase border border-[#048C8C]'>
+            <table className='table-auto w-full  text-sm text-left text-[#048C8C] '>
+                <thead className='text-xs uppercase border border-[#048C8C] '>
                     <tr>
                         {comapnyHeads.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
@@ -70,4 +70,4 @@ const Companies = () => {
     )
 }
 
-export default memo(Companies)
+export default memo(Integrations)

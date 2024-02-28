@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Cold from '@svgs/cold.svg'
 import Hired from '@svgs/hired.svg'
 import Rejected from '@svgs/rejected.svg'
@@ -6,7 +7,10 @@ import Hot from '@svgs/hot.svg'
 import Warm from '@svgs/warm.svg'
 import Total from '@svgs/total.svg'
 import Filters from '@svgs/filters.svg'
+import IntegrationsSVG from '@svgs/integrations.svg'
 
 export { OctagonLogo, OctagonSmallIcon } from '@svgs/svg-icons'
 
-export { Cold, Hired, Rejected, Prospects, Hot, Warm, Total, Filters }
+const Integrations = memo(() => <img src={IntegrationsSVG} alt='I' />)
+
+export { Cold, Hired, Rejected, Prospects, Hot, Warm, Total, Filters, Integrations }

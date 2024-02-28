@@ -10,6 +10,7 @@ import JobsUploader from '@modules/jobsUploader'
 import Companies from '@modules/userManagement/companies'
 import Roles from '@modules/userManagement/roles'
 import Users from '@modules/userManagement/users'
+import Integrations from '@modules/settings/integrations'
 
 export {
     Jobs,
@@ -24,4 +25,5 @@ export {
     Companies,
     Roles,
     Users,
+    Integrations,
 }
