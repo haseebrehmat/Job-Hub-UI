@@ -29,7 +29,7 @@ const Roles = () => {
                     label='Create Role'
                     fit
                     icon={CreateIcon}
-                    onClick={() => handleClick({ name: '', status: true, user: '' })}
+                    onClick={() => handleClick({ name: '', code: '', description: '', group: '' })}
                 />
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
@@ -50,6 +50,7 @@ const Roles = () => {
                                 <td className='px-3 py-6'>{row?.name}</td>
                                 <td className='px-3 py-6'>{row?.description}</td>
                                 <td className='px-3 text-2xl italic font-mono'>{row?.code}</td>
+                                <td className='px-3 py-6'>{row?.group[0]?.name}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {ActionsIcons}
                                 </td>
