@@ -93,3 +93,13 @@ export const parseSelectedRole = (code, roles) => {
 export const parseRoles = roles => roles.map(role => ({ value: role.id, label: role.name }))
 
 export const parseComapnies = companies => companies.map(company => ({ value: company.id, label: company.name }))
+
+export const parseGroups = groups => groups.map(group => ({ value: group.id, label: group.name }))
+
+export const parseSelectedGroup = (id, groups) => {
+    if (id) {
+        const group = groups.find(row => row?.id === id)
+        return { value: group?.id, label: group?.name }
+    }
+    return null
+}
