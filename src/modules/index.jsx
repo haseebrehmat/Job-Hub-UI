@@ -9,6 +9,7 @@ import JobsFilter from '@modules/jobsFilter'
 import JobsUploader from '@modules/jobsUploader'
 import Companies from '@modules/userManagement/companies'
 import Roles from '@modules/userManagement/roles'
+import Users from '@modules/userManagement/users'
 
 export {
     Jobs,
@@ -22,4 +23,5 @@ export {
     Layout as AppLayout,
     Companies,
     Roles,
+    Users,
 }
