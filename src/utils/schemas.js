@@ -27,6 +27,14 @@ export const companySchema = Yup.object().shape({
 
 export const roleSchema = Yup.object().shape({
     name: Yup.string().required('Role name is required'),
-    description: Yup.string().nullable().max(255, 'Description must be less than 255 characters'),
+    description: Yup.string().required().max(255, 'Description must be less than 255 characters'),
     code: Yup.number('Code must be a number').positive('Code must be a positive number').required('Code is required'),
+})
+
+export const userSchema = Yup.object().shape({
+    username: Yup.string().required('Username is required'),
+    password: Yup.string().required('Pasword is required'),
+    role: Yup.string().required('Role is required'),
+    company: Yup.string().required('Company is required'),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
 })
