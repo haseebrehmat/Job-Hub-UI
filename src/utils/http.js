@@ -1,14 +1,18 @@
 import axios from 'axios'
-import { checkToken, getMsg, getToken } from './helpers'
+import { checkToken, getBaseUrl, getMsg, getToken } from './helpers'
 import { toast } from 'react-hot-toast'
 
 const token = getToken()
+const baseURL = getBaseUrl(import.meta.env.VITE_NODE_ENV)
 
 const http = axios.create({
-    baseURL: import.meta.env.VITE_AUTH_API_URL,
-    headers: {
-        Accept: 'application/json',
-    },
+    baseURL,
+    headers: { Accept: 'application/json' },
+})
+
+const rawHttp = axios.create({
+    baseURL,
+    headers: { Accept: 'application/json' },
 })
 
 http.interceptors.request.use(request => {
@@ -28,14 +32,7 @@ http.interceptors.response.use(
     }
 )
 
-const httpDev = axios.create({
-    baseURL: import.meta.env.VITE_DEV_API_URL,
-    headers: {
-        Accept: 'application/json',
-    },
-})
-
-httpDev.interceptors.request.use(request => {
+rawHttp.interceptors.request.use(request => {
     if (token !== null) {
         checkToken()
         request.headers.Authorization = `Bearer ${token}`
@@ -44,17 +41,17 @@ httpDev.interceptors.request.use(request => {
 })
 
 const scrapperHttp = axios.create({
-    baseURL: import.meta.env.VITE_SCRAPPER_API_URL,
+    baseURL,
     headers: {
         Accept: 'application/json',
     },
 })
 
 const teamAppliedJobsHttp = axios.create({
-    baseURL: import.meta.env.VITE_SCRAPPER_API_URL,
+    baseURL,
     headers: {
         Accept: 'application/json',
     },
 })
 
-export { http, httpDev, scrapperHttp, teamAppliedJobsHttp }
+export { http, rawHttp, scrapperHttp, teamAppliedJobsHttp }
