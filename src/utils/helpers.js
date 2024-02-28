@@ -12,6 +12,19 @@ export const decodeJwt = () => (getToken() ? jwt_decode(getToken()) : { user: nu
 
 export const getMsg = error => error?.response?.data?.detail || 'Something went wrong'
 
+export const getBaseUrl = nodeEnv => {
+    switch (nodeEnv) {
+        case 'dev':
+            return import.meta.env.VITE_DEV_API_URL
+        case 'prod':
+            return import.meta.env.VITE_PROD_API_URL
+        case 'stage':
+            return import.meta.env.VITE_STAGE_API_URL
+        default:
+            return import.meta.env.VITE_DEV_API_URL
+    }
+}
+
 export const timeSince = date => {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000)
     let intervalType = ''
