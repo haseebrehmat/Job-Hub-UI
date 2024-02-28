@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { checkToken, getBaseUrl, getMsg, getToken } from './helpers'
+import { checkToken, getBaseUrl, getMsg, getToken, handle401 } from '@utils/helpers'
 import { toast } from 'react-hot-toast'
 
 const token = getToken()
@@ -28,6 +28,7 @@ http.interceptors.response.use(
     error => {
         checkToken()
         toast.error(getMsg(error))
+        handle401(error)
         Promise.reject(error)
     }
 )
