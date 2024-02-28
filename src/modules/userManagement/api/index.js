@@ -23,7 +23,14 @@ export const saveRole = (url, { arg: role }) => {
     return rawHttp.post(url, role).then(({ data }) => toast.success(data.detail))
 }
 
-export const fetchUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
+export const fetchUsers = url =>
+    http.get(url).then(({ data }) => ({
+        users: data?.results,
+        next: data?.next,
+        previous: data?.previous,
+        total: data?.count,
+        status: 'success',
+    }))
 
 export const saveUser = (url, { arg: user }) => {
     if (user?.id) {
