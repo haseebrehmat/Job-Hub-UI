@@ -14,9 +14,9 @@ const Users = () => {
     const [query, setQuery] = useState()
     const [user, setUser] = useState()
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/user/?limit=5', fetchUsers)
-    const handleClick = ({ name, username, role, company, id }) => {
-        setUser({ name, username, role, company, id })
+    const { data, error, isLoading, mutate } = useSWR('/api/auth/user/', fetchUsers)
+    const handleClick = ({ username, role, company, id }) => {
+        setUser({ username, role, company, id })
         setShow(!show)
     }
     if (isLoading) return <Loading />
@@ -29,7 +29,7 @@ const Users = () => {
                     label='Create User'
                     fit
                     icon={CreateIcon}
-                    onClick={() => handleClick({ name: '', username: '', role: '', company: '' })}
+                    onClick={() => handleClick({ username: '', role: '', company: '' })}
                 />
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
@@ -47,11 +47,10 @@ const Users = () => {
                         data?.users?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{row?.name}</td>
                                 <td className='px-3 py-6'>{row?.email}</td>
                                 <td className='px-3 py-6'>{row?.username}</td>
-                                <td className='px-3 py-6'>{row?.role}</td>
-                                <td className='px-3 py-6'>{row?.company}</td>
+                                <td className='px-3 py-6'>{row?.role?.name || 'not assigned'}</td>
+                                <td className='px-3 py-6'>{row?.company?.name || 'not assigned'}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {ActionsIcons}
                                 </td>

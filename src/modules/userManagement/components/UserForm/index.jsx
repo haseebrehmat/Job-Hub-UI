@@ -6,7 +6,7 @@ import { useMutate } from '@/hooks'
 import { Button, Drawer, Input, SelectBox } from '@components'
 import { saveUser, fetchRoles, fetchCompanies } from '@modules/userManagement/api'
 
-import { roleSchema } from '@utils/schemas'
+import { userSchema } from '@utils/schemas'
 import { getMsg, parseRoles, parseComapnies } from '@utils/helpers'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
@@ -16,7 +16,6 @@ const UserForm = ({ show, setShow, mutate, user }) => {
         `/api/auth/user${user?.id ? `/${user?.id}/` : '/'}`,
         saveUser,
         {
-            name: user?.name || '',
             username: user?.username || '',
             email: user?.email || '',
             id: user?.id,
@@ -24,23 +23,19 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             role: user?.role || '',
             password: user?.password || '',
         },
-        roleSchema,
-        async formValues => {
-            trigger({ ...formValues, id: user?.id })
-            if (!user?.id) resetForm()
-        },
+        userSchema,
+        async formValues => trigger({ ...formValues, id: user?.id }),
         error => toast.error(getMsg(error)),
-        () => user?.id && mutate('/api/auth/role_association/')
+        () => (user?.id ? mutate('/api/auth/user/') : resetForm())
     )
+
+    console.log(user)
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{user?.id ? 'Edit' : 'Create'} User</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Name*</span>
-                    <Input name='name' value={values.name} onChange={handleChange} ph='Name' />
-                    {errors.name && <small className='ml-1 text-xs text-red-600'>{errors.name}</small>}
                     <span className='text-xs font-semibold'>Email*</span>
                     <Input name='email' type='email' value={values.email} onChange={handleChange} ph='Enter email' />
                     {errors.email && <small className='ml-1 text-xs text-red-600'>{errors.email}</small>}
