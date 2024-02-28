@@ -2,36 +2,39 @@ import React, { useState } from 'react'
 import Select, { components } from 'react-select'
 import './styles.css'
 
-const VALUE_LIMIT = 2
-
-const chipStyles = {
-    fontSize: '14px',
-    color: '#048C8C',
-    boxShadow: '0 0 0 1px #048C8C',
-    fontWeight: 'bold',
-    background: '#EDFFFB',
-    borderRadius: '2px',
-    padding: '4px 8px',
-    margin: '2px',
-}
-
-const MultiValue = props => {
-    const { index, getValue } = props
-    const hiddenLength = getValue().length - VALUE_LIMIT
-
-    return index < VALUE_LIMIT ? (
-        <components.MultiValue {...props} />
-    ) : index === VALUE_LIMIT ? (
-        <div style={chipStyles}>{`+${hiddenLength}`}</div>
-    ) : null
-}
-
 export default function MySelect() {
     const [selectedOptions, setSelectedOptions] = useState()
 
+    const chipStyles = {
+        fontSize: '14px',
+        color: '#048C8C',
+        boxShadow: '0 0 0 1px #048C8C',
+        fontWeight: 'bold',
+        background: '#EDFFFB',
+        borderRadius: '2px',
+        padding: '4px 8px',
+        margin: '2px',
+    }
+
+    const MultiValue = props => {
+        const { index, getValue } = props
+
+        const keywords_length = selectedOptions.map(obj => obj.label).join('').length
+        console.log(keywords_length)
+
+        const VALUE_LIMIT = keywords_length <= 15 ? 2 : keywords_length <= 18 ? 0 : 0
+        const hiddenLength = getValue().length - VALUE_LIMIT
+
+        return index < VALUE_LIMIT ? (
+            <components.MultiValue {...props} />
+        ) : index === VALUE_LIMIT ? (
+            <div style={chipStyles}>{`+${hiddenLength}`}</div>
+        ) : null
+    }
+
     const optionList = [
         { value: 'red', label: 'Red' },
-        { value: 'green', label: 'Green' },
+        { value: 'greenkdlsgfljsgfldsdfdggfdghadsdf', label: 'Greensdljfh;kdh;sddsfdfhfsgfghdsfsdsdsd' },
         { value: 'yellow', label: 'Yellow' },
         { value: 'blue', label: 'Blue' },
         { value: 'white', label: 'White' },
