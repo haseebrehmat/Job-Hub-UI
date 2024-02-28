@@ -22,3 +22,12 @@ export const saveRole = (url, { arg: role }) => {
     }
     return httpDev.post(url, role).then(({ data }) => toast.success(data.detail))
 }
+
+export const fetchUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
+
+export const saveUser = (url, { arg: user }) => {
+    if (user?.id) {
+        return httpDev.put(url, user).then(({ data }) => toast.success(data.detail || 'User updated successfully'))
+    }
+    return httpDev.post(url, user).then(({ data }) => toast.success(data.detail))
+}
