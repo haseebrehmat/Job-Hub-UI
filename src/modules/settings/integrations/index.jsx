@@ -14,7 +14,8 @@ const Integrations = () => {
     const [query, setQuery] = useState()
     const [company, setCompany] = useState()
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/company/', fetchCompanies)
+    const { data, error, isLoading, mutate } = useSWR('/api/auth/integration/', fetchCompanies)
+    console.log(data)
     const handleClick = ({ name, status, id }) => {
         setCompany({ name, status, id })
         setShow(!show)
@@ -26,7 +27,7 @@ const Integrations = () => {
                 <Searchbox query={query} setQuery={setQuery} />
                 <Filters />
                 <Button
-                    label='Create Company'
+                    label='Add Integration'
                     fit
                     icon={CreateIcon}
                     onClick={() => handleClick({ name: '', status: true, user: '' })}
@@ -44,11 +45,11 @@ const Integrations = () => {
                 </thead>
                 <tbody>
                     {data?.companies?.length > 0 && !error ? (
-                        data.companies.map((comp, idx) => (
+                        data.results.map((comp, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{comp?.name}</td>
-                                <td className='px-3 py-6'>{comp?.code}</td>
+                                <td className='px-3 py-6'>{comp.company?.name}</td>
+                                <td className='px-3 py-6'>{comp?.api_key}</td>
                                 <td className='px-1 py-6'>
                                     <Badge
                                         label={comapnyStatus[comp?.status ? 0 : 1]}
