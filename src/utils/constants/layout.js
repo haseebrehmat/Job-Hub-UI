@@ -69,7 +69,7 @@ export const menuItems = [
         subItems: [
             {
                 label: 'Users',
-                link: '/applied-jobs',
+                link: '/users',
                 svg: UserIcon,
             },
             {
