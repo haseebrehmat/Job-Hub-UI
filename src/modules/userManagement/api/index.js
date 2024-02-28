@@ -14,6 +14,8 @@ export const saveCompany = (url, { arg: company }) => {
 
 export const fetchRoles = url => http.get(url).then(({ data }) => ({ roles: data, status: 'success' }))
 
+export const fetchGroups = url => http.get(url).then(({ data }) => ({ groups: data, status: 'success' }))
+
 export const fetchFixRoles = url => http.get(url).then(({ data }) => ({ fixedRoles: data, status: 'success' }))
 
 export const saveRole = (url, { arg: role }) => {
@@ -27,7 +29,7 @@ export const fetchUsers = url =>
     http.get(url).then(({ data }) => ({
         users: data?.results,
         next: data?.next,
-        previous: data?.previous,
+        prev: data?.previous,
         total: data?.count,
         status: 'success',
     }))
