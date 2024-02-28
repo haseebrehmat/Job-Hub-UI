@@ -35,7 +35,7 @@ export default function MySelect() {
         { value: 'yellow', label: 'Yellow' },
         { value: 'blue', label: 'Blue' },
         { value: 'white', label: 'White' },
-        { value: 'white1', label: 'White1' },
+        { value: 'orange', label: 'Orange' },
     ]
 
     const ClearIndicator = props => (
@@ -65,7 +65,7 @@ export default function MySelect() {
             marginBottom: 2.1,
             fontWeight: 'bold',
             borderRadius: 5,
-            marginLeft:2.5,
+            marginLeft: 2.5,
             width: '98%',
             color: '#048C8C',
             borderColor: '#006366',
@@ -73,7 +73,7 @@ export default function MySelect() {
             backgroundColor: state.isSelected ? '#EDFFFB' : 'white',
             '::after': {
                 content: state.isSelected ? '"\u2713"' : '""',
-                marginLeft:'80%',
+                float: 'right',
                 backgroundColor: 'transparent',
             },
         }),
@@ -103,7 +103,6 @@ export default function MySelect() {
                     onChange={handleSelect}
                     isSearchable
                     isMulti
-                    maxSelectedItems={1}
                     hideSelectedOptions={false}
                     styles={styles}
                     backgroundColor='transparent'
