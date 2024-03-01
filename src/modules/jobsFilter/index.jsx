@@ -4,11 +4,11 @@ import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import toast from 'react-hot-toast'
 import jwt_decode from 'jwt-decode'
-import MySelect from './components/MySelect'
+import CustomSelector from '../../components/CustomSelector'
+import { baseURL } from '@utils/http'
 
 const JobsFilter = memo(() => {
-    const apiUrl = `${import.meta.env.VITE_SCRAPPER_API_URL}api/job_portal/`
-    // const apiUrl = `http://54.215.158.128/api/job_portal/`
+    const apiUrl = `${baseURL}api/job_portal/`
     const { role } = jwt_decode(localStorage.getItem('token'))
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
@@ -61,7 +61,6 @@ const JobsFilter = memo(() => {
         }
 
         url = params_count > 0 ? `${url}?${params.toString()}` : url
-        console.log(url)
         setData([])
         fetch(url, {
             headers: {
@@ -232,10 +231,12 @@ const JobsFilter = memo(() => {
 
                     <div className='my-2'>
                         Tech Stack
-                        <MySelect
+                        <CustomSelector
                             options={formatOptions(techStackData)}
                             handleChange={setTechStack}
                             selectorValue={techStackSelector}
+                            isMulti
+                            placeholder='Select Tech Stack'
                         />
                     </div>
                     <div className='my-2'>

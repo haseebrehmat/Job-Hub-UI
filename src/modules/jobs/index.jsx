@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Badge } from '@components'
+import { Loading } from '@components'
 
 import { fetchTeamAppliedJobs } from '@modules/jobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
@@ -9,9 +9,10 @@ import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
 import { tableHeads, jobStatus } from '@constants/jobs'
 import { formatDate, timeSince } from '@utils/helpers'
 import toast from 'react-hot-toast'
+import { baseURL } from '@utils/http'
 
 const Jobs = memo(() => {
-    const apiUrl = import.meta.env.VITE_SCRAPPER_API_URL
+    const apiUrl = baseURL
     const [page, setPage] = useState(1)
     const [bd, setBD] = useState('all')
     const { data, error, isLoading, mutate } = useSWR([page, bd], () =>
@@ -88,8 +89,8 @@ const Jobs = memo(() => {
                         data.jobs.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
-                                    <span className='font-bold'>{timeSince(job.job_posted_date)}</span>
-                                    <div>{formatDate(job.job_posted_date)}</div>
+                                    <span className='font-bold'>{timeSince(job.applied_date)}</span>
+                                    <div>{formatDate(job.applied_date)}</div>
                                 </td>
                                 <td className='px-3 py-4'>{job.company_name}</td>
                                 <td className='px-3 py-4'>{job.job_title}</td>

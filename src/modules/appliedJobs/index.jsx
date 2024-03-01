@@ -35,8 +35,8 @@ const AppliedJobs = memo(() => {
                         data.jobs.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
-                                    <span className='font-bold'>{timeSince(job.job_posted_date)}</span>
-                                    <div>{formatDate(job.job_posted_date)}</div>
+                                    <span className='font-bold'>{timeSince(job.applied_date)}</span>
+                                    <div>{formatDate(job.applied_date)}</div>
                                 </td>
                                 <td className='px-3 py-4'>{job.company_name}</td>
                                 <td className='px-3 py-4'>{job.job_title}</td>
