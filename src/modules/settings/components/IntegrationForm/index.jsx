@@ -28,9 +28,12 @@ const IntegrationForm = ({ show, setShow, mutate, company }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{company?.id ? 'Edit' : 'Add'} Integration</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Company*</span>
-                    <Input name='comapny' value={values.name} onChange={handleChange} ph='Name' />
-                    {errors.name && <small className='ml-1 text-xs text-red-600'>{errors.name}</small>}
+                    <span className='text-xs font-semibold'>Select Company*</span>
+                    <Input name='comapny' value={values.name} onChange={handleChange} ph='company' />
+                    <span className='text-xs font-semibold'>Select Integration*</span>
+                    <Input name='comapny' value={values.name} onChange={handleChange} ph='company' />
+                    <span className='text-xs font-semibold'>Api Key*</span>
+                    <Input name='Api Key' onChange={handleChange} ph='Api Key' />
                     <div className='pt-3 flex flex-col'>
                         <Checkbox name='status' label='Enabled' onChange={handleChange} checked={values.status} />
                         {errors.status && <small className='ml-1 text-xs text-red-600'>{errors.status}</small>}
