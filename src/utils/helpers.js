@@ -103,3 +103,8 @@ export const parseSelectedGroup = (id, groups) => {
     }
     return null
 }
+
+export const can = permissionKey => {
+    const user = decodeJwt()
+    return user?.permissions?.includes(permissionKey)
+}

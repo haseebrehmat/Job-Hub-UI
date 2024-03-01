@@ -9,44 +9,20 @@ import {
     CompaniesIcon,
     RolesIcon,
 } from '@icons'
-import { decodeJwt } from '@utils/helpers'
-
-const user = decodeJwt()
-
-const jobsSubItems = role => {
-    switch (role) {
-        case 'TL':
-            return [
-                {
-                    label: 'Team Applied Jobs',
-                    link: '/jobs',
-                    svg: TeamAppliedJobsIcon,
-                },
-            ]
-        case 'BD':
-            return [
-                {
-                    label: 'Jobs Portal',
-                    link: '/jobs-portal',
-                    svg: Jobs,
-                },
-            ]
-        default:
-            return []
-    }
-}
 
 export const menuItems = [
     {
         label: 'Dashboard',
         link: '/',
         svg: DashboardIcon,
+        permissions: ['view_dashboard'],
     },
     {
         label: 'Jobs',
         link: '#!',
         svg: ReportIcon,
         key: 'jobs',
+        permissions: ['view_jobs'],
         subItems: [
             {
                 label: 'Applied Jobs',
@@ -58,7 +34,16 @@ export const menuItems = [
                 link: '/jobs-uploader',
                 svg: JobsUploaderIcon,
             },
-            ...jobsSubItems(user.role),
+            {
+                label: 'Team Applied Jobs',
+                link: '/jobs',
+                svg: TeamAppliedJobsIcon,
+            },
+            {
+                label: 'Jobs Portal',
+                link: '/jobs-portal',
+                svg: Jobs,
+            },
         ],
     },
     {
