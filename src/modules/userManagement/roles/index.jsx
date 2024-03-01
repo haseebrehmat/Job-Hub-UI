@@ -15,8 +15,8 @@ const Roles = () => {
     const [role, setRole] = useState()
     const [show, setShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR('/api/auth/role_association/', fetchRoles)
-    const handleClick = ({ name, code, description, id }) => {
-        setRole({ name, code, description, id })
+    const handleClick = ({ name, code, description, group, id }) => {
+        setRole({ name, code, description, group: group.id, id })
         setShow(!show)
     }
     if (isLoading) return <Loading />
@@ -49,8 +49,8 @@ const Roles = () => {
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.name}</td>
                                 <td className='px-3 py-6'>{row?.description}</td>
+                                <td className='px-3 py-6'>{row?.group?.name}</td>
                                 <td className='px-3 text-2xl italic font-mono'>{row?.code}</td>
-                                <td className='px-3 py-6'>{row?.group[0]?.name}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {ActionsIcons}
                                 </td>

@@ -17,23 +17,13 @@ const CompanyForm = ({ show, setShow, mutate, role }) => {
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/role_association${role?.id ? `/${role?.id}/` : '/'}`,
         saveRole,
-        {
-            name: role?.name || '',
-            code: role?.code || '',
-            group: role?.group || '',
-            description: role?.description || '',
-            id: role?.id,
-        },
+        role,
         roleSchema,
-        async formValues => {
-            trigger({ ...formValues, id: role?.id })
-            if (!role?.id) resetForm()
-        },
+        async formValues => trigger({ ...formValues, id: role?.id }),
         error => toast.error(getMsg(error)),
-        () => role?.id && mutate('/api/auth/role_association/')
+        () => (role?.id ? mutate('/api/auth/role_association/') : resetForm())
     )
-    console.log(role)
-
+    console.log(values)
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
@@ -64,8 +54,8 @@ const CompanyForm = ({ show, setShow, mutate, role }) => {
                             <span className='text-xs font-semibold'>Group*</span>
                             <SelectBox
                                 options={parseGroups(groupsData?.groups)}
-                                selected={parseSelectedGroup(values.group[0], groupsData?.groups)}
-                                handleChange={({ value }) => setFieldValue('code', value)}
+                                selected={parseSelectedGroup(values.group, groupsData?.groups)}
+                                handleChange={({ value }) => setFieldValue('group', value)}
                                 classes='text-gray-500 text-sm'
                             />
                             {errors.code && <small className='ml-1 text-xs text-red-600'>{errors.code}</small>}
