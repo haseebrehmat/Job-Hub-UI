@@ -17,14 +17,25 @@ const Dashboard = () => {
             {!error ? (
                 <>
                     <Filters filters={filters} setFilters={setFilters} />
+                    {/* <div className='block xl:hidden'>
+                        <Statistics
+                            className='flex'
+                            flexDirection='flex-row'
+                            flexSpace='space-x-8'
+                            data={data?.statistics}
+                        />
+                    </div> */}
                     <div className='flex items-start justify-between'>
                         <div className='flex flex-col w-4/5 space-y-16'>
                             <Leads data={data?.leads} />
                             <TechStacks data={data?.tech_jobs} />
                             <WarmLeads data={data?.leads} />
                         </div>
+                        {/* <div className='w-1/5 pl-6 invisible xl:visible'>
+                            <Statistics flexDirection='flex-col' flexSpace='space-y-8' data={data?.statistics} />
+                        </div> */}
                         <div className='w-1/5 pl-6'>
-                            <Statistics data={data?.statistics} />
+                            <Statistics flexDirection='flex-col' flexSpace='space-y-8' data={data?.statistics} />
                         </div>
                     </div>
                 </>

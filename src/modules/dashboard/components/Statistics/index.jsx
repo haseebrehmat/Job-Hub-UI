@@ -4,8 +4,8 @@ import { StatCard } from '@components'
 
 import { statsIcons } from '@constants/dashboard'
 
-const Statistics = ({ data }) => (
-    <div className='flex flex-col space-y-8'>
+const Statistics = ({ data, flexDirection, flexSpace }) => (
+    <div className={`flex ${flexDirection} ${flexSpace}`}>
         {data?.length > 0 &&
             data.map(({ name, value }, index) => (
                 <StatCard
