@@ -35,7 +35,7 @@ import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
-import { RiUserSettingsLine } from 'react-icons/ri'
+import { RiUserSettingsLine, RiLock2Fill } from 'react-icons/ri'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -80,3 +80,4 @@ export const RolesIcon = <RiUserSettingsLine style={{ fontSize: '22px' }} />
 export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
 export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
 export const TrashIcon = <FaRegTrashAlt style={{ fontSize: '16px' }} />
+export const PermissionIcon = <RiLock2Fill style={{ fontSize: '22px' }} />

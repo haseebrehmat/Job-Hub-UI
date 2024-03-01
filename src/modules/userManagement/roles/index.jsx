@@ -9,6 +9,7 @@ import { fetchRoles } from '@modules/userManagement/api'
 import { roleHeads } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
+import { PermissionIcon } from '@/assets/icons'
 
 const Roles = () => {
     const [query, setQuery] = useState()
@@ -43,7 +44,11 @@ const Roles = () => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.name}</td>
-                                <td className='px-3 py-6'>Permissions goes here</td>
+                                <td className='px-3 py-4'>
+                                    <span className='flex items-center gap-2'>
+                                        {PermissionIcon} Permissions goes here
+                                    </span>
+                                </td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {ActionsIcons}
                                 </td>
