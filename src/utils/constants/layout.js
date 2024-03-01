@@ -11,6 +11,32 @@ import {
     SettingIcon,
     IntegrationIcon,
 } from '@icons'
+import { decodeJwt } from '@utils/helpers'
+
+const user = decodeJwt()
+
+const jobsSubItems = role => {
+    switch (role) {
+        case 'TL':
+            return [
+                {
+                    label: 'Team Applied Jobs',
+                    link: '/jobs',
+                    svg: TeamAppliedJobsIcon,
+                },
+            ]
+        case 'BD':
+            return [
+                {
+                    label: 'Jobs Portal',
+                    link: '/jobs-portal',
+                    svg: Jobs,
+                },
+            ]
+        default:
+            return []
+    }
+}
 
 export const menuItems = [
     {

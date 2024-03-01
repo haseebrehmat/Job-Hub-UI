@@ -1,4 +1,4 @@
-export const integrations_head = ['#', 'Company', 'Api key', 'Status', '']
+export const integrations_head = ['#', 'Company', 'Integration', 'Status', '']
 export const roleHeads = ['ID', 'Name', 'Description', 'Group', 'Code', '']
 export const userHeads = ['ID', 'Email', 'Username', 'Role', 'Company', '']
 

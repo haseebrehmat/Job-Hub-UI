@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { toast } from 'react-hot-toast'
-
+import CustomSelector from '@components/CustomSelector'
 import { Button, Checkbox, Drawer, Input } from '@components'
 import { saveCompany } from '@modules/userManagement/api'
 
@@ -28,10 +28,26 @@ const IntegrationForm = ({ show, setShow, mutate, company }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{company?.id ? 'Edit' : 'Add'} Integration</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Select Company*</span>
-                    <Input name='comapny' value={values.name} onChange={handleChange} ph='company' />
+                    {company?.id ? (
+                        <></>
+                    ) : (
+                        <>
+                            <span className='text-xs font-semibold'>Select Company*</span>
+                            <CustomSelector
+                                options={[{ label: 'a1213', value: 'ali' }]}
+                                // handleChange={setTechStack}
+                                // selectorValue={techStackSelector}
+                                placeholder='Company'
+                            />
+                        </>
+                    )}
                     <span className='text-xs font-semibold'>Select Integration*</span>
-                    <Input name='comapny' value={values.name} onChange={handleChange} ph='company' />
+                    <CustomSelector
+                        options={[{ label: 'a1213', value: 'ali' }]}
+                        // handleChange={setTechStack}
+                        // selectorValue={techStackSelector}
+                        placeholder='Integration'
+                    />
                     <span className='text-xs font-semibold'>Api Key*</span>
                     <Input name='Api Key' onChange={handleChange} ph='Api Key' />
                     <div className='pt-3 flex flex-col'>

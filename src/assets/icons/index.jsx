@@ -36,7 +36,8 @@ import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
 import { RiUserSettingsLine } from 'react-icons/ri'
-import { Integrations } from '@svgs'
+import { Integrations, Filters} from '@svgs'
+
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -70,7 +71,7 @@ export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='#048C8C' />
 export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='#048C8C' />
 export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C' />
 export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
-export const FilterIcon = <HiOutlineFilter fontSize='1.5em' color='#048C8C' />
+export const FilterIcon = <Filters />
 export const ResetIcon = <FiRefreshCw fontSize='1.5em' color='#048C8C' />
 export const JobsUploaderIcon = <BsCloudUpload style={{ fontSize: '22px' }} />
 export const TeamAppliedJobsIcon = <BsCollectionFill style={{ fontSize: '22px' }} />
@@ -82,3 +83,4 @@ export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
 export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
 export const TrashIcon = <FaRegTrashAlt style={{ fontSize: '16px' }} />
 export const IntegrationIcon = <Integrations />
+

@@ -6,11 +6,12 @@ import Prospects from '@svgs/prospects.svg'
 import Hot from '@svgs/hot.svg'
 import Warm from '@svgs/warm.svg'
 import Total from '@svgs/total.svg'
-import Filters from '@svgs/filters.svg'
+import FiltersSVG from '@svgs/filters.svg'
 import IntegrationsSVG from '@svgs/integrations.svg'
 
 export { OctagonLogo, OctagonSmallIcon } from '@svgs/svg-icons'
 
-const Integrations = memo(() => <img src={IntegrationsSVG} alt='I' />)
+const Integrations = () => <img src={IntegrationsSVG} alt='I' />
+const Filters = () => <img src={FiltersSVG} alt='I' />
 
 export { Cold, Hired, Rejected, Prospects, Hot, Warm, Total, Filters, Integrations }

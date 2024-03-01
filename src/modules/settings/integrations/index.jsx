@@ -1,36 +1,45 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Badge, Searchbox, EmptyTable, Filters, Button } from '@components'
+import { Loading, Badge, Searchbox, EmptyTable, Button } from '@components'
 
-import { IntegrationForm } from '@modules/settings/components'
+import { IntegrationForm, FilterForm } from '@modules/settings/components'
 import { fetchIntegrations } from '@modules/settings/api'
 
 import { integrations_head, apiStatus } from '@constants/settings'
-
-import { CreateIcon, ActionsIcons } from '@icons'
+import { CreateIcon, ActionsIcons, FilterIcon } from '@icons'
 
 const Integrations = () => {
     const [query, setQuery] = useState()
     const [company, setCompany] = useState()
-    const [show, setShow] = useState(false)
+    const [mutateShow, setMutateShow] = useState(false)
+    const [filterShow, setFilterShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR('/api/auth/integration/', fetchIntegrations)
     console.log(data)
-    const handleClick = ({ name, status, id }) => {
+    const handleMutate = ({ name, status, id }) => {
         setCompany({ name, status, id })
-        setShow(!show)
+        setMutateShow(!mutateShow)
+    }
+    const handleFilter = ({ name, status, id }) => {
+        // setCompany({ name, status, id })
+        setFilterShow(!filterShow)
     }
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
-                <Filters />
+                <Button
+                    label='Filter'
+                    fit
+                    icon={FilterIcon}
+                    onClick={() => handleFilter({ name: '', status: true, user: '' })}
+                />
                 <Button
                     label='Add Integration'
                     fit
                     icon={CreateIcon}
-                    onClick={() => handleClick({ name: '', status: true, user: '' })}
+                    onClick={() => handleMutate({ name: '', status: true, user: '' })}
                 />
             </div>
             <table className='table-auto w-full  text-sm text-left text-[#048C8C] '>
@@ -56,7 +65,7 @@ const Integrations = () => {
                                         type={comp?.status ? 'enabled' : 'disabled'}
                                     />
                                 </td>
-                                <td className='px-3 py-6 float-right' onClick={() => handleClick(comp)}>
+                                <td className='px-3 py-6 float-right' onClick={() => handleMutate(comp)}>
                                     {ActionsIcons}
                                 </td>
                             </tr>
@@ -66,7 +75,10 @@ const Integrations = () => {
                     )}
                 </tbody>
             </table>
-            {show && <IntegrationForm show={show} setShow={setShow} mutate={mutate} company={company} />}
+            {mutateShow && (
+                <IntegrationForm show={mutateShow} setShow={setMutateShow} mutate={mutate} company={company} />
+            )}
+            {filterShow && <FilterForm show={filterShow} setShow={setFilterShow} mutate={mutate} company={company} />}
         </div>
     )
 }
