@@ -99,7 +99,7 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
                     value={selectedOptions}
                     onChange={handleSelect}
                     isSearchable
-                    isMulti
+                    isMulti={isMulti}
                     hideSelectedOptions={false}
                     styles={styles}
                     backgroundColor='transparent'
