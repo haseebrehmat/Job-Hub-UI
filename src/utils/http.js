@@ -55,4 +55,4 @@ const teamAppliedJobsHttp = axios.create({
     },
 })
 
-export { http, rawHttp, scrapperHttp, teamAppliedJobsHttp }
+export { http, rawHttp, baseURL, scrapperHttp, teamAppliedJobsHttp }

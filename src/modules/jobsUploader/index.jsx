@@ -4,13 +4,15 @@ import { FileUploader } from 'react-drag-drop-files'
 import ClipLoader from 'react-spinners/ClipLoader'
 import toast from 'react-hot-toast'
 
+import { baseURL } from '@utils/http'
+
 const JobsUploader = memo(() => {
-    const apiUrl = import.meta.env.VITE_SCRAPPER_API_URL
+    console.log(baseURL)
     const fileTypes = ['csv', 'xlsx']
     const [files, setFiles] = useState(null)
     const [disableBtn, setDisableBtn] = useState(true)
     const [spinnerFlag, setSpinnerFlag] = useState(false)
-    const upload_job_url = `${apiUrl}api/job_portal/upload_data/`
+    const upload_job_url = `${baseURL}api/job_portal/upload_data/`
 
     const handleChange = upload_files => {
         setDisableBtn(false)
