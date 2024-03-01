@@ -38,3 +38,8 @@ export const userSchema = Yup.object().shape({
     company: Yup.string().required('Company is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
 })
+
+export const integrationSchema = Yup.object().shape({
+    company: Yup.string().required('Company is required'),
+    Api_Key: Yup.string().required('Api key is required'),
+})

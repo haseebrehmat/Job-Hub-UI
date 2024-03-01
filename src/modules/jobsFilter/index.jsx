@@ -8,7 +8,8 @@ import CustomSelector from '../../components/CustomSelector'
 import { baseURL } from '@utils/http'
 
 const JobsFilter = memo(() => {
-    const apiUrl = `${baseURL}api/job_portal/`
+    const apiUrl = `${import.meta.env.VITE_DEV_API_URL}api/job_portal/`
+    // const apiUrl = `http://54.215.158.128/api/job_portal/`
     const { role } = jwt_decode(localStorage.getItem('token'))
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])

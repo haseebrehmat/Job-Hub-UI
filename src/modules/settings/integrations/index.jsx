@@ -3,10 +3,10 @@ import useSWR from 'swr'
 
 import { Loading, Badge, Searchbox, EmptyTable, Filters, Button } from '@components'
 
-import { CompanyForm } from '@modules/userManagement/components'
-import { fetchCompanies } from '@modules/userManagement/api'
+import { IntegrationForm } from '@modules/settings/components'
+import { fetchIntegrations } from '@modules/settings/api'
 
-import { comapnyHeads, comapnyStatus } from '@constants/userManagement'
+import { integrations_head, apiStatus } from '@constants/settings'
 
 import { CreateIcon, ActionsIcons } from '@icons'
 
@@ -14,7 +14,7 @@ const Integrations = () => {
     const [query, setQuery] = useState()
     const [company, setCompany] = useState()
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/integration/', fetchCompanies)
+    const { data, error, isLoading, mutate } = useSWR('/api/auth/integration/', fetchIntegrations)
     console.log(data)
     const handleClick = ({ name, status, id }) => {
         setCompany({ name, status, id })
@@ -36,7 +36,7 @@ const Integrations = () => {
             <table className='table-auto w-full  text-sm text-left text-[#048C8C] '>
                 <thead className='text-xs uppercase border border-[#048C8C] '>
                     <tr>
-                        {comapnyHeads.map(heading => (
+                        {integrations_head.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -44,15 +44,15 @@ const Integrations = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.companies?.length > 0 && !error ? (
-                        data.results.map((comp, idx) => (
+                    {data?.integrations?.length > 0 && !error ? (
+                        data.integrations.map((comp, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{comp.company?.name}</td>
                                 <td className='px-3 py-6'>{comp?.api_key}</td>
                                 <td className='px-1 py-6'>
                                     <Badge
-                                        label={comapnyStatus[comp?.status ? 0 : 1]}
+                                        label={apiStatus[comp?.status ? 0 : 1]}
                                         type={comp?.status ? 'enabled' : 'disabled'}
                                     />
                                 </td>
@@ -62,11 +62,11 @@ const Integrations = () => {
                             </tr>
                         ))
                     ) : (
-                        <EmptyTable cols={6} msg='No companies found yet!' />
+                        <EmptyTable cols={6} msg='No company intigrations found yet!' />
                     )}
                 </tbody>
             </table>
-            {show && <CompanyForm show={show} setShow={setShow} mutate={mutate} company={company} />}
+            {show && <IntegrationForm show={show} setShow={setShow} mutate={mutate} company={company} />}
         </div>
     )
 }
