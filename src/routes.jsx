@@ -4,6 +4,7 @@ import {
     AppliedJobs,
     Login,
     TeamAppliedJobs,
+    JobSourceBlocking,
     JobsFilter,
     JobsUploader,
     ForgetPassword,
@@ -54,6 +55,12 @@ export const routes = [
         component: <Companies />,
         protect: true,
         title: 'Companies Management',
+    },
+    {
+        path: '/job-source-blocking',
+        component: <JobSourceBlocking />,
+        protect: true,
+        title: 'Job Source Blocking',
     },
     {
         path: '/roles',

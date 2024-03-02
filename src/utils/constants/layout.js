@@ -93,6 +93,12 @@ export const menuItems = [
                 perms: ['view_company', 'create_company', 'update_company'],
             },
             {
+                label: 'Job Source Blocking',
+                link: '/job-source-blocking',
+                svg: CompaniesIcon,
+                perms: ['view_company', 'create_company', 'update_company'],
+            },
+            {
                 label: 'Roles',
                 link: '/roles',
                 svg: RolesIcon,

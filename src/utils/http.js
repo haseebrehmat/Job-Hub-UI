@@ -10,6 +10,11 @@ const http = axios.create({
     headers: { Accept: 'application/json' },
 })
 
+// const localHttp = axios.create({
+//     baseURL,
+//     headers: { Accept: 'application/json' },
+// })
+
 const rawHttp = axios.create({
     baseURL,
     headers: { Accept: 'application/json' },

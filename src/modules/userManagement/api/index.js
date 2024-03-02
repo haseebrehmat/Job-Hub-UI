@@ -2,6 +2,14 @@ import { http, rawHttp } from '@utils/http'
 import { toast } from 'react-hot-toast'
 
 export const fetchCompanies = url => http.get(url).then(({ data }) => ({ companies: data, status: 'success' }))
+export const fetchBlacklistCompanies = url =>
+    http
+        .get(url, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
+            },
+        })
+        .then(({ data }) => ({ companies: data, status: 'success' }))
 
 export const saveCompany = (url, { arg: company }) => {
     if (company?.id) {
