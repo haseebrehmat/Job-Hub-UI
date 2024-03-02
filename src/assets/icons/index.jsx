@@ -6,6 +6,7 @@ import {
     MdClear,
     MdOutlineVerifiedUser,
     MdOutlineKeyboardArrowDown,
+    MdWorkOutline,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -81,3 +82,4 @@ export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
 export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
 export const TrashIcon = <FaRegTrashAlt style={{ fontSize: '16px' }} />
 export const PermissionIcon = <RiLock2Fill style={{ fontSize: '22px' }} />
+export const UserAppliedJobIcon = <MdWorkOutline style={{ fontSize: '22px' }} />
