@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Select, { components } from 'react-select'
 import './styles.css'
 
+import clearIcon from '@/assets/svgs/re.svg'
+
 const VALUE_LIMIT = 2
 
 const chipStyles = {
@@ -31,7 +33,7 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
 
     const ClearIndicator = props => (
         <div {...props.innerProps}>
-            <img width={32} height={32} src='./src/assets/svgs/re.svg' alt='Clear Indicator' />
+            <img width={32} height={32} src={clearIcon} alt='Clear Indicator' />
         </div>
     )
 

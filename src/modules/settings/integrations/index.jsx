@@ -7,39 +7,43 @@ import { IntegrationForm, FilterForm } from '@modules/settings/components'
 import { fetchIntegrations } from '@modules/settings/api'
 
 import { integrations_head, apiStatus } from '@constants/settings'
-import { CreateIcon, ActionsIcons, FilterIcon } from '@icons'
+import { CreateIcon, ActionsIcons } from '@icons'
+import { Filters } from '@/components'
 
 const Integrations = () => {
     const [query, setQuery] = useState()
-    const [company, setCompany] = useState()
+    const [filters, setfilters] = useState({ companies: [], integrations: [] })
+    const [integration, setIntegration] = useState()
     const [mutateShow, setMutateShow] = useState(false)
     const [filterShow, setFilterShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/integration/', fetchIntegrations)
-    console.log(data)
-    const handleMutate = ({ name, status, id }) => {
-        setCompany({ name, status, id })
+    const seletedCompanies = filters.companies.map(r => r.value).toString()
+    const seletedIntegrations = filters.integrations.map(r => r.value).toString()
+    const { data, error, isLoading, mutate } = useSWR(
+        `/api/auth/integration/?companies=${seletedCompanies}&integrations=${seletedIntegrations}`,
+        fetchIntegrations
+    )
+    const handleMutate = ({ name, status, company, api_key, id }) => {
+        setIntegration({ name, status, company, api_key, id })
         setMutateShow(!mutateShow)
     }
-    const handleFilter = ({ name, status, id }) => {
-        // setCompany({ name, status, id })
+    const handleFilter = () => {
         setFilterShow(!filterShow)
     }
     if (isLoading) return <Loading />
+
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
                 <Button
-                    label='Filter'
-                    fit
-                    icon={FilterIcon}
-                    onClick={() => handleFilter({ name: '', status: true, user: '' })}
-                />
-                <Button
                     label='Add Integration'
                     fit
                     icon={CreateIcon}
-                    onClick={() => handleMutate({ name: '', status: true, user: '' })}
+                    onClick={() => handleMutate({ name: '', status: true, company: '', api_key: '' })}
+                />
+                <Filters
+                    apply={() => handleFilter({ name: '', status: true, user: '' })}
+                    clear={() => mutate(`/api/auth/integration/?companies=&integrations=`)}
                 />
             </div>
             <table className='table-auto w-full  text-sm text-left text-[#048C8C] '>
@@ -58,7 +62,7 @@ const Integrations = () => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{comp.company?.name}</td>
-                                <td className='px-3 py-6'>{comp?.api_key}</td>
+                                <td className='px-3 py-6'>{comp?.name}</td>
                                 <td className='px-1 py-6'>
                                     <Badge
                                         label={apiStatus[comp?.status ? 0 : 1]}
@@ -71,14 +75,22 @@ const Integrations = () => {
                             </tr>
                         ))
                     ) : (
-                        <EmptyTable cols={6} msg='No company intigrations found yet!' />
+                        <EmptyTable cols={6} msg='No company integrations found yet!' />
                     )}
                 </tbody>
             </table>
             {mutateShow && (
-                <IntegrationForm show={mutateShow} setShow={setMutateShow} mutate={mutate} company={company} />
+                <IntegrationForm
+                    show={mutateShow}
+                    setShow={setMutateShow}
+                    mutate={mutate}
+                    integration={integration}
+                    data={data}
+                />
             )}
-            {filterShow && <FilterForm show={filterShow} setShow={setFilterShow} mutate={mutate} company={company} />}
+            {filterShow && (
+                <FilterForm show={filterShow} setShow={setFilterShow} filters={filters} setfilters={setfilters} />
+            )}
         </div>
     )
 }
