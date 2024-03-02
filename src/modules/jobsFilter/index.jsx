@@ -109,8 +109,6 @@ const JobsFilter = memo(() => {
         const job_source = jobSourceSelector !== 'all' ? jobSourceSelector : ''
         const job_type = jobTypeSelector !== 'all' ? jobTypeSelector : ''
         const techStackValues = techStackSelector.map(obj => obj.value).join(',')
-        // console.log(techStackSelector)
-        // console.log(techStackSelector)
         setJobsFilterParams({
             ...jobsFilterParams,
             tech_keywords: techStackValues,
@@ -168,7 +166,7 @@ const JobsFilter = memo(() => {
         options_arr.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
     return (
-        <div className='my-2'>
+        <div className='my-2 h-screen'>
             <h3 className='text-center py-2 pl-4 text-[#006366] font-bold text-lg'>Jobs Portal</h3>
             <div className='p-3 border'>
                 <div className='flex'>
@@ -244,7 +242,7 @@ const JobsFilter = memo(() => {
                         <select
                             value={ordering}
                             onChange={e => setOrdering(e.target.value)}
-                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
                             <option value='job_posted_date'>Posted Date</option>
                             <option value='job_title'>Job Title</option>
@@ -258,7 +256,7 @@ const JobsFilter = memo(() => {
                         <select
                             value={sortBy}
                             onChange={e => setSortBy(e.target.value)}
-                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
                             <option value='asc'>Ascending</option>
                             <option value='desc'>Descending</option>
@@ -307,7 +305,14 @@ const JobsFilter = memo(() => {
                                 <td className='text-start p-2 rounded text-sm shadow-sm'>{item.job_title}</td>
                                 <td className='d-sm-table-cell d-none text-start'>{item.company_name}</td>
                                 <td>
-                                    <a href={item.job_source_url}>{item.job_source}</a>
+                                    <a
+                                        className='underline'
+                                        target='_blank'
+                                        rel='noreferrer'
+                                        href={item.job_source_url}
+                                    >
+                                        {item.job_source}
+                                    </a>
                                 </td>
                                 <td>{item.tech_keywords}</td>
                                 <td>{item.job_type}</td>
@@ -346,7 +351,7 @@ const JobsFilter = memo(() => {
                     previousLabel='Previous'
                     renderOnZeroPageCount={null}
                     containerClassName='flex justify-center my-2'
-                    pageLinkClassName='bg-white border-gray-300 text-gray-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
+                    pageLinkClassName='bg-white border-gray-300 text-white-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
                     previousClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
                     nextClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
                     breakLinkClassName='bg-white border-gray-300 text-gray-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'

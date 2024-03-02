@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import {
     AppliedJobs,
     Login,
-    Jobs,
+    TeamAppliedJobs,
     JobsFilter,
     JobsUploader,
     ForgetPassword,
@@ -30,8 +30,8 @@ export const routes = [
         title: 'Applied Jobs',
     },
     {
-        path: '/jobs',
-        component: <Jobs />,
+        path: '/team-applied-jobs',
+        component: <TeamAppliedJobs />,
         protect: true,
         title: 'Team Appllied Jobs',
     },

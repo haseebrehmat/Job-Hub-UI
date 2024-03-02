@@ -34,7 +34,7 @@ export const menuItems = [
             },
             {
                 label: 'Team Applied Jobs',
-                link: '/jobs',
+                link: '/team-applied-jobs',
                 svg: TeamAppliedJobsIcon,
             },
             {
