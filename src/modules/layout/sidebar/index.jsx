@@ -28,6 +28,7 @@ const SideBar = ({ toggle, setToggle }) => {
                         <img src={smallLogo} alt='' width='25' height='25' />
                     )}
                 </span>
+
                 <span className='block lg:hidden'>
                     <img src={smallLogo} alt='' width='25' height='25' />
                 </span>

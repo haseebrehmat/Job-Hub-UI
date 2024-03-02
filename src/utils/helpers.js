@@ -48,7 +48,7 @@ export const timeSince = date => {
                     if (interval >= 1) {
                         intervalType = 'minute'
                     } else {
-                        interval = seconds
+                        interval = seconds + 1
                         intervalType = 'second'
                     }
                 }

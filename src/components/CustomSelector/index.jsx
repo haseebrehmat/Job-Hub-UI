@@ -89,22 +89,23 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
     }, [selectorValue])
 
     return (
-        <div className='app'>
-            <div className='dropdown-container'>
-                <Select
-                    components={{ ClearIndicator, MultiValue }}
-                    options={options}
-                    maxMenuHeight={200}
-                    placeholder={placeholder}
-                    value={selectedOptions}
-                    onChange={handleSelect}
-                    isSearchable
-                    isMulti={isMulti}
-                    hideSelectedOptions={false}
-                    styles={styles}
-                    backgroundColor='transparent'
-                />
-            </div>
+        <div className='dropdown-container'>
+            <Select
+                components={{ ClearIndicator, MultiValue }}
+                options={options}
+                maxMenuHeight={200}
+                placeholder={placeholder}
+                value={selectedOptions}
+                onChange={handleSelect}
+                isSearchable
+                isMulti={isMulti}
+                hideSelectedOptions={false}
+                styles={styles}
+                backgroundColor='transparent'
+                className='single-select'
+                classNamePrefix='react-select'
+                menuPlacement='auto'
+            />
         </div>
     )
 }
