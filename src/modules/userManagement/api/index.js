@@ -42,3 +42,5 @@ export const saveUser = (url, { arg: user }) => {
     }
     return rawHttp.post(url, user).then(({ data }) => toast.success(data.detail))
 }
+
+export const fetchPermissions = url => http.get(url).then(({ data }) => ({ permissions: data, status: 'success' }))

@@ -41,7 +41,7 @@ export const routes = [
         path: '/jobs-portal',
         component: <JobsFilter />,
         protect: true,
-        title: 'Jobs Portal',
+        title: 'Jobs Detail',
     },
     {
         path: '/jobs-uploader',

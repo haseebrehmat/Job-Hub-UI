@@ -25,7 +25,7 @@ export const menuItems = [
         key: 'jobs',
         perms: [
             'view_applied_job',
-            'view_job_portal',
+            'view_jobdetail',
             'view_job_uploader',
             'view_team_applied_job',
             'update_job_status',
@@ -56,10 +56,10 @@ export const menuItems = [
                 perms: ['view_team_applied_job', 'update_job_status'],
             },
             {
-                label: 'Jobs Portal',
+                label: 'Jobs Detail',
                 link: '/jobs-portal',
                 svg: Jobs,
-                perms: ['view_job_portal', 'update_job_status'],
+                perms: ['view_jobdetail', 'update_job_status'],
             },
         ],
     },

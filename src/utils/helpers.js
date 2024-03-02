@@ -115,3 +115,5 @@ export const can = permissionKey => {
     }
     return perms.includes(permissionKey)
 }
+
+export const transformPascal = str => str.replace(/([a-z])([A-Z])/g, '$1 $2')
