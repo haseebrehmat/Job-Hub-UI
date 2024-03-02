@@ -9,10 +9,10 @@ import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/compo
 import { tableHeads, jobStatus } from '@constants/appliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
 
-const AppliedJobs = memo(() => {
+const AppliedJobs = memo(({ userId = '' }) => {
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
-    const { data, error, isLoading } = useSWR([page, query], () => fetchAppliedJobs(page, query))
+    const { data, error, isLoading } = useSWR([page, query, userId], () => fetchAppliedJobs(page, query, userId))
 
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
     if (isLoading) return <Loading />

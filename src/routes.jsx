@@ -13,8 +13,10 @@ import {
     Users,
 } from '@modules'
 
-import { getToken } from '@utils/helpers'
+import { getToken, decodeJwt } from '@utils/helpers'
 import App from './App'
+
+const { user_id } = decodeJwt()
 
 export const routes = [
     {
@@ -39,7 +41,7 @@ export const routes = [
         path: '/jobs-portal',
         component: <JobsFilter />,
         protect: true,
-        title: 'Jobs Portal',
+        title: 'Jobs Detail',
     },
     {
         path: '/jobs-uploader',
@@ -64,6 +66,12 @@ export const routes = [
         component: <Users />,
         protect: true,
         title: 'Users Management',
+    },
+    {
+        path: '/user-applied-jobs',
+        component: <AppliedJobs userId={user_id} />,
+        protect: true,
+        title: 'My Applied Jobs',
     },
 ]
 

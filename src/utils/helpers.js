@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode'
+import { permissions } from '@constants/permissions'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
 
@@ -20,6 +21,8 @@ export const getBaseUrl = nodeEnv => {
             return import.meta.env.VITE_PROD_API_URL
         case 'stage':
             return import.meta.env.VITE_STAGE_API_URL
+        case 'local':
+            return import.meta.env.VITE_LOCAL_API_URL
         default:
             return import.meta.env.VITE_DEV_API_URL
     }
@@ -103,3 +106,14 @@ export const parseSelectedGroup = (id, groups) => {
     }
     return null
 }
+
+export const can = permissionKey => {
+    const user = decodeJwt()
+    const perms = user?.permissionss || permissions
+    if (Array.isArray(permissionKey)) {
+        return permissionKey.some(key => perms.includes(key))
+    }
+    return perms.includes(permissionKey)
+}
+
+export const transformPascal = str => str.replace(/([a-z])([A-Z])/g, '$1 $2')
