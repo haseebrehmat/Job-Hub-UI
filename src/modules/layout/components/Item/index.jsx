@@ -7,7 +7,6 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
     const handleSubMenu = key => setSubMenu({ ...subMenu, [key]: !subMenu[key] })
     const handleHover = key => setSubMenu({ ...subMenu, [key]: true })
     const location = useLocation()
-    console.log(location.pathname)
 
     return (
         <>

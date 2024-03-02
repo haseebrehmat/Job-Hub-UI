@@ -31,12 +31,12 @@ export const menuItems = [
             'update_job_status',
         ],
         subItems: [
-            {
-                label: 'Applied Jobs',
-                link: '/applied-jobs',
-                svg: ReportIcon,
-                perms: ['view_applied_job'],
-            },
+            // {
+            //     label: 'Applied Jobs',
+            //     link: '/applied-jobs',
+            //     svg: ReportIcon,
+            //     perms: ['view_applied_job'],
+            // },
             {
                 label: 'My Applied Jobs',
                 link: '/user-applied-jobs',
@@ -49,12 +49,12 @@ export const menuItems = [
                 svg: JobsUploaderIcon,
                 perms: ['view_job_uploader'],
             },
-            {
-                label: 'Team Applied Jobs',
-                link: '/team-applied-jobs',
-                svg: TeamAppliedJobsIcon,
-                perms: ['view_team_applied_job', 'update_job_status'],
-            },
+            // {
+            //     label: 'Team Applied Jobs',
+            //     link: '/team-applied-jobs',
+            //     svg: TeamAppliedJobsIcon,
+            //     perms: ['view_team_applied_job', 'update_job_status'],
+            // },
             {
                 label: 'Jobs Detail',
                 link: '/jobs-portal',

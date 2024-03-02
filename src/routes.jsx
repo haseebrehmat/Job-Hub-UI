@@ -25,18 +25,18 @@ export const routes = [
         protect: true,
         title: 'Octagon Dashboard',
     },
-    {
-        path: '/applied-jobs',
-        component: <AppliedJobs />,
-        protect: true,
-        title: 'Applied Jobs',
-    },
-    {
-        path: '/team-applied-jobs',
-        component: <TeamAppliedJobs />,
-        protect: true,
-        title: 'Team Appllied Jobs',
-    },
+    // {
+    //     path: '/applied-jobs',
+    //     component: <AppliedJobs />,
+    //     protect: true,
+    //     title: 'Applied Jobs',
+    // },
+    // {
+    //     path: '/team-applied-jobs',
+    //     component: <TeamAppliedJobs />,
+    //     protect: true,
+    //     title: 'Team Appllied Jobs',
+    // },
     {
         path: '/jobs-portal',
         component: <JobsFilter />,

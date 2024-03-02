@@ -17,7 +17,6 @@ const Permissions = ({ permissions, setPermissions }) => {
         setPermissions(updatedPermissions)
     }
     if (isLoading) return <div>Loading permissions....</div>
-    console.log(data)
 
     return (
         <div className='max-w-full overflow-x-auto'>

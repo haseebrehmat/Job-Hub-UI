@@ -52,7 +52,6 @@ const JobsFilter = memo(() => {
         }
 
         url = params_count > 0 ? `${url}?${params.toString()}` : url
-        console.log(url)
         setData([])
         fetch(url, {
             headers: {

@@ -20,10 +20,8 @@ export const fetchFixRoles = url => http.get(url).then(({ data }) => ({ fixedRol
 
 export const saveRole = (url, { arg: role }) => {
     if (role?.id) {
-        console.log(role)
         // return rawHttp.put(url, role).then(({ data }) => toast.success(data.detail || 'Role updated successfully'))
     }
-    console.log(role)
     // return rawHttp.post(url, role).then(({ data }) => toast.success(data.detail))
 }
 
