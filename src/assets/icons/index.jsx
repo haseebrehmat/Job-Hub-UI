@@ -21,6 +21,7 @@ import {
 import { HiUser, HiUsers, HiOutlineFilter, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
+import { TbRefresh } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
 import {
     AiOutlineSearch,
@@ -36,8 +37,7 @@ import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
 import { RiUserSettingsLine } from 'react-icons/ri'
-import { Integrations, Filters} from '@svgs'
-
+import { Integrations, Filters, ResetFilters} from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -48,6 +48,7 @@ export const UsersIcon = <HiUsers style={{ fontSize: '22px' }} />
 export const RoleIcon = <HiUser style={{ fontSize: '22px' }} />
 export const NewUserIcon = <HiUserPlus style={{ fontSize: '22px' }} />
 export const SettingIcon = <IoMdSettings style={{ fontSize: '20px' }} />
+export const ResetFilterIcon = <TbRefresh style={{ fontSize: '20px' }} />
 export const NotificationIcon = <MdNotifications style={{ fontSize: '20px' }} />
 export const SecurityIcon = <BsShieldShaded style={{ fontSize: '18px' }} />
 export const PaginateNext = <BsArrowRightCircle style={{ fontSize: '18px' }} />
@@ -83,4 +84,4 @@ export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
 export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
 export const TrashIcon = <FaRegTrashAlt style={{ fontSize: '16px' }} />
 export const IntegrationIcon = <Integrations />
-
+export const ResetFiltersSvg = <ResetFilters />

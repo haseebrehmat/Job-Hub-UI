@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Select, { components } from 'react-select'
-import './styles.css'
 
-import clearIcon from '@/assets/svgs/re.svg'
+import './styles.css'
+import { ResetFilters } from '@svgs'
 
 const VALUE_LIMIT = 2
 
@@ -20,7 +20,6 @@ const chipStyles = {
 const MultiValue = props => {
     const { index, getValue } = props
     const hiddenLength = getValue().length - VALUE_LIMIT
-
     return index < VALUE_LIMIT ? (
         <components.MultiValue {...props} />
     ) : index === VALUE_LIMIT ? (
@@ -33,7 +32,8 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
 
     const ClearIndicator = props => (
         <div {...props.innerProps}>
-            <img width={32} height={32} src={clearIcon} alt='Clear Indicator' />
+            <ResetFilters />
+            {/* <img width={32} height={32} src={ResetIcon} alt='Clear Indicator' /> */}
         </div>
     )
 

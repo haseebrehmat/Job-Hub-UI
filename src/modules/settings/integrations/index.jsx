@@ -35,15 +35,15 @@ const Integrations = () => {
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
+                <Filters
+                    apply={() => handleFilter({ name: '', status: true, user: '' })}
+                    clear={() => setfilters({ companies: [], integrations: [] })}
+                />
                 <Button
                     label='Add Integration'
                     fit
                     icon={CreateIcon}
                     onClick={() => handleMutate({ name: '', status: true, company: '', api_key: '' })}
-                />
-                <Filters
-                    apply={() => handleFilter({ name: '', status: true, user: '' })}
-                    clear={() => mutate(`/api/auth/integration/?companies=&integrations=`)}
                 />
             </div>
             <table className='table-auto w-full  text-sm text-left text-[#048C8C] '>
