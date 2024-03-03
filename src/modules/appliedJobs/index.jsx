@@ -44,9 +44,12 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                     <div>{formatDate(job.applied_date)}</div>
                                 </td>
                                 <td className='px-3 py-4'>{job.company_name}</td>
-                                <td className='px-3 py-4'>{job.job_title}</td>
+                                <td className='px-3 py-4 cursor-pointer underline'>
+                                    <a href={job.job_source_url} target='_blank' rel='noopener noreferrer'>
+                                        {job.job_title}
+                                    </a>
+                                </td>
                                 <td className='px-3 py-4'>{job.job_source}</td>
-                                <td className='px-3 py-4'>Me</td>
                                 <td className='w-28 py-4'>
                                     <Badge label={jobStatus[job.job_status]} type='success' />
                                 </td>
@@ -54,7 +57,6 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                 <td className='px-3 py-4'>
                                     <Badge label={job.tech_keywords} />
                                 </td>
-                                <td className='px-3 py-4'>$100</td>
                             </tr>
                         ))
                     ) : (
