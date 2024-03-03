@@ -10,7 +10,7 @@ import { integrationNames } from '@/utils/constants/settings'
 
 const FilterForm = ({ show, setShow, filters, setfilters }) => {
     const [values, setValues] = useState(filters)
-    const { data, isLoading } = useSWR('/api/auth/company/', fetchCompanies)
+    const { data, isLoading, error: companyError } = useSWR('/api/auth/company/', fetchCompanies)
 
     const handleChange = (type, obj) => setValues(preFilters => ({ ...preFilters, [type]: obj }))
 
@@ -19,23 +19,27 @@ const FilterForm = ({ show, setShow, filters, setfilters }) => {
         setShow(!show)
     }
 
+    const renderCompanies = isLoading ? (
+        <div>Loading companies....</div>
+    ) : companyError ? (
+        <div className='text-red-500 text-xs'>Failed to fetch companies</div>
+    ) : (
+        <CustomSelector
+            options={parseComapnies(data?.companies)}
+            handleChange={obj => handleChange('companies', obj)}
+            selectorValue={values.companies}
+            isMulti
+            placeholder='Company'
+        />
+    )
+
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <div className='grid grid-flow-row gap-2'>
                 <p className='font-medium text-xl'>Filters</p>
                 <hr className='mb-2' />
                 <span className='text-xs font-semibold'>Select Company*</span>
-                {isLoading ? (
-                    <span>Fecthing Companies......</span>
-                ) : (
-                    <CustomSelector
-                        options={parseComapnies(data?.companies)}
-                        handleChange={obj => handleChange('companies', obj)}
-                        selectorValue={values.companies}
-                        isMulti
-                        placeholder='Company'
-                    />
-                )}
+                {renderCompanies}
                 <span className='text-xs font-semibold'>Select Integration*</span>
                 <CustomSelector
                     options={integrationNames}

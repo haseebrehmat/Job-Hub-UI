@@ -33,7 +33,6 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
     const ClearIndicator = props => (
         <div {...props.innerProps}>
             <ResetFilters />
-            {/* <img width={32} height={32} src={ResetIcon} alt='Clear Indicator' /> */}
         </div>
     )
 

@@ -11,7 +11,7 @@ import { integrationSchema } from '@utils/schemas'
 import { integrationNames } from '@utils/constants/settings'
 
 const IntegrationForm = ({ show, setShow, mutate, integration }) => {
-    const { data, isLoading } = useSWR('/api/auth/company/', fetchCompanies)
+    const { data, isLoading, error: companyError } = useSWR('/api/auth/company/', fetchCompanies)
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/integration${integration?.id ? `/${integration?.id}/` : '/'}`,
         saveIntegration,
@@ -27,6 +27,19 @@ const IntegrationForm = ({ show, setShow, mutate, integration }) => {
         () => (errors ? mutate('/api/auth/integration/') : resetForm())
     )
 
+    const renderCompanies = isLoading ? (
+        <div>Loading companies....</div>
+    ) : companyError ? (
+        <div className='text-red-500 text-xs'>Failed to fetch companies</div>
+    ) : (
+        <CustomSelector
+            options={parseComapnies(data?.companies)}
+            handleChange={({ value }) => setFieldValue('company', value)}
+            selectorValue={parseSelectedCompany(values.company, data?.companies)}
+            placeholder='Select Company'
+        />
+    )
+
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
@@ -34,16 +47,7 @@ const IntegrationForm = ({ show, setShow, mutate, integration }) => {
                     <p className='font-medium text-xl'>{integration?.id ? 'Edit' : 'Add'} Integration</p>
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Select Company*</span>
-                    {isLoading ? (
-                        <div>Companies fetching....</div>
-                    ) : (
-                        <CustomSelector
-                            options={parseComapnies(data?.companies)}
-                            handleChange={({ value }) => setFieldValue('company', value)}
-                            selectorValue={parseSelectedCompany(values.company, data?.companies)}
-                            placeholder='Select Company'
-                        />
-                    )}
+                    {renderCompanies}
                     {errors.company && <small className='ml-1 text-xs text-red-600'>{errors.company}</small>}
                     <span className='text-xs font-semibold'>Select Integration*</span>
                     <CustomSelector
