@@ -303,61 +303,63 @@ const JobsFilter = memo(() => {
                 </div>
             </div>
 
-            <table className='border text-center border-slate-400 table-auto w-full border-collapse my-2 text-lg'>
-                <thead className='bg-slate-50 dark:bg-slate-700'>
-                    <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold text-slate-900 dark:text-slate-200'>
-                        <th className='p-2 text-start'>Job Title</th>
-                        <th className='d-sm-table-cell text-start d-none '>Company</th>
-                        <th className=''> Job Source</th>
-                        <th>Tech Stack</th>
-                        <th>Job Type</th>
-                        <th>Date Posted</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.length > 0 &&
-                        data.map((item, key) => (
-                            <tr
-                                className='border border-slate-300 dark:border-slate-700  text-slate-500 dark:text-slate-400'
-                                key={key}
-                            >
-                                <td className='text-start p-2 rounded shadow-sm whitespace-normal w-[30%]	'>
-                                    {item.job_title}
-                                </td>
-                                <td className='text-start d-sm-table-cell d-none whitespace-normal w-[150px]'>
-                                    {item.company_name}
-                                </td>
-                                <td className='text-center'>
-                                    <a
-                                        className='underline'
-                                        target='_blank'
-                                        rel='noreferrer'
-                                        href={item.job_source_url}
-                                    >
-                                        {item.job_source}
-                                    </a>
-                                </td>
-                                <td>{item.tech_keywords}</td>
-                                <td>{item.job_type}</td>
-                                <td>{item.job_posted_date.slice(0, 10)}</td>
-                                <td className='flex justify-center'>
-                                    {item.job_status === 0 ? (
-                                        <button
-                                            disabled={role === 'TL'}
-                                            className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
-                                            onClick={() => updateJobStatus(key)}
+            <div className='overflow-x-auto'>
+                <table className='table-auto w-full border-collapse border text-center border-slate-400 my-2'>
+                    <thead className='bg-slate-50 dark:bg-slate-700'>
+                        <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold text-slate-900 dark:text-slate-200'>
+                            <th className='p-2 text-start'>Job Title</th>
+                            <th className='d-sm-table-cell text-start d-none '>Company</th>
+                            <th className=''> Job Source</th>
+                            <th>Tech Stack</th>
+                            <th>Job Type</th>
+                            <th>Date Posted</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody className='text-sm sm:text-base'>
+                        {data.length > 0 &&
+                            data.map((item, key) => (
+                                <tr
+                                    className='border border-slate-300 dark:border-slate-700  text-slate-500 dark:text-slate-400'
+                                    key={key}
+                                >
+                                    <td className='text-start p-2 rounded shadow-sm whitespace-normal w-[30%]	'>
+                                        {item.job_title}
+                                    </td>
+                                    <td className='text-start d-sm-table-cell d-none whitespace-normal w-[150px]'>
+                                        {item.company_name}
+                                    </td>
+                                    <td className='text-center'>
+                                        <a
+                                            className='underline'
+                                            target='_blank'
+                                            rel='noreferrer'
+                                            href={item.job_source_url}
                                         >
-                                            {jobStatusChoice[item.job_status]}
-                                        </button>
-                                    ) : (
-                                        jobStatusChoice[item.job_status]
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
+                                            {item.job_source}
+                                        </a>
+                                    </td>
+                                    <td>{item.tech_keywords}</td>
+                                    <td>{item.job_type}</td>
+                                    <td>{item.job_posted_date.slice(0, 10)}</td>
+                                    <td className='flex justify-center'>
+                                        {item.job_status === 0 ? (
+                                            <button
+                                                disabled={role === 'TL'}
+                                                className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
+                                                onClick={() => updateJobStatus(key)}
+                                            >
+                                                {jobStatusChoice[item.job_status]}
+                                            </button>
+                                        ) : (
+                                            jobStatusChoice[item.job_status]
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </div>
 
             {data.length === 0 && recordFound && (
                 <div className='flex justify-center my-2'>
