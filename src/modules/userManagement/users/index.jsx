@@ -15,8 +15,8 @@ const Users = () => {
     const [user, setUser] = useState()
     const [show, setShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR('/api/auth/user/', fetchUsers)
-    const handleClick = ({ username, role, company, id }) => {
-        setUser({ username, role, company, id })
+    const handleClick = ({ username, email, roles, id }) => {
+        setUser({ username, email, roles, id })
         setShow(!show)
     }
     if (isLoading) return <Loading />
@@ -29,7 +29,7 @@ const Users = () => {
                     label='Create User'
                     fit
                     icon={CreateIcon}
-                    onClick={() => handleClick({ username: '', role: '', company: '' })}
+                    onClick={() => handleClick({ username: '', email: '', roles: '' })}
                 />
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
@@ -49,8 +49,7 @@ const Users = () => {
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.email}</td>
                                 <td className='px-3 py-6'>{row?.username}</td>
-                                <td className='px-3 py-6'>{row?.role?.name || 'not assigned'}</td>
-                                <td className='px-3 py-6'>{row?.company?.name || 'not assigned'}</td>
+                                <td className='px-3 py-6'>{row?.roles?.name || 'not assigned'}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {ActionsIcons}
                                 </td>
