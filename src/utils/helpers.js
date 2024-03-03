@@ -139,3 +139,19 @@ export const can = permissionKey => {
 }
 
 export const transformPascal = str => str.replace(/([a-z])([A-Z])/g, '$1 $2')
+
+export const removeOrAddElementsFromArray = (array, elements) => {
+    const found = elements.filter(element => array.includes(element))
+    if (found.length === elements.length) {
+        elements.forEach(element => {
+            array.splice(array.indexOf(element), 1)
+        })
+    } else {
+        elements.forEach(element => {
+            if (!array.includes(element)) {
+                array.push(element)
+            }
+        })
+    }
+    return array
+}
