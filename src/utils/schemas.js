@@ -25,6 +25,11 @@ export const companySchema = Yup.object().shape({
     status: Yup.boolean().required('Status is required'),
 })
 
+export const integrationFilterSchema = Yup.object().shape({
+    company: Yup.string(),
+    integration: Yup.boolean(),
+})
+
 export const roleSchema = Yup.object().shape({
     name: Yup.string().required('Role name is required'),
 })
@@ -35,4 +40,11 @@ export const userSchema = Yup.object().shape({
     role: Yup.string().required('Role is required'),
     company: Yup.string().required('Company is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
+})
+
+export const integrationSchema = Yup.object().shape({
+    company: Yup.string().required('Please select company'),
+    name: Yup.string().required('Please select integration type'),
+    api_key: Yup.string().required('Api key is required'),
+    status: Yup.boolean().required('Status is required'),
 })

@@ -5,11 +5,12 @@ import Layout from '@modules/layout'
 import AppliedJobs from '@modules/appliedJobs'
 import TeamAppliedJobs from '@modules/teamAppliedJobs'
 import Dashboard from '@modules/dashboard'
-import JobsFilter from '@modules/jobsFilter'
+import JobsFilter from '@/modules/jobsFilter'
 import JobsUploader from '@modules/jobsUploader'
 import Companies from '@modules/userManagement/companies'
 import Roles from '@modules/userManagement/roles'
 import Users from '@modules/userManagement/users'
+import Integrations from '@modules/settings/integrations'
 
 export {
     TeamAppliedJobs,
@@ -24,4 +25,5 @@ export {
     Companies,
     Roles,
     Users,
+    Integrations,
 }

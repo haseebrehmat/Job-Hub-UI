@@ -22,6 +22,7 @@ import {
 import { HiUser, HiUsers, HiOutlineFilter, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
+import { TbRefresh } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
 import {
     AiOutlineSearch,
@@ -37,7 +38,7 @@ import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
 import { RiUserSettingsLine, RiLock2Fill } from 'react-icons/ri'
-import resetIconSVG from '../svgs/re.svg'
+import { Integrations, Filters, ResetFilters} from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
@@ -48,6 +49,7 @@ export const UsersIcon = <HiUsers style={{ fontSize: '22px' }} />
 export const RoleIcon = <HiUser style={{ fontSize: '22px' }} />
 export const NewUserIcon = <HiUserPlus style={{ fontSize: '22px' }} />
 export const SettingIcon = <IoMdSettings style={{ fontSize: '20px' }} />
+export const ResetFilterIcon = <TbRefresh style={{ fontSize: '20px' }} />
 export const NotificationIcon = <MdNotifications style={{ fontSize: '20px' }} />
 export const SecurityIcon = <BsShieldShaded style={{ fontSize: '18px' }} />
 export const PaginateNext = <BsArrowRightCircle style={{ fontSize: '18px' }} />
@@ -71,7 +73,7 @@ export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='#048C8C' />
 export const ColdLeadsIcon = <BsSnow3 fontSize='1.4em' color='#048C8C' />
 export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C' />
 export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
-export const FilterIcon = <HiOutlineFilter fontSize='1.5em' color='#048C8C' />
+export const FilterIcon = <Filters />
 export const ResetIcon = <FiRefreshCw fontSize='1.5em' color='#048C8C' />
 export const JobsUploaderIcon = <BsCloudUpload style={{ fontSize: '22px' }} />
 export const TeamAppliedJobsIcon = <BsCollectionFill style={{ fontSize: '22px' }} />
@@ -82,6 +84,7 @@ export const RolesIcon = <RiUserSettingsLine style={{ fontSize: '22px' }} />
 export const CreateIcon = <BiPlusCircle style={{ fontSize: '22px' }} />
 export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
 export const TrashIcon = <FaRegTrashAlt style={{ fontSize: '16px' }} />
+export const IntegrationIcon = <Integrations />
+export const ResetFiltersSvg = <ResetFilters />
 export const PermissionIcon = <RiLock2Fill style={{ fontSize: '22px' }} />
 export const UserAppliedJobIcon = <MdWorkOutline style={{ fontSize: '22px' }} />
-export const CustomResetIcon = resetIconSVG

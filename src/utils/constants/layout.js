@@ -8,6 +8,8 @@ import {
     UserIcon,
     CompaniesIcon,
     RolesIcon,
+    SettingIcon,
+    IntegrationIcon,
     UserAppliedJobIcon,
 } from '@icons'
 
@@ -100,4 +102,18 @@ export const menuItems = [
             },
         ],
     },
+    {
+        label: 'Settings',
+        link: '#!',
+        svg: SettingIcon,
+        key: 'settings',
+        subItems: [
+            {
+                label: 'Integrations',
+                link: '/integrations',
+                svg: IntegrationIcon,
+            },
+        ],
+    },
+
 ]

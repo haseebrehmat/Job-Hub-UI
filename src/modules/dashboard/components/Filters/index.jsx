@@ -6,9 +6,7 @@ import { Input, Button } from '@components'
 
 import { filtersSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
-
-import { NavbarSearchIcon, ResetIcon } from '@icons'
-import { Filters as FilterSvg } from '@svgs'
+import { NavbarSearchIcon, ResetIcon, FilterIcon } from '@icons'
 import 'react-sliding-pane/dist/react-sliding-pane.css'
 
 const Filters = ({ filters, setFilters }) => {
@@ -41,7 +39,7 @@ const Filters = ({ filters, setFilters }) => {
                     </form>
                 </div>
                 <div className='flex space-x-3'>
-                    <Button label='Filter' fit svg={FilterSvg} onClick={toggleFilters} />
+                    <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
                     <Button fit icon={ResetIcon} onClick={resetFilters} />
                 </div>
             </div>

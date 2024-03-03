@@ -23,6 +23,7 @@ const CompanyForm = ({ show, setShow, mutate, role }) => {
         error => toast.error(getMsg(error)),
         () => (role?.id ? mutate('/api/auth/role_association/') : resetForm())
     )
+    console.log(values)
     return (
         <Drawer show={show} setShow={setShow} w='500px'>
             <form onSubmit={handleSubmit}>

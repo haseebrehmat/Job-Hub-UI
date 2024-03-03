@@ -11,6 +11,7 @@ import {
     Companies,
     Roles,
     Users,
+    Integrations,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -66,6 +67,12 @@ export const routes = [
         component: <Users />,
         protect: true,
         title: 'Users Management',
+    },
+    {
+        path: '/integrations',
+        component: <Integrations />,
+        protect: true,
+        title: 'Integration Management',
     },
     {
         path: '/user-applied-jobs',

@@ -20,7 +20,6 @@ const JobsFilter = memo(() => {
     const [jobTypeSelector, setJobTypeSelector] = useState('all')
     const [stats, setStats] = useState({ total_jobs: 0, filtered_jobs: 0 })
     const [jobStatusChoice, setJobStatusChoice] = useState({})
-    // YYYY-MM-DD
     const [dates, setDates] = useState({ from_date: '', to_date: '' })
     const jobDetailsUrl = `${apiUrl}job_details/`
     const [jobTitle, setJobTitle] = useState('')

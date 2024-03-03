@@ -97,6 +97,28 @@ export const parseRoles = roles => roles.map(role => ({ value: role.id, label: r
 
 export const parseComapnies = companies => companies.map(company => ({ value: company.id, label: company.name }))
 
+export const parseSelectedCompany = (id, companies) => {
+    if (id) {
+        const company = companies.find(row => row?.id === id)
+        return { value: company?.id, label: company?.name }
+    }
+    return null
+}
+
+// export const parseIntegration_companies = integrations =>
+//     integrations.map(({ company }) => ({ value: company.id, label: company.name }))
+
+export const parseIntegration_companies = integrations => {
+    const arr = integrations.map(({ company }) => ({ value: company.id, label: company.name }))
+    return [...new Set(arr.map(item => JSON.stringify(item)))].map(item => JSON.parse(item))
+}
+
+// export const parseIntegration = integrations => integrations.map(integration => ({ value: integration.name, label: integration.name }))
+export const parseIntegration = integrations => {
+    const arr = integrations.map(integration => ({ value: integration.name, label: integration.name }))
+    return [...new Set(arr.map(item => JSON.stringify(item)))].map(item => JSON.parse(item))
+}
+
 export const parseGroups = groups => groups.map(group => ({ value: group.id, label: group.name }))
 
 export const parseSelectedGroup = (id, groups) => {

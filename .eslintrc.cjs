@@ -48,5 +48,6 @@ module.exports = {
         'jsx-a11y/anchor-is-valid': 'off',
         'import/extensions': 'off',
         'jsx-a11y/no-noninteractive-element-interactions': 'off',
+        'no-nested-ternary': 'off',
     },
 }
