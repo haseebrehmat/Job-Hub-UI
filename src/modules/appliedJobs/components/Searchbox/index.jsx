@@ -1,10 +1,10 @@
-import { memo, useState } from 'react'
+import { memo, useState, useEffect } from 'react'
 
 import { Input } from '@components'
 
 import { SearchIcon, SearchClearIcon } from '@icons'
 
-const Searchbox = memo(({ query = '', setQuery, setPage }) => {
+const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount }) => {
     const [value, setValue] = useState(query)
     const handleChange = e => setValue(e.target.value)
     const handleClick = () => {
@@ -19,7 +19,10 @@ const Searchbox = memo(({ query = '', setQuery, setPage }) => {
 
     return (
         <div className='flex items-center justify-between'>
-            <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs</p>
+            <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>
+                Applied Jobs: {last12HoursJobsCount} (Last 12 hours)
+            </p>
+
             <div className='p-4'>
                 <label htmlFor='table-search' className='sr-only'>
                     Search

@@ -18,6 +18,7 @@ const JobsFilter = memo(() => {
     const [jobSourceSelector, setJobSourceSelector] = useState('all')
     const [techStackSelector, setTechStack] = useState([])
     const [jobTypeSelector, setJobTypeSelector] = useState('all')
+    const [jobVisibilitySelector, setJobVisibilitySelector] = useState('recruiter')
     const [stats, setStats] = useState({ total_jobs: 0, filtered_jobs: 0 })
     const [jobStatusChoice, setJobStatusChoice] = useState({})
     // YYYY-MM-DD
@@ -25,18 +26,17 @@ const JobsFilter = memo(() => {
     const jobDetailsUrl = `${apiUrl}job_details/`
     const [jobTitle, setJobTitle] = useState('')
     const [ordering, setOrdering] = useState('job_posted_date')
-    const [sortBy, setSortBy] = useState('desc')
-    const defaultParams = {
+    const [jobsFilterParams, setJobsFilterParams] = useState({
         job_source: '',
         tech_keywords: '',
         page: 1,
         from_date: '',
         to_date: '',
         job_type: '',
-        ordering: '',
+        ordering: 'job_posted_date',
         search: '',
-    }
-    const [jobsFilterParams, setJobsFilterParams] = useState(defaultParams)
+        job_visibility: 'recruiter',
+    })
 
     const [recordFound, setRecordFound] = useState(true)
 
@@ -52,6 +52,7 @@ const JobsFilter = memo(() => {
         }
 
         url = params_count > 0 ? `${url}?${params.toString()}` : url
+        console.log(url)
         setData([])
         fetch(url, {
             headers: {
@@ -105,7 +106,8 @@ const JobsFilter = memo(() => {
             tech_keywords: techStackValues,
             job_source,
             page: 1,
-            ordering: sortBy === 'asc' ? ordering : `-${ordering}`,
+            ordering,
+            job_visibility: jobVisibilitySelector,
             from_date: dates.from_date,
             to_date: dates.to_date,
             job_type,
@@ -114,14 +116,30 @@ const JobsFilter = memo(() => {
     }
 
     const resetFilters = () => {
+        setData([])
+        setPagesCount([])
+        setTechStackData([])
+        setJobSourceData([])
+        setJobTypeData([])
         setJobSourceSelector('all')
         setTechStack([])
         setJobTypeSelector('all')
+        setJobVisibilitySelector('recruiter')
         setDates({ from_date: '', to_date: '' })
+        setStats({ total_jobs: 0, filtered_jobs: 0 })
         setJobTitle('')
         setOrdering('job_posted_date')
-        setSortBy('desc')
-        setJobsFilterParams(defaultParams)
+        setJobsFilterParams({
+            job_source: '',
+            tech_keywords: '',
+            page: 1,
+            from_date: '',
+            to_date: '',
+            job_type: '',
+            ordering: 'job_posted_date',
+            search: '',
+            job_visibility: 'recruiter',
+        })
     }
 
     const runJobFilter = () => {
@@ -244,14 +262,14 @@ const JobsFilter = memo(() => {
                     </div>
 
                     <div className='my-2'>
-                        Sort By
+                        Job Visibility
                         <select
-                            value={sortBy}
-                            onChange={e => setSortBy(e.target.value)}
+                            value={jobVisibilitySelector}
+                            onChange={e => setJobVisibilitySelector(e.target.value)}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
-                            <option value='asc'>Ascending</option>
-                            <option value='desc'>Descending</option>
+                            <option value='recruiter'>Recruiter</option>
+                            <option value='non-recruiter'>Non-Recruriter</option>
                         </select>
                     </div>
                     <div className='my-2'>

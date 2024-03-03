@@ -56,12 +56,12 @@ export const routes = [
         protect: true,
         title: 'Companies Management',
     },
-    {
-        path: '/job-source-blocking',
-        component: <JobSourceBlocking />,
-        protect: true,
-        title: 'Job Source Blocking',
-    },
+    // {
+    //     path: '/job-source-blocking',
+    //     component: <JobSourceBlocking />,
+    //     protect: true,
+    //     title: 'Job Source Blocking',
+    // },
     {
         path: '/roles',
         component: <Roles />,

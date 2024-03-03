@@ -19,7 +19,12 @@ const AppliedJobs = memo(({ userId = '' }) => {
 
     return (
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
-            <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
+            <Searchbox
+                query={query}
+                setQuery={setQuery}
+                setPage={setPage}
+                last12HoursJobsCount={data.last_12_hours_count}
+            />
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
