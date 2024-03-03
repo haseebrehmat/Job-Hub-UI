@@ -1,19 +1,19 @@
 import { memo, useState } from 'react'
 import { toast } from 'react-hot-toast'
-// import useSwr from 'swr'
-
-import { Button, Drawer, Input } from '@components'
-import { saveRole } from '@modules/userManagement/api'
 
 import { useMutate } from '@/hooks'
+
+import { Button, Drawer, Input } from '@components'
+import { Permissions } from '@modules/userManagement/components'
+import { saveRole } from '@modules/userManagement/api'
+
 import { roleSchema } from '@utils/schemas'
 import { getMsg } from '@utils/helpers'
 
 import { TrashIcon } from '@icons'
-import Permissions from '../Permissions'
 
 const CompanyForm = ({ show, setShow, mutate, role }) => {
-    const [permissions, setPermissions] = useState([1, 2, 4])
+    const [permissions, setPermissions] = useState([])
     const { values, errors, handleSubmit, handleChange, resetForm, trigger } = useMutate(
         `/api/auth/role_association${role?.id ? `/${role?.id}/` : '/'}`,
         saveRole,
