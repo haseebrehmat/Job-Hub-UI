@@ -3,15 +3,15 @@ import useSWR from 'swr'
 
 import { Loading } from '@components'
 
-import { fetchTeamAppliedJobs } from '@modules/jobs/api'
+import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
 
-import { tableHeads, jobStatus } from '@constants/jobs'
+import { tableHeads, jobStatus } from '@constants/teamAppliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
 import toast from 'react-hot-toast'
 import { baseURL } from '@utils/http'
 
-const Jobs = memo(() => {
+const TeamAppliedJobs = memo(() => {
     const apiUrl = baseURL
     const [page, setPage] = useState(1)
     const [bd, setBD] = useState('all')
@@ -95,7 +95,9 @@ const Jobs = memo(() => {
                                 <td className='px-3 py-4'>{job.company_name}</td>
                                 <td className='px-3 py-4'>{job.job_title}</td>
                                 <td className='px-3 py-4'>
-                                    <a href={job.job_source_url}>{job.job_source}</a>
+                                    <a className='underlin' target='_blank' rel='noreferrer' href={job.job_source_url}>
+                                        {job.job_source}
+                                    </a>
                                 </td>
                                 <td className='px-3 py-4'>
                                     <select
@@ -124,4 +126,4 @@ const Jobs = memo(() => {
     )
 })
 
-export default Jobs
+export default TeamAppliedJobs

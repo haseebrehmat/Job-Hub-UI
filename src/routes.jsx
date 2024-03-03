@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import {
     AppliedJobs,
     Login,
-    Jobs,
+    TeamAppliedJobs,
     JobsFilter,
     JobsUploader,
     ForgetPassword,
@@ -14,8 +14,10 @@ import {
     Integrations,
 } from '@modules'
 
-import { getToken } from '@utils/helpers'
+import { getToken, decodeJwt } from '@utils/helpers'
 import App from './App'
+
+const { user_id } = decodeJwt()
 
 export const routes = [
     {
@@ -24,23 +26,23 @@ export const routes = [
         protect: true,
         title: 'Octagon Dashboard',
     },
-    {
-        path: '/applied-jobs',
-        component: <AppliedJobs />,
-        protect: true,
-        title: 'Applied Jobs',
-    },
-    {
-        path: '/jobs',
-        component: <Jobs />,
-        protect: true,
-        title: 'Team Appllied Jobs',
-    },
+    // {
+    //     path: '/applied-jobs',
+    //     component: <AppliedJobs />,
+    //     protect: true,
+    //     title: 'Applied Jobs',
+    // },
+    // {
+    //     path: '/team-applied-jobs',
+    //     component: <TeamAppliedJobs />,
+    //     protect: true,
+    //     title: 'Team Appllied Jobs',
+    // },
     {
         path: '/jobs-portal',
         component: <JobsFilter />,
         protect: true,
-        title: 'Jobs Portal',
+        title: 'Jobs Detail',
     },
     {
         path: '/jobs-uploader',
@@ -71,6 +73,12 @@ export const routes = [
         component: <Integrations />,
         protect: true,
         title: 'Integration Management',
+    },
+    {
+        path: '/user-applied-jobs',
+        component: <AppliedJobs userId={user_id} />,
+        protect: true,
+        title: 'My Applied Jobs',
     },
 ]
 

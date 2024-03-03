@@ -17,22 +17,23 @@ const SideBar = ({ toggle, setToggle }) => {
     return (
         <aside
             className={`sm:flex hidden ${
-                toggle ? 'w-auto lg:w-[15%]' : 'w-fit'
-            } flex-col space-y-2 border-2 py-2 sm:px-2 my-2 ml-2 text-[#048C8C] bg-[#EDFFFB] rounded-lg`}
+                toggle ? 'w-auto xl:w-[15%]' : 'w-fit'
+            } flex-col space-y-2 border-2 py-2 sm:px-2 my-2 ml-2  text-[#048C8C] bg-[#EDFFFB] rounded-lg`}
         >
             <div className={`p-2 flex justify-center md:justify-${toggle ? 'center' : 'between'}`}>
-                <span className='hidden lg:block'>
+                <span className='hidden lg:block '>
                     {toggle ? (
                         <img src={logo} alt='' width='120' height='59' />
                     ) : (
-                        <img src={smallLogo} alt='' width='50' height='50' />
+                        <img src={smallLogo} alt='' width='25' height='25' />
                     )}
                 </span>
+
                 <span className='block lg:hidden'>
-                    <img src={smallLogo} alt='' width='50' height='50' />
+                    <img src={smallLogo} alt='' width='25' height='25' />
                 </span>
             </div>
-            <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
+            <hr className='w-75 h-100 bg-[#048C8C] my-4 border-0 rounded' />
             {menuItems?.length > 0 &&
                 menuItems?.map(item => (
                     <Item item={item} subMenu={subMenu} setSubMenu={setSubMenu} show={toggle} key={item.label} />
@@ -48,11 +49,13 @@ const SideBar = ({ toggle, setToggle }) => {
                 {toggle ? <span className='ml-3 hidden lg:block'>Logout</span> : ''}
             </button>
             <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
-            <div className='h-[100%] flex flex-col justify-end items-center'>
-                <span className='cursor-pointer p-2 flex mb-1' onClick={() => setToggle(!toggle)}>
-                    {OpenSidebarIcon}
-                    {toggle && <span className='hidden lg:flex ml-1'>Toggle Sidebar</span>}
-                </span>
+            <div className='flex flex-col justify-end h-[100%]'>
+                <div className='h-100 flex flex-col justify-end items-center'>
+                    <span className='cursor-pointer p-2 flex mb-1' onClick={() => setToggle(!toggle)}>
+                        {OpenSidebarIcon}
+                        {toggle && <span className='hidden lg:flex ml-1'>Toggle Sidebar</span>}
+                    </span>
+                </div>
                 {toggle && (
                     <button className='hidden lg:flex w-full p-2.5 bg-[#048C8C] rounded-xl self-end my-2'>
                         <p align='justify' className='text-white float-left text-xs'>

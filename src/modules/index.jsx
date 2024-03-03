@@ -3,7 +3,7 @@ import ForgetPassword from '@modules/authentication/forgetPassword'
 import ResetPassword from '@modules/authentication/resetPassword'
 import Layout from '@modules/layout'
 import AppliedJobs from '@modules/appliedJobs'
-import Jobs from '@modules/jobs'
+import TeamAppliedJobs from '@modules/teamAppliedJobs'
 import Dashboard from '@modules/dashboard'
 import JobsFilter from '@/modules/jobsFilter'
 import JobsUploader from '@modules/jobsUploader'
@@ -13,7 +13,7 @@ import Users from '@modules/userManagement/users'
 import Integrations from '@modules/settings/integrations'
 
 export {
-    Jobs,
+    TeamAppliedJobs,
     AppliedJobs,
     JobsFilter,
     JobsUploader,

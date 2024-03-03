@@ -4,7 +4,7 @@ import { getMsg } from '@utils/helpers'
 export const fetchTeamAppliedJobs = (page, applied_by = '') =>
     http
         .get(
-            `api/job_portal/team_applied_job_details/?applied_by=${applied_by}&ordering=-job_posted_date&page=${page}&page_size=12`,
+            `api/job_portal/team_applied_job_details/?applied_by=${applied_by}&ordering=-applied_date&page=${page}&page_size=12`,
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,

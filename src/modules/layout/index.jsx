@@ -9,15 +9,15 @@ const layout = memo(({ children, title }) => {
     const [show, setShow] = useState(false)
 
     return (
-        <main className='flex h-screen'>
+        <main className='flex h-100'>
             <SideBar toggle={toggle} setToggle={setToggle} />
             <Overlay show={show} setShow={setShow} />
             <div className='w-[85%] flex-1'>
                 <div className='flex flex-col space-y-1 h-screen'>
-                    <div className='h-fit'>
+                    <div className='h-100'>
                         <Navbar setShow={setShow} title={title} />
                     </div>
-                    <div className='max-h-screen overflow-auto p-3'>{children}</div>
+                    <div className='max-h-100 overflow-auto p-3'>{children}</div>
                 </div>
             </div>
         </main>

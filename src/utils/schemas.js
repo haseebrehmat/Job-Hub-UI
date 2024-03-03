@@ -32,8 +32,6 @@ export const integrationFilterSchema = Yup.object().shape({
 
 export const roleSchema = Yup.object().shape({
     name: Yup.string().required('Role name is required'),
-    description: Yup.string().required().max(255, 'Description must be less than 255 characters'),
-    code: Yup.number('Code must be a number').positive('Code must be a positive number').required('Code is required'),
 })
 
 export const userSchema = Yup.object().shape({

@@ -7,7 +7,6 @@ import toast from 'react-hot-toast'
 import { baseURL } from '@utils/http'
 
 const JobsUploader = memo(() => {
-    console.log(baseURL)
     const fileTypes = ['csv', 'xlsx']
     const [files, setFiles] = useState(null)
     const [disableBtn, setDisableBtn] = useState(true)

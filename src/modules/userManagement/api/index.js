@@ -20,9 +20,9 @@ export const fetchFixRoles = url => http.get(url).then(({ data }) => ({ fixedRol
 
 export const saveRole = (url, { arg: role }) => {
     if (role?.id) {
-        return rawHttp.put(url, role).then(({ data }) => toast.success(data.detail || 'Role updated successfully'))
+        // return rawHttp.put(url, role).then(({ data }) => toast.success(data.detail || 'Role updated successfully'))
     }
-    return rawHttp.post(url, role).then(({ data }) => toast.success(data.detail))
+    // return rawHttp.post(url, role).then(({ data }) => toast.success(data.detail))
 }
 
 export const fetchUsers = url =>
@@ -40,3 +40,5 @@ export const saveUser = (url, { arg: user }) => {
     }
     return rawHttp.post(url, user).then(({ data }) => toast.success(data.detail))
 }
+
+export const fetchPermissions = url => http.get(url).then(({ data }) => ({ permissions: data, status: 'success' }))

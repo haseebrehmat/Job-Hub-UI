@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode'
+import { permissions } from '@constants/permissions'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
 
@@ -50,7 +51,7 @@ export const timeSince = date => {
                     if (interval >= 1) {
                         intervalType = 'minute'
                     } else {
-                        interval = seconds
+                        interval = seconds + 1
                         intervalType = 'second'
                     }
                 }
@@ -127,3 +128,14 @@ export const parseSelectedGroup = (id, groups) => {
     }
     return null
 }
+
+export const can = permissionKey => {
+    const user = decodeJwt()
+    const perms = user?.permissionss || permissions
+    if (Array.isArray(permissionKey)) {
+        return permissionKey.some(key => perms.includes(key))
+    }
+    return perms.includes(permissionKey)
+}
+
+export const transformPascal = str => str.replace(/([a-z])([A-Z])/g, '$1 $2')
