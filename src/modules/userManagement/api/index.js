@@ -12,7 +12,7 @@ export const saveCompany = (url, { arg: company }) => {
     return rawHttp.post(url, company).then(({ data }) => toast.success(data.detail))
 }
 
-export const fetchRoles = url => http.get(url).then(({ data }) => ({ roles: data, status: 'success' }))
+export const fetchRoles = url => http.get(url).then(({ data }) => ({ roles: data.results, status: 'success' }))
 
 export const fetchGroups = url => http.get(url).then(({ data }) => ({ groups: data, status: 'success' }))
 
@@ -20,9 +20,9 @@ export const fetchFixRoles = url => http.get(url).then(({ data }) => ({ fixedRol
 
 export const saveRole = (url, { arg: role }) => {
     if (role?.id) {
-        // return rawHttp.put(url, role).then(({ data }) => toast.success(data.detail || 'Role updated successfully'))
+        return rawHttp.put(url, role).then(({ data }) => toast.success(data.detail || 'Role updated successfully'))
     }
-    // return rawHttp.post(url, role).then(({ data }) => toast.success(data.detail))
+    return rawHttp.post(url, role).then(({ data }) => toast.success(data.detail))
 }
 
 export const fetchUsers = url =>

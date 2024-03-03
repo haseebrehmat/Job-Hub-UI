@@ -15,7 +15,7 @@ const Roles = () => {
     const [query, setQuery] = useState()
     const [role, setRole] = useState()
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/role_association/', fetchRoles)
+    const { data, error, isLoading, mutate } = useSWR('/api/auth/role/', fetchRoles)
     const handleClick = row => {
         setRole(row)
         setShow(!show)

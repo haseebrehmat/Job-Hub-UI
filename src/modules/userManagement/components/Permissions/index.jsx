@@ -1,13 +1,10 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
+import useSWR from 'swr'
 
-import { removeOrAddElementsFromArray, transformPascal } from '@/utils/helpers'
+import { removeOrAddElementsFromArray, transformPascal } from '@utils/helpers'
 
 const Permissions = ({ permissions, setPermissions }) => {
-    const [data, setData] = useState({})
-
-    fetch('permissions.json')
-        .then(res => res.json())
-        .then(vals => setData(vals))
+    const { data, error } = useSWR('/get/local/permissions/', () => fetch('permissions.json').then(res => res.json()))
 
     const handleChange = (e, type) => {
         const value = type === 'module' ? e.target.value.split(',') : [e.target.value]
@@ -60,7 +57,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                     ) : (
                         <tr className='bg-white border-b border-[#006366] border-opacity-30'>
                             <td className='px-2 py-2' colSpan={2}>
-                                No Permissions Found
+                                {error ? 'Failed to Load permissions' : 'No Permissions Found'}
                             </td>
                         </tr>
                     )}

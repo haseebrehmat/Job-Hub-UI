@@ -12,16 +12,16 @@ import { getMsg } from '@utils/helpers'
 
 import { TrashIcon } from '@icons'
 
-const CompanyForm = ({ show, setShow, mutate, role }) => {
-    const [permissions, setPermissions] = useState([])
+const RoleForm = ({ show, setShow, mutate, role }) => {
+    const [permissions, setPermissions] = useState(role?.permissions?.map(p => p.codename) ?? [])
     const { values, errors, handleSubmit, handleChange, resetForm, trigger } = useMutate(
-        `/api/auth/role_association${role?.id ? `/${role?.id}/` : '/'}`,
+        `/api/auth/role${role?.id ? `/${role?.id}/` : '/'}`,
         saveRole,
         role,
         roleSchema,
         async formValues => trigger({ ...formValues, id: role?.id, permissions }),
         error => toast.error(getMsg(error)),
-        () => (role?.id ? mutate('/api/auth/role_association/') : resetForm())
+        () => (role?.id ? mutate('/api/auth/role/') : resetForm())
     )
     console.log(values)
     return (
@@ -52,4 +52,4 @@ const CompanyForm = ({ show, setShow, mutate, role }) => {
     )
 }
 
-export default memo(CompanyForm)
+export default memo(RoleForm)
