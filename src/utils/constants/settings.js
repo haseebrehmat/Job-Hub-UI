@@ -8,8 +8,8 @@ export const apiStatus = {
 }
 
 export const integrationNames = [
-    { value: 'Chat GPT API', label: 'Chat GPT API' },
-    { value: 'Google API', label: 'Google API' },
-    { value: 'Google Maps API', label: 'Google Maps API' },
+    { value: 'chat gpt', label: 'Chat GPT' },
+    { value: 'github', label: 'Github' },
+    { value: 'google', label: 'Google Maps API' },
     { value: 'Twillio API', label: 'Twillio API' },
 ]
