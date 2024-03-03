@@ -33,7 +33,11 @@ const AppliedJobs = memo(({ userId = '' }) => {
                 <tbody>
                     {data?.jobs?.length > 0 && !error ? (
                         data.jobs.map((job, index) => (
-                            <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
+                            <tr
+                                className='bg-white border border-slate-300 hover:bg-gray-100 cursor-pointer'
+                                key={index}
+                                onClick={() => window.open(job.job_source_url, '_blank', 'noopener,noreferrer')}
+                            >
                                 <td className='px-3 py-4'>
                                     <span className='font-bold'>{timeSince(job.applied_date)}</span>
                                     <div>{formatDate(job.applied_date)}</div>
