@@ -1,5 +1,4 @@
 import jwt_decode from 'jwt-decode'
-import { permissions } from '@constants/permissions'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
 
@@ -85,10 +84,10 @@ export const handle401 = error => {
 export const parseFixedRoles = roles =>
     roles.map(role => ({ value: role.code, label: `${role.code} -- ${role.description}` }))
 
-export const parseSelectedRole = (code, roles) => {
-    if (code) {
-        const role = roles.find(row => row?.code === code)
-        return { value: role?.code, label: `${role?.code} -- ${role?.description}` }
+export const parseSelectedRole = (id, roles) => {
+    if (id) {
+        const role = roles.find(row => row?.id === id)
+        return { value: role?.id, label: role?.name }
     }
     return null
 }
@@ -131,7 +130,7 @@ export const parseSelectedGroup = (id, groups) => {
 
 export const can = permissionKey => {
     const user = decodeJwt()
-    const perms = user?.permissionss || permissions
+    const perms = user?.permissions
     if (Array.isArray(permissionKey)) {
         return permissionKey.some(key => perms.includes(key))
     }
