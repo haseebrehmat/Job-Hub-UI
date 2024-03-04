@@ -73,7 +73,7 @@ const Integrations = () => {
                                     />
                                 </td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleMutate(comp)}>
-                                    {can(['edit_integration', 'delete_integration']) && ActionsIcons}
+                                    {can('edit_integration') && ActionsIcons}
                                 </td>
                             </tr>
                         ))
