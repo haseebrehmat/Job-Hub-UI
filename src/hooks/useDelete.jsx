@@ -3,13 +3,13 @@ import { toast } from 'react-hot-toast'
 import { getMsg } from '@/utils/helpers'
 import { http } from '@/utils/http'
 
-const useDelete = (url, onError = null, onSuccess = null) => {
-    const showSuccessToast = data => toast.success(data.detail)
-    const showErrorToast = error => toast.success(getMsg(error))
+const useDelete = url => {
+    // const showSuccessToast = data => toast.success(data.detail)
+    // const showErrorToast = error => toast.error(getMsg(error))
 
     const { trigger, isMutating } = useSWRMutation(url, () => http.delete(url), {
-        onError: onError || showErrorToast,
-        onSuccess: onSuccess || showSuccessToast,
+        onError: error => toast.error(getMsg(error)),
+        onSuccess: ({ data }) => toast.success(data.detail),
     })
 
     return {

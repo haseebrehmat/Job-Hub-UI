@@ -12,26 +12,32 @@ const customStyles = {
     },
 }
 
-// Modal.setAppElement('#root')
-
-const CustomDilog = () => {
+const CustomDilog = (title, description, successTrigger) => {
     let subtitle
     const [modalIsOpen, setIsOpen] = useState(false)
 
     const openModal = () => {
         setIsOpen(true)
+        console.log('open modal')
     }
 
     const afterOpenModal = () => {
-        subtitle.style.color = '#f00'
+        // subtitle.style.color = '#f00'
     }
 
     const closeModal = () => {
         setIsOpen(false)
     }
-    return (
-        <div>
-            <button onClick={openModal}>Open Modal</button>
+
+    const successModal = () => {
+        successTrigger()
+        closeModal()
+    }
+    // {/* <button onClick={openModal}>Open Modal</button> */}
+    // {deleteButton}
+
+    return {
+        CustomModal: (
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
@@ -40,13 +46,12 @@ const CustomDilog = () => {
                 contentLabel='Example Modal'
             >
                 <div className='flex items-start justify-between rounded-t dark:border-gray-600'>
-                    <h3 className='text-xl font-semibold text-gray-900 dark:text-white'>Confirm Delete</h3>
+                    <h3 className='text-xl font-semibold text-gray-900 dark:text-white'>{title}</h3>
                 </div>
 
                 <div className='p-2 space-y-5'>
-                    <p className='text-base leading-relaxed text-gray-500 dark:text-gray-400'>
-                        Are you want to delete the product?
-                    </p>
+                    {/* Are you want to delete the product? */}
+                    <p className='text-base leading-relaxed text-gray-500 dark:text-gray-400'>{description}</p>
                 </div>
 
                 <div className='flex justify-end items-center space-x-2 border-gray-200 rounded-b dark:border-gray-600'>
@@ -59,7 +64,7 @@ const CustomDilog = () => {
                     </button>
 
                     <button
-                        onClick={closeModal}
+                        onClick={successModal}
                         type='button'
                         className='text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
                     >
@@ -67,8 +72,9 @@ const CustomDilog = () => {
                     </button>
                 </div>
             </Modal>
-        </div>
-    )
+        ),
+        openModal,
+    }
 }
 
 export default CustomDilog

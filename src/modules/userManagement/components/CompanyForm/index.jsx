@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { toast } from 'react-hot-toast'
 
-import { Button, Checkbox, Drawer, Input } from '@components'
+import { Button, Checkbox, Drawer, Input, CustomDilog } from '@components'
 import { saveCompany } from '@modules/userManagement/api'
 
 import { useMutate } from '@/hooks'

@@ -1,14 +1,15 @@
 import { memo } from 'react'
 import { toast } from 'react-hot-toast'
 
-import { useMutate } from '@/hooks'
-import { Button, Drawer, Input } from '@components'
+import { useMutate, useDelete } from '@/hooks'
+import { Button, Drawer, Input, CustomDilog } from '@components'
 
 import { RolesDropdown } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
 import { userSchema } from '@utils/schemas'
 import { getMsg } from '@utils/helpers'
+import { TrashIcon } from '@icons'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
@@ -25,6 +26,22 @@ const UserForm = ({ show, setShow, mutate, user }) => {
         async formValues => trigger({ ...formValues, id: user?.id }),
         error => toast.error(getMsg(error)),
         () => (user?.id ? mutate('/api/auth/user/') : resetForm())
+    )
+
+    const { wait, confirm } = useDelete(`/api/auth/user/${user?.id}/`)
+
+    const deleteUser = async () => {
+        const result = await confirm()
+        if (result && wait === false) {
+            setShow(false)
+            mutate('/api/auth/user/')
+        }
+    }
+
+    const { CustomModal, openModal } = CustomDilog(
+        'Confirm delete?',
+        `Are you sure want to delete the user: ${user?.id}`,
+        deleteUser
     )
 
     return (
@@ -53,9 +70,20 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                             {errors.password && <small className='ml-1 text-xs text-red-600'>{errors.password}</small>}
                         </>
                     )}
+
                     <div className='pt-4 space-y-2'>
                         <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
+
+                        {CustomModal}
+                        {user?.id && (
+                            <Button
+                                label='Delete'
+                                classes='bg-transparent text-red-500 border-red-500'
+                                icon={TrashIcon}
+                                onClick={openModal}
+                            />
+                        )}
                     </div>
                 </div>
             </form>

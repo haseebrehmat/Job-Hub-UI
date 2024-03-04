@@ -132,9 +132,9 @@ export const can = permissionKey => {
     const user = decodeJwt()
     const perms = user?.permissions
     if (Array.isArray(permissionKey)) {
-        return permissionKey.some(key => perms.includes(key))
+        return permissionKey.some(key => perms?.includes(key))
     }
-    return perms.includes(permissionKey)
+    return perms?.includes(permissionKey)
 }
 
 export const transformPascal = str => str.replace(/([a-z])([A-Z])/g, '$1 $2')
