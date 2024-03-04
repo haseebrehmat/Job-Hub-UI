@@ -6,7 +6,7 @@ import { fetchRoles } from '@modules/userManagement/api'
 
 import { parseRoles, parseSelectedRole } from '@utils/helpers'
 
-const RolesDropdown = ({ value: selected, error, setFieldValue }) => {
+const RolesDropdown = ({ value: selected, error = null, setFieldValue, onChange = null }) => {
     const { data, isLoading, error: fetchError } = useSWR('/api/auth/role/', fetchRoles)
 
     return isLoading ? (
@@ -19,7 +19,7 @@ const RolesDropdown = ({ value: selected, error, setFieldValue }) => {
             <SelectBox
                 options={parseRoles(data?.roles)}
                 selected={parseSelectedRole(selected, data?.roles)}
-                handleChange={({ value }) => setFieldValue('roles', value)}
+                handleChange={onChange || (({ value }) => setFieldValue('roles', value))}
                 classes='text-gray-500 text-sm'
             />
             {error && <small className='ml-1 text-xs text-red-600'>{error}</small>}
