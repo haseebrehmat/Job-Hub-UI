@@ -10,6 +10,7 @@ import { roleHeads } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
 import { PermissionIcon } from '@/assets/icons'
+import { can } from '@/utils/helpers'
 
 const Roles = () => {
     const [query, setQuery] = useState()
@@ -36,7 +37,9 @@ const Roles = () => {
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
                 <Filters />
-                <Button label='Create Role' fit icon={CreateIcon} onClick={() => handleClick({ name: '' })} />
+                {can('create_role') && (
+                    <Button label='Create Role' fit icon={CreateIcon} onClick={() => handleClick({ name: '' })} />
+                )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -60,7 +63,7 @@ const Roles = () => {
                                     </span>
                                 </td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
-                                    {ActionsIcons}
+                                    {can('edit_role') && ActionsIcons}
                                 </td>
                             </tr>
                         ))
@@ -69,7 +72,7 @@ const Roles = () => {
                     )}
                 </tbody>
             </table>
-            {show && <RoleForm show={show} setShow={setShow} mutate={mutate} role={role} />}
+            {show && can('edit_role') && <RoleForm show={show} setShow={setShow} mutate={mutate} role={role} />}
             {showList && <PermissionList show={showList} setShow={setShowList} list={role?.permissions} />}
         </div>
     )
