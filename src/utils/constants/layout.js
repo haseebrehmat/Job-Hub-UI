@@ -75,12 +75,15 @@ export const menuItems = [
             'view_user',
             'view_role',
             'view_company',
+            'view_team',
             'create_user',
             'create_role',
             'create_company',
+            'create_team',
             'update_user',
             'update_role',
             'update_company',
+            'update_team',
         ],
         subItems: [
             {
@@ -100,6 +103,12 @@ export const menuItems = [
                 link: '/roles',
                 svg: RolesIcon,
                 perms: ['view_role', 'create_role', 'update_role'],
+            },
+            {
+                label: 'Teams',
+                link: '/teams',
+                svg: RolesIcon,
+                perms: ['view_team', 'create_team', 'update_team'],
             },
         ],
     },

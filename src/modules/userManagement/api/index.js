@@ -42,3 +42,5 @@ export const saveUser = (url, { arg: user }) => {
 }
 
 export const fetchPermissions = url => http.get(url).then(({ data }) => ({ permissions: data, status: 'success' }))
+
+export const fetchTeams = url => http.get(url).then(({ data }) => ({ teams: data, status: 'success' }))
