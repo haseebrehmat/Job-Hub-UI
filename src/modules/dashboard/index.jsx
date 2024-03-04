@@ -31,7 +31,9 @@ const Dashboard = () => {
                             <WarmLeads data={data?.leads} />
                         </div>
                         <div className='w-1/5 pl-6 invisible xl:visible'>
-                            <Statistics classes='flex-col space-y-8' data={data?.statistics} />
+                            {can('view_statistics') && (
+                                <Statistics classes='flex-col space-y-8' data={data?.statistics} />
+                            )}
                         </div>
                     </div>
                 </>
