@@ -9,6 +9,7 @@ import { fetchTeams } from '@modules/userManagement/api'
 import { teamHeads } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
+import { can } from '@/utils/helpers'
 
 const Teams = () => {
     const [team, setTeam] = useState()
@@ -45,7 +46,7 @@ const Teams = () => {
                     </span>
                 </td>
                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
-                    {ActionsIcons}
+                    {can('edit_team') && ActionsIcons}
                 </td>
             </tr>
         ))
@@ -55,12 +56,14 @@ const Teams = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 pb-6 float-right'>
-                <Button
-                    label='Create Team'
-                    fit
-                    icon={CreateIcon}
-                    onClick={() => handleClick({ name: '', reporting_to: '', members: [] })}
-                />
+                {can('create_team') && (
+                    <Button
+                        label='Create Team'
+                        fit
+                        icon={CreateIcon}
+                        onClick={() => handleClick({ name: '', reporting_to: '', members: [] })}
+                    />
+                )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -74,7 +77,7 @@ const Teams = () => {
                 </thead>
                 <tbody>{renderTeams}</tbody>
             </table>
-            {show && <TeamForm show={show} setShow={setShow} mutate={mutate} team={team} />}
+            {show && can('edit_team') && <TeamForm show={show} setShow={setShow} mutate={mutate} team={team} />}
         </div>
     )
 }
