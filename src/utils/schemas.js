@@ -36,9 +36,7 @@ export const roleSchema = Yup.object().shape({
 
 export const userSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Pasword is required'),
-    role: Yup.string().required('Role is required'),
-    company: Yup.string().required('Company is required'),
+    roles: Yup.string().required('Role is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
 })
 
@@ -47,4 +45,10 @@ export const integrationSchema = Yup.object().shape({
     name: Yup.string().required('Please select integration type'),
     api_key: Yup.string().required('Api key is required'),
     status: Yup.boolean().required('Status is required'),
+})
+
+export const teamSchema = Yup.object().shape({
+    name: Yup.string().required('Team name is required'),
+    reporting_to: Yup.string().required('Please select reporting to'),
+    members: Yup.array().required('Please select members'),
 })

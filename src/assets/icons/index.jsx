@@ -38,7 +38,7 @@ import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
 import { RiUserSettingsLine, RiLock2Fill } from 'react-icons/ri'
-import { Integrations, Filters, ResetFilters} from '@svgs'
+import { Integrations, Filters, ResetFilters } from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />

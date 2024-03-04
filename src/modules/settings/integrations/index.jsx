@@ -9,6 +9,7 @@ import { fetchIntegrations } from '@modules/settings/api'
 import { integrations_head, apiStatus } from '@constants/settings'
 import { CreateIcon, ActionsIcons } from '@icons'
 import { Filters } from '@/components'
+import { can } from '@/utils/helpers'
 
 const Integrations = () => {
     const [query, setQuery] = useState()
@@ -39,12 +40,14 @@ const Integrations = () => {
                     apply={() => handleFilter({ name: '', status: true, user: '' })}
                     clear={() => setfilters({ companies: [], integrations: [] })}
                 />
-                <Button
-                    label='Add Integration'
-                    fit
-                    icon={CreateIcon}
-                    onClick={() => handleMutate({ name: '', status: true, company: '', api_key: '' })}
-                />
+                {can('create_integration') && (
+                    <Button
+                        label='Add Integration'
+                        fit
+                        icon={CreateIcon}
+                        onClick={() => handleMutate({ name: '', status: true, company: '', api_key: '' })}
+                    />
+                )}
             </div>
             <table className='table-auto w-full  text-sm text-left text-[#048C8C] '>
                 <thead className='text-xs uppercase border border-[#048C8C] '>
@@ -70,7 +73,7 @@ const Integrations = () => {
                                     />
                                 </td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleMutate(comp)}>
-                                    {ActionsIcons}
+                                    {can('edit_integration') && ActionsIcons}
                                 </td>
                             </tr>
                         ))
@@ -79,7 +82,7 @@ const Integrations = () => {
                     )}
                 </tbody>
             </table>
-            {mutateShow && (
+            {mutateShow && can('edit_integration') && (
                 <IntegrationForm
                     show={mutateShow}
                     setShow={setMutateShow}

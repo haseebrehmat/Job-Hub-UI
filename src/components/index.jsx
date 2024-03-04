@@ -14,7 +14,11 @@ import EmptyTable from '@components/EmptyTable'
 import Filters from '@components/Filters'
 import Drawer from '@components/Drawer'
 import Checkbox from '@components/Checkbox'
+<<<<<<< HEAD
 import Profile from '@components/Profile'
+=======
+import CustomDilog from '@components/CustomDilog'
+>>>>>>> OC-49
 
 export {
     Badge,
@@ -33,5 +37,9 @@ export {
     EmptyTable,
     Searchbox,
     Filters,
+<<<<<<< HEAD
     Profile,
+=======
+    CustomDilog,
+>>>>>>> OC-49
 }
