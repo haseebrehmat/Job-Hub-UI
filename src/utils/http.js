@@ -28,7 +28,7 @@ http.interceptors.response.use(
     error => {
         checkToken()
         toast.error(getMsg(error))
-        handle401(error)
+        // handle401(error)
         Promise.reject(error)
     }
 )

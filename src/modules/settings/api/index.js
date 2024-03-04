@@ -4,9 +4,6 @@ import { toast } from 'react-hot-toast'
 export const fetchIntegrations = url =>
     http.get(url).then(({ data }) => ({ integrations: data.results, status: 'success' }))
 
-export const fetchFilteredIntegrations = url =>
-    http.get(url).then(({ data }) => ({ integrations: data.results, status: 'success' }))
-
 export const saveIntegration = (url, { arg: integration }) => {
     if (integration?.id) {
         return rawHttp
