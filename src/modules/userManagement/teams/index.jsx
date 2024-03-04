@@ -20,9 +20,9 @@ const Teams = () => {
         setShow(!show)
     }
 
-    const renderTeams = isLoading ? (
-        <Loading />
-    ) : error ? (
+    if (isLoading) return <Loading />
+
+    const renderTeams = error ? (
         <EmptyTable cols={6} msg='Failed to load teams..' />
     ) : data?.teams?.length > 0 ? (
         data?.teams?.map((row, idx) => (
