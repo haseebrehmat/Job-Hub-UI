@@ -6,3 +6,5 @@ export const comapnyStatus = {
     0: 'Enable',
     1: 'Disable',
 }
+
+export const blockedSourceHeads = ['ID', 'Job Source', '']

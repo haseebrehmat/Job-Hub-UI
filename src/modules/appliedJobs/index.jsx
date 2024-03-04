@@ -19,7 +19,12 @@ const AppliedJobs = memo(({ userId = '' }) => {
 
     return (
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
-            <Searchbox query={query} setQuery={setQuery} setPage={setPage} />
+            <Searchbox
+                query={query}
+                setQuery={setQuery}
+                setPage={setPage}
+                last12HoursJobsCount={data.last_12_hours_count}
+            />
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
@@ -39,9 +44,12 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                     <div>{formatDate(job.applied_date)}</div>
                                 </td>
                                 <td className='px-3 py-4'>{job.company_name}</td>
-                                <td className='px-3 py-4'>{job.job_title}</td>
+                                <td className='px-3 py-4 cursor-pointer underline'>
+                                    <a href={job.job_source_url} target='_blank' rel='noopener noreferrer'>
+                                        {job.job_title}
+                                    </a>
+                                </td>
                                 <td className='px-3 py-4'>{job.job_source}</td>
-                                <td className='px-3 py-4'>Me</td>
                                 <td className='w-28 py-4'>
                                     <Badge label={jobStatus[job.job_status]} type='success' />
                                 </td>
@@ -49,7 +57,6 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                 <td className='px-3 py-4'>
                                     <Badge label={job.tech_keywords} />
                                 </td>
-                                <td className='px-3 py-4'>$100</td>
                             </tr>
                         ))
                     ) : (

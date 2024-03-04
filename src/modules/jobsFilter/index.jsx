@@ -2,7 +2,6 @@ import { useState, memo, useEffect } from 'react'
 import Selector from './components/Selector'
 import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
-import toast from 'react-hot-toast'
 import jwt_decode from 'jwt-decode'
 import CustomSelector from '../../components/CustomSelector'
 import { baseURL } from '@utils/http'
@@ -18,24 +17,24 @@ const JobsFilter = memo(() => {
     const [jobSourceSelector, setJobSourceSelector] = useState('all')
     const [techStackSelector, setTechStack] = useState([])
     const [jobTypeSelector, setJobTypeSelector] = useState('all')
+    const [jobVisibilitySelector, setJobVisibilitySelector] = useState('recruiter')
     const [stats, setStats] = useState({ total_jobs: 0, filtered_jobs: 0 })
     const [jobStatusChoice, setJobStatusChoice] = useState({})
     const [dates, setDates] = useState({ from_date: '', to_date: '' })
     const jobDetailsUrl = `${apiUrl}job_details/`
     const [jobTitle, setJobTitle] = useState('')
     const [ordering, setOrdering] = useState('job_posted_date')
-    const [sortBy, setSortBy] = useState('desc')
-    const defaultParams = {
+    const [jobsFilterParams, setJobsFilterParams] = useState({
         job_source: '',
         tech_keywords: '',
         page: 1,
         from_date: '',
         to_date: '',
         job_type: '',
-        ordering: '',
+        ordering: 'job_posted_date',
         search: '',
-    }
-    const [jobsFilterParams, setJobsFilterParams] = useState(defaultParams)
+        job_visibility: 'recruiter',
+    })
 
     const [recordFound, setRecordFound] = useState(true)
 
@@ -51,6 +50,7 @@ const JobsFilter = memo(() => {
         }
 
         url = params_count > 0 ? `${url}?${params.toString()}` : url
+        console.log(url)
         setData([])
         fetch(url, {
             headers: {
@@ -104,7 +104,8 @@ const JobsFilter = memo(() => {
             tech_keywords: techStackValues,
             job_source,
             page: 1,
-            ordering: sortBy === 'asc' ? ordering : `-${ordering}`,
+            ordering,
+            job_visibility: jobVisibilitySelector,
             from_date: dates.from_date,
             to_date: dates.to_date,
             job_type,
@@ -113,14 +114,30 @@ const JobsFilter = memo(() => {
     }
 
     const resetFilters = () => {
+        setData([])
+        setPagesCount([])
+        setTechStackData([])
+        setJobSourceData([])
+        setJobTypeData([])
         setJobSourceSelector('all')
         setTechStack([])
         setJobTypeSelector('all')
+        setJobVisibilitySelector('recruiter')
         setDates({ from_date: '', to_date: '' })
+        setStats({ total_jobs: 0, filtered_jobs: 0 })
         setJobTitle('')
         setOrdering('job_posted_date')
-        setSortBy('desc')
-        setJobsFilterParams(defaultParams)
+        setJobsFilterParams({
+            job_source: '',
+            tech_keywords: '',
+            page: 1,
+            from_date: '',
+            to_date: '',
+            job_type: '',
+            ordering: 'job_posted_date',
+            search: '',
+            job_visibility: 'recruiter',
+        })
     }
 
     const runJobFilter = () => {
@@ -243,14 +260,14 @@ const JobsFilter = memo(() => {
                     </div>
 
                     <div className='my-2'>
-                        Sort By
+                        Job Visibility
                         <select
-                            value={sortBy}
-                            onChange={e => setSortBy(e.target.value)}
+                            value={jobVisibilitySelector}
+                            onChange={e => setJobVisibilitySelector(e.target.value)}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
-                            <option value='asc'>Ascending</option>
-                            <option value='desc'>Descending</option>
+                            <option value='recruiter'>Recruiter</option>
+                            <option value='non-recruiter'>Non-Recruriter</option>
                         </select>
                     </div>
                     <div className='my-2'>
@@ -284,61 +301,63 @@ const JobsFilter = memo(() => {
                 </div>
             </div>
 
-            <table className='border text-center border-slate-400 table-auto w-full border-collapse my-2 text-lg'>
-                <thead className='bg-slate-50 dark:bg-slate-700'>
-                    <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold text-slate-900 dark:text-slate-200'>
-                        <th className='p-2 text-start'>Job Title</th>
-                        <th className='d-sm-table-cell text-start d-none '>Company</th>
-                        <th className=''> Job Source</th>
-                        <th>Tech Stack</th>
-                        <th>Job Type</th>
-                        <th>Date Posted</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.length > 0 &&
-                        data.map((item, key) => (
-                            <tr
-                                className='border border-slate-300 dark:border-slate-700  text-slate-500 dark:text-slate-400'
-                                key={key}
-                            >
-                                <td className='text-start p-2 rounded shadow-sm whitespace-normal w-[30%]	'>
-                                    {item.job_title}
-                                </td>
-                                <td className='text-start d-sm-table-cell d-none whitespace-normal w-[150px]'>
-                                    {item.company_name}
-                                </td>
-                                <td className='text-center'>
-                                    <a
-                                        className='underline'
-                                        target='_blank'
-                                        rel='noreferrer'
-                                        href={item.job_source_url}
-                                    >
-                                        {item.job_source}
-                                    </a>
-                                </td>
-                                <td>{item.tech_keywords}</td>
-                                <td>{item.job_type}</td>
-                                <td>{item.job_posted_date.slice(0, 10)}</td>
-                                <td className='flex justify-center'>
-                                    {item.job_status === 0 ? (
-                                        <button
-                                            disabled={role === 'TL'}
-                                            className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
-                                            onClick={() => updateJobStatus(key)}
+            <div className='overflow-x-auto'>
+                <table className='table-auto w-full border-collapse border text-center border-slate-400 my-2'>
+                    <thead className='bg-slate-50 dark:bg-slate-700'>
+                        <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold text-slate-900 dark:text-slate-200'>
+                            <th className='p-2 text-start'>Job Title</th>
+                            <th className='d-sm-table-cell text-start d-none '>Company</th>
+                            <th className=''> Job Source</th>
+                            <th>Tech Stack</th>
+                            <th>Job Type</th>
+                            <th>Date Posted</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody className='text-sm sm:text-base'>
+                        {data.length > 0 &&
+                            data.map((item, key) => (
+                                <tr
+                                    className='border border-slate-300 dark:border-slate-700  text-slate-500 dark:text-slate-400'
+                                    key={key}
+                                >
+                                    <td className='text-start p-2 rounded shadow-sm whitespace-normal w-[30%]	'>
+                                        {item.job_title}
+                                    </td>
+                                    <td className='text-start d-sm-table-cell d-none whitespace-normal w-[150px]'>
+                                        {item.company_name}
+                                    </td>
+                                    <td className='text-center'>
+                                        <a
+                                            className='underline'
+                                            target='_blank'
+                                            rel='noreferrer'
+                                            href={item.job_source_url}
                                         >
-                                            {jobStatusChoice[item.job_status]}
-                                        </button>
-                                    ) : (
-                                        jobStatusChoice[item.job_status]
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                </tbody>
-            </table>
+                                            {item.job_source}
+                                        </a>
+                                    </td>
+                                    <td>{item.tech_keywords}</td>
+                                    <td>{item.job_type}</td>
+                                    <td>{item.job_posted_date.slice(0, 10)}</td>
+                                    <td className='flex justify-center'>
+                                        {item.job_status === 0 ? (
+                                            <button
+                                                disabled={role === 'TL'}
+                                                className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
+                                                onClick={() => updateJobStatus(key)}
+                                            >
+                                                {jobStatusChoice[item.job_status]}
+                                            </button>
+                                        ) : (
+                                            jobStatusChoice[item.job_status]
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </div>
 
             {data.length === 0 && recordFound && (
                 <div className='flex justify-center my-2'>
