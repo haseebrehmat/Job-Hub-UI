@@ -117,6 +117,7 @@ export const menuItems = [
         link: '#!',
         svg: SettingIcon,
         key: 'settings',
+        perms: ['view_integration', 'create_integration', 'update_integration'],
         subItems: [
             {
                 label: 'Integrations',
