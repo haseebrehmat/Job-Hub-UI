@@ -5,14 +5,16 @@ import { Loading } from '@components'
 
 import { Filters, Statistics, Leads, WarmLeads, TechStacks } from '@modules/dashboard/components'
 import { fetchDashboardData } from '@modules/dashboard/api'
+import { decodeJwt } from '@/utils/helpers'
 
 const Dashboard = () => {
+    const user = decodeJwt()
     const [filters, setFilters] = useState({ from_date: '', to_date: '' })
     const { data, error, isLoading } = useSWR([filters], () => fetchDashboardData(filters.from_date, filters.to_date))
 
     if (isLoading) return <Loading />
 
-    return (
+    return user?.permissions?.length > 0 ? (
         <div className='flex flex-col w-full space-y-14'>
             {!error ? (
                 <>
@@ -34,6 +36,10 @@ const Dashboard = () => {
             ) : (
                 <p className='mx-auto'>No Graphs or data Found!</p>
             )}
+        </div>
+    ) : (
+        <div className='flex flex-col w-full space-y-14'>
+            <p className='mx-auto mt-10 italic text-lg'>You don`t have any permission. Please contact your admin.</p>
         </div>
     )
 }

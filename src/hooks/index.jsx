@@ -1,3 +1,4 @@
 import useMutate from '@/hooks/useMutate'
+import useDelete from '@/hooks/useDelete'
 
-export { useMutate }
+export { useDelete, useMutate }

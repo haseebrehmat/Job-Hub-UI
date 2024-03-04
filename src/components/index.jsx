@@ -14,6 +14,7 @@ import EmptyTable from '@components/EmptyTable'
 import Filters from '@components/Filters'
 import Drawer from '@components/Drawer'
 import Checkbox from '@components/Checkbox'
+import CustomDilog from '@components/CustomDilog'
 
 export {
     Badge,
@@ -32,4 +33,5 @@ export {
     EmptyTable,
     Searchbox,
     Filters,
+    CustomDilog,
 }

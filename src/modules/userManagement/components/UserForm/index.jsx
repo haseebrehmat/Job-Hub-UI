@@ -1,27 +1,25 @@
 import { memo } from 'react'
 import { toast } from 'react-hot-toast'
-import useSwr from 'swr'
 
 import { useMutate } from '@/hooks'
-import { Button, Drawer, Input, SelectBox } from '@components'
-import { saveUser, fetchRoles, fetchCompanies } from '@modules/userManagement/api'
+import { Button, Drawer, Input } from '@components'
+
+import { RolesDropdown } from '@modules/userManagement/components'
+import { saveUser } from '@modules/userManagement/api'
 
 import { userSchema } from '@utils/schemas'
-import { getMsg, parseRoles, parseComapnies } from '@utils/helpers'
+import { getMsg } from '@utils/helpers'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
-    const { data: fetchedRoles, isLoading: rolesLoading } = useSwr('/api/auth/role_association/', fetchRoles)
-    const { data: fetchedCompanies, isLoading: companiesLoading } = useSwr('/api/auth/company/', fetchCompanies)
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/user${user?.id ? `/${user?.id}/` : '/'}`,
         saveUser,
         {
-            username: user?.username || '',
-            email: user?.email || '',
+            username: user?.username,
+            email: user?.email,
             id: user?.id,
-            company: user?.company || '',
-            role: user?.role || '',
-            password: user?.password || '',
+            roles: user?.roles?.id,
+            password: '',
         },
         userSchema,
         async formValues => trigger({ ...formValues, id: user?.id }),
@@ -41,43 +39,20 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                     <span className='text-xs font-semibold'>Username*</span>
                     <Input name='username' value={values.username} onChange={handleChange} ph='Enter username' />
                     {errors.username && <small className='ml-1 text-xs text-red-600'>{errors.username}</small>}
-                    {rolesLoading ? (
-                        <small className='ml-1 p-3 text-xs text-gray-400'>Roles Loading...</small>
-                    ) : (
+                    <RolesDropdown value={values.roles} error={errors.roles} setFieldValue={setFieldValue} />
+                    {user?.id ? null : (
                         <>
-                            <span className='text-xs font-semibold'>Role*</span>
-                            <SelectBox
-                                options={parseRoles(fetchedRoles?.roles)}
-                                selected={values.role}
-                                handleChange={({ value }) => setFieldValue('role', value)}
-                                classes='text-gray-500 text-sm'
+                            <span className='text-xs font-semibold'>Password*</span>
+                            <Input
+                                name='password'
+                                type='password'
+                                value={values.password}
+                                onChange={handleChange}
+                                ph='Password'
                             />
-                            {errors.role && <small className='ml-1 text-xs text-red-600'>{errors.role}</small>}
+                            {errors.password && <small className='ml-1 text-xs text-red-600'>{errors.password}</small>}
                         </>
                     )}
-                    {companiesLoading ? (
-                        <small className='ml-1 p-3 text-xs text-gray-400'>Companies Loading...</small>
-                    ) : (
-                        <>
-                            <span className='text-xs font-semibold'>Company*</span>
-                            <SelectBox
-                                options={parseComapnies(fetchedCompanies?.companies)}
-                                selected={values.company}
-                                handleChange={({ value }) => setFieldValue('company', value)}
-                                classes='text-gray-500 text-sm'
-                            />
-                            {errors.company && <small className='ml-1 text-xs text-red-600'>{errors.company}</small>}
-                        </>
-                    )}
-                    <span className='text-xs font-semibold'>Password*</span>
-                    <Input
-                        name='password'
-                        type='password'
-                        value={values.password}
-                        onChange={handleChange}
-                        ph='Password'
-                    />
-                    {errors.password && <small className='ml-1 text-xs text-red-600'>{errors.password}</small>}
                     <div className='pt-4 space-y-2'>
                         <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />

@@ -3,7 +3,6 @@ import {
     ReportIcon,
     Jobs,
     JobsUploaderIcon,
-    TeamAppliedJobsIcon,
     ManagementIcon,
     UserIcon,
     CompaniesIcon,
@@ -18,7 +17,7 @@ export const menuItems = [
         label: 'Dashboard',
         link: '/',
         svg: DashboardIcon,
-        perms: ['view_dashboard'],
+        perms: ['view_dashboard', 'view_statistics'],
     },
     {
         label: 'Jobs',
@@ -27,10 +26,12 @@ export const menuItems = [
         key: 'jobs',
         perms: [
             'view_applied_job',
-            'view_jobdetail',
+            'view_user_applied_job',
             'view_job_uploader',
             'view_team_applied_job',
-            'update_job_status',
+            'change_job_status',
+            'upload_csv',
+            'view_job_portal',
         ],
         subItems: [
             // {
@@ -49,19 +50,19 @@ export const menuItems = [
                 label: 'Jobs Uploader',
                 link: '/jobs-uploader',
                 svg: JobsUploaderIcon,
-                perms: ['view_job_uploader'],
+                perms: ['view_job_uploader', 'upload_csv'],
             },
             // {
             //     label: 'Team Applied Jobs',
             //     link: '/team-applied-jobs',
             //     svg: TeamAppliedJobsIcon,
-            //     perms: ['view_team_applied_job', 'update_job_status'],
+            //     perms: ['view_team_applied_job', 'change_job_status'],
             // },
             {
-                label: 'Jobs Detail',
+                label: 'Jobs Portal',
                 link: '/jobs-portal',
                 svg: Jobs,
-                perms: ['view_jobdetail', 'update_job_status'],
+                perms: ['view_job_portal', 'change_job_status'],
             },
         ],
     },
@@ -118,8 +119,8 @@ export const menuItems = [
                 label: 'Integrations',
                 link: '/integrations',
                 svg: IntegrationIcon,
+                perms: ['view_integration', 'create_integration', 'update_integration'],
             },
         ],
     },
-
 ]

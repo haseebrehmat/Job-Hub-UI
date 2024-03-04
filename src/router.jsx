@@ -6,10 +6,10 @@ import { AppLayout } from '@modules'
 
 import { routes, authRoutes } from '@/routes'
 
-const browserRoutes = routes.map(({ path, protect, component, title }) => ({
+const browserRoutes = routes.map(({ path, protect, component, title, permission }) => ({
     path,
     element: protect ? (
-        <Protected>
+        <Protected permission={permission}>
             <AppLayout title={title}>{component}</AppLayout>
         </Protected>
     ) : (
