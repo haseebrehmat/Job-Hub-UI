@@ -5,8 +5,7 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import jwt_decode from 'jwt-decode'
 import CustomSelector from '../../components/CustomSelector'
 import { baseURL } from '@utils/http'
-
-// import CustomDilog from '@components/CustomDilog'
+import { toast } from 'react-hot-toast'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`

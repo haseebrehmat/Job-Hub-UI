@@ -34,6 +34,9 @@ const JobsUploader = memo(() => {
             method: 'POST',
             body: formData,
             mode: 'cors',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
+            },
         })
             .then(resp => {
                 if (!resp.ok) {

@@ -27,7 +27,7 @@ const FilterForm = ({ show, setShow, filters, setfilters }) => {
         <CustomSelector
             options={parseComapnies(data?.companies)}
             handleChange={obj => handleChange('companies', obj)}
-            selectorValue={values.companies}
+            selectorValue={values?.companies}
             isMulti
             placeholder='Company'
         />

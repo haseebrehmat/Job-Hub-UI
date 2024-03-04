@@ -46,8 +46,8 @@ const Companies = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.companies?.results?.length > 0 && !error ? (
-                        data.companies.results.map((comp, idx) => (
+                    {data?.companies?.length > 0 && !error ? (
+                        data.companies.map((comp, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{comp?.name}</td>
