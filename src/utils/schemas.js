@@ -46,3 +46,9 @@ export const integrationSchema = Yup.object().shape({
     api_key: Yup.string().required('Api key is required'),
     status: Yup.boolean().required('Status is required'),
 })
+
+export const teamSchema = Yup.object().shape({
+    name: Yup.string().required('Team name is required'),
+    reporting_to: Yup.string().required('Please select reporting to'),
+    members: Yup.array().required('Please select members'),
+})
