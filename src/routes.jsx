@@ -13,6 +13,7 @@ import {
     Roles,
     Users,
     Integrations,
+    Teams,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -82,6 +83,13 @@ export const routes = [
         protect: true,
         title: 'Users Management',
         permission: 'view_user',
+    },
+    {
+        path: '/teams',
+        component: <Teams />,
+        protect: true,
+        title: 'Teams Management',
+        permission: 'view_team',
     },
     {
         path: '/integrations',

@@ -50,3 +50,15 @@ export const saveUser = (url, { arg: user }) => {
 }
 
 export const fetchPermissions = url => http.get(url).then(({ data }) => ({ permissions: data, status: 'success' }))
+
+export const fetchTeams = url => http.get(url).then(({ data }) => ({ teams: data, status: 'success' }))
+
+export const saveTeam = (url, { arg: team }) => {
+    team.members = team.members.map(member => member.value)
+    if (team?.id) {
+        return rawHttp.put(url, team).then(({ data }) => toast.success(data.detail || 'Team updated successfully'))
+    }
+    return rawHttp.post(url, team).then(({ data }) => toast.success(data.detail))
+}
+
+export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))

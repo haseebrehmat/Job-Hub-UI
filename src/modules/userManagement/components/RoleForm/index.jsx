@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'
 
 import { useMutate, useDelete } from '@/hooks'
 
-import { Button, Drawer, Input } from '@components'
+import { Button, Drawer, Input, CustomDilog } from '@components'
 import { Permissions } from '@modules/userManagement/components'
 import { saveRole } from '@modules/userManagement/api'
 
@@ -11,8 +11,6 @@ import { roleSchema } from '@utils/schemas'
 import { getMsg } from '@utils/helpers'
 
 import { TrashIcon } from '@icons'
-
-import { CustomDilog } from '@/components'
 
 const RoleForm = ({ show, setShow, mutate, role }) => {
     const [permissions, setPermissions] = useState(role?.permissions?.map(p => p.codename) ?? [])
@@ -38,7 +36,7 @@ const RoleForm = ({ show, setShow, mutate, role }) => {
 
     const { CustomModal, openModal } = CustomDilog(
         'Confirm delete?',
-        `Are you sure want to delete the role: ${role?.id}`,
+        `Are you sure want to delete the role: ${role?.name}`,
         deleteRole
     )
 

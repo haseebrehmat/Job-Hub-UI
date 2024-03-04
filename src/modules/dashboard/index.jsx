@@ -5,7 +5,7 @@ import { Loading } from '@components'
 
 import { Filters, Statistics, Leads, WarmLeads, TechStacks } from '@modules/dashboard/components'
 import { fetchDashboardData } from '@modules/dashboard/api'
-import { decodeJwt } from '@/utils/helpers'
+import { can, decodeJwt } from '@/utils/helpers'
 
 const Dashboard = () => {
     const user = decodeJwt()
@@ -19,9 +19,11 @@ const Dashboard = () => {
             {!error ? (
                 <>
                     <Filters filters={filters} setFilters={setFilters} />
-                    <div className='block xl:hidden'>
-                        <Statistics classes='grid grid-cols-3 space-y-4 space-x-3' data={data?.statistics} />
-                    </div>
+                    {can('view_statistics') && (
+                        <div className='block xl:hidden'>
+                            <Statistics classes='grid grid-cols-3 space-y-4 space-x-3' data={data?.statistics} />
+                        </div>
+                    )}
                     <div className='flex items-start justify-between'>
                         <div className='flex flex-col w-4/5 space-y-16'>
                             <Leads data={data?.leads} />

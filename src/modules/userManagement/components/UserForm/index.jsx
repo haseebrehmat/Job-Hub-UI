@@ -40,7 +40,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
 
     const { CustomModal, openModal } = CustomDilog(
         'Confirm delete?',
-        `Are you sure want to delete the user: ${user?.id}`,
+        `Are you sure want to delete the user: ${values?.username}`,
         deleteUser
     )
 

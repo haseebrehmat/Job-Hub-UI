@@ -9,6 +9,7 @@ import { fetchUsers } from '@modules/userManagement/api'
 import { userHeads } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
+import { can } from '@/utils/helpers'
 
 const Users = () => {
     const [query, setQuery] = useState()
@@ -25,12 +26,14 @@ const Users = () => {
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
                 <Filters />
-                <Button
-                    label='Create User'
-                    fit
-                    icon={CreateIcon}
-                    onClick={() => handleClick({ username: '', email: '', roles: '' })}
-                />
+                {can('create_user') && (
+                    <Button
+                        label='Create User'
+                        fit
+                        icon={CreateIcon}
+                        onClick={() => handleClick({ username: '', email: '', roles: '' })}
+                    />
+                )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -51,7 +54,7 @@ const Users = () => {
                                 <td className='px-3 py-6'>{row?.username}</td>
                                 <td className='px-3 py-6'>{row?.roles?.name || 'not assigned'}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
-                                    {ActionsIcons}
+                                    {can('edit_user') && ActionsIcons}
                                 </td>
                             </tr>
                         ))
@@ -60,7 +63,7 @@ const Users = () => {
                     )}
                 </tbody>
             </table>
-            {show && <UserForm show={show} setShow={setShow} mutate={mutate} user={user} />}
+            {show && can('edit_user') && <UserForm show={show} setShow={setShow} mutate={mutate} user={user} />}
         </div>
     )
 }

@@ -9,6 +9,7 @@ import { fetchCompanies } from '@modules/userManagement/api'
 import { comapnyHeads, comapnyStatus } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
+import { can } from '@/utils/helpers'
 
 const Companies = () => {
     const [query, setQuery] = useState()
@@ -25,12 +26,14 @@ const Companies = () => {
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
                 <Filters />
-                <Button
-                    label='Create Company'
-                    fit
-                    icon={CreateIcon}
-                    onClick={() => handleClick({ name: '', status: true })}
-                />
+                {can('create_company') && (
+                    <Button
+                        label='Create Company'
+                        fit
+                        icon={CreateIcon}
+                        onClick={() => handleClick({ name: '', status: true })}
+                    />
+                )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -56,7 +59,7 @@ const Companies = () => {
                                     />
                                 </td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(comp)}>
-                                    {ActionsIcons}
+                                    {can('edit_company') && ActionsIcons}
                                 </td>
                             </tr>
                         ))
@@ -65,7 +68,9 @@ const Companies = () => {
                     )}
                 </tbody>
             </table>
-            {show && <CompanyForm show={show} setShow={setShow} mutate={mutate} company={company} />}
+            {show && can('edit_company') && (
+                <CompanyForm show={show} setShow={setShow} mutate={mutate} company={company} />
+            )}
         </div>
     )
 }

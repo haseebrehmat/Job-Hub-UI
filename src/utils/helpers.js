@@ -84,6 +84,8 @@ export const handle401 = error => {
 export const parseFixedRoles = roles =>
     roles.map(role => ({ value: role.code, label: `${role.code} -- ${role.description}` }))
 
+export const parseRoles = roles => roles.map(role => ({ value: role.id, label: role.name }))
+
 export const parseSelectedRole = (id, roles) => {
     if (id) {
         const role = roles.find(row => row?.id === id)
@@ -92,7 +94,15 @@ export const parseSelectedRole = (id, roles) => {
     return null
 }
 
-export const parseRoles = roles => roles.map(role => ({ value: role.id, label: role.name }))
+export const parseUsers = users => users.map(user => ({ value: user.id, label: user.username }))
+
+export const parseSelectedUser = (id, users) => {
+    if (id) {
+        const user = users.find(row => row?.id === id)
+        return { value: user?.id, label: user?.username }
+    }
+    return null
+}
 
 export const parseComapnies = companies => companies.map(company => ({ value: company.id, label: company.name }))
 
@@ -102,20 +112,6 @@ export const parseSelectedCompany = (id, companies) => {
         return { value: company?.id, label: company?.name }
     }
     return null
-}
-
-// export const parseIntegration_companies = integrations =>
-//     integrations.map(({ company }) => ({ value: company.id, label: company.name }))
-
-export const parseIntegration_companies = integrations => {
-    const arr = integrations.map(({ company }) => ({ value: company.id, label: company.name }))
-    return [...new Set(arr.map(item => JSON.stringify(item)))].map(item => JSON.parse(item))
-}
-
-// export const parseIntegration = integrations => integrations.map(integration => ({ value: integration.name, label: integration.name }))
-export const parseIntegration = integrations => {
-    const arr = integrations.map(integration => ({ value: integration.name, label: integration.name }))
-    return [...new Set(arr.map(item => JSON.stringify(item)))].map(item => JSON.parse(item))
 }
 
 export const parseGroups = groups => groups.map(group => ({ value: group.id, label: group.name }))
