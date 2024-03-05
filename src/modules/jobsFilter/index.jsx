@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode'
 import CustomSelector from '../../components/CustomSelector'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
+import { can } from '@/utils/helpers'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -343,17 +344,19 @@ const JobsFilter = memo(() => {
                                     <td>{item.job_type}</td>
                                     <td>{item.job_posted_date.slice(0, 10)}</td>
                                     <td className='flex justify-center'>
-                                        {item.job_status === 0 ? (
-                                            <button
-                                                disabled={role === 'TL'}
-                                                className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
-                                                onClick={() => updateJobStatus(key)}
-                                            >
-                                                {jobStatusChoice[item.job_status]}
-                                            </button>
-                                        ) : (
-                                            jobStatusChoice[item.job_status]
-                                        )}
+                                        {can('change_job_status') ? (
+                                            item.job_status === 0 ? (
+                                                <button
+                                                    disabled={role === 'TL'}
+                                                    className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
+                                                    onClick={() => updateJobStatus(key)}
+                                                >
+                                                    {jobStatusChoice[item.job_status]}
+                                                </button>
+                                            ) : (
+                                                jobStatusChoice[item.job_status]
+                                            )
+                                        ) : null}
                                     </td>
                                 </tr>
                             ))}

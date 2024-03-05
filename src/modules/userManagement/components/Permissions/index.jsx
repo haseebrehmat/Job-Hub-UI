@@ -1,11 +1,10 @@
 import { memo } from 'react'
-import useSWR from 'swr'
 
 import { removeOrAddElementsFromArray, transformPascal } from '@utils/helpers'
 
-const Permissions = ({ permissions, setPermissions }) => {
-    const { data, error } = useSWR('/get/local/permissions/', () => fetch('permissions.json').then(res => res.json()))
+import { permissions as data } from '@utils/constants/permissions'
 
+const Permissions = ({ permissions, setPermissions }) => {
     const handleChange = (e, type) => {
         const value = type === 'module' ? e.target.value.split(',') : [e.target.value]
         const updatedPerms = removeOrAddElementsFromArray(permissions, value)
@@ -27,8 +26,8 @@ const Permissions = ({ permissions, setPermissions }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.permissions?.length > 0 ? (
-                        data?.permissions.map((perm, idx) => (
+                    {data?.length > 0 ? (
+                        data?.map((perm, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
                                 <td className='px-2 py-2'>{transformPascal(perm.module)}</td>
                                 <td className='px-2 py-2 grid grid-cols-2 gap-2'>
@@ -57,7 +56,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                     ) : (
                         <tr className='bg-white border-b border-[#006366] border-opacity-30'>
                             <td className='px-2 py-2' colSpan={2}>
-                                {error ? 'Failed to Load permissions' : 'No Permissions Found'}
+                                No Permissions Found
                             </td>
                         </tr>
                     )}

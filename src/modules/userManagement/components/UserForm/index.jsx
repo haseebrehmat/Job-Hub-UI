@@ -8,7 +8,7 @@ import { RolesDropdown } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
 import { userSchema } from '@utils/schemas'
-import { getMsg } from '@utils/helpers'
+import { can, getMsg } from '@utils/helpers'
 import { TrashIcon } from '@icons'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
@@ -76,7 +76,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                         <Button label='Cancel' onClick={() => setShow(false)} />
 
                         {CustomModal}
-                        {user?.id && (
+                        {can('delete_user') && user?.id && (
                             <Button
                                 label='Delete'
                                 classes='bg-transparent text-red-500 border-red-500'
