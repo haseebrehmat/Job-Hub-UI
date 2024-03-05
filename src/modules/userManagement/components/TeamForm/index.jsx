@@ -12,6 +12,7 @@ import { teamSchema } from '@utils/schemas'
 import { getMsg, parseUsers } from '@utils/helpers'
 import RoleUsersDropdown from '../ReportingToDropdown'
 import { TrashIcon } from '@icons'
+import { can } from '@/utils/helpers'
 
 const TeamForm = ({ show, setShow, mutate, team }) => {
     const [role, setRole] = useState(team?.reporting_to?.roles)
@@ -84,15 +85,16 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
                     <div className='pt-4 space-y-2'>
                         <Button label={team?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
-                        {CustomModal}
-                        {team?.id && (
+                        {/* {CustomModal}
+
+                        {can('delete_team') && team?.id && (
                             <Button
                                 label='Delete'
                                 classes='bg-transparent text-red-500 border-red-500'
                                 icon={TrashIcon}
                                 onClick={openModal}
                             />
-                        )}
+                        )} */}
                     </div>
                 </div>
             </form>

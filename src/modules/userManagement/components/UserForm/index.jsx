@@ -75,7 +75,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                         <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
 
-                        {CustomModal}
+                        {/* {CustomModal}
                         {can('delete_user') && user?.id && (
                             <Button
                                 label='Delete'
@@ -83,7 +83,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                                 icon={TrashIcon}
                                 onClick={openModal}
                             />
-                        )}
+                        )} */}
                     </div>
                 </div>
             </form>

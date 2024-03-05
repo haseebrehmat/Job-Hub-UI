@@ -2,7 +2,6 @@ import { useState, memo, useEffect } from 'react'
 import Selector from './components/Selector'
 import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
-import jwt_decode from 'jwt-decode'
 import CustomSelector from '../../components/CustomSelector'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
@@ -10,7 +9,6 @@ import { can } from '@/utils/helpers'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
-    const { role } = jwt_decode(localStorage.getItem('token'))
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const [techStackData, setTechStackData] = useState([])
@@ -40,7 +38,7 @@ const JobsFilter = memo(() => {
 
     const [recordFound, setRecordFound] = useState(true)
 
-    const fetchJobsData = url => {
+    const fetchJobsData = async url => {
         const params = new URLSearchParams()
         let params_count = 0
 
@@ -52,41 +50,37 @@ const JobsFilter = memo(() => {
         }
 
         url = params_count > 0 ? `${url}?${params.toString()}` : url
-        console.log(url)
         setData([])
-        fetch(url, {
+
+        const response = await fetch(url, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
             },
         })
-            .then(resp => {
-                if (!resp.ok) {
-                    throw Error(resp)
-                }
-                return resp.json()
+        const json = await response.json()
+
+        if (response.ok) {
+            setStats({
+                ...stats,
+                total_jobs: json.total_jobs,
+                filtered_jobs: json.filtered_jobs,
             })
-            .then(resp => {
-                setStats({
-                    ...stats,
-                    total_jobs: resp.total_jobs,
-                    filtered_jobs: resp.filtered_jobs,
-                })
-                setData(resp.data)
-                if (resp.data.length === 0) {
-                    setRecordFound(false)
-                } else {
-                    setRecordFound(true)
-                }
-                setJobStatusChoice(resp.job_status_choice)
-                setTechStackData(resp.tech_keywords_count_list)
-                setJobSourceData(resp.job_source_count_list)
-                setJobTypeData(resp.total_job_type)
-                setPagesCount(resp.links.num_pages)
-            })
-            .catch(error => {
+            setData(json.data)
+            if (json.data.length === 0) {
                 setRecordFound(false)
-            })
+            } else {
+                setRecordFound(true)
+            }
+            setJobStatusChoice(json.job_status_choice)
+            setTechStackData(json.tech_keywords_count_list)
+            setJobSourceData(json.job_source_count_list)
+            setJobTypeData(json.total_job_type)
+            setPagesCount(json.links.num_pages)
+        } else {
+            setRecordFound(false)
+            toast.error(json.detail)
+        }
     }
 
     const handleJobSource = event => {
@@ -149,8 +143,8 @@ const JobsFilter = memo(() => {
         fetchJobsData(jobDetailsUrl)
     }, [jobsFilterParams])
 
-    const updateJobStatus = id => {
-        fetch(`${apiUrl}job_status/`, {
+    const updateJobStatus = async id => {
+        const response = await fetch(`${apiUrl}job_status/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -158,22 +152,19 @@ const JobsFilter = memo(() => {
             },
             body: JSON.stringify({ status: 1, job: data[id].id }),
         })
-            .then(resp => {
-                if (!resp.ok) {
-                    throw Error(resp)
-                }
-                return resp.json()
-            })
-            .then(resp => {
-                const temp_data = data.map((item, key) => (key === id ? { ...item, job_status: 1 } : item))
-                setData(temp_data)
-                toast.success('Job applied successfully!')
-            })
-            .catch(error => {
-                const temp_data = data.map((item, key) => (key === id ? { ...item, job_status: 1 } : item))
-                setData(temp_data)
-                toast.error('This job is already applied!')
-            })
+
+        const json = await response.json()
+
+        if (response.ok) {
+            const temp_data = data.map((item, key) => (key === id ? { ...item, job_status: 1 } : item))
+            setData(temp_data)
+            toast.success(json.detail)
+        } else {
+            toast.error(json.detail)
+            setTimeout(() => {
+                location.reload()
+            }, 2000)
+        }
     }
     const handlePageClick = async data => {
         setJobsFilterParams({
@@ -347,7 +338,6 @@ const JobsFilter = memo(() => {
                                         {can('change_job_status') ? (
                                             item.job_status === 0 ? (
                                                 <button
-                                                    disabled={role === 'TL'}
                                                     className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
                                                     onClick={() => updateJobStatus(key)}
                                                 >
@@ -384,8 +374,9 @@ const JobsFilter = memo(() => {
                     previousClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
                     nextClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
                     breakLinkClassName='bg-white border-gray-300 text-gray-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    activeLinkClassName='bg-green-700 text-white'
+                    activeLinkClassName='bg-green-800 text-white'
                     activeClassName='active'
+                    forcePage={jobsFilterParams.page - 1}
                 />
             )}
 

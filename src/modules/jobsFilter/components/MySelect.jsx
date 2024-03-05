@@ -19,7 +19,6 @@ export default function MySelect({ options, handleChange, selectorValue }) {
         const { index, getValue } = props
 
         const keywords_length = selectedOptions.map(obj => obj.label).join('').length
-        console.log(keywords_length)
 
         const VALUE_LIMIT = keywords_length <= 15 ? 2 : keywords_length <= 18 ? 0 : 0
         const hiddenLength = getValue().length - VALUE_LIMIT

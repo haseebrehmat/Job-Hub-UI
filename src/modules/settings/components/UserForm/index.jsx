@@ -29,7 +29,6 @@ const UserForm = ({ show, setShow, mutate, user }) => {
         () => (user?.id ? mutate('/api/auth/user/') : resetForm())
     )
 
-    console.log(user)
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
