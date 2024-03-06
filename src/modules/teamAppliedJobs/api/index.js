@@ -11,9 +11,9 @@ export const fetchTeamAppliedJobs = (page, applied_by = '') =>
                 },
             }
         )
-        .then(({ data: { data, links, filtered_jobs, team_memmbers } }) => ({
+        .then(({ data: { data, links, filtered_jobs, team_members } }) => ({
             jobs: data,
-            team_memmbers,
+            team_members,
             next: links.next,
             prev: links.previous,
             total: filtered_jobs,

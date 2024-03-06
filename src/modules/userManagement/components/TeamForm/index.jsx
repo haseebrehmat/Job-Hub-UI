@@ -9,7 +9,7 @@ import { RolesDropdown } from '@modules/userManagement/components'
 import { saveTeam, fetchRoleWiseUsers, fetchUsers } from '@modules/userManagement/api'
 
 import { teamSchema } from '@utils/schemas'
-import { getMsg, parseUsers } from '@utils/helpers'
+import { getMsg, parseMembers } from '@utils/helpers'
 import RoleUsersDropdown from '../ReportingToDropdown'
 import { TrashIcon } from '@icons'
 
@@ -72,7 +72,7 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
                             <span className='text-xs font-semibold'>Members*</span>
                             <CustomSelector
                                 name='members'
-                                options={parseUsers(fetched?.users)}
+                                options={parseMembers(fetched?.users, values.reporting_to)}
                                 handleChange={obj => setFieldValue('members', obj)}
                                 selectorValue={values.members}
                                 isMulti

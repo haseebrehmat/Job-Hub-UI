@@ -10,6 +10,7 @@ import {
     SettingIcon,
     IntegrationIcon,
     UserAppliedJobIcon,
+    TeamAppliedJobsIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -52,12 +53,12 @@ export const menuItems = [
                 svg: JobsUploaderIcon,
                 perms: ['view_job_uploader', 'upload_csv'],
             },
-            // {
-            //     label: 'Team Applied Jobs',
-            //     link: '/team-applied-jobs',
-            //     svg: TeamAppliedJobsIcon,
-            //     perms: ['view_team_applied_job', 'change_job_status'],
-            // },
+            {
+                label: 'Team Applied Jobs',
+                link: '/team-applied-jobs',
+                svg: TeamAppliedJobsIcon,
+                perms: ['view_team_applied_job', 'change_job_status'],
+            },
             {
                 label: 'Jobs Portal',
                 link: '/jobs-portal',

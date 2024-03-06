@@ -150,3 +150,6 @@ export const removeOrAddElementsFromArray = (array, elements) => {
     }
     return array
 }
+
+export const parseMembers = (members, leadId) =>
+    members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))

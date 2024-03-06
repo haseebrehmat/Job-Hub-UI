@@ -54,6 +54,8 @@ const TeamAppliedJobs = memo(() => {
             })
     }
 
+    console.log(data)
+
     return isLoading || error ? (
         <Loading />
     ) : (
@@ -66,8 +68,8 @@ const TeamAppliedJobs = memo(() => {
                     onChange={handleBdChange}
                 >
                     <option value='all'>All</option>
-                    {data?.team_memmbers?.length > 0 &&
-                        data.team_memmbers.map((item, key) => (
+                    {data?.team_members?.length > 0 &&
+                        data.team_members.map((item, key) => (
                             <option value={item.id} key={key}>
                                 {item.username}
                             </option>
