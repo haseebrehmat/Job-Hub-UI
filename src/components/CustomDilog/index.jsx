@@ -18,7 +18,6 @@ const CustomDilog = (title, description, successTrigger) => {
 
     const openModal = () => {
         setIsOpen(true)
-        console.log('open modal')
     }
 
     const afterOpenModal = () => {

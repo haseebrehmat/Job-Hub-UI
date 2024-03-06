@@ -18,7 +18,6 @@ const JobSourceBlocking = () => {
     const { data, error, isLoading, mutate } = useSWR('/api/job_portal/blacklist/jobs/', fetchBlacklistCompanies)
     const handleClick = ({ name, status, id }) => {
         setCompany({ name, status, id })
-        // console.log(error)
         setShow(!show)
     }
     if (isLoading) return <Loading />

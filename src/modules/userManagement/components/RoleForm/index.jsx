@@ -9,6 +9,7 @@ import { saveRole } from '@modules/userManagement/api'
 
 import { roleSchema } from '@utils/schemas'
 import { getMsg } from '@utils/helpers'
+import { can } from '@/utils/helpers'
 
 import { TrashIcon } from '@icons'
 
@@ -53,15 +54,17 @@ const RoleForm = ({ show, setShow, mutate, role }) => {
                     <div className='pt-2 grid grid-cols-3 gap-3'>
                         <Button label={role?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
-                        {CustomModal}
-                        {role?.id && (
+
+                        {/* {CustomModal}
+
+                        {can('delete_role') && role?.id && (
                             <Button
                                 label='Delete'
                                 classes='bg-transparent text-red-500 border-red-500'
                                 icon={TrashIcon}
                                 onClick={openModal}
                             />
-                        )}
+                        )} */}
                     </div>
                 </div>
             </form>
