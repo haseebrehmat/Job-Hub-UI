@@ -3,6 +3,10 @@ import Selector from './components/Selector'
 import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
+import { Loading, EmptyTable } from '@components'
+import { TableNavigate } from '@modules/jobsFilter/components'
+import { CreateIcon, ActionsIcons } from '@icons'
+import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can } from '@/utils/helpers'
@@ -36,6 +40,7 @@ const JobsFilter = memo(() => {
         job_visibility: 'recruiter',
     })
 
+    const error = true
     const [recordFound, setRecordFound] = useState(true)
 
     const fetchJobsData = async url => {
@@ -166,20 +171,13 @@ const JobsFilter = memo(() => {
             }, 2000)
         }
     }
-    const handlePageClick = async data => {
-        setJobsFilterParams({
-            ...jobsFilterParams,
-            page: data.selected + 1,
-        })
-    }
-
     const formatOptions = options_arr =>
         options_arr.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
+    const [page, setPage] = useState(1)
+    const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
     return (
         <div className='my-2 h-screen'>
-            <h3 className='text-center py-2 pl-4 text-[#006366] font-bold text-lg'>Jobs Portal</h3>
-
             <div className='p-3 border'>
                 <div className='flex'>
                     <input
@@ -293,35 +291,23 @@ const JobsFilter = memo(() => {
                         Filter
                     </button>
                 </div>
-            </div>
-
-            <div className='overflow-x-auto'>
-                <table className='table-auto w-full border-collapse border text-center border-slate-400 my-2'>
-                    <thead className='bg-slate-50 dark:bg-slate-700'>
-                        <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold text-slate-900 dark:text-slate-200'>
-                            <th className='p-2 text-start'>Job Title</th>
-                            <th className='d-sm-table-cell text-start d-none '>Company</th>
-                            <th className=''> Job Source</th>
-                            <th>Tech Stack</th>
-                            <th>Job Type</th>
-                            <th>Date Posted</th>
-                            <th>Status</th>
+                <table className='table-auto w-full  text-sm text-left mt-6 text-[#048C8C] '>
+                    <thead className='text-sm uppercase border tex border-[#048C8C] '>
+                        <tr>
+                            {jobsHeads.map(heading => (
+                                <th scope='col' className='px-3 py-4' key={heading}>
+                                    {heading}
+                                </th>
+                            ))}
                         </tr>
                     </thead>
-                    <tbody className='text-sm sm:text-base'>
-                        {data.length > 0 &&
+                    <tbody>
+                        {data.length > 0 && error ? (
                             data.map((item, key) => (
-                                <tr
-                                    className='border border-slate-300 dark:border-slate-700  text-slate-500 dark:text-slate-400'
-                                    key={key}
-                                >
-                                    <td className='text-start p-2 rounded shadow-sm whitespace-normal w-[30%]	'>
-                                        {item.job_title}
-                                    </td>
-                                    <td className='text-start d-sm-table-cell d-none whitespace-normal w-[150px]'>
-                                        {item.company_name}
-                                    </td>
-                                    <td className='text-center'>
+                                <tr className='bg-white border-b border-[#006366] border-opacity-30' key={key}>
+                                    <td className='px-3 py-0'>{item.job_title}</td>
+                                    <td className='px-3 py-0'>{item.company_name}</td>
+                                    <td className='px-3 py-0'>
                                         <a
                                             className='underline'
                                             target='_blank'
@@ -331,14 +317,14 @@ const JobsFilter = memo(() => {
                                             {item.job_source}
                                         </a>
                                     </td>
-                                    <td>{item.tech_keywords}</td>
-                                    <td>{item.job_type}</td>
-                                    <td>{item.job_posted_date.slice(0, 10)}</td>
-                                    <td className='flex justify-center'>
+                                    <td className='px-3 py-0'>{item.tech_keywords}</td>
+                                    <td className='px-3 py-0'>{item.job_type}</td>
+                                    <td className='px-3 py-0'>{item.job_posted_date.slice(0, 10)}</td>
+                                    <td className='px-1 py-0'>
                                         {can('change_job_status') ? (
                                             item.job_status === 0 ? (
                                                 <button
-                                                    className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
+                                                    className='block rounded px-2 py-1 my-3 bg-[#10868a] text-white'
                                                     onClick={() => updateJobStatus(key)}
                                                 >
                                                     {jobStatusChoice[item.job_status]}
@@ -349,38 +335,22 @@ const JobsFilter = memo(() => {
                                         ) : null}
                                     </td>
                                 </tr>
-                            ))}
+                            ))
+                        ) : (
+                            <EmptyTable cols={6} msg='No Jobs found yet!' />
+                        )}
                     </tbody>
                 </table>
+                {data?.length === 0 && recordFound && (
+                    <div className='flex justify-center my-2'>
+                        <ClipLoader color='#36d7b7' size={60} />
+                    </div>
+                )}
+
+                <TableNavigate data={data} page={page} handleClick={handleClick} />
+
+                {/* {!recordFound && <p className='text-center fs-4 text-danger'>Record not found!</p>} */}
             </div>
-
-            {data.length === 0 && recordFound && (
-                <div className='flex justify-center my-2'>
-                    <ClipLoader color='#36d7b7' size={60} />
-                </div>
-            )}
-
-            {recordFound && (
-                <ReactPaginate
-                    breakLabel='...'
-                    nextLabel='Next'
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageClick}
-                    pageCount={Math.ceil(pagesCount)}
-                    previousLabel='Previous'
-                    renderOnZeroPageCount={null}
-                    containerClassName='flex justify-center my-2'
-                    pageLinkClassName='bg-white border-gray-300 text-white-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    previousClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    nextClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    breakLinkClassName='bg-white border-gray-300 text-gray-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    activeLinkClassName='bg-green-800 text-white'
-                    activeClassName='active'
-                    forcePage={jobsFilterParams.page - 1}
-                />
-            )}
-
-            {!recordFound && <p className='text-center fs-4 text-danger'>Record not found!</p>}
         </div>
     )
 })
