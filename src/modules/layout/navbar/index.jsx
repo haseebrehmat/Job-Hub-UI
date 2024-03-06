@@ -16,7 +16,11 @@ const Navbar = ({ setShow, title = 'Octagon' }) => {
                         </a>
                     </li>
                     <li className=' mx-2 my-2 cursor-pointer text-teal-800'>
-                        <a type='button' onClick={() => setProfile(!profile)}>
+                        <a
+                            type='button'
+                            onMouseEnter={() => setProfile(!profile)}
+                            onMouseLeave={() => setProfile(!profile)}
+                        >
                             {NavContactIcon}
                         </a>
                         {profile && <Profile />}
