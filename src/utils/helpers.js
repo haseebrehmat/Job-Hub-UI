@@ -66,8 +66,8 @@ export const timeSince = date => {
 export const formatDate = date => new Date(date).toLocaleString()
 
 export const checkToken = () => {
-    const { exp } = decodeJwt()
-    if (Date(exp) < new Date()) {
+    const user = decodeJwt()
+    if (!user?.user_id || Date(user.exp) < new Date()) {
         removeToken()
         window.location.href = '/login'
     }

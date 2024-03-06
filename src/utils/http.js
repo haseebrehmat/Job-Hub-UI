@@ -10,11 +10,6 @@ const http = axios.create({
     headers: { Accept: 'application/json' },
 })
 
-// const localHttp = axios.create({
-//     baseURL,
-//     headers: { Accept: 'application/json' },
-// })
-
 const rawHttp = axios.create({
     baseURL,
     headers: { Accept: 'application/json' },
@@ -31,9 +26,9 @@ http.interceptors.request.use(request => {
 http.interceptors.response.use(
     response => response,
     error => {
-        checkToken()
         toast.error(getMsg(error))
-        // handle401(error)
+        checkToken()
+        handle401(error)
         Promise.reject(error)
     }
 )
