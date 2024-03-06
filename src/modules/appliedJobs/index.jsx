@@ -13,7 +13,6 @@ const AppliedJobs = memo(({ userId = '' }) => {
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
     const { data, error, isLoading } = useSWR([page, query, userId], () => fetchAppliedJobs(page, query, userId))
-
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
     if (isLoading) return <Loading />
 
