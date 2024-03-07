@@ -85,7 +85,7 @@ const JobsUploaderV2 = () => {
     return (
         <div>
             <form id='form-file-upload' onDragEnter={handleDrag} onSubmit={e => e.preventDefault()}>
-                <input ref={inputRef} type='file' id='input-file-upload' multiple onChange={handleChange} />
+                <input accept=".xlsx, .xls, .ods" required ref={inputRef} type='file' id='input-file-upload' multiple onChange={handleChange} />
                 <label id='label-file-upload' htmlFor='input-file-upload' className={dragActive ? 'drag-active' : ''}>
                     <div>
                         <button disabled={fileUploadButton} className='upload-button' onClick={()=>{onButtonClick()}}>
