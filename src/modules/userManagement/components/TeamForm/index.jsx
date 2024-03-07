@@ -6,7 +6,7 @@ import { useMutate, useDelete } from '@/hooks'
 import { Button, Drawer, Input, CustomDilog } from '@components'
 import CustomSelector from '@components/CustomSelector'
 import { RolesDropdown } from '@modules/userManagement/components'
-import { saveTeam, fetchRoleWiseUsers, fetchUsers } from '@modules/userManagement/api'
+import { saveTeam, fetchRoleWiseUsers, fetchDropdownUsers } from '@modules/userManagement/api'
 
 import { teamSchema } from '@utils/schemas'
 import { getMsg, parseMembers } from '@utils/helpers'
@@ -31,7 +31,7 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
         () => (team?.id ? mutate('/api/auth/team/') : resetForm())
     )
     const { data, isLoading: uLoading } = useSWR(`/api/auth/role_users/${role}/`, role ? fetchRoleWiseUsers : null)
-    const { data: fetched, isLoading } = useSWR(`/api/auth/user/`, fetchUsers)
+    const { data: fetched, isLoading } = useSWR('/api/auth/user/?type=dropdown', fetchDropdownUsers)
 
     const { wait, confirm } = useDelete(`/api/auth/team/${team?.id}/`)
 

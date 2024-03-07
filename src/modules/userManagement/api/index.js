@@ -61,3 +61,5 @@ export const saveTeam = (url, { arg: team }) => {
 }
 
 export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
+
+export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
