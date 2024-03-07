@@ -36,9 +36,8 @@ export const saveRole = (url, { arg: role }) => {
 export const fetchUsers = url =>
     http.get(url).then(({ data }) => ({
         users: data?.results,
-        next: data?.next,
-        prev: data?.previous,
         total: data?.count,
+        pages: data?.num_pages,
         status: 'success',
     }))
 
