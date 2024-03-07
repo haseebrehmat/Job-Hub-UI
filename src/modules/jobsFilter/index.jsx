@@ -4,12 +4,13 @@ import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
 import { Loading, EmptyTable } from '@components'
-import { TableNavigate } from '@modules/jobsFilter/components'
+import { TableNavigate, FilterForm } from '@modules/jobsFilter/components'
 import { CreateIcon, ActionsIcons } from '@icons'
 import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can } from '@/utils/helpers'
+import { Filters, Searchbox, Badge } from '@/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -176,10 +177,29 @@ const JobsFilter = memo(() => {
 
     const [page, setPage] = useState(1)
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
+
     return (
-        <div className='my-2 h-screen'>
+        <div className='my-2 h-screen text-[#048C8C] '>
+            <div className='flex items-center space-x-4 py-2'>
+                <Searchbox query={jobTitle} setQuery={setJobTitle} />
+                <Filters apply={() => runJobFilter()} clear={() => resetFilters()} />
+                <div className='flex justify-center space-x-4 my-2 grid-flow-col '>
+                    <div>
+                        <p>Total :</p>
+                        <p>Filtered :</p>
+                    </div>
+                    <div className='justify-center  grid-flow-row '>
+                        <div>
+                            <Badge label={stats.total_jobs} type='enabled' />
+                        </div>
+                        <div>
+                            <Badge label={stats.filtered_jobs} type='enabled' />
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className='p-3 border'>
-                <div className='flex'>
+                {/* <div className='flex'>
                     <input
                         type='text'
                         className='shadow appearance-none border w-full py-2 px-3 mx-2'
@@ -197,9 +217,9 @@ const JobsFilter = memo(() => {
                     >
                         Search
                     </button>
-                </div>
+                </div> */}
 
-                <div className='grid grid-cols-4 gap-3'>
+                <div className='grid grid-cols-3 -my-2 gap-3'>
                     <div className='my-2'>
                         From
                         <input
@@ -274,83 +294,67 @@ const JobsFilter = memo(() => {
                         />
                     </div>
                 </div>
-
-                <div className='flex justify-center space-x-5 my-2'>
-                    <div>
-                        <h3>Total Jobs: {stats.total_jobs}</h3>
-                    </div>
-                    <div>
-                        <h3>Filtered Jobs: {stats.filtered_jobs}</h3>
-                    </div>
-                </div>
-                <div className='col-md-4 col-12 flex justify-center space-x-5'>
-                    <button className='px-4 py-2 block rounded bg-amber-600 text-white' onClick={resetFilters}>
-                        Reset
-                    </button>
-                    <button className='px-4 py-2 block rounded bg-blue-600 text-white' onClick={runJobFilter}>
-                        Filter
-                    </button>
-                </div>
-                <table className='table-auto w-full  text-sm text-left mt-6 text-[#048C8C] '>
-                    <thead className='text-sm uppercase border tex border-[#048C8C] '>
-                        <tr>
-                            {jobsHeads.map(heading => (
-                                <th scope='col' className='px-3 py-4' key={heading}>
-                                    {heading}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.length > 0 && error ? (
-                            data.map((item, key) => (
-                                <tr className='bg-white border-b border-[#006366] border-opacity-30' key={key}>
-                                    <td className='px-3 py-0'>{item.job_title}</td>
-                                    <td className='px-3 py-0'>{item.company_name}</td>
-                                    <td className='px-3 py-0'>
-                                        <a
-                                            className='underline'
-                                            target='_blank'
-                                            rel='noreferrer'
-                                            href={item.job_source_url}
-                                        >
-                                            {item.job_source}
-                                        </a>
-                                    </td>
-                                    <td className='px-3 py-0'>{item.tech_keywords}</td>
-                                    <td className='px-3 py-0'>{item.job_type}</td>
-                                    <td className='px-3 py-0'>{item.job_posted_date.slice(0, 10)}</td>
-                                    <td className='px-1 py-0'>
-                                        {can('change_job_status') ? (
-                                            item.job_status === 0 ? (
-                                                <button
-                                                    className='block rounded px-2 py-1 my-3 bg-[#10868a] text-white'
-                                                    onClick={() => updateJobStatus(key)}
-                                                >
-                                                    {jobStatusChoice[item.job_status]}
-                                                </button>
-                                            ) : (
-                                                jobStatusChoice[item.job_status]
-                                            )
-                                        ) : null}
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <EmptyTable cols={6} msg='No Jobs found yet!' />
-                        )}
-                    </tbody>
-                </table>
-                {data?.length === 0 && recordFound && (
-                    <div className='flex justify-center my-2'>
-                        <ClipLoader color='#36d7b7' size={60} />
-                    </div>
-                )}
-
-                <TableNavigate data={data} page={page} handleClick={handleClick} />
-
-                {/* {!recordFound && <p className='text-center fs-4 text-danger'>Record not found!</p>} */}
             </div>
+            <table className='table-auto w-full  text-sm text-left mt-6 text-[#048C8C] '>
+                <thead className='text-sm uppercase border tex border-[#048C8C] '>
+                    <tr>
+                        {jobsHeads.map(heading => (
+                            <th scope='col' className='px-3 py-4' key={heading}>
+                                {heading}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.length > 0 && error ? (
+                        data.map((item, key) => (
+                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={key}>
+                                <td className='px-3 py-0'>{item.job_title}</td>
+                                <td className='px-3 py-0'>{item.company_name}</td>
+                                <td className='px-3 py-0'>
+                                    <a
+                                        className='underline'
+                                        target='_blank'
+                                        rel='noreferrer'
+                                        href={item.job_source_url}
+                                    >
+                                        {item.job_source}
+                                    </a>
+                                </td>
+                                <td className='px-3 py-0'>{item.tech_keywords}</td>
+                                <td className='px-3 py-0'>{item.job_type}</td>
+                                <td className='px-3 py-0'>{item.job_posted_date.slice(0, 10)}</td>
+                                <td className='px-1 py-0'>
+                                    {can('change_job_status') ? (
+                                        item.job_status === 0 ? (
+                                            <button
+                                                className='block rounded px-2 py-1 my-3 bg-[#10868a] text-white'
+                                                onClick={() => updateJobStatus(key)}
+                                            >
+                                                {jobStatusChoice[item.job_status]}
+                                            </button>
+                                        ) : (
+                                            <button className='block rounded px-2 py-1 my-3 text-gray-400 bg-[#ffffff] '>
+                                                {jobStatusChoice[item.job_status]}
+                                            </button>
+                                        )
+                                    ) : null}
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <EmptyTable cols={6} msg='No Jobs found yet!' />
+                    )}
+                </tbody>
+            </table>
+            {data?.length === 0 && recordFound && (
+                <div className='flex justify-center my-2'>
+                    <ClipLoader color='#36d7b7' size={60} />
+                </div>
+            )}
+
+            <TableNavigate data={data} page={page} handleClick={handleClick} />
+            {/* {!recordFound && <p className='text-center fs-4 text-danger'>Record not found!</p>} */}
         </div>
     )
 })
