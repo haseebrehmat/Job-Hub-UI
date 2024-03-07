@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
 import { Loading, EmptyTable } from '@components'
-import { TableNavigate, FilterForm } from '@modules/jobsFilter/components'
+import { TableNavigate } from '@modules/jobsFilter/components'
 import { CreateIcon, ActionsIcons } from '@icons'
 import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
@@ -179,24 +179,10 @@ const JobsFilter = memo(() => {
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     return (
-        <div className='my-2 h-screen text-[#048C8C] '>
-            <div className='flex items-center space-x-4 py-2'>
+        <div className='my-2  h-screen text-[#048C8C] '>
+            <div className='flex p-3 items-center py-2 justify-between '>
                 <Searchbox query={jobTitle} setQuery={setJobTitle} />
                 <Filters apply={() => runJobFilter()} clear={() => resetFilters()} />
-                <div className='flex justify-center space-x-4 my-2 grid-flow-col '>
-                    <div>
-                        <p>Total :</p>
-                        <p>Filtered :</p>
-                    </div>
-                    <div className='justify-center  grid-flow-row '>
-                        <div>
-                            <Badge label={stats.total_jobs} type='enabled' />
-                        </div>
-                        <div>
-                            <Badge label={stats.filtered_jobs} type='enabled' />
-                        </div>
-                    </div>
-                </div>
             </div>
             <div className='p-3 border'>
                 {/* <div className='flex'>
@@ -220,26 +206,29 @@ const JobsFilter = memo(() => {
                 </div> */}
 
                 <div className='grid grid-cols-3 -my-2 gap-3'>
-                    <div className='my-2'>
-                        From
-                        <input
-                            className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
-                            type='date'
-                            max={new Date().toISOString().slice(0, 10)}
-                            value={dates.from_date}
-                            onChange={event => setDates({ ...dates, from_date: event.target.value })}
-                        />
+                    <div className='grid grid-cols-2  gap-3'>
+                        <div className='my-2'>
+                            From
+                            <input
+                                className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
+                                type='date'
+                                max={new Date().toISOString().slice(0, 10)}
+                                value={dates.from_date}
+                                onChange={event => setDates({ ...dates, from_date: event.target.value })}
+                            />
+                        </div>
+                        <div className='my-2'>
+                            To
+                            <input
+                                className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
+                                type='date'
+                                max={new Date().toISOString().slice(0, 10)}
+                                value={dates.to_date}
+                                onChange={event => setDates({ ...dates, to_date: event.target.value })}
+                            />
+                        </div>
                     </div>
-                    <div className='my-2'>
-                        To
-                        <input
-                            className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
-                            type='date'
-                            max={new Date().toISOString().slice(0, 10)}
-                            value={dates.to_date}
-                            onChange={event => setDates({ ...dates, to_date: event.target.value })}
-                        />
-                    </div>
+
                     <div className='my-2'>
                         Listings
                         <Selector
@@ -292,6 +281,21 @@ const JobsFilter = memo(() => {
                             isMulti
                             placeholder='Select Tech Stack'
                         />
+                    </div>
+
+                    <div className='flex space-x-4 my-2 grid-flow-col '>
+                        <div>
+                            <p className=' font-medium text-2xl '>Total :</p>
+                            <p className=' font-medium text-2xl '>Filtered :</p>
+                        </div>
+                        <div className='justify-center  grid-flow-row '>
+                            <div className=' h-8 '>
+                                <Badge label={stats.total_jobs} type='enabled' />
+                            </div>
+                            <div>
+                                <Badge label={stats.filtered_jobs} type='enabled' />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -354,7 +358,6 @@ const JobsFilter = memo(() => {
             )}
 
             <TableNavigate data={data} page={page} handleClick={handleClick} />
-            {/* {!recordFound && <p className='text-center fs-4 text-danger'>Record not found!</p>} */}
         </div>
     )
 })
