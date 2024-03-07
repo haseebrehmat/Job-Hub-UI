@@ -335,7 +335,7 @@ const JobsFilter = memo(() => {
                                     <td>{item.job_type}</td>
                                     <td>{item.job_posted_date.slice(0, 10)}</td>
                                     <td className='flex justify-center'>
-                                        {can('change_job_status') ? (
+                                        {can('apply_job') ? (
                                             item.job_status === 0 ? (
                                                 <button
                                                     className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
@@ -374,7 +374,7 @@ const JobsFilter = memo(() => {
                     previousClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
                     nextClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
                     breakLinkClassName='bg-white border-gray-300 text-gray-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    activeLinkClassName='bg-green-800 text-white'
+                    activeLinkClassName='bg-cyan-700 text-white'
                     activeClassName='active'
                     forcePage={jobsFilterParams.page - 1}
                 />
