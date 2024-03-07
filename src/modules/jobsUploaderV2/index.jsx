@@ -8,6 +8,8 @@ const JobsUploaderV2 = () => {
     // drag state
     const upload_job_url = `${baseURL}api/job_portal/upload_data/`
     const [dragActive, setDragActive] = useState(false)
+    const [buttonDisable, setButtonDisable] = useState(true)
+    const [fileUploadButton, setFileUploadButton] = useState(false)
     // ref
     const inputRef = useRef(null)
     // upload files
@@ -34,7 +36,8 @@ const JobsUploaderV2 = () => {
         setDragActive(false)
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
             // handleFiles(e.dataTransfer.files);
-            setUploadFiles(e.dataTransfer.files)
+            setUploadFiles([...e.dataTransfer.files])
+            setButtonDisable(false)
         }
     }
 
@@ -43,8 +46,8 @@ const JobsUploaderV2 = () => {
         e.preventDefault()
         console.log(e.target.value)
         if (e.target.files && e.target.files[0]) {
-            setUploadFiles(e.target.files)
-            // handleFiles(e.target.files);
+            setUploadFiles([...e.target.files])
+            setButtonDisable(false)
         }
     }
 
@@ -55,7 +58,6 @@ const JobsUploaderV2 = () => {
 
     const uploadButtonHandle = async event => {
         event.preventDefault()
-
         const formData = new FormData()
         for (let i = 0; i < uploadFiles.length; i++) {
             formData.append(`file_upload`, uploadFiles[i])
@@ -68,7 +70,6 @@ const JobsUploaderV2 = () => {
                 Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
             },
         })
-
         const json = await response.json()
         if (response.ok) {
             toast.success(json.detail)
@@ -76,7 +77,8 @@ const JobsUploaderV2 = () => {
             setUploadFiles([])
             toast.error(json.detail)
         }
-
+        setFileUploadButton(false)
+        setUploadFiles([])
         return false
     }
 
@@ -86,7 +88,7 @@ const JobsUploaderV2 = () => {
                 <input ref={inputRef} type='file' id='input-file-upload' multiple onChange={handleChange} />
                 <label id='label-file-upload' htmlFor='input-file-upload' className={dragActive ? 'drag-active' : ''}>
                     <div>
-                        <button className='upload-button' onClick={onButtonClick}>
+                        <button disabled={fileUploadButton} className='upload-button' onClick={()=>{onButtonClick()}}>
                             Upload a file
                         </button>
                     </div>
@@ -101,13 +103,27 @@ const JobsUploaderV2 = () => {
                     />
                 )}
             </form>
-            <div className='flex justify-center'>
-                {Array.from(uploadFiles).forEach(file => (
-                    <div className='py-2' id={file.name}> hello {file.name} </div>
+            <div className='justify-center'>
+                {uploadFiles.map((item, i) => (
+                    <div className='list-item' key={i}>
+                        {item.name}
+                    </div>
                 ))}
             </div>
             <div className='flex justify-center'>
-                <Button label='Upload Files' type='submit' fill onClick={e => uploadButtonHandle(e)} />
+                <button
+                    disabled = {buttonDisable}
+                    className={`${
+                        buttonDisable ? 'text-black bg-[#a1a1aa]' : 'text-white bg-[#048C8C] hover:bg-[#048C6D]'
+                    }  py-2 px-4 rounded`}
+                    type='submit'
+                    onClick={e => {
+                        setButtonDisable(true)
+                        setFileUploadButton(true)
+                        uploadButtonHandle(e)}}
+                >
+                    Upload Files
+                </button>
             </div>
         </div>
     )
