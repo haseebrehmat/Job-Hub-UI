@@ -3,6 +3,7 @@ import './index.css'
 import { toast } from 'react-hot-toast'
 import { Button } from '@/components'
 import { baseURL } from '@utils/http'
+import { UploadIcon } from '@icons'
 
 const JobsUploaderV2 = () => {
     // drag state
@@ -83,47 +84,79 @@ const JobsUploaderV2 = () => {
     }
 
     return (
-        <div>
-            <form id='form-file-upload' onDragEnter={handleDrag} onSubmit={e => e.preventDefault()}>
-                <input accept=".xlsx, .xls, .ods" required ref={inputRef} type='file' id='input-file-upload' multiple onChange={handleChange} />
-                <label id='label-file-upload' htmlFor='input-file-upload' className={dragActive ? 'drag-active' : ''}>
+        <div className='flex flex-col border shadow	text-[#006366] py-8'>
+            <div className='flex flex-row mx-auto'>
+                <div className='mr-1 my-12 '>
+                    <button
+                        disabled={buttonDisable}
+                        className={`${
+                            buttonDisable
+                                ? 'text-[#66666d] bg-[#dddde0] text-sm'
+                                : 'text-white bg-[#048C8C] hover:bg-[#048C6D]'
+                        }  py-2 px-4 rounded h-10`}
+                        type='submit'
+                        onClick={e => {
+                            setButtonDisable(true)
+                            setFileUploadButton(true)
+                            uploadButtonHandle(e)
+                        }}
+                    >
+                        <span>Upload</span>
+                    </button>
+                </div>
+                <div className='flex flex-col justify-center mx-auto border p-3 '>
                     <div>
-                        <button disabled={fileUploadButton} className='upload-button' onClick={()=>{onButtonClick()}}>
-                            Upload a file
-                        </button>
+                        <form id='form-file-upload' onDragEnter={handleDrag} onSubmit={e => e.preventDefault()}>
+                            <input
+                                accept='.xlsx, .xls, .ods'
+                                required
+                                ref={inputRef}
+                                type='file'
+                                id='input-file-upload'
+                                multiple
+                                onChange={handleChange}
+                            />
+                            <label
+                                id='label-file-upload'
+                                htmlFor='input-file-upload'
+                                className={dragActive ? 'drag-active' : ''}
+                            >
+                                <div className='flex px-12 h-32 py-12 align-item-middle '>
+                                    <button
+                                        disabled={fileUploadButton}
+                                        className='upload-button'
+                                        onClick={() => {
+                                            onButtonClick()
+                                        }}
+                                    >
+                                        <div className='flex'>
+                                            <span className='px-2'> {UploadIcon}</span>
+                                            <span>drag,drop,select files?csv.xlsx.xls.ods </span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </label>
+
+                            {dragActive && (
+                                <div
+                                    id='drag-file-element'
+                                    onDragEnter={handleDrag}
+                                    onDragLeave={handleDrag}
+                                    onDragOver={handleDrag}
+                                    onDrop={handleDrop}
+                                />
+                            )}
+                        </form>
                     </div>
-                </label>
-                {dragActive && (
-                    <div
-                        id='drag-file-element'
-                        onDragEnter={handleDrag}
-                        onDragLeave={handleDrag}
-                        onDragOver={handleDrag}
-                        onDrop={handleDrop}
-                    />
-                )}
-            </form>
-            <div className='justify-center'>
-                {uploadFiles.map((item, i) => (
-                    <div className='list-item' key={i}>
-                        {item.name}
+                    <div className='text-xs flex flex-col items-start p-3'>
+                        {uploadFiles.map((item, i) => (
+                            <div className='flex justify-between items-center w-full gap-5' key={i}>
+                                <span className='py-2'>{item.name}</span>
+                                <span className='py-2'>{UploadIcon}</span>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            <div className='flex justify-center'>
-                <button
-                    disabled = {buttonDisable}
-                    className={`${
-                        buttonDisable ? 'text-black bg-[#a1a1aa]' : 'text-white bg-[#048C8C] hover:bg-[#048C6D]'
-                    }  py-2 px-4 rounded`}
-                    type='submit'
-                    onClick={e => {
-                        setButtonDisable(true)
-                        setFileUploadButton(true)
-                        uploadButtonHandle(e)}}
-                >
-                    Upload Files
-                </button>
+                </div>
             </div>
         </div>
     )
