@@ -15,7 +15,7 @@ const Button = memo(
         <button
             type={type}
             className={`w-${fit ? 'fit' : 'full'} ${
-                fill ? 'text-white bg-[#048C8C]' : 'text-[#048C8C]'
+                fill ? 'text-white bg-[#048C8C] hover:bg-[#10a5a5]' : 'text-[#048C8C]'
             } border border-cyan-600 font-medium rounded-lg text-sm px-2 py-2 text-center ${
                 icon || svg ? 'flex items-center justify-center' : 'hover:text-white hover:bg-[#048C8C]'
             } ${classes}`}
