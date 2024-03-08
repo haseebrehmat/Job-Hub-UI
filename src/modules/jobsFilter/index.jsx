@@ -269,6 +269,7 @@ const JobsFilter = memo(() => {
                         >
                             <option value='recruiter'>Recruiter</option>
                             <option value='non-recruiter'>Non-Recruriter</option>
+                            <option value='non-recruiter'>All</option>
                         </select>
                     </div>
                     <div className='my-2'>
@@ -343,6 +344,19 @@ const JobsFilter = memo(() => {
                                             </button>
                                         )
                                     ) : null}
+                                </td>
+                                <td className='px-3 py-0'>
+                                    <span className='flex justify-center'>
+                                        <input
+                                            id={'checkbox'}
+                                            type='checkbox'
+                                            name='permissions'
+                                            defaultValue={''}
+                                            defaultChecked={''}
+                                            onChange={''}
+                                            className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
+                                        />
+                                    </span>
                                 </td>
                             </tr>
                         ))
