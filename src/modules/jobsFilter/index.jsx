@@ -1,10 +1,9 @@
-import { useState, memo, useEffect } from 'react'
+import { useState, memo, useEffect, useMemo } from 'react'
 import Selector from './components/Selector'
 import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
-import { Loading, EmptyTable } from '@components'
-import { TableNavigate } from '@modules/jobsFilter/components'
+import { Loading, EmptyTable, Paginated } from '@components'
 import { CreateIcon, ActionsIcons } from '@icons'
 import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
@@ -14,6 +13,7 @@ import { Filters, Searchbox, Badge } from '@/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
+    const [page, setPage] = useState(1)
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const [techStackData, setTechStackData] = useState([])
@@ -26,13 +26,12 @@ const JobsFilter = memo(() => {
     const [stats, setStats] = useState({ total_jobs: 0, filtered_jobs: 0 })
     const [jobStatusChoice, setJobStatusChoice] = useState({})
     const [dates, setDates] = useState({ from_date: '', to_date: '' })
-    const jobDetailsUrl = `${apiUrl}job_details/`
+    const jobDetailsUrl = `${apiUrl}job_details/?page=${page}`
     const [jobTitle, setJobTitle] = useState('')
     const [ordering, setOrdering] = useState('job_posted_date')
     const [jobsFilterParams, setJobsFilterParams] = useState({
         job_source: '',
         tech_keywords: '',
-        page: 1,
         from_date: '',
         to_date: '',
         job_type: '',
@@ -47,7 +46,7 @@ const JobsFilter = memo(() => {
     const fetchJobsData = async url => {
         const params = new URLSearchParams()
         let params_count = 0
-
+        
         for (const i in jobsFilterParams) {
             if (jobsFilterParams[i] !== '') {
                 params.append(i, jobsFilterParams[i])
@@ -55,7 +54,7 @@ const JobsFilter = memo(() => {
             }
         }
 
-        url = params_count > 0 ? `${url}?${params.toString()}` : url
+        url = params_count > 0 ? `${url}&${params.toString()}` : url
         setData([])
 
         const response = await fetch(url, {
@@ -105,7 +104,6 @@ const JobsFilter = memo(() => {
             ...jobsFilterParams,
             tech_keywords: techStackValues,
             job_source,
-            page: 1,
             ordering,
             job_visibility: jobVisibilitySelector,
             from_date: dates.from_date,
@@ -132,7 +130,6 @@ const JobsFilter = memo(() => {
         setJobsFilterParams({
             job_source: '',
             tech_keywords: '',
-            page: 1,
             from_date: '',
             to_date: '',
             job_type: '',
@@ -147,7 +144,7 @@ const JobsFilter = memo(() => {
     }
     useEffect(() => {
         fetchJobsData(jobDetailsUrl)
-    }, [jobsFilterParams])
+    }, [jobsFilterParams, page])
 
     const updateJobStatus = async id => {
         const response = await fetch(`${apiUrl}job_status/`, {
@@ -175,8 +172,6 @@ const JobsFilter = memo(() => {
     const formatOptions = options_arr =>
         options_arr.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
-    const [page, setPage] = useState(1)
-    const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     return (
         <div className='my-2  h-screen text-[#048C8C] '>
@@ -348,12 +343,12 @@ const JobsFilter = memo(() => {
                                 <td className='px-3 py-0'>
                                     <span className='flex justify-center'>
                                         <input
-                                            id={'checkbox'}
+                                            id='checkbox'
                                             type='checkbox'
                                             name='permissions'
-                                            defaultValue={''}
-                                            defaultChecked={''}
-                                            onChange={''}
+                                            defaultValue=''
+                                            defaultChecked=''
+                                            onChange=''
                                             className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
                                         />
                                     </span>
@@ -371,7 +366,7 @@ const JobsFilter = memo(() => {
                 </div>
             )}
 
-            <TableNavigate data={data} page={page} handleClick={handleClick} />
+            <Paginated page={page} setPage={setPage} pages={pagesCount} />
         </div>
     )
 })
