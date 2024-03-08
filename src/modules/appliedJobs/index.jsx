@@ -23,7 +23,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                 query={query}
                 setQuery={setQuery}
                 setPage={setPage}
-                last12HoursJobsCount={data.last_12_hours_count}
+                last12HoursJobsCount={data?.last_12_hours_count}
             />
             <table className='table-auto w-full text-sm text-left text-gray-500'>
                 <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
