@@ -10,7 +10,7 @@ export const removeToken = () => localStorage.removeItem('token')
 
 export const decodeJwt = () => (getToken() ? jwt_decode(getToken()) : { user: null })
 
-export const getMsg = error => error?.response?.data?.detail || 'Wurr gy bhai, Server nahi chal raha'
+export const getMsg = error => error?.response?.data?.detail || 'Server error'
 
 export const getBaseUrl = nodeEnv => {
     switch (nodeEnv) {
@@ -67,7 +67,11 @@ export const formatDate = date => new Date(date).toLocaleString()
 
 export const checkToken = () => {
     const user = decodeJwt()
-    if (!user?.user_id || Date(user.exp) < new Date()) {
+    if (!user?.user_id) {
+        removeToken()
+        window.location.href = '/login'
+    }
+    if (user.exp < Math.round(new Date().getTime() / 1000)) {
         removeToken()
         window.location.href = '/login'
     }
@@ -132,6 +136,8 @@ export const can = permissionKey => {
     }
     return perms?.includes(permissionKey)
 }
+
+export const have = (value, inArray) => value.some(key => inArray?.includes(key))
 
 export const transformPascal = str => str.replace(/([a-z])([A-Z])/g, '$1 $2')
 
