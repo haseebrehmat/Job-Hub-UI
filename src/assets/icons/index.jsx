@@ -7,6 +7,8 @@ import {
     MdOutlineVerifiedUser,
     MdOutlineKeyboardArrowDown,
     MdWorkOutline,
+    MdArrowBackIos,
+    MdArrowForwardIos,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -18,8 +20,9 @@ import {
     BsSnow3,
     BsCollectionFill,
     BsThreeDotsVertical,
+    BsFillKeyFill,
 } from 'react-icons/bs'
-import { HiUser, HiUsers, HiOutlineFilter, HiOutlineUsers } from 'react-icons/hi'
+import { HiUser, HiUsers, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
 import { TbRefresh } from 'react-icons/tb'
@@ -88,3 +91,6 @@ export const IntegrationIcon = <Integrations />
 export const ResetFiltersSvg = <ResetFilters />
 export const PermissionIcon = <RiLock2Fill style={{ fontSize: '22px' }} />
 export const UserAppliedJobIcon = <MdWorkOutline style={{ fontSize: '22px' }} />
+export const PageNext = <MdArrowForwardIos style={{ fontSize: 16 }} />
+export const PagePrev = <MdArrowBackIos style={{ fontSize: 16 }} />
+export const UpdatePasswordIcon = <BsFillKeyFill style={{ fontSize: '22px' }} />

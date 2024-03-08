@@ -12,6 +12,7 @@ import Roles from '@modules/userManagement/roles'
 import Users from '@modules/userManagement/users'
 import Teams from '@modules/userManagement/teams'
 import Integrations from '@modules/settings/integrations'
+import Profile from '@modules/profile'
 
 export {
     TeamAppliedJobs,
@@ -29,4 +30,5 @@ export {
     Users,
     Integrations,
     JobSourceBlocking,
+    Profile,
 }

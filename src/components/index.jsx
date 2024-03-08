@@ -16,6 +16,7 @@ import Drawer from '@components/Drawer'
 import Checkbox from '@components/Checkbox'
 import Profile from '@components/Profile'
 import CustomDilog from '@components/CustomDilog'
+import Paginated from '@components/Paginated'
 
 export {
     Badge,
@@ -27,6 +28,7 @@ export {
     Switch,
     Protected,
     Pagination,
+    Paginated,
     Limits,
     Loading,
     StatCard,
