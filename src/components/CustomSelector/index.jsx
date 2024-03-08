@@ -39,10 +39,10 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
     const styles = {
         control: (base, state) => ({
             ...base,
-            borderRadius: 5,
-            fontSize: 16,
+            borderRadius: 8,
+            fontSize: 18,
             color: '#048C8C',
-            borderColor: state.isFocused ? '#0EB3AD' : '#0EB3AD',
+            borderColor: state.isFocused ? '#048C8C' : '#048C8C ',
             boxShadow: state.isFocused ? '0 0 0 1px #048C8C' : '',
             '&:hover': {
                 borderColor: '#048C8C',

@@ -34,10 +34,10 @@ const JobsUploader = () => {
         } else {
             toast.error(detail)
         }
+
         setFiles([])
-        event.target.files = ''
         setSpinnerFlag(false)
-        // return false
+        return false
     }
 
     return (

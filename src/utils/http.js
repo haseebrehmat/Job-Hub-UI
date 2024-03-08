@@ -41,18 +41,4 @@ rawHttp.interceptors.request.use(request => {
     return request
 })
 
-const scrapperHttp = axios.create({
-    baseURL,
-    headers: {
-        Accept: 'application/json',
-    },
-})
-
-const teamAppliedJobsHttp = axios.create({
-    baseURL,
-    headers: {
-        Accept: 'application/json',
-    },
-})
-
-export { http, rawHttp, baseURL, scrapperHttp, teamAppliedJobsHttp }
+export { http, rawHttp, baseURL }
