@@ -49,5 +49,6 @@ module.exports = {
         'import/extensions': 'off',
         'jsx-a11y/no-noninteractive-element-interactions': 'off',
         'no-nested-ternary': 'off',
+        'react/style-prop-object': 'off',
     },
 }
