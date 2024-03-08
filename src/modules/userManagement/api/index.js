@@ -36,9 +36,8 @@ export const saveRole = (url, { arg: role }) => {
 export const fetchUsers = url =>
     http.get(url).then(({ data }) => ({
         users: data?.results,
-        next: data?.next,
-        prev: data?.previous,
         total: data?.count,
+        pages: data?.num_pages,
         status: 'success',
     }))
 
@@ -62,3 +61,5 @@ export const saveTeam = (url, { arg: team }) => {
 }
 
 export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
+
+export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))

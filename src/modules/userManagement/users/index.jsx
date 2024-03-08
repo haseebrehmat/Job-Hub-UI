@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Searchbox, EmptyTable, Filters, Button } from '@components'
+import { Loading, Searchbox, EmptyTable, Filters, Button, Paginated } from '@components'
 
 import { UserForm } from '@modules/userManagement/components'
 import { fetchUsers } from '@modules/userManagement/api'
@@ -9,13 +9,14 @@ import { fetchUsers } from '@modules/userManagement/api'
 import { userHeads } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
-import { can } from '@/utils/helpers'
+import { can } from '@utils/helpers'
 
 const Users = () => {
     const [query, setQuery] = useState()
     const [user, setUser] = useState()
+    const [page, setPage] = useState(1)
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/user/', fetchUsers)
+    const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}`, fetchUsers)
     const handleClick = ({ username, email, roles, id }) => {
         setUser({ username, email, roles, id })
         setShow(!show)
@@ -63,6 +64,11 @@ const Users = () => {
                     )}
                 </tbody>
             </table>
+            {data?.users?.length > 0 && (
+                <div className='w-full'>
+                    <Paginated pages={data?.pages ?? Math.ceil(data.total / 25)} setPage={setPage} page={page} />
+                </div>
+            )}
             {show && can('edit_user') && <UserForm show={show} setShow={setShow} mutate={mutate} user={user} />}
         </div>
     )
