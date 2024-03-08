@@ -3,7 +3,7 @@ import Selector from './components/Selector'
 import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
-import { Loading, EmptyTable, Paginated } from '@components'
+import { Loading, EmptyTable, Paginated, CustomDilog } from '@components'
 import { CreateIcon, ActionsIcons, Checkedbox, unCheckedbox } from '@icons'
 import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
@@ -15,6 +15,7 @@ const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
     const [page, setPage] = useState(1)
     const [data, setData] = useState([])
+    const [currentJob, setCurrentJob] = useState()
     const [pagesCount, setPagesCount] = useState([])
     const [techStackData, setTechStackData] = useState([])
     const [jobSourceData, setJobSourceData] = useState([])
@@ -169,8 +170,15 @@ const JobsFilter = memo(() => {
             }, 2000)
         }
     }
+
     const formatOptions = options_arr =>
         options_arr.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
+
+    const { CustomModal, openModal } = CustomDilog(
+        'Confirm delete?',
+        `Are you sure want to delete the role:  `,
+        updateJobStatus(currentJob)
+    )
 
     return (
         <div className='my-2  h-screen text-[#048C8C] '>
@@ -339,10 +347,11 @@ const JobsFilter = memo(() => {
                                         )
                                     ) : null}
                                 </td>
+                                {CustomModal}
                                 <td className='px-3 py-0'>
                                     <span className='flex justify-center'>
                                         {item.job_status === 0 ? (
-                                            <button className='' onClick={() => updateJobStatus(key)}>
+                                            <button className='' onClick={(openModal)}>
                                                 {Checkedbox}
                                             </button>
                                         ) : (
