@@ -20,6 +20,7 @@ import {
     BsSnow3,
     BsCollectionFill,
     BsThreeDotsVertical,
+    BsFillKeyFill,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
@@ -92,3 +93,4 @@ export const PermissionIcon = <RiLock2Fill style={{ fontSize: '22px' }} />
 export const UserAppliedJobIcon = <MdWorkOutline style={{ fontSize: '22px' }} />
 export const PageNext = <MdArrowForwardIos style={{ fontSize: 16 }} />
 export const PagePrev = <MdArrowBackIos style={{ fontSize: 16 }} />
+export const UpdatePasswordIcon = <BsFillKeyFill style={{ fontSize: '22px' }} />

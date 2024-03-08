@@ -1,7 +1,7 @@
 import useSWRMutation from 'swr/mutation'
 import { useFormik } from 'formik'
 
-const useMutate = (url, api, initial, schema, onSubmit, onError, onSuccess) => {
+const useMutate = (url, api, initial, schema, onSubmit, onError, onSuccess = null) => {
     const { trigger } = useSWRMutation(url, api, {
         onError,
         onSuccess,

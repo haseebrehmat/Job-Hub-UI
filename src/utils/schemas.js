@@ -52,3 +52,16 @@ export const teamSchema = Yup.object().shape({
     reporting_to: Yup.string().required('Please select reporting to'),
     members: Yup.array().required('Please select members'),
 })
+
+export const profileSchema = Yup.object().shape({
+    username: Yup.string().required('Username is required'),
+    first_name: Yup.string().required('First name is required'),
+    last_name: Yup.string().required('Last name is required'),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
+})
+
+export const updatePasswordSchema = Yup.object().shape({
+    old_password: Yup.string().required('Old Password is required'),
+    new_password: Yup.string().required('Password is required'),
+    confirmed_password: Yup.string().oneOf([Yup.ref('new_password'), null], 'Passwords must match'),
+})

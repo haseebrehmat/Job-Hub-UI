@@ -14,6 +14,7 @@ import {
     Users,
     Integrations,
     Teams,
+    Profile,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -104,6 +105,13 @@ export const routes = [
         protect: true,
         title: 'My Applied Jobs',
         permission: 'view_user_applied_job',
+    },
+    {
+        path: '/profile',
+        component: <Profile />,
+        protect: true,
+        title: 'Profile',
+        permission: 'all',
     },
 ]
 
