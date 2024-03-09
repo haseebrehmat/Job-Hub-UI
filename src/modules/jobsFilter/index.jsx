@@ -1,8 +1,9 @@
-import { useState, memo, useEffect } from 'react'
+import { useState, memo, useEffect} from 'react'
 import Selector from './components/Selector'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
-import { EmptyTable, Paginated } from '@components'
+import { Paginated, CustomDilog, EmptyTable } from '@components'
+import { Checkedbox, unCheckedbox } from '@icons'
 import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
@@ -13,7 +14,9 @@ import JobPortalSearchBox from './components/JobPortalSearchBox'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
+    const [page, setPage] = useState(1)
     const [data, setData] = useState([])
+    const [currentJob, setCurrentJob] = useState('')
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
 
@@ -131,7 +134,7 @@ const JobsFilter = memo(() => {
 
     useEffect(() => {
         fetchJobsData(jobDetailsUrl)
-    }, [jobsFilterParams])
+    }, [jobsFilterParams, page])
 
     const applyJob = async id => {
         const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, 1, data[id].id)
@@ -327,17 +330,30 @@ const JobsFilter = memo(() => {
                                         )
                                     ) : null}
                                 </td>
+                                {CustomModal}
                                 <td className='px-3 py-0'>
                                     <span className='flex justify-center'>
-                                        <input
-                                            id='checkbox'
-                                            type='checkbox'
-                                            name='permissions'
-                                            defaultValue=''
-                                            defaultChecked=''
-                                            onChange=''
-                                            className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
-                                        />
+                                        {item.job_status === 0 ? (
+                                            <button
+                                                className=''
+                                                onClick={() => {
+                                                    setCurrentJob(key)
+                                                    openModal()
+                                                }}
+                                            >
+                                                {Checkedbox}
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className=' '
+                                                onClick={() => {
+                                                    setCurrentJob(key)
+                                                    openModal()
+                                                }}
+                                            >
+                                                {unCheckedbox}
+                                            </button>
+                                        )}
                                     </span>
                                 </td>
                             </tr>

@@ -3,3 +3,8 @@ export const colors = {
     secondary: '#048C8C',
     background: '#EDFFFB',
 }
+
+export const dilogColor = {
+    success: '#048C8C',
+    warning: '#ff5252',
+}

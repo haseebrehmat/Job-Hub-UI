@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { dilogColor } from '@utils/colors'
 import Modal from 'react-modal'
 
 const customStyles = {
@@ -12,18 +12,12 @@ const customStyles = {
     },
 }
 
-const CustomDilog = (title, description, successTrigger) => {
-    let subtitle
+const CustomDilog = (title, description, successTrigger, type) => {
     const [modalIsOpen, setIsOpen] = useState(false)
 
     const openModal = () => {
         setIsOpen(true)
     }
-
-    const afterOpenModal = () => {
-        // subtitle.style.color = '#f00'
-    }
-
     const closeModal = () => {
         setIsOpen(false)
     }
@@ -32,24 +26,15 @@ const CustomDilog = (title, description, successTrigger) => {
         successTrigger()
         closeModal()
     }
-    // {/* <button onClick={openModal}>Open Modal</button> */}
-    // {deleteButton}
 
     return {
         CustomModal: (
-            <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel='Example Modal'
-            >
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles} contentLabel='Example Modal'>
                 <div className='flex items-start justify-between rounded-t dark:border-gray-600'>
                     <h3 className='text-xl font-semibold text-gray-900 dark:text-white'>{title}</h3>
                 </div>
 
                 <div className='p-2 space-y-5'>
-                    {/* Are you want to delete the product? */}
                     <p className='text-base leading-relaxed text-gray-500 dark:text-gray-400'>{description}</p>
                 </div>
 
@@ -61,13 +46,11 @@ const CustomDilog = (title, description, successTrigger) => {
                     >
                         Cancel
                     </button>
-
                     <button
+                        className={`block rounded px-2 py-1 my-3 bg-[${dilogColor[type]}] text-white`}
                         onClick={successModal}
-                        type='button'
-                        className='text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
                     >
-                        Delete
+                        {type === 'success' ? 'Ok' : 'delete'}
                     </button>
                 </div>
             </Modal>
