@@ -32,6 +32,7 @@ const JobsFilter = memo(() => {
         jobStatusChoice: {},
         dates: { from_date: '', to_date: '' },
         jobTitle: '',
+        page: 1,
         ordering: 'job_posted_date',
     }
 
@@ -387,19 +388,22 @@ const JobsFilter = memo(() => {
                     )}
                 </tbody>
             </table>
-            {data?.length === 0 && recordFound && (
+
+            {data?.length === 0 && !recordFound && (
                 <div className='flex justify-center my-2'>
                     <ClipLoader color='#36d7b7' size={60} />
                 </div>
             )}
 
-            <Paginated
-                page={jobsFilterParams?.page}
-                setPage={pageNumber => {
-                    setJobsFilterParams({ ...jobsFilterParams, page: pageNumber })
-                }}
-                pages={pagesCount}
-            />
+            {data?.length > 0 && (
+                <Paginated
+                    page={jobsFilterParams?.page}
+                    setPage={pageNumber => {
+                        setJobsFilterParams({ ...jobsFilterParams, page: pageNumber })
+                    }}
+                    pages={pagesCount}
+                />
+            )}
         </div>
     )
 })
