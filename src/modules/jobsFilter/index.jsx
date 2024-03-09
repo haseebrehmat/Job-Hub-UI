@@ -173,7 +173,7 @@ const JobsFilter = memo(() => {
         () => {
             console.log(currentCompany[1])
             changeRecruiter(currentCompany[0], currentCompany[1])
-            // updateParams()
+            updateParams()
         },
         'success'
     )
@@ -365,7 +365,7 @@ const JobsFilter = memo(() => {
                                                     openModal()
                                                 }}
                                             >
-                                                {Checkedbox}
+                                                {unCheckedbox}
                                             </button>
                                         ) : (
                                             <button
@@ -375,7 +375,7 @@ const JobsFilter = memo(() => {
                                                     openModal()
                                                 }}
                                             >
-                                                {unCheckedbox}
+                                                {Checkedbox}
                                             </button>
                                         )}
                                     </span>
