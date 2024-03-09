@@ -7,8 +7,9 @@ import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can } from '@/utils/helpers'
-import { Filters, Searchbox, Badge } from '@/components'
+import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus } from './api'
+import JobPortalSearchBox from './components/JobPortalSearchBox'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -103,7 +104,7 @@ const JobsFilter = memo(() => {
         setFilterState({ ...filterState, techStackSelector: techStackSelectorData })
     }
 
-    const updateParams = title => {
+    const updateParams = () => {
         const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector } =
             filterState
         const { from_date, to_date } = dates
@@ -118,7 +119,7 @@ const JobsFilter = memo(() => {
             from_date,
             to_date,
             job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
-            search: title,
+            search: filterState?.jobTitle,
         })
     }
 
@@ -126,10 +127,6 @@ const JobsFilter = memo(() => {
         setData([])
         setFilterState(defaultFilterState)
         setJobsFilterParams(defaulJobsFiltersParams)
-    }
-
-    const runJobFilter = () => {
-        updateParams('')
     }
 
     useEffect(() => {
@@ -157,8 +154,18 @@ const JobsFilter = memo(() => {
     return (
         <div className='my-2  h-screen text-[#048C8C] '>
             <div className='flex p-3 items-center py-2 justify-between '>
-                <Searchbox query={filterState?.jobTitle} setQuery={filterState?.setJobTitle} />
-                <Filters apply={() => runJobFilter()} clear={() => resetFilters()} />
+                <JobPortalSearchBox
+                    value={filterState?.jobTitle}
+                    handleEnter={e => {
+                        if (e.key === 'Enter') {
+                            updateParams()
+                        }
+                    }}
+                    setQuery={title => {
+                        setFilterState({ ...filterState, jobTitle: title })
+                    }}
+                />
+                <Filters apply={() => updateParams()} clear={() => resetFilters()} />
             </div>
             <div className='p-3 border'>
                 <div className='grid grid-cols-3 -my-2 gap-3'>
@@ -244,7 +251,7 @@ const JobsFilter = memo(() => {
                         >
                             <option value='recruiter'>Recruiter</option>
                             <option value='non-recruiter'>Non-Recruriter</option>
-                            <option value='non-recruiter'>All</option>
+                            <option value='all'>All</option>
                         </select>
                     </div>
                     <div className='my-2'>
