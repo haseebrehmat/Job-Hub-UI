@@ -8,6 +8,7 @@ const Input = memo(
         onBlur = null,
         value = undefined,
         ph = '',
+        onKeyDown = null,
         classes = null,
         label = null,
         max = null,
@@ -24,6 +25,7 @@ const Input = memo(
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
+                onKeyDown={onKeyDown}
                 max={max}
             />
             {label && (

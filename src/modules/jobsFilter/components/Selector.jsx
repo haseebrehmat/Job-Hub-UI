@@ -13,7 +13,7 @@ const Selector = props => {
                     const { name, value } = item
                     return (
                         <option key={key} value={name}>
-                            {name} ({value})
+                            {name.charAt(0).toUpperCase() + name.slice(1)} ({value})
                         </option>
                     )
                 })}
