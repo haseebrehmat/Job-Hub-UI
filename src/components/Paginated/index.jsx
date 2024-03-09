@@ -26,11 +26,11 @@ const Paginated = ({ pages: pageCount, setPage, page }) => {
                 forcePage={page - 1}
                 renderOnZeroPageCount={null}
                 containerClassName='flex justify-start my-2 gap-2'
-                pageLinkClassName='border px-2 py-1 rounded-lg border-[#4ab9a7]'
-                previousClassName='border px-2 py-1 rounded-lg text-white bg-[#4ab9a7] border-[#4ab9a7]'
-                nextClassName='border px-2 py-1 rounded-lg text-white bg-[#4ab9a7] border-[#4ab9a7]'
-                breakLinkClassName='text-gray-500 border px-2 py-1 rounded-lg border-[#4ab9a7]'
-                activeLinkClassName='text-white bg-[#4ab9a7] border px-2 py-1'
+                pageLinkClassName='border px-2 py-1 rounded-lg border-[#10868a]'
+                previousClassName='border px-2 py-1 rounded-lg text-white bg-[#10868a] border-[#10868a]'
+                nextClassName='border px-2 py-1 rounded-lg text-white bg-[#10868a] border-[#10868a]'
+                breakLinkClassName='text-gray-500 border px-2 py-1 rounded-lg border-[#10868a]'
+                activeLinkClassName='text-white bg-[#10868a] border px-2 py-1'
             />
         </div>
     )

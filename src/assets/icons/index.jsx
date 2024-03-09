@@ -34,6 +34,7 @@ import {
     AiOutlineFall,
     AiOutlineCloseCircle,
     AiOutlineMinusCircle,
+    AiOutlineCloudUpload,
 } from 'react-icons/ai'
 import { ImSearch } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
@@ -44,6 +45,7 @@ import { RiUserSettingsLine, RiLock2Fill } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
+export const UploadIcon = <AiOutlineCloudUpload style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
 export const NavigationIcon = <FiMenu style={{ fontSize: '22px' }} />
 export const DashboardIcon = <MdSpaceDashboard style={{ fontSize: '20px' }} />

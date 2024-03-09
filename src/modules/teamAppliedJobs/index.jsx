@@ -54,7 +54,7 @@ const TeamAppliedJobs = memo(() => {
             })
     }
 
-    console.log(data)
+    // console.log(data)
 
     return isLoading || error ? (
         <Loading />

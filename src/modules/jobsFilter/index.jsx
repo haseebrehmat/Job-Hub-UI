@@ -1,249 +1,231 @@
 import { useState, memo, useEffect } from 'react'
 import Selector from './components/Selector'
-import ReactPaginate from 'react-paginate'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
+import { EmptyTable, Paginated } from '@components'
+import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can } from '@/utils/helpers'
+import { Filters, Searchbox, Badge } from '@/components'
+import { fetchJobs, updateJobStatus } from './api'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
     const [data, setData] = useState([])
     const [pagesCount, setPagesCount] = useState([])
-    const [techStackData, setTechStackData] = useState([])
-    const [jobSourceData, setJobSourceData] = useState([])
-    const [jobTypeData, setJobTypeData] = useState([])
-    const [jobSourceSelector, setJobSourceSelector] = useState('all')
-    const [techStackSelector, setTechStack] = useState([])
-    const [jobTypeSelector, setJobTypeSelector] = useState('all')
-    const [jobVisibilitySelector, setJobVisibilitySelector] = useState('recruiter')
-    const [stats, setStats] = useState({ total_jobs: 0, filtered_jobs: 0 })
-    const [jobStatusChoice, setJobStatusChoice] = useState({})
-    const [dates, setDates] = useState({ from_date: '', to_date: '' })
     const jobDetailsUrl = `${apiUrl}job_details/`
-    const [jobTitle, setJobTitle] = useState('')
-    const [ordering, setOrdering] = useState('job_posted_date')
-    const [jobsFilterParams, setJobsFilterParams] = useState({
+
+    const defaultFilterState = {
+        techStacData: [],
+        jobSourceData: [],
+        jobTypeData: [],
+        techStackSelector: [],
+        jobSourceSelector: 'all',
+        jobTypeSelector: 'all',
+        jobVisibilitySelector: 'recruiter',
+        stats: { total_jobs: 0, filtered_jobs: 0 },
+        jobStatusChoice: {},
+        dates: { from_date: '', to_date: '' },
+        jobTitle: '',
+        ordering: 'job_posted_date',
+    }
+
+    const [filterState, setFilterState] = useState(defaultFilterState)
+
+    const defaulJobsFiltersParams = {
         job_source: '',
         tech_keywords: '',
-        page: 1,
         from_date: '',
         to_date: '',
         job_type: '',
         ordering: 'job_posted_date',
         search: '',
+        page: 1,
         job_visibility: 'recruiter',
-    })
+    }
 
+    const [jobsFilterParams, setJobsFilterParams] = useState(defaulJobsFiltersParams)
+
+    const error = true
     const [recordFound, setRecordFound] = useState(true)
 
-    const fetchJobsData = async url => {
+    const generateParamsString = () => {
         const params = new URLSearchParams()
         let params_count = 0
 
-        for (const i in jobsFilterParams) {
-            if (jobsFilterParams[i] !== '') {
-                params.append(i, jobsFilterParams[i])
-                params_count += 1
-            }
-        }
+        Object.entries(jobsFilterParams).forEach(([key, value]) => {
+            params.append(key, value)
+            params_count++
+        })
+        return params_count > 0 ? params.toString() : ''
+    }
 
-        url = params_count > 0 ? `${url}?${params.toString()}` : url
+    const fetchJobsData = async url => {
         setData([])
 
-        const response = await fetch(url, {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
-            },
-        })
-        const json = await response.json()
+        const {
+            jobsData,
+            status,
+            total_jobs,
+            filtered_jobs,
+            job_status_choice,
+            tech_keywords_count_list,
+            job_source_count_list,
+            total_job_type,
+            num_pages,
+            detail,
+        } = await fetchJobs(`${url}?${generateParamsString()}`)
 
-        if (response.ok) {
-            setStats({
-                ...stats,
-                total_jobs: json.total_jobs,
-                filtered_jobs: json.filtered_jobs,
+        if (status === 'success') {
+            setFilterState({
+                ...filterState,
+                stats: { ...filterState?.stats, total_jobs, filtered_jobs },
+                jobStatusChoice: job_status_choice,
+                techStackData: tech_keywords_count_list,
+                jobSourceData: job_source_count_list,
+                jobTypeData: total_job_type,
             })
-            setData(json.data)
-            if (json.data.length === 0) {
+            setData(jobsData)
+            if (jobsData.length === 0) {
                 setRecordFound(false)
             } else {
                 setRecordFound(true)
             }
-            setJobStatusChoice(json.job_status_choice)
-            setTechStackData(json.tech_keywords_count_list)
-            setJobSourceData(json.job_source_count_list)
-            setJobTypeData(json.total_job_type)
-            setPagesCount(json.links.num_pages)
+            setPagesCount(num_pages)
         } else {
             setRecordFound(false)
-            toast.error(json.detail)
+            toast.error(detail)
         }
     }
 
-    const handleJobSource = event => {
-        setJobSourceSelector(event.target.value)
-    }
-
-    const handleJobType = event => {
-        setJobTypeSelector(event.target.value)
+    const handleTechStackSelector = techStackSelectorData => {
+        setFilterState({ ...filterState, techStackSelector: techStackSelectorData })
     }
 
     const updateParams = title => {
-        const job_source = jobSourceSelector !== 'all' ? jobSourceSelector : ''
-        const job_type = jobTypeSelector !== 'all' ? jobTypeSelector : ''
-        const techStackValues = techStackSelector.map(obj => obj.value).join(',')
+        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector } =
+            filterState
+        const { from_date, to_date } = dates
+        const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
         setJobsFilterParams({
             ...jobsFilterParams,
-            tech_keywords: techStackValues,
-            job_source,
+            tech_keywords,
+            job_source: jobSourceSelector !== 'all' ? jobSourceSelector : '',
             page: 1,
             ordering,
             job_visibility: jobVisibilitySelector,
-            from_date: dates.from_date,
-            to_date: dates.to_date,
-            job_type,
+            from_date,
+            to_date,
+            job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
             search: title,
         })
     }
 
     const resetFilters = () => {
         setData([])
-        setPagesCount([])
-        setTechStackData([])
-        setJobSourceData([])
-        setJobTypeData([])
-        setJobSourceSelector('all')
-        setTechStack([])
-        setJobTypeSelector('all')
-        setJobVisibilitySelector('recruiter')
-        setDates({ from_date: '', to_date: '' })
-        setStats({ total_jobs: 0, filtered_jobs: 0 })
-        setJobTitle('')
-        setOrdering('job_posted_date')
-        setJobsFilterParams({
-            job_source: '',
-            tech_keywords: '',
-            page: 1,
-            from_date: '',
-            to_date: '',
-            job_type: '',
-            ordering: 'job_posted_date',
-            search: '',
-            job_visibility: 'recruiter',
-        })
+        setFilterState(defaultFilterState)
+        setJobsFilterParams(defaulJobsFiltersParams)
     }
 
     const runJobFilter = () => {
         updateParams('')
     }
+
     useEffect(() => {
         fetchJobsData(jobDetailsUrl)
     }, [jobsFilterParams])
 
-    const updateJobStatus = async id => {
-        const response = await fetch(`${apiUrl}job_status/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
-            },
-            body: JSON.stringify({ status: 1, job: data[id].id }),
-        })
+    const applyJob = async id => {
+        const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, 1, data[id].id)
 
-        const json = await response.json()
-
-        if (response.ok) {
-            const temp_data = data.map((item, key) => (key === id ? { ...item, job_status: 1 } : item))
+        if (status === 'success') {
+            const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: 1 } : item))
             setData(temp_data)
-            toast.success(json.detail)
+            toast.success(detail)
         } else {
-            toast.error(json.detail)
+            toast.error(detail)
             setTimeout(() => {
                 location.reload()
             }, 2000)
         }
     }
-    const handlePageClick = async data => {
-        setJobsFilterParams({
-            ...jobsFilterParams,
-            page: data.selected + 1,
-        })
-    }
 
     const formatOptions = options_arr =>
-        options_arr.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
+        options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
     return (
-        <div className='my-2 h-screen'>
-            <h3 className='text-center py-2 pl-4 text-[#006366] font-bold text-lg'>Jobs Portal</h3>
-
+        <div className='my-2  h-screen text-[#048C8C] '>
+            <div className='flex p-3 items-center py-2 justify-between '>
+                <Searchbox query={filterState?.jobTitle} setQuery={filterState?.setJobTitle} />
+                <Filters apply={() => runJobFilter()} clear={() => resetFilters()} />
+            </div>
             <div className='p-3 border'>
-                <div className='flex'>
-                    <input
-                        type='text'
-                        className='shadow appearance-none border w-full py-2 px-3 mx-2'
-                        value={jobTitle}
-                        onChange={event => {
-                            setJobTitle(event.target.value)
-                        }}
-                        placeholder='Search'
-                    />
-                    <button
-                        className='px-4 py-2 block rounded bg-blue-600 text-white'
-                        onClick={() => {
-                            updateParams(jobTitle)
-                        }}
-                    >
-                        Search
-                    </button>
-                </div>
+                <div className='grid grid-cols-3 -my-2 gap-3'>
+                    <div className='grid grid-cols-2  gap-3'>
+                        <div className='my-2'>
+                            From
+                            <input
+                                className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm textjobTypeData-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
+                                type='date'
+                                max={new Date().toISOString().slice(0, 10)}
+                                value={filterState?.dates?.from_date}
+                                onChange={event =>
+                                    setFilterState({
+                                        ...filterState,
+                                        dates: { ...filterState?.dates, from_date: event.target.value },
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className='my-2'>
+                            To
+                            <input
+                                className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
+                                type='date'
+                                max={new Date().toISOString().slice(0, 10)}
+                                value={filterState?.dates?.to_date}
+                                onChange={event =>
+                                    setFilterState({
+                                        ...filterState,
+                                        dates: { ...filterState?.dates, to_date: event.target.value },
+                                    })
+                                }
+                            />
+                        </div>
+                    </div>
 
-                <div className='grid grid-cols-4 gap-3'>
-                    <div className='my-2'>
-                        From
-                        <input
-                            className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
-                            type='date'
-                            max={new Date().toISOString().slice(0, 10)}
-                            value={dates.from_date}
-                            onChange={event => setDates({ ...dates, from_date: event.target.value })}
-                        />
-                    </div>
-                    <div className='my-2'>
-                        To
-                        <input
-                            className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
-                            type='date'
-                            max={new Date().toISOString().slice(0, 10)}
-                            value={dates.to_date}
-                            onChange={event => setDates({ ...dates, to_date: event.target.value })}
-                        />
-                    </div>
                     <div className='my-2'>
                         Listings
                         <Selector
-                            data={jobTypeData}
-                            selectorValue={jobTypeSelector}
-                            handleSelectChange={handleJobType}
+                            data={filterState?.jobTypeData}
+                            selectorValue={filterState?.jobTypeSelector}
+                            handleSelectChange={e =>
+                                setFilterState({ ...filterState, jobTypeSelector: e.target.value })
+                            }
                         />
                     </div>
                     <div className='my-2'>
                         Job Source
                         <Selector
-                            data={jobSourceData}
-                            selectorValue={jobSourceSelector}
-                            handleSelectChange={handleJobSource}
+                            data={filterState?.jobSourceData}
+                            selectorValue={filterState?.jobSourceSelector}
+                            handleSelectChange={e =>
+                                setFilterState({ ...filterState, jobSourceSelector: e.target.value })
+                            }
                         />
                     </div>
 
                     <div className='my-2'>
                         Order By
                         <select
-                            value={ordering}
-                            onChange={e => setOrdering(e.target.value)}
+                            value={filterState?.ordering}
+                            onChange={e =>
+                                setFilterState({
+                                    ...filterState,
+                                    ordering: e.target.value,
+                                })
+                            }
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
                             <option value='job_posted_date'>Posted Date</option>
@@ -256,131 +238,121 @@ const JobsFilter = memo(() => {
                     <div className='my-2'>
                         Job Visibility
                         <select
-                            value={jobVisibilitySelector}
-                            onChange={e => setJobVisibilitySelector(e.target.value)}
+                            value={filterState?.jobVisibilitySelector}
+                            onChange={e => setFilterState({ ...filterState, jobVisibilitySelector: e.target.value })}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
                             <option value='recruiter'>Recruiter</option>
                             <option value='non-recruiter'>Non-Recruriter</option>
+                            <option value='non-recruiter'>All</option>
                         </select>
                     </div>
                     <div className='my-2'>
                         Tech Stack
                         <CustomSelector
                             className='mx-auto'
-                            options={formatOptions(techStackData)}
-                            handleChange={setTechStack}
-                            selectorValue={techStackSelector}
+                            options={formatOptions(filterState?.techStackData)}
+                            handleChange={handleTechStackSelector}
+                            selectorValue={filterState?.techStackSelector}
                             isMulti
                             placeholder='Select Tech Stack'
                         />
                     </div>
-                </div>
 
-                <div className='flex justify-center space-x-5 my-2'>
-                    <div>
-                        <h3>Total Jobs: {stats.total_jobs}</h3>
+                    <div className='flex space-x-4 my-2 grid-flow-col '>
+                        <div>
+                            <p className='font-medium text-2xl '>Total :</p>
+                            <p className='font-medium text-2xl '>Filtered :</p>
+                        </div>
+                        <div className='justify-center  grid-flow-row '>
+                            <div className=' h-8 '>
+                                <Badge label={filterState?.stats?.total_jobs?.toString()} type='enabled' />
+                            </div>
+                            <div>
+                                <Badge label={filterState?.stats?.filtered_jobs?.toString()} type='enabled' />
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h3>Filtered Jobs: {stats.filtered_jobs}</h3>
-                    </div>
-                </div>
-                <div className='col-md-4 col-12 flex justify-center space-x-5'>
-                    <button className='px-4 py-2 block rounded bg-amber-600 text-white' onClick={resetFilters}>
-                        Reset
-                    </button>
-                    <button className='px-4 py-2 block rounded bg-blue-600 text-white' onClick={runJobFilter}>
-                        Filter
-                    </button>
                 </div>
             </div>
-
-            <div className='overflow-x-auto'>
-                <table className='table-auto w-full border-collapse border text-center border-slate-400 my-2'>
-                    <thead className='bg-slate-50 dark:bg-slate-700'>
-                        <tr className='w-1/2 border border-slate-300 dark:border-slate-600 font-semibold text-slate-900 dark:text-slate-200'>
-                            <th className='p-2 text-start'>Job Title</th>
-                            <th className='d-sm-table-cell text-start d-none '>Company</th>
-                            <th className=''> Job Source</th>
-                            <th>Tech Stack</th>
-                            <th>Job Type</th>
-                            <th>Date Posted</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody className='text-sm sm:text-base'>
-                        {data.length > 0 &&
-                            data.map((item, key) => (
-                                <tr
-                                    className='border border-slate-300 dark:border-slate-700  text-slate-500 dark:text-slate-400'
-                                    key={key}
-                                >
-                                    <td className='text-start p-2 rounded shadow-sm whitespace-normal w-[30%]	'>
-                                        {item.job_title}
-                                    </td>
-                                    <td className='text-start d-sm-table-cell d-none whitespace-normal w-[150px]'>
-                                        {item.company_name}
-                                    </td>
-                                    <td className='text-center'>
-                                        <a
-                                            className='underline'
-                                            target='_blank'
-                                            rel='noreferrer'
-                                            href={item.job_source_url}
-                                        >
-                                            {item.job_source}
-                                        </a>
-                                    </td>
-                                    <td>{item.tech_keywords}</td>
-                                    <td>{item.job_type}</td>
-                                    <td>{item.job_posted_date.slice(0, 10)}</td>
-                                    <td className='flex justify-center'>
-                                        {can('change_job_status') ? (
-                                            item.job_status === 0 ? (
-                                                <button
-                                                    className='block rounded px-2 py-1 my-3 bg-green-700 text-white'
-                                                    onClick={() => updateJobStatus(key)}
-                                                >
-                                                    {jobStatusChoice[item.job_status]}
-                                                </button>
-                                            ) : (
-                                                jobStatusChoice[item.job_status]
-                                            )
-                                        ) : null}
-                                    </td>
-                                </tr>
-                            ))}
-                    </tbody>
-                </table>
-            </div>
-
-            {data.length === 0 && recordFound && (
+            <table className='table-auto w-full  text-sm text-left mt-6 text-[#048C8C] '>
+                <thead className='text-sm uppercase border tex border-[#048C8C] '>
+                    <tr>
+                        {jobsHeads?.map(heading => (
+                            <th scope='col' className='px-3 py-4' key={heading}>
+                                {heading}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {data && data?.length > 0 && error ? (
+                        data?.map((item, key) => (
+                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={key}>
+                                <td className='px-3 py-0'>{item?.job_title}</td>
+                                <td className='px-3 py-0'>{item?.company_name}</td>
+                                <td className='px-3 py-0'>
+                                    <a
+                                        className='underline'
+                                        target='_blank'
+                                        rel='noreferrer'
+                                        href={item?.job_source_url}
+                                    >
+                                        {item?.job_source}
+                                    </a>
+                                </td>
+                                <td className='px-3 py-0'>{item?.tech_keywords}</td>
+                                <td className='px-3 py-0'>{item?.job_type}</td>
+                                <td className='px-3 py-0'>{item?.job_posted_date.slice(0, 10)}</td>
+                                <td className='px-1 py-0'>
+                                    {can('change_job_status') ? (
+                                        filterState?.jobStatusChoice && item && item?.job_status === 0 ? (
+                                            <button
+                                                className='block rounded px-2 py-1 my-3 bg-[#10868a] text-white'
+                                                onClick={() => applyJob(key)}
+                                            >
+                                                {filterState.jobStatusChoice[item.job_status]}
+                                            </button>
+                                        ) : (
+                                            <button className='block rounded px-2 py-1 my-3 text-gray-400 bg-[#ffffff] '>
+                                                {filterState.jobStatusChoice[item.job_status]}
+                                            </button>
+                                        )
+                                    ) : null}
+                                </td>
+                                <td className='px-3 py-0'>
+                                    <span className='flex justify-center'>
+                                        <input
+                                            id='checkbox'
+                                            type='checkbox'
+                                            name='permissions'
+                                            defaultValue=''
+                                            defaultChecked=''
+                                            onChange=''
+                                            className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
+                                        />
+                                    </span>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <EmptyTable cols={6} msg='No Jobs found yet!' />
+                    )}
+                </tbody>
+            </table>
+            {data?.length === 0 && recordFound && (
                 <div className='flex justify-center my-2'>
                     <ClipLoader color='#36d7b7' size={60} />
                 </div>
             )}
 
-            {recordFound && (
-                <ReactPaginate
-                    breakLabel='...'
-                    nextLabel='Next'
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageClick}
-                    pageCount={Math.ceil(pagesCount)}
-                    previousLabel='Previous'
-                    renderOnZeroPageCount={null}
-                    containerClassName='flex justify-center my-2'
-                    pageLinkClassName='bg-white border-gray-300 text-white-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    previousClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    nextClassName='bg-blue-500 text-white border-gray-300 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    breakLinkClassName='bg-white border-gray-300 text-gray-500 hover:bg-blue-900 hover:text-white relative inline-flex items-center px-2 py-1 border text-sm font-medium'
-                    activeLinkClassName='bg-green-800 text-white'
-                    activeClassName='active'
-                    forcePage={jobsFilterParams.page - 1}
-                />
-            )}
-
-            {!recordFound && <p className='text-center fs-4 text-danger'>Record not found!</p>}
+            <Paginated
+                page={jobsFilterParams?.page}
+                setPage={() => {
+                    setJobsFilterParams({ ...jobsFilterParams, page: jobsFilterParams.page })
+                }}
+                pages={pagesCount}
+            />
         </div>
     )
 })

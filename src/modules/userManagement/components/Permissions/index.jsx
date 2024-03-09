@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { transformPascal } from '@utils/helpers'
 
@@ -11,7 +11,6 @@ const Permissions = ({ permissions, setPermissions }) => {
             .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
             .reduce((acc, cur) => ({ ...acc, ...cur }))
     )
-
     const handleChange = e => {
         const {
             value: key,
@@ -21,18 +20,18 @@ const Permissions = ({ permissions, setPermissions }) => {
         setPermss(prev => ({ ...prev, [key]: value }))
         if (parent && value) parent?.split(',').forEach(p => setPermss(prev => ({ ...prev, [p]: value })))
         if (child && !value) child?.split(',').forEach(c => setPermss(prev => ({ ...prev, [c]: value })))
-        setPermissions(Object.keys(permss).filter(k => permss[k]))
     }
-
     const handleModule = e => {
         const {
             checked,
             dataset: { perms },
         } = e.target
         perms?.split(',').forEach(p => setPermss(prev => ({ ...prev, [p]: checked })))
-        setPermissions(Object.keys(permss).filter(k => permss[k]))
     }
-
+    useEffect(() => {
+        const allowedPermissions = Object.keys(permss).filter(k => permss[k])
+        if (allowedPermissions.length > 0) setPermissions(allowedPermissions)
+    }, [permss])
     return (
         <div className='max-w-full overflow-x-auto'>
             <p className='pb-2 font-semibold'>Assign Permissions</p>
