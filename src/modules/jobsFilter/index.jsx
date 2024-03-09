@@ -108,7 +108,7 @@ const JobsFilter = memo(() => {
     }
 
     const updateParams = () => {
-        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector } =
+        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector, page } =
             filterState
         const { from_date, to_date } = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
@@ -116,7 +116,7 @@ const JobsFilter = memo(() => {
             ...jobsFilterParams,
             tech_keywords,
             job_source: jobSourceSelector !== 'all' ? jobSourceSelector : '',
-            page: 1,
+            page,
             ordering,
             job_visibility: jobVisibilitySelector,
             from_date,

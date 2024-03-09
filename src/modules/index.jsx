@@ -7,7 +7,6 @@ import TeamAppliedJobs from '@modules/teamAppliedJobs'
 import Dashboard from '@modules/dashboard'
 import JobsFilter from '@/modules/jobsFilter'
 import JobsUploader from '@modules/jobsUploader'
-import JobsUploaderV2 from '@modules/jobsUploaderV2'
 import { Companies, JobSourceBlocking } from '@modules/userManagement'
 import Roles from '@modules/userManagement/roles'
 import Users from '@modules/userManagement/users'
@@ -20,7 +19,6 @@ export {
     AppliedJobs,
     JobsFilter,
     JobsUploader,
-    JobsUploaderV2,
     Dashboard,
     Teams,
     Login,

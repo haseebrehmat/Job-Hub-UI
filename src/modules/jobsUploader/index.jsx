@@ -1,22 +1,21 @@
 import { React, useEffect, useRef, useState } from 'react'
 import './index.css'
 import { toast } from 'react-hot-toast'
-import { Button } from '@/components'
 import { baseURL } from '@utils/http'
-import { UploadIcon } from '@icons'
+import { UploadIcon, CrossIcon } from '@icons'
+import uploadJobs from './api'
 
-const JobsUploaderV2 = () => {
+const JobsUploader = () => {
     // drag state
-    const upload_job_url = `${baseURL}api/job_portal/upload_data/`
     const [dragActive, setDragActive] = useState(false)
     const [buttonDisable, setButtonDisable] = useState(true)
     const [fileUploadButton, setFileUploadButton] = useState(false)
     // ref
     const inputRef = useRef(null)
     // upload files
-    const [uploadFiles, setUploadFiles] = useState([])
+    const [files, setFiles] = useState([])
     // handle drag events
-    function handleDrag(e) {
+    const handleDrag = e => {
         e.preventDefault()
         e.stopPropagation()
         if (e.type === 'dragenter' || e.type === 'dragover') {
@@ -26,9 +25,7 @@ const JobsUploaderV2 = () => {
         }
     }
 
-    useEffect(() => {
-        console.log('Hello', uploadFiles)
-    }, [uploadFiles])
+    useEffect(() => {}, [files])
 
     // triggers when file is dropped
     const handleDrop = e => {
@@ -37,7 +34,7 @@ const JobsUploaderV2 = () => {
         setDragActive(false)
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
             // handleFiles(e.dataTransfer.files);
-            setUploadFiles([...e.dataTransfer.files])
+            setFiles([...e.dataTransfer.files])
             setButtonDisable(false)
         }
     }
@@ -45,9 +42,8 @@ const JobsUploaderV2 = () => {
     // triggers when file is selected with click
     const handleChange = e => {
         e.preventDefault()
-        console.log(e.target.value)
         if (e.target.files && e.target.files[0]) {
-            setUploadFiles([...e.target.files])
+            setFiles([...e.target.files])
             setButtonDisable(false)
         }
     }
@@ -57,63 +53,52 @@ const JobsUploaderV2 = () => {
         inputRef.current.click()
     }
 
-    const uploadButtonHandle = async event => {
-        event.preventDefault()
-        const formData = new FormData()
-        for (let i = 0; i < uploadFiles.length; i++) {
-            formData.append(`file_upload`, uploadFiles[i])
+    const removeFile = id => {
+        const files_copy = files.map(file => file)
+        files_copy.splice(id, 1)
+        setFiles(files_copy)
+        if (files_copy.length === 0) {
+            setButtonDisable(true)
         }
-        const response = await fetch(upload_job_url, {
-            method: 'POST',
-            body: formData,
-            mode: 'cors',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
-            },
-        })
-        const json = await response.json()
-        if (response.ok) {
-            toast.success(json.detail)
+    }
+
+    const uploadFiles = async event => {
+        event.preventDefault()
+
+        const formData = new FormData()
+
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`file_upload`, files[i])
+        }
+
+        const { status, detail } = await uploadJobs(`${baseURL}api/job_portal/upload_data/`, formData)
+
+        if (status === 'success') {
+            toast.success(detail)
         } else {
-            setUploadFiles([])
-            toast.error(json.detail)
+            toast.error(detail)
         }
         setFileUploadButton(false)
-        setUploadFiles([])
+        setFiles([])
         return false
     }
 
     return (
         <div className='flex flex-col border shadow	text-[#006366] py-8'>
             <div className='flex flex-row mx-auto'>
-                <div className='mr-1 my-12 '>
-                    <button
-                        disabled={buttonDisable}
-                        className={`${
-                            buttonDisable
-                                ? 'text-[#66666d] bg-[#dddde0] text-sm'
-                                : 'text-white bg-[#048C8C] hover:bg-[#048C6D]'
-                        }  py-2 px-4 rounded h-10`}
-                        type='submit'
-                        onClick={e => {
-                            setButtonDisable(true)
-                            setFileUploadButton(true)
-                            uploadButtonHandle(e)
-                        }}
-                    >
-                        <span>Upload</span>
-                    </button>
-                </div>
                 <div className='flex flex-col justify-center mx-auto border p-3 '>
                     <div>
+                        <h4 className='text-center text-cyan-700 my-3 font-bold'>Upload multiples files</h4>
                         <form id='form-file-upload' onDragEnter={handleDrag} onSubmit={e => e.preventDefault()}>
                             <input
                                 accept='.xlsx, .xls, .ods'
                                 required
+                                name='input-file-upload'
                                 ref={inputRef}
                                 type='file'
                                 id='input-file-upload'
                                 multiple
+                                value={[]}
                                 onChange={handleChange}
                             />
                             <label
@@ -141,20 +126,40 @@ const JobsUploaderV2 = () => {
                                 <div
                                     id='drag-file-element'
                                     onDragEnter={handleDrag}
+                                    onDrop={handleDrop}
                                     onDragLeave={handleDrag}
                                     onDragOver={handleDrag}
-                                    onDrop={handleDrop}
                                 />
                             )}
                         </form>
                     </div>
                     <div className='text-xs flex flex-col items-start p-3'>
-                        {uploadFiles.map((item, i) => (
+                        {files?.map((item, i) => (
                             <div className='flex justify-between items-center w-full gap-5' key={i}>
                                 <span className='py-2'>{item.name}</span>
-                                <span className='py-2'>{UploadIcon}</span>
+                                <span className='py-2' onClick={() => removeFile(i)}>
+                                    {CrossIcon}
+                                </span>
                             </div>
                         ))}
+                        <div className='mx-auto'>
+                            <button
+                                disabled={buttonDisable}
+                                className={`${
+                                    buttonDisable
+                                        ? 'text-[#66666d] bg-[#dddde0] text-sm'
+                                        : 'text-white bg-[#048C8C] hover:bg-[#048C6D]'
+                                }  py-3 px-6 rounded`}
+                                type='submit'
+                                onClick={e => {
+                                    setButtonDisable(true)
+                                    setFileUploadButton(true)
+                                    uploadFiles(e)
+                                }}
+                            >
+                                Upload
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -162,4 +167,4 @@ const JobsUploaderV2 = () => {
     )
 }
 
-export default JobsUploaderV2
+export default JobsUploader
