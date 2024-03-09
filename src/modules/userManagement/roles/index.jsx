@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Searchbox, EmptyTable, Filters, Button } from '@components'
+import { Loading, Searchbox, EmptyTable, Button } from '@components'
 
 import { RoleForm, PermissionList } from '@modules/userManagement/components'
 import { fetchRoles } from '@modules/userManagement/api'
@@ -13,12 +13,12 @@ import { PermissionIcon } from '@/assets/icons'
 import { can } from '@/utils/helpers'
 
 const Roles = () => {
-    const [query, setQuery] = useState()
+    const [query, setQuery] = useState('')
     const [role, setRole] = useState()
     const [show, setShow] = useState(false)
     const [showList, setShowList] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/role/', fetchRoles)
+    const { data, error, isLoading, mutate } = useSWR(`/api/auth/role/?search=${query}`, fetchRoles)
 
     const handleClick = row => {
         setRole(row)
@@ -36,7 +36,6 @@ const Roles = () => {
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
-                <Filters />
                 {can('create_role') && (
                     <Button label='Create Role' fit icon={CreateIcon} onClick={() => handleClick({ name: '' })} />
                 )}

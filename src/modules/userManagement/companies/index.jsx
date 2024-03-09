@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Badge, Searchbox, EmptyTable, Filters, Button } from '@components'
+import { Loading, Badge, Searchbox, EmptyTable, Button } from '@components'
 
 import { CompanyForm } from '@modules/userManagement/components'
 import { fetchCompanies } from '@modules/userManagement/api'
@@ -12,20 +12,23 @@ import { CreateIcon, ActionsIcons } from '@icons'
 import { can } from '@/utils/helpers'
 
 const Companies = () => {
-    const [query, setQuery] = useState()
+    const [query, setQuery] = useState('')
     const [company, setCompany] = useState()
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/company/', fetchCompanies)
+
+    const { data, error, isLoading, mutate } = useSWR(`/api/auth/company/?search=${query}`, fetchCompanies)
+
     const handleClick = ({ name, status, id }) => {
         setCompany({ name, status, id })
         setShow(!show)
     }
+
     if (isLoading) return <Loading />
+
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
-                <Filters />
                 {can('create_company') && (
                     <Button
                         label='Create Company'

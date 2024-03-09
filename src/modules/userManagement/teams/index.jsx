@@ -1,21 +1,23 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, EmptyTable, Button, Badge } from '@components'
+import { Loading, EmptyTable, Button, Badge, Searchbox } from '@components'
 
 import { TeamForm } from '@modules/userManagement/components'
 import { fetchTeams } from '@modules/userManagement/api'
 
 import { teamHeads } from '@constants/userManagement'
 
+import { can } from '@utils/helpers'
 import { CreateIcon, ActionsIcons } from '@icons'
-import { can } from '@/utils/helpers'
 
 const Teams = () => {
     const [team, setTeam] = useState()
+    const [query, setQuery] = useState('')
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR('/api/auth/team/', fetchTeams)
+    const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=${query}`, fetchTeams)
+
     const handleClick = row => {
         setTeam(row)
         setShow(!show)
@@ -55,7 +57,8 @@ const Teams = () => {
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 pb-6 float-right'>
+            <div className='flex items-center space-x-4 pb-6'>
+                <Searchbox query={query} setQuery={setQuery} />
                 {can('create_team') && (
                     <Button
                         label='Create Team'

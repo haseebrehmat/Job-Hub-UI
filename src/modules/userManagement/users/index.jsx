@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Searchbox, EmptyTable, Filters, Button, Paginated } from '@components'
+import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
 import { UserForm } from '@modules/userManagement/components'
 import { fetchUsers } from '@modules/userManagement/api'
@@ -12,21 +12,24 @@ import { CreateIcon, ActionsIcons } from '@icons'
 import { can } from '@utils/helpers'
 
 const Users = () => {
-    const [query, setQuery] = useState()
+    const [query, setQuery] = useState('')
     const [user, setUser] = useState()
     const [page, setPage] = useState(1)
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}`, fetchUsers)
+
+    const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}&search=${query}`, fetchUsers)
+
     const handleClick = ({ username, email, roles, id }) => {
         setUser({ username, email, roles, id })
         setShow(!show)
     }
+
     if (isLoading) return <Loading />
+
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
-                <Filters />
                 {can('create_user') && (
                     <Button
                         label='Create User'
