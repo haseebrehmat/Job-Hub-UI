@@ -46,7 +46,7 @@ const JobsFilter = memo(() => {
         ordering: 'job_posted_date',
         search: '',
         page: 1,
-        job_visibility: 'recruiter',
+        job_visibility: 'all',
     }
 
     const [jobsFilterParams, setJobsFilterParams] = useState(defaulJobsFiltersParams)
