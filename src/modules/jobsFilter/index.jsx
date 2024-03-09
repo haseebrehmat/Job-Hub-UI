@@ -15,7 +15,7 @@ const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
     const [page, setPage] = useState(1)
     const [data, setData] = useState([])
-    const [currentJob, setCurrentJob] = useState()
+    const [currentJob, setCurrentJob] = useState('')
     const [pagesCount, setPagesCount] = useState([])
     const [techStackData, setTechStackData] = useState([])
     const [jobSourceData, setJobSourceData] = useState([])
@@ -175,9 +175,12 @@ const JobsFilter = memo(() => {
         options_arr.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
     const { CustomModal, openModal } = CustomDilog(
-        'Confirm delete?',
-        `Are you sure want to delete the role:  `,
-        updateJobStatus(currentJob)
+        'Please Confirm ',
+        'Are you sure want to change the state of recruiter  ',
+        () => {
+            updateJobStatus(currentJob)
+        },
+        'success'
     )
 
     return (
@@ -351,11 +354,25 @@ const JobsFilter = memo(() => {
                                 <td className='px-3 py-0'>
                                     <span className='flex justify-center'>
                                         {item.job_status === 0 ? (
-                                            <button className='' onClick={(openModal)}>
+                                            <button
+                                                className=''
+                                                onClick={() => {
+                                                    setCurrentJob(key)
+                                                    openModal()
+                                                }}
+                                            >
                                                 {Checkedbox}
                                             </button>
                                         ) : (
-                                            <button className=' '>{unCheckedbox}</button>
+                                            <button
+                                                className=' '
+                                                onClick={() => {
+                                                    setCurrentJob(key)
+                                                    openModal()
+                                                }}
+                                            >
+                                                {unCheckedbox}
+                                            </button>
                                         )}
                                     </span>
                                 </td>
