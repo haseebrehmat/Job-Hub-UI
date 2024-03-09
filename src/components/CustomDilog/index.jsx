@@ -47,7 +47,7 @@ const CustomDilog = (title, description, successTrigger, type) => {
                         Cancel
                     </button>
                     <button
-                        className={`block rounded px-2 py-1 my-3 bg-[${dilogColor[type]}] text-white`}
+                        className={`block dark:border-gray-500 border-gray-200 rounded px-8 py-1.5 my-3 bg-[${dilogColor[type]}] text-white max-w-lg`}
                         onClick={successModal}
                     >
                         {type === 'success' ? 'Ok' : 'delete'}

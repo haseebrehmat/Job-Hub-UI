@@ -47,11 +47,8 @@ import { RiUserSettingsLine, RiLock2Fill } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
-<<<<<<< HEAD
-=======
 export const Checkedbox = <MdCheckBox style={{ fontSize: '22px' }} />
 export const unCheckedbox = <MdCheckBoxOutlineBlank style={{ fontSize: '22px' }} />
->>>>>>> test_job_portal
 export const UploadIcon = <AiOutlineCloudUpload style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
 export const NavigationIcon = <FiMenu style={{ fontSize: '22px' }} />

@@ -49,4 +49,19 @@ const updateJobStatus = async (url, status, job) => {
     return { status: response.ok ? 'success' : 'error', detail }
 }
 
-export { fetchJobs, updateJobStatus }
+const updateRecruiterStatus = async (url, company_name) => {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({ company_name }),
+    })
+
+    const { detail } = await response.json()
+
+    return { status: response.ok ? 'success' : 'error', detail }
+}
+
+export { fetchJobs, updateJobStatus, updateRecruiterStatus }

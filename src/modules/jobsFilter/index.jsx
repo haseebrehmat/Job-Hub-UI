@@ -1,4 +1,4 @@
-import { useState, memo, useEffect} from 'react'
+import { useState, memo, useEffect } from 'react'
 import Selector from './components/Selector'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
@@ -9,14 +9,14 @@ import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can } from '@/utils/helpers'
 import { Filters, Badge } from '@/components'
-import { fetchJobs, updateJobStatus } from './api'
+import { fetchJobs, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
     const [page, setPage] = useState(1)
     const [data, setData] = useState([])
-    const [currentJob, setCurrentJob] = useState('')
+    const [currentCompany, setCurrentCompany] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
 
@@ -27,7 +27,7 @@ const JobsFilter = memo(() => {
         techStackSelector: [],
         jobSourceSelector: 'all',
         jobTypeSelector: 'all',
-        jobVisibilitySelector: 'recruiter',
+        jobVisibilitySelector: 'all',
         stats: { total_jobs: 0, filtered_jobs: 0 },
         jobStatusChoice: {},
         dates: { from_date: '', to_date: '' },
@@ -151,8 +151,32 @@ const JobsFilter = memo(() => {
         }
     }
 
+    const changeRecruiter = async (company, func) => {
+        const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
+
+        if (status === 'success') {
+            toast.success(detail)
+        } else {
+            toast.error(detail)
+            setTimeout(() => {
+                location.reload()
+            }, 2000)
+        }
+    }
+
     const formatOptions = options_arr =>
         options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
+
+    const { CustomModal, openModal } = CustomDilog(
+        'Please Confirm ',
+        'Are you sure want to change the state of recruiter',
+        () => {
+            console.log(currentCompany[1])
+            changeRecruiter(currentCompany[0], currentCompany[1])
+            // updateParams()
+        },
+        'success'
+    )
 
     return (
         <div className='my-2  h-screen text-[#048C8C] '>
@@ -252,9 +276,9 @@ const JobsFilter = memo(() => {
                             onChange={e => setFilterState({ ...filterState, jobVisibilitySelector: e.target.value })}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
-                            <option value='recruiter'>Recruiter</option>
-                            <option value='non-recruiter'>Non-Recruriter</option>
-                            <option value='all'>All</option>
+                            <option value='all'>all</option>
+                            <option value='recruiter'>recruiter</option>
+                            <option value='non-recruiter'>non-recruiter</option>
                         </select>
                     </div>
                     <div className='my-2'>
@@ -333,11 +357,11 @@ const JobsFilter = memo(() => {
                                 {CustomModal}
                                 <td className='px-3 py-0'>
                                     <span className='flex justify-center'>
-                                        {item.job_status === 0 ? (
+                                        {!item.block ? (
                                             <button
                                                 className=''
                                                 onClick={() => {
-                                                    setCurrentJob(key)
+                                                    setCurrentCompany([item?.company_name, 'add/'])
                                                     openModal()
                                                 }}
                                             >
@@ -347,7 +371,7 @@ const JobsFilter = memo(() => {
                                             <button
                                                 className=' '
                                                 onClick={() => {
-                                                    setCurrentJob(key)
+                                                    setCurrentCompany([item?.company_name, 'remove/'])
                                                     openModal()
                                                 }}
                                             >
@@ -371,8 +395,8 @@ const JobsFilter = memo(() => {
 
             <Paginated
                 page={jobsFilterParams?.page}
-                setPage={() => {
-                    setJobsFilterParams({ ...jobsFilterParams, page: jobsFilterParams.page })
+                setPage={pageNumber => {
+                    setJobsFilterParams({ ...jobsFilterParams, page: pageNumber })
                 }}
                 pages={pagesCount}
             />

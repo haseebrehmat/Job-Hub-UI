@@ -5,6 +5,6 @@ export const colors = {
 }
 
 export const dilogColor = {
-    success: '#048C8C',
     warning: '#ff5252',
+    success: '#048C8C',
 }
