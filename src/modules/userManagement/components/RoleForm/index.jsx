@@ -22,7 +22,10 @@ const RoleForm = ({ show, setShow, mutate, role }) => {
         roleSchema,
         async formValues => trigger({ ...formValues, id: role?.id, permissions }),
         error => toast.error(getMsg(error)),
-        () => (role?.id ? mutate('/api/auth/role/') : resetForm())
+        () => {
+            mutate()
+            if (!role?.id) resetForm()
+        }
     )
 
     const { wait, confirm } = useDelete(`/api/auth/role/${role?.id}/`)

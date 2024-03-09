@@ -14,12 +14,12 @@ const CompanyForm = ({ show, setShow, mutate, company }) => {
         saveCompany,
         { name: company?.name || '', status: company?.status },
         companySchema,
-        async formValues => {
-            trigger({ ...formValues, id: company?.id })
-            if (!company?.id) resetForm()
-        },
+        async formValues => trigger({ ...formValues, id: company?.id }),
         error => toast.error(getMsg(error)),
-        () => company?.id && mutate('/api/auth/company/')
+        () => {
+            mutate()
+            if (!company?.id) resetForm()
+        }
     )
 
     return (

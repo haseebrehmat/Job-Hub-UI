@@ -25,7 +25,10 @@ const UserForm = ({ show, setShow, mutate, user }) => {
         userSchema,
         async formValues => trigger({ ...formValues, id: user?.id }),
         error => toast.error(getMsg(error)),
-        () => (user?.id ? mutate('/api/auth/user/') : resetForm())
+        () => {
+            mutate()
+            if (!user?.id) resetForm()
+        }
     )
 
     const { wait, confirm } = useDelete(`/api/auth/user/${user?.id}/`)
