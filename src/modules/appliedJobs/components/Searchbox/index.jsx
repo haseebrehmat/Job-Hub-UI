@@ -14,7 +14,6 @@ const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount })
 
     const handleEnter = e => {
         if (e.key === 'Enter') {
-            console.log(value)
             setQuery(value)
             setPage(1)
         }

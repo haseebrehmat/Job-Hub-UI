@@ -1,6 +1,7 @@
-import { getToken } from '@utils/helpers'
+import { checkToken, getToken } from '@utils/helpers'
 
 const uploadJobs = async (url, formData) => {
+    checkToken()
     const response = await fetch(url, {
         method: 'POST',
         body: formData,

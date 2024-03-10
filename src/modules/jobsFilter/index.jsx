@@ -7,7 +7,7 @@ import { Checkedbox, unCheckedbox } from '@icons'
 import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
-import { can } from '@/utils/helpers'
+import { can, checkToken } from '@/utils/helpers'
 import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
@@ -170,7 +170,7 @@ const JobsFilter = memo(() => {
         'Please Confirm ',
         'Are you sure want to change the state of recruiter',
         () => {
-            console.log(currentCompany[1])
+            checkToken()
             changeRecruiter(currentCompany[0], currentCompany[1])
             updateParams()
         },

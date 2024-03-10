@@ -7,7 +7,7 @@ import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
 
 import { tableHeads, jobStatus } from '@constants/teamAppliedJobs'
-import { formatDate, timeSince } from '@utils/helpers'
+import { checkToken, formatDate, timeSince } from '@utils/helpers'
 import toast from 'react-hot-toast'
 import { baseURL } from '@utils/http'
 
@@ -25,13 +25,14 @@ const TeamAppliedJobs = memo(() => {
         setBD(e.target.value)
     }
     const updateJobStatus = (id, stausValue) => {
+        checkToken()
         fetch(`${apiUrl}api/job_portal/job_status/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
             },
-            body: JSON.stringify({ status: stausValue, job: data.jobs[id].id }),
+            body: JSON.stringify({ status: stausValue, job: data?.jobs[id].id }),
         })
             .then(resp => {
                 if (!resp.ok) {
@@ -43,7 +44,7 @@ const TeamAppliedJobs = memo(() => {
                 mutate(
                     {
                         ...data,
-                        jobs: data.jobs.map((item, key) => (key === id ? { ...item, status: stausValue } : item)),
+                        jobs: data?.jobs.map((item, key) => (key === id ? { ...item, status: stausValue } : item)),
                     },
                     false
                 )
@@ -54,7 +55,6 @@ const TeamAppliedJobs = memo(() => {
             })
     }
 
-    // console.log(data)
 
     return isLoading || error ? (
         <Loading />
@@ -91,14 +91,14 @@ const TeamAppliedJobs = memo(() => {
                         data.jobs.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
-                                    <span className='font-bold'>{timeSince(job.applied_date)}</span>
-                                    <div>{formatDate(job.applied_date)}</div>
+                                    <span className='font-bold'>{timeSince(job?.applied_date)}</span>
+                                    <div>{formatDate(job?.applied_date)}</div>
                                 </td>
-                                <td className='px-3 py-4'>{job.company_name}</td>
-                                <td className='px-3 py-4'>{job.job_title}</td>
+                                <td className='px-3 py-4'>{job?.company_name}</td>
+                                <td className='px-3 py-4'>{job?.job_title}</td>
                                 <td className='px-3 py-4'>
-                                    <a className='underlin' target='_blank' rel='noreferrer' href={job.job_source_url}>
-                                        {job.job_source}
+                                    <a className='underlin' target='_blank' rel='noreferrer' href={job?.job_source_url}>
+                                        {job?.job_source}
                                     </a>
                                 </td>
                                 <td className='px-3 py-4'>{job?.applied_by_name || 'not-confirmed'}</td>
@@ -106,7 +106,7 @@ const TeamAppliedJobs = memo(() => {
                                     <select
                                         name='job_status'
                                         className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg'
-                                        value={job.status}
+                                        value={job?.status}
                                         onChange={e => updateJobStatus(index, e.target.value)}
                                     >
                                         {jobsStatusTypes.length > 0 &&

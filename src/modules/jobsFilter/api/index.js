@@ -1,6 +1,7 @@
-import { getToken } from '@/utils/helpers'
+import { checkToken, getToken } from '@/utils/helpers'
 
 const fetchJobs = async url => {
+    checkToken()
     const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
@@ -35,6 +36,7 @@ const fetchJobs = async url => {
 }
 
 const updateJobStatus = async (url, status, job) => {
+    checkToken()
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -50,6 +52,7 @@ const updateJobStatus = async (url, status, job) => {
 }
 
 const updateRecruiterStatus = async (url, company_name) => {
+    checkToken()
     const response = await fetch(url, {
         method: 'POST',
         headers: {
