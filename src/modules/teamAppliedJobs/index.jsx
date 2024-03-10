@@ -43,7 +43,7 @@ const TeamAppliedJobs = memo(() => {
                 mutate(
                     {
                         ...data,
-                        jobs: data.jobs.map((item, key) => (key === id ? { ...item, job_status: stausValue } : item)),
+                        jobs: data.jobs.map((item, key) => (key === id ? { ...item, status: stausValue } : item)),
                     },
                     false
                 )
@@ -101,11 +101,12 @@ const TeamAppliedJobs = memo(() => {
                                         {job.job_source}
                                     </a>
                                 </td>
+                                <td className='px-3 py-4'>{job?.applied_by_name || 'not-confirmed'}</td>
                                 <td className='px-3 py-4'>
                                     <select
                                         name='job_status'
                                         className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg'
-                                        value={job.job_status}
+                                        value={job.status}
                                         onChange={e => updateJobStatus(index, e.target.value)}
                                     >
                                         {jobsStatusTypes.length > 0 &&

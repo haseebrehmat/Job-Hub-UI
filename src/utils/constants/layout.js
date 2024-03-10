@@ -64,7 +64,7 @@ export const menuItems = [
                 label: 'Jobs Portal',
                 link: '/jobs-portal',
                 svg: Jobs,
-                perms: ['view_job_portal', 'change_job_status'],
+                perms: ['view_job_portal', 'apply_job'],
             },
         ],
     },
