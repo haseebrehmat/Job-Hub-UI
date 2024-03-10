@@ -7,4 +7,5 @@
 }
 .dropdown-container {
   width: 100%;
+min-width: 18rem;
 }
