@@ -8,7 +8,6 @@ import { fetchIntegrations } from '@modules/settings/api'
 
 import { integrations_head, apiStatus } from '@constants/settings'
 import { CreateIcon, ActionsIcons } from '@icons'
-import { Filters } from '@/components'
 import { can } from '@/utils/helpers'
 
 const Integrations = () => {
@@ -35,8 +34,9 @@ const Integrations = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
-                <Searchbox query={query} setQuery={setQuery} />
-                <Filters
+                <Searchbox
+                    query={query}
+                    setQuery={setQuery}
                     apply={() => handleFilter({ name: '', status: true, user: '' })}
                     clear={() => setfilters({ companies: [], integrations: [] })}
                 />

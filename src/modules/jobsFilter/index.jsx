@@ -136,10 +136,10 @@ const JobsFilter = memo(() => {
     }, [jobsFilterParams])
 
     const applyJob = async id => {
-        const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, 1, data[id].id)
+        const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, '1', data[id].id)
 
         if (status === 'success') {
-            const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: 1 } : item))
+            const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: '1' } : item))
             setData(temp_data)
             toast.success(detail)
         } else {
@@ -324,7 +324,7 @@ const JobsFilter = memo(() => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={key}>
                                 <td className='px-3 py-0'>{item?.job_title}</td>
                                 <td className='px-3 py-0'>{item?.company_name}</td>
-                                <td className='px-3 py-0'>
+                                <td className='px-3 py-0 capitalize'>
                                     <a
                                         className='underline'
                                         target='_blank'
@@ -339,7 +339,7 @@ const JobsFilter = memo(() => {
                                 <td className='px-3 py-0'>{item?.job_posted_date.slice(0, 10)}</td>
                                 <td className='px-1 py-0'>
                                     {can('apply_job') ? (
-                                        filterState?.jobStatusChoice && item && item?.job_status === 0 ? (
+                                        item?.job_status === '0' ? (
                                             <button
                                                 className='block rounded px-2 py-1 my-3 bg-[#10868a] text-white'
                                                 onClick={() => applyJob(key)}
