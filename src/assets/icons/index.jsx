@@ -43,7 +43,7 @@ import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
 import { BiPlusCircle } from 'react-icons/bi'
-import { RiUserSettingsLine, RiLock2Fill } from 'react-icons/ri'
+import { RiUserSettingsLine, RiLock2Fill, RiTeamLine } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
@@ -101,3 +101,4 @@ export const PageNext = <MdArrowForwardIos style={{ fontSize: 16 }} />
 export const PagePrev = <MdArrowBackIos style={{ fontSize: 16 }} />
 export const UpdatePasswordIcon = <BsFillKeyFill style={{ fontSize: '22px' }} />
 export const CrossIcon = <ImCross />
+export const TeamsIcon = <RiTeamLine style={{ fontSize: '22px' }} />

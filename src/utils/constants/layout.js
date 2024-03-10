@@ -11,6 +11,7 @@ import {
     IntegrationIcon,
     UserAppliedJobIcon,
     TeamAppliedJobsIcon,
+    TeamsIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -114,7 +115,7 @@ export const menuItems = [
             {
                 label: 'Teams',
                 link: '/teams',
-                svg: RolesIcon,
+                svg: TeamsIcon,
                 perms: ['view_team', 'create_team', 'update_team'],
             },
         ],

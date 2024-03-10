@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from 'react'
+import { memo, useState } from 'react'
 
 import { Input } from '@components'
 
@@ -11,6 +11,15 @@ const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount })
         setQuery(value)
         setPage(1)
     }
+
+    const handleEnter = e => {
+        if (e.key === 'Enter') {
+            console.log(value)
+            setQuery(value)
+            setPage(1)
+        }
+    }
+
     const handleClear = () => {
         setQuery('')
         setValue('')
@@ -34,7 +43,13 @@ const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount })
                     >
                         {SearchIcon}
                     </div>
-                    <Input ph='Search & Click Icon' classes='block p-2 pl-10' value={value} onChange={handleChange} />
+                    <Input
+                        ph='Search & Click Icon'
+                        classes='block p-2 pl-10'
+                        value={value}
+                        onChange={handleChange}
+                        onKeyDown={handleEnter}
+                    />
                     {query === '' ? (
                         ''
                     ) : (

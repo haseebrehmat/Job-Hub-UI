@@ -28,7 +28,10 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
         teamSchema,
         async formValues => trigger({ ...formValues, id: team?.id }),
         error => toast.error(getMsg(error)),
-        () => (team?.id ? mutate('/api/auth/team/') : resetForm())
+        () => {
+            mutate()
+            if (!team?.id) resetForm()
+        }
     )
     const { data, isLoading: uLoading } = useSWR(`/api/auth/role_users/${role}/`, role ? fetchRoleWiseUsers : null)
     const { data: fetched, isLoading } = useSWR('/api/auth/user/?type=dropdown', fetchDropdownUsers)
