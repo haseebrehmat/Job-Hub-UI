@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom'
 
-
 import {
     AppliedJobs,
     Login,
@@ -20,7 +19,6 @@ import {
 
 import { getToken, decodeJwt } from '@utils/helpers'
 import App from './App'
-import JobsUploaderV2 from './modules/jobsUploaderV2/index';
 
 const { user_id } = decodeJwt()
 
@@ -55,7 +53,7 @@ export const routes = [
     },
     {
         path: '/jobs-uploader',
-        component: <JobsUploaderV2 />,
+        component: <JobsUploader />,
         protect: true,
         title: 'Job Uploader',
         permission: 'view_job_uploader',

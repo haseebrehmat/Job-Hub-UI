@@ -4,7 +4,9 @@ import ReactPaginate from 'react-paginate'
 import { PageNext, PagePrev } from '@icons'
 
 const Paginated = ({ pages: pageCount, setPage, page }) => {
-    const handlePageClick = event => setPage(event.selected + 1)
+    const handlePageClick = event => {
+        setPage(event.selected + 1)
+    }
 
     return (
         <div

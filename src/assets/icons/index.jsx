@@ -38,7 +38,7 @@ import {
     AiOutlineMinusCircle,
     AiOutlineCloudUpload,
 } from 'react-icons/ai'
-import { ImSearch } from 'react-icons/im'
+import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
@@ -100,3 +100,4 @@ export const UserAppliedJobIcon = <MdWorkOutline style={{ fontSize: '22px' }} />
 export const PageNext = <MdArrowForwardIos style={{ fontSize: 16 }} />
 export const PagePrev = <MdArrowBackIos style={{ fontSize: 16 }} />
 export const UpdatePasswordIcon = <BsFillKeyFill style={{ fontSize: '22px' }} />
+export const CrossIcon = <ImCross />

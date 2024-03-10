@@ -14,7 +14,6 @@ import JobPortalSearchBox from './components/JobPortalSearchBox'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
-    const [page, setPage] = useState(1)
     const [data, setData] = useState([])
     const [currentCompany, setCurrentCompany] = useState([])
     const [pagesCount, setPagesCount] = useState([])
@@ -134,7 +133,7 @@ const JobsFilter = memo(() => {
 
     useEffect(() => {
         fetchJobsData(jobDetailsUrl)
-    }, [jobsFilterParams, page])
+    }, [jobsFilterParams])
 
     const applyJob = async id => {
         const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, 1, data[id].id)
@@ -276,9 +275,9 @@ const JobsFilter = memo(() => {
                             onChange={e => setFilterState({ ...filterState, jobVisibilitySelector: e.target.value })}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
-                            <option value='all'>all</option>
-                            <option value='recruiter'>recruiter</option>
-                            <option value='non-recruiter'>non-recruiter</option>
+                            <option value='all'>All</option>
+                            <option value='recruiter'>Recruiter</option>
+                            <option value='non-recruiter'>Non-Recruiter</option>
                         </select>
                     </div>
                     <div className='my-2'>
@@ -339,17 +338,17 @@ const JobsFilter = memo(() => {
                                 <td className='px-3 py-0'>{item?.job_type}</td>
                                 <td className='px-3 py-0'>{item?.job_posted_date.slice(0, 10)}</td>
                                 <td className='px-1 py-0'>
-                                    {can('change_job_status') ? (
+                                    {can('apply_job') ? (
                                         filterState?.jobStatusChoice && item && item?.job_status === 0 ? (
                                             <button
                                                 className='block rounded px-2 py-1 my-3 bg-[#10868a] text-white'
                                                 onClick={() => applyJob(key)}
                                             >
-                                                {filterState.jobStatusChoice[item.job_status]}
+                                                {filterState?.jobStatusChoice[item?.job_status]}
                                             </button>
                                         ) : (
                                             <button className='block rounded px-2 py-1 my-3 text-gray-400 bg-[#ffffff] '>
-                                                {filterState.jobStatusChoice[item.job_status]}
+                                                {filterState?.jobStatusChoice[item?.job_status]}
                                             </button>
                                         )
                                     ) : null}
@@ -357,7 +356,7 @@ const JobsFilter = memo(() => {
                                 {CustomModal}
                                 <td className='px-3 py-0'>
                                     <span className='flex justify-center'>
-                                        {!item.block ? (
+                                        {!item?.block ? (
                                             <button
                                                 className=''
                                                 onClick={() => {
