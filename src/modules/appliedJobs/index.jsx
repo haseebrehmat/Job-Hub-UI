@@ -39,22 +39,22 @@ const AppliedJobs = memo(({ userId = '' }) => {
                         data.jobs.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
-                                    <span className='font-bold'>{timeSince(job.applied_date)}</span>
-                                    <div>{formatDate(job.applied_date)}</div>
+                                    <span className='font-bold'>{timeSince(job?.applied_date)}</span>
+                                    <div>{formatDate(job?.applied_date)}</div>
                                 </td>
-                                <td className='px-3 py-4'>{job.company_name}</td>
+                                <td className='px-3 py-4'>{job?.company_name}</td>
                                 <td className='px-3 py-4 cursor-pointer underline'>
-                                    <a href={job.job_source_url} target='_blank' rel='noopener noreferrer'>
-                                        {job.job_title}
+                                    <a href={job?.job_source_url} target='_blank' rel='noopener noreferrer'>
+                                        {job?.job_title}
                                     </a>
                                 </td>
-                                <td className='px-3 py-4'>{job.job_source}</td>
+                                <td className='px-3 py-4'>{job?.job_source}</td>
                                 <td className='w-28 py-4'>
-                                    <Badge label={jobStatus[job.job_status]} type='success' />
+                                    <Badge label={jobStatus[job?.job_status]} type='success' />
                                 </td>
                                 <td className='px-3 py-4'>BD</td>
                                 <td className='px-3 py-4'>
-                                    <Badge label={job.tech_keywords} />
+                                    <Badge label={job?.tech_keywords} />
                                 </td>
                             </tr>
                         ))
