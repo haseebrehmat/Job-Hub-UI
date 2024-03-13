@@ -61,7 +61,9 @@ const TeamAppliedJobs = memo(() => {
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
             <div className='flex items-center justify-between'>
                 <div>
-                    <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs: 0 (Last 12 hours)</p>
+                    <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>
+                        Applied Jobs: {data.last_12_hours_count} (Last 12 hours)
+                    </p>
                 </div>
 
                 <select
