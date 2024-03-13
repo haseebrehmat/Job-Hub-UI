@@ -55,13 +55,15 @@ const TeamAppliedJobs = memo(() => {
             })
     }
 
-
     return isLoading || error ? (
         <Loading />
     ) : (
         <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
             <div className='flex items-center justify-between'>
-                <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Team Applied Jobs</p>
+                <div>
+                    <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>Applied Jobs: 0 (Last 12 hours)</p>
+                </div>
+
                 <select
                     className='block py-2 px-4 text-sm text-gray-900 border border-gray-300 rounded-lg'
                     value={bd}
@@ -95,12 +97,12 @@ const TeamAppliedJobs = memo(() => {
                                     <div>{formatDate(job?.applied_date)}</div>
                                 </td>
                                 <td className='px-3 py-4'>{job?.company_name}</td>
-                                <td className='px-3 py-4'>{job?.job_title}</td>
                                 <td className='px-3 py-4'>
                                     <a className='underlin' target='_blank' rel='noreferrer' href={job?.job_source_url}>
-                                        {job?.job_source}
+                                        {job?.job_title}
                                     </a>
                                 </td>
+                                <td className='px-3 py-4'>{job?.job_source}</td>
                                 <td className='px-3 py-4'>{job?.applied_by_name || 'not-confirmed'}</td>
                                 <td className='px-3 py-4'>
                                     <select

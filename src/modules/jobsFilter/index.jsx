@@ -7,10 +7,11 @@ import { Checkedbox, unCheckedbox } from '@icons'
 import { jobsHeads } from '@constants/appliedJob'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
-import { can, checkToken } from '@/utils/helpers'
+import { can, checkToken, dataForCsv } from '@/utils/helpers'
 import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
+import { GenerateCSV } from '@modules/jobsFilter/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -291,7 +292,6 @@ const JobsFilter = memo(() => {
                             placeholder='Select Tech Stack'
                         />
                     </div>
-
                     <div className='flex space-x-4 my-2 grid-flow-col '>
                         <div>
                             <p className='font-medium text-2xl '>Total :</p>
@@ -305,6 +305,10 @@ const JobsFilter = memo(() => {
                                 <Badge label={filterState?.stats?.filtered_jobs?.toString()} type='enabled' />
                             </div>
                         </div>
+                    </div>
+                    <div>{}</div>
+                    <div className='flex justify-end px-4 align-baseline h-1'>
+                        <div className='my-6'>{data ? GenerateCSV(dataForCsv(data)) : ''}</div>
                     </div>
                 </div>
             </div>
@@ -341,7 +345,7 @@ const JobsFilter = memo(() => {
                                     {can('apply_job') ? (
                                         item?.job_status === '0' ? (
                                             <button
-                                                className='block rounded px-2 py-1 my-3 bg-[#10868a] text-white'
+                                                className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
                                                 onClick={() => applyJob(key)}
                                             >
                                                 {filterState?.jobStatusChoice[item?.job_status]}
