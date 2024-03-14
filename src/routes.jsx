@@ -15,6 +15,7 @@ import {
     Integrations,
     Teams,
     Profile,
+    CoverLetter,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -111,6 +112,13 @@ export const routes = [
         component: <Profile />,
         protect: true,
         title: 'Profile',
+        permission: 'all',
+    },
+    {
+        path: '/coverletter',
+        component: <CoverLetter />,
+        protect: true,
+        title: 'Cover Letter',
         permission: 'all',
     },
 ]

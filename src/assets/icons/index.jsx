@@ -43,7 +43,7 @@ import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
-import { BiPlusCircle } from 'react-icons/bi'
+import { BiPlusCircle, BiMessageDetail } from 'react-icons/bi'
 import { RiUserSettingsLine, RiLock2Fill, RiTeamLine } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 
@@ -52,6 +52,7 @@ export const DownloadIcon = <BsCloudArrowDownFill style={{ fontSize: '22px' }} /
 export const Checkedbox = <MdCheckBox style={{ fontSize: '22px' }} />
 export const unCheckedbox = <MdCheckBoxOutlineBlank style={{ fontSize: '22px' }} />
 export const UploadIcon = <AiOutlineCloudUpload style={{ fontSize: '22px' }} />
+export const CoverLetter = <BiMessageDetail style={{ fontSize: '22px' }} />
 export const CloseIcon = <MdClose style={{ fontSize: '22px' }} />
 export const NavigationIcon = <FiMenu style={{ fontSize: '22px' }} />
 export const DashboardIcon = <MdSpaceDashboard style={{ fontSize: '20px' }} />
