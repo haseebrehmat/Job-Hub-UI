@@ -168,6 +168,7 @@ const JobsFilter = memo(() => {
         const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
 
         if (status === 'success') {
+            updateParams()
             toast.success(detail)
         } else {
             toast.error(detail)
@@ -186,7 +187,6 @@ const JobsFilter = memo(() => {
         () => {
             checkToken()
             changeRecruiter(currentCompany[0], currentCompany[1])
-            updateParams()
         },
         'success'
     )
