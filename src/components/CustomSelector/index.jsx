@@ -17,18 +17,18 @@ const chipStyles = {
     margin: '2px',
 }
 
-const MultiValue = props => {
-    const { index, getValue } = props
-    const hiddenLength = getValue().length - VALUE_LIMIT
-    return index < VALUE_LIMIT ? (
-        <components.MultiValue {...props} />
-    ) : index === VALUE_LIMIT ? (
-        <div style={chipStyles}>{`+${hiddenLength}`}</div>
-    ) : null
-}
-
 export default function CustomSelector({ options, handleChange, selectorValue, isMulti, placeholder }) {
-    const [selectedOptions, setSelectedOptions] = useState([])
+    const [selectedOptions, setSelectedOptions] = useState(selectorValue)
+
+    const MultiValue = props => {
+        const { index, getValue } = props
+        const hiddenLength = getValue().length - VALUE_LIMIT
+        return index < VALUE_LIMIT ? (
+            <components.MultiValue {...props} />
+        ) : index === VALUE_LIMIT ? (
+            <div style={chipStyles}>{`+${hiddenLength}`}</div>
+        ) : null
+    }
 
     const ClearIndicator = props => (
         <div {...props.innerProps}>

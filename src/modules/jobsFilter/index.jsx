@@ -31,7 +31,8 @@ const JobsFilter = memo(() => {
         jobStatusChoice: {},
         dates: { from_date: '', to_date: '' },
         jobTitle: '',
-        ordering: 'job_posted_date',
+        techStackData: [],
+        ordering: '-job_posted_date',
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
@@ -42,7 +43,7 @@ const JobsFilter = memo(() => {
         from_date: '',
         to_date: '',
         job_type: '',
-        ordering: 'job_posted_date',
+        ordering: '-job_posted_date',
         search: '',
         page: 1,
         job_visibility: 'all',
@@ -64,6 +65,10 @@ const JobsFilter = memo(() => {
         return params_count > 0 ? params.toString() : ''
     }
 
+    const handleTechStackSelector = techStackSelectorData => {
+        setFilterState({ ...filterState, techStackSelector: techStackSelectorData })
+    }
+
     const fetchJobsData = async url => {
         setData([])
 
@@ -80,6 +85,7 @@ const JobsFilter = memo(() => {
             detail,
         } = await fetchJobs(`${url}?${generateParamsString()}`)
 
+        const { techStackSelector } = filterState
         if (status === 'success') {
             setFilterState({
                 ...filterState,
@@ -88,6 +94,17 @@ const JobsFilter = memo(() => {
                 techStackData: tech_keywords_count_list,
                 jobSourceData: job_source_count_list,
                 jobTypeData: total_job_type,
+                techStackSelector: techStackSelector
+                    .map(({ value }) => {
+                        const updated_tech_count = tech_keywords_count_list.find(tech => tech.name === value)
+                        return (
+                            updated_tech_count && {
+                                label: `${updated_tech_count.name} (${updated_tech_count.value})`,
+                                value: updated_tech_count.name,
+                            }
+                        )
+                    })
+                    .filter(Boolean),
             })
             setData(jobsData)
             if (jobsData.length === 0) {
@@ -100,10 +117,6 @@ const JobsFilter = memo(() => {
             setRecordFound(false)
             toast.error(detail)
         }
-    }
-
-    const handleTechStackSelector = techStackSelectorData => {
-        setFilterState({ ...filterState, techStackSelector: techStackSelectorData })
     }
 
     const updateParams = () => {
@@ -261,7 +274,7 @@ const JobsFilter = memo(() => {
                             }
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
-                            <option value='job_posted_date'>Posted Date</option>
+                            <option value='-job_posted_date'>Posted Date</option>
                             <option value='job_title'>Job Title</option>
                             <option value='job_type'>Job Type</option>
                             <option value='company_name'>Company</option>
@@ -321,7 +334,12 @@ const JobsFilter = memo(() => {
                 <tbody>
                     {data && data?.length > 0 && error ? (
                         data?.map((item, key) => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={key}>
+                            <tr
+                                className={`${
+                                    item?.block ? 'bg-[#EDFDFB]' : 'bg-white'
+                                } border-b border-[#006366] border-opacity-30`}
+                                key={key}
+                            >
                                 <td className='px-3 py-0'>{item?.job_title}</td>
                                 <td className='px-3 py-0'>{item?.company_name}</td>
                                 <td className='px-3 py-0 capitalize'>
