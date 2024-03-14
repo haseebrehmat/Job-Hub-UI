@@ -12,6 +12,7 @@ import {
     UserAppliedJobIcon,
     TeamAppliedJobsIcon,
     TeamsIcon,
+    CoverLetter,
 } from '@icons'
 
 export const menuItems = [
@@ -34,14 +35,10 @@ export const menuItems = [
             'change_job_status',
             'upload_csv',
             'view_job_portal',
+            'view_cover_letter',
+            'generate_cover_letter',
         ],
         subItems: [
-            // {
-            //     label: 'Applied Jobs',
-            //     link: '/applied-jobs',
-            //     svg: ReportIcon,
-            //     perms: ['view_applied_job'],
-            // },
             {
                 label: 'My Applied Jobs',
                 link: '/user-applied-jobs',
@@ -65,6 +62,12 @@ export const menuItems = [
                 link: '/jobs-portal',
                 svg: Jobs,
                 perms: ['view_job_portal', 'apply_job'],
+            },
+            {
+                label: 'Cover Letter',
+                link: '/coverletter',
+                svg: CoverLetter,
+                perms: ['view_cover_letter', 'generate_cover_letter'],
             },
         ],
     },

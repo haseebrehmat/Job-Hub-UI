@@ -13,6 +13,7 @@ import Users from '@modules/userManagement/users'
 import Teams from '@modules/userManagement/teams'
 import Integrations from '@modules/settings/integrations'
 import Profile from '@modules/profile'
+import CoverLetter from './coverLetter'
 
 export {
     TeamAppliedJobs,
@@ -31,4 +32,5 @@ export {
     Integrations,
     JobSourceBlocking,
     Profile,
+    CoverLetter,
 }
