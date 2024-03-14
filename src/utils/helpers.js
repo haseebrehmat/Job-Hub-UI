@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode'
+import { validFileExtensions } from '@constants/profile'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
 
@@ -171,3 +172,6 @@ export const dataForCsv = data =>
         Recruiter: obj.block,
         JOB_SOURCE: obj.job_source_url,
     }))
+
+export const isValidFileTypeForAvatar = (fileName, fileType) =>
+    fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1
