@@ -8,3 +8,10 @@ export const updateProfile = (url, { arg: profile }) =>
 
 export const updatePassword = (url, { arg: passwords }) =>
     rawHttp.post(url, passwords).then(({ data }) => toast.success(data.detail || 'Password updated successfully'))
+
+export const updateAvatar = (url, { arg: file }) =>
+    rawHttp.put(url, file, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
