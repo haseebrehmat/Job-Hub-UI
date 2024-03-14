@@ -10,7 +10,7 @@ import {
     MdArrowBackIos,
     MdArrowForwardIos,
     MdCheckBox,
-    MdCheckBoxOutlineBlank
+    MdCheckBoxOutlineBlank,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -23,6 +23,7 @@ import {
     BsCollectionFill,
     BsThreeDotsVertical,
     BsFillKeyFill,
+    BsCloudArrowDownFill,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineUsers } from 'react-icons/hi'
 import { HiUserPlus } from 'react-icons/hi2'
@@ -47,6 +48,7 @@ import { RiUserSettingsLine, RiLock2Fill, RiTeamLine } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
+export const DownloadIcon = <BsCloudArrowDownFill style={{ fontSize: '22px' }} />
 export const Checkedbox = <MdCheckBox style={{ fontSize: '22px' }} />
 export const unCheckedbox = <MdCheckBoxOutlineBlank style={{ fontSize: '22px' }} />
 export const UploadIcon = <AiOutlineCloudUpload style={{ fontSize: '22px' }} />

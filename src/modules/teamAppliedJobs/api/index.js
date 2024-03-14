@@ -11,11 +11,12 @@ export const fetchTeamAppliedJobs = (page, applied_by = '') =>
                 },
             }
         )
-        .then(({ data: { data, links, filtered_jobs, team_members } }) => ({
+        .then(({ data: { data, links, filtered_jobs, team_members, last_12_hours_count } }) => ({
             jobs: data,
             team_members,
             next: links.next,
             prev: links.previous,
             total: filtered_jobs,
+            last_12_hours_count,
         }))
         .catch(error => ({ status: 'error', message: getMsg(error) }))

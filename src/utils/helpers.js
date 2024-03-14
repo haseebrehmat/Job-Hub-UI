@@ -159,3 +159,15 @@ export const removeOrAddElementsFromArray = (array, elements) => {
 
 export const parseMembers = (members, leadId) =>
     members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
+
+export const dataForCsv = data =>
+    data.map(obj => ({
+        JOB_TITLE: obj.job_title,
+        COMPANY: obj.company_name,
+        Tech_Stack: obj.tech_keywords,
+        Job_Type: obj.job_type,
+        Date_Posted: obj.job_posted_date.slice(0, 10),
+        Status: obj.job_status,
+        Recruiter: obj.block,
+        JOB_SOURCE: obj.job_source_url,
+    }))
