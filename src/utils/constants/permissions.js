@@ -1,4 +1,4 @@
-import { decodeJwt } from '@utils/helpers'
+import { isSuper } from '@utils/helpers'
 
 export const rawpermissions = [
     {
@@ -228,12 +228,10 @@ export const rawpermissions = [
     },
 ]
 
-const { is_superuser } = decodeJwt()
-
 export const permissions = rawpermissions.map(row => ({
     module: row.module,
     permissions: row?.permissions.filter(p => {
-        if (is_superuser) return p.level >= 1
+        if (isSuper()) return p.level >= 1
         return p.level >= 2
     }),
 }))
