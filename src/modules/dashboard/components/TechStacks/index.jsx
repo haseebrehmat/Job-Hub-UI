@@ -11,7 +11,7 @@ import {
 
 function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
     return (
-        <Text {...rest} verticalAnchor='middle' y={y + (y - cy) / 8} x={x + (x - cx) / 10}>
+        <Text {...rest} verticalAnchor='middle' y={y + (y - cy) / 6} x={x + (x - cx) / 6}>
             {payload.value}
         </Text>
     )
@@ -21,16 +21,16 @@ const TechStacks = ({ data }) => (
     <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
         <ResponsiveContainer
             width='98%'
-            height={450}
+            height={700}
             minWidth={800}
             className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto -mt-8'
         >
-            <RadarChart outerRadius={150} width={600} height={400} data={data}>
+            <RadarChart outerRadius={250} data={data}>
                 <PolarGrid stroke='#037571' strokeWidth='0.5' />
                 <PolarAngleAxis
                     dataKey='name'
                     stroke='#037571'
-                    strokeWidth='0.5'
+                    strokeWidth='0.6'
                     tick={props => renderPolarAngleAxis(props)}
                     tickLine={false}
                 />
@@ -41,7 +41,7 @@ const TechStacks = ({ data }) => (
                     interval={3}
                     stroke='#00000'
                     orientation='middle'
-                    fontSize={10}
+                    fontSize={12}
                 />
                 <Radar
                     name='Tech Jobs'
