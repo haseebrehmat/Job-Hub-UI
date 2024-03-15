@@ -4,14 +4,15 @@ import { toast } from 'react-hot-toast'
 import { useMutate, useDelete } from '@/hooks'
 import { Button, Drawer, Input, CustomDilog } from '@components'
 
-import { RolesDropdown } from '@modules/userManagement/components'
+import { RolesDropdown, CompaniesDropdown } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
 import { userSchema } from '@utils/schemas'
-import { can, getMsg } from '@utils/helpers'
+import { can, decodeJwt, getMsg } from '@utils/helpers'
 import { TrashIcon } from '@icons'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
+    const loggedUser = decodeJwt()
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/user${user?.id ? `/${user?.id}/` : '/'}`,
         saveUser,
@@ -19,6 +20,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             username: user?.username,
             email: user?.email,
             id: user?.id,
+            company: user?.company?.id || loggedUser?.company,
             roles: user?.roles?.id,
             password: '',
         },
@@ -60,6 +62,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                     <Input name='username' value={values.username} onChange={handleChange} ph='Enter username' />
                     {errors.username && <small className='ml-1 text-xs text-red-600'>{errors.username}</small>}
                     <RolesDropdown value={values.roles} error={errors.roles} setFieldValue={setFieldValue} />
+                    <CompaniesDropdown value={values.company} error={errors.company} setFieldValue={setFieldValue} />
                     {user?.id ? null : (
                         <>
                             <span className='text-xs font-semibold'>Password*</span>

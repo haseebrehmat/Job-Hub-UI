@@ -11,6 +11,8 @@ export const removeToken = () => localStorage.removeItem('token')
 
 export const decodeJwt = () => (getToken() ? jwt_decode(getToken()) : { user: null })
 
+export const isSuper = () => decodeJwt()?.is_superuser
+
 export const getMsg = error => error?.response?.data?.detail || 'Server error'
 
 export const getBaseUrl = nodeEnv => {

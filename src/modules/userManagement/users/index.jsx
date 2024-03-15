@@ -9,7 +9,7 @@ import { fetchUsers } from '@modules/userManagement/api'
 import { userHeads } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
-import { can } from '@utils/helpers'
+import { can, isSuper } from '@utils/helpers'
 
 const Users = () => {
     const [query, setQuery] = useState('')
@@ -19,8 +19,8 @@ const Users = () => {
 
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}&search=${query}`, fetchUsers)
 
-    const handleClick = ({ username, email, roles, id }) => {
-        setUser({ username, email, roles, id })
+    const handleClick = ({ username, email, roles, company, id }) => {
+        setUser({ username, email, roles, company, id })
         setShow(!show)
     }
 
@@ -55,7 +55,12 @@ const Users = () => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.email}</td>
-                                <td className='px-3 py-6'>{row?.username}</td>
+                                <td className='px-3 py-6'>
+                                    {row?.username}
+                                    {isSuper() && row?.company && (
+                                        <span className='font-bold mx-1'>({row?.company?.name})</span>
+                                    )}
+                                </td>
                                 <td className='px-3 py-6'>{row?.roles?.name || 'not assigned'}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {can('edit_user') && ActionsIcons}
