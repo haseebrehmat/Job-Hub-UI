@@ -48,48 +48,50 @@ const Permissions = ({ permissions, setPermissions }) => {
                 </thead>
                 <tbody>
                     {data?.length > 0 ? (
-                        data?.map((perm, idx) => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
-                                <td className='px-2 py-2'>
-                                    <div className='flex items-center'>
-                                        <input
-                                            id={`checkbox-${idx}`}
-                                            type='checkbox'
-                                            name='permissions'
-                                            data-perms={perm.permissions.map(({ codename }) => codename)}
-                                            onChange={handleModule}
-                                            className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
-                                        />
-                                        <label htmlFor={`checkbox-${idx}`} className='ml-2 text-sm'>
-                                            {transformPascal(perm.module)}
-                                        </label>
-                                    </div>
-                                </td>
-                                <td className='px-2 py-2 grid grid-cols-2 gap-2'>
-                                    {perm?.permissions?.map(({ codename, name, parent, child }) => (
-                                        <div className='flex items-center' key={codename}>
+                        data?.map((perm, idx) =>
+                            perm?.permissions?.length > 0 ? (
+                                <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
+                                    <td className='px-2 py-2'>
+                                        <div className='flex items-center'>
                                             <input
-                                                id={`checkbox-${codename}`}
+                                                id={`checkbox-${idx}`}
                                                 type='checkbox'
                                                 name='permissions'
-                                                data-parent={parent}
-                                                data-child={child}
-                                                value={codename}
-                                                checked={permss[codename]}
-                                                onChange={handleChange}
+                                                data-perms={perm.permissions.map(({ codename }) => codename)}
+                                                onChange={handleModule}
                                                 className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
                                             />
-                                            <label
-                                                htmlFor={`checkbox-${codename}`}
-                                                className='ml-2 text-sm  capitalize'
-                                            >
-                                                {name}
+                                            <label htmlFor={`checkbox-${idx}`} className='ml-2 text-sm'>
+                                                {transformPascal(perm.module)}
                                             </label>
                                         </div>
-                                    ))}
-                                </td>
-                            </tr>
-                        ))
+                                    </td>
+                                    <td className='px-2 py-2 grid grid-cols-2 gap-2'>
+                                        {perm?.permissions?.map(({ codename, name, parent, child }) => (
+                                            <div className='flex items-center' key={codename}>
+                                                <input
+                                                    id={`checkbox-${codename}`}
+                                                    type='checkbox'
+                                                    name='permissions'
+                                                    data-parent={parent}
+                                                    data-child={child}
+                                                    value={codename}
+                                                    checked={permss[codename]}
+                                                    onChange={handleChange}
+                                                    className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
+                                                />
+                                                <label
+                                                    htmlFor={`checkbox-${codename}`}
+                                                    className='ml-2 text-sm  capitalize'
+                                                >
+                                                    {name}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </td>
+                                </tr>
+                            ) : null
+                        )
                     ) : (
                         <tr className='bg-white border-b border-[#006366] border-opacity-30'>
                             <td className='px-2 py-2' colSpan={2}>
