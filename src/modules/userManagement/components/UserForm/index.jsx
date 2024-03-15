@@ -62,7 +62,13 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                     <Input name='username' value={values.username} onChange={handleChange} ph='Enter username' />
                     {errors.username && <small className='ml-1 text-xs text-red-600'>{errors.username}</small>}
                     <RolesDropdown value={values.roles} error={errors.roles} setFieldValue={setFieldValue} />
-                    <CompaniesDropdown value={values.company} error={errors.company} setFieldValue={setFieldValue} />
+                    {!values.company && (
+                        <CompaniesDropdown
+                            value={values.company}
+                            error={errors.company}
+                            setFieldValue={setFieldValue}
+                        />
+                    )}
                     {user?.id ? null : (
                         <>
                             <span className='text-xs font-semibold'>Password*</span>
