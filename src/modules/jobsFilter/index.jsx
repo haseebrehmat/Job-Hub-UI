@@ -346,9 +346,9 @@ const JobsFilter = memo(() => {
                             >
                                 <td className='px-3 py-0'>{item?.job_title}</td>
                                 <td className='px-3 py-0'>{item?.company_name}</td>
-                                <td className='px-3 py-0 capitalize'>
+                                <td className='px-1 py-0 capitalize'>
                                     <a
-                                        className='underline'
+                                        className='underline focus:text-black focus:text-lg'
                                         target='_blank'
                                         rel='noreferrer'
                                         href={item?.job_source_url}
