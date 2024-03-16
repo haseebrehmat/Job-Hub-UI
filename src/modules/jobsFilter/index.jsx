@@ -346,9 +346,9 @@ const JobsFilter = memo(() => {
                                 } border-b border-[#006366] border-opacity-30`}
                                 key={key}
                             >
-                                <td className='px-3 py-0'>{item?.job_title}</td>
-                                <td className='px-3 py-0'>{item?.company_name}</td>
-                                <td className='px-1 py-0 capitalize'>
+                                <td className='p-5 w-96'>{item?.job_title}</td>
+                                <td className='p-5'>{item?.company_name}</td>
+                                <td className='p-5 capitalize'>
                                     <a
                                         className='underline focus:text-black focus:text-lg'
                                         target='_blank'
