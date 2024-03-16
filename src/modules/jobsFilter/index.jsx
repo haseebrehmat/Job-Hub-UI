@@ -183,7 +183,7 @@ const JobsFilter = memo(() => {
 
     const { CustomModal, openModal } = CustomDilog(
         'Please Confirm ',
-        'Are you sure want to change the state of recruiter',
+        'Are you sure you want to change the state of recruiter',
         () => {
             checkToken()
             changeRecruiter(currentCompany[0], currentCompany[1])
