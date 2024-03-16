@@ -8,11 +8,12 @@ import { fetchIntegrations } from '@modules/settings/api'
 
 import { integrations_head, apiStatus } from '@constants/settings'
 import { CreateIcon, ActionsIcons } from '@icons'
-import { can } from '@/utils/helpers'
+import { can, decodeJwt, isSuper } from '@/utils/helpers'
 
 const Integrations = () => {
+    const loggedUser = decodeJwt()
     const [query, setQuery] = useState()
-    const [filters, setfilters] = useState({ companies: [], integrations: [] })
+    const [filters, setfilters] = useState({ companies: isSuper() ? [] : [loggedUser?.company], integrations: [] })
     const [integration, setIntegration] = useState()
     const [mutateShow, setMutateShow] = useState(false)
     const [filterShow, setFilterShow] = useState(false)
