@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast'
 import { useMutate, useDelete } from '@/hooks'
 import { Button, Drawer, Input, CustomDilog } from '@components'
 
-import { RolesDropdown, CompaniesDropdown } from '@modules/userManagement/components'
+import { RolesDropdown, CompaniesDropdown, Password } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
 import { userSchema } from '@utils/schemas'
@@ -69,20 +69,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                             setFieldValue={setFieldValue}
                         />
                     )}
-                    {user?.id ? null : (
-                        <>
-                            <span className='text-xs font-semibold'>Password*</span>
-                            <Input
-                                name='password'
-                                type='password'
-                                value={values.password}
-                                onChange={handleChange}
-                                ph='Password'
-                            />
-                            {errors.password && <small className='ml-1 text-xs text-red-600'>{errors.password}</small>}
-                        </>
-                    )}
-
+                    <Password value={values.password} error={errors.password} onChange={handleChange} id={user?.id} />
                     <div className='pt-4 space-y-2'>
                         <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
