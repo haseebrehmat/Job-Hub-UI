@@ -36,7 +36,7 @@ export const menuItems = [
             'upload_csv',
             'view_job_portal',
             'view_cover_letter',
-            'generate_cover_letter',
+            'create_cover_letter',
         ],
         subItems: [
             {
@@ -67,7 +67,7 @@ export const menuItems = [
                 label: 'Cover Letter',
                 link: '/coverletter',
                 svg: CoverLetter,
-                perms: ['view_cover_letter', 'generate_cover_letter'],
+                perms: ['view_cover_letter', 'create_cover_letter'],
             },
         ],
     },
