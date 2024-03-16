@@ -55,13 +55,9 @@ const Users = () => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.email}</td>
-                                <td className='px-3 py-6'>
-                                    {row?.username}
-                                    {isSuper() && row?.company && (
-                                        <span className='font-bold mx-1'>({row?.company?.name})</span>
-                                    )}
-                                </td>
+                                <td className='px-3 py-6'>{row?.username}</td>
                                 <td className='px-3 py-6'>{row?.roles?.name || 'not assigned'}</td>
+                                <td className='px-3 py-6 font-bold'>{row?.company ? row?.company?.name : '-'}</td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
                                     {can('edit_user') && ActionsIcons}
                                 </td>
