@@ -29,8 +29,6 @@ const CoverLetter = () => {
             {!Show &&
                 <TextEditor />
             }
-
-
             {Show && <Form show={Show} setShow={setShow} />}
         </div>
     )
