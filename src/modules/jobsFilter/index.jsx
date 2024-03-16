@@ -327,8 +327,8 @@ const JobsFilter = memo(() => {
                     </div>
                 </div>
             </div>
-            <table className='table-auto w-full  text-sm text-left mt-6 text-[#048C8C] '>
-                <thead className='text-sm uppercase border tex border-[#048C8C] '>
+            <table className='table-auto w-full  text-xl text-left mt-6 text-[#048C8C] '>
+                <thead className='text-lg uppercase border tex border-[#048C8C] '>
                     <tr>
                         {jobsHeads?.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
@@ -358,7 +358,7 @@ const JobsFilter = memo(() => {
                                         {item?.job_source}
                                     </a>
                                 </td>
-                                <td className='p-5 '>{item?.tech_keywords}</td>
+                                <td className='p-5'>{item?.tech_keywords}</td>
                                 <td className='p-5'>{item?.job_type}</td>
                                 <td className='p-5'>{item?.job_posted_date.slice(0, 10)}</td>
                                 <td className='p-2'>
