@@ -1,17 +1,22 @@
 import { memo } from 'react'
 import { toast } from 'react-hot-toast'
 import useSWR from 'swr'
+
+import { useMutate } from '@/hooks'
+
 import CustomSelector from '@components/CustomSelector'
 import { Button, Checkbox, Drawer, Input } from '@components'
+
 import { fetchCompanies } from '@modules/userManagement/api'
 import { saveIntegration } from '@modules/settings/api'
-import { getMsg, parseComapnies, parseSelectedCompany } from '@utils/helpers'
-import { useMutate } from '@/hooks'
+
+import { decodeJwt, getMsg, isSuper, parseComapnies, parseSelectedCompany } from '@utils/helpers'
 import { integrationSchema } from '@utils/schemas'
-import { integrationNames } from '@utils/constants/settings'
+import { integrationNames } from '@constants/settings'
 
 const IntegrationForm = ({ show, setShow, mutate, integration }) => {
-    const { data, isLoading, error: companyError } = useSWR('/api/auth/company/', fetchCompanies)
+    const loggedUser = decodeJwt()
+    const { data, isLoading, error: companyError } = useSWR('/api/auth/company/', isSuper() && fetchCompanies)
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/integration${integration?.id ? `/${integration?.id}/` : '/'}`,
         saveIntegration,
@@ -19,7 +24,7 @@ const IntegrationForm = ({ show, setShow, mutate, integration }) => {
             name: integration?.name,
             status: integration?.status,
             api_key: integration?.api_key,
-            company: integration?.company?.id,
+            company: integration?.company?.id || loggedUser?.company,
         },
         integrationSchema,
         async formValues => trigger({ ...formValues, id: integration?.id }),
@@ -27,18 +32,20 @@ const IntegrationForm = ({ show, setShow, mutate, integration }) => {
         () => (errors ? mutate('/api/auth/integration/') : resetForm())
     )
 
-    const renderCompanies = isLoading ? (
-        <div>Loading companies....</div>
-    ) : companyError ? (
-        <div className='text-red-500 text-xs'>Failed to fetch companies</div>
-    ) : (
-        <CustomSelector
-            options={parseComapnies(data?.companies)}
-            handleChange={({ value }) => setFieldValue('company', value)}
-            selectorValue={parseSelectedCompany(values.company, data?.companies)}
-            placeholder='Select Company'
-        />
-    )
+    const renderCompanies =
+        isSuper() &&
+        (isLoading ? (
+            <div>Loading companies....</div>
+        ) : companyError ? (
+            <div className='text-red-500 text-xs'>Failed to fetch companies</div>
+        ) : (
+            <CustomSelector
+                options={parseComapnies(data?.companies)}
+                handleChange={({ value }) => setFieldValue('company', value)}
+                selectorValue={parseSelectedCompany(values.company, data?.companies)}
+                placeholder='Select Company'
+            />
+        ))
 
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
@@ -46,9 +53,13 @@ const IntegrationForm = ({ show, setShow, mutate, integration }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{integration?.id ? 'Edit' : 'Add'} Integration</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Select Company*</span>
-                    {renderCompanies}
-                    {errors.company && <small className='ml-1 text-xs text-red-600'>{errors.company}</small>}
+                    {isSuper() && (
+                        <>
+                            <span className='text-xs font-semibold'>Select Company*</span>
+                            {renderCompanies}
+                            {errors.company && <small className='ml-1 text-xs text-red-600'>{errors.company}</small>}
+                        </>
+                    )}
                     <span className='text-xs font-semibold'>Select Integration*</span>
                     <CustomSelector
                         options={integrationNames}
