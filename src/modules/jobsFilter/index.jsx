@@ -340,7 +340,7 @@ const JobsFilter = memo(() => {
                         data?.map((item, key) => (
                             <tr
                                 className={`${
-                                    item?.block ? 'bg-[#EDFDFB]' : 'bg-white'
+                                    item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
                                 } border-b border-[#006366] border-opacity-30`}
                                 key={key}
                             >

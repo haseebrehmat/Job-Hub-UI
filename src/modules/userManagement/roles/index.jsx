@@ -6,11 +6,10 @@ import { Loading, Searchbox, EmptyTable, Button } from '@components'
 import { RoleForm, PermissionList } from '@modules/userManagement/components'
 import { fetchRoles } from '@modules/userManagement/api'
 
+import { can, isSuper } from '@utils/helpers'
 import { roleHeads } from '@constants/userManagement'
 
-import { CreateIcon, ActionsIcons } from '@icons'
-import { PermissionIcon } from '@/assets/icons'
-import { can } from '@/utils/helpers'
+import { CreateIcon, ActionsIcons, PermissionIcon } from '@icons'
 
 const Roles = () => {
     const [query, setQuery] = useState('')
@@ -36,7 +35,7 @@ const Roles = () => {
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
-                {can('create_role') && (
+                {can('create_role') && !isSuper() && (
                     <Button label='Create Role' fit icon={CreateIcon} onClick={() => handleClick({ name: '' })} />
                 )}
             </div>
@@ -62,7 +61,7 @@ const Roles = () => {
                                     </span>
                                 </td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
-                                    {can('edit_role') && ActionsIcons}
+                                    {can('edit_role') && !isSuper() && ActionsIcons}
                                 </td>
                             </tr>
                         ))
