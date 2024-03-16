@@ -1,5 +1,9 @@
 import * as Yup from 'yup'
+
+import { isValidFileTypeForAvatar } from './helpers'
+
 import { today } from '@constants/dashboard'
+import { MAX_FILE_SIZE } from '@constants/profile'
 
 export const loginSchema = Yup.object({
     email: Yup.string().email().required(),
@@ -64,4 +68,13 @@ export const updatePasswordSchema = Yup.object().shape({
     old_password: Yup.string().required('Old Password is required'),
     new_password: Yup.string().required('Password is required'),
     confirmed_password: Yup.string().oneOf([Yup.ref('new_password'), null], 'Passwords must match'),
+})
+
+export const avatarSchema = Yup.object().shape({
+    file: Yup.mixed()
+        .required('Required')
+        .test('is-valid-type', 'Not a valid image type', value =>
+            isValidFileTypeForAvatar(value && value.name.toLowerCase(), 'file')
+        )
+        .test('is-valid-size', 'Max allowed size is 4MBs', value => value && value.size <= MAX_FILE_SIZE),
 })

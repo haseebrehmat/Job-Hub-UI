@@ -1,13 +1,19 @@
 import { memo, useState } from 'react'
+import useSWR from 'swr'
 
-import { Button } from '@components'
+import { Button, Loading } from '@components'
 
-import { UpdateDetails, UpdatePassword } from '@modules/profile/components'
+import { UpdateAvatar, UpdateDetails, UpdatePassword } from '@modules/profile/components'
+import { fetchProfile } from '@modules/profile/api'
 
 import { UserIcon, ActionsIcons, UpdatePasswordIcon } from '@icons'
 
 const Profile = () => {
+    const { data, isLoading } = useSWR('/api/auth/user_profile/', fetchProfile)
     const [activeTab, setActiveTab] = useState({ avatar: true, details: false, password: false })
+
+    if (isLoading) return <Loading />
+
     return (
         <div className='p-2'>
             <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
@@ -36,26 +42,13 @@ const Profile = () => {
                         />
                     </div>
                     {activeTab.avatar && (
-                        <form className='flex items-center space-x-6 mx-auto mt-4'>
-                            <div className='shrink-0'>
-                                <img
-                                    className='h-16 w-16 object-cover rounded-full'
-                                    alt='Heelo'
-                                    src='https://ui-avatars.com/api/?name=Avatar&background=0D8ABC&color=fff'
-                                />
-                            </div>
-                            <label className='block'>
-                                <span className='sr-only'>Choose profile photo</span>
-                                <input
-                                    type='file'
-                                    className='block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 hover:file:bg-violet-100'
-                                />
-                            </label>
-                        </form>
+                        <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md md:w-1/2 mx-auto mt-4'>
+                            <UpdateAvatar data={data} />
+                        </div>
                     )}
                     {activeTab.details && (
                         <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md md:w-1/2 mx-auto mt-4'>
-                            <UpdateDetails />
+                            <UpdateDetails data={data} />
                         </div>
                     )}
                     {activeTab.password && (

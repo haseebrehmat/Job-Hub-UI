@@ -1,18 +1,16 @@
 import { memo } from 'react'
-import useSWR from 'swr'
 import { toast } from 'react-hot-toast'
 
-import { Loading, Input, Button } from '@components'
+import { Input, Button } from '@components'
 
-import { fetchProfile, updateProfile } from '@modules/profile/api'
+import { updateProfile } from '@modules/profile/api'
 
 import { useMutate } from '@/hooks'
 
 import { profileSchema } from '@utils/schemas'
 import { getMsg } from '@utils/helpers'
 
-const UpdateDetails = () => {
-    const { data, isLoading } = useSWR('/api/auth/user_profile/', fetchProfile)
+const UpdateDetails = ({ data }) => {
     const { values, errors, handleSubmit, handleChange, trigger } = useMutate(
         '/api/auth/user_profile/',
         updateProfile,
@@ -26,8 +24,6 @@ const UpdateDetails = () => {
         async formValues => trigger({ ...formValues }),
         error => toast.error(getMsg(error))
     )
-
-    if (isLoading) return <Loading />
 
     return (
         <form onSubmit={handleSubmit} className='text-[#328d8c]'>
