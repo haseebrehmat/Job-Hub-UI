@@ -205,7 +205,7 @@ const JobsFilter = memo(() => {
                         setFilterState({ ...filterState, jobTitle: title })
                     }}
                 />
-                <div className='my-6'>{data ? GenerateCSV(dataForCsv(data)) : ''}</div>
+                {data ? GenerateCSV(dataForCsv(data)) : ''}
             </div>
             <div className='p-3 border'>
                 <div className='grid grid-cols-3 -my-2 gap-3'>
@@ -319,9 +319,11 @@ const JobsFilter = memo(() => {
                             </div>
                         </div>
                     </div>
-                    <div>{}</div>
-                    <div className='flex justify-end px-4 align-baseline my-6'>
-                    <Filters apply={() => updateParams()} clear={() => resetFilters()} />
+                    <div>{ }</div>
+                    <div className='flex justify-end px-4 align-baseline'>
+                        <div className='my-6'>
+                            <Filters apply={() => updateParams()} clear={() => resetFilters()} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,10 +358,10 @@ const JobsFilter = memo(() => {
                                         {item?.job_source}
                                     </a>
                                 </td>
-                                <td className='px-3'>{item?.tech_keywords}</td>
-                                <td className='px-3'>{item?.job_type}</td>
-                                <td className='px-3'>{item?.job_posted_date.slice(0, 10)}</td>
-                                <td className='px-1'>
+                                <td className='p-5 '>{item?.tech_keywords}</td>
+                                <td className='p-5'>{item?.job_type}</td>
+                                <td className='p-5'>{item?.job_posted_date.slice(0, 10)}</td>
+                                <td className='p-2'>
                                     {can('apply_job') ? (
                                         item?.job_status === '0' ? (
                                             <button
@@ -376,7 +378,7 @@ const JobsFilter = memo(() => {
                                     ) : null}
                                 </td>
                                 {CustomModal}
-                                <td className='px-3'>
+                                <td className='p-5'>
                                     <span className='flex justify-center'>
                                         {!item?.block ? (
                                             <button
