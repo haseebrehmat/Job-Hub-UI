@@ -340,15 +340,15 @@ const JobsFilter = memo(() => {
                         data?.map((item, key) => (
                             <tr
                                 className={`${
-                                    item?.block ? 'bg-[#EDFDFB]' : 'bg-white'
+                                    item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
                                 } border-b border-[#006366] border-opacity-30`}
                                 key={key}
                             >
                                 <td className='px-3 py-0'>{item?.job_title}</td>
                                 <td className='px-3 py-0'>{item?.company_name}</td>
-                                <td className='px-3 py-0 capitalize'>
+                                <td className='px-1 py-0 capitalize'>
                                     <a
-                                        className='underline'
+                                        className='underline focus:text-black focus:text-lg'
                                         target='_blank'
                                         rel='noreferrer'
                                         href={item?.job_source_url}
