@@ -9,7 +9,7 @@ import { fetchUsers } from '@modules/userManagement/api'
 import { userHeads } from '@constants/userManagement'
 
 import { CreateIcon, ActionsIcons } from '@icons'
-import { can, isSuper } from '@utils/helpers'
+import { can } from '@utils/helpers'
 
 const Users = () => {
     const [query, setQuery] = useState('')
