@@ -105,7 +105,7 @@ const TeamAppliedJobs = memo(() => {
                                     </a>
                                 </td>
                                 <td className='px-3 py-4'>{job?.job_source}</td>
-                                <td className='px-3 py-4'>{job?.job_type}</td>
+                                <td className='px-3 py-4'>{job?.tech_keywords}</td>
                                 <td className='px-3 py-4'>{job?.job_type}</td>
                                 <td className='px-3 py-4'>{job?.applied_by_name || 'not-confirmed'}</td>
                                 <td className='px-3 py-4'>

@@ -5,7 +5,7 @@ import { Loading, Button } from '@components'
 
 import { Form, TextEditor } from '@modules/coverLetter/components'
 import { fetchIntegrations } from '@modules/settings/api'
-import { CreateLetterIcon} from '@icons'
+import { CreateLetterIcon } from '@icons'
 import { can } from '@/utils/helpers'
 
 const CoverLetter = () => {
@@ -21,10 +21,8 @@ const CoverLetter = () => {
 
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 py-6'>
-                {can('create_cover_letter') && (
-                    <Button label='Generate Cover Letter' fit icon={CreateLetterIcon} onClick={() => handleFilter()} />
-                )}
+            <div className='flex items-center space-x-4 py-2'>
+               <Button label='Generate Cover Letter' fit icon={CreateLetterIcon} onClick={() => handleFilter()} />
             </div>
             {!Show &&
                 <TextEditor />

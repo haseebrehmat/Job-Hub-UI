@@ -327,7 +327,7 @@ const JobsFilter = memo(() => {
                     </div>
                 </div>
             </div>
-            <table className='table-auto w-full  text-xl text-left mt-6 text-[#048C8C] '>
+            <table className='table-auto w-full table text-xl text-left mt-6 text-[#048C8C] '>
                 <thead className='text-lg uppercase border tex border-[#048C8C] '>
                     <tr>
                         {jobsHeads?.map(heading => (
@@ -368,7 +368,7 @@ const JobsFilter = memo(() => {
                                                 className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
                                                 onClick={() => applyJob(key)}
                                             >
-                                                {filterState?.jobStatusChoice[item?.job_status]}
+                                                Apply
                                             </button>
                                         ) : (
                                             <button className='block rounded px-2 py-1 my-3 text-gray-400 bg-[#ffffff] '>
