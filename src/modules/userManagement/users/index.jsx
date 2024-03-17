@@ -3,13 +3,13 @@ import useSWR from 'swr'
 
 import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
-import { UserForm } from '@modules/userManagement/components'
+import { UserForm, UsersActions } from '@modules/userManagement/components'
 import { fetchUsers } from '@modules/userManagement/api'
 
+import { can } from '@utils/helpers'
 import { userHeads } from '@constants/userManagement'
 
-import { CreateIcon, ActionsIcons } from '@icons'
-import { can } from '@utils/helpers'
+import { CreateIcon } from '@icons'
 
 const Users = () => {
     const [query, setQuery] = useState('')
@@ -58,8 +58,10 @@ const Users = () => {
                                 <td className='px-3 py-6'>{row?.username}</td>
                                 <td className='px-3 py-6'>{row?.roles?.name || 'not assigned'}</td>
                                 <td className='px-3 py-6 font-bold'>{row?.company ? row?.company?.name : '-'}</td>
-                                <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
-                                    {can('edit_user') && ActionsIcons}
+                                <td className='px-3 py-6 float-right'>
+                                    {can(['edit_user', 'delete_user']) && (
+                                        <UsersActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
+                                    )}
                                 </td>
                             </tr>
                         ))
@@ -68,12 +70,12 @@ const Users = () => {
                     )}
                 </tbody>
             </table>
-            {data?.users?.length > 0 && (
+            {data?.users?.length > 24 && (
                 <div className='w-full'>
                     <Paginated pages={data?.pages ?? Math.ceil(data.total / 25)} setPage={setPage} page={page} />
                 </div>
             )}
-            {show && can('edit_user') && <UserForm show={show} setShow={setShow} mutate={mutate} user={user} />}
+            {can('edit_user') && show && <UserForm show={show} setShow={setShow} mutate={mutate} user={user} />}
         </div>
     )
 }

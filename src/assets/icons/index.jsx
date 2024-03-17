@@ -26,7 +26,7 @@ import {
     BsCloudArrowDownFill,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineUsers } from 'react-icons/hi'
-import { HiUserPlus } from 'react-icons/hi2'
+import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
 import { TbRefresh } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
@@ -105,3 +105,4 @@ export const PagePrev = <MdArrowBackIos style={{ fontSize: 16 }} />
 export const UpdatePasswordIcon = <BsFillKeyFill style={{ fontSize: '22px' }} />
 export const CrossIcon = <ImCross />
 export const TeamsIcon = <RiTeamLine style={{ fontSize: '22px' }} />
+export const EditIcon = <HiOutlinePencilSquare style={{ fontSize: '20px' }} />

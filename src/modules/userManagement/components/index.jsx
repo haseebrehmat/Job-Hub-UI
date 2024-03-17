@@ -7,6 +7,7 @@ import RolesDropdown from '@modules/userManagement/components/RolesDropdown'
 import CompaniesDropdown from '@modules/userManagement/components/CompaniesDropdown'
 import PermissionList from '@modules/userManagement/components/PermissionList'
 import Password from '@modules/userManagement/components/Password'
+import UsersActions from '@modules/userManagement/components/UsersActions'
 
 export {
     CompanyForm,
@@ -18,4 +19,5 @@ export {
     PermissionList,
     TeamForm,
     Password,
+    UsersActions,
 }
