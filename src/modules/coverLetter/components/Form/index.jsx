@@ -16,7 +16,7 @@ const Form = ({ show, setShow, filters, setfilters }) => {
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <div className='grid grid-flow-row gap-2'>
-                <p className='font-medium text-xl'>Cover Letter Form</p>
+                <p className='font-medium text-xl'>Cover Letter124 Form</p>
                 <hr className='mb-2' />
                 <Input
                     name='name'
