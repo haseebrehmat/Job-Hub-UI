@@ -63,3 +63,8 @@ export const saveTeam = (url, { arg: team }) => {
 export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
 
 export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
+
+
+export const generateCoverLetter = (url, { arg: details }) => {
+    return rawHttp.post(url, details).then(({ data }) => ({coverletter: data.detail, status: 'success' }))
+}

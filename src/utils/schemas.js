@@ -106,3 +106,10 @@ export const cronjobSettingSchema = Yup.object().shape({
                     .required('Please select interval type'),
         }),
 })
+
+export const coverLetterSchema = Yup.object().shape({
+    name: Yup.string().required('Applicant name is required'),
+    company: Yup.string().required('Company name is required'),
+    experience: Yup.string().required('Applicant experience is required'),
+    job_des: Yup.string().required('Job description is required'),
+})

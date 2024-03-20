@@ -1,61 +1,69 @@
-import { useState, memo } from 'react'
-import useSWR from 'swr'
-import { Button, Drawer, Input, Textarea } from '@components'
+import { memo } from 'react'
+import { useMutate } from '@/hooks'
+import { generateCoverLetter } from '@modules/userManagement/api'
+import { Button, Drawer, Input, Textarea, Loading } from '@components'
+import { coverLetterSchema } from '@utils/schemas'
 
 
-
-const Form = ({ show, setShow, filters, setfilters }) => {
-    const [values, setValues] = useState({'name': '', 'company': '', 'experience': '', 'job_desc': ''})
-    const handleSubmit = () => {
-        setfilters(values)
-        setShow(!show)
-    }
-
-
-
+const Form = ({ show, setShow, setInit }) => {
+    const { values, errors, handleSubmit, handleChange, resetForm, trigger ,wait} = useMutate(
+        'api/job_portal/cover_letter/generate/',
+        generateCoverLetter,
+        { name: '', company: '', experience: '', job_des: '' },
+        coverLetterSchema,
+        async formValues => trigger({ ...formValues }),
+        error => toast.error(getMsg(error)),
+        data => {
+            setInit(data.coverletter)
+            setShow(false)
+            resetForm()
+        }
+    )
+    if (wait) return <Loading />
     return (
+        
         <Drawer show={show} setShow={setShow} w='320px'>
-            <div className='grid grid-flow-row gap-2'>
-                <p className='font-medium text-xl'>Cover Letter Form</p>
-                <hr className='mb-2' />
-                <Input
-                    name='name'
-                    onChange={e=> setValues({...values, name: e.target.value})}
-                    value={values.name}
-                    ph='name'
-                    onBlur={""}
-                    label='name'
-                />
-                <Input
-                    name='company'
-                    onChange={e=> setValues({...values, company: e.target.value})}
-                    value={values.company}
-                    ph='company'
-                    onBlur={""}
-                    label='Company'
-                />
-                <Input
-                    name='experience'
-                    onChange={e=> setValues({...values, experience: e.target.value})}
-                    value={values.experience}
-                    ph='experience'
-                    onBlur={""}
-                    label='Experience'
-                />
-
-                <Textarea
-                    name='job_des'
-                    onChange={e=> setValues({...values, job_desc: e.target.value})}
-                    value={values.job_desc}
-                    ph='job description'
-                    onBlur={""}
-                    label='Job Description'
-                />
-                <div className='pt-4 space-y-2'>
-                    <Button label='Generate' fill onClick={handleSubmit} />
-                    <Button label='Cancel' onClick={() => setShow(false)} />
+            <form onSubmit={handleSubmit}>
+                <div className='grid grid-flow-row gap-2'>
+                    <p className='font-medium text-xl'>Cover Letter Form</p>
+                    <hr className='mb-2' />
+                    <Input
+                        name='name'
+                        onChange={handleChange}
+                        value={values.name}
+                        ph='name'
+                        label='name'
+                    /> {errors.name && <small className='ml-1 text-xs text-red-600'>{errors.name}</small>}
+                    <Input
+                        name='company'
+                        onChange={handleChange}
+                        value={values.company}
+                        ph='company'
+                        label='company'
+                    />
+                    {errors.company && <small className='ml-1 text-xs text-red-600'>{errors.company}</small>}
+                    <Input
+                        name='experience'
+                        onChange={handleChange}
+                        value={values.experience}
+                        ph='experience'
+                        label='experience'
+                    />
+                    {errors.experience && <small className='ml-1 text-xs text-red-600'>{errors.experience}</small>}
+                    <Textarea
+                        name='job_des'
+                        onChange={handleChange}
+                        value={values.job_des}
+                        ph='job description'
+                        label='Job Description'
+                    />
+                    {errors.job_des && <small className='ml-1 text-xs text-red-600'>{errors.job_des}</small>}
+                    <div className='pt-4 space-y-2'>
+                        <Button label='Generate' fill type='submit' />
+                        <Button label='Cancel' onClick={() => setShow(false)} />
+                    </div>
                 </div>
-            </div>
+            </form>
         </Drawer>
     )
 }
