@@ -14,6 +14,7 @@ import Teams from '@modules/userManagement/teams'
 import Integrations from '@modules/settings/integrations'
 import Profile from '@modules/profile'
 import CoverLetter from './coverLetter'
+import Scrapper from '@modules/scrapper'
 
 export {
     TeamAppliedJobs,
@@ -33,4 +34,5 @@ export {
     JobSourceBlocking,
     Profile,
     CoverLetter,
+    Scrapper,
 }
