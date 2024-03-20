@@ -16,6 +16,7 @@ import {
     Teams,
     Profile,
     CoverLetter,
+    Scrapper,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -120,6 +121,13 @@ export const routes = [
         protect: true,
         title: 'Cover Letter',
         permission: 'all',
+    },
+    {
+        path: '/job-scrapper',
+        component: <Scrapper />,
+        protect: true,
+        title: 'Job Scrapper',
+        permission: 'view_job_scrapper',
     },
 ]
 
