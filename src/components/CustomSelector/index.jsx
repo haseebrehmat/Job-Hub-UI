@@ -43,7 +43,7 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
             fontSize: 18,
             color: '#048C8C',
             borderColor: state.isFocused ? '#048C8C' : '#048C8C ',
-            boxShadow: state.isFocused ? '0 0 0 1px #048C8C' : '',
+            boxShadow: state.isFocused ? '0 0 0 0px #048C8C' : '',
             '&:hover': {
                 borderColor: '#048C8C',
             },
@@ -51,6 +51,8 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
         placeholder: base => ({
             ...base,
             color: '#048C8C',
+            opacity: 0.8,
+            fontSize: 14,
         }),
         option: (provided, state) => ({
             ...provided,
