@@ -13,6 +13,7 @@ import {
     TeamAppliedJobsIcon,
     TeamsIcon,
     CoverLetter,
+    ScrapperIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -37,6 +38,10 @@ export const menuItems = [
             'view_job_portal',
             'view_cover_letter',
             'create_cover_letter',
+            'generate_cover_letter',
+            'view_job_scrapper',
+            'update_scrapper_cronjob_time',
+            'run_scrapper',
         ],
         subItems: [
             {
@@ -68,6 +73,12 @@ export const menuItems = [
                 link: '/coverletter',
                 svg: CoverLetter,
                 perms: ['view_cover_letter', 'create_cover_letter'],
+            },
+            {
+                label: 'Job Scrapper',
+                link: '/job-scrapper',
+                svg: ScrapperIcon,
+                perms: ['view_job_scrapper', 'update_scrapper_cronjob_time', 'run_scrapper'],
             },
         ],
     },
