@@ -195,6 +195,16 @@ export const rawpermissions = [
                 parent: ['view_job_portal'],
                 level: 2,
             },
+            {
+                codename: 'view_cover_letter',
+                name: 'View Cover Letter',
+                parent: ['view_cover_letter'],
+            },
+            {
+                codename: 'create_cover_letter',
+                name: 'Create Cover Letter',
+                parent: ['create_cover_letter'],
+            }, 
         ],
     },
     {

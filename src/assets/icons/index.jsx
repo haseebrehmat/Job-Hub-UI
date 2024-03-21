@@ -26,8 +26,8 @@ import {
     BsCloudArrowDownFill,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineUsers } from 'react-icons/hi'
-import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
-import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications } from 'react-icons/io'
+import { HiUserPlus } from 'react-icons/hi2'
+import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications ,IoIosCreate} from 'react-icons/io'
 import { TbRefresh } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
 import {
@@ -48,6 +48,7 @@ import { RiUserSettingsLine, RiLock2Fill, RiTeamLine } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
+export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
 export const DownloadIcon = <BsCloudArrowDownFill style={{ fontSize: '22px' }} />
 export const Checkedbox = <MdCheckBox style={{ fontSize: '22px' }} />
 export const unCheckedbox = <MdCheckBoxOutlineBlank style={{ fontSize: '22px' }} />
