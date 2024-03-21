@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useMutate } from '@/hooks'
-import { generateCoverLetter } from '@modules/userManagement/api'
+import { generateCoverLetter } from '@modules/coverLetter/api'
 import { Button, Drawer, Input, Textarea, Loading } from '@components'
 import { coverLetterSchema } from '@utils/schemas'
 
