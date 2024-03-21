@@ -1,13 +1,28 @@
 import { memo } from 'react'
+import useSWRMutation from 'swr/mutation'
 
 import { Button } from '@components'
 
-const SyncNow = () => (
-    <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md mt-4'>
-        <h1 className='mb-2 text-lg font-medium'>Sync Now</h1>
-        <hr className='mb-5' />
-        <Button label='Run Scrapper Now' fit />
-    </div>
-)
+import { syncNow } from '@modules/scrapper/api'
+
+import { RunScrapperIcon } from '@icons'
+
+const SyncNow = () => {
+    const { trigger, isMutating } = useSWRMutation('/api/job_scraper/sync/', syncNow, {
+        shouldRetryOnError: true,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+
+    return (
+        <Button
+            label={isMutating ? 'Running....' : 'Run Scrapper Now'}
+            fit
+            icon={RunScrapperIcon}
+            onClick={() => trigger()}
+            disabled={isMutating}
+        />
+    )
+}
 
 export default memo(SyncNow)
