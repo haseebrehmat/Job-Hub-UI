@@ -1,15 +1,14 @@
 import { memo } from 'react'
 import { toast } from 'react-hot-toast'
 
-import { useMutate, useDelete } from '@/hooks'
-import { Button, Drawer, Input, CustomDilog } from '@components'
+import { useMutate } from '@/hooks'
+import { Button, Drawer, Input } from '@components'
 
-import { RolesDropdown, CompaniesDropdown } from '@modules/userManagement/components'
+import { RolesDropdown, CompaniesDropdown, Password } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
 import { userSchema } from '@utils/schemas'
-import { can, decodeJwt, getMsg } from '@utils/helpers'
-import { TrashIcon } from '@icons'
+import { decodeJwt, getMsg, isSuper } from '@utils/helpers'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
     const loggedUser = decodeJwt()
@@ -32,22 +31,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             if (!user?.id) resetForm()
         }
     )
-
-    const { wait, confirm } = useDelete(`/api/auth/user/${user?.id}/`)
-
-    const deleteUser = async () => {
-        const result = await confirm()
-        if (result && wait === false) {
-            setShow(false)
-            mutate('/api/auth/user/')
-        }
-    }
-
-    const { CustomModal, openModal } = CustomDilog(
-        'Confirm delete?',
-        `Are you sure want to delete the user: ${values?.username}`,
-        deleteUser
-    )
+    const allowCompanyEdit = isSuper() && !values.id
 
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
@@ -62,40 +46,17 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                     <Input name='username' value={values.username} onChange={handleChange} ph='Enter username' />
                     {errors.username && <small className='ml-1 text-xs text-red-600'>{errors.username}</small>}
                     <RolesDropdown value={values.roles} error={errors.roles} setFieldValue={setFieldValue} />
-                    {!values.company && (
+                    {allowCompanyEdit && (
                         <CompaniesDropdown
                             value={values.company}
                             error={errors.company}
                             setFieldValue={setFieldValue}
                         />
                     )}
-                    {user?.id ? null : (
-                        <>
-                            <span className='text-xs font-semibold'>Password*</span>
-                            <Input
-                                name='password'
-                                type='password'
-                                value={values.password}
-                                onChange={handleChange}
-                                ph='Password'
-                            />
-                            {errors.password && <small className='ml-1 text-xs text-red-600'>{errors.password}</small>}
-                        </>
-                    )}
-
+                    <Password value={values.password} error={errors.password} onChange={handleChange} id={user?.id} />
                     <div className='pt-4 space-y-2'>
                         <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
-
-                        {/* {CustomModal}
-                        {can('delete_user') && user?.id && (
-                            <Button
-                                label='Delete'
-                                classes='bg-transparent text-red-500 border-red-500'
-                                icon={TrashIcon}
-                                onClick={openModal}
-                            />
-                        )} */}
                     </div>
                 </div>
             </form>
