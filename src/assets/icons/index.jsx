@@ -26,8 +26,8 @@ import {
     BsCloudArrowDownFill,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineUsers } from 'react-icons/hi'
-import { HiUserPlus } from 'react-icons/hi2'
-import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications ,IoIosCreate} from 'react-icons/io'
+import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
+import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
 import { TbRefresh } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
 import {
