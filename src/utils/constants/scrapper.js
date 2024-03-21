@@ -4,3 +4,5 @@ export const options = [
     { label: 'Hours', value: 'hours' },
     { label: 'Days', value: 'days' },
 ]
+
+export const settingsHeads = ['ID', 'Source', 'Type', 'Setting', '']
