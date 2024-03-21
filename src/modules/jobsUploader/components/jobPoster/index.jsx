@@ -2,16 +2,22 @@ import { React, useState } from 'react'
 
 import { Loading, Badge, Searchbox, EmptyTable, Button } from '@components'
 import { CreateIcon, ActionsIcons } from '@icons'
-import { comapnyHeads, comapnyStatus } from '@constants/userManagement'
+import { jobsHeads } from '@constants/appliedJob'
+import { JobForm } from '@modules/jobsUploader/components'
 
 const JobsPoster = () => {
     const [query, setQuery] = useState('')
+    const [show, setShow] = useState(false)
+    const handleClick = () => {
+        setShow(!show)
+    }
+
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
                 <Button
-                    label='Create Company'
+                    label='Create a Job'
                     fit
                     icon={CreateIcon}
                     onClick={() => handleClick({ name: '', status: true })}
@@ -21,15 +27,15 @@ const JobsPoster = () => {
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        {comapnyHeads.map(heading => (
+                        {jobsHeads.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
                         ))}
                     </tr>
                 </thead>
-                {/* <tbody>
-                    {data?.companies?.length > 0 && !error ? (
+                <tbody>
+                    {/* {data?.companies?.length > 0 && !error ? (
                         data.companies.map((comp, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
@@ -48,11 +54,11 @@ const JobsPoster = () => {
                         ))
                     ) : (
                         <EmptyTable cols={6} msg='No companies found yet!' />
-                    )}
-                </tbody> */}
+                    )} */}
+                </tbody>
             </table>
-                {/* <CompanyForm show={show} setShow={setShow} mutate={mutate} company={company} /> */}
-            </div>
+                <JobForm  show={show} setShow={setShow}  />
+        </div>
 
     )
 }

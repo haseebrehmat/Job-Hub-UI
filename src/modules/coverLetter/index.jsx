@@ -5,22 +5,22 @@ import { CreateLetterIcon } from '@icons'
 import { can } from '@/utils/helpers'
 
 const CoverLetter = () => {
-    const [Show, setShow] = useState(false)
+    const [show, setShow] = useState(false)
     const [init, setInit] = useState("<p>your Ai Generated Cover Letter Displays here.........</p>")
 
-    const handleFilter = () => {
-        setShow(!Show)
+    const handleClick = () => {
+        setShow(!show)
     }
 
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-2'>
-               <Button label='Generate Cover Letter' fit icon={CreateLetterIcon} onClick={() => handleFilter()} />
+               <Button label='Generate Cover Letter' fit icon={CreateLetterIcon} onClick={() => handleClick()} />
             </div>
-            {!Show &&
+            {!show &&
                 <TextEditor init={init}  />
             }
-            {Show && <Form show={Show} setShow={setShow} setInit={setInit}/>}
+            {show && <Form show={show} setShow={setShow} setInit={setInit}/>}
         </div>
     )
 }

@@ -6,7 +6,7 @@ import { coverLetterSchema } from '@utils/schemas'
 
 
 const Form = ({ show, setShow, setInit }) => {
-    const { values, errors, handleSubmit, handleChange, resetForm, trigger ,wait} = useMutate(
+    const { values, errors, handleSubmit, handleChange, resetForm, trigger, wait } = useMutate(
         'api/job_portal/cover_letter/generate/',
         generateCoverLetter,
         { name: '', company: '', experience: '', job_des: '' },
@@ -21,12 +21,13 @@ const Form = ({ show, setShow, setInit }) => {
     )
     if (wait) return <Loading />
     return (
-        
+
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Cover Letter Form</p>
                     <hr className='mb-2' />
+                    
                     <Input
                         name='name'
                         onChange={handleChange}
