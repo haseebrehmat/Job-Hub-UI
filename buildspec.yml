@@ -11,7 +11,7 @@ phases:
     commands:
       - curl -sL https://rpm.nodesource.com/setup_18.x | bash -
       - yum remove -y nodejs npm
-      - yum install -y nodejs
+      - nvm install 18.12.1
       - yum install yarn
       - yarn install:clean
   # Now we want to actually build our React app
