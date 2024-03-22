@@ -1,9 +1,11 @@
 import useSWRMutation from 'swr/mutation'
 import { useFormik } from 'formik'
+import { getMsg } from '@/utils/helpers'
+import { toast } from 'react-hot-toast'
 
-const useMutate = (url, api, initial, schema, onSubmit, onError, onSuccess = null) => {
+const useMutate = (url, api, initial, schema, onSubmit, onError = null, onSuccess = null) => {
     const { trigger, isMutating } = useSWRMutation(url, api, {
-        onError,
+        onError: onError || (error => toast.error(getMsg(error))),
         onSuccess,
     })
 
