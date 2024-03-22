@@ -1,17 +1,24 @@
 import { React, useState } from 'react'
+import useSWR from 'swr'
 
 import { Loading, Badge, Searchbox, EmptyTable, Button } from '@components'
-import { CreateIcon, ActionsIcons } from '@icons'
-import { jobsHeads } from '@constants/appliedJob'
+
 import { JobForm } from '@modules/jobsUploader/components'
+import { fetchManualJobs } from '@modules/jobsUploader/api'
+
+import { manualJobsHeads } from '@constants/appliedJob'
+import { CreateIcon, ActionsIcons } from '@icons'
 
 const JobsPoster = () => {
     const [query, setQuery] = useState('')
     const [show, setShow] = useState(false)
+    const { data, error, isLoading, mutate } = useSWR(`api/job_portal/manual_jobs/`, fetchManualJobs)
+
     const handleClick = () => {
         setShow(!show)
     }
 
+    if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
@@ -22,12 +29,11 @@ const JobsPoster = () => {
                     icon={CreateIcon}
                     onClick={() => handleClick({ name: '', status: true })}
                 />
-
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        {jobsHeads.map(heading => (
+                        {manualJobsHeads.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -35,31 +41,33 @@ const JobsPoster = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {data?.companies?.length > 0 && !error ? (
-                        data.companies.map((comp, idx) => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={comp.id}>
-                                <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{comp?.name}</td>
-                                <td className='px-3 py-6'>{comp?.code}</td>
-                                <td className='px-1 py-6'>
-                                    <Badge
-                                        label={comapnyStatus[comp?.status ? 0 : 1]}
-                                        type={comp?.status ? 'enabled' : 'disabled'}
-                                    />
+                    {data?.jobs?.length > 0 && !error ? (
+                        data.jobs.map(job => (
+                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={job?.id}>
+                                <td className='p-5'>{job?.job_title}</td>
+                                <td className='p-5'>{job?.company_name}</td>
+                                <td className='p-5 capitalize'>
+                                    <a
+                                        className='underline focus:text-black focus:text-lg'
+                                        target='_blank'
+                                        rel='noreferrer'
+                                        href={job?.job_source_url}
+                                    >
+                                        {job?.job_source}
+                                    </a>
                                 </td>
-                                <td className='px-3 py-6 float-right' onClick={() => handleClick(comp)}>
-                                    {ActionsIcons}
-                                </td>
+                                <td className='p-5'>{job?.tech_keywords}</td>
+                                <td className='p-5'>{job?.job_type}</td>
+                                <td className='p-5'>{job?.job_posted_date}</td>
                             </tr>
                         ))
                     ) : (
                         <EmptyTable cols={6} msg='No companies found yet!' />
-                    )} */}
+                    )}
                 </tbody>
             </table>
-                <JobForm  show={show} setShow={setShow}  />
+            <JobForm show={show} setShow={setShow} />
         </div>
-
     )
 }
 

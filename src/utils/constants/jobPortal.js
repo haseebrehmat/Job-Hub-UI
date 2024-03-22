@@ -8,3 +8,13 @@ export const JOB_HEADS = [
     'Status',
     'recruiter',
 ]
+
+export const manualJobsHeads = [
+    'Job Title',
+    'Company',
+    'Job Source',
+    'Tech Stack',
+    'Job Type',
+    'Date Posted',
+    'Actions',
+]

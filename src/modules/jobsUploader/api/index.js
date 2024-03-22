@@ -1,4 +1,5 @@
 import { checkToken, getToken } from '@utils/helpers'
+import { http } from '@utils/http'
 
 const uploadJobs = async (url, formData) => {
     checkToken()
@@ -14,5 +15,7 @@ const uploadJobs = async (url, formData) => {
     const { detail } = await response.json()
     return { status: response.ok ? 'success' : 'error', detail }
 }
+
+export const fetchManualJobs = url => http.get(url).then(({ data }) => ({ jobs: data, status: 'success' }))
 
 export default uploadJobs
