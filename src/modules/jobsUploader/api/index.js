@@ -1,5 +1,6 @@
 import { checkToken, getToken } from '@utils/helpers'
-import { http } from '@utils/http'
+import { http, rawHttp } from '@utils/http'
+import { toast } from 'react-hot-toast'
 
 const uploadJobs = async (url, formData) => {
     checkToken()
@@ -18,4 +19,8 @@ const uploadJobs = async (url, formData) => {
 
 export const fetchManualJobs = url => http.get(url).then(({ data }) => ({ jobs: data, status: 'success' }))
 
+export const jobPost = (url, job) => {
+    console.log('job', job)
+    rawHttp.post(url, job).then(({ data }) => toast.success(data.detail))
+}
 export default uploadJobs

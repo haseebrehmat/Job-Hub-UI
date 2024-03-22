@@ -1,22 +1,19 @@
 import { React, useState } from 'react'
 import useSWR from 'swr'
+import { Loading, Searchbox, EmptyTable, Button } from '@components'
 
-import { Loading, Badge, Searchbox, EmptyTable, Button } from '@components'
-
-import { JobForm } from '@modules/jobsUploader/components'
+import { JobForm, ManualJobsActions } from '@modules/jobsUploader/components'
 import { fetchManualJobs } from '@modules/jobsUploader/api'
 
-import { manualJobsHeads } from '@constants/appliedJob'
-import { CreateIcon, ActionsIcons } from '@icons'
+import { manualJobsHeads } from '@constants/jobPortal'
+import { CreateIcon } from '@icons'
 
 const JobsPoster = () => {
     const [query, setQuery] = useState('')
     const [show, setShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR(`api/job_portal/manual_jobs/`, fetchManualJobs)
 
-    const handleClick = () => {
-        setShow(!show)
-    }
+    const handleClick = () => setShow(!show)
 
     if (isLoading) return <Loading />
     return (
@@ -59,6 +56,9 @@ const JobsPoster = () => {
                                 <td className='p-5'>{job?.tech_keywords}</td>
                                 <td className='p-5'>{job?.job_type}</td>
                                 <td className='p-5'>{job?.job_posted_date}</td>
+                                <td className='px-3 py-6 float-right'>
+                                    <ManualJobsActions id={job?.id} edit={() => handleClick(job?.id)} mutate={mutate} />
+                                </td>
                             </tr>
                         ))
                     ) : (

@@ -113,3 +113,14 @@ export const coverLetterSchema = Yup.object().shape({
     experience: Yup.string().required('Applicant experience is required'),
     job_des: Yup.string().required('Job description is required'),
 })
+
+export const manualJobSchema = Yup.object().shape({
+    title: Yup.string().required('Applicant name is required'),
+    company: Yup.string().required('Company name is required'),
+    job_source: Yup.string().required('job source is required'),
+    job_type: Yup.string().required('job type is required'),
+    address: Yup.string().required('addressis required'),
+    job_source_url: Yup.string().required('job URL is required'),
+    job_posted_date: Yup.string().required('job posted date is required'),
+    job_des: Yup.string().required('Job description is required'),
+})

@@ -16,6 +16,12 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Career Builder', value: 'careerbuilder' },
 ]
 
+export const JOB_TYPE = [
+    { label: 'Full Time Remote', value: 'Full Time Remote' },
+    { label: 'Full Time on Site', value: 'Full Time on Site' },
+    { label: 'Contract', value: 'Contract' },
+]
+
 export const JOB_SOURCES = {
     linkedin: 'Linkedin',
     careerbuilder: 'Career Builder',
