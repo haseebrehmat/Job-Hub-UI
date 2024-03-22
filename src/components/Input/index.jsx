@@ -13,6 +13,7 @@ const Input = memo(
         classes = null,
         label = null,
         max = null,
+        min = null,
     }) => (
         <div className={label && `relative`}>
             <input
@@ -28,6 +29,7 @@ const Input = memo(
                 onBlur={onBlur}
                 onKeyDown={onKeyDown}
                 max={max}
+                min={min}
                 autoFocus
             />
             {label && (

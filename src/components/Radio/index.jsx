@@ -10,7 +10,7 @@ const Radio = ({ checked = false, onChange = null, value, name, label }) => (
             value={value}
             onChange={onChange}
         />
-        <label className='checked:text-[#328d8c] ml-4 font-normal'>{label}</label>
+        <label className='checked:text-[#328d8c] ml-3 font-normal'>{label}</label>
     </div>
 )
 
