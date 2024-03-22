@@ -10,7 +10,8 @@ phases:
   pre_build:
     commands:
       - curl -sL https://rpm.nodesource.com/setup_18.x | bash -
-      - yum install -y nodejs
+      - dnf install -y nodejs
+      - yum install yarn
       - yarn install:clean
   # Now we want to actually build our React app
   build:
