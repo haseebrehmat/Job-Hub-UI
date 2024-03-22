@@ -1,5 +1,5 @@
 import { memo } from 'react'
-
+import { toast } from 'react-hot-toast'
 import { useMutate } from '@/hooks'
 
 import { Button, Drawer, Input, Textarea, Loading } from '@components'
@@ -7,10 +7,10 @@ import { Button, Drawer, Input, Textarea, Loading } from '@components'
 import { generateCoverLetter } from '@modules/coverLetter/api'
 
 import { coverLetterSchema } from '@utils/schemas'
-
+import { getMsg } from '@utils/helpers'
 
 const CoverLetterForm = ({ show, setShow, setInit }) => {
-    const { values, errors, handleSubmit, handleChange, resetForm, trigger ,wait} = useMutate(
+    const { values, errors, handleSubmit, handleChange, resetForm, trigger, wait } = useMutate(
         'api/job_portal/cover_letter/generate/',
         generateCoverLetter,
         { name: '', company: '', experience: '', job_des: '' },
@@ -25,27 +25,14 @@ const CoverLetterForm = ({ show, setShow, setInit }) => {
     )
     if (wait) return <Loading />
     return (
-        
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Cover Letter Form</p>
                     <hr className='mb-2' />
-                    <Input
-                        name='name'
-                        onChange={handleChange}
-                        value={values.name}
-                        ph=''
-                        label='name'
-                    /> 
+                    <Input name='name' onChange={handleChange} value={values.name} ph='' label='name' />
                     {errors.name && <small className='ml-1 text-xs text-red-600'>{errors.name}</small>}
-                    <Input
-                        name='company'
-                        onChange={handleChange}
-                        value={values.company}
-                        ph=''
-                        label='company'
-                    />
+                    <Input name='company' onChange={handleChange} value={values.company} ph='' label='company' />
                     {errors.company && <small className='ml-1 text-xs text-red-600'>{errors.company}</small>}
                     <Input
                         name='experience'
