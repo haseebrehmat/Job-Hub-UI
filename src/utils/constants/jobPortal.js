@@ -1,4 +1,4 @@
-export const jobsHeads = [
+export const JOB_HEADS = [
     'Job Title',
     'Company',
     'Job Source',
