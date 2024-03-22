@@ -3,9 +3,10 @@ export const tableHeads = [
     'Company Name',
     'Job Title',
     'Job Source',
+    'Tech Stack',
+    'Job Type',
     'Status',
     'Agent (BD)',
-    'Tech Stack',
 ]
 
 export const jobStatus = {
