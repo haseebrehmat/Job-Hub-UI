@@ -9,12 +9,11 @@ phases:
   # To give our build server access, we can simply run "npm install"
   pre_build:
     commands:
-      - curl -sL https://rpm.nodesource.com/setup_18.x | bash -
-      - curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh -o install_nvm.sh
+      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+      - . ~/.nvm/nvm.sh
+      - nvm install –lts
+      - curl -o- -L https://yarnpkg.com/install.sh | bash
       - source ~/.bashrc
-      - yum remove -y nodejs npm
-      - nvm install 18.12.1
-      - yum install yarn
       - yarn install:clean
   # Now we want to actually build our React app
   build:
