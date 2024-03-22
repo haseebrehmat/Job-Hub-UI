@@ -79,3 +79,11 @@ export const avatarSchema = Yup.object().shape({
         )
         .test('is-valid-size', 'Max allowed size is 4MBs', value => value && value.size <= MAX_FILE_SIZE),
 })
+
+export const cronjobSettingSchema = Yup.object().shape({
+    job_source: Yup.string().required('Job source is required'),
+    type: Yup.string().oneOf(['time', 'interval'], 'Invalid type'),
+    time: Yup.string(),
+    interval: Yup.number().positive(),
+    interval_type: Yup.string(),
+})
