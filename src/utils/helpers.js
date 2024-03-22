@@ -1,4 +1,6 @@
 import jwt_decode from 'jwt-decode'
+
+import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
@@ -177,3 +179,17 @@ export const dataForCsv = data =>
 
 export const isValidFileTypeForAvatar = (fileName, fileType) =>
     fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1
+
+export const convertFrom24To12Format = time24 => {
+    if (time24) {
+        const [sHours, minutes] = time24.match(/([0-9]{1,2}):([0-9]{2})/).slice(1)
+        const period = +sHours < 12 ? 'AM' : 'PM'
+        const hours = +sHours % 12 || 12
+        return `On ${hours}:${minutes} ${period} daily`
+    }
+    return 'not-specified'
+}
+
+export const parseIntervalType = value => (value ? INTERVAL_TYPE_OPTIONS.find(row => row.value === value) : null)
+
+export const parseJobSource = value => (value ? JOB_SOURCE_OPTIONS.find(row => row.value === value) : null)
