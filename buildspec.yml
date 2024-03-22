@@ -9,6 +9,8 @@ phases:
   # To give our build server access, we can simply run "npm install"
   pre_build:
     commands:
+      - curl -sL https://rpm.nodesource.com/setup_18.x | bash -
+      - yum install -y nodejs
       - yarn install:clean
   # Now we want to actually build our React app
   build:
