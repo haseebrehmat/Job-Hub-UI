@@ -15,7 +15,7 @@ const CronjobSettingForm = ({ show, setShow, mutate, setting }) => {
     const [scrapperType, setScrapperType] = useState({ time: setting?.time_based, interval: setting?.interval_based })
 
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
-        `/api/job_portal/scheduler${setting?.id ? `/${setting?.id}/` : '/'}`,
+        `/api/job_scraper/scheduler${setting?.id ? `/${setting?.id}/` : '/'}`,
         saveCronjobSetting,
         {
             id: setting?.id,

@@ -12,7 +12,7 @@ const CronjobSettingActions = memo(({ id, edit, mutate }) => {
     return (
         <div className='flex items-center'>
             {can('delete_cronjob_setting') && (
-                <DeleteDialog show={show} setShow={setShow} url={`api/job_portal/scheduler/${id}/`} refetch={mutate}>
+                <DeleteDialog show={show} setShow={setShow} url={`api/job_scraper/scheduler/${id}/`} refetch={mutate}>
                     <Button classes='bg-transparent border-0 px-0' icon={TrashIcon} onClick={() => setShow(true)} />
                 </DeleteDialog>
             )}

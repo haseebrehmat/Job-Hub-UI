@@ -15,7 +15,7 @@ const Scrapper = () => {
     const [setting, setSetting] = useState()
     const [show, setShow] = useState(false)
 
-    const { data, isLoading, error, mutate } = useSWR('/api/job_portal/scheduler/', fetchCronjobSettings)
+    const { data, isLoading, error, mutate } = useSWR('/api/job_scraper/scheduler/', fetchCronjobSettings)
 
     const handleClick = (values = null) => {
         setSetting(values)
