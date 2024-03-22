@@ -18,6 +18,8 @@ import Profile from '@components/Profile'
 import CustomDilog from '@components/CustomDilog'
 import DeleteDialog from '@components/DeleteDialog'
 import Paginated from '@components/Paginated'
+import CustomSelector from '@components/CustomSelector'
+import Radio from '@components/Radio'
 
 export {
     Badge,
@@ -40,4 +42,6 @@ export {
     Profile,
     CustomDilog,
     DeleteDialog,
+    CustomSelector,
+    Radio,
 }

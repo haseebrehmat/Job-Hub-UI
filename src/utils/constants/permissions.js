@@ -204,7 +204,37 @@ export const rawpermissions = [
                 codename: 'create_cover_letter',
                 name: 'Create Cover Letter',
                 parent: ['create_cover_letter'],
-            }, 
+            },
+            {
+                codename: 'view_job_scrapper',
+                name: 'View Job Scrapper',
+                child: ['create_cronjob_setting', 'edit_cronjob_setting', 'delete_cronjob_setting', 'run_scrapper'],
+                level: 1,
+            },
+            {
+                codename: 'create_cronjob_setting',
+                name: 'Create Cronjob Setting',
+                parent: ['view_job_scrapper'],
+                level: 1,
+            },
+            {
+                codename: 'edit_cronjob_setting',
+                name: 'Edit Cronjob Setting',
+                parent: ['view_job_scrapper'],
+                level: 1,
+            },
+            {
+                codename: 'delete_cronjob_setting',
+                name: 'Delete Cronjob Setting',
+                parent: ['view_job_scrapper'],
+                level: 1,
+            },
+            {
+                codename: 'run_scrapper',
+                name: 'Run Scrapper',
+                parent: ['view_job_scrapper'],
+                level: 1,
+            },
         ],
     },
     {
