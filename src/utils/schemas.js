@@ -1,9 +1,10 @@
 import * as Yup from 'yup'
 
-import { isValidFileTypeForAvatar } from './helpers'
+import { isValidFileTypeForAvatar } from '@utils/helpers'
 
 import { today } from '@constants/dashboard'
 import { MAX_FILE_SIZE } from '@constants/profile'
+import { JOB_SOURCES } from '@constants/scrapper'
 
 export const loginSchema = Yup.object({
     email: Yup.string().email().required(),
@@ -78,4 +79,30 @@ export const avatarSchema = Yup.object().shape({
             isValidFileTypeForAvatar(value && value.name.toLowerCase(), 'file')
         )
         .test('is-valid-size', 'Max allowed size is 4MBs', value => value && value.size <= MAX_FILE_SIZE),
+})
+
+export const cronjobSettingSchema = Yup.object().shape({
+    job_source: Yup.mixed()
+        .oneOf(Object.keys(JOB_SOURCES), 'Invalid job source type')
+        .required('Please select job source'),
+    type: Yup.string().oneOf(['time', 'interval'], 'Invalid type'),
+    time: Yup.string().when('type', {
+        is: type => type === 'time',
+        then: () => Yup.string().required('Time is required'),
+    }),
+    interval: Yup.number()
+        .positive()
+        .when('type', {
+            is: type => type === 'interval',
+            then: () => Yup.number().positive().required('Interval is required'),
+        }),
+    interval_type: Yup.mixed()
+        .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
+        .when('type', {
+            is: type => type === 'interval',
+            then: () =>
+                Yup.mixed()
+                    .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
+                    .required('Please select interval type'),
+        }),
 })

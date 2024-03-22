@@ -4,7 +4,7 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
 import { Paginated, CustomDilog, EmptyTable } from '@components'
 import { Checkedbox, unCheckedbox } from '@icons'
-import { jobsHeads } from '@constants/appliedJob'
+import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can, checkToken, dataForCsv } from '@/utils/helpers'
@@ -330,7 +330,7 @@ const JobsFilter = memo(() => {
             <table className='table-auto w-full table text-xl text-left mt-6 text-[#048C8C] '>
                 <thead className='text-lg uppercase border tex border-[#048C8C] '>
                     <tr>
-                        {jobsHeads?.map(heading => (
+                        {JOB_HEADS?.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -406,7 +406,7 @@ const JobsFilter = memo(() => {
                             </tr>
                         ))
                     ) : (
-                        <EmptyTable cols={6} msg='No Jobs found yet!' />
+                        <EmptyTable cols={8} msg='No Jobs found yet!' />
                     )}
                 </tbody>
             </table>

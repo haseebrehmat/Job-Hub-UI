@@ -13,12 +13,13 @@ const Input = memo(
         classes = null,
         label = null,
         max = null,
+        min = null,
     }) => (
         <div className={label && `relative`}>
             <input
                 type={type}
                 name={name}
-                className={`block px-8 pb-2.5 ${
+                className={`block px-4 pb-2.5 ${
                     label ? 'pt-4' : 'pt-2.5'
                 } w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer ${classes}`}
                 placeholder={ph}
@@ -28,6 +29,7 @@ const Input = memo(
                 onBlur={onBlur}
                 onKeyDown={onKeyDown}
                 max={max}
+                min={min}
                 autoFocus
             />
             {label && (
