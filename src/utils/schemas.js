@@ -114,6 +114,7 @@ export const coverLetterSchema = Yup.object().shape({
     experience: Yup.string().required('Applicant experience is required'),
     job_des: Yup.string().required('Job description is required'),
 })
+<<<<<<< HEAD
 
 export const manualJobSchema = Yup.object().shape({
     job_title: Yup.string().required('Applicant name is required'),
@@ -126,3 +127,5 @@ export const manualJobSchema = Yup.object().shape({
     tech_keywords: Yup.string().required('tech stack is required'),
     job_description: Yup.string().required('Job description is required'),
 })
+=======
+>>>>>>> fix: integerate coverletter api on frontend

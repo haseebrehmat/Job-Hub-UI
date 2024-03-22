@@ -1,3 +1,4 @@
-import Form from '@modules/coverLetter/components/Form'
+import CoverLetterForm from '@modules/coverLetter/components/coverLetterForm'
 import TextEditor from '@modules/coverLetter/components/TextEditor'
-export { Form, TextEditor }
+
+export { CoverLetterForm, TextEditor }

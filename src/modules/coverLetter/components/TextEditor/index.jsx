@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+
 import html2pdf from 'html2pdf.js';
 
 export default function App({ init, setInit }) {
@@ -16,13 +17,8 @@ export default function App({ init, setInit }) {
     };
 
     const pdfDoc = new html2pdf(htmlContent, options);
-    // pdfDoc.save();
   };
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+
   return (
     <>
       <Editor
