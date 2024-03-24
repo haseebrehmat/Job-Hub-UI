@@ -49,13 +49,14 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                     </a>
                                 </td>
                                 <td className='px-3 py-4'>{job?.job_source}</td>
+                                <td className='px-3 py-4'>
+                                    <Badge label={job?.tech_keywords} />
+                                </td>
+                                <td className='px-3 py-4'>{job?.job_type}</td>
                                 <td className='w-28 py-4'>
                                     <Badge label={jobStatus[job?.status]} type='success' />
                                 </td>
                                 <td className='px-3 py-4'>BD</td>
-                                <td className='px-3 py-4'>
-                                    <Badge label={job?.tech_keywords} />
-                                </td>
                             </tr>
                         ))
                     ) : (

@@ -2,15 +2,16 @@ import React, { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import html2pdf from 'html2pdf.js';
 
-export default function App() {
+export default function App({ init, setInit }) {
   const editorRef = useRef(null);
- const convertHTMLtoPDF = () => {
+
+  const convertHTMLtoPDF = () => {
 
     const htmlContent = `${editorRef.current.getContent()}<br><br>`;
     const options = {
       margin: 1,
       filename: 'coverletter.pdf',
-      html2canvas: { scale: 2},
+      html2canvas: { scale: 2 },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
     };
 
@@ -27,7 +28,7 @@ export default function App() {
       <Editor
         apiKey='cwe1lw25hfmuo0hjvs2u0aosqll2gzb83eqc9znkuywu43ci'
         onInit={(evt, editor) => editorRef.current = editor}
-        initialValue="<p>your Ai Generated Cover Letter Displays here.........</p>"
+        initialValue={init}
         init={{
           height: 500,
           menubar: true,

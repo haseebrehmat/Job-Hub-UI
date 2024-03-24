@@ -193,3 +193,7 @@ export const convertFrom24To12Format = time24 => {
 export const parseIntervalType = value => (value ? INTERVAL_TYPE_OPTIONS.find(row => row.value === value) : null)
 
 export const parseJobSource = value => (value ? JOB_SOURCE_OPTIONS.find(row => row.value === value) : null)
+
+export const parseTechKeywords = techStacks => techStacks.map(techStack => ({ value: techStack, label: techStack }))
+
+export const parseTechKeyword = value => (value ? JOB_SOURCE_OPTIONS.find(row => row.value === value) : null)

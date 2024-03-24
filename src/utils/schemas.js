@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import * as Yup from 'yup'
 
 import { isValidFileTypeForAvatar } from '@utils/helpers'
@@ -105,4 +106,23 @@ export const cronjobSettingSchema = Yup.object().shape({
                     .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
                     .required('Please select interval type'),
         }),
+})
+
+export const coverLetterSchema = Yup.object().shape({
+    name: Yup.string().required('Applicant name is required'),
+    company: Yup.string().required('Company name is required'),
+    experience: Yup.string().required('Applicant experience is required'),
+    job_des: Yup.string().required('Job description is required'),
+})
+
+export const manualJobSchema = Yup.object().shape({
+    job_title: Yup.string().required('Applicant name is required'),
+    company_name: Yup.string().required('Company name is required'),
+    job_source: Yup.string().required('job source is required'),
+    job_type: Yup.string().required('job type is required'),
+    address: Yup.string().required('addressis required'),
+    job_source_url: Yup.string().required('job URL is required'),
+    job_posted_date: Yup.string().required('job posted date is required'),
+    tech_keywords: Yup.string().required('tech stack is required'),
+    job_description: Yup.string().required('Job description is required'),
 })
