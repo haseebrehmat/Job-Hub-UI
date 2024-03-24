@@ -27,7 +27,7 @@ const Login = memo(() => {
                 toast.success(message)
                 setTimeout(() => {
                     // navigate('/') // For time being, this is not working.
-                    window.location.reload()
+                    // window.location.reload()
                 }, 3000)
             }
             setSubmitting(false)
