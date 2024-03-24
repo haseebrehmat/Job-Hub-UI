@@ -1,8 +1,8 @@
 import { memo, useState } from 'react'
 
-import { Button } from '@components'
+import { Button, TextEditor } from '@components'
 
-import { TextEditor, CoverLetterForm } from '@modules/coverLetter/components'
+import { CoverLetterForm } from '@modules/coverLetter/components'
 
 import { CreateLetterIcon } from '@icons'
 

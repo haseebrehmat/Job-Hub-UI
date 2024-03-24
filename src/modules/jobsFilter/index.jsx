@@ -2,14 +2,14 @@ import { useState, memo, useEffect } from 'react'
 import Selector from './components/Selector'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
-import { Paginated, CustomDilog, EmptyTable } from '@components'
+import { Paginated, CustomDilog, EmptyTable, TextEditor } from '@components'
 import { Checkedbox, unCheckedbox } from '@icons'
 import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can, checkToken, dataForCsv } from '@/utils/helpers'
 import { Filters, Badge } from '@/components'
-import { fetchJobs, updateJobStatus, updateRecruiterStatus } from './api'
+import { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
 import { GenerateCSV } from '@modules/jobsFilter/components'
 
@@ -34,6 +34,7 @@ const JobsFilter = memo(() => {
         jobTitle: '',
         techStackData: [],
         ordering: '-job_posted_date',
+        showCoverLetter: false,
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
@@ -51,6 +52,7 @@ const JobsFilter = memo(() => {
     }
 
     const [jobsFilterParams, setJobsFilterParams] = useState(defaulJobsFiltersParams)
+    const [init, setInit] = useState('<p>your Ai Generated Cover Letter Displays here.........</p>')
 
     const error = true
     const [recordFound, setRecordFound] = useState(true)
@@ -178,6 +180,17 @@ const JobsFilter = memo(() => {
         }
     }
 
+    const generateLetter = async user_data => {
+        const { status, detail } = await generateCoverLetter(`${apiUrl}cover_letter/generate/`, user_data)
+
+        if (status === 'success') {
+            setInit(detail)
+            setFilterState({ ...filterState, showCoverLetter: true })
+        } else {
+            toast.error(detail)
+        }
+    }
+
     const formatOptions = options_arr =>
         options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
@@ -262,7 +275,6 @@ const JobsFilter = memo(() => {
                             }
                         />
                     </div>
-
                     <div className='my-2'>
                         Order By
                         <select
@@ -319,7 +331,7 @@ const JobsFilter = memo(() => {
                             </div>
                         </div>
                     </div>
-                    <div>{ }</div>
+                    <div>{}</div>
                     <div className='flex justify-end px-4 align-baseline'>
                         <div className='my-6'>
                             <Filters apply={() => updateParams()} clear={() => resetFilters()} />
@@ -327,7 +339,19 @@ const JobsFilter = memo(() => {
                     </div>
                 </div>
             </div>
-            <table className='table-auto w-full table text-xl text-left mt-6 text-[#048C8C] '>
+            {filterState?.showCoverLetter && (
+                <div className=' absolute  ml-80 -mt-80 bg-cover bg-[#F5F5F5] border'>
+                    <button
+                        className='block rounded px-2 py-1 my-2 bg-[#FF0000] text-white'
+                        onClick={() => setFilterState({ ...filterState, showCoverLetter: false })}
+                    >
+                        close
+                    </button>
+                    <TextEditor init={init} />
+                </div>
+            )}
+
+            <table className='table-auto w-full table text-lg text-left mt-6 text-[#048C8C] '>
                 <thead className='text-lg uppercase border tex border-[#048C8C] '>
                     <tr>
                         {JOB_HEADS?.map(heading => (
@@ -402,6 +426,21 @@ const JobsFilter = memo(() => {
                                             </button>
                                         )}
                                     </span>
+                                </td>
+                                <td className='p-5'>
+                                    <button
+                                        className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white focus:bg-[#076366]'
+                                        onClick={() =>
+                                            generateLetter({
+                                                name: 'test user',
+                                                company: item?.company_name,
+                                                experience: '2 years',
+                                                job_des: item?.job_description,
+                                            })
+                                        }
+                                    >
+                                        Generate
+                                    </button>
                                 </td>
                             </tr>
                         ))

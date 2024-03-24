@@ -20,6 +20,7 @@ import DeleteDialog from '@components/DeleteDialog'
 import Paginated from '@components/Paginated'
 import CustomSelector from '@components/CustomSelector'
 import Radio from '@components/Radio'
+import TextEditor from '@components/TextEditor'
 
 export {
     Badge,
@@ -44,4 +45,5 @@ export {
     DeleteDialog,
     CustomSelector,
     Radio,
+    TextEditor,
 }
