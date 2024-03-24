@@ -7,13 +7,13 @@ phases:
   # The build server won't have access to our node_modules folder
   # This is because we have it inside of our .gitignore file
   # To give our build server access, we can simply run "npm install"
+  install:
+    runtime-versions:
+      nodejs: 18.10.1
+    commands:
+      - npm install
   pre_build:
     commands:
-      - yum remove -y nodejs npm
-      - curl -sL https://rpm.nodesource.com/setup_18.x | bash -
-      - curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh -o install_nvm.sh
-      - . install_nvm.sh
-      - nvm install 18.12.1
       - yum install yarn
       - yarn install:clean
   # Now we want to actually build our React app
