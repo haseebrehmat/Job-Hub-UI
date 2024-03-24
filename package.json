@@ -10,7 +10,8 @@
     "lint": "npx eslint src --ext .jsx,.js",
     "lint:fix": "npx eslint src --ext .jsx,.js --fix",
     "format": "prettier --write src --ext .jsx,.js",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -rf yarn.json && yarn install && yarn dev"
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -rf yarn.json && yarn install && yarn dev",
+    "deploy": "aws s3 sync build/ s3://octagon-frontend-master"
   },
   "dependencies": {
     "@tinymce/tinymce-react": "^4.3.0",
