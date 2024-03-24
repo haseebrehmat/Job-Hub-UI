@@ -11,6 +11,8 @@ import {
     MdArrowForwardIos,
     MdCheckBox,
     MdCheckBoxOutlineBlank,
+    MdOutlinePostAdd,
+    MdOutlineDriveFolderUpload,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -110,3 +112,5 @@ export const TeamsIcon = <RiTeamLine style={{ fontSize: '22px' }} />
 export const EditIcon = <HiOutlinePencilSquare style={{ fontSize: '20px' }} />
 export const ScrapperIcon = <HiOutlineWifi style={{ fontSize: '20px' }} />
 export const RunScrapperIcon = <BsFillPlayFill style={{ fontSize: '20px' }} />
+export const PostJobIcon = <MdOutlinePostAdd style={{ fontSize: '22px' }} />
+export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22px' }} />

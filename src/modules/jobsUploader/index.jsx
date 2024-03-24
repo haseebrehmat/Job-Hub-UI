@@ -4,6 +4,8 @@ import { Button } from '@components'
 
 import { FilesUploader, ManualJobs } from '@modules/jobsUploader/components'
 
+import { PostJobIcon, UploadJobIcon } from '@icons'
+
 const JobsUploader = () => {
     const [activeTab, setActiveTab] = useState({ jobposter: true, filesuploader: false })
 
@@ -14,13 +16,15 @@ const JobsUploader = () => {
                     <Button
                         label='Post a Job'
                         fit
-                        classes='md:pr-8 md:pl-6'
+                        icon={PostJobIcon}
+                        classes={`md:pr-8 md:pl-6 ${activeTab.jobposter && 'text-white bg-[#048C8C]'}`}
                         onClick={() => setActiveTab({ jobposter: true, filesuploader: false })}
                     />
                     <Button
                         label='Upload Job Files'
                         fit
-                        classes='md:pr-8 md:pl-6'
+                        icon={UploadJobIcon}
+                        classes={`md:pr-8 md:pl-6 ${activeTab.filesuploader && 'text-white bg-[#048C8C]'}`}
                         onClick={() => setActiveTab({ jobposter: false, filesuploader: true })}
                     />
                 </div>
