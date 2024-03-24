@@ -6,20 +6,22 @@ import { Loading, EmptyTable, Button } from '@components'
 import { JobForm } from '@modules/jobsUploader/components'
 import { fetchManualJobs } from '@modules/jobsUploader/api'
 
-import { manualJobsHeads } from '@constants/jobPortal'
-import { CreateIcon } from '@icons'
 import { formatDate } from '@utils/helpers'
+import { MANUAL_JOBS_HEADS } from '@constants/jobPortal'
+
+import { CreateIcon } from '@icons'
 
 const ManualJobs = () => {
     const [show, setShow] = useState(false)
-    const { data, error, isLoading, mutate } = useSWR(`api/job_portal/manual_jobs/`, fetchManualJobs)
+    const { data, error, isLoading, mutate } = useSWR('api/job_portal/manual_jobs/', fetchManualJobs)
 
     const handleClick = () => setShow(!show)
 
     if (isLoading) return <Loading />
+
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 py-2'>
+            <div className='flex items-center py-3 justify-end'>
                 <Button
                     label='Create a Job'
                     fit
@@ -30,7 +32,7 @@ const ManualJobs = () => {
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        {manualJobsHeads.map(heading => (
+                        {MANUAL_JOBS_HEADS.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -56,9 +58,6 @@ const ManualJobs = () => {
                                 <td className='p-5'>{job?.tech_keywords}</td>
                                 <td className='p-5'>{job?.job_type}</td>
                                 <td className='p-5'>{formatDate(job?.job_posted_date)}</td>
-                                {/* <td className='px-3 py-6 float-right'>
-                                    <ManualJobsActions id={job?.id} edit={() => handleClick(job?.id)} mutate={mutate} />
-                                </td> */}
                             </tr>
                         ))
                     ) : (

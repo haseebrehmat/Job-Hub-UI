@@ -6,19 +6,18 @@ import { useMutate } from '@/hooks'
 
 import { Button, Drawer, Input, Textarea, CustomSelector } from '@components'
 
-import { fetchTechStacks, jobPost } from '@modules/jobsUploader/api'
+import { fetchTechStacks, saveJob } from '@modules/jobsUploader/api'
 
 import { parseJobSource, parseTechKeywords, parseTechKeyword, getMsg } from '@utils/helpers'
 import { manualJobSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
-import { JOB_TYPE, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
+import { JOB_TYPES_OPTIONS, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 
 const JobForm = ({ show, setShow, mutate }) => {
     const { data, isLoading, error } = useSWR('/api/job_portal/tech_keywords/', fetchTechStacks)
-
     const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
         'api/job_portal/manual_jobs/',
-        jobPost,
+        saveJob,
         {
             job_title: '',
             company_name: '',
@@ -38,10 +37,11 @@ const JobForm = ({ show, setShow, mutate }) => {
             resetForm()
         }
     )
+
     const renderTech = isLoading ? (
-        <div>Loading companies....</div>
+        <div>Loading tech stacks....</div>
     ) : error ? (
-        <div className='text-red-500 text-xs'>Failed to fetch companies</div>
+        <div className='text-red-500 text-xs'>Failed to fetch tech stacks</div>
     ) : (
         <CustomSelector
             options={parseTechKeywords(data.techStacks)}
@@ -55,7 +55,7 @@ const JobForm = ({ show, setShow, mutate }) => {
         <Drawer show={show} setShow={setShow} w='600px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>Job Posting</p>
+                    <p className='font-medium text-xl'>Add Manual Job</p>
                     <hr className='mb-2' />
                     <div className='grid grid-flow-col gap-2'>
                         <div>
@@ -95,7 +95,7 @@ const JobForm = ({ show, setShow, mutate }) => {
                         </div>
                         <div className='w-72 z-20'>
                             <CustomSelector
-                                options={JOB_TYPE}
+                                options={JOB_TYPES_OPTIONS}
                                 selectorValue={parseJobSource(values.job_type)}
                                 handleChange={e => setFieldValue('job_type', e.value)}
                                 placeholder='Select job type'
@@ -104,7 +104,7 @@ const JobForm = ({ show, setShow, mutate }) => {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 gap-2'>
-                        <div className=' z-20'>
+                        <div className='z-20'>
                             {renderTech}
                             {errors.tech_keywords && (
                                 <small className='ml-1 text-xs text-red-600'>{errors.tech_keywords}</small>
@@ -137,7 +137,7 @@ const JobForm = ({ show, setShow, mutate }) => {
                             )}
                         </div>
                         <div>
-                            <Input name='address' onChange={handleChange} value={values.address} label='Address' />{' '}
+                            <Input name='address' onChange={handleChange} value={values.address} label='Address' />
                             {errors.address && <small className='ml-1 text-xs text-red-600'>{errors.address}</small>}
                         </div>
                     </div>
