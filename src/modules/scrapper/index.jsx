@@ -19,7 +19,7 @@ const Scrapper = () => {
 
     const handleClick = (values = null) => {
         setSetting(values)
-        setShow(!show)
+        setShow(true)
     }
 
     if (isLoading) return <Loading />
@@ -27,8 +27,10 @@ const Scrapper = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 pb-6'>
-                <Button label='Create Cronjob Setting' fit icon={CreateIcon} onClick={() => handleClick()} />
-                <SyncNow />
+                {can('create_cronjob_setting') && (
+                    <Button label='Create Cronjob Setting' fit icon={CreateIcon} onClick={() => handleClick()} />
+                )}
+                {can('run_scrapper') && <SyncNow />}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -70,7 +72,7 @@ const Scrapper = () => {
                     )}
                 </tbody>
             </table>
-            {can('edit_cronjob_setting') && show && (
+            {can(['edit_cronjob_setting', 'create_cronjob_setting']) && show && (
                 <CronjobSettingForm show={show} setShow={setShow} mutate={mutate} setting={setting} />
             )}
         </div>
