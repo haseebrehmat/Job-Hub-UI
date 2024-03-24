@@ -9,7 +9,7 @@ phases:
   # To give our build server access, we can simply run "npm install"
   install:
     commands:
-      - n 18.12.1
+      - n 14.18.3
   pre_build:
     commands:
       - yum install yarn
@@ -17,7 +17,7 @@ phases:
   # Now we want to actually build our React app
   build:
    commands:
-      - yarn build
+      - yarn build &
 # Artifacts will specify what files will be uploaded to s3
 # This will include all files within the "build" folder
 artifacts:
