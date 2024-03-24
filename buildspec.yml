@@ -9,27 +9,16 @@ phases:
   # To give our build server access, we can simply run "npm install"
   install:
     commands:
-      - n 18.12.1
+      - n 14.18.3
   pre_build:
     commands:
-      - yum -y update
-      - yum -y install wget
-      - wget https://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.gz
-      - tar -xzvf glibc-2.33.tar.gz
-      - cd glibc-2.33
-      - mkdir build
-      - cd build
-      - ../configure --prefix=/usr
-      - make
-      - make install
       - yum install yarn
       - yarn install:clean
   # Now we want to actually build our React app
   build:
    commands:
-      - yarn build &
-# Artifacts will specify what files will be uploaded to s3
-# This will include all files within the "build" folder
+      - yarn build 
+
 artifacts:
   files:
     - '**/*'
