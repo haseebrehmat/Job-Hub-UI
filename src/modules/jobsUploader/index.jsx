@@ -1,6 +1,8 @@
-import { React, useEffect, useRef, useState } from 'react'
-import { Button, Loading } from '@components'
-import { FilesUploader, JobsPoster } from '@modules/jobsUploader/components'
+import { React, useState } from 'react'
+
+import { Button } from '@components'
+
+import { FilesUploader, ManualJobs } from '@modules/jobsUploader/components'
 
 const JobsUploader = () => {
     const [activeTab, setActiveTab] = useState({ jobposter: true, filesuploader: false })
@@ -12,26 +14,19 @@ const JobsUploader = () => {
                     <Button
                         label='Post a Job'
                         fit
-                        // icon={UserIcon}
-                        classes={`md:pr-8 md:pl-6`}
+                        classes='md:pr-8 md:pl-6'
                         onClick={() => setActiveTab({ jobposter: true, filesuploader: false })}
                     />
                     <Button
                         label='Upload Job Files'
                         fit
-                        // icon={ActionsIcons}
-                        classes={`md:pr-8 md:pl-6`}
+                        classes='md:pr-8 md:pl-6'
                         onClick={() => setActiveTab({ jobposter: false, filesuploader: true })}
                     />
                 </div>
-                {activeTab.jobposter && (
-                    <JobsPoster />
-                )}
-                {activeTab.filesuploader && (
-                    <FilesUploader />
-                )}
+                {activeTab.jobposter && <ManualJobs />}
+                {activeTab.filesuploader && <FilesUploader />}
             </div>
-
         </div>
     )
 }

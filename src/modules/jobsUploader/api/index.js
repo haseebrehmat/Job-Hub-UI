@@ -19,8 +19,9 @@ const uploadJobs = async (url, formData) => {
 
 export const fetchManualJobs = url => http.get(url).then(({ data }) => ({ jobs: data, status: 'success' }))
 
-export const jobPost = (url, job) => {
-    console.log('job', job)
-    rawHttp.post(url, job).then(({ data }) => toast.success(data.detail))
-}
+export const jobPost = (url, { arg: job }) => rawHttp.post(url, job).then(({ data }) => toast.success(data.detail))
+
+export const fetchTechStacks = url =>
+    http.get(url).then(({ data }) => ({ techStacks: data.keywords, status: 'success' }))
+
 export default uploadJobs

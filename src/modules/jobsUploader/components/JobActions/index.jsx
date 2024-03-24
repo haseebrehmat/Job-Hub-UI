@@ -2,11 +2,9 @@ import { memo, useState } from 'react'
 
 import { Button, DeleteDialog } from '@components'
 
-import { can } from '@utils/helpers'
-
 import { TrashIcon, EditIcon } from '@icons'
 
-const ManualJobsActions = memo(({ id, edit, mutate }) => {
+const JobActions = memo(({ id, edit, mutate }) => {
     const [show, setShow] = useState(false)
 
     return (
@@ -20,4 +18,4 @@ const ManualJobsActions = memo(({ id, edit, mutate }) => {
     )
 })
 
-export default memo(ManualJobsActions)
+export default memo(JobActions)

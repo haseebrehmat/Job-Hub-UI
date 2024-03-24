@@ -1,15 +1,16 @@
 import { React, useState } from 'react'
 import useSWR from 'swr'
-import { Loading, Searchbox, EmptyTable, Button } from '@components'
 
-import { JobForm, ManualJobsActions } from '@modules/jobsUploader/components'
+import { Loading, EmptyTable, Button } from '@components'
+
+import { JobForm } from '@modules/jobsUploader/components'
 import { fetchManualJobs } from '@modules/jobsUploader/api'
 
 import { manualJobsHeads } from '@constants/jobPortal'
 import { CreateIcon } from '@icons'
+import { formatDate } from '@utils/helpers'
 
-const JobsPoster = () => {
-    const [query, setQuery] = useState('')
+const ManualJobs = () => {
     const [show, setShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR(`api/job_portal/manual_jobs/`, fetchManualJobs)
 
@@ -18,8 +19,7 @@ const JobsPoster = () => {
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 py-6'>
-                <Searchbox query={query} setQuery={setQuery} />
+            <div className='flex items-center space-x-4 py-2'>
                 <Button
                     label='Create a Job'
                     fit
@@ -55,10 +55,10 @@ const JobsPoster = () => {
                                 </td>
                                 <td className='p-5'>{job?.tech_keywords}</td>
                                 <td className='p-5'>{job?.job_type}</td>
-                                <td className='p-5'>{job?.job_posted_date}</td>
-                                <td className='px-3 py-6 float-right'>
+                                <td className='p-5'>{formatDate(job?.job_posted_date)}</td>
+                                {/* <td className='px-3 py-6 float-right'>
                                     <ManualJobsActions id={job?.id} edit={() => handleClick(job?.id)} mutate={mutate} />
-                                </td>
+                                </td> */}
                             </tr>
                         ))
                     ) : (
@@ -66,9 +66,9 @@ const JobsPoster = () => {
                     )}
                 </tbody>
             </table>
-            <JobForm show={show} setShow={setShow} />
+            <JobForm show={show} setShow={setShow} mutate={mutate} />
         </div>
     )
 }
 
-export default JobsPoster
+export default ManualJobs
