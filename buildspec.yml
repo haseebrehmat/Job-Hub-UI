@@ -13,11 +13,10 @@ phases:
   pre_build:
     commands:
       - yum install yarn
-      - yarn install:clean
+      - yarn install
+      - yarn build
   # Now we want to actually build our React app
-  build:
-   commands:
-      - yarn build 
+ 
 
 artifacts:
   files:
