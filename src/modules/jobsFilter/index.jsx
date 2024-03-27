@@ -2,7 +2,7 @@ import { useState, memo, useEffect } from 'react'
 import Selector from './components/Selector'
 import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
-import { Paginated, CustomDilog, EmptyTable, TextEditor } from '@components'
+import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
 import { Checkedbox, unCheckedbox } from '@icons'
 import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
@@ -35,6 +35,7 @@ const JobsFilter = memo(() => {
         techStackData: [],
         ordering: '-job_posted_date',
         showCoverLetter: false,
+        isLoading: false,
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
@@ -181,11 +182,12 @@ const JobsFilter = memo(() => {
     }
 
     const generateLetter = async user_data => {
+        setFilterState({ ...filterState, isLoading: true })
         const { status, detail } = await generateCoverLetter(`${apiUrl}cover_letter/generate/`, user_data)
 
         if (status === 'success') {
             setInit(detail)
-            setFilterState({ ...filterState, showCoverLetter: true })
+            setFilterState({ ...filterState, showCoverLetter: true, isLoading: false })
         } else {
             toast.error(detail)
         }
@@ -203,7 +205,7 @@ const JobsFilter = memo(() => {
         },
         'success'
     )
-
+    if (filterState?.isLoading) return <Loading />
     return (
         <div className='my-2  h-screen text-[#048C8C] '>
             <div className='flex p-3 items-center py-2 justify-between '>
