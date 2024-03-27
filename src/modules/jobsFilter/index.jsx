@@ -25,7 +25,7 @@ const JobsFilter = memo(() => {
         jobSourceData: [],
         jobTypeData: [],
         techStackSelector: [],
-        jobSourceSelector: 'all',
+        jobSourceSelector: [],
         jobTypeSelector: 'all',
         jobVisibilitySelector: 'all',
         stats: { total_jobs: 0, filtered_jobs: 0 },
@@ -128,10 +128,11 @@ const JobsFilter = memo(() => {
             filterState
         const { from_date, to_date } = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
+        const selected_job_sources = jobSourceSelector.map(obj => obj.value).join(',')
         setJobsFilterParams({
             ...jobsFilterParams,
             tech_keywords,
-            job_source: jobSourceSelector !== 'all' ? jobSourceSelector : '',
+            job_source: selected_job_sources,
             page: 1,
             ordering,
             job_visibility: jobVisibilitySelector,
@@ -269,12 +270,13 @@ const JobsFilter = memo(() => {
                     </div>
                     <div className='my-2'>
                         Job Source
-                        <Selector
-                            data={filterState?.jobSourceData}
+                        <CustomSelector
+                            className='mx-auto'
+                            options={formatOptions(filterState?.jobSourceData)}
+                            handleChange={value => setFilterState({ ...filterState, jobSourceSelector: value })}
                             selectorValue={filterState?.jobSourceSelector}
-                            handleSelectChange={e =>
-                                setFilterState({ ...filterState, jobSourceSelector: e.target.value })
-                            }
+                            isMulti
+                            placeholder='Select Job Source'
                         />
                     </div>
                     <div className='my-2'>
