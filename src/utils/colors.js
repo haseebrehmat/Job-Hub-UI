@@ -4,7 +4,7 @@ export const colors = {
     background: '#EDFFFB',
 }
 
-export const dilogColor = {
+export const dialogColor = {
     warning: '#ff5252',
     success: '#048C8C',
 }

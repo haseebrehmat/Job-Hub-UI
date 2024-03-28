@@ -25,6 +25,7 @@ const JobForm = ({ show, setShow, mutate }) => {
             job_type: '',
             address: '',
             job_posted_date: today,
+            time: '',
             job_source_url: '',
             job_description: '',
             tech_keywords: '',
@@ -103,7 +104,7 @@ const JobForm = ({ show, setShow, mutate }) => {
                             {errors.job_type && <small className='ml-1 text-xs text-red-600'>{errors.job_type}</small>}
                         </div>
                     </div>
-                    <div className='grid grid-cols-2 gap-2'>
+                    <div className='grid grid-cols-3 gap-2'>
                         <div className='z-20'>
                             {renderTech}
                             {errors.tech_keywords && (
@@ -122,6 +123,10 @@ const JobForm = ({ show, setShow, mutate }) => {
                                 <small className='ml-1 text-xs text-red-600'>{errors.job_posted_date}</small>
                             )}
                         </div>
+                        <div>
+                            <Input name='time' type='time' value={values.time} onChange={handleChange} />
+                            {errors.time && <small className='ml-1 text-xs text-red-600'>{errors.time}</small>}
+                        </div>
                     </div>
                     <div className='grid grid-cols-2 gap-2'>
                         <div>
@@ -137,8 +142,8 @@ const JobForm = ({ show, setShow, mutate }) => {
                             )}
                         </div>
                         <div>
-                            <Input name='address' onChange={handleChange} value={values.address} label='Address' />
-                            {errors.address && <small className='ml-1 text-xs text-red-600'>{errors.address}</small>}
+                            <Input name='address' onChange={handleChange} value={values.address} label='Location' />
+                            {errors.location && <small className='ml-1 text-xs text-red-600'>{errors.location}</small>}
                         </div>
                     </div>
                     <Textarea
