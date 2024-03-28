@@ -133,8 +133,8 @@ const JobsFilter = memo(() => {
             ...jobsFilterParams,
             tech_keywords,
             job_source: selected_job_sources,
-            page: 1,
             ordering,
+            page: 1,
             job_visibility: jobVisibilitySelector,
             from_date,
             to_date,
@@ -172,13 +172,10 @@ const JobsFilter = memo(() => {
         const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
 
         if (status === 'success') {
-            updateParams()
+            fetchJobsData(jobDetailsUrl)
             toast.success(detail)
         } else {
             toast.error(detail)
-            setTimeout(() => {
-                location.reload()
-            }, 2000)
         }
     }
 

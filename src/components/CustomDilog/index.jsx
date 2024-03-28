@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { dilogColor } from '@utils/colors'
 import Modal from 'react-modal'
 
+Modal.setAppElement('#root')
+
 const customStyles = {
     content: {
         top: '50%',
@@ -9,6 +11,11 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         transform: 'translate(-50%, -50%)',
+    },
+    overlay: {
+        backdropFilter: 'blur(5px)',
+        backgroundColor: '#f1f1f1',
+        opacity: 0.09,
     },
 }
 
@@ -29,7 +36,7 @@ const CustomDilog = (title, description, successTrigger, type) => {
 
     return {
         CustomModal: (
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles} contentLabel='Example Modal'>
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles}>
                 <div className='flex items-start justify-between rounded-t dark:border-gray-600'>
                     <h3 className='text-xl font-semibold text-gray-900 dark:text-white'>{title}</h3>
                 </div>
