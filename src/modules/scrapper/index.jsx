@@ -4,7 +4,7 @@ import { Button } from '@components'
 
 import { CronjobSetting, JobSourceLinks } from '@modules/scrapper/components'
 
-import { UserIcon, ActionsIcons } from '@icons'
+import { JobSourceLinkIcon, CronjobSettingIcon } from '@icons'
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState({ setting: true, links: false })
@@ -17,14 +17,14 @@ const Profile = () => {
                         <Button
                             label='Cronjob Settings'
                             fit
-                            icon={UserIcon}
+                            icon={CronjobSettingIcon}
                             classes={`md:pr-8 md:pl-6 ${!activeTab.setting && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ setting: true, links: false })}
                         />
                         <Button
                             label='Job Source Links / URLs'
                             fit
-                            icon={ActionsIcons}
+                            icon={JobSourceLinkIcon}
                             classes={`md:pr-8 md:pl-6 ${!activeTab.links && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ setting: false, links: true })}
                         />

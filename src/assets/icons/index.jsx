@@ -41,6 +41,8 @@ import {
     AiOutlineCloseCircle,
     AiOutlineMinusCircle,
     AiOutlineCloudUpload,
+    AiOutlineLink,
+    AiFillSetting,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
@@ -114,3 +116,5 @@ export const ScrapperIcon = <HiOutlineWifi style={{ fontSize: '20px' }} />
 export const RunScrapperIcon = <BsFillPlayFill style={{ fontSize: '20px' }} />
 export const PostJobIcon = <MdOutlinePostAdd style={{ fontSize: '22px' }} />
 export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22px' }} />
+export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
+export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
