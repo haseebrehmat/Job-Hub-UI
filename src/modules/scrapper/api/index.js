@@ -18,3 +18,14 @@ export const saveCronjobSetting = (url, { arg: setting }) => {
 }
 
 export const fetchJobSourceLinks = url => http.get(url).then(({ data }) => ({ links: data?.detail, status: 'success' }))
+
+export const saveJobSourceLink = (url, { arg: link }) => {
+    if (link?.id) {
+        return rawHttp
+            .put(url, link)
+            .then(({ data }) => toast.success(data.detail || 'Job Source Link updated successfully'))
+    }
+    return rawHttp
+        .post(url, link)
+        .then(({ data }) => toast.success(data.detail || 'Job Source Link created successfully'))
+}

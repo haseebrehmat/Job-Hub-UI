@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Button, EmptyTable, Loading } from '@components'
 
-import { CronjobSettingActions, CronjobSettingForm } from '@modules/scrapper/components'
+import { JobSourceLinkActions, JobSourceLinkForm } from '@modules/scrapper/components'
 import { fetchJobSourceLinks } from '@modules/scrapper/api'
 
 import { can } from '@utils/helpers'
@@ -13,13 +13,13 @@ import { CreateIcon } from '@icons'
 import { Badge, Tooltip } from '@/components'
 
 const JobSourceLinks = () => {
-    const [setting, setSetting] = useState()
+    const [link, setLink] = useState()
     const [show, setShow] = useState(false)
 
     const { data, isLoading, error, mutate } = useSWR('/api/job_scraper/job_source_link/', fetchJobSourceLinks)
 
     const handleClick = (values = null) => {
-        setSetting(values)
+        setLink(values)
         setShow(true)
     }
 
@@ -51,7 +51,7 @@ const JobSourceLinks = () => {
                                 <td className='px-3 py-6'>
                                     {row?.queries?.length > 0 &&
                                         row?.queries.map((q, index) => (
-                                            <span className='font-mono mx-2 inline-block'>
+                                            <span className='font-mono mx-2 inline-block' key={index}>
                                                 <a href={q} target='_blank' rel='noreferrer'>
                                                     <Tooltip text={q}>
                                                         <Badge label={`Link ${index + 1}`} type='success' />
@@ -62,7 +62,7 @@ const JobSourceLinks = () => {
                                 </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_cronjob_setting', 'delete_cronjob_setting']) && (
-                                        <CronjobSettingActions
+                                        <JobSourceLinkActions
                                             id={row?.id}
                                             edit={() => handleClick(row)}
                                             mutate={mutate}
@@ -72,12 +72,12 @@ const JobSourceLinks = () => {
                             </tr>
                         ))
                     ) : (
-                        <EmptyTable cols={6} msg='No cronjob settings found yet!' />
+                        <EmptyTable cols={6} msg='No job source links / urls found yet!' />
                     )}
                 </tbody>
             </table>
             {can(['edit_cronjob_setting', 'create_cronjob_setting']) && show && (
-                <CronjobSettingForm show={show} setShow={setShow} mutate={mutate} setting={setting} />
+                <JobSourceLinkForm show={show} setShow={setShow} mutate={mutate} link={link} />
             )}
         </div>
     )
