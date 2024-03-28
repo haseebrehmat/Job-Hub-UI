@@ -16,3 +16,5 @@ export const saveCronjobSetting = (url, { arg: setting }) => {
         .post(url, setting)
         .then(({ data }) => toast.success(data.detail || 'Cronjob Setting created successfully'))
 }
+
+export const fetchJobSourceLinks = url => http.get(url).then(({ data }) => ({ links: data?.detail, status: 'success' }))

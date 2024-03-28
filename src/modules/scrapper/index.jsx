@@ -2,7 +2,7 @@ import { memo, useState } from 'react'
 
 import { Button } from '@components'
 
-import { CronjobSetting } from '@modules/scrapper/components'
+import { CronjobSetting, JobSourceLinks } from '@modules/scrapper/components'
 
 import { UserIcon, ActionsIcons } from '@icons'
 
@@ -34,7 +34,11 @@ const Profile = () => {
                             <CronjobSetting />
                         </div>
                     )}
-                    {activeTab.links && <div className='p-2 mt-4'>Here comes Links section</div>}
+                    {activeTab.links && (
+                        <div className='mt-5'>
+                            <JobSourceLinks />
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
