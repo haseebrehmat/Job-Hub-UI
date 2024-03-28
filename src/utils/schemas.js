@@ -126,3 +126,9 @@ export const manualJobSchema = Yup.object().shape({
     tech_keywords: Yup.string().required('tech stack is required'),
     job_description: Yup.string().required('Job description is required'),
 })
+
+export const jobSourceLinkSchema = Yup.object().shape({
+    job_source: Yup.mixed()
+        .oneOf(Object.keys(JOB_SOURCES), 'Invalid job source type')
+        .required('Please select job source'),
+})

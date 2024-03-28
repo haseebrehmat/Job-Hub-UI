@@ -21,6 +21,7 @@ import Paginated from '@components/Paginated'
 import CustomSelector from '@components/CustomSelector'
 import Radio from '@components/Radio'
 import TextEditor from '@components/TextEditor'
+import Tooltip from '@components/Tooltip'
 
 export {
     Badge,
@@ -46,4 +47,5 @@ export {
     CustomSelector,
     Radio,
     TextEditor,
+    Tooltip,
 }

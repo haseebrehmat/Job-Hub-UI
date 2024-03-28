@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Searchbox, EmptyTable, Button } from '@components'
+import { Loading, Searchbox, EmptyTable, Button, Tooltip } from '@components'
 
 import { RoleForm, PermissionList } from '@modules/userManagement/components'
 import { fetchRoles } from '@modules/userManagement/api'
@@ -57,7 +57,7 @@ const Roles = () => {
                                 <td className='px-3 py-6'>{row?.name}</td>
                                 <td className='px-3 py-4 cursor-pointer'>
                                     <span className='flex items-center gap-2' onClick={() => handleShow(row)}>
-                                        {PermissionIcon} Permissions goes here
+                                        <Tooltip text='Permissions goes here'>{PermissionIcon}</Tooltip>
                                     </span>
                                 </td>
                                 <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
