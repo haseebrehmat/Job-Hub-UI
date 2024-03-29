@@ -208,7 +208,15 @@ export const rawpermissions = [
             {
                 codename: 'view_job_scrapper',
                 name: 'View Job Scrapper',
-                child: ['create_cronjob_setting', 'edit_cronjob_setting', 'delete_cronjob_setting', 'run_scrapper'],
+                child: [
+                    'create_cronjob_setting',
+                    'edit_cronjob_setting',
+                    'delete_cronjob_setting',
+                    'run_scrapper',
+                    'create_job_source_link',
+                    'edit_job_source_link',
+                    'delete_job_source_link',
+                ],
                 level: 1,
             },
             {
@@ -232,6 +240,24 @@ export const rawpermissions = [
             {
                 codename: 'run_scrapper',
                 name: 'Run Scrapper',
+                parent: ['view_job_scrapper'],
+                level: 1,
+            },
+            {
+                codename: 'create_job_source_link',
+                name: 'Create Job Source Link',
+                parent: ['view_job_scrapper'],
+                level: 1,
+            },
+            {
+                codename: 'edit_job_source_link',
+                name: 'Edit Job Source Link',
+                parent: ['view_job_scrapper'],
+                level: 1,
+            },
+            {
+                codename: 'delete_job_source_link',
+                name: 'Delete Job Source Link',
                 parent: ['view_job_scrapper'],
                 level: 1,
             },
