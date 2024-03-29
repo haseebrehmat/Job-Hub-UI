@@ -3,9 +3,7 @@ import { Editor } from '@tinymce/tinymce-react'
 
 import html2pdf from 'html2pdf.js'
 
-function replaceNewLine(str) {
-    return str.replace(/\n/g, '<br>')
-}
+const replaceNewLine = str => str.replace(/\n/g, '<br>')
 
 export default function App({ init }) {
     const editorRef = useRef(null)

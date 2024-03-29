@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import useSWR from 'swr'
 
@@ -14,6 +14,7 @@ import { today } from '@constants/dashboard'
 import { JOB_TYPES_OPTIONS, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 
 const JobForm = ({ show, setShow, mutate }) => {
+    const [tStackField, setTStackField] = useState(false)
     const { data, isLoading, error } = useSWR('/api/job_portal/tech_keywords/', fetchTechStacks)
     const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
         'api/job_portal/manual_jobs/',
@@ -36,8 +37,18 @@ const JobForm = ({ show, setShow, mutate }) => {
         () => {
             mutate()
             resetForm()
+            setTStackField(false)
         }
     )
+
+    const reset = () => {
+        setTStackField(false)
+        resetForm()
+    }
+    const setTechStack = value => {
+        if (value === 'other') setTStackField(!tStackField)
+        else setFieldValue('job_source', value)
+    }
 
     const renderTech = isLoading ? (
         <div>Loading tech stacks....</div>
@@ -84,12 +95,17 @@ const JobForm = ({ show, setShow, mutate }) => {
                     </div>
                     <div className='grid grid-flow-col gap-2'>
                         <div className='w-72 z-30'>
-                            <CustomSelector
-                                options={JOB_SOURCE_OPTIONS}
-                                selectorValue={parseJobSource(values.job_source)}
-                                handleChange={e => setFieldValue('job_source', e.value)}
-                                placeholder='Select job source'
-                            />
+                            {tStackField ? (
+                                <Input name='job_source' onChange={handleChange} label='Job Source' />
+                            ) : (
+                                <CustomSelector
+                                    options={JOB_SOURCE_OPTIONS}
+                                    selectorValue={parseJobSource(values.job_source)}
+                                    handleChange={e => setTechStack(e.value)}
+                                    placeholder='Select job source'
+                                />
+                            )}
+
                             {errors.job_source && (
                                 <small className='ml-1 text-xs text-red-600'>{errors.job_source}</small>
                             )}
@@ -143,7 +159,7 @@ const JobForm = ({ show, setShow, mutate }) => {
                         </div>
                         <div>
                             <Input name='address' onChange={handleChange} value={values.address} label='Location' />
-                            {errors.location && <small className='ml-1 text-xs text-red-600'>{errors.location}</small>}
+                            {errors.address && <small className='ml-1 text-xs text-red-600'>{errors.address}</small>}
                         </div>
                     </div>
                     <Textarea
@@ -159,6 +175,7 @@ const JobForm = ({ show, setShow, mutate }) => {
                     <div className='pt-4 space-y-2'>
                         <Button label='Post' fill type='submit' disabled={wait} />
                         <Button label='Cancel' onClick={() => setShow(false)} />
+                        <Button label='Reset' onClick={() => reset()} />
                     </div>
                 </div>
             </form>
