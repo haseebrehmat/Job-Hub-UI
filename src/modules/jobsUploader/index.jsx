@@ -1,8 +1,10 @@
 import { React, useState } from 'react'
 
-import { Button } from '@components'
+import { Button, EmptyTable } from '@components'
 
 import { FilesUploader, ManualJobs } from '@modules/jobsUploader/components'
+
+import { can } from '@utils/helpers'
 
 import { PostJobIcon, UploadJobIcon } from '@icons'
 
@@ -20,15 +22,22 @@ const JobsUploader = () => {
                         classes={`md:pr-8 md:pl-6 ${activeTab.jobposter && 'text-white bg-[#048C8C]'}`}
                         onClick={() => setActiveTab({ jobposter: true, filesuploader: false })}
                     />
-                    <Button
-                        label='Upload Job Files'
-                        fit
-                        icon={UploadJobIcon}
-                        classes={`md:pr-8 md:pl-6 ${activeTab.filesuploader && 'text-white bg-[#048C8C]'}`}
-                        onClick={() => setActiveTab({ jobposter: false, filesuploader: true })}
-                    />
+                    {can(['view_job_uploader', 'upload_csv']) && (
+                        <Button
+                            label='Upload Job Files'
+                            fit
+                            icon={UploadJobIcon}
+                            classes={`md:pr-8 md:pl-6 ${activeTab.filesuploader && 'text-white bg-[#048C8C]'}`}
+                            onClick={() => setActiveTab({ jobposter: false, filesuploader: true })}
+                        />
+                    )}
                 </div>
-                {activeTab.jobposter && <ManualJobs />}
+                {activeTab.jobposter &&
+                    (can(['view_manual_job']) ? (
+                        <ManualJobs />
+                    ) : (
+                        <EmptyTable cols={6} msg='User dont have the required permissions ' />
+                    ))}
                 {activeTab.filesuploader && <FilesUploader />}
             </div>
         </div>
