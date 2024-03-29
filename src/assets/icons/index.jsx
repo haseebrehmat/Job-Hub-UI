@@ -27,6 +27,7 @@ import {
     BsFillKeyFill,
     BsCloudArrowDownFill,
     BsFillPlayFill,
+    BsCardList,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineUsers, HiOutlineWifi } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
@@ -118,3 +119,4 @@ export const PostJobIcon = <MdOutlinePostAdd style={{ fontSize: '22px' }} />
 export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22px' }} />
 export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
+export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
