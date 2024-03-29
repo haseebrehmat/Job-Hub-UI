@@ -137,6 +137,13 @@ export const routes = [
         title: 'Logger',
         permission: 'view_logger',
     },
+    {
+        path: '/resume-builder',
+        component: <Integrations />,
+        protect: true,
+        title: 'Resume Builder',
+        permission: 'all',
+    },
 ]
 
 export const authRoutes = [

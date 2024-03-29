@@ -15,6 +15,7 @@ import {
     CoverLetter,
     ScrapperIcon,
     LoggerIcon,
+    ResumeIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -151,6 +152,12 @@ export const menuItems = [
                 label: 'Integrations',
                 link: '/integrations',
                 svg: IntegrationIcon,
+                perms: ['view_integration', 'create_integration', 'update_integration'],
+            },
+            {
+                label: 'Resume Builder',
+                link: '/resume-builder',
+                svg: ResumeIcon,
                 perms: ['view_integration', 'create_integration', 'update_integration'],
             },
         ],

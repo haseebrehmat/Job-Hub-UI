@@ -16,6 +16,7 @@ import Profile from '@modules/profile'
 import CoverLetter from './coverLetter'
 import Scrapper from '@modules/scrapper'
 import Logger from '@modules/logger'
+import ResumeBuilder from '@modules/settings/resumeBuilder'
 
 export {
     TeamAppliedJobs,
@@ -37,4 +38,5 @@ export {
     CoverLetter,
     Scrapper,
     Logger,
+    ResumeBuilder,
 }
