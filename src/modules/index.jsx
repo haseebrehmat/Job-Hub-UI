@@ -15,6 +15,7 @@ import Integrations from '@modules/settings/integrations'
 import Profile from '@modules/profile'
 import CoverLetter from './coverLetter'
 import Scrapper from '@modules/scrapper'
+import Logger from '@modules/logger'
 
 export {
     TeamAppliedJobs,
@@ -35,4 +36,5 @@ export {
     Profile,
     CoverLetter,
     Scrapper,
+    Logger,
 }
