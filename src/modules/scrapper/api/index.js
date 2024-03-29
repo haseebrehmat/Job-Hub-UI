@@ -2,7 +2,7 @@ import { toast } from 'react-hot-toast'
 
 import { http, rawHttp } from '@utils/http'
 
-export const syncNow = url => http.get(url).then(({ data }) => toast.success(data.detail))
+export const syncNow = (url, { arg: { link } }) => http.get(link).then(({ data }) => toast.success(data.detail))
 
 export const fetchCronjobSettings = url => http.get(url).then(({ data }) => ({ settings: data, status: 'success' }))
 
