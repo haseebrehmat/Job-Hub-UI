@@ -11,7 +11,7 @@ const JobSourceLinkActions = memo(({ id, edit, mutate }) => {
 
     return (
         <div className='flex items-center'>
-            {can('delete_cronjob_setting') && (
+            {can('delete_job_source_link') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
@@ -21,7 +21,7 @@ const JobSourceLinkActions = memo(({ id, edit, mutate }) => {
                     <Button classes='bg-transparent border-0 px-0' icon={TrashIcon} onClick={() => setShow(true)} />
                 </DeleteDialog>
             )}
-            {can('edit_cronjob_setting') && (
+            {can('edit_job_source_link') && (
                 <Button classes='bg-transparent border-0 !px-0' icon={EditIcon} onClick={() => edit()} />
             )}
         </div>
