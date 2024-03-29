@@ -7,7 +7,7 @@ import { Checkedbox, unCheckedbox } from '@icons'
 import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
-import { can, checkToken, dataForCsv } from '@/utils/helpers'
+import { can, formatDate, checkToken, dataForCsv } from '@/utils/helpers'
 import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
@@ -19,6 +19,7 @@ const JobsFilter = memo(() => {
     const [currentCompany, setCurrentCompany] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
+    const [jobIdForLastCV, setJobIdForLastCV] = useState('')
 
     const defaultFilterState = {
         techStacData: [],
@@ -133,8 +134,8 @@ const JobsFilter = memo(() => {
             ...jobsFilterParams,
             tech_keywords,
             job_source: selected_job_sources,
-            page: 1,
             ordering,
+            page: 1,
             job_visibility: jobVisibilitySelector,
             from_date,
             to_date,
@@ -172,13 +173,10 @@ const JobsFilter = memo(() => {
         const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
 
         if (status === 'success') {
-            updateParams()
+            fetchJobsData(jobDetailsUrl)
             toast.success(detail)
         } else {
             toast.error(detail)
-            setTimeout(() => {
-                location.reload()
-            }, 2000)
         }
     }
 
@@ -388,7 +386,8 @@ const JobsFilter = memo(() => {
                                 </td>
                                 <td className='p-5'>{item?.tech_keywords}</td>
                                 <td className='p-5'>{item?.job_type}</td>
-                                <td className='p-5'>{item?.job_posted_date.slice(0, 10)}</td>
+
+                                <td className='p-5'>{formatDate(item?.job_posted_date)}</td>
                                 <td className='p-2'>
                                     {can('apply_job') ? (
                                         item?.job_status === '0' ? (
@@ -433,15 +432,18 @@ const JobsFilter = memo(() => {
                                 </td>
                                 <td className='p-5'>
                                     <button
-                                        className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white focus:bg-[#076366]'
-                                        onClick={() =>
+                                        className={`block rounded px-2 py-1 my-2 ${
+                                            jobIdForLastCV === item?.id ? 'bg-[#083031]' : 'bg-[#10868a]'
+                                        } text-white focus:bg-[#076366]`}
+                                        onClick={() => {
+                                            setJobIdForLastCV(item.id)
                                             generateLetter({
                                                 name: 'test user',
                                                 company: item?.company_name,
                                                 experience: '2 years',
                                                 job_des: item?.job_description,
                                             })
-                                        }
+                                        }}
                                     >
                                         Generate
                                     </button>

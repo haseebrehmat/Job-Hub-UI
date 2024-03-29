@@ -14,6 +14,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Monster', value: 'monster' },
     { label: 'Zip Recruiter', value: 'ziprecruiter' },
     { label: 'Career Builder', value: 'careerbuilder' },
+    { label: 'Other', value: 'other' },
 ]
 
 export const JOB_TYPES_OPTIONS = [
@@ -32,6 +33,7 @@ export const JOB_SOURCES = {
     glassdoor: 'Glassdoor',
     monster: 'Monster',
     simplyhired: 'Simply Hired',
+    other: 'Other',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
