@@ -64,7 +64,7 @@ const ManualJobs = () => {
                                 </tr>
                             ))
                         ) : (
-                            <EmptyTable cols={6} msg='No companies found yet!' />
+                            <EmptyTable cols={6} msg='No Jobs found yet!' />
                         )}
                     </tbody>
                 </table>

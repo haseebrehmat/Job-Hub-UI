@@ -12,7 +12,7 @@ const JobsUploader = () => {
     const [activeTab, setActiveTab] = useState({ jobposter: true, filesuploader: false })
 
     return (
-        <div className='flex flex-col border shadow	text-[#006366] py-8'>
+        <div className='flex flex-col border shadow	text-[#006366] py-8 '>
             <div className='flex flex-col mb-4'>
                 <div className='flex flex-row mb-4 md:gap-5 ml-6'>
                     <Button
@@ -36,7 +36,7 @@ const JobsUploader = () => {
                     (can(['view_manual_job']) ? (
                         <ManualJobs />
                     ) : (
-                        <EmptyTable cols={6} msg='User dont have the required permissions ' />
+                        <div className='text-center	my-4'>User do not have the required permissions</div>
                     ))}
                 {activeTab.filesuploader && <FilesUploader />}
             </div>
