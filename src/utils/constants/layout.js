@@ -56,7 +56,7 @@ export const menuItems = [
                 label: 'Jobs Uploader',
                 link: '/jobs-uploader',
                 svg: JobsUploaderIcon,
-                perms: ['view_job_uploader', 'upload_csv'],
+                perms: ['view_job_uploader', 'upload_csv', 'create_manual_job', 'view_manual_job'],
             },
             {
                 label: 'Team Applied Jobs',
@@ -125,12 +125,6 @@ export const menuItems = [
                 svg: CompaniesIcon,
                 perms: ['view_company', 'create_company', 'update_company'],
             },
-            // {
-            //     label: 'Job Source Blocking',
-            //     link: '/job-source-blocking',
-            //     svg: CompaniesIcon,
-            //     perms: ['view_company', 'create_company', 'update_company'],
-            // },
             {
                 label: 'Roles',
                 link: '/roles',

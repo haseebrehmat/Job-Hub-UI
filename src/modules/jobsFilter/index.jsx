@@ -183,7 +183,6 @@ const JobsFilter = memo(() => {
     const generateLetter = async user_data => {
         setFilterState({ ...filterState, isLoading: true })
         const { status, detail } = await generateCoverLetter(`${apiUrl}cover_letter/generate/`, user_data)
-
         if (status === 'success') {
             setInit(detail)
             setFilterState({ ...filterState, showCoverLetter: true, isLoading: false })

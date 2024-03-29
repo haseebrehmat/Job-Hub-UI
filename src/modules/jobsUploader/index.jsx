@@ -1,8 +1,10 @@
 import { React, useState } from 'react'
 
-import { Button } from '@components'
+import { Button, EmptyTable } from '@components'
 
 import { FilesUploader, ManualJobs } from '@modules/jobsUploader/components'
+
+import { can } from '@utils/helpers'
 
 import { PostJobIcon, UploadJobIcon } from '@icons'
 
@@ -10,7 +12,7 @@ const JobsUploader = () => {
     const [activeTab, setActiveTab] = useState({ jobposter: true, filesuploader: false })
 
     return (
-        <div className='flex flex-col border shadow	text-[#006366] py-8'>
+        <div className='flex flex-col border shadow	text-[#006366] py-8 '>
             <div className='flex flex-col mb-4'>
                 <div className='flex flex-row mb-4 md:gap-5 ml-6'>
                     <Button
@@ -20,15 +22,22 @@ const JobsUploader = () => {
                         classes={`md:pr-8 md:pl-6 ${activeTab.jobposter && 'text-white bg-[#048C8C]'}`}
                         onClick={() => setActiveTab({ jobposter: true, filesuploader: false })}
                     />
-                    <Button
-                        label='Upload Job Files'
-                        fit
-                        icon={UploadJobIcon}
-                        classes={`md:pr-8 md:pl-6 ${activeTab.filesuploader && 'text-white bg-[#048C8C]'}`}
-                        onClick={() => setActiveTab({ jobposter: false, filesuploader: true })}
-                    />
+                    {can(['view_job_uploader', 'upload_csv']) && (
+                        <Button
+                            label='Upload Job Files'
+                            fit
+                            icon={UploadJobIcon}
+                            classes={`md:pr-8 md:pl-6 ${activeTab.filesuploader && 'text-white bg-[#048C8C]'}`}
+                            onClick={() => setActiveTab({ jobposter: false, filesuploader: true })}
+                        />
+                    )}
                 </div>
-                {activeTab.jobposter && <ManualJobs />}
+                {activeTab.jobposter &&
+                    (can(['view_manual_job']) ? (
+                        <ManualJobs />
+                    ) : (
+                        <div className='text-center	my-4'>User do not have the required permissions</div>
+                    ))}
                 {activeTab.filesuploader && <FilesUploader />}
             </div>
         </div>
