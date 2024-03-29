@@ -17,7 +17,7 @@ const layout = memo(({ children, title }) => {
                     <div className='h-100'>
                         <Navbar setShow={setShow} title={title} />
                     </div>
-                    <div className='max-h-100 overflow-auto p-3'>{children}</div>
+                    <div className='max-h-100 p-3'>{children}</div>
                 </div>
             </div>
         </main>
