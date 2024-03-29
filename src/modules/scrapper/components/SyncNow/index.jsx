@@ -18,7 +18,10 @@ const SyncNow = () => {
         revalidateOnReconnect: false,
     })
 
-    const runSingleScraper = source => trigger({ link: `/api/job_scraper/sync/?job_source=${source}` })
+    const runSingleScraper = source => {
+        trigger({ link: `/api/job_scraper/sync/?job_source=${source}` })
+        setIsOpen(!isOpen)
+    }
 
     return (
         <div className='relative inline-block text-left z-20'>

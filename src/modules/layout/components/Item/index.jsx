@@ -18,8 +18,8 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                 onClick={() => handleSubMenu(item.key)}
                 onMouseEnter={() => handleHover(item.key)}
             >
-                <Link key={item.label} to={item.link} className='flex items-center text-md p-4'>
-                    {item.svg}
+                <Link key={item.label} to={item.link} className='flex items-center text-md p-2'>
+                    <span className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'>{item.svg}</span>
                     {show ? <span className='ml-3 hidden lg:block'>{item.label}</span> : ''}
                 </Link>
                 {show && item?.subItems && <span className='hidden lg:block mr-2'>{OpenSubMenuIcon}</span>}
@@ -32,11 +32,13 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                                 <Link
                                     key={subItem.label}
                                     to={subItem.link}
-                                    className={`flex items-center text-sm p-4 ml-2 border-[#048C8C] my-1 ${
+                                    className={`flex items-center text-sm p-2 ml-2 border-[#048C8C] my-1 ${
                                         location.pathname === subItem.link ? 'border-2' : 'border-0'
                                     } text-[#003C40] rounded hover:text-[#003C40] border-solid hover:border-2 hover:border-solid hover:border-[#048C8C] cursor-pointer`}
                                 >
-                                    {subItem.svg}
+                                    <span className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'>
+                                        {subItem.svg}
+                                    </span>
                                     {show ? <span className='ml-3 hidden lg:block'>{subItem.label}</span> : ''}
                                 </Link>
                             ) : null

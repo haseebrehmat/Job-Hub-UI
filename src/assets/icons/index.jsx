@@ -48,7 +48,7 @@ import {
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail } from 'react-icons/bi'
 import { RiUserSettingsLine, RiLock2Fill, RiTeamLine } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
@@ -120,3 +120,4 @@ export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22p
 export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
 export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
+export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px', color: 'red' }} />
