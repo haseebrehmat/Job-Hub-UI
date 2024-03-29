@@ -25,7 +25,7 @@ const CronjobSetting = () => {
     if (isLoading) return <Loading />
 
     return (
-        <div className='max-w-full overflow-x-auto mb-14'>
+        <div className='max-w-full mb-14'>
             <div className='flex items-center space-x-4 pb-6'>
                 {can('create_cronjob_setting') && (
                     <Button label='Create Cronjob Setting' fit icon={CreateIcon} onClick={() => handleClick()} />
