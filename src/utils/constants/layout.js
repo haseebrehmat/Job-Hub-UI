@@ -14,6 +14,7 @@ import {
     TeamsIcon,
     CoverLetter,
     ScrapperIcon,
+    LoggerIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -153,5 +154,11 @@ export const menuItems = [
                 perms: ['view_integration', 'create_integration', 'update_integration'],
             },
         ],
+    },
+    {
+        label: 'Logger',
+        link: '/logger',
+        svg: LoggerIcon,
+        perms: ['view_logger', 'show_log_details'],
     },
 ]
