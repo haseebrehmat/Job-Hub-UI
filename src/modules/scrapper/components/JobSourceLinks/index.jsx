@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Button, EmptyTable, Loading } from '@components'
+import { Button, EmptyTable, Loading, Badge, Tooltip } from '@components'
 
 import { JobSourceLinkActions, JobSourceLinkForm } from '@modules/scrapper/components'
 import { fetchJobSourceLinks } from '@modules/scrapper/api'
@@ -10,7 +10,6 @@ import { can } from '@utils/helpers'
 import { JOB_SOURCES, JOB_SOURCE_LINK_HEADS } from '@constants/scrapper'
 
 import { CreateIcon } from '@icons'
-import { Badge, Tooltip } from '@/components'
 
 const JobSourceLinks = () => {
     const [link, setLink] = useState()
@@ -28,7 +27,7 @@ const JobSourceLinks = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14'>
             <div className='flex items-center space-x-4 pb-6'>
-                {can('create_cronjob_setting') && (
+                {can('create_job_source_link') && (
                     <Button label='Create Job Source Link' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
             </div>
@@ -61,7 +60,7 @@ const JobSourceLinks = () => {
                                         ))}
                                 </td>
                                 <td className='px-3 py-6 float-right'>
-                                    {can(['edit_cronjob_setting', 'delete_cronjob_setting']) && (
+                                    {can(['edit_job_source_link', 'delete_job_source_link']) && (
                                         <JobSourceLinkActions
                                             id={row?.id}
                                             edit={() => handleClick(row)}
@@ -76,7 +75,7 @@ const JobSourceLinks = () => {
                     )}
                 </tbody>
             </table>
-            {can(['edit_cronjob_setting', 'create_cronjob_setting']) && show && (
+            {can(['edit_job_source_link', 'delete_job_source_link']) && show && (
                 <JobSourceLinkForm show={show} setShow={setShow} mutate={mutate} link={link} />
             )}
         </div>
