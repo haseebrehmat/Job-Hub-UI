@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import useSWR from 'swr'
+import useSWRMutation from 'swr/mutation'
 
 import { Button } from '@components'
 
@@ -11,19 +11,20 @@ import { RunScrapperIcon } from '@icons'
 
 const SyncNow = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const [source, setSource] = useState(null)
 
-    const { isMutating } = useSWR(`/api/job_scraper/sync/?job_source=${source}`, source === null ? null : syncNow, {
+    const { isMutating, trigger } = useSWRMutation(['/api/job_scraper/sync/', 'single-job-source'], syncNow, {
         shouldRetryOnError: true,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     })
 
+    const runSingleScraper = source => trigger({ link: `/api/job_scraper/sync/?job_source=${source}` })
+
     return (
         <div className='relative inline-block text-left z-20'>
             <div>
                 <Button
-                    label={isMutating ? 'Running....' : 'Run Scrapper Now'}
+                    label={isMutating ? 'Running........' : 'Run Scrapper Now'}
                     fit
                     icon={RunScrapperIcon}
                     onClick={() => setIsOpen(!isOpen)}
@@ -38,7 +39,7 @@ const SyncNow = () => {
                     <div className='py-1'>
                         <button
                             className='block w-full text-start px-4 py-2 text-sm hover:bg-gray-100'
-                            onClick={() => setSource('all')}
+                            onClick={() => runSingleScraper('all')}
                             disabled={isMutating}
                         >
                             All
@@ -46,7 +47,7 @@ const SyncNow = () => {
                         {JOB_SOURCE_OPTIONS.filter(job => job.value !== 'other').map(({ label, value }) => (
                             <button
                                 className='block w-full text-start px-4 py-2 text-sm hover:bg-gray-100'
-                                onClick={() => setSource(value)}
+                                onClick={() => runSingleScraper(value)}
                                 disabled={isMutating}
                                 key={value}
                             >
