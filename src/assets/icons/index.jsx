@@ -123,7 +123,7 @@ export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
 export const RunningScrapperIcon = <VscVmRunning style={{ fontSize: '22px' }} />
 export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
-export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px' }} />
+export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px', color: 'red' }} />
+export const ResumeIcon = <GrDocumentUser style={{ fontSize: 16 }} />
 export const JobSource = <VscSourceControl style={{ fontSize: '22px' }} />
 export const TechSTack = <RiStackFill style={{ fontSize: '22px' }} />
-export const ResumeIcon = <GrDocumentUser style={{ fontSize: '22px' }} />

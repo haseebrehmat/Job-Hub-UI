@@ -18,6 +18,7 @@ import {
     CoverLetter,
     Scrapper,
     Logger,
+    ResumeBuilder,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -139,7 +140,7 @@ export const routes = [
     },
     {
         path: '/resume-builder',
-        component: <Integrations />,
+        component: <ResumeBuilder />,
         protect: true,
         title: 'Resume Builder',
         permission: 'all',
