@@ -9,7 +9,6 @@ import { removeToken } from '@utils/helpers'
 import { OpenSidebarIcon, LogoutIcon } from '@icons'
 import logo from '@images/signin-logo.svg'
 import smallLogo from '@images/signin-small-logo.svg'
-import './index.css'
 
 const SideBar = ({ toggle, setToggle }) => {
     const navigate = useNavigate()

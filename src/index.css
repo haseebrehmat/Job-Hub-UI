@@ -71,6 +71,12 @@ body{
     overflow: auto !important;
 }
 
+
+.hide_scrollbar::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
