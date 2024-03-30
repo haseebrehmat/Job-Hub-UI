@@ -27,6 +27,7 @@ import {
     BsFillKeyFill,
     BsCloudArrowDownFill,
     BsFillPlayFill,
+    BsCardList,
 } from 'react-icons/bs'
 import { HiUser, HiUsers, HiOutlineUsers, HiOutlineWifi } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
@@ -47,10 +48,11 @@ import {
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail } from 'react-icons/bi'
 import { RiUserSettingsLine, RiLock2Fill, RiTeamLine } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
+import { VscVmRunning } from 'react-icons/vsc'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -64,7 +66,7 @@ export const NavigationIcon = <FiMenu style={{ fontSize: '22px' }} />
 export const DashboardIcon = <MdSpaceDashboard style={{ fontSize: '20px' }} />
 export const ReportIcon = <BsFillFileTextFill style={{ fontSize: '20px' }} />
 export const UsersIcon = <HiUsers style={{ fontSize: '22px' }} />
-export const RoleIcon = <HiUser style={{ fontSize: '22px' }} />
+export const RoleIcon = <HiUser style={{ fontSize: '22px' }} VscVmRunning />
 export const NewUserIcon = <HiUserPlus style={{ fontSize: '22px' }} />
 export const SettingIcon = <IoMdSettings style={{ fontSize: '20px' }} />
 export const ResetFilterIcon = <TbRefresh style={{ fontSize: '20px' }} />
@@ -118,3 +120,6 @@ export const PostJobIcon = <MdOutlinePostAdd style={{ fontSize: '22px' }} />
 export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22px' }} />
 export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
+export const RunningScrapperIcon = <VscVmRunning style={{ fontSize: '22px' }} />
+export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
+export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px', color: 'red' }} />

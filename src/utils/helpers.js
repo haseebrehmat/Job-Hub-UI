@@ -68,7 +68,29 @@ export const timeSince = date => {
     return `${interval} ${intervalType} ago`
 }
 
-export const formatDate = date => new Date(date).toLocaleString()
+export const formatDate = date =>
+    new Date(date).toLocaleString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+    })
+
+export const formatDate2 = date =>
+    new Date(date).toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+    })
+
+export const formatDate3 = date =>
+    new Date(date).toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+    })
 
 export const checkToken = () => {
     const user = decodeJwt()

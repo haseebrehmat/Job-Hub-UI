@@ -96,6 +96,14 @@ export const cronjobSettingSchema = Yup.object().shape({
         .when('type', {
             is: type => type === 'interval',
             then: () => Yup.number().positive().required('Interval is required'),
+        })
+        .when('interval_type', {
+            is: interval_type => interval_type === 'minutes',
+            then: () =>
+                Yup.number()
+                    .positive()
+                    .required('Interval is required')
+                    .min(25, 'Interval must be greater than or equal to 25 minutes'),
         }),
     interval_type: Yup.mixed()
         .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')

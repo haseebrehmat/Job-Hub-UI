@@ -17,6 +17,7 @@ import {
     Profile,
     CoverLetter,
     Scrapper,
+    Logger,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -128,6 +129,13 @@ export const routes = [
         protect: true,
         title: 'Job Scrapper',
         permission: 'view_job_scrapper',
+    },
+    {
+        path: '/logger',
+        component: <Logger />,
+        protect: true,
+        title: 'Logger',
+        permission: 'view_logger',
     },
 ]
 

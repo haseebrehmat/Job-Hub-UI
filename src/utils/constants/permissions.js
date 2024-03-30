@@ -292,6 +292,23 @@ export const rawpermissions = [
             },
         ],
     },
+    {
+        module: 'Logger',
+        permissions: [
+            {
+                codename: 'view_logger',
+                name: 'View Logger',
+                child: ['view_log_details'],
+                level: 1,
+            },
+            {
+                codename: 'show_log_details',
+                name: 'Show Log Details',
+                parent: ['view_logger'],
+                level: 1,
+            },
+        ],
+    },
 ]
 
 export const permissions = rawpermissions.map(row => ({

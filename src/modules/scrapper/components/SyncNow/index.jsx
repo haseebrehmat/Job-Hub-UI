@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useState, useRef, useEffect } from 'react'
 import useSWRMutation from 'swr/mutation'
 
 import { Button } from '@components'
@@ -11,6 +11,7 @@ import { RunScrapperIcon } from '@icons'
 
 const SyncNow = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const divRef = useRef(null)
 
     const { isMutating, trigger } = useSWRMutation(['/api/job_scraper/sync/', 'single-job-source'], syncNow, {
         shouldRetryOnError: true,
@@ -18,10 +19,26 @@ const SyncNow = () => {
         revalidateOnReconnect: false,
     })
 
-    const runSingleScraper = source => trigger({ link: `/api/job_scraper/sync/?job_source=${source}` })
+    const runSingleScraper = source => {
+        trigger({ link: `/api/job_scraper/sync/?job_source=${source}` })
+        setIsOpen(!isOpen)
+    }
+
+    const handleClickOutside = event => {
+        if (divRef.current && !divRef.current.contains(event.target)) {
+            setIsOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    })
 
     return (
-        <div className='relative inline-block text-left z-20'>
+        <div className='relative inline-block text-left' ref={divRef}>
             <div>
                 <Button
                     label={isMutating ? 'Running........' : 'Run Scrapper Now'}

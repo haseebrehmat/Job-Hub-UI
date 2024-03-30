@@ -71,7 +71,7 @@ const CronjobSettingForm = ({ show, setShow, mutate, setting }) => {
                                 ph='Enter interval number'
                                 type='number'
                                 name='interval'
-                                min={1}
+                                min={values.interval_type === 'minutes' ? 25 : 1}
                                 value={values.interval}
                                 onChange={handleChange}
                             />
