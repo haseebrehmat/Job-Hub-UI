@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Profile, Tooltip } from '@components'
@@ -10,11 +10,25 @@ import { NavContactIcon, NavSettingIcon, OpenSidebarIcon, SignOutIcon } from '@i
 const Navbar = ({ setShow, title = 'Octagon' }) => {
     const navigate = useNavigate()
     const [profile, setProfile] = useState(false)
+    const divRef = useRef(null)
 
     const handleLogout = () => {
         removeToken()
         navigate(0)
     }
+
+    const handleClickOutside = event => {
+        if (divRef.current && !divRef.current.contains(event.target)) {
+            setProfile(false)
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    })
 
     return (
         <header className='bg-white w-full px-8 pt-3'>
@@ -26,7 +40,7 @@ const Navbar = ({ setShow, title = 'Octagon' }) => {
                             {OpenSidebarIcon}
                         </a>
                     </li>
-                    <li className=' mx-2 my-2 cursor-pointer text-teal-800'>
+                    <li className=' mx-2 my-2 cursor-pointer text-teal-800' ref={divRef}>
                         <a type='button' onClick={() => setProfile(!profile)} onMouseEnter={() => setProfile(true)}>
                             {NavContactIcon}
                         </a>
