@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 
-import { Button, EmptyTable } from '@components'
+import { Button } from '@components'
 
 import { FilesUploader, ManualJobs } from '@modules/jobsUploader/components'
 
