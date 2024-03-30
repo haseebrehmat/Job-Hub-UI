@@ -3,13 +3,14 @@ import { memo, useState } from 'react'
 import SideBar from '@modules/layout/sidebar'
 import Navbar from '@modules/layout/navbar'
 import Overlay from '@modules/layout/overlay'
+import './index.css'
 
 const layout = memo(({ children, title }) => {
     const [toggle, setToggle] = useState(true)
     const [show, setShow] = useState(false)
 
     return (
-        <main className='flex h-100'>
+        <main className='flex h-screen hide_scrollbar'>
             <SideBar toggle={toggle} setToggle={setToggle} />
             <Overlay show={show} setShow={setShow} />
             <div className='w-[85%] flex-1'>
