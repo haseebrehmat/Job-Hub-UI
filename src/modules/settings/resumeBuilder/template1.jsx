@@ -5,8 +5,8 @@ import { svgs } from './svgs'
 
 const Template1 = () => (
     <div className='flex flex-col items-center'>
-        <p className='my-2 border-2 py-2 px-4 w-fit'>Template 1</p>
-        <div className='p-8 bg-white shadow-2xl border-2 rounded-lg w-[21cm] min-h-[29.7cm]'>
+        <p className='my-2 border-2 py-2 px-4 w-fit bg-white'>Template 1</p>
+        <div className='p-8 bg-white shadow-2xl border-2 rounded-lg w-[24cm] min-h-[29.7cm]'>
             <div className='flex items-center'>
                 <img src={dev.basic.avatar} alt='Profile' className='w-28 h-w-28 rounded-full' />
                 <div className='flex items-center justify-between w-full'>
@@ -93,8 +93,8 @@ const Template1 = () => (
                         <div className='ml-4 space-y-1'>
                             {dev.hobbies.map((name, index) => (
                                 <div className='inline-block' key={index}>
-                                    <span className='pr-3'>{name}</span>
-                                    <span className='pr-3 text-gray-400 text-2xl'>
+                                    <span className='pr-2'>{name}</span>
+                                    <span className='pr-2 text-gray-400 text-2xl'>
                                         {dev.hobbies.length !== index + 1 && '|'}
                                     </span>
                                 </div>
