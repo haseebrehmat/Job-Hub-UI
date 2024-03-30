@@ -18,7 +18,7 @@ const SideBar = ({ toggle, setToggle }) => {
         <aside
             className={`sm:flex hidden ${
                 toggle ? 'w-auto xl:w-[15%]' : 'w-fit'
-            } flex-col space-y-2 border-2 py-2 sm:px-2 my-2 ml-2  text-[#048C8C] bg-[#EDFFFB] rounded-lg`}
+            } flex-col space-y-2 border-2 py-2 sm:px-2 my-2 ml-2  text-[#048C8C] bg-[#EDFFFB] rounded-lg h-screen overflow-scroll hide_scrollbar`}
         >
             <div className={`p-2 flex justify-center md:justify-${toggle ? 'center' : 'between'}`}>
                 <span className='hidden lg:block '>

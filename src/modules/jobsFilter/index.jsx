@@ -196,7 +196,7 @@ const JobsFilter = memo(() => {
     )
     if (filterState?.isLoading) return <Loading />
     return (
-        <div className='text-[#048C8C] h-screen overflow-scroll'>
+        <div className='text-[#048C8C] h-[52rem] overflow-scroll'>
             <div className='flex p-3 items-center py-2 justify-between '>
                 <JobPortalSearchBox
                     value={filterState?.jobTitle}
