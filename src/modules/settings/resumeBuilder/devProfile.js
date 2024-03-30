@@ -1,11 +1,12 @@
 export const devProfile = {
     basic: {
-        name: 'Ubaid Ali',
+        name: 'Obaidullah Yousaf',
         email: 'ubaid@example.com',
         phone: '+918888888888',
         address: '202 Edyth Green, North Marinaville-21524, South Carolina, USA',
         title: 'Software Engineer',
         avatar: 'https://i.pravatar.cc',
+        portfolio: 'www.google.com',
     },
     summary:
         'Highly skilled software developer with 7+ years of experience designing and implementing software solutions. Proficient in multiple programming languages such as Java, Python, and JavaScript. Proven ability to develop scalable and high-performance applications using cloud technologies such as AWS and Azure. Demonstrated expertise in full-stack development, including front-end frameworks such as React and back-end frameworks such as Node.js. Strong problem-solving and analytical skills with a passion for delivering clean and efficient code. Excellent communication and collaboration abilities with cross-functional teams and stakeholders',
@@ -48,18 +49,21 @@ export const devProfile = {
             degree: 'Bachelor of Science in Computer Science',
             from: '2015',
             to: '2019',
+            grade: '3.5/4 CGPA',
         },
         {
             institute: 'KLM College',
             degree: 'Post Graduate in Computer Science',
             from: '2013',
             to: '2015',
+            grade: 'A+ Grade',
         },
         {
             institute: 'RTS School',
             degree: 'Primary School',
             from: '2013',
             to: '2011',
+            grade: 'A Grade',
         },
     ],
     links: {
