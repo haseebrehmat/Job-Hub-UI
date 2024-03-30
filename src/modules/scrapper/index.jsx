@@ -19,7 +19,7 @@ const Profile = () => {
                             fit
                             fill={activeTab.setting}
                             icon={CronjobSettingIcon}
-                            classes={`md:pr-8 md:pl-6 ${!activeTab.setting && 'border-gray-200'}`}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.setting && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ setting: true, links: false })}
                         />
                         <Button
@@ -27,7 +27,7 @@ const Profile = () => {
                             fit
                             fill={activeTab.links}
                             icon={JobSourceLinkIcon}
-                            classes={`md:pr-8 md:pl-6 ${!activeTab.links && 'border-gray-200'}`}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.links && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ setting: false, links: true })}
                         />
                     </div>
