@@ -74,7 +74,7 @@ export const devProfile = {
     languages: [
         {
             name: 'English',
-            fluency: 5, // fluency level out of 5
+            fluency: 3, // fluency level out of 5
         },
         {
             name: 'Urdu',
@@ -82,7 +82,7 @@ export const devProfile = {
         },
         {
             name: 'Punjabi',
-            fluency: 5,
+            fluency: 2,
         },
     ],
 }
