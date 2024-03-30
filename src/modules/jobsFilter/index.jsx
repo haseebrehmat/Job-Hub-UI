@@ -1,6 +1,5 @@
 import { useState, memo, useEffect } from 'react'
 import Selector from './components/Selector'
-import ClipLoader from 'react-spinners/ClipLoader'
 import CustomSelector from '../../components/CustomSelector'
 import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
 import { Checkedbox, unCheckedbox } from '@icons'
@@ -36,7 +35,7 @@ const JobsFilter = memo(() => {
         techStackData: [],
         ordering: '-job_posted_date',
         showCoverLetter: false,
-        isLoading: false,
+        isLoading: true,
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
@@ -57,8 +56,6 @@ const JobsFilter = memo(() => {
     const [init, setInit] = useState('<p>your Ai Generated Cover Letter Displays here.........</p>')
 
     const error = true
-    const [recordFound, setRecordFound] = useState(true)
-
     const generateParamsString = () => {
         const params = new URLSearchParams()
         let params_count = 0
@@ -76,7 +73,6 @@ const JobsFilter = memo(() => {
 
     const fetchJobsData = async url => {
         setData([])
-
         const {
             jobsData,
             status,
@@ -89,7 +85,6 @@ const JobsFilter = memo(() => {
             num_pages,
             detail,
         } = await fetchJobs(`${url}?${generateParamsString()}`)
-
         const { techStackSelector } = filterState
         if (status === 'success') {
             setFilterState({
@@ -99,6 +94,7 @@ const JobsFilter = memo(() => {
                 techStackData: tech_keywords_count_list,
                 jobSourceData: job_source_count_list,
                 jobTypeData: total_job_type,
+                isLoading: false,
                 techStackSelector: techStackSelector
                     .map(({ value }) => {
                         const updated_tech_count = tech_keywords_count_list.find(tech => tech.name === value)
@@ -111,16 +107,12 @@ const JobsFilter = memo(() => {
                     })
                     .filter(Boolean),
             })
+            setFilterState({ ...filterState, isLoading: false })
             setData(jobsData)
-            if (jobsData.length === 0) {
-                setRecordFound(false)
-            } else {
-                setRecordFound(true)
-            }
             setPagesCount(num_pages)
         } else {
-            setRecordFound(false)
             toast.error(detail)
+            setFilterState({ ...filterState, isLoading: false })
         }
     }
 
@@ -188,6 +180,7 @@ const JobsFilter = memo(() => {
             setFilterState({ ...filterState, showCoverLetter: true, isLoading: false })
         } else {
             toast.error(detail)
+            setFilterState({ ...filterState, isLoading: false })
         }
     }
 
@@ -454,12 +447,6 @@ const JobsFilter = memo(() => {
                     )}
                 </tbody>
             </table>
-            {data?.length === 0 && recordFound && (
-                <div className='flex justify-center my-2'>
-                    <ClipLoader color='#36d7b7' size={60} />
-                </div>
-            )}
-
             <Paginated
                 page={jobsFilterParams?.page}
                 setPage={pageNumber => {

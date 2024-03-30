@@ -30,7 +30,7 @@ const fetchJobs = async url => {
         tech_keywords_count_list,
         job_source_count_list,
         total_job_type,
-        num_pages: links.num_pages,
+        num_pages: links?.num_pages,
         detail,
     }
 }
