@@ -342,110 +342,108 @@ const JobsFilter = memo(() => {
                     <TextEditor init={init} />
                 </div>
             )}
-            <div className=''>
-                <table className='table-auto w-full table text-lg h-46 text-left mt-6 text-[#048C8C] '>
-                    <thead className='text-lg uppercase border tex border-[#048C8C] '>
-                        <tr>
-                            {JOB_HEADS?.map(heading => (
-                                <th scope='col' className='px-3 py-4' key={heading}>
-                                    {heading}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data && data?.length > 0 && error ? (
-                            data?.map((item, key) => (
-                                <tr
-                                    className={`${
-                                        item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
-                                    } border-b border-[#006366] border-opacity-30`}
-                                    key={key}
-                                >
-                                    <td className='p-5 w-96'>{item?.job_title}</td>
-                                    <td className='p-5'>{item?.company_name}</td>
-                                    <td className='p-5 capitalize'>
-                                        <a
-                                            className='underline focus:text-black focus:text-lg'
-                                            target='_blank'
-                                            rel='noreferrer'
-                                            href={item?.job_source_url}
-                                        >
-                                            {item?.job_source}
-                                        </a>
-                                    </td>
-                                    <td className='p-5'>{item?.tech_keywords}</td>
-                                    <td className='p-5'>{item?.job_type}</td>
+            <table className='table-auto w-full table text-lg h-46 text-left mt-6 text-[#048C8C] '>
+                <thead className='text-lg uppercase border tex border-[#048C8C] '>
+                    <tr>
+                        {JOB_HEADS?.map(heading => (
+                            <th scope='col' className='px-3 py-4' key={heading}>
+                                {heading}
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {data && data?.length > 0 && error ? (
+                        data?.map((item, key) => (
+                            <tr
+                                className={`${
+                                    item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
+                                } border-b border-[#006366] border-opacity-30`}
+                                key={key}
+                            >
+                                <td className='p-5 w-96'>{item?.job_title}</td>
+                                <td className='p-5'>{item?.company_name}</td>
+                                <td className='p-5 capitalize'>
+                                    <a
+                                        className='underline focus:text-black focus:text-lg'
+                                        target='_blank'
+                                        rel='noreferrer'
+                                        href={item?.job_source_url}
+                                    >
+                                        {item?.job_source}
+                                    </a>
+                                </td>
+                                <td className='p-5'>{item?.tech_keywords}</td>
+                                <td className='p-5'>{item?.job_type}</td>
 
-                                    <td className='p-5'>{formatDate(item?.job_posted_date)}</td>
-                                    <td className='p-2'>
-                                        {can('apply_job') ? (
-                                            item?.job_status === '0' ? (
-                                                <button
-                                                    className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
-                                                    onClick={() => applyJob(key)}
-                                                >
-                                                    Apply
-                                                </button>
-                                            ) : (
-                                                <button className='block rounded px-2 py-1 my-3 text-gray-400 bg-[#ffffff] '>
-                                                    {filterState?.jobStatusChoice[item?.job_status]}
-                                                </button>
-                                            )
-                                        ) : null}
-                                    </td>
-                                    {CustomModal}
-                                    <td className='p-5'>
-                                        <span className='flex justify-center'>
-                                            {!item?.block ? (
-                                                <button
-                                                    className=''
-                                                    onClick={() => {
-                                                        setCurrentCompany([item?.company_name, 'add/'])
-                                                        openModal()
-                                                    }}
-                                                >
-                                                    {unCheckedbox}
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    className=' '
-                                                    onClick={() => {
-                                                        setCurrentCompany([item?.company_name, 'remove/'])
-                                                        openModal()
-                                                    }}
-                                                >
-                                                    {Checkedbox}
-                                                </button>
-                                            )}
-                                        </span>
-                                    </td>
-                                    <td className='p-5'>
-                                        <button
-                                            className={`block rounded px-2 py-1 my-2 ${
-                                                jobIdForLastCV === item?.id ? 'bg-[#083031]' : 'bg-[#10868a]'
-                                            } text-white focus:bg-[#076366]`}
-                                            onClick={() => {
-                                                setJobIdForLastCV(item.id)
-                                                generateLetter({
-                                                    name: 'test user',
-                                                    company: item?.company_name,
-                                                    experience: '2 years',
-                                                    job_des: item?.job_description,
-                                                })
-                                            }}
-                                        >
-                                            Generate
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <EmptyTable cols={8} msg='No Jobs found yet!' />
-                        )}
-                    </tbody>
-                </table>
-            </div>
+                                <td className='p-5'>{formatDate(item?.job_posted_date)}</td>
+                                <td className='p-2'>
+                                    {can('apply_job') ? (
+                                        item?.job_status === '0' ? (
+                                            <button
+                                                className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
+                                                onClick={() => applyJob(key)}
+                                            >
+                                                Apply
+                                            </button>
+                                        ) : (
+                                            <button className='block rounded px-2 py-1 my-3 text-gray-400 bg-[#ffffff] '>
+                                                {filterState?.jobStatusChoice[item?.job_status]}
+                                            </button>
+                                        )
+                                    ) : null}
+                                </td>
+                                {CustomModal}
+                                <td className='p-5'>
+                                    <span className='flex justify-center'>
+                                        {!item?.block ? (
+                                            <button
+                                                className=''
+                                                onClick={() => {
+                                                    setCurrentCompany([item?.company_name, 'add/'])
+                                                    openModal()
+                                                }}
+                                            >
+                                                {unCheckedbox}
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className=' '
+                                                onClick={() => {
+                                                    setCurrentCompany([item?.company_name, 'remove/'])
+                                                    openModal()
+                                                }}
+                                            >
+                                                {Checkedbox}
+                                            </button>
+                                        )}
+                                    </span>
+                                </td>
+                                <td className='p-5'>
+                                    <button
+                                        className={`block rounded px-2 py-1 my-2 ${
+                                            jobIdForLastCV === item?.id ? 'bg-[#083031]' : 'bg-[#10868a]'
+                                        } text-white focus:bg-[#076366]`}
+                                        onClick={() => {
+                                            setJobIdForLastCV(item.id)
+                                            generateLetter({
+                                                name: 'test user',
+                                                company: item?.company_name,
+                                                experience: '2 years',
+                                                job_des: item?.job_description,
+                                            })
+                                        }}
+                                    >
+                                        Generate
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <EmptyTable cols={8} msg='No Jobs found yet!' />
+                    )}
+                </tbody>
+            </table>
             <Paginated
                 page={jobsFilterParams?.page}
                 setPage={pageNumber => {
