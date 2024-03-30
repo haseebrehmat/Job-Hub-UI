@@ -17,6 +17,7 @@ const Profile = () => {
                         <Button
                             label='Cronjob Settings'
                             fit
+                            fill={activeTab.setting}
                             icon={CronjobSettingIcon}
                             classes={`md:pr-8 md:pl-6 ${!activeTab.setting && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ setting: true, links: false })}
@@ -24,6 +25,7 @@ const Profile = () => {
                         <Button
                             label='Job Source Links / URLs'
                             fit
+                            fill={activeTab.links}
                             icon={JobSourceLinkIcon}
                             classes={`md:pr-8 md:pl-6 ${!activeTab.links && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ setting: false, links: true })}
