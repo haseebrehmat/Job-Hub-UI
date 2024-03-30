@@ -38,3 +38,4 @@ export const JOB_SOURCES = {
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
 export const JOB_SOURCE_LINK_HEADS = ['ID', 'Source', 'Links', '']
+export const SCRAPER_STATUS_HEADS = ['ID', 'Source', 'Status']

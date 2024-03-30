@@ -29,3 +29,5 @@ export const saveJobSourceLink = (url, { arg: link }) => {
         .post(url, link)
         .then(({ data }) => toast.success(data.detail || 'Job Source Link created successfully'))
 }
+
+export const fetchScraperStatus = url => http.get(url).then(({ data }) => data)
