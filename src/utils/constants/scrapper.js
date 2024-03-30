@@ -34,6 +34,7 @@ export const JOB_SOURCES = {
     monster: 'Monster',
     simplyhired: 'Simply Hired',
     other: 'Other',
+    all: 'All',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']

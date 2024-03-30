@@ -5,7 +5,7 @@ import { EmptyTable, Loading, Badge, Button } from '@components'
 
 import { fetchScraperStatus } from '@modules/scrapper/api'
 
-import { SCRAPER_STATUS_HEADS } from '@constants/scrapper'
+import { SCRAPER_STATUS_HEADS, JOB_SOURCES } from '@constants/scrapper'
 
 import { ResetFilterIcon } from '@icons'
 
@@ -34,7 +34,7 @@ const ScraperStatus = () => {
                         data?.map((row, idx) => (
                             <tr className='border-b border-[#006366] border-opacity-20 hover:bg-gray-100' key={idx}>
                                 <td className='px-3 py-4'>{idx + 1}</td>
-                                <td className='px-3 py-4 capitalize'>{row.job_source}</td>
+                                <td className='px-3 py-4 capitalize'>{JOB_SOURCES[row.job_source]}</td>
                                 <td className='px-3 py-4'>
                                     {row.running ? (
                                         <div className='flex items-center text-sm gap-2 border w-fit px-3 py-0.5 rounded-full bg-[#359393] text-white'>
