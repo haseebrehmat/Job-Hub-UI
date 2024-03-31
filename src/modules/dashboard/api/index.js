@@ -1,8 +1,8 @@
 import { http } from '@utils/http'
 
-export const fetchDashboardData = (from, to) =>
+export const fetchDashboardData = ({ from_date, to_date, company }) =>
     http
-        .get(`api/dashboard/dashboard_analytics/?from_date=${from}&to_date=${to}`)
+        .get(`api/dashboard/dashboard_analytics/?from_date=${from_date}&to_date=${to_date}&company=${company}`)
         .then(({ data: { leads, statistics, tech_keywords_count_list } }) => ({
             leads,
             statistics,
