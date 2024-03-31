@@ -200,7 +200,7 @@ const JobsFilter = memo(() => {
     )
     if (filterState?.isLoading) return <Loading />
     return (
-        <div className='text-[#048C8C] '>
+        <div className='text-[#048C8C]'>
             <div className='flex p-3 items-center py-2 justify-between '>
                 <JobPortalSearchBox
                     value={filterState?.jobTitle}

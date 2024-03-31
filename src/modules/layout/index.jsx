@@ -17,7 +17,7 @@ const layout = memo(({ children, title }) => {
                     <div className='h-100'>
                         <Navbar setShow={setShow} title={title} />
                     </div>
-                    <div className=' h-[52rem] overflow-scroll'>{children}</div>
+                    <div className='h-[52rem] overflow-scroll'>{children}</div>
                 </div>
             </div>
         </main>
