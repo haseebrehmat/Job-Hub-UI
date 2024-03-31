@@ -219,3 +219,19 @@ export const parseJobSource = value => (value ? JOB_SOURCE_OPTIONS.find(row => r
 export const parseTechKeywords = techStacks => techStacks.map(techStack => ({ value: techStack, label: techStack }))
 
 export const parseTechKeyword = value => (value ? JOB_SOURCE_OPTIONS.find(row => row.value === value) : null)
+
+export const formatStringInPascal = str => {
+    if (!str) {
+        return str
+    }
+
+    return str
+        .split(' ')
+        .map(item => {
+            if (!item) {
+                return item
+            }
+            return item[0].toUpperCase() + item.substr(1)
+        })
+        .join(' ')
+}

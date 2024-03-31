@@ -6,7 +6,7 @@ import { Checkedbox, unCheckedbox } from '@icons'
 import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
-import { can, formatDate, checkToken, dataForCsv } from '@/utils/helpers'
+import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@/utils/helpers'
 import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
@@ -71,6 +71,19 @@ const JobsFilter = memo(() => {
         setFilterState({ ...filterState, techStackSelector: techStackSelectorData })
     }
 
+    const updateSelectorCount = (selector, new_count_list) =>
+        selector
+            .map(({ value }) => {
+                const updated_count = new_count_list.find(item => item.name === value)
+                return (
+                    updated_count && {
+                        label: `${updated_count.name} (${updated_count.value})`,
+                        value: updated_count.name,
+                    }
+                )
+            })
+            .filter(Boolean)
+
     const fetchJobsData = async url => {
         setData([])
         const {
@@ -85,7 +98,7 @@ const JobsFilter = memo(() => {
             num_pages,
             detail,
         } = await fetchJobs(`${url}?${generateParamsString()}`)
-        const { techStackSelector } = filterState
+        const { techStackSelector, jobSourceSelector } = filterState
         if (status === 'success') {
             setFilterState({
                 ...filterState,
@@ -95,17 +108,8 @@ const JobsFilter = memo(() => {
                 jobSourceData: job_source_count_list,
                 jobTypeData: total_job_type,
                 isLoading: false,
-                techStackSelector: techStackSelector
-                    .map(({ value }) => {
-                        const updated_tech_count = tech_keywords_count_list.find(tech => tech.name === value)
-                        return (
-                            updated_tech_count && {
-                                label: `${updated_tech_count.name} (${updated_tech_count.value})`,
-                                value: updated_tech_count.name,
-                            }
-                        )
-                    })
-                    .filter(Boolean),
+                techStackSelector: updateSelectorCount(techStackSelector, tech_keywords_count_list),
+                jobSourceSelector: updateSelectorCount(jobSourceSelector, job_source_count_list),
             })
             setData(jobsData)
             setPagesCount(num_pages)
@@ -361,8 +365,16 @@ const JobsFilter = memo(() => {
                                 } border-b border-[#006366] border-opacity-30`}
                                 key={key}
                             >
-                                <td className='p-5 w-96'>{item?.job_title}</td>
-                                <td className='p-5'>{item?.company_name}</td>
+                                <td className='p-5 w-96'>
+                                    {item?.job_title &&
+                                        item?.job_title.length > 0 &&
+                                        formatStringInPascal(item.job_title)}
+                                </td>
+                                <td className='p-5'>
+                                    {item?.company_name &&
+                                        item?.company_name.length > 0 &&
+                                        formatStringInPascal(item.company_name)}
+                                </td>
                                 <td className='p-5 capitalize'>
                                     <a
                                         className='underline focus:text-black focus:text-lg'
