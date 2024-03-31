@@ -12,12 +12,12 @@ const layout = memo(({ children, title }) => {
         <main className='flex h-screen hide_scrollbar'>
             <SideBar toggle={toggle} setToggle={setToggle} />
             <Overlay show={show} setShow={setShow} />
-            <div className='w-[85%] flex-1'>
+            <div className='w-[85%] flex-1  '>
                 <div className='flex flex-col space-y-1 h-screen'>
                     <div className='h-100'>
                         <Navbar setShow={setShow} title={title} />
                     </div>
-                    <div className='max-h-100 p-3'>{children}</div>
+                    <div className=' h-[52rem] overflow-scroll'>{children}</div>
                 </div>
             </div>
         </main>
