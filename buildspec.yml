@@ -1,5 +1,8 @@
+# Specifies what build spec version this file is.
+# This helps AWS CodePipeline parse the file correctly.
+# Keep this at 0.2
 version: 0.2
-
+# We can listen for specific phases and execute commands per phase.
 phases:
   install:
     commands:
@@ -13,13 +16,14 @@ phases:
       # Install Node.js
       - nvm install 18.12.1
       - nvm use 18.12.1
-
+  pre_build:
+    commands:
+      - yum install yarn
+      - yarn install
+  # Now we want to actually build our React app
   build:
     commands:
-      # Run your build commands here
-      - yarn install
       - yarn build
-      # Additional commands for testing, packaging, etc.
 
 artifacts:
   files:
