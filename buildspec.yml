@@ -4,12 +4,8 @@
 version: 0.2
 # We can listen for specific phases and execute commands per phase.
 phases:
-  # The build server won't have access to our node_modules folder
-  # This is because we have it inside of our .gitignore file
-  # To give our build server access, we can simply run "npm install"
   install:
     commands:
-      # Install NVM
       - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
       - export NVM_DIR="$HOME/.nvm"
       - [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -25,7 +21,7 @@ phases:
       - yarn install
   # Now we want to actually build our React app
   build:
-   commands:
+    commands:
       - yarn build
 
 artifacts:
