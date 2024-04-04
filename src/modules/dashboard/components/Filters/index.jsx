@@ -48,7 +48,6 @@ const Filters = ({ filters, setFilters }) => {
                     <form onSubmit={handleSubmit}>
                         <div className='grid grid-flow-row gap-2'>
                             <p className='font-medium text-xl'>Filters</p>
-                            {/* <Input name='bd' ph='BD' /> */}
                             <span className='text-sm'>From</span>
                             <Input
                                 name='from_date'

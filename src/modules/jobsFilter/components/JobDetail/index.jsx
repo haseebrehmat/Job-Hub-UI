@@ -3,10 +3,10 @@ import { memo } from 'react'
 import { Button, Drawer, Badge } from '@components'
 import { JobSource, TechSTack } from '@icons'
 
-const JobDetail = ({ show, setShow }) => (
+const JobDetail = ({ show, setShow, values }) => (
     <Drawer show={show} setShow={setShow} w='520px'>
-        <div className='max-w-4xl p-6 bg-white border border-gray-300  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
-            <div className='flex'>
+        <div className='max-w-4xl p-6 bg-white border border-gray-300  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 my-2'>
+            <div className='flex mt-4'>
                 <svg
                     className='w-10 h-10 mb-2'
                     aria-hidden='true'
@@ -23,12 +23,12 @@ const JobDetail = ({ show, setShow }) => (
                 </svg>
                 <div className='flex flex-col'>
                     <p className='text-lg  font-semibold  text-gray-900 mx-2 flex items-baseline'>
-                        {show.company}{' '}
+                        {values.company}{' '}
                         <p className='text-sm  text-gray-500 mx-2'>
-                            {show.company_type ? '( recruiter )' : '( non-recruiter )'}
+                            {values.company_type ? '( recruiter )' : '( non-recruiter )'}
                         </p>{' '}
                     </p>
-                    <p className='text-xs -mt-1 text-gray-500 mx-2'>{show.date}</p>
+                    <p className='text-xs -mt-1 text-gray-500 mx-2'>{values.date}</p>
                 </div>
             </div>
             <div className='flex gap-2 ml-1 mt-2'>
@@ -36,26 +36,26 @@ const JobDetail = ({ show, setShow }) => (
                     {JobSource}{' '}
                     <p className='text-base text-gray-600 dark:text-white mx-2'>
                         {' '}
-                        <Badge label={show.job_source} font_size='lg' />
+                        <Badge label={values.job_source} />
                     </p>
                 </div>
                 <div className='flex'>
                     {TechSTack}{' '}
                     <p className='text-base text-gray-600 dark:text-white mx-2'>
                         {' '}
-                        <Badge label={show.tech_stack} type='success' />
+                        <Badge label={values.tech_stack} type='success' />
                     </p>
                 </div>
             </div>
-            <a className=' ' target='_blank' rel='noreferrer' href={show.job_url}>
-                <h5 className='text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mt-3 hover:text-[#10868a]'>
-                    {show.job_title}
-                    <span className='text-base text-gray-500 dark:text-white mx-2'>( {show.job_type} based )</span>
+            <a className=' ' target='_blank' rel='noreferrer' href={values.job_url}>
+                <h5 className='text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mt-4 hover:text-[#10868a]'>
+                    {values.job_title}
+                    <span className='text-base text-gray-500 dark:text-white mx-2'>( {values.job_type} based )</span>
                 </h5>
             </a>
-            <p className='font-normal text-gray-500 dark:text-gray-400'>{show.job_description}</p>
-            <div className='pt-4 space-y-2'>
-                <Button label='Cancel' onClick={() => setShow({ ...show, showJObDescription: false })} />
+            <p className='font-normal text-gray-500 dark:text-gray-400'>{values.job_description}</p>
+            <div className='mt-8 space-y-2 px-20'>
+                <Button label='Cancel' onClick={() => setShow(false)} />
             </div>
         </div>
     </Drawer>

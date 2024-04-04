@@ -19,6 +19,7 @@ const JobsFilter = memo(() => {
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
     const [jobIdForLastCV, setJobIdForLastCV] = useState('')
+    const [showJobDetails, setShowJobDetails] = useState(false)
 
     const defaultFilterState = {
         techStacData: [],
@@ -28,7 +29,7 @@ const JobsFilter = memo(() => {
         jobSourceSelector: [],
         jobTypeSelector: 'all',
         jobVisibilitySelector: 'all',
-        stats: { total_jobs: 0, filtered_jobs: 0 },
+        stats: { total_job: '0', filtered_job: '0' },
         jobStatusChoice: {},
         dates: { from_date: '', to_date: '' },
         jobTitle: '',
@@ -36,7 +37,6 @@ const JobsFilter = memo(() => {
         ordering: '-job_posted_date',
         showCoverLetter: false,
         isLoading: true,
-        showJObDescription: false,
         job_description: '',
         job_title: '',
         job_type: '',
@@ -112,7 +112,7 @@ const JobsFilter = memo(() => {
         if (status === 'success') {
             setFilterState({
                 ...filterState,
-                stats: { ...filterState?.stats, total_jobs, filtered_jobs },
+                stats: { total_job: total_jobs, filtered_job: filtered_jobs },
                 jobStatusChoice: job_status_choice,
                 techStackData: tech_keywords_count_list,
                 jobSourceData: job_source_count_list,
@@ -208,6 +208,33 @@ const JobsFilter = memo(() => {
         },
         'success'
     )
+
+    const setJobDetails = (
+        job_descriptions,
+        job_t,
+        job_typ,
+        company_name,
+        job_posted_date,
+        block,
+        tech_keywords,
+        job_sourc,
+        job_source_url
+    ) => {
+        setFilterState({
+            ...filterState,
+            showJObDescription: true,
+            job_description: job_descriptions,
+            job_title: job_t,
+            job_type: job_typ,
+            company: company_name,
+            date: formatDate(job_posted_date),
+            company_type: block,
+            tech_stack: tech_keywords,
+            job_source: job_sourc,
+            job_url: job_source_url,
+        })
+        setShowJobDetails(true)
+    }
     if (filterState?.isLoading) return <Loading />
     return (
         <div className='text-[#048C8C]'>
@@ -323,31 +350,31 @@ const JobsFilter = memo(() => {
                             placeholder='Select Tech Stack'
                         />
                     </div>
-                    <div className='flex space-x-4 my-2 grid-flow-col '>
+                    <div className='flex space-x-4 my-2 grid-flow-col'>
                         <div>
                             <p className='font-medium text-2xl '>Total :</p>
                             <p className='font-medium text-2xl '>Filtered :</p>
                         </div>
-                        <div className='justify-center  grid-flow-row '>
+                        <div className='justify-center  grid-flow-row mt-1'>
                             <div className=' h-8 '>
-                                <Badge label={filterState?.stats?.total_jobs?.toString()} type='enabled' />
+                                <Badge label={filterState?.stats.filtered_job} type='enabled' />
                             </div>
                             <div>
-                                <Badge label={filterState?.stats?.filtered_jobs?.toString()} type='enabled' />
+                                <Badge label={filterState?.stats?.filtered_job} type='enabled' />
                             </div>
                         </div>
                     </div>
                     <div className='flex space-x-4 my-2 grid-flow-col '>
                         <div>
                             <p className='font-medium text-2xl '>Recruiters :</p>
-                            <p className='font-medium text-2xl '>Non-Recruiters :</p>
+                            <p className='font-medium text-2xl '>NonRecruiters :</p>
                         </div>
-                        <div className='justify-center  grid-flow-row '>
+                        <div className='justify-center  grid-flow-row mt-1'>
                             <div className=' h-8 '>
-                                <Badge label={filterState?.stats?.total_jobs?.toString()} type='enabled' />
+                                <Badge label={filterState?.stats.filtered_job} type='enabled' />
                             </div>
                             <div>
-                                <Badge label={filterState?.stats?.filtered_jobs?.toString()} type='enabled' />
+                                <Badge label={filterState?.stats?.filtered_job} type='enabled' />
                             </div>
                         </div>
                     </div>
@@ -388,19 +415,17 @@ const JobsFilter = memo(() => {
                                 } border-b border-[#006366] border-opacity-30 hover:bg-gray-100 cursor-pointer`}
                                 key={key}
                                 onClick={() =>
-                                    setFilterState({
-                                        ...filterState,
-                                        showJObDescription: true,
-                                        job_description: item?.job_description,
-                                        job_title: item?.job_title,
-                                        job_type: item?.job_type,
-                                        company: item?.company_name,
-                                        date: formatDate(item?.job_posted_date),
-                                        company_type: item?.block,
-                                        tech_stack: item?.tech_keywords,
-                                        job_source: item?.job_source,
-                                        job_url: item?.job_source_url,
-                                    })
+                                    setJobDetails(
+                                        item?.job_description,
+                                        item?.job_title,
+                                        item?.job_type,
+                                        item?.company_name,
+                                        item?.job_posted_date,
+                                        item?.block,
+                                        item?.tech_keywords,
+                                        item?.job_source,
+                                        item?.job_source_url
+                                    )
                                 }
                             >
                                 <td className='p-5 w-96'>
@@ -425,7 +450,6 @@ const JobsFilter = memo(() => {
                                 </td>
                                 <td className='p-5'>{item?.tech_keywords}</td>
                                 <td className='p-5'>{item?.job_type}</td>
-
                                 <td className='p-5'>{formatDate(item?.job_posted_date)}</td>
                                 <td className='p-2'>
                                     {can('apply_job') ? (
@@ -501,7 +525,7 @@ const JobsFilter = memo(() => {
                 }}
                 pages={pagesCount}
             />
-            {filterState.showJObDescription && <JobDetail show={filterState} setShow={setFilterState} />}
+            {showJobDetails && <JobDetail show={showJobDetails} values={filterState} setShow={setShowJobDetails} />}
         </div>
     )
 })

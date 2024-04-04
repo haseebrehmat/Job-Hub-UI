@@ -24,8 +24,8 @@ const fetchJobs = async url => {
     return {
         status: response.ok ? 'success' : 'error',
         jobsData: data,
-        total_jobs,
-        filtered_jobs,
+        total_jobs: total_jobs?.toString(),
+        filtered_jobs: filtered_jobs?.toString(),
         job_status_choice,
         tech_keywords_count_list,
         job_source_count_list,
