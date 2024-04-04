@@ -12,11 +12,12 @@ const DeleteDialog = ({
     title = ' Confirm Delete',
     setShow,
     refetch,
+    perm = null,
 }) => {
     const { wait, confirm, err } = useDelete(url)
     const allowDeletion = import.meta.env.VITE_DELETE_ACTION_ALLOWED === 'true'
     return (
-        allowDeletion && (
+        (perm ?? allowDeletion) && (
             <>
                 {children}
                 {show && (
