@@ -141,3 +141,7 @@ export const jobSourceLinkSchema = Yup.object().shape({
         .oneOf(Object.keys(JOB_SOURCES), 'Invalid job source type')
         .required('Please select job source'),
 })
+
+export const pseudoSchema = Yup.object().shape({
+    name: Yup.string().required('Pseudo name is required'),
+})
