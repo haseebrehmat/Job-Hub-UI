@@ -19,6 +19,8 @@ import {
     Scrapper,
     Logger,
     ResumeBuilder,
+    Pseudos,
+    Verticals,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -143,6 +145,20 @@ export const routes = [
         component: <ResumeBuilder />,
         protect: true,
         title: 'Resume Builder',
+        permission: 'all',
+    },
+    {
+        path: '/pseudos',
+        component: <Pseudos />,
+        protect: true,
+        title: 'Pseudos',
+        permission: 'all',
+    },
+    {
+        path: '/pseudo/:id/verticals',
+        component: <Verticals />,
+        protect: true,
+        title: 'Veritcals',
         permission: 'all',
     },
 ]
