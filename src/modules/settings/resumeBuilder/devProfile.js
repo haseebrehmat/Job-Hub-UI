@@ -89,4 +89,15 @@ export const devProfile = {
             fluency: 2,
         },
     ],
+    certificates: ['LeetCode best frontend developer', 'HackerRank Backend Geek'],
+    others: [
+        {
+            name: 'Biblography',
+            value: `A short bio should include your name, what you do, and your achievements. You should also include your company or product's brand, if you have one, and your goals and motivations for doing what you do.`,
+        },
+        {
+            name: 'Client Side Skills',
+            value: 'Html \n Css \n JavaScript \n',
+        },
+    ],
 }
