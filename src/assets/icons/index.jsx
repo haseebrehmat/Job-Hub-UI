@@ -50,7 +50,7 @@ import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail } from 'react-icons/bi'
-import { RiUserSettingsLine, RiLock2Fill, RiTeamLine, RiStackFill } from 'react-icons/ri'
+import { RiUserSettingsLine, RiLock2Fill, RiTeamLine, RiStackFill, RiProfileLine } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
@@ -127,3 +127,4 @@ export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px', color: 'red' }
 export const ResumeIcon = <GrDocumentUser style={{ fontSize: 16 }} />
 export const JobSource = <VscSourceControl style={{ fontSize: '22px' }} />
 export const TechSTack = <RiStackFill style={{ fontSize: '22px' }} />
+export const PseudoIcon = <RiProfileLine style={{ fontSize: 16 }} />
