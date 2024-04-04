@@ -51,7 +51,7 @@ const Navbar = ({ setShow, title = 'Octagon' }) => {
                             <Link to='/profile'>{NavSettingIcon}</Link>
                         </Tooltip>
                     </li>
-                    <li className='mx-2 my-2 cursor-pointer text-teal-800'>
+                    <li className='mx-2 my-3 cursor-pointer text-teal-800'>
                         <Tooltip text='Logout' down>
                             <a type='button' onClick={handleLogout}>
                                 {SignOutIcon}

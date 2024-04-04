@@ -16,7 +16,6 @@ export default function App({ init }) {
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
         }
-
         html2pdf(htmlContent, options)
     }
 
@@ -45,7 +44,7 @@ export default function App({ init }) {
                         'insertdatetime',
                         'media',
                         'table',
-                        'code',
+
                         'help',
                         'wordcount',
                     ],

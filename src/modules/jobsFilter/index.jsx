@@ -10,7 +10,7 @@ import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@
 import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
-import { GenerateCSV } from '@modules/jobsFilter/components'
+import { GenerateCSV, JobDetail } from '@modules/jobsFilter/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -36,6 +36,16 @@ const JobsFilter = memo(() => {
         ordering: '-job_posted_date',
         showCoverLetter: false,
         isLoading: true,
+        showJObDescription: false,
+        job_description: '',
+        job_title: '',
+        job_type: '',
+        company: '',
+        date: '',
+        company_type: '',
+        tech_stack: '',
+        job_source: '',
+        job_url: '',
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
@@ -327,7 +337,20 @@ const JobsFilter = memo(() => {
                             </div>
                         </div>
                     </div>
-                    <div>{}</div>
+                    <div className='flex space-x-4 my-2 grid-flow-col '>
+                        <div>
+                            <p className='font-medium text-2xl '>Recruiters :</p>
+                            <p className='font-medium text-2xl '>Non-Recruiters :</p>
+                        </div>
+                        <div className='justify-center  grid-flow-row '>
+                            <div className=' h-8 '>
+                                <Badge label={filterState?.stats?.total_jobs?.toString()} type='enabled' />
+                            </div>
+                            <div>
+                                <Badge label={filterState?.stats?.filtered_jobs?.toString()} type='enabled' />
+                            </div>
+                        </div>
+                    </div>
                     <div className='flex justify-end px-4 align-baseline'>
                         <div className='my-6'>
                             <Filters apply={() => updateParams()} clear={() => resetFilters()} />
@@ -362,8 +385,23 @@ const JobsFilter = memo(() => {
                             <tr
                                 className={`${
                                     item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
-                                } border-b border-[#006366] border-opacity-30`}
+                                } border-b border-[#006366] border-opacity-30 hover:bg-gray-100 cursor-pointer`}
                                 key={key}
+                                onClick={() =>
+                                    setFilterState({
+                                        ...filterState,
+                                        showJObDescription: true,
+                                        job_description: item?.job_description,
+                                        job_title: item?.job_title,
+                                        job_type: item?.job_type,
+                                        company: item?.company_name,
+                                        date: formatDate(item?.job_posted_date),
+                                        company_type: item?.block,
+                                        tech_stack: item?.tech_keywords,
+                                        job_source: item?.job_source,
+                                        job_url: item?.job_source_url,
+                                    })
+                                }
                             >
                                 <td className='p-5 w-96'>
                                     {item?.job_title &&
@@ -463,6 +501,7 @@ const JobsFilter = memo(() => {
                 }}
                 pages={pagesCount}
             />
+            {filterState.showJObDescription && <JobDetail show={filterState} setShow={setFilterState} />}
         </div>
     )
 })

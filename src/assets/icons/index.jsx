@@ -50,9 +50,9 @@ import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail } from 'react-icons/bi'
-import { RiUserSettingsLine, RiLock2Fill, RiTeamLine } from 'react-icons/ri'
+import { RiUserSettingsLine, RiLock2Fill, RiTeamLine, RiStackFill } from 'react-icons/ri'
 import { Integrations, Filters, ResetFilters } from '@svgs'
-import { VscVmRunning } from 'react-icons/vsc'
+import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -122,4 +122,6 @@ export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
 export const RunningScrapperIcon = <VscVmRunning style={{ fontSize: '22px' }} />
 export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
-export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px', color: 'red' }} />
+export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px' }} />
+export const JobSource = <VscSourceControl style={{ fontSize: '22px' }} />
+export const TechSTack = <RiStackFill style={{ fontSize: '22px' }} />
