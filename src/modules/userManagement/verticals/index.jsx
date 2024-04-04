@@ -1,6 +1,6 @@
 import { memo, useState } from 'react'
 
-import { Button } from '@components'
+import { Button, Input, Textarea } from '@components'
 
 import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/userManagement'
 import { useParams } from 'react-router-dom'
@@ -15,12 +15,24 @@ const Verticals = () => {
         setActiveTab({ ...activeTab })
     }
 
-    console.log(id)
-
     return (
         <div className='p-2'>
             <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
-                <div className='flex flex-col mb-4'>
+                <div className='flex flex-col'>
+                    <div className='flex mb-4 gap-7'>
+                        <div className='w-full flex flex-col'>
+                            <span className='text-lg mb-2 italic'>{id}</span>
+                            <div>
+                                <span className='text-xs font-semibold'>Name*</span>
+                                <Input name='name' value='' ph='Enter vertical name' />
+                            </div>
+                        </div>
+                        <div className='w-full'>
+                            <span className='text-xs font-semibold'>Description*</span>
+                            <Textarea rows={3} name='name' value='' ph='Enter vertical description' />
+                        </div>
+                    </div>
+                    <hr className='mb-4' />
                     <div className='flex flex-col mb-4 space-y-2 md:gap-2 sm:flex-row sm:space-y-0'>
                         {Object.entries(activeTab).map(([key, value]) => (
                             <Button

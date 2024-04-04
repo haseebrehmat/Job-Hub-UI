@@ -8,6 +8,8 @@ import CompaniesDropdown from '@modules/userManagement/components/CompaniesDropd
 import PermissionList from '@modules/userManagement/components/PermissionList'
 import Password from '@modules/userManagement/components/Password'
 import UsersActions from '@modules/userManagement/components/UsersActions'
+import PseudoForm from '@modules/userManagement/components/PseudoForm'
+import PseudoActions from '@modules/userManagement/components/PseudoActions'
 
 export {
     CompanyForm,
@@ -20,4 +22,6 @@ export {
     TeamForm,
     Password,
     UsersActions,
+    PseudoForm,
+    PseudoActions,
 }
