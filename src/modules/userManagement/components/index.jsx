@@ -10,6 +10,7 @@ import Password from '@modules/userManagement/components/Password'
 import UsersActions from '@modules/userManagement/components/UsersActions'
 import PseudoForm from '@modules/userManagement/components/PseudoForm'
 import PseudoActions from '@modules/userManagement/components/PseudoActions'
+import BasicInfo from '@modules/userManagement/components/BasicInfo'
 
 export {
     CompanyForm,
@@ -24,4 +25,5 @@ export {
     UsersActions,
     PseudoForm,
     PseudoActions,
+    BasicInfo,
 }
