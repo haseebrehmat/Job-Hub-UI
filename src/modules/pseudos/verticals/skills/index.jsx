@@ -3,11 +3,10 @@ import useSWR from 'swr'
 
 import { Loading, EmptyTable, Button } from '@components'
 
+import { SkillActions } from '@modules/pseudos/components'
 import { fetchUsers } from '@modules/userManagement/api'
 
-import { can } from '@utils/helpers'
-
-import { CreateIcon, TrashIcon, EditIcon } from '@icons'
+import { CreateIcon } from '@icons'
 
 const Skills = () => {
     const [user, setUser] = useState()
@@ -27,19 +26,14 @@ const Skills = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-1'>
             <div className='flex items-center space-x-4 py-4'>
-                {can('create_user') && (
-                    <Button label='Add Skll' fit icon={CreateIcon} onClick={() => handleClick(null)} />
-                )}
+                <Button label='Add Skll' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
             <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
                 {flag ? (
                     data?.users?.map((row, idx) => (
                         <div className='bg-white rounded-md p-4 border relative' key={idx}>
                             <h2 className='font-semibold text-lg'>{row?.username}</h2>
-                            <div className='absolute top-0 right-0 mr-2 flex'>
-                                <Button classes='_icon-btn' icon={TrashIcon} />
-                                <Button classes='_icon-btn' icon={EditIcon} />
-                            </div>
+                            <SkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             <div className='flex items-center mt-2'>
                                 <div className='w-full bg-gray-200 rounded-lg overflow-hidden shadow-inner'>
                                     <div className='bg-[#4f9d9b] h-2' style={{ width: `${(idx + 1) * 20}%` }} />
