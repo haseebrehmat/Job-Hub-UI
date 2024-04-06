@@ -2,11 +2,11 @@ import { memo, useState } from 'react'
 
 import { Button } from '@components'
 
-import { BasicInfo, Skills } from '@modules/pseudos/verticals/sections'
+import { BasicInfo, Skills } from '@/modules/pseudos/vertical/sections'
 
 import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/pseudos'
 
-const Verticals = () => {
+const Vertical = () => {
     const [activeTab, setActiveTab] = useState(VERTICAL_INITIAL_TABS)
 
     const handleClick = key => {
@@ -41,4 +41,4 @@ const Verticals = () => {
     )
 }
 
-export default memo(Verticals)
+export default memo(Vertical)

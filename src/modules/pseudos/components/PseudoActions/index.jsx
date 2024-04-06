@@ -1,7 +1,8 @@
 import { memo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { Button, DeleteDialog, Tooltip } from '@components'
+
+import { CreateVertical } from '@modules/pseudos/components'
 
 import { can } from '@utils/helpers'
 import { PSEUDO_DELETION } from '@constants/allowDeletion'
@@ -9,20 +10,17 @@ import { PSEUDO_DELETION } from '@constants/allowDeletion'
 import { TrashIcon, EditIcon, CreateIcon } from '@icons'
 
 const PseudoActions = memo(({ id, edit, mutate }) => {
-    const redirect = useNavigate()
-
     const [show, setShow] = useState(false)
-
-    const goToVerticals = () => redirect(`/pseudo/${id}/verticals`)
+    const [createVertical, setCreateVertical] = useState(false)
 
     return (
         <div className='flex items-center'>
             <Tooltip text='Add vertical'>
-                <Button classes='bg-transparent border-0 !px-0' icon={CreateIcon} onClick={goToVerticals} />
+                <Button classes='_icon-btn' icon={CreateIcon} onClick={() => setCreateVertical(true)} />
             </Tooltip>
             {can('edit_user') && (
                 <Tooltip text='Edit pseudo'>
-                    <Button classes='bg-transparent border-0 !px-0' icon={EditIcon} onClick={() => edit()} />
+                    <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                 </Tooltip>
             )}
             {can('delete_user') && (
@@ -34,14 +32,11 @@ const PseudoActions = memo(({ id, edit, mutate }) => {
                     perm={PSEUDO_DELETION}
                 >
                     <Tooltip text='Delete pseudo'>
-                        <Button
-                            classes='bg-transparent border-0 !px-0'
-                            icon={TrashIcon}
-                            onClick={() => setShow(true)}
-                        />
+                        <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
                     </Tooltip>
                 </DeleteDialog>
             )}
+            {createVertical && <CreateVertical show={createVertical} setShow={setCreateVertical} pseudoId={id} />}
         </div>
     )
 })

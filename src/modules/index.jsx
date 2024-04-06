@@ -18,7 +18,7 @@ import Scrapper from '@modules/scrapper'
 import Logger from '@modules/logger'
 import ResumeBuilder from '@modules/settings/resumeBuilder'
 import Pseudos from '@modules/pseudos'
-import Verticals from '@modules/pseudos/verticals'
+import Vertical from '@/modules/pseudos/vertical'
 
 export {
     TeamAppliedJobs,
@@ -42,5 +42,5 @@ export {
     Logger,
     ResumeBuilder,
     Pseudos,
-    Verticals,
+    Vertical,
 }

@@ -1,5 +1,6 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
+import { FaEdit } from 'react-icons/fa'
 
 import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
@@ -10,6 +11,7 @@ import { can } from '@utils/helpers'
 import { PSEUDO_HEADS } from '@constants/pseudos'
 
 import { CreateIcon } from '@icons'
+import { Link } from 'react-router-dom'
 
 const Pseudos = () => {
     const [query, setQuery] = useState('')
@@ -23,6 +25,8 @@ const Pseudos = () => {
         setPseudo(values)
         setShow(!show)
     }
+
+    const editVertical = id => console.log(id)
 
     if (isLoading) return <Loading />
 
@@ -50,7 +54,21 @@ const Pseudos = () => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.name}</td>
-                                <td className='px-3 py-6'>List of verticals</td>
+                                <td className='px-3 py-6'>
+                                    {row?.verticals.length > 0
+                                        ? row?.verticals.map(v => (
+                                              <div
+                                                  className='inline-flex items-center justify-center rounded-full bg-[#4f9d9b] text-white px-2 py-0.5 m-1 cursor-pointer hover:bg-[#346e6c] transition duration-200'
+                                                  key={v.id}
+                                              >
+                                                  <Link to={`/vertical/${v.id}`} className='flex items-center'>
+                                                      <span className='mr-2'>{v.name}</span>
+                                                      <FaEdit onClick={() => editVertical(v.id)} />
+                                                  </Link>
+                                              </div>
+                                          ))
+                                        : '-'}
+                                </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_user', 'delete_user']) && (
                                         <PseudoActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
