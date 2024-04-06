@@ -10,7 +10,7 @@ import { pseudoSchema } from '@utils/schemas'
 
 const PseudoForm = ({ show, setShow, mutate, pseudo }) => {
     const { values, errors, handleSubmit, resetForm, trigger, handleChange } = useMutate(
-        `/api/job_scraper/job_source_link${pseudo?.id ? `/${pseudo?.id}/` : '/'}`,
+        `/api/profile/pseudo${pseudo?.id ? `/${pseudo?.id}/` : '/'}`,
         savePseudo,
         { id: pseudo?.id, name: pseudo?.name || '' },
         pseudoSchema,

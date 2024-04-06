@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
 import { PseudoForm, PseudoActions } from '@modules/pseudos/components'
-import { fetchUsers } from '@modules/userManagement/api'
+import { fetchPseudos } from '@modules/pseudos/api'
 
 import { can } from '@utils/helpers'
 import { PSEUDO_HEADS } from '@constants/pseudos'
@@ -17,7 +17,7 @@ const Pseudos = () => {
     const [page, setPage] = useState(1)
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}&search=${query}`, fetchUsers)
+    const { data, error, isLoading, mutate } = useSWR('/api/profile/pseudo/', fetchPseudos)
 
     const handleClick = (values = null) => {
         setPseudo(values)
@@ -45,11 +45,11 @@ const Pseudos = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.users?.length > 0 && !error ? (
-                        data?.users?.map((row, idx) => (
+                    {data?.pseudos?.length > 0 && !error ? (
+                        data?.pseudos?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{row?.email}</td>
+                                <td className='px-3 py-6'>{row?.name}</td>
                                 <td className='px-3 py-6'>List of verticals</td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_user', 'delete_user']) && (
