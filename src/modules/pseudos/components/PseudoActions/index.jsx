@@ -36,7 +36,9 @@ const PseudoActions = memo(({ id, edit, mutate }) => {
                     </Tooltip>
                 </DeleteDialog>
             )}
-            {createVertical && <CreateVertical show={createVertical} setShow={setCreateVertical} pseudoId={id} />}
+            {createVertical && (
+                <CreateVertical show={createVertical} setShow={setCreateVertical} pseudoId={id} mutate={mutate} />
+            )}
         </div>
     )
 })

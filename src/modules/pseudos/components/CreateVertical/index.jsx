@@ -17,14 +17,14 @@ const CreateVertical = ({ show, setShow, mutate, pseudoId }) => {
         async formValues => trigger({ ...formValues }),
         null,
         () => {
+            setShow(!show)
             mutate()
-            setShow(false)
         }
     )
     const flag = values.name.length > 0 && values.description.length > 0 && values.email.length > 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='400px'>
+        <Drawer show={show} setShow={setShow} w='350px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Create Vertical</p>
@@ -43,6 +43,7 @@ const CreateVertical = ({ show, setShow, mutate, pseudoId }) => {
                     {errors.email && <small className='ml-1 text-xs text-red-600'>{errors.email}</small>}
                     <span className='text-xs font-semibold'>Description*</span>
                     <Textarea
+                        rows={3}
                         name='description'
                         value={values.description}
                         onChange={handleChange}

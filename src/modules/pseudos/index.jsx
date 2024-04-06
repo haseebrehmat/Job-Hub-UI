@@ -1,6 +1,6 @@
 import { memo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import useSWR from 'swr'
-import { FaEdit } from 'react-icons/fa'
 
 import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
@@ -10,8 +10,7 @@ import { fetchPseudos } from '@modules/pseudos/api'
 import { can } from '@utils/helpers'
 import { PSEUDO_HEADS } from '@constants/pseudos'
 
-import { CreateIcon } from '@icons'
-import { Link } from 'react-router-dom'
+import { CreateIcon, EditIcon } from '@icons'
 
 const Pseudos = () => {
     const [query, setQuery] = useState('')
@@ -25,8 +24,6 @@ const Pseudos = () => {
         setPseudo(values)
         setShow(!show)
     }
-
-    const editVertical = id => console.log(id)
 
     if (isLoading) return <Loading />
 
@@ -58,12 +55,12 @@ const Pseudos = () => {
                                     {row?.verticals.length > 0
                                         ? row?.verticals.map(v => (
                                               <div
-                                                  className='inline-flex items-center justify-center rounded-full bg-[#4f9d9b] text-white px-2 py-0.5 m-1 cursor-pointer hover:bg-[#346e6c] transition duration-200'
+                                                  className='inline-flex items-center justify-center rounded-full bg-[#4f9d9b] text-white px-3 py-1 m-1 cursor-pointer hover:bg-[#346e6c] transition duration-200'
                                                   key={v.id}
                                               >
                                                   <Link to={`/vertical/${v.id}`} className='flex items-center'>
                                                       <span className='mr-2'>{v.name}</span>
-                                                      <FaEdit onClick={() => editVertical(v.id)} />
+                                                      {EditIcon}
                                                   </Link>
                                               </div>
                                           ))
