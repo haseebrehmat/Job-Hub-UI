@@ -1,4 +1,7 @@
 #!/bin/bash
+# Remove old Node.js version
+sudo apt-get remove nodejs
+
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
