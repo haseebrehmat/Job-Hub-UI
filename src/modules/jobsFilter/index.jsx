@@ -125,10 +125,12 @@ const JobsFilter = memo(() => {
             setPagesCount(num_pages)
         } else {
             toast.error(detail)
+            setFilterState({ ...filterState, isLoading: false })
         }
     }
 
     const updateParams = () => {
+        setFilterState({ ...filterState, isLoading: true })
         const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector } =
             filterState
         const { from_date, to_date } = dates

@@ -22,13 +22,14 @@ const JobDetail = ({ show, setShow, values }) => (
                     <path d='M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z' />
                 </svg>
                 <div className='flex flex-col'>
-                    <p className='text-lg  font-semibold  text-gray-900 mx-2 flex items-baseline'>
-                        {values.company}{' '}
-                        <p className='text-sm  text-gray-500 mx-2'>
+                    <div className='text-lg  font-semibold  text-gray-900 flex items-baseline'>
+                        {values.company}
+                        <span className='text-sm  text-gray-500 mx-2'>
                             {values.company_type ? '( recruiter )' : '( non-recruiter )'}
-                        </p>{' '}
-                    </p>
-                    <p className='text-xs -mt-1 text-gray-500 mx-2'>{values.date}</p>
+                        </span>
+                    </div>
+
+                    <p className='text-xs -mt-1 text-gray-500'>{values.date}</p>
                 </div>
             </div>
             <div className='flex gap-2 ml-1 mt-2'>
