@@ -20,7 +20,7 @@ import {
     Logger,
     ResumeBuilder,
     Pseudos,
-    Verticals,
+    Vertical,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -155,8 +155,8 @@ export const routes = [
         permission: 'all',
     },
     {
-        path: '/pseudo/:id/verticals',
-        component: <Verticals />,
+        path: '/vertical/:id',
+        component: <Vertical />,
         protect: true,
         title: 'Veritcals',
         permission: 'all',

@@ -145,3 +145,9 @@ export const jobSourceLinkSchema = Yup.object().shape({
 export const pseudoSchema = Yup.object().shape({
     name: Yup.string().required('Pseudo name is required'),
 })
+
+export const createVerticalSchema = Yup.object().shape({
+    name: Yup.string().required('Vertical name is required'),
+    description: Yup.string().required('Ddescription is required'),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
+})
