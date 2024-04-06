@@ -30,7 +30,7 @@ const Basic = () => {
                 <p className='text-lg mb-2 italic'>{id}</p>
                 <div className='grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3'>
                     {BASIC_INFO_INPUTS.map(input => (
-                        <div>
+                        <div key={input.name}>
                             <span className='text-xs font-semibold'>{input.label}*</span>
                             <Input
                                 name={input.name}
