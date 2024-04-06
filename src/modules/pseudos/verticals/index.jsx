@@ -2,9 +2,9 @@ import { memo, useState } from 'react'
 
 import { Button } from '@components'
 
-import { BasicInfo } from '@modules/userManagement/components'
+import { BasicInfo, Skills } from '@modules/pseudos/verticals/sections'
 
-import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/userManagement'
+import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/pseudos'
 
 const Verticals = () => {
     const [activeTab, setActiveTab] = useState(VERTICAL_INITIAL_TABS)
@@ -30,7 +30,7 @@ const Verticals = () => {
                     ))}
                 </div>
                 {activeTab.basic && <BasicInfo />}
-                {activeTab.skill && <div className='mt-5'>here goes skills</div>}
+                {activeTab.skill && <Skills />}
                 {activeTab.experience && <div className='mt-5'>here goes experience</div>}
                 {activeTab.education && <div className='mt-5'>here goes educations</div>}
                 {activeTab.hobby && <div className='mt-5'>here goes hobbys</div>}

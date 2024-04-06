@@ -4,7 +4,7 @@ import { useMutate } from '@/hooks'
 
 import { Button, Drawer, Input } from '@components'
 
-import { savePseudo } from '@modules/userManagement/api'
+import { savePseudo } from '@modules/pseudos/api'
 
 import { pseudoSchema } from '@utils/schemas'
 

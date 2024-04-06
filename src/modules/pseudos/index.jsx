@@ -3,11 +3,11 @@ import useSWR from 'swr'
 
 import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
-import { PseudoForm, PseudoActions } from '@modules/userManagement/components'
+import { PseudoForm, PseudoActions } from '@modules/pseudos/components'
 import { fetchUsers } from '@modules/userManagement/api'
 
 import { can } from '@utils/helpers'
-import { PSEUDO_HEADS } from '@constants/userManagement'
+import { PSEUDO_HEADS } from '@constants/pseudos'
 
 import { CreateIcon } from '@icons'
 

@@ -8,9 +8,9 @@ import { Button, Input, Textarea } from '@components'
 import { saveCompany } from '@modules/userManagement/api'
 
 import { companySchema } from '@utils/schemas'
-import { BASIC_INFO_INPUTS } from '@constants/userManagement'
+import { BASIC_INFO_INPUTS } from '@constants/pseudos'
 
-const BasicInfo = () => {
+const Basic = () => {
     const { id } = useParams()
     const { values, handleSubmit, handleChange, resetForm, trigger } = useMutate(
         `/api/auth/company${id ? `/${id}/` : '/'}`,
@@ -82,4 +82,4 @@ const BasicInfo = () => {
     )
 }
 
-export default memo(BasicInfo)
+export default memo(Basic)

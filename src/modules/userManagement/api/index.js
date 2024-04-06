@@ -63,11 +63,3 @@ export const saveTeam = (url, { arg: team }) => {
 export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
 
 export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
-
-export const savePseudo = (url, { arg: team }) => {
-    team.members = team.members.map(member => member.value)
-    if (team?.id) {
-        return rawHttp.put(url, team).then(({ data }) => toast.success(data.detail || 'Team updated successfully'))
-    }
-    return rawHttp.post(url, team).then(({ data }) => toast.success(data.detail))
-}

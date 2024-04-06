@@ -17,8 +17,8 @@ import CoverLetter from './coverLetter'
 import Scrapper from '@modules/scrapper'
 import Logger from '@modules/logger'
 import ResumeBuilder from '@modules/settings/resumeBuilder'
-import Pseudos from '@/modules/userManagement/pseudos'
-import Verticals from '@/modules/userManagement/verticals'
+import Pseudos from '@modules/pseudos'
+import Verticals from '@modules/pseudos/verticals'
 
 export {
     TeamAppliedJobs,
