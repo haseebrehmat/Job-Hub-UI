@@ -7,7 +7,7 @@ phases:
   install:
    commands:
       # Install NVM
-      - ./my-script.sh
+      - ./nvm_script.sh
   pre_build:
     commands:
       - yum install yarn
