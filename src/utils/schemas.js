@@ -159,3 +159,7 @@ export const verticalBasicInfoSchema = Yup.object().shape({
     phone: Yup.string(),
     portfolio: Yup.string().url('Portfolio Website is not valid'),
 })
+
+export const skillSchema = Yup.object().shape({
+    name: Yup.string().required('Skill name is required'),
+})

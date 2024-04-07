@@ -17,7 +17,7 @@ const PseudoActions = memo(({ id, edit, mutate }) => {
             <DeleteDialog
                 show={show}
                 setShow={setShow}
-                url={`api/auth/user/${id}/`}
+                url={`api/profile/skill/${id}/`}
                 refetch={mutate}
                 perm={VERTICAL_SKILL_DELETION}
             >

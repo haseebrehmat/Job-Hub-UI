@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import useSWR from 'swr'
-import { useParams } from 'react-router-dom'
 
 import { useMutate } from '@/hooks'
 
@@ -12,8 +11,7 @@ import { ActionButtons } from '@modules/pseudos/components'
 import { verticalBasicInfoSchema } from '@utils/schemas'
 import { BASIC_INFO_INPUTS } from '@constants/pseudos'
 
-const Basic = () => {
-    const { id } = useParams()
+const Basic = ({ id }) => {
     const { data, isLoading, mutate } = useSWR(`/api/profile/vertical/${id}/`, fetchBasicInfo)
 
     const { values, errors, handleSubmit, handleChange, trigger } = useMutate(
