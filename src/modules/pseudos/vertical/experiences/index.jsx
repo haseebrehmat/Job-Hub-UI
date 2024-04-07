@@ -3,19 +3,19 @@ import useSWR from 'swr'
 
 import { Loading, Button } from '@components'
 
-import { ActionButtons, SkillActions, SkillForm } from '@modules/pseudos/components'
-import { fetchSkills } from '@modules/pseudos/api'
+import { ActionButtons, SkillActions, ExperienceForm } from '@modules/pseudos/components'
+import { fetchExperiences } from '@modules/pseudos/api'
 
 import { CreateIcon } from '@icons'
 
 const Experiences = ({ id }) => {
-    const [skill, setSkill] = useState()
+    const [experience, setExperience] = useState()
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR(`/api/profile/experience/?id=${id}`, fetchSkills)
+    const { data, error, isLoading, mutate } = useSWR(`/api/profile/experience/?id=${id}`, fetchExperiences)
 
     const handleClick = values => {
-        setSkill(values)
+        setExperience(values)
         setShow(!show)
     }
 
@@ -47,7 +47,7 @@ const Experiences = ({ id }) => {
                 )}
             </div>
             <ActionButtons mutate={mutate} classes='mt-4 !w-1/3' />
-            {show && <SkillForm show={show} setShow={setShow} mutate={mutate} skill={skill} id={id} />}
+            {show && <ExperienceForm show={show} setShow={setShow} mutate={mutate} experience={experience} id={id} />}
         </div>
     )
 }

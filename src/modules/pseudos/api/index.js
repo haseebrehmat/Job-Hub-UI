@@ -34,3 +34,14 @@ export const saveSkill = async (url, { arg: skill }) => {
     const { data: data_1 } = await rawHttp.post(url, skill)
     return toast.success(data_1.detail || 'Skill created successfully')
 }
+
+export const fetchExperiences = url => http.get(url).then(({ data }) => data.results)
+
+export const saveExperience = async (url, { arg: experience }) => {
+    if (experience?.id) {
+        const { data } = await rawHttp.put(url, experience)
+        return toast.success(data.detail || 'Experience updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, experience)
+    return toast.success(data_1.detail || 'Experience created successfully')
+}
