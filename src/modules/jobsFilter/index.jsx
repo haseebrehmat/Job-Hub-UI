@@ -29,7 +29,7 @@ const JobsFilter = memo(() => {
         jobSourceSelector: [],
         jobTypeSelector: 'all',
         jobVisibilitySelector: 'all',
-        stats: { total_job: '0', filtered_job: '0' },
+        stats: { total_job: '0', filtered_job: '0', recruiter_job: '0', non_recruiter_job: '0' },
         jobStatusChoice: {},
         dates: { from_date: '', to_date: '' },
         jobTitle: '',
@@ -101,6 +101,8 @@ const JobsFilter = memo(() => {
             status,
             total_jobs,
             filtered_jobs,
+            recruiter_jobs,
+            non_recruiter_jobs,
             job_status_choice,
             tech_keywords_count_list,
             job_source_count_list,
@@ -112,7 +114,12 @@ const JobsFilter = memo(() => {
         if (status === 'success') {
             setFilterState({
                 ...filterState,
-                stats: { total_job: total_jobs, filtered_job: filtered_jobs },
+                stats: {
+                    total_job: total_jobs,
+                    filtered_job: filtered_jobs,
+                    non_recruiter_job: non_recruiter_jobs,
+                    recruiter_job: recruiter_jobs,
+                },
                 jobStatusChoice: job_status_choice,
                 techStackData: tech_keywords_count_list,
                 jobSourceData: job_source_count_list,
@@ -162,7 +169,6 @@ const JobsFilter = memo(() => {
 
     const applyJob = async id => {
         const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, '1', data[id].id)
-
         if (status === 'success') {
             const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: '1' } : item))
             setData(temp_data)
@@ -177,7 +183,6 @@ const JobsFilter = memo(() => {
 
     const changeRecruiter = async (company, func) => {
         const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
-
         if (status === 'success') {
             fetchJobsData(jobDetailsUrl)
             toast.success(detail)
@@ -359,7 +364,7 @@ const JobsFilter = memo(() => {
                         </div>
                         <div className='justify-center  grid-flow-row mt-1'>
                             <div className=' h-8 '>
-                                <Badge label={filterState?.stats.filtered_job} type='enabled' />
+                                <Badge label={filterState?.stats?.total_job} type='enabled' />
                             </div>
                             <div>
                                 <Badge label={filterState?.stats?.filtered_job} type='enabled' />
@@ -373,10 +378,10 @@ const JobsFilter = memo(() => {
                         </div>
                         <div className='justify-center  grid-flow-row mt-1'>
                             <div className=' h-8 '>
-                                <Badge label={filterState?.stats.filtered_job} type='enabled' />
+                                <Badge label={filterState?.stats?.recruiter_job} type='enabled' />
                             </div>
                             <div>
-                                <Badge label={filterState?.stats?.filtered_job} type='enabled' />
+                                <Badge label={filterState?.stats?.non_recruiter_job} type='enabled' />
                             </div>
                         </div>
                     </div>
@@ -414,26 +419,31 @@ const JobsFilter = memo(() => {
                             <tr
                                 className={`${
                                     item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
-                                } border-b border-[#006366] border-opacity-30 hover:bg-gray-100 cursor-pointer`}
+                                } border-b border-[#006366] border-opacity-30 hover:bg-gray-100`}
                                 key={key}
-                                onClick={() =>
-                                    setJobDetails(
-                                        item?.job_description,
-                                        item?.job_title,
-                                        item?.job_type,
-                                        item?.company_name,
-                                        item?.job_posted_date,
-                                        item?.block,
-                                        item?.tech_keywords,
-                                        item?.job_source,
-                                        item?.job_source_url
-                                    )
-                                }
                             >
                                 <td className='p-5 w-96'>
-                                    {item?.job_title &&
-                                        item?.job_title.length > 0 &&
-                                        formatStringInPascal(item.job_title)}
+                                    <a
+                                        className='hover:bg-gray-100 cursor-pointer'
+                                        onClick={() =>
+                                            setJobDetails(
+                                                item?.job_description,
+                                                item?.job_title,
+                                                item?.job_type,
+                                                item?.company_name,
+                                                item?.job_posted_date,
+                                                item?.block,
+                                                item?.tech_keywords,
+                                                item?.job_source,
+                                                item?.job_source_url
+                                            )
+                                        }
+                                        data-title='click to open Job description'
+                                    >
+                                        {item?.job_title &&
+                                            item?.job_title.length > 0 &&
+                                            formatStringInPascal(item.job_title)}
+                                    </a>
                                 </td>
                                 <td className='p-5'>
                                     {item?.company_name &&

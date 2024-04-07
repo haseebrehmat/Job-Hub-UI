@@ -79,6 +79,30 @@ body{
     background: transparent;
 }
 
+[data-title]:hover:after {
+    opacity: 5;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    background-color: #3d3d3d;
+    color: #f8f2f2;
+    font-size: 80%;
+    position: absolute;
+    padding: 5px 5px 8px 8px;
+    left: 15%;
+    top: 150%;
+    white-space: nowrap;
+    box-shadow: 2px 3px 3px #4d4c4c;
+    opacity: 8;
+    z-index: 99999;
+    visibility: hidden;
+}
+[data-title] {
+    position: relative;
+}
+
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
