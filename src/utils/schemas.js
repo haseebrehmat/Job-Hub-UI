@@ -162,4 +162,7 @@ export const verticalBasicInfoSchema = Yup.object().shape({
 
 export const skillSchema = Yup.object().shape({
     name: Yup.string().required('Skill name is required'),
+    level: Yup.number('Skill level must be an number')
+        .required('Skill level is required')
+        .max(5, 'Skill level is too high'),
 })
