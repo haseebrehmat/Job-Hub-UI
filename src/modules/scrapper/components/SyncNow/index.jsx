@@ -39,7 +39,14 @@ const SyncNow = () => {
 
     return (
         <div className='relative inline-block text-left' ref={divRef}>
-            <div>
+            <div className='flex'>
+                <Button
+                    label={isMutating ? 'Running........' : 'Run Scrapper Now'}
+                    fit
+                    icon={RunScrapperIcon}
+                    onClick={() => setIsOpen(!isOpen)}
+                    disabled={isMutating}
+                />
                 <Button
                     label={isMutating ? 'Running........' : 'Run Scrapper Now'}
                     fit

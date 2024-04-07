@@ -2,12 +2,12 @@ import { memo, useState } from 'react'
 
 import { Button } from '@components'
 
-import { CronjobSetting, JobSourceLinks, ScraperStatus } from '@modules/scrapper/components'
+import { CronjobSetting, JobSourceLinks, ScraperStatus, Logs } from '@modules/scrapper/components'
 
-import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon } from '@icons'
+import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon } from '@icons'
 
 const Profile = () => {
-    const [activeTab, setActiveTab] = useState({ setting: true, links: false, status: false })
+    const [activeTab, setActiveTab] = useState({ setting: true, links: false, status: false, logs: false })
 
     const handleClick = key => {
         Object.keys(activeTab).forEach(k => (activeTab[k] = false))
@@ -44,6 +44,14 @@ const Profile = () => {
                             classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.status && 'border-gray-200'}`}
                             onClick={() => handleClick('status')}
                         />
+                        <Button
+                            label='Logs'
+                            fit
+                            fill={activeTab.logs}
+                            icon={LogsIcon}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.status && 'border-gray-200'}`}
+                            onClick={() => handleClick('logs')}
+                        />
                     </div>
                     {activeTab.setting && (
                         <div className='mt-5'>
@@ -58,6 +66,11 @@ const Profile = () => {
                     {activeTab.status && (
                         <div className='mt-5'>
                             <ScraperStatus />
+                        </div>
+                    )}
+                    {activeTab.logs && (
+                        <div className='mt-5'>
+                            <Logs />
                         </div>
                     )}
                 </div>

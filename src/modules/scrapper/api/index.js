@@ -6,6 +6,8 @@ export const syncNow = (url, { arg: { link } }) => http.get(link).then(({ data }
 
 export const fetchCronjobSettings = url => http.get(url).then(({ data }) => ({ settings: data, status: 'success' }))
 
+export const fetchJobLogs = url => http.get(url).then(({ data }) => ({ logs: data, status: 'success' }))
+
 export const saveCronjobSetting = (url, { arg: setting }) => {
     if (setting?.id) {
         return rawHttp
