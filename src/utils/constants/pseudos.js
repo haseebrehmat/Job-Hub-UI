@@ -28,10 +28,10 @@ export const BASIC_INFO_INPUTS = [
         ph: 'Enter vertical name',
     },
     {
-        name: 'title',
-        label: 'Title',
+        name: 'designation',
+        label: 'Designation',
         type: 'text',
-        ph: 'Enter vertical title',
+        ph: 'Enter vertical designation',
     },
     {
         name: 'email',

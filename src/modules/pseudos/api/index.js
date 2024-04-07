@@ -25,3 +25,10 @@ export const saveVertical = async (url, { arg: vertical }) => {
     const { data } = await rawHttp.post(url, vertical)
     return toast.success(data.detail || 'Vertical created successfully')
 }
+
+export const fetchBasicInfo = url => http.get(url).then(({ data }) => data)
+
+export const updateBasicInfo = async (url, { arg: pseudo }) => {
+    const { data } = await rawHttp.put(url, pseudo)
+    return toast.success(data.detail || 'Pseudo updated successfully')
+}
