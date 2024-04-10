@@ -1,17 +1,18 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
 import { Input, Textarea, Loading } from '@components'
 
+import { ActionButtons, Hobbies } from '@modules/pseudos/components'
 import { fetchBasicInfo, updateBasicInfo } from '@modules/pseudos/api'
-import { ActionButtons } from '@modules/pseudos/components'
 
 import { verticalBasicInfoSchema } from '@utils/schemas'
 import { BASIC_INFO_INPUTS } from '@constants/pseudos'
 
 const Basic = ({ id }) => {
+    const [hobbies, setHobbies] = useState([])
     const { data, isLoading, mutate } = useSWR(`/api/profile/vertical/${id}/`, fetchBasicInfo)
 
     const { values, errors, handleSubmit, handleChange, trigger } = useMutate(
@@ -28,7 +29,7 @@ const Basic = ({ id }) => {
             summary: data?.summary || '',
         },
         verticalBasicInfoSchema,
-        async formValues => trigger({ ...formValues, vertical_id: id }),
+        async formValues => trigger({ ...formValues, vertical_id: id, hobbies }),
         null,
         () => mutate()
     )
@@ -77,7 +78,7 @@ const Basic = ({ id }) => {
                         {errors.description && <small className='__error'>{errors.description}</small>}
                     </div>
                 </div>
-                <div className='pb-3'>
+                <div>
                     <span className='text-xs font-semibold'>Summary*</span>
                     <Textarea
                         rows={5}
@@ -88,6 +89,7 @@ const Basic = ({ id }) => {
                     />
                     {errors.summary && <small className='__error'>{errors.summary}</small>}
                 </div>
+                <Hobbies hobbies={data?.hobbies} setHobbies={setHobbies} />
                 <ActionButtons form mutate={mutate} />
             </form>
         </div>

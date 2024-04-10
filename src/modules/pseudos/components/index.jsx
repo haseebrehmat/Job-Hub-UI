@@ -8,6 +8,7 @@ import ExperienceForm from '@modules/pseudos/components/ExperienceForm'
 import ExperienceActions from '@modules/pseudos/components/ExperienceActions'
 import EducationForm from '@modules/pseudos/components/EducationForm'
 import EducationActions from '@modules/pseudos/components/EducationActions'
+import Hobbies from '@modules/pseudos/components/Hobbies'
 
 export {
     PseudoActions,
@@ -20,4 +21,5 @@ export {
     ExperienceActions,
     EducationForm,
     EducationActions,
+    Hobbies,
 }

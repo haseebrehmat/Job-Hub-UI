@@ -5,7 +5,6 @@ export const VERTICAL_SECTIONS = {
     skill: 'Skill Set',
     experience: 'Experience',
     education: 'Eduction History',
-    hobby: 'Hobbies',
     language: 'Languages',
 }
 
@@ -14,7 +13,6 @@ export const VERTICAL_INITIAL_TABS = {
     skill: false,
     experience: false,
     education: false,
-    hobby: false,
     language: false,
 }
 
