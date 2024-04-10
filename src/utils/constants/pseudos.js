@@ -48,3 +48,11 @@ export const BASIC_INFO_INPUTS = [
         ph: 'Enter vertical portfolio website',
     },
 ]
+
+export const PROFICIENCY_LEVELS = {
+    1: 'Beginner',
+    2: 'Elementary',
+    3: 'Intermediate',
+    4: 'Advanced',
+    5: 'Expert',
+}

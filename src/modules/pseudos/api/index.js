@@ -56,3 +56,14 @@ export const saveEducation = async (url, { arg: education }) => {
     const { data: data_1 } = await rawHttp.post(url, education)
     return toast.success(data_1.detail || 'Education created successfully')
 }
+
+export const fetchLanguages = url => http.get(url).then(({ data }) => data.results)
+
+export const saveLanguage = async (url, { arg: language }) => {
+    if (language?.id) {
+        const { data } = await rawHttp.put(url, language)
+        return toast.success(data.detail || 'Language updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, language)
+    return toast.success(data_1.detail || 'Language created successfully')
+}

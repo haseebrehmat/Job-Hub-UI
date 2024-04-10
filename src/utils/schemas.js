@@ -182,3 +182,10 @@ export const educationSchema = Yup.object().shape({
     start_date: Yup.date().max(today, 'Please choose future date'),
     end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
 })
+
+export const languageSchema = Yup.object().shape({
+    name: Yup.string().required('Language name is required'),
+    level: Yup.number('Language level must be an number')
+        .required('Language level is required')
+        .max(5, 'Language level is too high'),
+})
