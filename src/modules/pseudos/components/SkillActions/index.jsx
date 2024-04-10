@@ -6,7 +6,7 @@ import { VERTICAL_SKILL_DELETION } from '@constants/allowDeletion'
 
 import { TrashIcon, EditIcon } from '@icons'
 
-const PseudoActions = memo(({ id, edit, mutate }) => {
+const SkillActions = memo(({ id, edit, mutate }) => {
     const [show, setShow] = useState(false)
 
     return (
@@ -29,4 +29,4 @@ const PseudoActions = memo(({ id, edit, mutate }) => {
     )
 })
 
-export default memo(PseudoActions)
+export default memo(SkillActions)
