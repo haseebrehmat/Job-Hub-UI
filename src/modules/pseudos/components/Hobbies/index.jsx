@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 
 import { Button, Input } from '@components'
-import { CreateIcon } from '@/assets/icons'
+
+import { VERTICAL_HOBBY_DELETION } from '@constants/allowDeletion'
+
+import { CreateIcon } from '@icons'
 
 const Hobbies = ({ hobbies, setHobbies }) => {
     const [tags, setTags] = useState(hobbies)
@@ -32,13 +35,15 @@ const Hobbies = ({ hobbies, setHobbies }) => {
                         className='inline-block px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center'
                     >
                         <span>{tag}</span>
-                        <button
-                            type='button'
-                            onClick={() => handleTagRemove(tag)}
-                            className='ml-2 text-gray-700 font-semibold focus:outline-none hover:text-red-700'
-                        >
-                            x
-                        </button>
+                        {VERTICAL_HOBBY_DELETION && (
+                            <button
+                                type='button'
+                                onClick={() => handleTagRemove(tag)}
+                                className='ml-2 text-gray-700 font-semibold focus:outline-none hover:text-red-700'
+                            >
+                                x
+                            </button>
+                        )}
                     </span>
                 ))}
             </div>
