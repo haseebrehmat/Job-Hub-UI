@@ -5,5 +5,15 @@ import CreateVertical from '@modules/pseudos/components/CreateVertical'
 import ActionButtons from '@modules/pseudos/components/ActionButtons'
 import SkillForm from '@modules/pseudos/components/SkillForm'
 import ExperienceForm from '@modules/pseudos/components/ExperienceForm'
+import ExperienceActions from '@modules/pseudos/components/ExperienceActions'
 
-export { PseudoActions, PseudoForm, SkillActions, CreateVertical, ActionButtons, SkillForm, ExperienceForm }
+export {
+    PseudoActions,
+    PseudoForm,
+    SkillActions,
+    CreateVertical,
+    ActionButtons,
+    SkillForm,
+    ExperienceForm,
+    ExperienceActions,
+}
