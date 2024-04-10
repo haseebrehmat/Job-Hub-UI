@@ -166,3 +166,11 @@ export const skillSchema = Yup.object().shape({
         .required('Skill level is required')
         .max(5, 'Skill level is too high'),
 })
+
+export const experienceSchema = Yup.object().shape({
+    company_name: Yup.string().required('Company name is required'),
+    designation: Yup.string().required('Designation is required'),
+    description: Yup.string().max(250, 'Description is too long'),
+    start_date: Yup.date().max(today, 'Please choose future date'),
+    end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
+})
