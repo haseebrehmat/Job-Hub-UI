@@ -6,6 +6,8 @@ import { Loading, Button } from '@components'
 import { ActionButtons, ExperienceActions, ExperienceForm } from '@modules/pseudos/components'
 import { fetchExperiences } from '@modules/pseudos/api'
 
+import { formatDate2 } from '@utils/helpers'
+
 import { CreateIcon } from '@icons'
 
 const Experiences = ({ id }) => {
@@ -36,7 +38,8 @@ const Experiences = ({ id }) => {
                             <div className='flex flex-col mt-2'>
                                 <div className='ml-2 font-semibold'>{row?.company_name ?? 'Not Specified'}</div>
                                 <div className='ml-2 text-sm italic'>
-                                    From {row?.start_date ?? 'N/A'} To {row?.end_date ?? 'N/A'}
+                                    From {formatDate2(row?.start_date) ?? 'N/A'} to{'  '}
+                                    {formatDate2(row?.end_date) ?? 'N/A'}
                                 </div>
                                 <div className='ml-2 mt-2 text-gray-600'>{row?.description ?? 'Not description'}</div>
                             </div>
