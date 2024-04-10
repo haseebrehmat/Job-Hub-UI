@@ -174,3 +174,11 @@ export const experienceSchema = Yup.object().shape({
     start_date: Yup.date().max(today, 'Please choose future date'),
     end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
 })
+
+export const educationSchema = Yup.object().shape({
+    institute: Yup.string().required('Institute name is required'),
+    degree: Yup.string().required('Degree is required'),
+    grade: Yup.string().required('Grade like A+ or marks like 876/1100 required is required'),
+    start_date: Yup.date().max(today, 'Please choose future date'),
+    end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
+})
