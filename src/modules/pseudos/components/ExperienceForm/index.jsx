@@ -54,10 +54,16 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
                     />
                     {errors.designation && <small className='__error'>{errors.designation}</small>}
                     <span className='text-xs font-semibold'>Start Date*</span>
-                    <Input name='start_date' type='date' value={values.start_date} onChange={handleChange} />
+                    <Input
+                        name='start_date'
+                        type='date'
+                        value={values.start_date}
+                        onChange={handleChange}
+                        max={today}
+                    />
                     {errors.start_date && <small className='__error'>{errors.start_date}</small>}
                     <span className='text-xs font-semibold'>End Date*</span>
-                    <Input name='end_date' type='date' value={values.end_date} onChange={handleChange} />
+                    <Input name='end_date' type='date' value={values.end_date} onChange={handleChange} max={today} />
                     {errors.end_date && <small className='__error'>{errors.end_date}</small>}
                     <span className='text-xs font-semibold'>Description*</span>
                     <Textarea

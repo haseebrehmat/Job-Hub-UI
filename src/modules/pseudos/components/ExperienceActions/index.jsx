@@ -10,7 +10,7 @@ const ExperienceActions = memo(({ id, edit, mutate }) => {
     const [show, setShow] = useState(false)
 
     return (
-        <div className='absolute top-0 right-0 mr-2 flex'>
+        <div className='absolute top-0 right-0 mr-5 flex'>
             <Tooltip text='Edit experience'>
                 <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
             </Tooltip>
