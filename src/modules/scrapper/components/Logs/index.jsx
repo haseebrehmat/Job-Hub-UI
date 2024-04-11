@@ -10,7 +10,6 @@ import { LOGS_HEADS } from '@constants/scrapper'
 
 const Logs = () => {
     const [page, setPage] = useState(1)
-    const [show, setShow] = useState(false)
 
     const { data, isLoading, error } = useSWR('/api/job_scraper/logs/', fetchJobLogs)
 
@@ -30,7 +29,7 @@ const Logs = () => {
                 </thead>
                 <tbody className='bg-white'>
                     {data?.logs?.results?.length > 0 && !error ? (
-                        data?.logs?.map((row, idx) => (
+                        data?.logs?.results?.map((row, idx) => (
                             <tr className='border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.job_source}</td>
@@ -49,7 +48,7 @@ const Logs = () => {
                 setPage={pageNumber => {
                     setPage({ page: pageNumber })
                 }}
-                pages={12}
+                pages={data?.logs?.num_pages}
             />
         </div>
     )
