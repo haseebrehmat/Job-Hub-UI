@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { Button } from '@components'
 
@@ -17,6 +17,7 @@ import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/pseudos'
 
 const Vertical = () => {
     const { id } = useParams()
+    const { state } = useLocation()
     const [activeTab, setActiveTab] = useState(VERTICAL_INITIAL_TABS)
 
     const handleClick = key => {
@@ -27,6 +28,9 @@ const Vertical = () => {
 
     return (
         <div className='p-2'>
+            <p className='pl-2 pr-6 mb-2 w-fit rounded-r-full bg-[#328d8c] text-2xl text-white'>
+                {id} --- {state?.name ?? 'No name'}
+            </p>
             <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
                 <div className='flex flex-col mb-4 space-y-2 md:gap-2 sm:flex-row sm:space-y-0'>
                     {Object.entries(activeTab).map(([key, value]) => (

@@ -58,7 +58,11 @@ const Pseudos = () => {
                                                   className='inline-flex items-center justify-center rounded-full bg-[#4f9d9b] text-white px-3 py-1 m-1 cursor-pointer hover:bg-[#346e6c] transition duration-200'
                                                   key={v.id}
                                               >
-                                                  <Link to={`/vertical/${v.id}`} className='flex items-center'>
+                                                  <Link
+                                                      to={`/vertical/${v.id}`}
+                                                      state={{ name: v.name }}
+                                                      className='flex items-center'
+                                                  >
                                                       <span className='mr-2'>{v.name}</span>
                                                       {EditIcon}
                                                   </Link>
