@@ -7,6 +7,7 @@ export const VERTICAL_SECTIONS = {
     education: 'Eduction History',
     language: 'Languages',
     link: 'Social Links',
+    other: 'Other Sections',
 }
 
 export const VERTICAL_INITIAL_TABS = {
@@ -16,6 +17,7 @@ export const VERTICAL_INITIAL_TABS = {
     education: false,
     language: false,
     link: false,
+    other: false,
 }
 
 export const BASIC_INFO_INPUTS = [
