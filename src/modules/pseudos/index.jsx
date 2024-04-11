@@ -31,7 +31,7 @@ const Pseudos = () => {
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
-                {can('create_user') && (
+                {can('create_pseudo') && (
                     <Button label='Create Pseudo' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
             </div>
@@ -58,20 +58,24 @@ const Pseudos = () => {
                                                   className='inline-flex items-center justify-center rounded-full bg-[#4f9d9b] text-white px-3 py-1 m-1 cursor-pointer hover:bg-[#346e6c] transition duration-200'
                                                   key={v.id}
                                               >
-                                                  <Link
-                                                      to={`/vertical/${v.id}`}
-                                                      state={{ name: v.name }}
-                                                      className='flex items-center'
-                                                  >
-                                                      <span className='mr-2'>{v.name}</span>
-                                                      {EditIcon}
-                                                  </Link>
+                                                  {can('edit_vertical') ? (
+                                                      <Link
+                                                          to={`/vertical/${v.id}`}
+                                                          state={{ name: v.name }}
+                                                          className='flex items-center'
+                                                      >
+                                                          <span className='mr-2'>{v.name}</span>
+                                                          {EditIcon}
+                                                      </Link>
+                                                  ) : (
+                                                      <span>{v.name}</span>
+                                                  )}
                                               </div>
                                           ))
                                         : '-'}
                                 </td>
                                 <td className='px-3 py-6 float-right'>
-                                    {can(['edit_user', 'delete_user']) && (
+                                    {can(['edit_pseudo', 'delete_pseudo', 'create_vertical']) && (
                                         <PseudoActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
                                     )}
                                 </td>
@@ -87,7 +91,7 @@ const Pseudos = () => {
                     <Paginated pages={data?.pages ?? Math.ceil(data.total / 25)} setPage={setPage} page={page} />
                 </div>
             )}
-            {can('edit_user') && show && <PseudoForm show={show} setShow={setShow} mutate={mutate} pseudo={pseudo} />}
+            {can('edit_pseudo') && show && <PseudoForm show={show} setShow={setShow} mutate={mutate} pseudo={pseudo} />}
         </div>
     )
 }

@@ -15,15 +15,17 @@ const PseudoActions = memo(({ id, edit, mutate }) => {
 
     return (
         <div className='flex items-center'>
-            <Tooltip text='Add vertical'>
-                <Button classes='_icon-btn' icon={CreateIcon} onClick={() => setCreateVertical(true)} />
-            </Tooltip>
-            {can('edit_user') && (
+            {can('create_vertical') && (
+                <Tooltip text='Add vertical'>
+                    <Button classes='_icon-btn' icon={CreateIcon} onClick={() => setCreateVertical(true)} />
+                </Tooltip>
+            )}
+            {can('edit_pseudo') && (
                 <Tooltip text='Edit pseudo'>
                     <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                 </Tooltip>
             )}
-            {can('delete_user') && (
+            {can('delete_pseudo') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}

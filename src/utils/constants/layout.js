@@ -149,8 +149,15 @@ export const menuItems = [
                 label: 'Pseudos',
                 link: '/pseudos',
                 svg: PseudoIcon,
-                perms: ['view_user', 'create_user', 'edit_user'], // For time bieng
-                // perms: ['view_pseudo', 'create_pseudo', 'edit_pseudo', 'create_vertical', 'edit_vertical'],
+                perms: [
+                    'view_pseudo',
+                    'create_pseudo',
+                    'edit_pseudo',
+                    'delete_pseudo',
+                    'create_vertical',
+                    'edit_vertical',
+                    'delete_vertical',
+                ],
             },
         ],
     },

@@ -309,7 +309,6 @@ export const rawpermissions = [
             },
         ],
     },
-
     {
         module: 'Pseudos',
         permissions: [
@@ -332,6 +331,12 @@ export const rawpermissions = [
                 level: 2,
             },
             {
+                codename: 'delete_pseudo',
+                name: 'Delete Pseudo',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
                 codename: 'create_vertical',
                 name: 'Create Vertical',
                 parent: ['view_pseudo'],
@@ -340,6 +345,12 @@ export const rawpermissions = [
             {
                 codename: 'edit_vertical',
                 name: 'Edit Vertical',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
+                codename: 'delete_vertical',
+                name: 'Delete Vertical',
                 parent: ['view_pseudo'],
                 level: 2,
             },

@@ -29,23 +29,24 @@ const Hobbies = ({ hobbies, setHobbies }) => {
             <div className='flex flex-wrap gap-3 items-center'>
                 <Input value={inputValue} onChange={handleChange} ph='Add a hobby...' />
                 <Button icon={CreateIcon} fit onClick={handleClick} classes='!rounded-full !px-1' />
-                {tags.map(tag => (
-                    <span
-                        key={tag}
-                        className='inline-block px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center'
-                    >
-                        <span>{tag}</span>
-                        {VERTICAL_HOBBY_DELETION && (
-                            <button
-                                type='button'
-                                onClick={() => handleTagRemove(tag)}
-                                className='ml-2 text-gray-700 font-semibold focus:outline-none hover:text-red-700'
-                            >
-                                x
-                            </button>
-                        )}
-                    </span>
-                ))}
+                {tags?.length > 0 &&
+                    tags.map(tag => (
+                        <span
+                            key={tag}
+                            className='inline-block px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center'
+                        >
+                            <span>{tag}</span>
+                            {VERTICAL_HOBBY_DELETION && (
+                                <button
+                                    type='button'
+                                    onClick={() => handleTagRemove(tag)}
+                                    className='ml-2 text-gray-700 font-semibold focus:outline-none hover:text-red-700'
+                                >
+                                    x
+                                </button>
+                            )}
+                        </span>
+                    ))}
             </div>
         </div>
     )
