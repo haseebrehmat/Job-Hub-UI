@@ -195,3 +195,8 @@ export const linkSchema = Yup.object().shape({
     platform: Yup.mixed().oneOf(Object.keys(SOCIAL_PLATFORMS), 'Invalid platform').required('Please select platform'),
     url: Yup.string().url('Please enter a valid URL').required('URL is required'),
 })
+
+export const otherSectionSchema = Yup.object().shape({
+    name: Yup.string().required('Section name is required'),
+    value: Yup.string().max(1000, 'Section value is too long'),
+})
