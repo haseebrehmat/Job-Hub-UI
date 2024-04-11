@@ -37,6 +37,7 @@ const Vertical = () => {
                 {activeTab.education && <Education id={id} />}
                 {activeTab.language && <Languages id={id} />}
                 {activeTab.link && <Links id={id} />}
+                {activeTab.other && <div>Other Sections</div>}
             </div>
         </div>
     )
