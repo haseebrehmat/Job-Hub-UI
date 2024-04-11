@@ -4,7 +4,13 @@ import SideBar from '@modules/layout/sidebar'
 import Navbar from '@modules/layout/navbar'
 import Overlay from '@modules/layout/overlay'
 
+import { useLocation } from 'react-router-dom'
+
 const layout = memo(({ children, title }) => {
+    const location = useLocation()
+    if (location.state) {
+        title = `Team ${location.state.name}`
+    }
     const [toggle, setToggle] = useState(true)
     const [show, setShow] = useState(false)
 

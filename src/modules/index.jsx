@@ -11,6 +11,7 @@ import { Companies, JobSourceBlocking } from '@modules/userManagement'
 import Roles from '@modules/userManagement/roles'
 import Users from '@modules/userManagement/users'
 import Teams from '@modules/userManagement/teams'
+import Team from '@modules/userManagement/team'
 import Integrations from '@modules/settings/integrations'
 import Profile from '@modules/profile'
 import CoverLetter from './coverLetter'
@@ -27,6 +28,7 @@ export {
     JobsUploader,
     Dashboard,
     Teams,
+    Team,
     Login,
     ForgetPassword,
     ResetPassword,

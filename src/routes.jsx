@@ -14,6 +14,7 @@ import {
     Users,
     Integrations,
     Teams,
+    Team,
     Profile,
     CoverLetter,
     Scrapper,
@@ -159,6 +160,12 @@ export const routes = [
         component: <Vertical />,
         protect: true,
         title: 'Veritcals',
+    },
+    {
+        path: '/team-details',
+        component: <Team />,
+        protect: true,
+        title: 'Team Management',
         permission: 'all',
     },
 ]

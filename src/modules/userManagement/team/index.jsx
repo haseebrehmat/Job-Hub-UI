@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { Loading, EmptyTable, Button, Badge, Searchbox } from '@components'
@@ -7,17 +7,17 @@ import { Loading, EmptyTable, Button, Badge, Searchbox } from '@components'
 import { TeamForm } from '@modules/userManagement/components'
 import { fetchTeams } from '@modules/userManagement/api'
 
-import { teamHeads } from '@constants/userManagement'
+import { teamMemberHeads } from '@constants/userManagement'
 
 import { can } from '@utils/helpers'
-import { CreateIcon, ActionsIcons } from '@icons'
+import { ActionsIcons } from '@icons'
 
-const Teams = () => {
-    const [team, setTeam] = useState()
+const Team = () => {
+    const location = useLocation()
+    const team = location.state
+    const [team1, setTeam] = useState()
     const [query, setQuery] = useState('')
     const [show, setShow] = useState(false)
-    const navigate = useNavigate()
-    const handleOnClick = () => navigate('/team-details', { state: 'here' })
 
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=${query}`, fetchTeams)
 
@@ -30,20 +30,15 @@ const Teams = () => {
 
     const renderTeams = error ? (
         <EmptyTable cols={6} msg='Failed to load teams..' />
-    ) : data?.teams?.length > 0 ? (
-        data?.teams?.map((row, idx) => (
-            <tr
-                className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100'
-                key={row.id}
-                onClick={() => navigate('/team-details', { state: row })}
-                state={{ team: row }}
-            >
+    ) : team?.members?.length > 0 ? (
+        team?.members?.map((row, idx) => (
+            <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                 <td className='px-3 py-6'>{idx + 1}</td>
-                <td className='px-3 py-6 capitalize'>{row?.name ?? '-'}</td>
+                <td className='px-3 py-6 capitalize'>{row?.username ?? '-'}</td>
                 <td className='px-3 py-6 capitalize'>
                     <span className=' flex flex-col justify-center'>
                         {row?.reporting_to?.username}
-                        <span className='font-mono'>{row?.reporting_to?.email}</span>
+                        <span className='font-mono'>{row?.email}</span>
                     </span>
                 </td>
                 <td className='px-3 py-4'>
@@ -65,21 +60,11 @@ const Teams = () => {
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 pb-6'>
-                <Searchbox query={query} setQuery={setQuery} />
-                {can('create_team') && (
-                    <Button
-                        label='Create Team'
-                        fit
-                        icon={CreateIcon}
-                        onClick={() => handleClick({ name: '', reporting_to: '', members: [] })}
-                    />
-                )}
-            </div>
+            {console.log(team)}
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        {teamHeads.map(heading => (
+                        {teamMemberHeads.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -88,9 +73,9 @@ const Teams = () => {
                 </thead>
                 <tbody>{renderTeams}</tbody>
             </table>
-            {show && can('edit_team') && <TeamForm show={show} setShow={setShow} mutate={mutate} team={team} />}
+            {show && can('edit_team') && <TeamForm show={show} setShow={setShow} mutate={mutate} team={team1} />}
         </div>
     )
 }
 
-export default memo(Teams)
+export default memo(Team)
