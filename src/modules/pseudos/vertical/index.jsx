@@ -3,7 +3,15 @@ import { useParams } from 'react-router-dom'
 
 import { Button } from '@components'
 
-import { BasicInfo, Skills, Experiences, Education, Languages, Links, Others } from '@modules/pseudos/vertical/sections'
+import {
+    BasicInfo,
+    Skills,
+    Experiences,
+    Education,
+    Languages,
+    Links,
+    OtherSections,
+} from '@modules/pseudos/vertical/sections'
 
 import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/pseudos'
 
@@ -37,7 +45,7 @@ const Vertical = () => {
                 {activeTab.education && <Education id={id} />}
                 {activeTab.language && <Languages id={id} />}
                 {activeTab.link && <Links id={id} />}
-                {activeTab.other && <Others id={id} />}
+                {activeTab.other && <OtherSections id={id} />}
             </div>
         </div>
     )

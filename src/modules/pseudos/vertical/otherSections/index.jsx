@@ -3,19 +3,19 @@ import useSWR from 'swr'
 
 import { Loading, Button } from '@components'
 
-import { ActionButtons, ExperienceActions, ExperienceForm } from '@modules/pseudos/components'
-import { fetchOthers } from '@modules/pseudos/api'
+import { ActionButtons, OtherSectionActions, OtherSectionForm } from '@modules/pseudos/components'
+import { fetchOtherSections } from '@modules/pseudos/api'
 
 import { CreateIcon } from '@icons'
 
-const Others = ({ id }) => {
-    const [experience, setExperience] = useState()
+const OtherSections = ({ id }) => {
+    const [otherSection, setOtherSection] = useState()
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR(`/api/profile/other_section/?id=${id}`, fetchOthers)
+    const { data, error, isLoading, mutate } = useSWR(`/api/profile/other_section/?id=${id}`, fetchOtherSections)
 
     const handleClick = values => {
-        setExperience(values)
+        setOtherSection(values)
         setShow(!show)
     }
 
@@ -23,14 +23,14 @@ const Others = ({ id }) => {
     return (
         <div className='max-w-full overflow-x-auto mb-2 px-1'>
             <div className='flex items-center space-x-4 py-4'>
-                <Button label='Add Experience' fit icon={CreateIcon} onClick={() => handleClick(null)} />
+                <Button label='Add Other Section' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
             <div className='grid grid-cols-1 space-y-2'>
                 {data?.length > 0 && !error ? (
                     data?.map((row, idx) => (
                         <div className='bg-white rounded-md p-3 border border-cyan-600 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'No Name'}</h2>
-                            <ExperienceActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                            <OtherSectionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             <div className='ml-2 mt-1 text-gray-600'>{row?.value ?? 'Not detail'}</div>
                         </div>
                     ))
@@ -39,9 +39,11 @@ const Others = ({ id }) => {
                 )}
             </div>
             <ActionButtons mutate={mutate} classes='mt-4 !w-1/3' />
-            {show && <ExperienceForm show={show} setShow={setShow} mutate={mutate} experience={experience} id={id} />}
+            {show && (
+                <OtherSectionForm show={show} setShow={setShow} mutate={mutate} otherSection={otherSection} id={id} />
+            )}
         </div>
     )
 }
 
-export default memo(Others)
+export default memo(OtherSections)

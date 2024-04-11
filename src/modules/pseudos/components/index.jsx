@@ -13,6 +13,8 @@ import LanguageForm from '@modules/pseudos/components/LanguageForm'
 import LanguageActions from '@modules/pseudos/components/LanguageActions'
 import LinkForm from '@modules/pseudos/components/LinkForm'
 import LinkActions from '@modules/pseudos/components/LinkActions'
+import OtherSectionForm from '@modules/pseudos/components/OtherSectionForm'
+import OtherSectionActions from '@modules/pseudos/components/OtherSectionActions'
 
 export {
     PseudoActions,
@@ -30,4 +32,6 @@ export {
     LanguageActions,
     LinkForm,
     LinkActions,
+    OtherSectionForm,
+    OtherSectionActions,
 }
