@@ -67,3 +67,14 @@ export const saveLanguage = async (url, { arg: language }) => {
     const { data: data_1 } = await rawHttp.post(url, language)
     return toast.success(data_1.detail || 'Language created successfully')
 }
+
+export const fetchLinks = url => http.get(url).then(({ data }) => data.results)
+
+export const saveLink = async (url, { arg: link }) => {
+    if (link?.id) {
+        const { data } = await rawHttp.put(url, link)
+        return toast.success(data.detail || 'Link updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, link)
+    return toast.success(data_1.detail || 'Link created successfully')
+}

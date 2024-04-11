@@ -11,6 +11,8 @@ import EducationActions from '@modules/pseudos/components/EducationActions'
 import Hobbies from '@modules/pseudos/components/Hobbies'
 import LanguageForm from '@modules/pseudos/components/LanguageForm'
 import LanguageActions from '@modules/pseudos/components/LanguageActions'
+import LinkForm from '@modules/pseudos/components/LinkForm'
+import LinkActions from '@modules/pseudos/components/LinkActions'
 
 export {
     PseudoActions,
@@ -26,4 +28,6 @@ export {
     Hobbies,
     LanguageForm,
     LanguageActions,
+    LinkForm,
+    LinkActions,
 }
