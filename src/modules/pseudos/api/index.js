@@ -78,3 +78,14 @@ export const saveLink = async (url, { arg: link }) => {
     const { data: data_1 } = await rawHttp.post(url, link)
     return toast.success(data_1.detail || 'Link created successfully')
 }
+
+export const fetchOthers = url => http.get(url).then(({ data }) => data.results)
+
+export const saveOther = async (url, { arg: other }) => {
+    if (other?.id) {
+        const { data } = await rawHttp.put(url, other)
+        return toast.success(data.detail || 'Other Section updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, other)
+    return toast.success(data_1.detail || 'Other Section created successfully')
+}
