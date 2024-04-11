@@ -2,6 +2,7 @@ import jwt_decode from 'jwt-decode'
 
 import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
+import { SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
 
@@ -235,3 +236,5 @@ export const formatStringInPascal = str => {
         })
         .join(' ')
 }
+
+export const parsePlatform = value => (value ? SOCIAL_PLATFORM_OPTIONS.find(row => row.value === value) : null)

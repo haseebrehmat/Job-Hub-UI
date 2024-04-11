@@ -6,6 +6,7 @@ export const VERTICAL_SECTIONS = {
     experience: 'Experience',
     education: 'Eduction History',
     language: 'Languages',
+    link: 'Social Links',
 }
 
 export const VERTICAL_INITIAL_TABS = {
@@ -14,6 +15,7 @@ export const VERTICAL_INITIAL_TABS = {
     experience: false,
     education: false,
     language: false,
+    link: false,
 }
 
 export const BASIC_INFO_INPUTS = [
@@ -55,4 +57,24 @@ export const PROFICIENCY_LEVELS = {
     3: 'Intermediate',
     4: 'Advanced',
     5: 'Expert',
+}
+
+export const SOCIAL_PLATFORM_OPTIONS = [
+    { label: 'Linkedin', value: 'linkedin' },
+    { label: 'Facebook', value: 'facebook' },
+    { label: 'Instagram', value: 'instagram' },
+    { label: 'Behance', value: 'behance' },
+    { label: 'Github', value: 'github' },
+    { label: 'Twitter', value: 'twitter' },
+    { label: 'Other', value: 'other' },
+]
+
+export const SOCIAL_PLATFORMS = {
+    linkedin: 'LinkedIn',
+    facebook: 'Facebook',
+    instagram: 'Instagram',
+    behance: 'Behance',
+    github: 'Github',
+    twitter: 'Twitter',
+    other: 'Other',
 }

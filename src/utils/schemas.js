@@ -6,6 +6,7 @@ import { isValidFileTypeForAvatar } from '@utils/helpers'
 import { today } from '@constants/dashboard'
 import { MAX_FILE_SIZE } from '@constants/profile'
 import { JOB_SOURCES } from '@constants/scrapper'
+import { SOCIAL_PLATFORMS } from '@constants/pseudos'
 
 export const loginSchema = Yup.object({
     email: Yup.string().email().required(),
@@ -188,4 +189,9 @@ export const languageSchema = Yup.object().shape({
     level: Yup.number('Language level must be an number')
         .required('Language level is required')
         .max(5, 'Language level is too high'),
+})
+
+export const linkSchema = Yup.object().shape({
+    platform: Yup.mixed().oneOf(Object.keys(SOCIAL_PLATFORMS), 'Invalid platform').required('Please select platform'),
+    url: Yup.string().url('Please enter a valid URL').required('URL is required'),
 })
