@@ -18,6 +18,9 @@ import {
     CoverLetter,
     Scrapper,
     Logger,
+    ResumeBuilder,
+    Pseudos,
+    Vertical,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -136,6 +139,27 @@ export const routes = [
         protect: true,
         title: 'Logger',
         permission: 'view_logger',
+    },
+    {
+        path: '/resume-builder',
+        component: <ResumeBuilder />,
+        protect: true,
+        title: 'Resume Builder',
+        permission: 'all',
+    },
+    {
+        path: '/pseudos',
+        component: <Pseudos />,
+        protect: true,
+        title: 'Pseudos',
+        permission: 'all',
+    },
+    {
+        path: '/vertical/:id',
+        component: <Vertical />,
+        protect: true,
+        title: 'Veritcals',
+        permission: 'all',
     },
 ]
 

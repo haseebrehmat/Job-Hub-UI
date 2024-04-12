@@ -6,6 +6,7 @@ import { isValidFileTypeForAvatar } from '@utils/helpers'
 import { today } from '@constants/dashboard'
 import { MAX_FILE_SIZE } from '@constants/profile'
 import { JOB_SOURCES } from '@constants/scrapper'
+import { SOCIAL_PLATFORMS } from '@constants/pseudos'
 
 export const loginSchema = Yup.object({
     email: Yup.string().email().required(),
@@ -140,4 +141,62 @@ export const jobSourceLinkSchema = Yup.object().shape({
     job_source: Yup.mixed()
         .oneOf(Object.keys(JOB_SOURCES), 'Invalid job source type')
         .required('Please select job source'),
+})
+
+export const pseudoSchema = Yup.object().shape({
+    name: Yup.string().required('Pseudo name is required'),
+})
+
+export const createVerticalSchema = Yup.object().shape({
+    name: Yup.string().required('Vertical name is required'),
+    description: Yup.string().required('Ddescription is required'),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
+})
+
+export const verticalBasicInfoSchema = Yup.object().shape({
+    ...createVerticalSchema.fields,
+    address: Yup.string().max(100, 'Address is too long'),
+    summary: Yup.string().max(250, 'Summary is too long'),
+    phone: Yup.string(),
+    portfolio: Yup.string().url('Portfolio Website is not valid'),
+})
+
+export const skillSchema = Yup.object().shape({
+    name: Yup.string().required('Skill name is required'),
+    level: Yup.number('Skill level must be an number')
+        .required('Skill level is required')
+        .max(5, 'Skill level is too high'),
+})
+
+export const experienceSchema = Yup.object().shape({
+    company_name: Yup.string().required('Company name is required'),
+    designation: Yup.string().required('Designation is required'),
+    description: Yup.string().max(250, 'Description is too long'),
+    start_date: Yup.date().max(today, 'Please choose future date'),
+    end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
+})
+
+export const educationSchema = Yup.object().shape({
+    institute: Yup.string().required('Institute name is required'),
+    degree: Yup.string().required('Degree is required'),
+    grade: Yup.string().required('Grade like A+ or marks like 876/1100 required is required'),
+    start_date: Yup.date().max(today, 'Please choose future date'),
+    end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
+})
+
+export const languageSchema = Yup.object().shape({
+    name: Yup.string().required('Language name is required'),
+    level: Yup.number('Language level must be an number')
+        .required('Language level is required')
+        .max(5, 'Language level is too high'),
+})
+
+export const linkSchema = Yup.object().shape({
+    platform: Yup.mixed().oneOf(Object.keys(SOCIAL_PLATFORMS), 'Invalid platform').required('Please select platform'),
+    url: Yup.string().url('Please enter a valid URL').required('URL is required'),
+})
+
+export const otherSectionSchema = Yup.object().shape({
+    name: Yup.string().required('Section name is required'),
+    value: Yup.string().max(1000, 'Section value is too long'),
 })

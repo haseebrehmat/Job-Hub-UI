@@ -38,6 +38,14 @@
     @apply bg-[linear-gradient(to_left,#32BA7C_0%,#93DEBC_14.9%,#AFE2CB_30%,#C7ECDB_44.06%,#FFFFFF_100%)];
 }
 
+._icon-btn {
+    @apply bg-transparent border-0 !px-0;
+}
+
+.__error {
+    @apply ml-1 text-xs text-red-600;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;

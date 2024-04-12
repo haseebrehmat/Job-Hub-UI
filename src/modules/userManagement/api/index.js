@@ -1,7 +1,6 @@
 import { http, rawHttp } from '@utils/http'
 import { toast } from 'react-hot-toast'
 
-
 export const fetchCompanies = url => http.get(url).then(({ data }) => ({ companies: data.results, status: 'success' }))
 export const fetchBlacklistCompanies = url =>
     http
@@ -64,5 +63,3 @@ export const saveTeam = (url, { arg: team }) => {
 export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
 
 export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
-
-

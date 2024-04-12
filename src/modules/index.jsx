@@ -16,6 +16,9 @@ import Profile from '@modules/profile'
 import CoverLetter from './coverLetter'
 import Scrapper from '@modules/scrapper'
 import Logger from '@modules/logger'
+import ResumeBuilder from '@modules/settings/resumeBuilder'
+import Pseudos from '@modules/pseudos'
+import Vertical from '@/modules/pseudos/vertical'
 
 export {
     TeamAppliedJobs,
@@ -37,4 +40,7 @@ export {
     CoverLetter,
     Scrapper,
     Logger,
+    ResumeBuilder,
+    Pseudos,
+    Vertical,
 }

@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import Cold from '@svgs/cold.svg'
 import Hired from '@svgs/hired.svg'
 import Rejected from '@svgs/rejected.svg'
@@ -10,7 +9,7 @@ import FiltersSVG from '@svgs/filters.svg'
 import IntegrationsSVG from '@svgs/integrations.svg'
 import ResetFiltersSVG from '@svgs/re.svg'
 
-export { OctagonLogo, OctagonSmallIcon } from '@svgs/svg-icons'
+export { OctagonLogo, OctagonSmallIcon, LinksSvgs } from '@svgs/svg-icons'
 
 const Integrations = () => <img src={IntegrationsSVG} alt='I' />
 const Filters = () => <img src={FiltersSVG} alt='I' />

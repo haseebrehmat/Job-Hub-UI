@@ -309,6 +309,53 @@ export const rawpermissions = [
             },
         ],
     },
+    {
+        module: 'Pseudos',
+        permissions: [
+            {
+                codename: 'view_pseudo',
+                name: 'View Pseudos',
+                child: ['create_pseudo', 'view_pseudo', 'edit_pseudo', 'create_vertical', 'edit_vertical'],
+                level: 2,
+            },
+            {
+                codename: 'create_pseudo',
+                name: 'Create Pseudo',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
+                codename: 'edit_pseudo',
+                name: 'Edit Pseudo',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
+                codename: 'delete_pseudo',
+                name: 'Delete Pseudo',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
+                codename: 'create_vertical',
+                name: 'Create Vertical',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
+                codename: 'edit_vertical',
+                name: 'Edit Vertical',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
+                codename: 'delete_vertical',
+                name: 'Delete Vertical',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+        ],
+    },
 ]
 
 export const permissions = rawpermissions.map(row => ({

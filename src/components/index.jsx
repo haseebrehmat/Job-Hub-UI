@@ -22,6 +22,7 @@ import CustomSelector from '@components/CustomSelector'
 import Radio from '@components/Radio'
 import TextEditor from '@components/TextEditor'
 import Tooltip from '@components/Tooltip'
+import SliderInput from '@components/SliderInput'
 
 export {
     Badge,
@@ -48,4 +49,5 @@ export {
     Radio,
     TextEditor,
     Tooltip,
+    SliderInput,
 }
