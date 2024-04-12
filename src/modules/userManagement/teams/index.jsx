@@ -17,8 +17,6 @@ const Teams = () => {
     const [query, setQuery] = useState('')
     const [show, setShow] = useState(false)
     const navigate = useNavigate()
-    const handleOnClick = () => navigate('/team-details', { state: 'here' })
-
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=${query}`, fetchTeams)
 
     const handleClick = row => {
@@ -35,8 +33,14 @@ const Teams = () => {
             <tr
                 className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100'
                 key={row.id}
-                onClick={() => navigate('/team-details', { state: row })}
-                state={{ team: row }}
+                onClick={() =>
+                    navigate('/team-details', {
+                        state: {
+                            data: row,
+                            title: row?.name,
+                        },
+                    })
+                }
             >
                 <td className='px-3 py-6'>{idx + 1}</td>
                 <td className='px-3 py-6 capitalize'>{row?.name ?? '-'}</td>

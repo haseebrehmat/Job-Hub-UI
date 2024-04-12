@@ -14,7 +14,7 @@ import { ActionsIcons } from '@icons'
 
 const Team = () => {
     const location = useLocation()
-    const team = location.state
+    const team = location.state.data
     const [team1, setTeam] = useState()
     const [query, setQuery] = useState('')
     const [show, setShow] = useState(false)

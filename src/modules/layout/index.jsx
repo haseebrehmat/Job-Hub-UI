@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom'
 const layout = memo(({ children, title }) => {
     const location = useLocation()
     if (location.state) {
-        title = `Team ${location.state.name}`
+        title = location.state.title
     }
     const [toggle, setToggle] = useState(true)
     const [show, setShow] = useState(false)
