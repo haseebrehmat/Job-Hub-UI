@@ -156,7 +156,7 @@ export const createVerticalSchema = Yup.object().shape({
 export const verticalBasicInfoSchema = Yup.object().shape({
     ...createVerticalSchema.fields,
     address: Yup.string().max(100, 'Address is too long'),
-    summary: Yup.string().max(250, 'Summary is too long'),
+    summary: Yup.string().max(500, 'Summary is too long'),
     phone: Yup.string(),
     portfolio: Yup.string().url('Portfolio Website is not valid'),
 })
