@@ -60,6 +60,11 @@ export const saveTeam = (url, { arg: team }) => {
     return rawHttp.post(url, team).then(({ data }) => toast.success(data.detail))
 }
 
+export const assignVertical = (url, { arg: team_id, verticals }) =>
+    rawHttp.post(url, team_id, verticals).then(({ data }) => toast.success(data.detail))
+
 export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
 
 export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
+
+export const fetchPseudos = url => http.get(url).then(({ data }) => ({ pseudos: data, status: 'success' }))

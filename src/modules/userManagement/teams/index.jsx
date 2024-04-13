@@ -2,26 +2,32 @@ import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Loading, EmptyTable, Button, Badge, Searchbox } from '@components'
+import { Loading, EmptyTable, Button, Badge, Searchbox, Tooltip } from '@components'
 
-import { TeamForm } from '@modules/userManagement/components'
+import { TeamForm, PseudosForm } from '@modules/userManagement/components'
 import { fetchTeams } from '@modules/userManagement/api'
 
 import { teamHeads } from '@constants/userManagement'
 
 import { can } from '@utils/helpers'
-import { CreateIcon, ActionsIcons } from '@icons'
+import { CreateIcon, ActionsIcons, EditIcon } from '@icons'
 
 const Teams = () => {
     const [team, setTeam] = useState()
     const [query, setQuery] = useState('')
-    const [show, setShow] = useState(false)
+    const [showEditForm, setShowEditForm] = useState(false)
+    const [showPesudoForm, setShowPesudoForm] = useState(false)
     const navigate = useNavigate()
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=${query}`, fetchTeams)
 
-    const handleClick = row => {
-        setTeam(row)
-        setShow(!show)
+    const handleClick = (row, action) => {
+        if (action === 'edit') {
+            setTeam(row)
+            setShowEditForm(!showEditForm)
+        } else {
+            setShowPesudoForm(!showPesudoForm)
+            setTeam(row)
+        }
     }
 
     if (isLoading) return <Loading />
@@ -30,20 +36,23 @@ const Teams = () => {
         <EmptyTable cols={6} msg='Failed to load teams..' />
     ) : data?.teams?.length > 0 ? (
         data?.teams?.map((row, idx) => (
-            <tr
-                className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100'
-                key={row.id}
-                onClick={() =>
-                    navigate('/team-details', {
-                        state: {
-                            data: row,
-                            title: row?.name,
-                        },
-                    })
-                }
-            >
+            <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                 <td className='px-3 py-6'>{idx + 1}</td>
-                <td className='px-3 py-6 capitalize'>{row?.name ?? '-'}</td>
+                <Tooltip text='Click to view | edit team members'>
+                    <td
+                        className='px-3 py-6 capitalize my-2 hover:cursor-pointer'
+                        onClick={() =>
+                            navigate('/team-details', {
+                                state: {
+                                    data: row,
+                                    title: row?.name,
+                                },
+                            })
+                        }
+                    >
+                        {row?.name ?? '-'}
+                    </td>
+                </Tooltip>
                 <td className='px-3 py-6 capitalize'>
                     <span className=' flex flex-col justify-center'>
                         {row?.reporting_to?.username}
@@ -59,8 +68,13 @@ const Teams = () => {
                         ))}
                     </span>
                 </td>
-                <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
-                    {can('edit_team') && ActionsIcons}
+                <td className='px-3 py-6 flex space-x-4'>
+                    <Tooltip text='Assign Pesudos'>
+                        <span onClick={() => handleClick(row, '')}>{can('edit_team') && EditIcon}</span>
+                    </Tooltip>
+                    <Tooltip text='Edit Team'>
+                        <span onClick={() => handleClick(row, 'edit')}>{can('edit_team') && ActionsIcons}</span>
+                    </Tooltip>
                 </td>
             </tr>
         ))
@@ -92,7 +106,12 @@ const Teams = () => {
                 </thead>
                 <tbody>{renderTeams}</tbody>
             </table>
-            {show && can('edit_team') && <TeamForm show={show} setShow={setShow} mutate={mutate} team={team} />}
+            {showEditForm && can('edit_team') && (
+                <TeamForm show={showEditForm} setShow={setShowEditForm} mutate={mutate} team={team} />
+            )}
+            {showPesudoForm && can('edit_team') && (
+                <PseudosForm show={showPesudoForm} setShow={setShowPesudoForm} mutate={mutate} team={team} />
+            )}
         </div>
     )
 }

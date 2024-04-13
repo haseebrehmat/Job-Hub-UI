@@ -14,7 +14,10 @@ import { ActionsIcons } from '@icons'
 
 const Team = () => {
     const location = useLocation()
-    const team = location.state.data
+    let team = ''
+    if (location.state) {
+        team = location.state.data
+    }
     const [team1, setTeam] = useState()
     const [query, setQuery] = useState('')
     const [show, setShow] = useState(false)
@@ -60,7 +63,6 @@ const Team = () => {
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            {console.log(team)}
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
