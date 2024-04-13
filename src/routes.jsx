@@ -139,7 +139,7 @@ export const routes = [
         component: <Logger />,
         protect: true,
         title: 'Logger',
-        permission: 'view_logger',
+        permission: 'all',
     },
     {
         path: '/resume-builder',

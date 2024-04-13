@@ -1,1 +1,1 @@
-export const LOGGER_HEADS = ['id', 'title', 'type', 'user', 'created at', '']
+export const LOGGER_HEADS = ['user id', 'level', 'error', '#line', 'path', 'method', 'status', 'created at']
