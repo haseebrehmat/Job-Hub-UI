@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, EmptyTable, Button, Badge, Searchbox, Tooltip } from '@components'
 
-import { TeamForm, PseudosForm } from '@modules/userManagement/components'
+import { TeamForm, PseudosTeamForm } from '@modules/userManagement/components'
 import { fetchTeams } from '@modules/userManagement/api'
 
 import { teamHeads } from '@constants/userManagement'
@@ -110,7 +110,7 @@ const Teams = () => {
                 <TeamForm show={showEditForm} setShow={setShowEditForm} mutate={mutate} team={team} />
             )}
             {showPesudoForm && can('edit_team') && (
-                <PseudosForm show={showPesudoForm} setShow={setShowPesudoForm} mutate={mutate} team={team} />
+                <PseudosTeamForm show={showPesudoForm} setShow={setShowPesudoForm} mutate={mutate} team={team} />
             )}
         </div>
     )

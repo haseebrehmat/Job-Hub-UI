@@ -9,21 +9,35 @@ import { assignVertical, fetchPseudos } from '@modules/userManagement/api'
 
 import { verticalSchema } from '@utils/schemas'
 import { getMsg, parsePseudos, parseVertical } from '@utils/helpers'
-import { can } from '@/utils/helpers'
+// import { can } from '@/utils/helpers'
 
-const PseudosForm = ({ show, setShow, mutate, team }) => {
+const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
     const [pseudos, setPseudos] = useState({ pseudo: [], vertical: [] })
-    const { values, handleSubmit, resetForm, trigger } = useMutate(
+    const { handleSubmit, trigger } = useMutate(
         'api/profile/team_vertical_assignment/',
         assignVertical,
+        {
+            team_id: team.id,
+            verticals: pseudos.vertical.map(obj => obj.value),
+        },
         verticalSchema,
-        async formValues => trigger({ ...formValues, team_id: team.id, verticals: [] }),
+        async formValues =>
+            trigger({ ...formValues, team_id: team.id, verticals: pseudos.vertical.map(obj => obj.value) }),
         error => toast.error(getMsg(error)),
         () => {
             mutate()
-            if (!team?.id) resetForm()
+            setPseudos({ ...pseudos, pseudo: [], vertical: [] })
         }
     )
+
+    const removeVertical = id => {
+        const verticals = pseudos.vertical
+        const index = verticals.findIndex(obj => obj.value === id)
+        if (index !== -1) {
+            verticals.splice(index, 1)
+        }
+        setPseudos({ ...pseudos, vertical: verticals })
+    }
     const { data, isLoading } = useSWR('api/profile/team_vertical_assignment/', fetchPseudos)
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
@@ -39,8 +53,7 @@ const PseudosForm = ({ show, setShow, mutate, team }) => {
                             name='pseudo'
                             options={parsePseudos(data?.pseudos)}
                             handleChange={obj => setPseudos({ ...pseudos, pseudo: obj })}
-                            selectorValue={values.members}
-                            isMulti
+                            selectorValue={pseudos.pseudo}
                             placeholder='Select Pseudos'
                         />
                     )}
@@ -52,7 +65,7 @@ const PseudosForm = ({ show, setShow, mutate, team }) => {
                             name='vertical'
                             options={parseVertical(pseudos.pseudo, data?.pseudos)}
                             handleChange={obj => setPseudos({ ...pseudos, vertical: obj })}
-                            selectorValue={values.members}
+                            selectorValue={pseudos.vertical}
                             isMulti
                             placeholder='Select verticles'
                         />
@@ -62,10 +75,29 @@ const PseudosForm = ({ show, setShow, mutate, team }) => {
                         <Button label='Assign' type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
+                    <div>
+                        <h1 className='my-2 font-medium'>Selcted Verticals</h1>
+                        {pseudos.vertical?.length > 0 &&
+                            pseudos.vertical?.map(tag => (
+                                <span
+                                    key={tag.value}
+                                    className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'
+                                >
+                                    <span>{tag.label}</span>
+                                    <button
+                                        type='button'
+                                        onClick={() => removeVertical(tag.value)}
+                                        className='ml-2 text-gray-700 font-semibold focus:outline-none hover:text-red-700'
+                                    >
+                                        x
+                                    </button>
+                                </span>
+                            ))}
+                    </div>
                 </div>
             </form>
         </Drawer>
     )
 }
 
-export default memo(PseudosForm)
+export default memo(PseudosTeamForm)

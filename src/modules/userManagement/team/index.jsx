@@ -2,15 +2,15 @@ import { memo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Loading, EmptyTable, Button, Badge, Searchbox } from '@components'
+import { Loading, EmptyTable, Badge, Tooltip } from '@components'
 
-import { TeamForm } from '@modules/userManagement/components'
+import { PseudosMemberForm } from '@modules/userManagement/components'
 import { fetchTeams } from '@modules/userManagement/api'
 
 import { teamMemberHeads } from '@constants/userManagement'
 
 import { can } from '@utils/helpers'
-import { ActionsIcons } from '@icons'
+import { EditIcon } from '@icons'
 
 const Team = () => {
     const location = useLocation()
@@ -18,17 +18,16 @@ const Team = () => {
     if (location.state) {
         team = location.state.data
     }
-    const [team1, setTeam] = useState()
-    const [query, setQuery] = useState('')
+    const [user, setUser] = useState()
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=${query}`, fetchTeams)
+    const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=`, fetchTeams)
 
     const handleClick = row => {
-        setTeam(row)
+        setUser(row)
         setShow(!show)
     }
-
+    // console.log('team', team.verticals)
     if (isLoading) return <Loading />
 
     const renderTeams = error ? (
@@ -46,23 +45,42 @@ const Team = () => {
                 </td>
                 <td className='px-3 py-4'>
                     <span className='flex items-center gap-1'>
-                        {row?.members?.map((member, idxx) => (
-                            <div className='gap-2' key={idxx}>
-                                <Badge label={member?.username} />
+                        {row?.vertical?.map(member => (
+                            <div className='gap-2'>
+                                <Badge label={member} />
                             </div>
                         ))}
                     </span>
                 </td>
-                <td className='px-3 py-6 float-right' onClick={() => handleClick(row)}>
-                    {can('edit_team') && ActionsIcons}
+                <td className='px-3 py-4'>
+                    <Tooltip text='Assign Pesudos'>
+                        <span onClick={() => handleClick(row, '')}>{can('edit_team') && EditIcon}</span>
+                    </Tooltip>
                 </td>
             </tr>
         ))
     ) : (
-        <EmptyTable cols={6} msg='No teams found yet!' />
+        <EmptyTable cols={6} msg='No members found yet!' />
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
+            <div className='flex flex-col border shadow	text-[#006366] py-8 font-semibold px-6 mb-4'>
+                <h1>Assigned Vertivals</h1>
+                {team.verticals?.length > 0 &&
+                    team.verticals?.map(tag => (
+                        <span
+                            key={tag.value}
+                            className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'
+                        >
+                            <span>{tag.name}</span>
+                            <button
+                                type='button'
+                                onClick=''
+                                className='ml-2 text-gray-700 font-semibold focus:outline-none hover:text-red-700'
+                            ></button>
+                        </span>
+                    ))}
+            </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
@@ -75,7 +93,9 @@ const Team = () => {
                 </thead>
                 <tbody>{renderTeams}</tbody>
             </table>
-            {show && can('edit_team') && <TeamForm show={show} setShow={setShow} mutate={mutate} team={team1} />}
+            {show && can('edit_team') && (
+                <PseudosMemberForm show={show} setShow={setShow} mutate={mutate} user={user} vert={team.verticals} />
+            )}
         </div>
     )
 }

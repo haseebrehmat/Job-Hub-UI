@@ -188,21 +188,11 @@ export const removeOrAddElementsFromArray = (array, elements) => {
 export const parseMembers = (members, leadId) =>
     members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
 
-export const parsePseudos = pseudos => pseudos.map(pseudo => ({ value: pseudo.id, label: pseudo.name }))
+export const parsePseudos = pseudos =>
+    pseudos?.map(pseudo => ({ value: pseudo.id, label: pseudo.name, verticals: pseudo.verticals }))
 
-export const parseVertical = (ids, pseudos) => {
-    const id = pseudos.reduce((temp, pseudo) => {
-        if (ids.find(obj => obj.id === pseudo.id)) {
-            temp.push(pseudo)
-        }
-    })
-    console.log(id)
-    const verticals = pseudos.map(pseudo =>
-        pseudo.verticals.map(vertical => ({ value: vertical.id, label: vertical.name }))
-    )
-    const vertical = []
-    return vertical.concat(...verticals)
-}
+export const parseVertical = pseudo =>
+    pseudo?.verticals?.map(vertical => ({ value: vertical.id, label: vertical.name }))
 
 export const dataForCsv = data =>
     data.map(obj => ({
