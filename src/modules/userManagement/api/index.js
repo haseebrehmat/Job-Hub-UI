@@ -52,6 +52,8 @@ export const fetchPermissions = url => http.get(url).then(({ data }) => ({ permi
 
 export const fetchTeams = url => http.get(url).then(({ data }) => ({ teams: data, status: 'success' }))
 
+export const fetchTeamMembers = url => http.get(url).then(({ data }) => ({ team: data, status: 'success' }))
+
 export const saveTeam = (url, { arg: team }) => {
     team.members = team.members.map(member => member.value)
     if (team?.id) {
@@ -60,6 +62,11 @@ export const saveTeam = (url, { arg: team }) => {
     return rawHttp.post(url, team).then(({ data }) => toast.success(data.detail))
 }
 
+export const assignVertical = (url, { arg: team_id, verticals }) =>
+    rawHttp.post(url, team_id, verticals).then(({ data }) => toast.success(data.detail))
+
 export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
 
 export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
+
+export const fetchPseudos = url => http.get(url).then(({ data }) => ({ pseudos: data, status: 'success' }))

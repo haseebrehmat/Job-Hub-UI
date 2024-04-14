@@ -200,3 +200,11 @@ export const otherSectionSchema = Yup.object().shape({
     name: Yup.string().required('Section name is required'),
     value: Yup.string().max(1000, 'Section value is too long'),
 })
+
+export const verticalSchema = Yup.object().shape({
+    team_id: Yup.string().required('Section name is required'),
+})
+
+export const verticalmemberSchema = Yup.object().shape({
+    user_id: Yup.string().required('Section name is required'),
+})

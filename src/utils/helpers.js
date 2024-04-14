@@ -188,6 +188,12 @@ export const removeOrAddElementsFromArray = (array, elements) => {
 export const parseMembers = (members, leadId) =>
     members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
 
+export const parsePseudos = pseudos =>
+    pseudos?.map(pseudo => ({ value: pseudo.id, label: pseudo.name, verticals: pseudo.verticals }))
+
+export const parseVertical = pseudo =>
+    pseudo?.verticals?.map(vertical => ({ value: vertical.id, label: vertical.name }))
+
 export const dataForCsv = data =>
     data.map(obj => ({
         JOB_TITLE: obj.job_title,
