@@ -5,6 +5,8 @@ import Template2 from './template2'
 
 import { Button } from '@components'
 
+import { devProfile } from './devProfile'
+
 const ResumeBuilder = () => {
     const [tab, setTab] = useState(1)
 
@@ -26,8 +28,8 @@ const ResumeBuilder = () => {
                     onClick={() => setTab(2)}
                 />
             </div>
-            {tab === 1 && <Template1 />}
-            {tab === 2 && <Template2 />}
+            {tab === 1 && <Template1 data={devProfile} />}
+            {tab === 2 && <Template2 data={devProfile} />}
         </div>
     )
 }
