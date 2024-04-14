@@ -44,6 +44,7 @@ import {
     AiOutlineCloudUpload,
     AiOutlineLink,
     AiFillSetting,
+    AiOutlineHistory,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
@@ -128,3 +129,4 @@ export const ResumeIcon = <GrDocumentUser style={{ fontSize: 16 }} />
 export const JobSource = <VscSourceControl style={{ fontSize: '22px' }} />
 export const TechSTack = <RiStackFill style={{ fontSize: '22px' }} />
 export const PseudoIcon = <RiProfileLine style={{ fontSize: 16 }} />
+export const LogsIcon = <AiOutlineHistory style={{ fontSize: '22px' }} />
