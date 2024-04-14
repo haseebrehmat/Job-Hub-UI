@@ -1,47 +1,62 @@
 import { memo } from 'react'
 import useSWR from 'swr'
 
-import { EmptyTable, Loading } from '@components'
+import { EmptyTable, Loading, Tooltip } from '@components'
 
-import { fetchJobSourceLinks } from '@modules/scrapper/api'
+import { fetchErrorLogs } from '@modules/logger/api'
 
-import { can, formatDate2 } from '@utils/helpers'
-import { LOGGER_HEADS } from '@constants/logger'
+import { can, formatDate } from '@utils/helpers'
+import { ERROR_LOGGER_HEADS } from '@constants/logger'
 
 const Logger = () => {
-    const { data, isLoading, error } = useSWR('/api/job_scraper/job_source_link/', fetchJobSourceLinks)
+    const { data, isLoading, error } = useSWR('/api/error_logger/error_logs/', fetchErrorLogs)
 
     if (isLoading) return <Loading />
 
     return (
-        <div className='max-w-full overflow-x-auto mb-14'>
-            <table className='table-auto w-full text-left text-[#048C8C]'>
-                <thead className='text-xs uppercase border border-[#048C8C]'>
-                    <tr>
-                        {LOGGER_HEADS.map(heading => (
-                            <th scope='col' className='px-3 py-4' key={heading}>
-                                {heading}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody className='bg-white'>
-                    {data?.links?.length > 0 && !error ? (
-                        data?.links?.map((row, idx) => (
-                            <tr className='border-b border-[#006366] border-opacity-20 hover:bg-gray-100' key={row.id}>
-                                <td className='px-3 py-3.5'>{idx + 1}</td>
-                                <td className='px-3 py-3.5'>title..</td>
-                                <td className='px-3 py-3.5'>type..</td>
-                                <td className='px-3 py-3.5'>user..</td>
-                                <td className='px-3 py-3.5'>{formatDate2(row?.created_at)}</td>
-                                <td className='px-3 py-3.5 float-right'>{can('show_log_details') && 'see'}</td>
-                            </tr>
-                        ))
-                    ) : (
-                        <EmptyTable cols={6} msg='No logs found yet!' />
-                    )}
-                </tbody>
-            </table>
+        <div className='min-h-screen'>
+            <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
+                <table className='table-auto w-full table text-lg h-screen text-left mt-6 text-[#048C8C]'>
+                    <thead className='text-xs uppercase border border-[#048C8C]'>
+                        <tr>
+                            {ERROR_LOGGER_HEADS.map(heading => (
+                                <th scope='col' className='px-3 py-4' key={heading}>
+                                    {heading}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody className='bg-white'>
+                        {data?.errors?.length > 0 && !error ? (
+                            data?.errors?.map((row, idx) => (
+                                <tr className='border-b border-[#006366] border-opacity-20 hover:bg-gray-100' key={idx}>
+                                    <td className='px-3 py-3.5'>{row?.id}</td>
+                                    <td className='px-3 py-3.5 cursor-pointer'>
+                                        <Tooltip text={`email: ${row?.user?.email}`} down>
+                                            {row?.user?.username}
+                                        </Tooltip>
+                                    </td>
+                                    <td className='px-3 py-3.5'>{row?.level}</td>
+                                    <td className='px-3 py-3.5'>{row?.log_message}</td>
+                                    <td className='px-3 py-3.5'>{row?.error_message}</td>
+                                    <td className='px-3 py-3.5 cursor-pointer'>
+                                        <Tooltip text={`traceback: ${row?.traceback}`} down>
+                                            {row?.error_line}
+                                        </Tooltip>
+                                    </td>
+                                    <td className='px-3 py-3.5'>{row?.path}</td>
+                                    <td className='px-3 py-3.5'>{row?.line_number}</td>
+                                    <td className='px-3 py-3.5'>{row?.method}</td>
+                                    <td className='px-3 py-3.5'>{row?.status_code}</td>
+                                    <td className='px-3 py-3.5'>{formatDate(row?.time)}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <EmptyTable cols={6} msg='No logs found yet!' />
+                        )}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }

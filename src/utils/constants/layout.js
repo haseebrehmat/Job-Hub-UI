@@ -186,7 +186,6 @@ export const menuItems = [
         label: 'Logger',
         link: '/logger',
         svg: LoggerIcon,
-        // perms: ['hide'],
         perms: ['view_logger', 'show_log_details'],
     },
 ]
