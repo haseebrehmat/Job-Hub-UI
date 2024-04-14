@@ -100,3 +100,5 @@ export const saveCoverLetterTemplate = async (url, { arg: template }) => {
     const { data: data_1 } = await rawHttp.post(url, template)
     return toast.success(data_1.detail || 'Template Section created successfully')
 }
+
+export const fetchProfile = url => http.get(url).then(({ data }) => data)

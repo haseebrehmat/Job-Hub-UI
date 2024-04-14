@@ -12,6 +12,7 @@ import {
     Links,
     OtherSections,
     CoverLetterTemplate,
+    ResumePreview,
 } from '@modules/pseudos/vertical/sections'
 
 import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/pseudos'
@@ -52,7 +53,7 @@ const Vertical = () => {
                 {activeTab.link && <Links id={id} />}
                 {activeTab.other && <OtherSections id={id} />}
                 {activeTab.cover_letter_template && <CoverLetterTemplate id={id} />}
-                {activeTab.resume_preview && <CoverLetterTemplate id={id} />}
+                {activeTab.resume_preview && <ResumePreview id={id} />}
             </div>
         </div>
     )
