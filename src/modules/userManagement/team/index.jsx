@@ -68,7 +68,7 @@ const Team = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex flex-col border shadow	text-[#006366] py-8 font-semibold px-6 mb-4 '>
-                <h1>Assigned Vertivals</h1>
+                <h1>Assigned Verticals</h1>
                 <div className='mt-4'>
                     {data?.team?.verticals?.length > 0 &&
                         data?.team?.verticals?.map(tag => (
