@@ -64,6 +64,9 @@ const CoverLetterTemplate = ({ id }) => {
                         ph='Start typing from here. You can include placeholders by typing @ followed by a name.'
                         rows={20}
                     />
+                    <small className='text-gray-600'>
+                        Placeholders can be added like @placeholder_name@ way. Dont remove @ at last of placeholder
+                    </small>
                     {popdown && (
                         <div className='top-full left-0 w-full mt-1 border shadow-lg'>
                             <div className='flex py-2'>
