@@ -11,6 +11,7 @@ import {
     Languages,
     Links,
     OtherSections,
+    CoverLetterTemplate,
 } from '@modules/pseudos/vertical/sections'
 
 import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/pseudos'
@@ -32,7 +33,7 @@ const Vertical = () => {
                 {id} --- {state?.name ?? 'No name'}
             </p>
             <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
-                <div className='flex flex-col mb-4 space-y-2 md:gap-2 sm:flex-row sm:space-y-0'>
+                <div className='flex flex-col mb-4 space-y-2 md:gap-2 md:flex-row md:space-y-1'>
                     {Object.entries(activeTab).map(([key, value]) => (
                         <Button
                             key={key}
@@ -50,6 +51,8 @@ const Vertical = () => {
                 {activeTab.language && <Languages id={id} />}
                 {activeTab.link && <Links id={id} />}
                 {activeTab.other && <OtherSections id={id} />}
+                {activeTab.cover_letter_template && <CoverLetterTemplate id={id} />}
+                {activeTab.resume_preview && <CoverLetterTemplate id={id} />}
             </div>
         </div>
     )

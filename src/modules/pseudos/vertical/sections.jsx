@@ -4,6 +4,7 @@ import Experiences from '@modules/pseudos/vertical/experiences'
 import Education from '@modules/pseudos/vertical/education'
 import Languages from '@modules/pseudos/vertical/languages'
 import Links from '@modules/pseudos/vertical/links'
-import OtherSections from '@/modules/pseudos/vertical/otherSections'
+import OtherSections from '@modules/pseudos/vertical/otherSections'
+import CoverLetterTemplate from '@modules/pseudos/vertical/coverLetterTemplate'
 
-export { Skills, Basic as BasicInfo, Experiences, Education, Languages, Links, OtherSections }
+export { Skills, Basic as BasicInfo, Experiences, Education, Languages, Links, OtherSections, CoverLetterTemplate }

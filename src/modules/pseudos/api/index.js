@@ -89,3 +89,14 @@ export const saveOtherSection = async (url, { arg: other }) => {
     const { data: data_1 } = await rawHttp.post(url, other)
     return toast.success(data_1.detail || 'Other Section created successfully')
 }
+
+export const fetchCoverLetterTemplate = url => http.get(url).then(({ data }) => data.results)
+
+export const saveCoverLetterTemplate = async (url, { arg: template }) => {
+    if (template?.id) {
+        const { data } = await rawHttp.put(url, template)
+        return toast.success(data.detail || 'Template Section updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, template)
+    return toast.success(data_1.detail || 'Template Section created successfully')
+}

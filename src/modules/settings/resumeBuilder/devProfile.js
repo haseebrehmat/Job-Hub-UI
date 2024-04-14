@@ -78,15 +78,15 @@ export const devProfile = {
     languages: [
         {
             name: 'English',
-            fluency: 3, // fluency level out of 5
+            level: 3, // level level out of 5
         },
         {
             name: 'Urdu',
-            fluency: 5,
+            level: 5,
         },
         {
             name: 'Punjabi',
-            fluency: 2,
+            level: 2,
         },
     ],
     certificates: ['LeetCode best frontend developer', 'HackerRank Backend Geek'],
