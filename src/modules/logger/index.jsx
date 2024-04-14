@@ -32,17 +32,21 @@ const Logger = () => {
                                 <tr className='border-b border-[#006366] border-opacity-20 hover:bg-gray-100' key={idx}>
                                     <td className='px-3 py-3.5'>{row?.id}</td>
                                     <td className='px-3 py-3.5 cursor-pointer'>
-                                        <Tooltip text={`email: ${row?.user?.email}`} down>
-                                            {row?.user?.username}
-                                        </Tooltip>
+                                        {row?.user && (
+                                            <Tooltip text={`email: ${row?.user?.email}`} down>
+                                                {row?.user?.username}
+                                            </Tooltip>
+                                        )}
                                     </td>
                                     <td className='px-3 py-3.5'>{row?.level}</td>
                                     <td className='px-3 py-3.5'>{row?.log_message}</td>
                                     <td className='px-3 py-3.5'>{row?.error_message}</td>
                                     <td className='px-3 py-3.5 cursor-pointer'>
-                                        <Tooltip text={`traceback: ${row?.traceback}`} down>
-                                            {row?.error_line}
-                                        </Tooltip>
+                                        {row?.user && (
+                                            <Tooltip text={`traceback: ${row?.traceback}`} down>
+                                                {row?.error_line}
+                                            </Tooltip>
+                                        )}
                                     </td>
                                     <td className='px-3 py-3.5'>{row?.path}</td>
                                     <td className='px-3 py-3.5'>{row?.line_number}</td>
