@@ -35,6 +35,10 @@ export const JOB_SOURCES = {
     simplyhired: 'Simply Hired',
     other: 'Other',
     all: 'All',
+    // WITH UNDERSCORE
+    career_builder: 'Career Builder',
+    zip_recruiter: 'Zip Recruiter',
+    simply_hired: 'Simply Hired',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
