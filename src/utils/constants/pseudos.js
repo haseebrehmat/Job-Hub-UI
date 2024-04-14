@@ -55,6 +55,12 @@ export const BASIC_INFO_INPUTS = [
         type: 'url',
         ph: 'Enter vertical portfolio website',
     },
+    {
+        name: 'identity',
+        label: 'Identity',
+        type: 'text',
+        ph: 'Enter vertical identity like Python, Rails, or nothing..',
+    },
 ]
 
 export const PROFICIENCY_LEVELS = {
