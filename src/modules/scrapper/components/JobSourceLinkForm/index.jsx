@@ -13,7 +13,7 @@ import { JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 import { ValidateFalseIcon } from '@icons'
 
 const JobSourceLinkForm = ({ show, setShow, mutate, link }) => {
-    const [fields, setFields] = useState(link?.queries ?? [''])
+    const [fields, setFields] = useState(link?.queries?.map(({ link: queryLink }) => queryLink) ?? [''])
     const submitButtonShow = fields.length > 0 && fields.every(field => field.length > 0)
 
     const handleFieldChange = (index, event) => {
@@ -56,7 +56,7 @@ const JobSourceLinkForm = ({ show, setShow, mutate, link }) => {
                     {errors.job_source && <small className='ml-1 text-xs text-red-600'>{errors.job_source}</small>}
                     <div className='flex items-center justify-between my-2 w-'>
                         <p>Links</p>
-                        {fields.length < 5 && (
+                        {fields.length < 30 && (
                             <Tooltip text='Add Link'>
                                 <Button onClick={addField} icon='+' classes='!px-1 !py-0.5' />
                             </Tooltip>

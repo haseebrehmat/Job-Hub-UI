@@ -11,7 +11,7 @@ import { LOGS_HEADS } from '@constants/scrapper'
 const Logs = () => {
     const [page, setPage] = useState(1)
 
-    const { data, isLoading, error } = useSWR('/api/job_scraper/logs/', fetchJobLogs)
+    const { data, isLoading, error } = useSWR(`/api/job_scraper/logs/?page=${page}`, fetchJobLogs)
 
     if (isLoading) return <Loading />
 
@@ -43,13 +43,7 @@ const Logs = () => {
                     )}
                 </tbody>
             </table>
-            <Paginated
-                page={page}
-                setPage={pageNumber => {
-                    setPage({ page: pageNumber })
-                }}
-                pages={data?.logs?.num_pages}
-            />
+            <Paginated page={page} setPage={setPage} pages={data?.logs?.num_pages} />
         </div>
     )
 }
