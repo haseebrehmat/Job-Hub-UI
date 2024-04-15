@@ -47,8 +47,8 @@ const CoverLetterTemplate = ({ id }) => {
 
     useMemo(() => {
         if (data) {
-            setText(data[0].template)
-            setCursor(data[0].template.length)
+            setText(data[0]?.template ?? '')
+            setCursor(data[0]?.template?.length ?? 0)
         }
     }, [data])
 
