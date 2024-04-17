@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Button } from '@components'
 
 import { ActionButtons, ExperienceActions, ExperienceForm } from '@modules/pseudos/components'
-import { fetchExperiences } from '@modules/pseudos/api'
+import { fetchProjects } from '@modules/pseudos/api'
 
 import { formatDate2 } from '@utils/helpers'
 
@@ -14,7 +14,7 @@ const Projects = ({ id }) => {
     const [experience, setExperience] = useState()
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR(`/api/profile/experience/?id=${id}`, fetchExperiences)
+    const { data, error, isLoading, mutate } = useSWR(`/api/profile/experience/?id=${id}`, fetchProjects)
 
     const handleClick = values => {
         setExperience(values)

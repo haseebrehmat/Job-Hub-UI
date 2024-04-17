@@ -102,3 +102,14 @@ export const saveCoverLetterTemplate = async (url, { arg: template }) => {
 }
 
 export const fetchProfile = url => http.get(url).then(({ data }) => data)
+
+export const fetchProjects = url => http.get(url).then(({ data }) => data.results)
+
+export const saveProject = async (url, { arg: project }) => {
+    if (project?.id) {
+        const { data } = await rawHttp.put(url, project)
+        return toast.success(data.detail || 'Project updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, project)
+    return toast.success(data_1.detail || 'Project created successfully')
+}
