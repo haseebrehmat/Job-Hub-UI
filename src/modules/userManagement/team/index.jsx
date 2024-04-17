@@ -32,7 +32,7 @@ const Team = () => {
     }
     if (isLoading) return <Loading />
     const renderTeams = error ? (
-        <EmptyTable cols={6} msg='Failed to load teams..' />
+        <EmptyTable cols={6} msg='Failed to load team members..' />
     ) : data?.team?.members?.length > 0 ? (
         data?.team?.members?.map((row, idx) => (
             <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
@@ -57,7 +57,7 @@ const Team = () => {
                 </td>
                 <td className='px-3 py-4'>
                     <Tooltip text='Assign verticals'>
-                        <span onClick={() => handleClick(row, '')}>{can('edit_team') && EditIcon}</span>
+                        <span onClick={() => handleClick(row, '')}>{can('edit_member_team') && EditIcon}</span>
                     </Tooltip>
                 </td>
             </tr>
@@ -92,7 +92,7 @@ const Team = () => {
                 </thead>
                 <tbody>{renderTeams}</tbody>
             </table>
-            {show && can('edit_team') && (
+            {show && can('edit_member_team') && (
                 <PseudosMemberForm
                     show={show}
                     setShow={setShow}

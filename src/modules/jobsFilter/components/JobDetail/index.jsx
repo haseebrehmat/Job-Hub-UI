@@ -4,8 +4,8 @@ import { Button, Drawer, Badge } from '@components'
 import { JobSource, TechSTack } from '@icons'
 
 const JobDetail = ({ show, setShow, values }) => (
-    <Drawer show={show} setShow={setShow} w='520px'>
-        <div className='max-w-4xl p-6 bg-white border border-gray-300  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 my-2'>
+    <Drawer show={show} setShow={setShow} w='920px'>
+        <div className='max-w-4xl p-6 bg-white border border-gray-300  rounded-lg shadow'>
             <div className='flex mt-4'>
                 <svg
                     className='w-10 h-10 mb-2'
@@ -35,31 +35,33 @@ const JobDetail = ({ show, setShow, values }) => (
             <div className='flex gap-2 ml-1 mt-2'>
                 <div className='flex'>
                     {JobSource}{' '}
-                    <p className='text-base text-gray-600 dark:text-white mx-2'>
+                    <p className='text-base text-gray-600 '>
                         {' '}
                         <Badge label={values.job_source} />
                     </p>
                 </div>
                 <div className='flex'>
                     {TechSTack}{' '}
-                    <p className='text-base text-gray-600 dark:text-white mx-2'>
+                    <p className='text-base text-gray-600 '>
                         {' '}
                         <Badge label={values.tech_stack} type='success' />
                     </p>
                 </div>
             </div>
             <a className=' ' target='_blank' rel='noreferrer' href={values.job_url}>
-                <h5 className='text-2xl font-semibold tracking-tight text-gray-900 dark:text-white mt-4 hover:text-[#10868a]'>
+                <h5 className='text-2xl font-semibold tracking-tight text-gray-900  hover:text-[#10868a]'>
                     {values.job_title}
-                    <span className='text-base text-gray-500 dark:text-white mx-2'>( {values.job_type} based )</span>
+                    <span className='text-base text-gray-500 '>( {values.job_type} based )</span>
                 </h5>
             </a>
-            <p className='font-normal text-gray-500 dark:text-gray-400'>{values.job_description}</p>
-            <div className='mt-8 space-y-2 px-20'>
+            <p className='font-normal text-gray-900'>
+                {' '}
+                <div dangerouslySetInnerHTML={{ __html: values.job_description }} />
+            </p>
+            <div className='mt-8 space-y-2 px-60'>
                 <Button label='Cancel' onClick={() => setShow(false)} />
             </div>
         </div>
     </Drawer>
 )
-
 export default memo(JobDetail)

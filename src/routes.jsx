@@ -166,7 +166,7 @@ export const routes = [
         component: <Team />,
         protect: true,
         title: 'Team Management',
-        permission: 'all',
+        permission: 'view_member_team',
     },
 ]
 
