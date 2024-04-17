@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Button } from '@components'
 
-import { ActionButtons, ExperienceActions, ExperienceForm } from '@modules/pseudos/components'
+import { ActionButtons, ProjectActions, ExperienceForm } from '@modules/pseudos/components'
 import { fetchProjects } from '@modules/pseudos/api'
 
 import { formatDate2 } from '@utils/helpers'
@@ -32,7 +32,7 @@ const Projects = ({ id }) => {
                     data?.map((row, idx) => (
                         <div className='bg-white rounded-md p-4 border relative' key={idx}>
                             <h2 className='text-lg'>{row?.designation ?? 'Not Specified'}</h2>
-                            <ExperienceActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                            <ProjectActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             <div className='flex flex-col mt-2'>
                                 <div className='ml-2 font-semibold'>{row?.company_name ?? 'Not Specified'}</div>
                                 <div className='ml-2 text-sm italic'>

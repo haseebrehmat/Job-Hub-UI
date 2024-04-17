@@ -15,6 +15,7 @@ import LinkForm from '@modules/pseudos/components/LinkForm'
 import LinkActions from '@modules/pseudos/components/LinkActions'
 import OtherSectionForm from '@modules/pseudos/components/OtherSectionForm'
 import OtherSectionActions from '@modules/pseudos/components/OtherSectionActions'
+import ProjectActions from '@modules/pseudos/components/ProjectActions'
 
 export {
     PseudoActions,
@@ -34,4 +35,5 @@ export {
     LinkActions,
     OtherSectionForm,
     OtherSectionActions,
+    ProjectActions,
 }

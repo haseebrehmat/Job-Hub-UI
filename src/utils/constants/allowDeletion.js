@@ -8,3 +8,4 @@ export const VERTICAL_HOBBY_DELETION = true
 export const VERTICAL_LANGUAGE_DELETION = true
 export const VERTICAL_LINK_DELETION = true
 export const VERTICAL_OTHER_SECTION_DELETION = true
+export const VERTICAL_PROJECT_DELETION = true
