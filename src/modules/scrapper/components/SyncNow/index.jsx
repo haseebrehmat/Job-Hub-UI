@@ -1,6 +1,6 @@
 import { memo, useState, useRef, useEffect } from 'react'
 import useSWRMutation from 'swr/mutation'
-import useSWR from 'swr'
+import useSWRImmutable from 'swr/immutable'
 
 import { Button } from '@components'
 
@@ -9,13 +9,13 @@ import { syncNow, getScrapperCycleStatus, toggleScrapperCycleStatus } from '@mod
 import { JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 
 import { RunScrapperIcon, PauseIcon } from '@icons'
-import { baseURL } from '@utils/http'
 
 const SyncNow = () => {
     const [isOpen, setIsOpen] = useState(false)
     const divRef = useRef(null)
 
-    const { data, isLoading, mutate } = useSWR('api/job_scraper/sync_scheduler/', getScrapperCycleStatus)
+    const { data, isLoading, mutate } = useSWRImmutable('api/job_scraper/sync_scheduler/', getScrapperCycleStatus)
+
     const { isMutating: isMutating1, trigger: trigger1 } = useSWRMutation(
         ['/api/job_scraper/sync/', 'single-job-source'],
         syncNow,
@@ -27,12 +27,13 @@ const SyncNow = () => {
     )
 
     const { isMutating: isMutating2, trigger: trigger2 } = useSWRMutation(
-        [`${baseURL}api/job_scraper/sync_scheduler/`],
+        'api/job_scraper/sync_scheduler/',
         toggleScrapperCycleStatus,
         {
             shouldRetryOnError: true,
             revalidateOnFocus: false,
             revalidateOnReconnect: false,
+            onSuccess: () => mutate(),
         }
     )
 
@@ -54,12 +55,8 @@ const SyncNow = () => {
         }
     })
 
-    const handleTriggerforScrapper = () => {
-        trigger2()
-        if (!isMutating2) {
-            mutate()
-        }
-    }
+    const handleTriggerforScrapper = () => trigger2()
+
     return (
         <div className='relative inline-block text-left' ref={divRef}>
             <div className='flex'>
@@ -73,9 +70,9 @@ const SyncNow = () => {
                 />
                 {!isMutating2 && !isLoading && (
                     <Button
-                        label={!data ? 'Pause ' : 'Continue '}
+                        label={data ? 'Stop ' : 'Start '}
                         fit
-                        icon={!data ? PauseIcon : RunScrapperIcon}
+                        icon={data ? PauseIcon : RunScrapperIcon}
                         onClick={() => handleTriggerforScrapper()}
                         disabled={isLoading}
                         fill={!data}
