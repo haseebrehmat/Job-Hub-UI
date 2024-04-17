@@ -24,6 +24,8 @@ import {
     Vertical,
 } from '@modules'
 
+import { JobDetail } from '@modules/jobsFilter/components'
+
 import { getToken, decodeJwt } from '@utils/helpers'
 import App from './App'
 
@@ -56,6 +58,13 @@ export const routes = [
         component: <JobsFilter />,
         protect: true,
         title: 'Jobs Portal',
+        permission: 'view_job_portal',
+    },
+    {
+        path: '/job-details',
+        component: <JobDetail />,
+        protect: true,
+        title: 'Job Details',
         permission: 'view_job_portal',
     },
     {

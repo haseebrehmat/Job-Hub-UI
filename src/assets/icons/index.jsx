@@ -13,6 +13,7 @@ import {
     MdCheckBoxOutlineBlank,
     MdOutlinePostAdd,
     MdOutlineDriveFolderUpload,
+    MdWork,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -29,7 +30,7 @@ import {
     BsFillPlayFill,
     BsCardList,
 } from 'react-icons/bs'
-import { HiUser, HiUsers, HiOutlineUsers, HiOutlineWifi } from 'react-icons/hi'
+import { HiUser, HiUsers, HiOutlineUsers, HiOutlineWifi, HiOutlineOfficeBuilding } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
 import { TbRefresh } from 'react-icons/tb'
@@ -131,3 +132,5 @@ export const TechSTack = <RiStackFill style={{ fontSize: '22px' }} />
 export const PseudoIcon = <RiProfileLine style={{ fontSize: 16 }} />
 export const LogsIcon = <AiOutlineHistory style={{ fontSize: '22px' }} />
 export const PauseIcon = <BiPause style={{ fontSize: '22px' }} />
+export const JobIcon = <MdWork style={{ fontSize: '22px' }} />
+export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }} />
