@@ -17,7 +17,7 @@ const ProjectActions = memo(({ id, edit, mutate }) => {
             <DeleteDialog
                 show={show}
                 setShow={setShow}
-                url={`api/profile/experience/${id}/`}
+                url={`api/profile/project/${id}/`}
                 refetch={mutate}
                 perm={VERTICAL_PROJECT_DELETION}
             >
