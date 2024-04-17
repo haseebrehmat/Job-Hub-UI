@@ -19,7 +19,6 @@ const Teams = () => {
     const [showPesudoForm, setShowPesudoForm] = useState(false)
     const navigate = useNavigate()
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=${query}`, fetchTeams)
-
     const handleClick = (row, action) => {
         if (action === 'edit') {
             setTeam(row)
@@ -40,14 +39,6 @@ const Teams = () => {
             })
         }
     }
-    const setTooltip = () => {
-        if (can('view_member_team')) {
-            console.log('cannn', can('view_member_team'))
-            return true
-        }
-        return false
-    }
-
     if (isLoading) return <Loading />
 
     const renderTeams = error ? (
@@ -56,11 +47,16 @@ const Teams = () => {
         data?.teams?.map((row, idx) => (
             <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                 <td className='px-3 py-6'>{idx + 1}</td>
-                <Tooltip text='Click to view | edit team members' disable={setTooltip}>
-                    <td className='px-3 py-6 capitalize my-2 hover:cursor-pointer' onClick={handleNavigate(row)}>
-                        {row?.name ?? '-'}
-                    </td>
-                </Tooltip>
+                <td
+                    className={`px-3 py-6 capitalize my-2 ${can('view_member_team') ? 'hover:cursor-pointer' : ''}`}
+                    onClick={() => handleNavigate(row)}
+                >
+                    {can('view_member_team') ? (
+                        <Tooltip text='Click to view | edit team members'>{row?.name ?? '-'}</Tooltip>
+                    ) : (
+                        row?.name ?? '-'
+                    )}
+                </td>
                 <td className='px-3 py-6 capitalize'>
                     <span className=' flex flex-col justify-center'>
                         {row?.reporting_to?.username}
