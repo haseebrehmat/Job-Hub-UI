@@ -44,4 +44,4 @@ export const JOB_SOURCES = {
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
 export const LOGS_HEADS = ['ID', 'Source', 'Total jobs', 'Created_at', 'Updated_at']
 export const JOB_SOURCE_LINK_HEADS = ['ID', 'Source', 'Links', '']
-export const SCRAPER_STATUS_HEADS = ['ID', 'Source', 'Status']
+export const SCRAPER_STATUS_HEADS = ['ID', 'Source', 'Type', 'Status']
