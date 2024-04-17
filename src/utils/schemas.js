@@ -208,3 +208,10 @@ export const verticalSchema = Yup.object().shape({
 export const verticalmemberSchema = Yup.object().shape({
     user_id: Yup.string().required('Section name is required'),
 })
+
+export const projectSchema = Yup.object().shape({
+    name: Yup.string().required('Project name is required'),
+    title: Yup.string().required('Title of yours is required'),
+    description: Yup.string().max(1000, 'Project description is too long'),
+    repo: Yup.string().url('Please enter a github/bitbucket/gitlab repository URL'),
+})
