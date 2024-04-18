@@ -33,7 +33,7 @@ import { HiUser, HiUsers, HiOutlineUsers, HiOutlineWifi, HiOutlineOfficeBuilding
 import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
 import { TbRefresh, TbCalendarTime } from 'react-icons/tb'
-import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
+import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
 import {
     AiOutlineSearch,
     AiOutlineEye,
@@ -133,3 +133,4 @@ export const LogsIcon = <AiOutlineHistory style={{ fontSize: '22px' }} />
 export const PauseIcon = <BiPause style={{ fontSize: '22px' }} />
 export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }} />
 export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
+export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
