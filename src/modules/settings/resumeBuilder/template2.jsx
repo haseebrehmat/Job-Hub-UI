@@ -5,7 +5,7 @@ import { formatDate4 } from '@utils/helpers'
 import { svgs } from './svgs'
 
 const Template2 = ({ data: dev }) => (
-    <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[24cm] md:max-h-[29.7cm] w-full h-full'>
+    <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:max-h-[29.7cm] w-full h-full'>
         <div className='flex flex-col mb-10'>
             <p className='text-blue-900 text-6xl font-bold'>{dev?.basic?.name ?? 'no name'}</p>
             <p className='text-gray-500 text-3xl font-bold mt-3'>{dev?.basic?.title ?? 'no title'}</p>

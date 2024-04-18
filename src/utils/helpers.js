@@ -248,3 +248,5 @@ export const formatStringInPascal = str => {
 }
 
 export const parsePlatform = value => (value ? SOCIAL_PLATFORM_OPTIONS.find(row => row.value === value) : null)
+
+export const replaceNewLine = str => str.replace(/\n/g, '<br>')

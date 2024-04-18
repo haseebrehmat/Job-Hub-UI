@@ -6,7 +6,7 @@ import { avatarPlaceholder } from '@constants/profile'
 import { svgs } from './svgs'
 
 const Template1 = ({ data: dev }) => (
-    <div className='p-8 bg-white shadow-2xl border-2 rounded-lg md:w-[24cm] md:max-h-[29.7cm] w-full h-full'>
+    <div className='p-8 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:max-h-[29.7cm] w-full h-full'>
         <div className='flex items-center'>
             <img src={dev?.basic?.avatar ?? avatarPlaceholder} alt='Profile' className='w-28 h-w-28 rounded-full' />
             <div className='flex items-center justify-between w-full'>
