@@ -46,10 +46,10 @@ const Team = () => {
                 </td>
                 <td className='px-3 py-4'>
                     <span className='flex items-center gap-1 '>
-                        {row.vertical.length > 0
-                            ? row?.vertical?.map(member => (
+                        {row?.verticals?.length > 0
+                            ? row?.verticals?.map(member => (
                                   <div className='gap-2'>
-                                      <Badge label={member} />
+                                      <Badge label={member?.id} />
                                   </div>
                               ))
                             : '-'}
