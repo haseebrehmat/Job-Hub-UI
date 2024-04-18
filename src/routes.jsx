@@ -22,6 +22,7 @@ import {
     ResumeBuilder,
     Pseudos,
     Vertical,
+    ApplyForJob,
 } from '@modules'
 
 import { getToken, decodeJwt } from '@utils/helpers'
@@ -166,6 +167,13 @@ export const routes = [
         component: <Team />,
         protect: true,
         title: 'Team Management',
+        permission: 'all',
+    },
+    {
+        path: '/apply-for-job/:id',
+        component: <ApplyForJob />,
+        protect: true,
+        title: 'Apply For Job',
         permission: 'all',
     },
 ]

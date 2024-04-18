@@ -11,6 +11,7 @@ import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
 import { GenerateCSV, JobDetail } from '@modules/jobsFilter/components'
+import { Link } from 'react-router-dom'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -464,7 +465,13 @@ const JobsFilter = memo(() => {
                                 <td className='p-5'>{item?.job_type}</td>
                                 <td className='p-5'>{formatDate(item?.job_posted_date)}</td>
                                 <td className='p-2'>
-                                    {can('apply_job') ? (
+                                    <Link
+                                        to={`/apply-for-job/${item?.id}`}
+                                        className='rounded bg-[#10868a] text-white text-sm p-2'
+                                    >
+                                        Apply
+                                    </Link>
+                                    {/* {can('apply_job') ? (
                                         item?.job_status === '0' ? (
                                             <button
                                                 className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
@@ -477,7 +484,7 @@ const JobsFilter = memo(() => {
                                                 {filterState?.jobStatusChoice[item?.job_status]}
                                             </button>
                                         )
-                                    ) : null}
+                                    ) : null} */}
                                 </td>
                                 {CustomModal}
                                 <td className='p-5'>

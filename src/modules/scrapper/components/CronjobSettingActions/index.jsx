@@ -3,6 +3,7 @@ import { memo, useState } from 'react'
 import { Button, DeleteDialog } from '@components'
 
 import { can } from '@utils/helpers'
+import { CRONJOB_SETTING_DELETION } from '@constants/allowDeletion'
 
 import { TrashIcon, EditIcon } from '@icons'
 
@@ -12,13 +13,17 @@ const CronjobSettingActions = memo(({ id, edit, mutate }) => {
     return (
         <div className='flex items-center'>
             {can('delete_cronjob_setting') && (
-                <DeleteDialog show={show} setShow={setShow} url={`api/job_scraper/scheduler/${id}/`} refetch={mutate}>
-                    <Button classes='bg-transparent border-0 px-0' icon={TrashIcon} onClick={() => setShow(true)} />
+                <DeleteDialog
+                    show={show}
+                    setShow={setShow}
+                    url={`api/job_scraper/scheduler/${id}/`}
+                    refetch={mutate}
+                    perm={CRONJOB_SETTING_DELETION}
+                >
+                    <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
                 </DeleteDialog>
             )}
-            {can('edit_cronjob_setting') && (
-                <Button classes='bg-transparent border-0 px-0' icon={EditIcon} onClick={() => edit()} />
-            )}
+            {can('edit_cronjob_setting') && <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />}
         </div>
     )
 })

@@ -40,6 +40,6 @@ export const toggleScrapperCycleStatus = url => {
     rawHttp
         .post(url)
         .then(data =>
-            toast.success(`${data.data[0] === 'Sync stopped' ? 'Scrapper Cycle Paused' : 'Scrapper Cycle Continued'} `)
+            toast.success(`${data.data[0] === 'Sync stopped' ? 'Scrapper Cycle Stopped' : 'Scrapper Cycle Started'} `)
         )
 }

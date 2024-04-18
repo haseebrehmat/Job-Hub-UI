@@ -156,7 +156,7 @@ export const createVerticalSchema = Yup.object().shape({
 export const verticalBasicInfoSchema = Yup.object().shape({
     ...createVerticalSchema.fields,
     address: Yup.string().max(100, 'Address is too long'),
-    summary: Yup.string().max(250, 'Summary is too long'),
+    summary: Yup.string().max(500, 'Summary is too long'),
     phone: Yup.string(),
     portfolio: Yup.string().url('Portfolio Website is not valid'),
 })
@@ -207,4 +207,11 @@ export const verticalSchema = Yup.object().shape({
 
 export const verticalmemberSchema = Yup.object().shape({
     user_id: Yup.string().required('Section name is required'),
+})
+
+export const projectSchema = Yup.object().shape({
+    name: Yup.string().required('Project name is required'),
+    title: Yup.string().required('Title of yours is required'),
+    description: Yup.string().max(1000, 'Project description is too long'),
+    repo: Yup.string().url('Please enter a github/bitbucket/gitlab repository URL'),
 })
