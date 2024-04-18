@@ -21,7 +21,7 @@ const Teams = () => {
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/team/?search=${query}`, fetchTeams)
 
     const handleClick = (row, action) => {
-        if (action === 'edit') {
+        if (action === 'edit' || action === 'create') {
             setTeam(row)
             setShowEditForm(!showEditForm)
         } else {
@@ -41,14 +41,14 @@ const Teams = () => {
                 <Tooltip text='Click to view | edit team members'>
                     <td
                         className='px-3 py-6 capitalize my-2 hover:cursor-pointer'
-                        onClick={() =>
-                            navigate('/team-details', {
-                                state: {
-                                    data: row,
-                                    title: row?.name,
-                                },
-                            })
-                        }
+                        // onClick={() =>
+                        //     navigate('/team-details', {
+                        //         state: {
+                        //             data: row,
+                        //             title: row?.name,
+                        //         },
+                        //     })
+                        // }
                     >
                         {row?.name ?? '-'}
                     </td>
@@ -90,7 +90,7 @@ const Teams = () => {
                         label='Create Team'
                         fit
                         icon={CreateIcon}
-                        onClick={() => handleClick({ name: '', reporting_to: '', members: [] })}
+                        onClick={() => handleClick({ name: '', reporting_to: '', members: [] }, 'create')}
                     />
                 )}
             </div>
