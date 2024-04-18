@@ -20,6 +20,7 @@ import Logger from '@modules/logger'
 import ResumeBuilder from '@modules/settings/resumeBuilder'
 import Pseudos from '@modules/pseudos'
 import Vertical from '@/modules/pseudos/vertical'
+import ApplyForJob from '@modules/jobsFilter/applyForJob'
 
 export {
     TeamAppliedJobs,
@@ -45,4 +46,5 @@ export {
     ResumeBuilder,
     Pseudos,
     Vertical,
+    ApplyForJob,
 }
