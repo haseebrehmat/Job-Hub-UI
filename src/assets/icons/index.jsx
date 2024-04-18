@@ -13,7 +13,6 @@ import {
     MdCheckBoxOutlineBlank,
     MdOutlinePostAdd,
     MdOutlineDriveFolderUpload,
-    MdWork,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -33,7 +32,7 @@ import {
 import { HiUser, HiUsers, HiOutlineUsers, HiOutlineWifi, HiOutlineOfficeBuilding } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh } from 'react-icons/tb'
+import { TbRefresh, TbCalendarTime } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser } from 'react-icons/fi'
 import {
     AiOutlineSearch,
@@ -132,5 +131,5 @@ export const TechSTack = <RiStackFill style={{ fontSize: '22px' }} />
 export const PseudoIcon = <RiProfileLine style={{ fontSize: 16 }} />
 export const LogsIcon = <AiOutlineHistory style={{ fontSize: '22px' }} />
 export const PauseIcon = <BiPause style={{ fontSize: '22px' }} />
-export const JobIcon = <MdWork style={{ fontSize: '22px' }} />
 export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }} />
+export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />

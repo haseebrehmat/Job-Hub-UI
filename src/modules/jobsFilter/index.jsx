@@ -216,9 +216,6 @@ const JobsFilter = memo(() => {
             },
         })
     }
-
-    console.log(filterState)
-
     if (filterState?.isLoading) return <Loading />
     return (
         <div className='text-[#048C8C]'>

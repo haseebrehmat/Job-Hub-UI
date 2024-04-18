@@ -3,16 +3,28 @@ import { useLocation } from 'react-router-dom'
 
 import { Badge } from '@components'
 
-import { JobSource, TechSTack, JobIcon, CompanyIcon } from '@icons'
+import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon } from '@icons'
 
 import { formatDate } from '@/utils/helpers'
+
+const row = [
+    { name: 'ali hassan' },
+    { name: 'Usman asif' },
+    { name: 'zahid' },
+    { name: 'ahsan' },
+    { name: 'uzair' },
+    { name: 'ali' },
+    { name: 'obaid' },
+    { name: 'zahid' },
+    { name: 'ahsan' },
+    { name: 'uzair' },
+]
 
 const JobDetail = () => {
     const location = useLocation()
     let values = ''
     if (location.state) {
         values = location.state.data
-        console.log(values)
     }
     return (
         <div className='px-6'>
@@ -21,13 +33,15 @@ const JobDetail = () => {
                     <div className='flex flex-col col-span-3'>
                         <div className='flex flex-col space-y-4  p-6 '>
                             <div className='flex flex-row text-sm'>
-                                <span className='mr-3'>{JobIcon}</span>
+                                <span className='mr-3'>{UserAppliedJobIcon}</span>
                                 <p className='flex items-center  text-gray-900'>
                                     <span className='font-semibold mr-2 text-md uppercase'>Title :</span>
-                                    <span>{values?.job_title}</span>
+                                    <span>
+                                        {values?.job_title}{' '}
+                                        <span className='text-gray-1000 font-semibold'>({values?.job_type})</span>
+                                    </span>
                                 </p>
                             </div>
-
                             <div className='flex flex-row text-sm'>
                                 <span className='mr-3'>{CompanyIcon}</span>
                                 <p className='flex items-center  text-gray-900'>
@@ -37,7 +51,7 @@ const JobDetail = () => {
                             </div>
 
                             <div className='flex flex-row text-sm'>
-                                <span className='mr-3'>{TechSTack}</span>
+                                <span className='mr-3'>{DateTimeIcon}</span>
                                 <p className='flex items-center  text-gray-900'>
                                     <span className='font-semibold mr-2 text-md uppercase'>Posted at :</span>
                                     <span>{formatDate(values?.job_posted_date)}</span>
@@ -45,7 +59,7 @@ const JobDetail = () => {
                             </div>
                         </div>
                         <div className='flex flex-col w-full relative bottom-0'>
-                            <div className='grid grid-cols-4 border-t divide-x  bg-gray-50  py-3'>
+                            <div className='grid grid-cols-4 border-t divide-x  bg-gray-100  py-3'>
                                 <div
                                     className={`uppercase text-xs flex flex-row items-center justify-center font-semibold ${
                                         values?.block ? '' : 'line-through text-gray-500'
@@ -53,16 +67,16 @@ const JobDetail = () => {
                                 >
                                     recruiter
                                 </div>
-                                <div className='cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold'>
+                                <div className='uppercase text-xs flex flex-row items-center justify-center font-semibold'>
                                     <div className='mr-2'>{JobSource}</div>
                                     {values?.job_source}
                                 </div>
-                                <div className='cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold'>
+                                <div className=' uppercase text-xs flex flex-row items-center justify-center font-semibold'>
                                     <div className='mr-2'>{TechSTack}</div>
                                     {values?.tech_keywords}
                                 </div>
                                 <a
-                                    className='cursor-pointer uppercase text-xs flex flex-row items-center justify-center font-semibold'
+                                    className='uppercase text-xs flex flex-row items-center justify-center font-semibold'
                                     href={values?.job_source_url}
                                     target='_blank'
                                     rel='noreferrer'
@@ -85,7 +99,14 @@ const JobDetail = () => {
                         </div>
                     </div>
                     <div className='flex flex-col border-l  sm:h-full'>
-                        <span className='font-semibold  text-md uppercase mt-4 ml-4 '>Applied With </span>
+                        <span className='font-semibold  text-xl uppercase mt-4 ml-4 '>Applied With (10/20)</span>
+                        <div className='grid grid-rows-3 grid-flow-col gap-1 mt-3 px-4'>
+                            {row.map((member, idxx) => (
+                                <div className='gap-2' key={idxx}>
+                                    <Badge label={member?.name} type='success' />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,56 +121,12 @@ const JobDetail = () => {
                             </div>
                         </div>
                         <div className='flex flex-col w-full relative bottom-0'>
-                            <div className='grid grid-cols-3 border-t divide-x text-gray-500 bg-gray-50 py-3' />
+                            <div className='grid grid-cols-3 border-t divide-x text-gray-500 bg-gray-100 py-3' />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        // <div className='p-6 px-10 '>
-        //     <div className='flex mt-4 text-[#006366]'>
-        //         {JobIcon}
-        //         <div className='flex flex-col '>
-        //             <div className='text-3xl  font-semibold  text-[#006366] flex items-baseline'>
-        //                 {values?.company_name}
-        //                 <span className='text-sm  text-gray-500 mx-2'>
-        //                     {values?.block ? '( recruiter )' : '( non-recruiter )'}
-        //                 </span>
-        //             </div>
-
-        //             <p className='text-xs mt-1 text-gray-500'>{formatDate(values?.job_posted_date)}</p>
-        //         </div>
-        //     </div>
-
-        //     <div className='flex gap-6 ml-1 mt-2 mb-4'>
-        //         <div className='flex gap-2'>
-        //             {JobSource}{' '}
-        //             <p className='text-base text-gray-600 '>
-        //                 {' '}
-        //                 <Badge label={values?.job_source} />
-        //             </p>
-        //         </div>
-        //         <div className='flex gap-2'>
-        //             {TechSTack}{' '}
-        //             <p className='text-base text-gray-600 '>
-        //                 {' '}
-        //                 <Badge label={values?.tech_keywords} type='success' />
-        //             </p>
-        //         </div>
-        //     </div>
-        //     <hr />
-        //     <a className=' ' target='_blank' rel='noreferrer' href={values?.job_source_url}>
-        //         <h5 className='text-4xl font-semibold tracking-tight text-[#006366]  mt-4 hover:cursor-pointer hover:underline'>
-        //             {values?.job_title}
-        //             <span className='text-base text-gray-500 '>( {values?.job_type} based )</span>
-        //         </h5>
-        //     </a>
-        //     <p className='font-normal text-gray-900 mt-2'>
-        //         {' '}
-        //         <div dangerouslySetInnerHTML={{ __html: values?.job_description }} />
-        //     </p>
-        // </div>
     )
 }
 export default memo(JobDetail)
