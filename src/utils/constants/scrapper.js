@@ -35,9 +35,13 @@ export const JOB_SOURCES = {
     simplyhired: 'Simply Hired',
     other: 'Other',
     all: 'All',
+    // WITH UNDERSCORE
+    career_builder: 'Career Builder',
+    zip_recruiter: 'Zip Recruiter',
+    simply_hired: 'Simply Hired',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
 export const LOGS_HEADS = ['ID', 'Source', 'Total jobs', 'Created_at', 'Updated_at']
 export const JOB_SOURCE_LINK_HEADS = ['ID', 'Source', 'Links', '']
-export const SCRAPER_STATUS_HEADS = ['ID', 'Source', 'Status']
+export const SCRAPER_STATUS_HEADS = ['ID', 'Source', 'Type', 'Status']

@@ -27,6 +27,7 @@ const Basic = ({ id }) => {
             address: data?.address || '',
             description: data?.description || '',
             summary: data?.summary || '',
+            identity: data?.identity || '',
         },
         verticalBasicInfoSchema,
         async formValues => trigger({ ...formValues, vertical_id: id, hobbies }),

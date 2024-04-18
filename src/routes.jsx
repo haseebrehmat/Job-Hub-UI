@@ -22,6 +22,7 @@ import {
     ResumeBuilder,
     Pseudos,
     Vertical,
+    ApplyForJob,
 } from '@modules'
 
 import { JobDetail } from '@modules/jobsFilter/components'
@@ -176,6 +177,13 @@ export const routes = [
         protect: true,
         title: 'Team Management',
         permission: 'view_member_team',
+    },
+    {
+        path: '/apply-for-job/:id',
+        component: <ApplyForJob />,
+        protect: true,
+        title: 'Apply For Job',
+        permission: 'all',
     },
 ]
 

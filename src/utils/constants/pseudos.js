@@ -4,20 +4,26 @@ export const VERTICAL_SECTIONS = {
     basic: 'Basic Info',
     skill: 'Skill Set',
     experience: 'Experience',
+    project: 'Projects',
     education: 'Eduction History',
     language: 'Languages',
     link: 'Social Links',
     other: 'Other Sections',
+    cover_letter_template: 'Cover Letter Template',
+    resume_preview: 'Resume Preview',
 }
 
 export const VERTICAL_INITIAL_TABS = {
     basic: true,
     skill: false,
     experience: false,
+    project: false,
     education: false,
     language: false,
     link: false,
     other: false,
+    cover_letter_template: false,
+    resume_preview: false,
 }
 
 export const BASIC_INFO_INPUTS = [
@@ -51,6 +57,12 @@ export const BASIC_INFO_INPUTS = [
         type: 'url',
         ph: 'Enter vertical portfolio website',
     },
+    {
+        name: 'identity',
+        label: 'Identity',
+        type: 'text',
+        ph: 'Enter vertical identity like Python, Rails, or nothing..',
+    },
 ]
 
 export const PROFICIENCY_LEVELS = {
@@ -80,3 +92,13 @@ export const SOCIAL_PLATFORMS = {
     twitter: 'Twitter',
     other: 'Other',
 }
+
+export const COVER_LETTER_PLACEHOLDERS = [
+    'name',
+    'job_title',
+    'company_name',
+    'client_side_skills',
+    'server_side_skills',
+    'devops_side_skills',
+    'years_of_experience',
+]
