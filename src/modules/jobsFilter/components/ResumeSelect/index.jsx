@@ -7,7 +7,9 @@ import { Button, Loading } from '@components'
 import { Template1, Template2 } from '@modules/settings/templates'
 import { fetchProfile } from '@modules/profile/api'
 
-import { SelectedIcon } from '@icons'
+import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
+
+import { SelectedIcon, DownloadIcon } from '@icons'
 
 const ResumeSelect = ({ vertical, setResume }) => {
     const [tab, setTab] = useState(0)
@@ -21,26 +23,11 @@ const ResumeSelect = ({ vertical, setResume }) => {
         setSelectedDiv(ref)
     }
 
-    const downloadPdf = () => {
-        const options = {
-            margin: 0.5,
-            filename: 'resume.pdf',
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
-        }
-        return html2pdf().set(options).from(selectedDiv.current?.innerHTML).outputPdf().save()
-    }
+    const downloadPdf = () => html2pdf().set(RESUME_PDF_OPTIONS).from(selectedDiv.current?.innerHTML).outputPdf().save()
 
     useEffect(() => {
-        const options = {
-            margin: 0.25, // may be 0.5
-            filename: 'resume.pdf',
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-        }
         html2pdf()
-            .set(options)
+            .set(RESUME_PDF_OPTIONS)
             .from(selectedDiv?.current?.innerHTML)
             .output('blob')
             .then(blob => setResume(blob))
@@ -79,7 +66,7 @@ const ResumeSelect = ({ vertical, setResume }) => {
                     </div>
                 )}
             </div>
-            <Button label='Download' fit fill onClick={downloadPdf} />
+            <Button label='Download' icon={DownloadIcon} fit fill onClick={downloadPdf} classes='!m-4' />
         </div>
     )
 }

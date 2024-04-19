@@ -35,7 +35,7 @@ const ApplyForJob = () => {
         null,
         async formValues => trigger({ ...formValues }),
         null,
-        () => redirect('jobs-portal')
+        () => redirect('/jobs-portal')
     )
 
     if (isLoading1 || isLoading2 || wait) return <Loading />
