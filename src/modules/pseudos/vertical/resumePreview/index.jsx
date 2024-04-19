@@ -1,13 +1,11 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import Template1 from '@modules/settings/resumeBuilder/template1'
-import Template2 from '@modules/settings/resumeBuilder/template2'
-
 import { Button, Loading } from '@components'
 
 import { ActionButtons } from '@modules/pseudos/components'
 import { fetchProfile } from '@modules/pseudos/api'
+import { Template1, Template2 } from '@modules/settings/templates'
 
 const ResumeBuilder = ({ id }) => {
     const [tab, setTab] = useState(1)
@@ -33,8 +31,16 @@ const ResumeBuilder = ({ id }) => {
                         onClick={() => setTab(2)}
                     />
                 </div>
-                {tab === 1 && <Template1 data={data} />}
-                {tab === 2 && <Template2 data={data} />}
+                {tab === 1 && (
+                    <div className='p-8 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
+                        <Template1 data={data} />
+                    </div>
+                )}
+                {tab === 2 && (
+                    <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
+                        <Template2 data={data} />
+                    </div>
+                )}
             </div>
             <div className='bg-white px-4 mt-4 pt-4'>
                 <ActionButtons mutate={mutate} />
