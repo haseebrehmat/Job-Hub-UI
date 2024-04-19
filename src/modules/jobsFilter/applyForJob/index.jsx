@@ -1,92 +1,77 @@
-import { memo, useMemo, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import html2pdf from 'html2pdf.js'
+import { memo, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import useSWRImmutable from 'swr/immutable'
 
-import { CustomSelector, TextEditor, Button } from '@components'
+import { useMutate } from '@/hooks'
 
-import Template1 from '@modules/settings/resumeBuilder/template1'
-import Template2 from '@modules/settings/resumeBuilder/template2'
-import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
+import { CustomSelector, TextEditor, Loading, Button } from '@components'
 
-import { parsePlatform } from '@utils/helpers'
-import { SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
+import { ResumeSelect } from '@modules/jobsFilter/components'
+import { fetchUserVerticals, applyJob } from '@modules/jobsFilter/api'
 
-import { SelectedIcon } from '@icons'
+import { parseVerticals, decodeJwt, parseSelectedVertical } from '@utils/helpers'
 
 const ApplyForJob = () => {
+    const { user_id } = decodeJwt()
     const { id } = useParams()
-    const templateRefs = [useRef(null), useRef(null)]
-    const [selectedDiv, setSelectedDiv] = useState(templateRefs[0])
-    const [tab, setTab] = useState(0)
+    const redirect = useNavigate()
+
     const [pdfBlob, setPdfBlob] = useState(null)
+    const [verticalId, setVerticalId] = useState(null)
 
-    const handleClick = (index, ref) => {
-        setTab(index)
-        setSelectedDiv(ref)
-    }
+    const { data: data1, isLoading: isLoading1 } = useSWRImmutable(
+        `/api/profile/user_vertical/?user_id=${user_id}`,
+        fetchUserVerticals
+    )
+    const { data: data2, isLoading: isLoading2 } = useSWRImmutable(
+        `/api/profile/generate/cover_letter/?vertical_id=${verticalId}&job_id=${id}`,
+        verticalId ? fetchUserVerticals : null
+    )
 
-    useMemo(() => {
-        const options = {
-            margin: 0.25,
-            filename: 'resume.pdf',
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-        }
-        html2pdf()
-            .set(options)
-            .from(selectedDiv?.current?.innerHTML)
-            .output('blob')
-            .then(blob => setPdfBlob(blob))
-    }, [selectedDiv])
+    const { values, wait, handleSubmit, trigger, setFieldValue } = useMutate(
+        '/api/job_portal/job_status/',
+        applyJob,
+        { status: 1, vertical_id: verticalId, job: id, cover_letter: '', resume: pdfBlob },
+        null,
+        async formValues => trigger({ ...formValues }),
+        null,
+        () => redirect('job_portal')
+    )
 
+    if (isLoading1 || isLoading2 || wait) return <Loading />
     return (
         <div className='max-w-full mb-14 px-5'>
-            <div className='flex gap-5'>
-                <div className='flex flex-col space-y-4 w-1/2 bg-[#edfdfb] p-5 border border-gray-200 rounded-lg h-full'>
-                    <div className='z-20'>
-                        <p className='italic text-gray-600 py-2'>Select Vertical</p>
-                        <CustomSelector
-                            options={SOCIAL_PLATFORM_OPTIONS}
-                            selectorValue={parsePlatform('facebook')}
-                            handleChange={({ value }) => console.log(value)}
-                            placeholder='Select vertical'
-                        />
-                    </div>
-                    <TextEditor init={`Here your cover letter ${id}`} onChange={text => console.log(text)} />
-                </div>
-                <div className='xs:w-1/2'>
-                    <div className='flex flex-col items-center'>
-                        <div className='flex flex-row mb-5 gap-5'>
-                            <Button
-                                label='Template 1'
-                                fit
-                                fill={tab === 0}
-                                icon={tab === 0 && SelectedIcon}
-                                classes={`md:px-6 rounded-none ${tab !== 0 && 'border-gray-200'}`}
-                                onClick={() => handleClick(0, templateRefs[0])}
-                            />
-                            <Button
-                                label='Template 2'
-                                fit
-                                fill={tab === 1}
-                                icon={tab === 1 && SelectedIcon}
-                                classes={`md:px-6 rounded-none ${tab !== 1 && 'border-gray-200'}`}
-                                onClick={() => handleClick(1, templateRefs[1])}
+            <form onSubmit={handleSubmit}>
+                <div className='flex gap-5'>
+                    <div className='flex flex-col space-y-4 w-1/2 bg-[#edfdfb] p-5 border border-gray-200 rounded-lg h-full'>
+                        <div className='z-50'>
+                            <p className='italic text-gray-600 py-2'>Select Vertical</p>
+                            <CustomSelector
+                                options={parseVerticals(data1)}
+                                selectorValue={parseSelectedVertical(values.vertical_id, data1)}
+                                handleChange={({ value }) => {
+                                    setVerticalId(value)
+                                    setFieldValue('vertical_id', value)
+                                }}
+                                placeholder='Select vertical'
                             />
                         </div>
-                        {tab === 0 && (
-                            <div ref={templateRefs[0]} className='w-full'>
-                                <Template1 data={devProfile} />
-                            </div>
-                        )}
-                        {tab === 1 && (
-                            <div ref={templateRefs[1]}>
-                                <Template2 data={devProfile} />
-                            </div>
+                        {verticalId && (
+                            <>
+                                <TextEditor
+                                    init={data2?.cover_letter ?? `Here your cover letter ${id}`}
+                                    name='cover_letter'
+                                    onChange={text => setFieldValue('cover_letter', text)}
+                                />
+                                <Button label='Apply' type='submit' fill fit classes='px-8 md:px-12 !rounded-full' />
+                            </>
                         )}
                     </div>
+                    <div className='xs:w-1/2'>
+                        {verticalId && <ResumeSelect vertical={verticalId} setResume={setPdfBlob} />}
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

@@ -170,6 +170,7 @@ export const routes = [
         component: <Vertical />,
         protect: true,
         title: 'Veritcals',
+        permission: 'edit_vertical',
     },
     {
         path: '/team-details',

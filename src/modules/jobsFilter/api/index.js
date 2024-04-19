@@ -1,4 +1,6 @@
 import { checkToken, getToken } from '@/utils/helpers'
+import { http, rawHttp } from '@utils/http'
+import { toast } from 'react-hot-toast'
 
 const fetchJobs = async url => {
     checkToken()
@@ -86,3 +88,14 @@ const generateCoverLetter = async (url, data) => {
 }
 
 export { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter }
+
+export const fetchUserVerticals = link => http.get(link).then(({ data }) => data)
+
+export const applyJob = async (url, { arg: details }) => {
+    const { data } = await rawHttp.post(url, details, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+    return toast.success(data.detail || 'Job Applied successfully', { icon: '🎉', duration: 1000 })
+}
