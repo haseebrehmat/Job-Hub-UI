@@ -2,13 +2,13 @@ import { memo } from 'react'
 
 import { formatDate4 } from '@utils/helpers'
 
-import { svgs } from './svgs'
+import { svgs } from '../resumeBuilder/svgs'
 
 const Template2 = ({ data: dev }) => (
-    <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:max-h-[29.7cm] w-full h-full'>
+    <>
         <div className='flex flex-col mb-10'>
             <p className='text-blue-900 text-6xl font-bold'>{dev?.basic?.name ?? 'no name'}</p>
-            <p className='text-gray-500 text-3xl font-bold mt-3'>{dev?.basic?.title ?? 'no title'}</p>
+            <p className='text-gray-500 text-3xl font-bold mt-3'>{dev?.basic?.designation ?? 'no designation'}</p>
         </div>
         {dev?.summary?.length > 0 && (
             <div className='flex items-baseline justify-start mb-3 mt-10'>
@@ -33,6 +33,26 @@ const Template2 = ({ data: dev }) => (
                                     <p className='text-gray-500'>
                                         {formatDate4(from)} to {formatDate4(to)}
                                     </p>
+                                </div>
+                                <p className='text-gray-700'>{description ?? 'no description'}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        )}
+        {dev?.projects?.length > 0 && (
+            <div className='flex items-baseline justify-start my-3'>
+                <p className='text-blue-900 text-xl font-bold w-1/4'>Projects</p>
+                <div className='flex flex-col w-3/4'>
+                    <hr className='mb-3 border border-blue-900' />
+                    <div className='space-y-5'>
+                        {dev?.projects?.map(({ name, title, repo, description }, index) => (
+                            <div className='grid grid-cols-2 text-sm' key={index}>
+                                <div className='flex flex-col'>
+                                    <p className='text-blue-900 font-bold'>{name}</p>
+                                    <p className='italic'>{title}</p>
+                                    <p className='text-gray-500'>{repo ?? 'open source'}</p>
                                 </div>
                                 <p className='text-gray-700'>{description ?? 'no description'}</p>
                             </div>
@@ -107,7 +127,7 @@ const Template2 = ({ data: dev }) => (
                 </div>
             </div>
         </div>
-    </div>
+    </>
 )
 
 export default memo(Template2)

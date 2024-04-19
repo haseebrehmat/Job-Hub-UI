@@ -1,18 +1,18 @@
 import { memo } from 'react'
 
 import { formatDate4 } from '@utils/helpers'
-import { avatarPlaceholder } from '@constants/profile'
+import avatarPlaceholder from '@images/profile-placeholder.png'
 
-import { svgs } from './svgs'
+import { svgs } from '../resumeBuilder/svgs'
 
 const Template1 = ({ data: dev }) => (
-    <div className='p-8 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:max-h-[29.7cm] w-full h-full'>
+    <>
         <div className='flex items-center'>
             <img src={dev?.basic?.avatar ?? avatarPlaceholder} alt='Profile' className='w-28 h-w-28 rounded-full' />
             <div className='flex items-center justify-between w-full'>
                 <div className='ml-4'>
                     <h2 className='text-xl font-bold'>{dev?.basic?.name ?? 'no name'}</h2>
-                    <p className='text-gray-600'>{dev?.basic?.title ?? 'no title'}</p>
+                    <p className='text-gray-600'>{dev?.basic?.designation ?? 'no designation'}</p>
                 </div>
                 <div className='ml-4 text-end'>
                     <p className='text-sm py-0.5 text-gray-800'>{dev?.basic?.email ?? 'no email'}</p>
@@ -55,6 +55,22 @@ const Template1 = ({ data: dev }) => (
                 </div>
             </div>
         </div>
+        <hr className='my-6 border-2' />
+        {dev?.projects?.length > 0 && (
+            <div>
+                <h3 className='text-lg font-bold mb-1'>Projects</h3>
+                <div className='space-y-1.5 grid grid-cols-2'>
+                    {dev?.projects?.map(({ name, description, title, repo }, index) => (
+                        <div className='ml-4 mt-4' key={index}>
+                            <h4 className='text-md font-bold capitalize'>{name}</h4>
+                            <p className='text-gray-600'>{title}</p>
+                            <p className='text-gray-600 italic'>{repo ?? 'open source'}</p>
+                            <div className='ml-4'>{description ?? 'no description'}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )}
         <hr className='my-6 border-2' />
         <div className='grid grid-cols-2'>
             {dev?.experience?.length > 0 && (
@@ -127,7 +143,7 @@ const Template1 = ({ data: dev }) => (
                 {dev?.languages?.length > 0 && (
                     <div>
                         <h3 className='text-lg font-bold mb-2'>Languages</h3>
-                        <div className='ml-4 space-y-2'>
+                        <div className='ml-4 space-y-2 mb-2'>
                             {dev?.languages.map(({ name, level }, index) => (
                                 <div className='flex items-center justify-between' key={index}>
                                     <span>{name}</span>
@@ -165,7 +181,7 @@ const Template1 = ({ data: dev }) => (
                 )}
             </div>
         </div>
-    </div>
+    </>
 )
 
 export default memo(Template1)
