@@ -35,7 +35,7 @@ const ApplyForJob = () => {
         null,
         async formValues => trigger({ ...formValues }),
         null,
-        () => redirect('job_portal')
+        () => redirect('jobs-portal')
     )
 
     if (isLoading1 || isLoading2 || wait) return <Loading />
@@ -43,7 +43,7 @@ const ApplyForJob = () => {
         <div className='max-w-full mb-14 px-5'>
             <form onSubmit={handleSubmit}>
                 <div className='flex gap-5'>
-                    <div className='flex flex-col space-y-4 w-1/2 bg-[#edfdfb] p-5 border border-gray-200 rounded-lg h-full'>
+                    <div className='flex flex-col space-y-4 w-1/2 bg-[#edfdfb] p-5 border border-gray-200 rounded-lg h-full md:mt-8'>
                         <div className='z-50'>
                             <p className='italic text-gray-600 py-2'>Select Vertical</p>
                             <CustomSelector

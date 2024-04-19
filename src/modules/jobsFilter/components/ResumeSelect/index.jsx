@@ -4,8 +4,7 @@ import html2pdf from 'html2pdf.js'
 
 import { Button, Loading } from '@components'
 
-import Template1 from '@modules/settings/resumeBuilder/template1'
-import Template2 from '@modules/settings/resumeBuilder/template2'
+import { Template1, Template2 } from '@modules/settings/templates'
 import { fetchProfile } from '@modules/profile/api'
 
 import { SelectedIcon } from '@icons'
@@ -22,9 +21,20 @@ const ResumeSelect = ({ vertical, setResume }) => {
         setSelectedDiv(ref)
     }
 
+    const downloadPdf = () => {
+        const options = {
+            margin: 0.5,
+            filename: 'resume.pdf',
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
+        }
+        return html2pdf().set(options).from(selectedDiv.current?.innerHTML).outputPdf().save()
+    }
+
     useEffect(() => {
         const options = {
-            margin: 0.25,
+            margin: 0.25, // may be 0.5
             filename: 'resume.pdf',
             html2canvas: { scale: 2 },
             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
@@ -57,16 +67,19 @@ const ResumeSelect = ({ vertical, setResume }) => {
                     onClick={() => handleClick(1, templateRefs[1])}
                 />
             </div>
-            {tab === 0 && (
-                <div ref={templateRefs[0]} className='w-full'>
-                    <Template1 data={data.profile} />
-                </div>
-            )}
-            {tab === 1 && (
-                <div ref={templateRefs[1]}>
-                    <Template2 data={data.profile} />
-                </div>
-            )}
+            <div className='p-8 bg-white shadow-2xl border-2 rounded-lg'>
+                {tab === 0 && (
+                    <div ref={templateRefs[0]} className='md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
+                        <Template1 data={data.profile} />
+                    </div>
+                )}
+                {tab === 1 && (
+                    <div ref={templateRefs[1]} className='md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
+                        <Template2 data={data.profile} />
+                    </div>
+                )}
+            </div>
+            <Button label='Download' fit fill onClick={downloadPdf} />
         </div>
     )
 }
