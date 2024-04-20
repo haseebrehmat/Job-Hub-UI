@@ -8,6 +8,8 @@ import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/compo
 
 import { tableHeads, jobStatus } from '@constants/appliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
+import { DownloadIcon } from '@/assets/icons'
+import { Tooltip } from '@/components'
 
 const AppliedJobs = memo(({ userId = '' }) => {
     const [page, setPage] = useState(1)
@@ -58,6 +60,20 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                         <Badge label={jobStatus[job?.status]} type='success' />
                                     </td>
                                     <td className='px-3 py-4'>BD</td>
+                                    <td className='px-3 py-4'>
+                                        <div className='flex space-x-2'>
+                                            {job?.cover_letter && (
+                                                <a href={job?.cover_letter} download target='_blank' rel='noreferrer'>
+                                                    <Tooltip text='Download Cover Letter'>{DownloadIcon}</Tooltip>
+                                                </a>
+                                            )}
+                                            {job?.resume && (
+                                                <a href={job?.resume} download target='_blank' rel='noreferrer'>
+                                                    <Tooltip text='Download Resume'>{DownloadIcon}</Tooltip>
+                                                </a>
+                                            )}
+                                        </div>
+                                    </td>
                                 </tr>
                             ))
                         ) : (
