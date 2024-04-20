@@ -7,6 +7,7 @@ export const tableHeads = [
     'Job Type',
     'Status',
     'Agent (BD)',
+    'Vertical',
     'Attachments',
 ]
 
