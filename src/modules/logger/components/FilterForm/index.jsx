@@ -12,7 +12,6 @@ const FilterForm = ({ show, setShow, filters, setfilters }) => {
 
     const handleSubmit = () => {
         setfilters(values)
-        console.log(values)
         setShow(!show)
     }
 

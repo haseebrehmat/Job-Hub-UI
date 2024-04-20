@@ -45,6 +45,11 @@ const Logger = () => {
                             setPageInfo({ ...pageInfo, page: 1 })
                             handleFilter()
                         }}
+                        clear={() => {
+                            setQuery('')
+                            setPageInfo({ ...pageInfo, page: 1 })
+                            setfilters(defaultFilters)
+                        }}
                     />
                 </div>
                 <table className='table-auto w-full table h-100 text-left text-[#048C8C]'>
