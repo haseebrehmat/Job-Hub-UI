@@ -1,23 +1,53 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { EmptyTable, Loading, Tooltip, Paginated } from '@components'
+import { EmptyTable, Loading, Tooltip, Paginated, Searchbox } from '@components'
 
 import { fetchErrorLogs } from '@modules/logger/api'
 
 import { can, formatDate } from '@utils/helpers'
+import { FilterForm } from '@modules/logger/components/'
+
 import { ERROR_LOGGER_HEADS } from '@constants/logger'
 
 const Logger = () => {
     const [pageInfo, setPageInfo] = useState({ page: 1 })
-    const { data, isLoading, error } = useSWR(`/api/error_logger/error_logs/?page=${pageInfo?.page}`, fetchErrorLogs)
+    const [query, setQuery] = useState('')
+    const [filterShow, setFilterShow] = useState(false)
+    const defaultFilters = { logTypes: [], requestTypes: [] }
+    const [filters, setfilters] = useState(defaultFilters)
+    const formatArray = arr => arr.map(item => item.value).toString()
+    const { data, isLoading, error } = useSWR(
+        `/api/error_logger/error_logs/?search=${query}&page=${pageInfo?.page}&logsTypes=${formatArray(
+            filters?.logTypes
+        )}&requestTypes=${formatArray(filters?.requestTypes)}`,
+        fetchErrorLogs
+    )
 
     if (isLoading) return <Loading />
 
+    const handleFilter = () => {
+        setPageInfo({ ...pageInfo, page: 1 })
+        setFilterShow(!filterShow)
+    }
+
     return (
         <div className='min-h-screen'>
-            <div className='max-w-full overflow-x-auto shadow-md text-sm sm:rounded-lg mb-14'>
-                <table className='table-auto w-full table h-screen text-left mt-6 text-[#048C8C]'>
+            <div className='max-w-full overflow-x-auto shadow-md text-sm sm:rounded-lg px-2'>
+                <div className='flex items-center space-x-4 pb-6'>
+                    <Searchbox
+                        query={query}
+                        setQuery={text => {
+                            setQuery(text)
+                            setPageInfo({ ...pageInfo, page: 1 })
+                        }}
+                        apply={() => {
+                            setPageInfo({ ...pageInfo, page: 1 })
+                            handleFilter()
+                        }}
+                    />
+                </div>
+                <table className='table-auto w-full table h-100 text-left text-[#048C8C]'>
                     <thead className='uppercase border border-[#048C8C]'>
                         <tr>
                             {ERROR_LOGGER_HEADS.map(heading => (
@@ -83,7 +113,24 @@ const Logger = () => {
                     </tbody>
                 </table>
 
-                {data && (
+                {filterShow && (
+                    <FilterForm
+                        show={filterShow}
+                        setShow={setFilterShow}
+                        filters={filters}
+                        setfilters={filtersData => {
+                            setPageInfo({ ...pageInfo, page: 1 })
+                            setfilters(filtersData)
+                        }}
+                        resetForm={() => {
+                            setQuery('')
+                            setPageInfo({ ...pageInfo, page: 1 })
+                            setfilters(defaultFilters)
+                        }}
+                    />
+                )}
+
+                {data && data?.errors?.length > 0 && (
                     <Paginated
                         page={pageInfo?.page}
                         setPage={pageNumber => {
