@@ -1,4 +1,5 @@
 import { useState, memo, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Selector from './components/Selector'
 import CustomSelector from '../../components/CustomSelector'
 import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
@@ -10,8 +11,7 @@ import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@
 import { Filters, Badge } from '@/components'
 import { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
-import { GenerateCSV, JobDetail } from '@modules/jobsFilter/components'
-import { Link } from 'react-router-dom'
+import { GenerateCSV } from '@modules/jobsFilter/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -20,7 +20,6 @@ const JobsFilter = memo(() => {
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
     const [jobIdForLastCV, setJobIdForLastCV] = useState('')
-    const [showJobDetails, setShowJobDetails] = useState(false)
 
     const defaultFilterState = {
         techStacData: [],
@@ -38,19 +37,11 @@ const JobsFilter = memo(() => {
         ordering: '-job_posted_date',
         showCoverLetter: false,
         isLoading: true,
-        job_description: '',
-        job_title: '',
-        job_type: '',
-        company: '',
-        date: '',
-        company_type: '',
-        tech_stack: '',
-        job_source: '',
-        job_url: '',
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
 
+    const navigate = useNavigate()
     const defaulJobsFiltersParams = {
         job_source: '',
         tech_keywords: '',
@@ -217,31 +208,13 @@ const JobsFilter = memo(() => {
         'success'
     )
 
-    const setJobDetails = (
-        job_descriptions,
-        job_t,
-        job_typ,
-        company_name,
-        job_posted_date,
-        block,
-        tech_keywords,
-        job_sourc,
-        job_source_url
-    ) => {
-        setFilterState({
-            ...filterState,
-            showJObDescription: true,
-            job_description: job_descriptions,
-            job_title: job_t,
-            job_type: job_typ,
-            company: company_name,
-            date: formatDate(job_posted_date),
-            company_type: block,
-            tech_stack: tech_keywords,
-            job_source: job_sourc,
-            job_url: job_source_url,
+    const handleJobDetails = job => {
+        navigate('/job-details', {
+            state: {
+                data: job,
+                title: 'Job Details',
+            },
         })
-        setShowJobDetails(true)
     }
     if (filterState?.isLoading) return <Loading />
     return (
@@ -426,19 +399,7 @@ const JobsFilter = memo(() => {
                                 <td className='p-5 w-96'>
                                     <a
                                         className='hover:bg-gray-100 cursor-pointer'
-                                        onClick={() =>
-                                            setJobDetails(
-                                                item?.job_description,
-                                                item?.job_title,
-                                                item?.job_type,
-                                                item?.company_name,
-                                                item?.job_posted_date,
-                                                item?.block,
-                                                item?.tech_keywords,
-                                                item?.job_source,
-                                                item?.job_source_url
-                                            )
-                                        }
+                                        onClick={() => handleJobDetails(item)}
                                         data-title='click to open Job description'
                                     >
                                         {item?.job_title &&
@@ -465,13 +426,7 @@ const JobsFilter = memo(() => {
                                 <td className='p-5'>{item?.job_type}</td>
                                 <td className='p-5'>{formatDate(item?.job_posted_date)}</td>
                                 <td className='p-2'>
-                                    <Link
-                                        to={`/apply-for-job/${item?.id}`}
-                                        className='rounded bg-[#10868a] text-white text-sm p-2'
-                                    >
-                                        Apply
-                                    </Link>
-                                    {/* {can('apply_job') ? (
+                                    {can('apply_job') ? (
                                         item?.job_status === '0' ? (
                                             <button
                                                 className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
@@ -484,7 +439,7 @@ const JobsFilter = memo(() => {
                                                 {filterState?.jobStatusChoice[item?.job_status]}
                                             </button>
                                         )
-                                    ) : null} */}
+                                    ) : null}
                                 </td>
                                 {CustomModal}
                                 <td className='p-5'>
@@ -544,7 +499,7 @@ const JobsFilter = memo(() => {
                 }}
                 pages={pagesCount}
             />
-            {showJobDetails && <JobDetail show={showJobDetails} values={filterState} setShow={setShowJobDetails} />}
+            {/* <JobDetail values={filterState} /> */}
         </div>
     )
 })

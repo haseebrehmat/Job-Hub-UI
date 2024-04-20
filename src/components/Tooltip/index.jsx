@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react'
 
-const Tooltip = ({ text, down = false, children }) => {
+const Tooltip = ({ text, down = false, children, disable = false }) => {
     const memoizedTooltip = useMemo(
         () => (
             <span
@@ -17,7 +17,7 @@ const Tooltip = ({ text, down = false, children }) => {
     return (
         <div className='group relative flex'>
             {children}
-            {memoizedTooltip}
+            {!disable && memoizedTooltip}
         </div>
     )
 }

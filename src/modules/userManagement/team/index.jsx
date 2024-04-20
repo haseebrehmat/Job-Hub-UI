@@ -46,10 +46,10 @@ const Team = () => {
                 </td>
                 <td className='px-3 py-4'>
                     <span className='flex items-center gap-1 '>
-                        {row.vertical.length > 0
-                            ? row?.vertical?.map(member => (
+                        {row?.verticals?.length > 0
+                            ? row?.verticals?.map(member => (
                                   <div className='gap-2'>
-                                      <Badge label={member} />
+                                      <Badge label={member?.id} />
                                   </div>
                               ))
                             : '-'}
@@ -57,7 +57,7 @@ const Team = () => {
                 </td>
                 <td className='px-3 py-4'>
                     <Tooltip text='Assign verticals'>
-                        <span onClick={() => handleClick(row, '')}>{can('edit_team') && EditIcon}</span>
+                        <span onClick={() => handleClick(row, '')}>{can('edit_member_team') && EditIcon}</span>
                     </Tooltip>
                 </td>
             </tr>
@@ -92,7 +92,7 @@ const Team = () => {
                 </thead>
                 <tbody>{renderTeams}</tbody>
             </table>
-            {show && can('edit_team') && (
+            {show && can('edit_member_team') && (
                 <PseudosMemberForm
                     show={show}
                     setShow={setShow}

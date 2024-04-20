@@ -25,6 +25,8 @@ import {
     ApplyForJob,
 } from '@modules'
 
+import { JobDetail } from '@modules/jobsFilter/components'
+
 import { getToken, decodeJwt } from '@utils/helpers'
 import App from './App'
 
@@ -57,6 +59,13 @@ export const routes = [
         component: <JobsFilter />,
         protect: true,
         title: 'Jobs Portal',
+        permission: 'view_job_portal',
+    },
+    {
+        path: '/job-details',
+        component: <JobDetail />,
+        protect: true,
+        title: 'Job Details',
         permission: 'view_job_portal',
     },
     {
@@ -167,7 +176,7 @@ export const routes = [
         component: <Team />,
         protect: true,
         title: 'Team Management',
-        permission: 'all',
+        permission: 'view_member_team',
     },
     {
         path: '/apply-for-job/:id',
