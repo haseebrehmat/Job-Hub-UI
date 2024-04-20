@@ -1,6 +1,6 @@
 export const devProfile = {
     basic: {
-        name: 'Obaidullah Yousaf',
+        name: 'Usama Jawad',
         email: 'ubaid@example.com',
         phone: '+918888888888',
         address: '202 Edyth Green, North Marinaville-21524, South Carolina, USA',

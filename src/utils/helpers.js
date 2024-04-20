@@ -248,3 +248,19 @@ export const formatStringInPascal = str => {
 }
 
 export const parsePlatform = value => (value ? SOCIAL_PLATFORM_OPTIONS.find(row => row.value === value) : null)
+
+export const replaceNewLine = str => str.replace(/\n/g, '<br>')
+
+export const parseVerticals = verticals =>
+    verticals?.map(vertical => ({
+        value: vertical.id,
+        label: `${vertical.name}${vertical.identity ? ` - ${vertical.identity}` : ''}`,
+    }))
+
+export const parseSelectedVertical = (id, verticals) => {
+    if (id) {
+        const vertical = verticals.find(row => row?.id === id)
+        return { value: vertical?.id, label: `${vertical.name}${vertical.identity ? ` - ${vertical.identity}` : ''}` }
+    }
+    return null
+}

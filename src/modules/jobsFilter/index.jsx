@@ -1,5 +1,5 @@
 import { useState, memo, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Selector from './components/Selector'
 import CustomSelector from '../../components/CustomSelector'
 import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
@@ -425,8 +425,19 @@ const JobsFilter = memo(() => {
                                 <td className='p-5'>{item?.tech_keywords}</td>
                                 <td className='p-5'>{item?.job_type}</td>
                                 <td className='p-5'>{formatDate(item?.job_posted_date)}</td>
-                                <td className='p-2'>
-                                    {can('apply_job') ? (
+                                <td className=''>
+                                    {can('apply_job') && (
+                                        <Link
+                                            to={`/apply-for-job/${item?.id}`}
+                                            className='rounded bg-[#10868a] text-white p-2  text-sm inline-flex'
+                                        >
+                                            Apply
+                                            <span className='text-bold ml-0.5'>
+                                                ({item?.remaining_vertical ?? 0} / {item?.total_vertical ?? 0})
+                                            </span>
+                                        </Link>
+                                    )}
+                                    {/* {can('apply_job') ? (
                                         item?.job_status === '0' ? (
                                             <button
                                                 className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
@@ -439,7 +450,7 @@ const JobsFilter = memo(() => {
                                                 {filterState?.jobStatusChoice[item?.job_status]}
                                             </button>
                                         )
-                                    ) : null}
+                                        ) : null} */}
                                 </td>
                                 {CustomModal}
                                 <td className='p-5'>
