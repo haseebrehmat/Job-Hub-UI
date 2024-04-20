@@ -7,12 +7,22 @@ import { NavbarSearchIcon } from '@icons'
 const Searchbox = ({ name = 'search', ph = 'Search', query, setQuery, clear = null, apply = null }) => {
     const [value, setValue] = useState(query)
     const handleChange = e => setValue(e.target.value)
-    const handleClick = () => setQuery(value)
+    const handleClick = () => {
+        setQuery(value)
+    }
     const handleEnter = e => (e.key === 'Enter' ? setQuery(value) : null)
+
     const handleClear = () => {
         setQuery('')
         setValue('')
     }
+
+    const customClear = clear
+        ? () => {
+              clear()
+              setValue('')
+          }
+        : null
 
     return (
         <>
@@ -25,7 +35,7 @@ const Searchbox = ({ name = 'search', ph = 'Search', query, setQuery, clear = nu
                 </div>
                 <Input name={name} ph={ph} value={value} onChange={handleChange} onKeyDown={handleEnter} />
             </div>
-            <Filters clear={clear ?? handleClear} apply={apply} />
+            <Filters clear={customClear ?? handleClear} apply={apply} />
         </>
     )
 }
