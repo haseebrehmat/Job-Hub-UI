@@ -1,5 +1,4 @@
 import { useState, memo } from 'react'
-import useSWR from 'swr'
 
 import CustomSelector from '@components/CustomSelector'
 import { Button, Drawer } from '@components'
