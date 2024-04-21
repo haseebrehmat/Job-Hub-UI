@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { Loading, EmptyTable, Badge, Tooltip } from '@components'
@@ -11,6 +11,7 @@ import { teamMemberHeads } from '@constants/userManagement'
 
 import { can } from '@utils/helpers'
 import { EditIcon } from '@icons'
+import { Button } from '@/components'
 
 const Team = () => {
     const location = useLocation()
@@ -48,8 +49,8 @@ const Team = () => {
                     <span className='flex items-center gap-1 '>
                         {row?.verticals?.length > 0
                             ? row?.verticals?.map(member => (
-                                  <div className='gap-2'>
-                                      <Badge label={member?.id} />
+                                  <div className='gap-2' key={member?.id}>
+                                      <Badge label={member?.name} />
                                   </div>
                               ))
                             : '-'}
@@ -67,18 +68,23 @@ const Team = () => {
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex flex-col border shadow	text-[#006366] py-8 font-semibold px-6 mb-4 '>
-                <h1>Assigned Verticals</h1>
-                <div className='mt-4'>
-                    {data?.team?.verticals?.length > 0 &&
-                        data?.team?.verticals?.map(tag => (
-                            <span key={tag.id}>
-                                <span className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'>
-                                    {`${tag.id}-  ${tag.name}`}
+            <div className='flex border shadow	text-[#006366] py-8 font-semibold px-6 mb-4 justify-between'>
+                <div className='flex flex-col'>
+                    <h1>Assigned Verticals</h1>
+                    <div className='mt-4'>
+                        {data?.team?.verticals?.length > 0 &&
+                            data?.team?.verticals?.map(tag => (
+                                <span key={tag.id}>
+                                    <span className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'>
+                                        {`${tag.id}-  ${tag.name}`}
+                                    </span>
                                 </span>
-                            </span>
-                        ))}
+                            ))}
+                    </div>
                 </div>
+                <Link to='/teams' className='float-right'>
+                    <Button label='Back to teams' fit />
+                </Link>
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>

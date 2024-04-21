@@ -23,7 +23,7 @@ const layout = memo(({ children, title }) => {
                     <div className='h-100'>
                         <Navbar setShow={setShow} title={title} />
                     </div>
-                    <div className='h-auto overflow-scroll hide_scrollbar'>{children}</div>
+                    <div className='h-screen overflow-scroll hide_scrollbar'>{children}</div>
                 </div>
             </div>
         </main>
