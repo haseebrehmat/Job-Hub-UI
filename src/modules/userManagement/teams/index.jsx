@@ -37,21 +37,21 @@ const Teams = () => {
         data?.teams?.map((row, idx) => (
             <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                 <td className='px-3 py-6'>{idx + 1}</td>
-                <Tooltip text='Click to view | edit team members'>
-                    <td
-                        className='px-3 py-6 capitalize my-2 hover:cursor-pointer'
-                        onClick={() =>
-                            navigate('/team-details', {
-                                state: {
-                                    data: row,
-                                    title: row?.name,
-                                },
-                            })
-                        }
-                    >
-                        {row?.name ?? '-'}
-                    </td>
-                </Tooltip>
+
+                <td
+                    className='px-3 py-6 capitalize underline underline-offset-4 my-2 font-bold hover:cursor-pointer'
+                    onClick={() =>
+                        navigate('/team-details', {
+                            state: {
+                                data: row,
+                                title: row?.name,
+                            },
+                        })
+                    }
+                >
+                    <Tooltip text='View members'>{row?.name ?? '-'}</Tooltip>
+                </td>
+
                 <td className='px-3 py-6 capitalize'>
                     <span className=' flex flex-col justify-center'>
                         {row?.reporting_to?.username}

@@ -11,7 +11,10 @@ import { getMsg, parsePseudos } from '@utils/helpers'
 // import { can } from '@/utils/helpers'
 
 const PseudosMemberForm = ({ show, setShow, mutate, user, vert }) => {
-    const [pseudos, setPseudos] = useState({ pseudo: [], vertical: [] })
+    const [pseudos, setPseudos] = useState({
+        pseudo: [],
+        vertical: user?.verticals?.length > 0 ? parsePseudos(user?.verticals) : [],
+    })
     const { handleSubmit, trigger } = useMutate(
         'api/profile/user_vertical_assignment/',
         assignVertical,
