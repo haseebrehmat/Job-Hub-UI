@@ -1,4 +1,15 @@
-export const tableHeads = ['Applied At', 'Company Name', 'Job Title', 'Job Source','TECH STACK','JOB TYPE', 'Applied By', 'Status']
+export const tableHeads = [
+    'Applied At',
+    'Company Name',
+    'Job Title',
+    'Job Source',
+    'TECH STACK',
+    'JOB TYPE',
+    'Applied By',
+    'Vertical',
+    'Attachments',
+    'Status',
+]
 
 export const jobStatus = {
     0: 'To Apply',

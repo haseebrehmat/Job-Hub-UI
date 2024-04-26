@@ -1,15 +1,15 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Badge } from '@components'
+import { Loading, Badge, Tooltip } from '@components'
 
 import { fetchAppliedJobs } from '@modules/appliedJobs/api'
 import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
 
 import { tableHeads, jobStatus } from '@constants/appliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
-import { DownloadIcon } from '@/assets/icons'
-import { Tooltip } from '@/components'
+
+import { DownloadIcon } from '@icons'
 
 const AppliedJobs = memo(({ userId = '' }) => {
     const [page, setPage] = useState(1)
