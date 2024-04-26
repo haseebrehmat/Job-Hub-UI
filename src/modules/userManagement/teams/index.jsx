@@ -40,14 +40,7 @@ const Teams = () => {
 
                 <td
                     className='px-3 py-6 capitalize underline underline-offset-4 my-2 font-bold hover:cursor-pointer'
-                    onClick={() =>
-                        navigate('/team-details', {
-                            state: {
-                                data: row,
-                                title: row?.name,
-                            },
-                        })
-                    }
+                    onClick={() => navigate(`/team-details/${row?.id}`, { state: { title: row?.name } })}
                 >
                     <Tooltip text='View members'>{row?.name ?? '-'}</Tooltip>
                 </td>

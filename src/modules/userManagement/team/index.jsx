@@ -1,29 +1,24 @@
 import { memo, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Loading, EmptyTable, Badge, Tooltip } from '@components'
+import { Button, Loading, EmptyTable, Badge, Tooltip } from '@components'
 
 import { PseudosMemberForm } from '@modules/userManagement/components'
 import { fetchTeamMembers } from '@modules/userManagement/api'
 
+import { can } from '@utils/helpers'
 import { teamMemberHeads } from '@constants/userManagement'
 
-import { can } from '@utils/helpers'
 import { EditIcon } from '@icons'
-import { Button } from '@/components'
 
 const Team = () => {
-    const location = useLocation()
-    let team = ''
-    if (location.state) {
-        team = location.state.data
-    }
+    const { id } = useParams()
     const [user, setUser] = useState()
     const [show, setShow] = useState(false)
 
     const { data, error, isLoading, mutate } = useSWR(
-        `api/profile/user_vertical_assignment/?team_id=${team.id}`,
+        `api/profile/user_vertical_assignment/?team_id=${id}`,
         fetchTeamMembers
     )
 
@@ -57,9 +52,11 @@ const Team = () => {
                     </span>
                 </td>
                 <td className='px-3 py-4'>
-                    <Tooltip text='Assign verticals'>
-                        <span onClick={() => handleClick(row, '')}>{can('edit_member_team') && EditIcon}</span>
-                    </Tooltip>
+                    {can('edit_member_team') && (
+                        <Tooltip text='Assign verticals'>
+                            <span onClick={() => handleClick(row, '')}>{EditIcon}</span>
+                        </Tooltip>
+                    )}
                 </td>
             </tr>
         ))
@@ -68,7 +65,7 @@ const Team = () => {
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex border shadow	text-[#006366] py-8 font-semibold px-6 mb-4 justify-between'>
+            <div className='flex border shadow text-[#006366] py-8 font-semibold px-6 mb-4 justify-between'>
                 <div className='flex flex-col'>
                     <h1>Assigned Verticals</h1>
                     <div className='mt-4'>
@@ -76,7 +73,7 @@ const Team = () => {
                             data?.team?.verticals?.map(tag => (
                                 <span key={tag.id}>
                                     <span className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'>
-                                        {`${tag.id}-  ${tag.name}`}
+                                        {`${tag.id} -  ${tag.name}`}
                                     </span>
                                 </span>
                             ))}
@@ -105,6 +102,7 @@ const Team = () => {
                     mutate={mutate}
                     user={user}
                     vert={data?.team?.verticals}
+                    teamId={id}
                 />
             )}
         </div>

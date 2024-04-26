@@ -173,10 +173,10 @@ export const routes = [
         permission: 'edit_vertical',
     },
     {
-        path: '/team-details',
+        path: '/team-details/:id',
         component: <Team />,
         protect: true,
-        title: 'Team Management',
+        title: 'Team Details',
         permission: 'view_member_team',
     },
     {
