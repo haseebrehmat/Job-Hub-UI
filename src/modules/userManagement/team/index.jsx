@@ -50,7 +50,7 @@ const Team = () => {
                         {row?.verticals?.length > 0
                             ? row?.verticals?.map(member => (
                                   <div className='gap-2' key={member?.id}>
-                                      <Badge label={member?.name} />
+                                      <Badge label={`${member?.pseudo} | ${member?.name}`} />
                                   </div>
                               ))
                             : '-'}
