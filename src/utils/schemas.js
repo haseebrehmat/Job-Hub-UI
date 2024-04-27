@@ -157,7 +157,7 @@ export const verticalBasicInfoSchema = Yup.object().shape({
     ...createVerticalSchema.fields,
     address: Yup.string().max(100, 'Address is too long'),
     summary: Yup.string().max(500, 'Summary is too long'),
-    phone: Yup.string(),
+    phone: Yup.string().matches(/^[0-9+()\-\s]*$/, 'Invalid phone number'),
     portfolio: Yup.string().url('Portfolio Website is not valid'),
 })
 

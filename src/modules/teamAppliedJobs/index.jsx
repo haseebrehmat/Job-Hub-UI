@@ -1,15 +1,17 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
+import toast from 'react-hot-toast'
 
-import { Loading } from '@components'
+import { Loading, Tooltip } from '@components'
 
 import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
 
-import { tableHeads, jobStatus } from '@constants/teamAppliedJobs'
 import { checkToken, formatDate, timeSince } from '@utils/helpers'
-import toast from 'react-hot-toast'
 import { baseURL } from '@utils/http'
+import { tableHeads, jobStatus } from '@constants/teamAppliedJobs'
+
+import { DownloadIcon } from '@icons'
 
 const TeamAppliedJobs = memo(() => {
     const apiUrl = baseURL
@@ -108,6 +110,21 @@ const TeamAppliedJobs = memo(() => {
                                 <td className='px-3 py-4'>{job?.tech_keywords}</td>
                                 <td className='px-3 py-4'>{job?.job_type}</td>
                                 <td className='px-3 py-4'>{job?.applied_by_name || 'not-confirmed'}</td>
+                                <td className='px-3 py-4 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
+                                <td className='px-3 py-4'>
+                                    <div className='flex space-x-2'>
+                                        {job?.cover_letter && (
+                                            <a href={job?.cover_letter} download target='_blank' rel='noreferrer'>
+                                                <Tooltip text='Download Cover Letter'>{DownloadIcon}</Tooltip>
+                                            </a>
+                                        )}
+                                        {job?.resume && (
+                                            <a href={job?.resume} download target='_blank' rel='noreferrer'>
+                                                <Tooltip text='Download Resume'>{DownloadIcon}</Tooltip>
+                                            </a>
+                                        )}
+                                    </div>
+                                </td>
                                 <td className='px-3 py-4'>
                                     <select
                                         name='job_status'

@@ -8,9 +8,8 @@ import { assignVertical } from '@modules/userManagement/api'
 
 import { verticalmemberSchema } from '@utils/schemas'
 import { getMsg, parsePseudos } from '@utils/helpers'
-// import { can } from '@/utils/helpers'
 
-const PseudosMemberForm = ({ show, setShow, mutate, user, vert }) => {
+const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
     const [pseudos, setPseudos] = useState({
         pseudo: [],
         vertical: user?.verticals?.length > 0 ? parsePseudos(user?.verticals) : [],
@@ -24,7 +23,12 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert }) => {
         },
         verticalmemberSchema,
         async formValues =>
-            trigger({ ...formValues, user_id: user.id, verticals: pseudos.vertical.map(obj => obj.value) }),
+            trigger({
+                ...formValues,
+                user_id: user.id,
+                team_id: teamId,
+                verticals: pseudos.vertical.map(obj => obj.value),
+            }),
         error => toast.error(getMsg(error)),
         () => {
             mutate()

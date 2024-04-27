@@ -18,7 +18,7 @@ const Pseudos = () => {
     const [page, setPage] = useState(1)
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR('/api/profile/pseudo/', fetchPseudos)
+    const { data, error, isLoading, mutate } = useSWR(`/api/profile/pseudo/?search=${query}`, fetchPseudos)
 
     const handleClick = (values = null) => {
         setPseudo(values)

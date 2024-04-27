@@ -48,7 +48,7 @@ export const BASIC_INFO_INPUTS = [
     {
         name: 'phone',
         label: 'Phone',
-        type: 'text',
+        type: 'tel',
         ph: 'Enter vertical phone',
     },
     {

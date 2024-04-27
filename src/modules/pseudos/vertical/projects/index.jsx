@@ -42,7 +42,9 @@ const Projects = ({ id }) => {
                                         'N/A'
                                     )}
                                 </div>
-                                <div className='ml-3 mt-2 text-gray-600'>{row?.description ?? 'Not description'}</div>
+                                <div className='ml-3 mt-2 text-gray-600 break-words'>
+                                    {row?.description ?? 'Not description'}
+                                </div>
                             </div>
                         </div>
                     ))

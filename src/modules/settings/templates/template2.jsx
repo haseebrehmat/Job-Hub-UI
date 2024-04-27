@@ -15,7 +15,7 @@ const Template2 = ({ data: dev }) => (
                 <p className='text-blue-900 text-xl font-bold w-1/4'>Summary</p>
                 <div className='flex flex-col w-3/4'>
                     <hr className='mb-3 border border-blue-900' />
-                    <p className='text-gray-700 text-sm'>{dev?.summary ?? 'no summary'}</p>
+                    <p className='text-gray-700 text-sm break-words'>{dev?.summary ?? 'no summary'}</p>
                 </div>
             </div>
         )}
@@ -34,7 +34,7 @@ const Template2 = ({ data: dev }) => (
                                         {formatDate4(from)} to {formatDate4(to)}
                                     </p>
                                 </div>
-                                <p className='text-gray-700'>{description ?? 'no description'}</p>
+                                <p className='text-gray-700 break-words'>{description ?? 'no description'}</p>
                             </div>
                         ))}
                     </div>
@@ -54,7 +54,7 @@ const Template2 = ({ data: dev }) => (
                                     <p className='italic'>{title}</p>
                                     <p className='text-gray-500'>{repo ?? 'open source'}</p>
                                 </div>
-                                <p className='text-gray-700'>{description ?? 'no description'}</p>
+                                <p className='text-gray-700 break-words'>{description ?? 'no description'}</p>
                             </div>
                         ))}
                     </div>
