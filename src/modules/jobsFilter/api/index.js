@@ -25,6 +25,7 @@ const fetchJobs = async url => {
         detail,
     } = await response.json()
 
+    console.log('sdf', recruiter_jobs)
     return {
         status: response.ok ? 'success' : 'error',
         jobsData: data,
@@ -90,6 +91,8 @@ const generateCoverLetter = async (url, data) => {
 export { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter }
 
 export const fetchUserVerticals = link => http.get(link).then(({ data }) => data)
+
+export const fetchJob = link => http.get(link).then(({ data }) => data)
 
 export const applyJob = async (url, { arg: details }) => {
     const { data } = await rawHttp.post(url, details, {

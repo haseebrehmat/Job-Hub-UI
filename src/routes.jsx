@@ -62,7 +62,7 @@ export const routes = [
         permission: 'view_job_portal',
     },
     {
-        path: '/job-details',
+        path: '/job-details/:id',
         component: <JobDetail />,
         protect: true,
         title: 'Job Details',

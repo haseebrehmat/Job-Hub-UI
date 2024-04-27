@@ -125,8 +125,8 @@ const JobsFilter = memo(() => {
             setPagesCount(num_pages)
         } else {
             toast.error(detail)
+            setFilterState({ ...filterState, isLoading: false })
         }
-        setFilterState({ ...filterState, isLoading: false })
     }
 
     const updateParams = () => {
@@ -210,7 +210,7 @@ const JobsFilter = memo(() => {
     )
 
     const handleJobDetails = job => {
-        navigate('/job-details', {
+        navigate(`/job-details/${job.id}`, {
             state: {
                 data: job,
                 title: 'Job Details',
