@@ -91,6 +91,8 @@ export { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter 
 
 export const fetchUserVerticals = link => http.get(link).then(({ data }) => data)
 
+export const fetchJob = link => http.get(link).then(({ data }) => data)
+
 export const applyJob = async (url, { arg: details }) => {
     const { data } = await rawHttp.post(url, details, {
         headers: {

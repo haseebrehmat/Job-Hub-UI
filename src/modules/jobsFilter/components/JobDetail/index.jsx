@@ -1,11 +1,14 @@
 import { memo } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import useSWR from 'swr'
 
-import { Badge, Button } from '@components'
+import { Badge, Button, Loading } from '@components'
+
+import { fetchJob } from '@modules/jobsFilter/api'
 
 import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon } from '@icons'
 
-import { formatDate } from '@/utils/helpers'
+import { formatDate, Id } from '@/utils/helpers'
 
 const row = [
     { name: 'ali hassan' },
@@ -21,12 +24,10 @@ const row = [
 ]
 
 const JobDetail = () => {
-    const location = useLocation()
-    let values = ''
-    if (location.state) {
-        values = location.state.data
-        console.log(values)
-    }
+    const { id } = useParams()
+    const { data, isLoading } = useSWR(`api/profile/job_vertical/?user_id=${Id()}&job_id=${id}`, fetchJob)
+    console.log(data)
+    if (isLoading) return <Loading />
     return (
         <div className='px-6'>
             <div className='flex flex-col border rounded-lg overflow-hidden bg-white text-[#006366]'>
@@ -38,8 +39,10 @@ const JobDetail = () => {
                                 <p className='flex items-center  text-gray-900'>
                                     <span className='font-semibold mr-2 text-md uppercase'>Title :</span>
                                     <span>
-                                        {values?.job_title}{' '}
-                                        <span className='text-gray-1000 font-semibold'>({values?.job_type})</span>
+                                        {data?.job_details?.job_title}{' '}
+                                        <span className='text-gray-1000 font-semibold'>
+                                            ({data?.job_details?.job_type})
+                                        </span>
                                     </span>
                                 </p>
                             </div>
@@ -47,7 +50,7 @@ const JobDetail = () => {
                                 <span className='mr-3'>{CompanyIcon}</span>
                                 <p className='flex items-center  text-gray-900'>
                                     <span className='font-semibold mr-2 text-md uppercase'>Company :</span>
-                                    <span>{values?.company_name}</span>
+                                    <span>{data?.job_details?.company_name}</span>
                                 </p>
                             </div>
 
@@ -55,7 +58,7 @@ const JobDetail = () => {
                                 <span className='mr-3'>{DateTimeIcon}</span>
                                 <p className='flex items-center  text-gray-900'>
                                     <span className='font-semibold mr-2 text-md uppercase'>Posted at :</span>
-                                    <span>{formatDate(values?.job_posted_date)}</span>
+                                    <span>{formatDate(data?.job_details?.job_posted_date)}</span>
                                 </p>
                             </div>
                         </div>
@@ -63,22 +66,22 @@ const JobDetail = () => {
                             <div className='grid grid-cols-4 border-t divide-x  bg-gray-100  py-3'>
                                 <div
                                     className={`uppercase text-xs flex flex-row items-center justify-center font-semibold ${
-                                        values?.block ? '' : 'line-through text-gray-500'
+                                        data?.job_details?.block ? '' : 'line-through text-gray-500'
                                     }`}
                                 >
                                     recruiter
                                 </div>
                                 <div className='uppercase text-xs flex flex-row items-center justify-center font-semibold'>
                                     <div className='mr-2'>{JobSource}</div>
-                                    {values?.job_source}
+                                    {data?.job_details?.job_source}
                                 </div>
                                 <div className=' uppercase text-xs flex flex-row items-center justify-center font-semibold'>
                                     <div className='mr-2'>{TechSTack}</div>
-                                    {values?.tech_keywords}
+                                    {data?.job_details?.tech_keywords}
                                 </div>
                                 <a
                                     className='uppercase text-xs flex flex-row items-center justify-center font-semibold'
-                                    href={values?.job_source_url}
+                                    href={data?.job_details?.job_source_url}
                                     target='_blank'
                                     rel='noreferrer'
                                 >
@@ -101,10 +104,10 @@ const JobDetail = () => {
                     </div>
                     <div className='flex flex-col border-l  sm:h-full'>
                         <span className='font-semibold  text-xl uppercase mt-4 ml-4 '>
-                            Applied With ({values?.remaining_vertical}/{values?.total_vertical})
+                            Applied With ({data?.totaL_applied_count}/{data?.total_verticals_count})
                         </span>
                         <div className='grid grid-rows-3 grid-flow-col gap-1 mt-3 px-4'>
-                            {row.map((member, idxx) => (
+                            {data?.applied_verticals?.map((member, idxx) => (
                                 <div className='gap-2' key={idxx}>
                                     <Badge label={member?.name} type='success' />
                                 </div>
@@ -119,7 +122,7 @@ const JobDetail = () => {
                         <div className='flex flex-col space-y-4 p-6 text-gray-600'>
                             <div className='flex flex-row text-md'>
                                 <p className='flex items-center text-gray-900'>
-                                    <div dangerouslySetInnerHTML={{ __html: values?.job_description }} />
+                                    <div dangerouslySetInnerHTML={{ __html: data?.job_details?.job_description }} />
                                 </p>
                             </div>
                         </div>

@@ -210,7 +210,7 @@ const JobsFilter = memo(() => {
     )
 
     const handleJobDetails = job => {
-        navigate('/job-details', {
+        navigate(`/job-details/${job.id}`, {
             state: {
                 data: job,
                 title: 'Job Details',

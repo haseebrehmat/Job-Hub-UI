@@ -17,6 +17,8 @@ export const decodeJwt = () => (getToken() ? jwt_decode(getToken()) : { user: nu
 
 export const isSuper = () => decodeJwt()?.is_superuser
 
+export const Id = () => decodeJwt()?.user_id
+
 export const getMsg = error => error?.response?.data?.detail || 'Server error'
 
 export const getBaseUrl = nodeEnv => {

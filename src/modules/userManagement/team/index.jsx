@@ -73,7 +73,7 @@ const Team = () => {
                             data?.team?.verticals?.map(tag => (
                                 <span key={tag.id}>
                                     <span className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'>
-                                        {`${tag.id} -  ${tag.name}`}
+                                        {`${tag.name}`}
                                     </span>
                                 </span>
                             ))}
