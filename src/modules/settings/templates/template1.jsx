@@ -25,7 +25,7 @@ const Template1 = ({ data: dev }) => (
         <div className='grid grid-cols-2'>
             <div>
                 <h3 className='text-lg font-bold'>Summary</h3>
-                <p className='text-gray-600 text-sm'>{dev?.summary ?? ''}</p>
+                <p className='text-gray-600 text-sm break-words'>{dev?.summary ?? ''}</p>
             </div>
             <div className='ml-4'>
                 <h3 className='text-lg font-bold mb-2'>Skills</h3>
@@ -65,7 +65,7 @@ const Template1 = ({ data: dev }) => (
                             <h4 className='text-md font-bold capitalize'>{name}</h4>
                             <p className='text-gray-600'>{title}</p>
                             <p className='text-gray-600 italic'>{repo ?? 'open source'}</p>
-                            <div className='ml-4'>{description ?? 'no description'}</div>
+                            <div className='ml-4 break-words'>{description ?? 'no description'}</div>
                         </div>
                     ))}
                 </div>
@@ -83,7 +83,7 @@ const Template1 = ({ data: dev }) => (
                                 <p className='text-gray-600'>
                                     {company} ({formatDate4(from)} -- {formatDate4(to)})
                                 </p>
-                                <div className='ml-4'>{description ?? 'no description'}</div>
+                                <div className='ml-4 break-words'>{description ?? 'no description'}</div>
                             </div>
                         ))}
                     </div>

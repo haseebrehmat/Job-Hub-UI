@@ -31,7 +31,7 @@ const OtherSections = ({ id }) => {
                         <div className='bg-white rounded-md p-3 border border-cyan-600 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'No Name'}</h2>
                             <OtherSectionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
-                            <div className='ml-2 mt-1 text-gray-600'>{row?.value ?? 'Not detail'}</div>
+                            <div className='ml-2 mt-1 text-gray-600 break-words'>{row?.value ?? 'Not detail'}</div>
                         </div>
                     ))
                 ) : (
