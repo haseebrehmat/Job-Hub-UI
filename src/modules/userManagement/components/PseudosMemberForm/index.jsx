@@ -38,11 +38,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
 
     const removeVertical = id => {
         const verticals = pseudos.vertical
-        const index = verticals.findIndex(obj => obj.value === id)
-        if (index !== -1) {
-            verticals.splice(index, 1)
-        }
-        setPseudos({ ...pseudos, vertical: verticals })
+        setPseudos({ ...pseudos, vertical: verticals.filter(item => item.value !== id) })
     }
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
@@ -50,14 +46,14 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Vertical Assignment</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Verticles</span>
+                    <span className='text-xs font-semibold'>Verticals</span>
                     <CustomSelector
                         name='vertical'
                         options={parsePseudos(vert)}
                         handleChange={obj => setPseudos({ ...pseudos, vertical: obj })}
                         selectorValue={pseudos.vertical}
                         isMulti
-                        placeholder='Select verticles'
+                        placeholder='Select verticals'
                     />
                     <div className='pt-4 space-y-2'>
                         <Button label='Assign' type='submit' fill />

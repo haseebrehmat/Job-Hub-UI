@@ -12,7 +12,11 @@ import { getMsg, parsePseudos, parseVertical } from '@utils/helpers'
 // import { can } from '@/utils/helpers'
 
 const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
-    const [pseudos, setPseudos] = useState({ pseudo: [], vertical: [] })
+    const { data, isLoading } = useSWR('api/profile/team_vertical_assignment/', fetchPseudos)
+    const [pseudos, setPseudos] = useState({
+        pseudo: [],
+        vertical: team?.verticals?.length > 0 ? parseVertical(team) : [],
+    })
     const { handleSubmit, trigger } = useMutate(
         'api/profile/team_vertical_assignment/',
         assignVertical,
@@ -32,13 +36,8 @@ const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
 
     const removeVertical = id => {
         const verticals = pseudos.vertical
-        const index = verticals.findIndex(obj => obj.value === id)
-        if (index !== -1) {
-            verticals.splice(index, 1)
-        }
-        setPseudos({ ...pseudos, vertical: verticals })
+        setPseudos({ ...pseudos, vertical: verticals.filter(item => item.value !== id) })
     }
-    const { data, isLoading } = useSWR('api/profile/team_vertical_assignment/', fetchPseudos)
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
@@ -57,17 +56,17 @@ const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
                             placeholder='Select Pseudos'
                         />
                     )}
-                    <span className='text-xs font-semibold'>Verticles</span>
+                    <span className='text-xs font-semibold'>Verticals</span>
                     {isLoading ? (
-                        'Verticles Loading ...'
+                        'Verticals Loading ...'
                     ) : (
                         <CustomSelector
                             name='vertical'
-                            options={parseVertical(pseudos.pseudo, data?.pseudos)}
+                            options={parseVertical(pseudos.pseudo)}
                             handleChange={obj => setPseudos({ ...pseudos, vertical: obj })}
                             selectorValue={pseudos.vertical}
                             isMulti
-                            placeholder='Select verticles'
+                            placeholder='Select verticals'
                         />
                     )}
 

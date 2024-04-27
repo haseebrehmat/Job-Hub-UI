@@ -1,7 +1,7 @@
 import { memo } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-import { Badge } from '@components'
+import { Badge, Button } from '@components'
 
 import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon } from '@icons'
 
@@ -25,6 +25,7 @@ const JobDetail = () => {
     let values = ''
     if (location.state) {
         values = location.state.data
+        console.log(values)
     }
     return (
         <div className='px-6'>
@@ -99,7 +100,9 @@ const JobDetail = () => {
                         </div>
                     </div>
                     <div className='flex flex-col border-l  sm:h-full'>
-                        <span className='font-semibold  text-xl uppercase mt-4 ml-4 '>Applied With (10/20)</span>
+                        <span className='font-semibold  text-xl uppercase mt-4 ml-4 '>
+                            Applied With ({values?.remaining_vertical}/{values?.total_vertical})
+                        </span>
                         <div className='grid grid-rows-3 grid-flow-col gap-1 mt-3 px-4'>
                             {row.map((member, idxx) => (
                                 <div className='gap-2' key={idxx}>
@@ -126,6 +129,9 @@ const JobDetail = () => {
                     </div>
                 </div>
             </div>
+            <Link to='/jobs-portal' className='float-right'>
+                <Button label='Back to Jobs Portal' fit />
+            </Link>
         </div>
     )
 }
