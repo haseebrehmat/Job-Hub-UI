@@ -87,6 +87,7 @@ const JobsFilter = memo(() => {
             .filter(Boolean)
 
     const fetchJobsData = async url => {
+        setFilterState(prevFilters => ({ ...prevFilters, isLoading: true }))
         setData([])
         const {
             jobsData,
@@ -124,8 +125,8 @@ const JobsFilter = memo(() => {
             setPagesCount(num_pages)
         } else {
             toast.error(detail)
-            setFilterState({ ...filterState, isLoading: false })
         }
+        setFilterState({ ...filterState, isLoading: false })
     }
 
     const updateParams = () => {
