@@ -125,8 +125,8 @@ const JobsFilter = memo(() => {
             setPagesCount(num_pages)
         } else {
             toast.error(detail)
+            setFilterState({ ...filterState, isLoading: false })
         }
-        setFilterState({ ...filterState, isLoading: false })
     }
 
     const updateParams = () => {
