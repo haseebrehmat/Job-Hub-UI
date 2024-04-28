@@ -7,6 +7,7 @@ import { replaceNewLine } from '@utils/helpers'
 
 export default function App({
     init = 'Start writing from here',
+    value = '',
     name = null,
     download = false,
     h = 500,
@@ -33,6 +34,7 @@ export default function App({
                 apiKey='cwe1lw25hfmuo0hjvs2u0aosqll2gzb83eqc9znkuywu43ci'
                 onInit={(evt, editor) => (editorRef.current = editor)}
                 initialValue={replaceNewLine(init)}
+                value={value}
                 init={{
                     height: h,
                     menubar: bar,
