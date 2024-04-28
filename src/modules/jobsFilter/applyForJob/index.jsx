@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import useSWRImmutable from 'swr/immutable'
 
@@ -18,6 +18,7 @@ const ApplyForJob = () => {
 
     const [pdfBlob, setPdfBlob] = useState(null)
     const [verticalId, setVerticalId] = useState(null)
+    const [coverLetter, setCoverLetter] = useState(`Here your cover letter ${id}`)
 
     const { data: data1, isLoading: isLoading1 } = useSWRImmutable(
         `/api/profile/user_vertical/?user_id=${user_id}`,
@@ -31,12 +32,13 @@ const ApplyForJob = () => {
     const { values, wait, handleSubmit, trigger, setFieldValue } = useMutate(
         '/api/job_portal/job_status/',
         applyJob,
-        { status: 1, vertical_id: verticalId, job: id, cover_letter: '', resume: pdfBlob },
+        { status: 1, vertical_id: verticalId, job: id, resume: pdfBlob },
         null,
-        async formValues => trigger({ ...formValues }),
+        async formValues => trigger({ ...formValues, cover_letter: coverLetter }),
         null,
         () => redirect('/jobs-portal')
     )
+    useMemo(() => setCoverLetter(data2?.cover_letter), [data2])
 
     if (isLoading1 || isLoading2 || wait) return <Loading />
     return (
@@ -60,8 +62,8 @@ const ApplyForJob = () => {
                             <>
                                 <TextEditor
                                     init={data2?.cover_letter ?? `Here your cover letter ${id}`}
-                                    name='cover_letter'
-                                    onChange={text => setFieldValue('cover_letter', text)}
+                                    value={coverLetter}
+                                    onChange={text => setCoverLetter(text)}
                                 />
                                 <Button label='Apply' type='submit' fill fit classes='px-8 md:px-12 !rounded-full' />
                             </>
