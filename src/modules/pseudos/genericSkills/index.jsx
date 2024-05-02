@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { SkillActions, GenericSkillForm } from '@modules/pseudos/components'
+import { GenericSkillActions, GenericSkillForm } from '@modules/pseudos/components'
 import { fetchPseudos } from '@modules/pseudos/api'
 
 import { CreateIcon, BackToIcon } from '@icons'
@@ -41,7 +41,7 @@ const GenericSkills = () => {
                         data?.map((row, idx) => (
                             <div className='bg-white rounded-md p-4 border relative' key={idx}>
                                 <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
-                                <SkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                                <GenericSkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                                 <div className='flex items-center mt-2'>
                                     <div className='w-full bg-gray-200 rounded-lg overflow-hidden shadow-inner'>
                                         <div className='bg-[#4f9d9b] h-2' style={{ width: `${row.level * 20}%` }} />
@@ -51,7 +51,7 @@ const GenericSkills = () => {
                             </div>
                         ))
                     ) : (
-                        <span className='ml-2 text-gray-500'>No skills found yet!</span>
+                        <span className='ml-2 text-gray-500'>No generic skills found yet!</span>
                     )}
                 </div>
             </div>

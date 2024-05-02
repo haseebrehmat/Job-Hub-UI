@@ -18,6 +18,7 @@ import OtherSectionActions from '@modules/pseudos/components/OtherSectionActions
 import ProjectActions from '@modules/pseudos/components/ProjectActions'
 import ProjectForm from '@modules/pseudos/components/ProjectForm'
 import GenericSkillForm from '@modules/pseudos/components/GenericSkillForm'
+import GenericSkillActions from '@modules/pseudos/components/GenericSkillActions'
 
 export {
     PseudoActions,
@@ -40,4 +41,5 @@ export {
     ProjectActions,
     ProjectForm,
     GenericSkillForm,
+    GenericSkillActions,
 }
