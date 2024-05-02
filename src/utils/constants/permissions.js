@@ -315,7 +315,14 @@ export const rawpermissions = [
             {
                 codename: 'view_pseudo',
                 name: 'View Pseudos',
-                child: ['create_pseudo', 'view_pseudo', 'edit_pseudo', 'create_vertical', 'edit_vertical'],
+                child: [
+                    'create_pseudo',
+                    'view_pseudo',
+                    'edit_pseudo',
+                    'create_vertical',
+                    'edit_vertical',
+                    'view_generic_skill',
+                ],
                 level: 2,
             },
             {
@@ -351,6 +358,12 @@ export const rawpermissions = [
             {
                 codename: 'delete_vertical',
                 name: 'Delete Vertical',
+                parent: ['view_pseudo'],
+                level: 2,
+            },
+            {
+                codename: 'view_generic_skill',
+                name: 'View Generic Skills',
                 parent: ['view_pseudo'],
                 level: 2,
             },
