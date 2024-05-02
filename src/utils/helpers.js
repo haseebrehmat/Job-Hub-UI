@@ -269,8 +269,16 @@ export const parseSelectedVertical = (id, verticals) => {
 
 export const parseSelectedGenericSkillType = type => {
     if (type) {
-        const genericSkill = GENERIC_SKILL_TYPES_OPTIONS.find(row => row?.value === type)
-        return { value: genericSkill?.value, label: genericSkill.label }
+        const genericSkillType = GENERIC_SKILL_TYPES_OPTIONS.find(row => row?.value === type)
+        return { value: genericSkillType?.value, label: genericSkillType.label }
+    }
+    return null
+}
+
+export const parseSelectedGenericSkill = (id, genericSkills) => {
+    if (id) {
+        const genericSkill = genericSkills.find(row => row?.id === id)
+        return { value: genericSkill?.id, label: genericSkill.name }
     }
     return null
 }
