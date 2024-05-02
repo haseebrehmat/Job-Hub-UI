@@ -7,7 +7,7 @@ import { Button, Drawer, Input, CustomSelector } from '@components'
 import { saveGenericSkill } from '@modules/pseudos/api'
 
 import { genericSkillSchema } from '@utils/schemas'
-import { parseSelectedGenericSkill } from '@utils/helpers'
+import { parseSelectedGenericSkillType } from '@utils/helpers'
 import { GENERIC_SKILL_TYPES_OPTIONS, GENERIC_SKILL_TYPES } from '@constants/pseudos'
 
 const GenericSkillForm = ({ show, setShow, mutate, skill }) => {
@@ -38,7 +38,7 @@ const GenericSkillForm = ({ show, setShow, mutate, skill }) => {
                     <CustomSelector
                         options={GENERIC_SKILL_TYPES_OPTIONS}
                         handleChange={({ value }) => setFieldValue('type', value)}
-                        selectorValue={parseSelectedGenericSkill(values.type)}
+                        selectorValue={parseSelectedGenericSkillType(values.type)}
                     />
                     {errors.type && <small className='__error'>{errors.type}</small>}
                     <div className='pt-4 space-y-2'>

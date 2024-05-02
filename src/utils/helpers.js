@@ -267,7 +267,7 @@ export const parseSelectedVertical = (id, verticals) => {
     return null
 }
 
-export const parseSelectedGenericSkill = type => {
+export const parseSelectedGenericSkillType = type => {
     if (type) {
         const genericSkill = GENERIC_SKILL_TYPES_OPTIONS.find(row => row?.value === type)
         return { value: genericSkill?.value, label: genericSkill.label }
