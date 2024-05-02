@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode'
 
-import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
+import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
 import { GENERIC_SKILL_TYPES, GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
 import { today } from '@constants/dashboard'
@@ -228,6 +228,8 @@ export const convertFrom24To12Format = time24 => {
 export const parseIntervalType = value => (value ? INTERVAL_TYPE_OPTIONS.find(row => row.value === value) : null)
 
 export const parseJobSource = value => (value ? JOB_SOURCE_OPTIONS.find(row => row.value === value) : null)
+
+export const parseJobType = value => (value ? JOB_TYPES_OPTIONS.find(row => row.value === value) : null)
 
 export const parseTechKeywords = techStacks => techStacks.map(techStack => ({ value: techStack, label: techStack }))
 

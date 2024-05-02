@@ -53,7 +53,10 @@ const JobSourceLinks = () => {
                                             <span className='font-mono m-1 inline-block' key={index}>
                                                 <a href={q.link} target='_blank' rel='noreferrer'>
                                                     <Tooltip text={q.link}>
-                                                        <Badge label={`Link ${index + 1}`} type='success' />
+                                                        <Badge
+                                                            label={`Link ${index + 1} | ${q.job_type}`}
+                                                            type='success'
+                                                        />
                                                     </Tooltip>
                                                 </a>
                                             </span>
