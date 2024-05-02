@@ -12,7 +12,7 @@ import { GENERIC_SKILL_TYPES_OPTIONS, GENERIC_SKILL_TYPES } from '@constants/pse
 
 const GenericSkillForm = ({ show, setShow, mutate, skill }) => {
     const { values, errors, handleSubmit, resetForm, trigger, handleChange, setFieldValue } = useMutate(
-        `/api/profile/skill${skill?.id ? `/${skill?.id}/` : '/'}`,
+        `/api/profile/generic_skill${skill?.id ? `/${skill?.id}/` : '/'}`,
         saveGenericSkill,
         { name: skill?.name || '', type: skill?.type || '' },
         genericSkillSchema,

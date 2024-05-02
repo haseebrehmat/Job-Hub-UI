@@ -122,3 +122,10 @@ export const saveGenericSkill = async (url, { arg: skill }) => {
     const { data: data_1 } = await rawHttp.post(url, skill)
     return toast.success(data_1.detail || 'Generic Skill created successfully')
 }
+
+export const fetchGenericSkills = url =>
+    http.get(url).then(({ data }) => ({
+        skills: data?.results,
+        total: data?.count,
+        pages: data?.num_pages,
+    }))

@@ -192,8 +192,7 @@ export const routes = [
         component: <GenericSkills />,
         protect: true,
         title: 'Generic Skills',
-        permission: 'all',
-        // permission: 'view_generic_skill',
+        permission: 'view_generic_skill',
     },
 ]
 

@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode'
 
 import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
-import { GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
+import { GENERIC_SKILL_TYPES, GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
 import { today } from '@constants/dashboard'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
@@ -278,7 +278,16 @@ export const parseSelectedGenericSkillType = type => {
 export const parseSelectedGenericSkill = (id, genericSkills) => {
     if (id) {
         const genericSkill = genericSkills.find(row => row?.id === id)
-        return { value: genericSkill?.id, label: genericSkill.name }
+        return {
+            value: genericSkill?.id,
+            label: `${genericSkill.name} - ${GENERIC_SKILL_TYPES[genericSkill.type] ?? 'N/A'}`,
+        }
     }
     return null
 }
+
+export const parseGenericSkills = genericSkills =>
+    genericSkills?.map(skill => ({
+        value: skill.id,
+        label: `${skill.name} - ${GENERIC_SKILL_TYPES[skill.type] ?? 'N/A'}`,
+    }))

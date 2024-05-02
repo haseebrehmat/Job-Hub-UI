@@ -5,9 +5,10 @@ import useSWR from 'swr'
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
 import { GenericSkillActions, GenericSkillForm } from '@modules/pseudos/components'
-import { fetchPseudos } from '@modules/pseudos/api'
+import { fetchGenericSkills } from '@modules/pseudos/api'
 
 import { CreateIcon, BackToIcon } from '@icons'
+import { GENERIC_SKILL_TYPES } from '@/utils/constants/pseudos'
 
 const GenericSkills = () => {
     const [query, setQuery] = useState('')
@@ -15,7 +16,10 @@ const GenericSkills = () => {
     const [skill, setSkill] = useState()
     const [show, setShow] = useState(false)
 
-    const { data, error, isLoading, mutate } = useSWR(`/api/profile/pseudo/?search=${query}`, fetchPseudos)
+    const { data, error, isLoading, mutate } = useSWR(
+        `/api/profile/generic_skill/?search=${query}&page=${page}`,
+        fetchGenericSkills
+    )
 
     const handleClick = values => {
         setSkill(values)
@@ -23,7 +27,6 @@ const GenericSkills = () => {
     }
 
     if (isLoading) return <Loading />
-
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center py-6 justify-between'>
@@ -35,25 +38,18 @@ const GenericSkills = () => {
                     <Button label='Back to pseudos' icon={BackToIcon} />
                 </Link>
             </div>
-            <div className='border border-[#048C8C] p-4'>
-                <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
-                    {data?.length > 0 && !error ? (
-                        data?.map((row, idx) => (
-                            <div className='bg-white rounded-md p-4 border relative' key={idx}>
-                                <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
-                                <GenericSkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
-                                <div className='flex items-center mt-2'>
-                                    <div className='w-full bg-gray-200 rounded-lg overflow-hidden shadow-inner'>
-                                        <div className='bg-[#4f9d9b] h-2' style={{ width: `${row.level * 20}%` }} />
-                                    </div>
-                                    <div className='ml-2'>{row?.level ?? 0}/5</div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <span className='ml-2 text-gray-500'>No generic skills found yet!</span>
-                    )}
-                </div>
+            <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
+                {data?.skills?.length > 0 && !error ? (
+                    data?.skills?.map((row, idx) => (
+                        <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
+                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
+                            <GenericSkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                            <div className='text-sm mt-2'>{GENERIC_SKILL_TYPES[row?.type] ?? 'N/A'}</div>
+                        </div>
+                    ))
+                ) : (
+                    <span className='m-auto p-5 text-gray-500'>No generic skills found yet!</span>
+                )}
             </div>
             {data?.users?.length > 24 && (
                 <div className='w-full'>
