@@ -1,22 +1,24 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Drawer, CustomSelector, SliderInput } from '@components'
+import { Button, Drawer, CustomSelector, SliderInput, Tooltip } from '@components'
 
-import { saveSkill, fetchPseudos } from '@modules/pseudos/api'
+import { GenericSkillForm } from '@modules/pseudos/components'
+import { saveSkill, fetchGenericSkills } from '@modules/pseudos/api'
 
 import { skillSchema } from '@utils/schemas'
-import { parseSelectedGenericSkill } from '@utils/helpers'
+import { parseSelectedGenericSkill, parseGenericSkills } from '@utils/helpers'
 
 const SkillForm = ({ show, setShow, mutate, skill, id }) => {
-    const { data, error, isLoading } = useSWR(`/api/profile/pseudo/`, fetchPseudos)
+    const [skillCreate, setSkillCreate] = useState(false)
+    const { data, error, isLoading, mutate: refetchSkills } = useSWR(`/api/profile/generic_skill/`, fetchGenericSkills)
 
     const { values, errors, handleSubmit, resetForm, trigger, handleChange, setFieldValue } = useMutate(
         `/api/profile/skill${skill?.id ? `/${skill?.id}/` : '/'}`,
         saveSkill,
-        { vertical_id: id, generic_skill_id: skill?.generic_skill_id || '', level: skill?.level || 0 },
+        { vertical_id: id, generic_skill_id: skill?.generic_skill?.id || 0, level: skill?.level || 0 },
         skillSchema,
         async formValues => trigger({ ...formValues, id: skill?.id }),
         null,
@@ -25,8 +27,7 @@ const SkillForm = ({ show, setShow, mutate, skill, id }) => {
             if (!skill?.id) resetForm()
         }
     )
-    const flag = values.generic_skill_id.length > 0 && values.level > 0
-
+    const flag = values.vertical_id > 0 && values.generic_skill_id > 0 && values.level > 0
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
@@ -39,11 +40,16 @@ const SkillForm = ({ show, setShow, mutate, skill, id }) => {
                         <div>Failed to load generic skill</div>
                     ) : (
                         <>
-                            <span className='text-xs font-semibold'>Skill*</span>
+                            <span className='text-xs font-semibold flex justify-between items-center'>
+                                Skill*
+                                <Tooltip text='Add skill'>
+                                    <Button label='+' classes='!px-1.5 !py-0.5' onClick={() => setSkillCreate(true)} />
+                                </Tooltip>
+                            </span>
                             <CustomSelector
-                                options={data.pseudos}
+                                options={parseGenericSkills(data?.skills)}
                                 handleChange={({ value }) => setFieldValue('generic_skill_id', value)}
-                                selectorValue={parseSelectedGenericSkill(values.generic_skill_id)}
+                                selectorValue={parseSelectedGenericSkill(values.generic_skill_id, data?.skills)}
                                 placeholder='Select Generic Skill'
                             />
                             {errors.generic_skill_id && <small className='__error'>{errors.generic_skill_id}</small>}
@@ -59,6 +65,9 @@ const SkillForm = ({ show, setShow, mutate, skill, id }) => {
                     </div>
                 </div>
             </form>
+            {skillCreate && (
+                <GenericSkillForm show={skillCreate} setShow={setSkillCreate} mutate={refetchSkills} close />
+            )}
         </Drawer>
     )
 }

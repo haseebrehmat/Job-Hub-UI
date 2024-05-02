@@ -10,7 +10,7 @@ import { genericSkillSchema } from '@utils/schemas'
 import { parseSelectedGenericSkillType } from '@utils/helpers'
 import { GENERIC_SKILL_TYPES_OPTIONS, GENERIC_SKILL_TYPES } from '@constants/pseudos'
 
-const GenericSkillForm = ({ show, setShow, mutate, skill }) => {
+const GenericSkillForm = ({ show, setShow, mutate, skill = null, close = false }) => {
     const { values, errors, handleSubmit, resetForm, trigger, handleChange, setFieldValue } = useMutate(
         `/api/profile/generic_skill${skill?.id ? `/${skill?.id}/` : '/'}`,
         saveGenericSkill,
@@ -21,6 +21,7 @@ const GenericSkillForm = ({ show, setShow, mutate, skill }) => {
         () => {
             mutate()
             if (!skill?.id) resetForm()
+            if (close) setShow(false)
         }
     )
     const flag = values.name.length > 0 && values.type.length > 0 && values.type in GENERIC_SKILL_TYPES
