@@ -29,7 +29,14 @@ import {
     BsFillPlayFill,
     BsCardList,
 } from 'react-icons/bs'
-import { HiUser, HiUsers, HiOutlineUsers, HiOutlineWifi, HiOutlineOfficeBuilding } from 'react-icons/hi'
+import {
+    HiUser,
+    HiUsers,
+    HiOutlineUsers,
+    HiOutlineWifi,
+    HiOutlineOfficeBuilding,
+    HiOutlineLightBulb,
+} from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
 import { TbRefresh, TbCalendarTime } from 'react-icons/tb'
@@ -134,3 +141,4 @@ export const PauseIcon = <BiPause style={{ fontSize: '22px' }} />
 export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }} />
 export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
 export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
+export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />

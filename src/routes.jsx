@@ -23,6 +23,7 @@ import {
     Pseudos,
     Vertical,
     ApplyForJob,
+    GenericSkills,
 } from '@modules'
 
 import { JobDetail } from '@modules/jobsFilter/components'
@@ -185,6 +186,14 @@ export const routes = [
         protect: true,
         title: 'Apply For Job',
         permission: 'all',
+    },
+    {
+        path: '/generic-skills',
+        component: <GenericSkills />,
+        protect: true,
+        title: 'Generic Skills',
+        permission: 'all',
+        // permission: 'view_generic_skill',
     },
 ]
 
