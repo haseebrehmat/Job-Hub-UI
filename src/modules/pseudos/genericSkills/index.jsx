@@ -7,8 +7,10 @@ import { Loading, Button, Searchbox, Paginated } from '@components'
 import { GenericSkillActions, GenericSkillForm } from '@modules/pseudos/components'
 import { fetchGenericSkills } from '@modules/pseudos/api'
 
+import { GENERIC_SKILL_TYPES } from '@constants/pseudos'
+import { can } from '@utils/helpers'
+
 import { CreateIcon, BackToIcon } from '@icons'
-import { GENERIC_SKILL_TYPES } from '@/utils/constants/pseudos'
 
 const GenericSkills = () => {
     const [query, setQuery] = useState('')
@@ -32,7 +34,9 @@ const GenericSkills = () => {
             <div className='flex items-center py-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={query} setQuery={setQuery} />
-                    <Button label='Create Generic Skill' fit icon={CreateIcon} onClick={() => handleClick(null)} />
+                    {can('create_generic_skill') && (
+                        <Button label='Create Generic Skill' fit icon={CreateIcon} onClick={() => handleClick(null)} />
+                    )}
                 </div>
                 <Link to='/pseudos'>
                     <Button label='Back to pseudos' icon={BackToIcon} />
@@ -43,7 +47,9 @@ const GenericSkills = () => {
                     data?.skills?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
-                            <GenericSkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                            {can('edit_generic_skill') && can('delete_generic_skill') && (
+                                <GenericSkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                            )}
                             <div className='text-sm mt-2'>{GENERIC_SKILL_TYPES[row?.type] ?? 'N/A'}</div>
                         </div>
                     ))
