@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode'
 
 import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
-import { SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
+import { GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
 import { today } from '@constants/dashboard'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
@@ -263,6 +263,14 @@ export const parseSelectedVertical = (id, verticals) => {
     if (id) {
         const vertical = verticals.find(row => row?.id === id)
         return { value: vertical?.id, label: `${vertical.name}${vertical.identity ? ` - ${vertical.identity}` : ''}` }
+    }
+    return null
+}
+
+export const parseSelectedGenericSkill = type => {
+    if (type) {
+        const genericSkill = GENERIC_SKILL_TYPES_OPTIONS.find(row => row?.value === type)
+        return { value: genericSkill?.value, label: genericSkill.label }
     }
     return null
 }

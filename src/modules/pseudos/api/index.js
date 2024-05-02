@@ -113,3 +113,12 @@ export const saveProject = async (url, { arg: project }) => {
     const { data: data_1 } = await rawHttp.post(url, project)
     return toast.success(data_1.detail || 'Project created successfully')
 }
+
+export const saveGenericSkill = async (url, { arg: skill }) => {
+    if (skill?.id) {
+        const { data } = await rawHttp.put(url, skill)
+        return toast.success(data.detail || 'Generic Skill updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, skill)
+    return toast.success(data_1.detail || 'Generic Skill created successfully')
+}

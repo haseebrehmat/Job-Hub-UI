@@ -6,7 +6,7 @@ import { isValidFileTypeForAvatar } from '@utils/helpers'
 import { today } from '@constants/dashboard'
 import { MAX_FILE_SIZE } from '@constants/profile'
 import { JOB_SOURCES } from '@constants/scrapper'
-import { SOCIAL_PLATFORMS } from '@constants/pseudos'
+import { GENERIC_SKILL_TYPES, SOCIAL_PLATFORMS } from '@constants/pseudos'
 
 export const loginSchema = Yup.object({
     email: Yup.string().email().required(),
@@ -214,4 +214,11 @@ export const projectSchema = Yup.object().shape({
     title: Yup.string().required('Title of yours is required'),
     description: Yup.string().max(1000, 'Project description is too long'),
     repo: Yup.string().url('Please enter a github/bitbucket/gitlab repository URL'),
+})
+
+export const genericSkillSchema = Yup.object().shape({
+    name: Yup.string().required('Skill name is required'),
+    type: Yup.mixed()
+        .oneOf(Object.keys(GENERIC_SKILL_TYPES), 'Invalid skill type')
+        .required('Please select skill type'),
 })

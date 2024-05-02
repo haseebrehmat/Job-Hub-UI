@@ -102,3 +102,17 @@ export const COVER_LETTER_PLACEHOLDERS = [
     'devops_side_skills',
     'years_of_experience',
 ]
+
+export const GENERIC_SKILL_TYPES_OPTIONS = [
+    { value: 'clientside', label: 'Client Side' },
+    { value: 'serverside', label: 'Server Side' },
+    { value: 'devops', label: 'DevOps' },
+    { value: 'others', label: 'Others' },
+]
+
+export const GENERIC_SKILL_TYPES = {
+    clientside: 'Client Side',
+    serverside: 'Server Side',
+    devops: 'DevOps',
+    others: 'Others',
+}

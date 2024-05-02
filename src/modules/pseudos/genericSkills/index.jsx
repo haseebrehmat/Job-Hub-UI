@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { SkillActions, SkillForm } from '@modules/pseudos/components'
+import { SkillActions, GenericSkillForm } from '@modules/pseudos/components'
 import { fetchPseudos } from '@modules/pseudos/api'
 
 import { CreateIcon, BackToIcon } from '@icons'
@@ -29,7 +29,7 @@ const GenericSkills = () => {
             <div className='flex items-center py-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={query} setQuery={setQuery} />
-                    <Button label='Create Generic Skill' fit icon={CreateIcon} onClick={() => handleClick()} />
+                    <Button label='Create Generic Skill' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                 </div>
                 <Link to='/pseudos'>
                     <Button label='Back to pseudos' icon={BackToIcon} />
@@ -60,7 +60,7 @@ const GenericSkills = () => {
                     <Paginated pages={data?.pages ?? Math.ceil(data.total / 25)} setPage={setPage} page={page} />
                 </div>
             )}
-            {show && <SkillForm show={show} setShow={setShow} mutate={mutate} skill={skill} />}
+            {show && <GenericSkillForm show={show} setShow={setShow} mutate={mutate} skill={skill} />}
         </div>
     )
 }
