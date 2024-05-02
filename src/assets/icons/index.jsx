@@ -13,6 +13,7 @@ import {
     MdCheckBoxOutlineBlank,
     MdOutlinePostAdd,
     MdOutlineDriveFolderUpload,
+    MdOutlineKeyboardBackspace,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -142,3 +143,4 @@ export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }}
 export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
 export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
 export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
+export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
