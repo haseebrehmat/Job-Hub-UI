@@ -5,7 +5,7 @@ import { Button, Loading } from '@components'
 
 import { ActionButtons } from '@modules/pseudos/components'
 import { fetchProfile } from '@modules/pseudos/api'
-import { Template1, Template2 } from '@modules/settings/templates'
+import { Template1, Template2, Template3 } from '@modules/settings/templates'
 
 const ResumeBuilder = ({ id }) => {
     const [tab, setTab] = useState(1)
@@ -31,6 +31,13 @@ const ResumeBuilder = ({ id }) => {
                             classes={`md:px-6 rounded-none ${tab !== 2 && 'border-gray-200'}`}
                             onClick={() => setTab(2)}
                         />
+                        <Button
+                            label='Template 3'
+                            fit
+                            fill={tab === 3}
+                            classes={`md:px-6 rounded-none ${tab !== 2 && 'border-gray-200'}`}
+                            onClick={() => setTab(3)}
+                        />
                     </div>
                     {tab === 1 && (
                         <div className='p-8 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
@@ -40,6 +47,11 @@ const ResumeBuilder = ({ id }) => {
                     {tab === 2 && (
                         <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
                             <Template2 data={data} />
+                        </div>
+                    )}
+                    {tab === 3 && (
+                        <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
+                            <Template3 data={data} />
                         </div>
                     )}
                 </div>

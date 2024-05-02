@@ -4,7 +4,7 @@ import html2pdf from 'html2pdf.js'
 
 import { Button, Loading } from '@components'
 
-import { Template1, Template2 } from '@modules/settings/templates'
+import { Template1, Template2, Template3 } from '@modules/settings/templates'
 import { fetchProfile } from '@modules/profile/api'
 
 import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
@@ -13,7 +13,7 @@ import { SelectedIcon, DownloadIcon } from '@icons'
 
 const ResumeSelect = ({ vertical, setResume }) => {
     const [tab, setTab] = useState(0)
-    const templateRefs = [useRef(null), useRef(null)]
+    const templateRefs = [useRef(null), useRef(null), useRef(null)]
     const [selectedDiv, setSelectedDiv] = useState(templateRefs[0])
 
     const { data, isLoading } = useSWR(`/api/profile/resume/${vertical}/`, fetchProfile)
@@ -53,6 +53,14 @@ const ResumeSelect = ({ vertical, setResume }) => {
                     classes={`md:px-6 rounded-none ${tab !== 1 && 'border-gray-200'}`}
                     onClick={() => handleClick(1, templateRefs[1])}
                 />
+                <Button
+                    label='Template 3'
+                    fit
+                    fill={tab === 2}
+                    icon={tab === 2 && SelectedIcon}
+                    classes={`md:px-6 rounded-none ${tab !== 2 && 'border-gray-200'}`}
+                    onClick={() => handleClick(2, templateRefs[2])}
+                />
             </div>
             <div className='p-8 bg-white shadow-2xl border-2 rounded-lg'>
                 {tab === 0 && (
@@ -63,6 +71,11 @@ const ResumeSelect = ({ vertical, setResume }) => {
                 {tab === 1 && (
                     <div ref={templateRefs[1]} className='md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
                         <Template2 data={data.profile} />
+                    </div>
+                )}
+                {tab === 2 && (
+                    <div ref={templateRefs[2]} className='md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
+                        <Template3 data={data.profile} />
                     </div>
                 )}
             </div>
