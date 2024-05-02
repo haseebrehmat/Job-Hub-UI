@@ -21,6 +21,7 @@ import ResumeBuilder from '@modules/settings/resumeBuilder'
 import Pseudos from '@modules/pseudos'
 import Vertical from '@/modules/pseudos/vertical'
 import ApplyForJob from '@modules/jobsFilter/applyForJob'
+import GenericSkills from '@modules/pseudos/genericSkills'
 
 export {
     TeamAppliedJobs,
@@ -47,4 +48,5 @@ export {
     Pseudos,
     Vertical,
     ApplyForJob,
+    GenericSkills,
 }
