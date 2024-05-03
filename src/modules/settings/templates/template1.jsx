@@ -1,9 +1,9 @@
 import { memo } from 'react'
 
 import { formatDate4 } from '@utils/helpers'
-import avatarPlaceholder from '@images/profile-placeholder.png'
 
-import { svgs } from '../resumeBuilder/svgs'
+import avatarPlaceholder from '@images/profile-placeholder.png'
+import { ResumeSvgs as svgs } from '@svgs'
 
 const Template1 = ({ data: dev }) => (
     <>
@@ -30,7 +30,7 @@ const Template1 = ({ data: dev }) => (
             <div className='ml-4'>
                 <h3 className='text-lg font-bold mb-2'>Skills</h3>
                 <div className='ml-4 space-y-1.5'>
-                    {dev?.skills?.map(({ name, level }, index) => (
+                    {dev?.skills?.all?.map(({ name, level }, index) => (
                         <div className='flex items-center justify-between' key={index}>
                             <span>{name}</span>
                             <div className='flex space-x-3'>

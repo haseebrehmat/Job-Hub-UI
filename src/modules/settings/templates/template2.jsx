@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import { formatDate4 } from '@utils/helpers'
 
-import { svgs } from '../resumeBuilder/svgs'
+import { ResumeSvgs as svgs } from '@svgs'
 
 const Template2 = ({ data: dev }) => (
     <>
@@ -85,7 +85,7 @@ const Template2 = ({ data: dev }) => (
                 </div>
             </div>
         )}
-        {dev?.skills?.length > 0 && (
+        {dev?.skills?.all?.length > 0 && (
             <div className='flex items-baseline justify-start my-3'>
                 <p className='text-blue-900 text-xl font-bold w-1/4'>Skills</p>
                 <div className='flex flex-col w-3/4'>
