@@ -10,7 +10,7 @@ import { fetchPseudos } from '@modules/pseudos/api'
 import { can } from '@utils/helpers'
 import { PSEUDO_HEADS } from '@constants/pseudos'
 
-import { CreateIcon, EditIcon } from '@icons'
+import { CreateIcon, EditIcon, GenericSkillIcon } from '@icons'
 
 const Pseudos = () => {
     const [query, setQuery] = useState('')
@@ -34,6 +34,9 @@ const Pseudos = () => {
                 {can('create_pseudo') && (
                     <Button label='Create Pseudo' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
+                <Link to='/generic-skills'>
+                    <Button label='Generic Skills' icon={GenericSkillIcon} />
+                </Link>
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>

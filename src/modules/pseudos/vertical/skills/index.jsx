@@ -7,6 +7,7 @@ import { ActionButtons, SkillActions, SkillForm } from '@modules/pseudos/compone
 import { fetchSkills } from '@modules/pseudos/api'
 
 import { CreateIcon } from '@icons'
+import { GENERIC_SKILL_TYPES } from '@/utils/constants/pseudos'
 
 const Skills = ({ id }) => {
     const [skill, setSkill] = useState()
@@ -20,18 +21,17 @@ const Skills = ({ id }) => {
     }
 
     if (isLoading) return <Loading />
-    const flag = data?.length > 0 && !error
-
     return (
         <div className='max-w-full overflow-x-auto mb-2 px-1'>
             <div className='flex items-center space-x-4 py-4'>
                 <Button label='Add Skll' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
             <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
-                {flag ? (
+                {data?.length > 0 && !error ? (
                     data?.map((row, idx) => (
                         <div className='bg-white rounded-md p-4 border relative' key={idx}>
-                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
+                            <h2 className='text-lg'>{row?.generic_skill?.name ?? 'Not Specified'}</h2>
+                            <h2 className='text-sm'>{GENERIC_SKILL_TYPES[row?.generic_skill?.type] ?? 'N/A'}</h2>
                             <SkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             <div className='flex items-center mt-2'>
                                 <div className='w-full bg-gray-200 rounded-lg overflow-hidden shadow-inner'>
