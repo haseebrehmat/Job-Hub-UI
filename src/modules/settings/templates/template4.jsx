@@ -4,52 +4,73 @@ import { formatDate4 } from '@utils/helpers'
 
 import { ResumeSvgs as svgs } from '@svgs'
 
-const Template3 = ({ data: dev }) => (
+const Template4 = ({ data: dev }) => (
     <>
-        <div className='flex flex-col mb-2'>
-            <p className='text-2xl text-center'>{dev?.basic?.name ?? 'no name'}</p>
-            <p className='text-gray-500 text-md text-center'>{dev?.basic?.designation ?? 'no designation'}</p>
-            <div className='text-gray-500 flex flex-row justify-center'>
+        <div className='grid grid-cols-2 text-sm'>
+            <div className='flex flex-col mb-2'>
+                <p className='text-2xl text-blue-900'>{dev?.basic?.name ?? ''}</p>
+                <p className='text-gray-500 text-lg '>{dev?.basic?.designation ?? ''}</p>
+                {dev?.summary?.length > 0 && (
+                    <div className='mb-10 mt-2'>
+                        <div className='flex flex-col'>
+                            <p className='text-gray-700 text-xs break-words'>{dev?.summary ?? ''}</p>
+                        </div>
+                    </div>
+                )}
+            </div>
+            <div className='flex flex-col mt-6 space-y-4'>
                 {dev?.basic?.phone && (
-                    <div className='flex flex-row justify-center text-xs  '>
-                        <p className='font-bold mx-2'> {svgs.phone3}</p>
-                        <p>{dev?.basic?.phone}</p>
+                    <div className='flex flex-row justify-end space-x-2'>
+                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.phone}</p>
+                        <p className='text-blue-900 fill-current'>{svgs.phone4}</p>
                     </div>
                 )}
                 {dev?.basic?.email && (
-                    <div className='flex flex-row justify-center text-xs  '>
-                        <p className='font-bold mx-2'> {svgs.gmail3}</p>
-                        <p>{dev?.basic?.email ?? ''}</p>
+                    <div className='flex flex-row justify-end space-x-2'>
+                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.email}</p>
+                        <p className='text-blue-900 fill-current'>{svgs.gmail4}</p>
                     </div>
                 )}
                 {dev?.basic?.address && (
-                    <div className='flex flex-row justify-center text-xs  '>
-                        <p className='font-bold mx-2'> {svgs.address3}</p>
-                        <p>{dev?.basic?.address}</p>
+                    <div className='flex flex-row justify-end space-x-2'>
+                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.address}</p>
+                        <p className='text-blue-900 fill-current'>{svgs.address4}</p>
                     </div>
                 )}
             </div>
         </div>
-        {dev?.summary?.length > 0 && (
+        {dev?.skills?.length > 0 && (
             <div className='mb-10'>
-                <p className=' text-lg text-center mb-3'>Summary</p>
+                <hr className='mb-2 border-black' />
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>Skills</p>
+                <hr className='mb-6 border-black' />
                 <div className='flex flex-col'>
-                    <hr className='mb-3 border-black' />
-                    <p className='text-gray-700 text-xs break-words'>{dev?.summary ?? 'no summary'}</p>
+                    <div>
+                        {dev?.skills.map(({ name }, index) => (
+                            <div className='inline-block py-1' key={index}>
+                                <span className='bg-blue-900 text-white text-sm font-medium mr-2 px-2.5 py-1 rounded'>
+                                    {name}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         )}
         {dev?.experience?.length > 0 && (
             <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Professional Experience</p>
+                <hr className='mb-2  border-black' />
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>
+                    Professional Experience
+                </p>
+                <hr className='mb-6  border-black' />
                 <div className='flex flex-col'>
-                    <hr className='mb-3  border-black' />
                     <div className='space-y-5'>
                         {dev?.experience.map(({ company, title, from, to, description }, index) => (
                             <div className='grid grid-cols-1 text-sm' key={index}>
                                 <div className='flex flex-col'>
                                     <div className='flex justify-between text-sm'>
-                                        <p className='text-gray-500 text-md'>{company}</p>
+                                        <p className='text-md font-semibold text-lg'>{company}</p>
                                         <p className=' text-md'>location</p>
                                     </div>
                                     <div className='flex justify-between text-sm'>
@@ -71,13 +92,14 @@ const Template3 = ({ data: dev }) => (
         )}
         {dev?.projects?.length > 0 && (
             <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Projects</p>
+                <hr className='mb-2 border-black' />
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>Projects</p>
+                <hr className='mb-6 border-black' />
                 <div className='flex flex-col '>
-                    <hr className='mb-3 border-black' />
                     <div className='space-y-5'>
                         {dev?.projects?.map(({ name, title, repo, description }, index) => (
                             <div className='text-sm' key={index}>
-                                <p className='font-bold'>{name}</p>
+                                <p className='font-bold text-lg'>{name}</p>
                                 <p className='italic'>{title}</p>
                                 <p className='text-gray-700 break-words text-xs'>{description ?? 'no description'}</p>
                                 <p className='text-gray-500'>{repo ?? 'open source'}</p>
@@ -87,39 +109,24 @@ const Template3 = ({ data: dev }) => (
                 </div>
             </div>
         )}
-        {dev?.skills?.length > 0 && (
-            <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Skills</p>
-                <div className='flex flex-col'>
-                    <hr className='mb-3 border-black' />
-                    <div>
-                        {dev?.skills.map(({ name }, index) => (
-                            <div className='inline-block' key={index}>
-                                <span className='pr-4 text-sm text-gray-800'>{name}</span>
-                                <span className='pr-4 text-gray-600 text-sm'>
-                                    {dev?.skills.length !== index + 1 && '|'}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        )}
+
         {dev?.education?.length > 0 && (
             <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Education</p>
+                <hr className='mb-2 border-black' />
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>Education</p>
+                <hr className='mb-6 border-black' />
                 <div className='flex flex-col'>
-                    <hr className='mb-3 border-black' />
                     <div className='space-y-5'>
                         {dev?.education.map(({ degree, from, to, institute, grade }, index) => (
                             <div className='grid grid-cols-1 text-sm' key={index}>
-                                <p className='text-lg text-gray-500'>{institute}</p>
+                                <p className='text-lg font-semibold'>{institute}</p>
                                 <div className='flex justify-between text-sm'>
                                     <p className=''>{degree}</p>
                                     <p className='text-gray-500'>
                                         {formatDate4(from)} to {formatDate4(to)}
                                     </p>
                                 </div>
+
                                 <p className='text-gray-700'>Grade: {grade}</p>
                             </div>
                         ))}
@@ -130,4 +137,4 @@ const Template3 = ({ data: dev }) => (
     </>
 )
 
-export default memo(Template3)
+export default memo(Template4)
