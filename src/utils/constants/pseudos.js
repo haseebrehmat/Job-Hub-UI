@@ -134,3 +134,5 @@ export const DEFAULT_SECTIONS = {
     avatar: { name: 'Avatar', status: true },
     hobby: { name: 'Hobbies', status: true },
 }
+
+export const BASIC_INFO_SECTIONS = ['name', 'address', 'portfolio', 'email', 'phone', 'designation', 'avatar', 'hobby']

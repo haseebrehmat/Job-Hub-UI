@@ -6,6 +6,8 @@ import { Button, Input } from '@components'
 
 import { saveSections } from '@modules/pseudos/api'
 
+import { BASIC_INFO_SECTIONS } from '@constants/pseudos'
+
 import { HidePassIcon, SeePassIcon } from '@icons'
 
 const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
@@ -18,12 +20,12 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
         {},
         null,
         async () =>
-            trigger({
-                sections: Object.keys(names).reduce((acc, key) => {
+            trigger(
+                Object.keys(names).reduce((acc, key) => {
                     acc[key] = { name: names[key], status: hide[key] }
                     return acc
-                }, {}),
-            }),
+                }, {})
+            ),
         null,
         () => mutate()
     )
@@ -36,108 +38,30 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
                     <p>Basic Info</p>
                     <hr className='m-1' />
                     <div className='flex flex-col ml-1 text-sm'>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input name='name' value={names.name} classes='__input_2' onChange={handleChange} />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('name')}>
-                                {hide.name ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input name='address' value={names.address} classes='__input_2' onChange={handleChange} />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('address')}>
-                                {hide.address ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input
-                                name='portfolio'
-                                value={names.portfolio}
-                                classes='__input_2'
-                                onChange={handleChange}
-                            />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('portfolio')}>
-                                {hide.portfolio ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input name='email' value={names.email} classes='__input_2' onChange={handleChange} />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('email')}>
-                                {hide.email ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input name='phone' value={names.phone} classes='__input_2' onChange={handleChange} />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('phone')}>
-                                {hide.phone ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input
-                                name='designation'
-                                value={names.designation}
-                                classes='__input_2'
-                                onChange={handleChange}
-                            />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('designation')}>
-                                {hide.designation ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input name='avatar' value={names.avatar} classes='__input_2' onChange={handleChange} />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('avatar')}>
-                                {hide.avatar ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
-                        <div className='flex items-center justify-between my-1.5'>
-                            <Input name='hobby' value={names.hobby} classes='__input_2' onChange={handleChange} />
-                            <span className='ml-3 cursor-pointer' onClick={() => toggleSection('hobby')}>
-                                {hide.hobby ? SeePassIcon : HidePassIcon}
-                            </span>
-                        </div>
+                        {BASIC_INFO_SECTIONS.map(item => (
+                            <div className='flex items-center justify-between my-1.5' key={item}>
+                                <Input name={item} value={names[item]} classes='__input_2' onChange={handleChange} />
+                                <span className='ml-3 cursor-pointer' onClick={() => toggleSection(item)}>
+                                    {hide[item] ? SeePassIcon : HidePassIcon}
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 </div>
-                <div className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'>
-                    <Input name='summary' value={names.summary} classes='__input_2' onChange={handleChange} />
-                    <span className='ml-3 cursor-pointer' onClick={() => toggleSection('summary')}>
-                        {hide.summary ? SeePassIcon : HidePassIcon}
-                    </span>
-                </div>
-                <div className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'>
-                    <Input name='skill' value={names.skill} classes='__input_2' onChange={handleChange} />
-                    <span className='ml-3 cursor-pointer' onClick={() => toggleSection('skill')}>
-                        {hide.skill ? SeePassIcon : HidePassIcon}
-                    </span>
-                </div>
-                <div className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'>
-                    <Input name='experience' value={names.experience} classes='__input_2' onChange={handleChange} />
-                    <span className='ml-3 cursor-pointer' onClick={() => toggleSection('experience')}>
-                        {hide.experience ? SeePassIcon : HidePassIcon}
-                    </span>
-                </div>
-                <div className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'>
-                    <Input name='education' value={names.education} classes='__input_2' onChange={handleChange} />
-                    <span className='ml-3 cursor-pointer' onClick={() => toggleSection('education')}>
-                        {hide.education ? SeePassIcon : HidePassIcon}
-                    </span>
-                </div>
-                <div className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'>
-                    <Input name='project' value={names.project} classes='__input_2' onChange={handleChange} />
-                    <span className='ml-3 cursor-pointer' onClick={() => toggleSection('project')}>
-                        {hide.project ? SeePassIcon : HidePassIcon}
-                    </span>
-                </div>
-                <div className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'>
-                    <Input name='language' value={names.language} classes='__input_2' onChange={handleChange} />
-                    <span className='ml-3 cursor-pointer' onClick={() => toggleSection('language')}>
-                        {hide.language ? SeePassIcon : HidePassIcon}
-                    </span>
-                </div>
-                <div className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'>
-                    <Input name='link' value={names.link} classes='__input_2' onChange={handleChange} />
-                    <span className='ml-3 cursor-pointer' onClick={() => toggleSection('link')}>
-                        {hide.link ? SeePassIcon : HidePassIcon}
-                    </span>
-                </div>
+                {Object.keys(names).map(
+                    item =>
+                        !BASIC_INFO_SECTIONS?.includes(item) && (
+                            <div
+                                className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'
+                                key={item}
+                            >
+                                <Input name={item} value={names[item]} classes='__input_2' onChange={handleChange} />
+                                <span className='ml-3 cursor-pointer' onClick={() => toggleSection(item)}>
+                                    {hide[item] ? SeePassIcon : HidePassIcon}
+                                </span>
+                            </div>
+                        )
+                )}
                 <Button label='Update' fit classes='!px-6 !py-1 !mx-auto !mt-2' type='submit' />
             </div>
         </form>

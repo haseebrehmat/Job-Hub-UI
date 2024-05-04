@@ -11,11 +11,11 @@ import { getSectionNames, getSectionStatus } from '@utils/helpers'
 import { DEFAULT_SECTIONS } from '@constants/pseudos'
 
 const ResumeBuilder = ({ id }) => {
-    const [tab, setTab] = useState(1)
-    const [hide, setHide] = useState(getSectionStatus(DEFAULT_SECTIONS))
-    const [names, setNames] = useState(getSectionNames(DEFAULT_SECTIONS))
-
     const { data, isLoading, mutate } = useSWR(`/api/profile/resume/${id}/`, fetchProfile)
+
+    const [tab, setTab] = useState(1)
+    const [hide, setHide] = useState(getSectionStatus(data?.sections ?? DEFAULT_SECTIONS))
+    const [names, setNames] = useState(getSectionNames(data?.sections ?? DEFAULT_SECTIONS))
 
     if (isLoading) return <Loading />
     return (
@@ -51,7 +51,7 @@ const ResumeBuilder = ({ id }) => {
                                     label='Template 3'
                                     fit
                                     fill={tab === 3}
-                                    classes={`md:px-6 rounded-none ${tab !== 2 && 'border-gray-200'}`}
+                                    classes={`md:px-6 rounded-none ${tab !== 3 && 'border-gray-200'}`}
                                     onClick={() => setTab(3)}
                                 />
                                 <Button
