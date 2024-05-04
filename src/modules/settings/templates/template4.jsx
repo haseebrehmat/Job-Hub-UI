@@ -4,45 +4,49 @@ import { formatDate4 } from '@utils/helpers'
 
 import { ResumeSvgs as svgs } from '@svgs'
 
-const Template4 = ({ data: dev }) => (
+const Template4 = ({ data: dev, hide, names }) => (
     <>
-        <div className='grid grid-cols-2 text-sm'>
+        <div className='grid grid-cols-2 text-sm mb-10'>
             <div className='flex flex-col mb-2'>
-                <p className='text-2xl text-blue-900'>{dev?.basic?.name ?? ''}</p>
-                <p className='text-gray-500 text-lg '>{dev?.basic?.designation ?? ''}</p>
-                {dev?.summary?.length > 0 && (
-                    <div className='mb-10 mt-2'>
+                {hide.name && dev?.basic?.name && <p className='text-2xl text-blue-900'>{dev?.basic?.name}</p>}
+                {hide.designation && dev?.basic?.designation && (
+                    <p className='text-gray-500 text-lg'>{dev?.basic?.designation}</p>
+                )}
+                {hide.summary && dev?.summary?.length > 0 && (
+                    <div className='mt-2'>
                         <div className='flex flex-col'>
                             <p className='text-gray-700 text-xs break-words'>{dev?.summary ?? ''}</p>
                         </div>
                     </div>
                 )}
             </div>
-            <div className='flex flex-col mt-6 space-y-4'>
-                {dev?.basic?.phone && (
-                    <div className='flex flex-row justify-end space-x-2'>
-                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.phone}</p>
-                        <p className='text-blue-900 fill-current'>{svgs.phone4}</p>
-                    </div>
-                )}
-                {dev?.basic?.email && (
-                    <div className='flex flex-row justify-end space-x-2'>
-                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.email}</p>
-                        <p className='text-blue-900 fill-current'>{svgs.gmail4}</p>
-                    </div>
-                )}
-                {dev?.basic?.address && (
-                    <div className='flex flex-row justify-end space-x-2'>
-                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.address}</p>
-                        <p className='text-blue-900 fill-current'>{svgs.address4}</p>
-                    </div>
-                )}
-            </div>
+            {(hide.phone || hide.email || hide.address) && (
+                <div className='flex flex-col mt-6 space-y-4'>
+                    {hide.phone && dev?.basic?.phone && (
+                        <div className='flex flex-row justify-end space-x-2'>
+                            <p className='text-gray-500 text-sm float-right'>{dev?.basic?.phone}</p>
+                            <p className='text-blue-900 fill-current'>{svgs.phone4}</p>
+                        </div>
+                    )}
+                    {hide.email && dev?.basic?.email && (
+                        <div className='flex flex-row justify-end space-x-2'>
+                            <p className='text-gray-500 text-sm float-right'>{dev?.basic?.email}</p>
+                            <p className='text-blue-900 fill-current'>{svgs.gmail4}</p>
+                        </div>
+                    )}
+                    {hide.address && dev?.basic?.address && (
+                        <div className='flex flex-row justify-end space-x-2'>
+                            <p className='text-gray-500 text-sm float-right'>{dev?.basic?.address}</p>
+                            <p className='text-blue-900 fill-current'>{svgs.address4}</p>
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
-        {dev?.skills?.length > 0 && (
+        {hide.skill && dev?.skills?.length > 0 && (
             <div className='mb-10'>
                 <hr className='mb-2 border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>Skills</p>
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.skill}</p>
                 <hr className='mb-6 border-black' />
                 <div className='flex flex-col'>
                     <div>
@@ -57,12 +61,10 @@ const Template4 = ({ data: dev }) => (
                 </div>
             </div>
         )}
-        {dev?.experience?.length > 0 && (
+        {hide.experience && dev?.experience?.length > 0 && (
             <div className='mb-10'>
                 <hr className='mb-2  border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>
-                    Professional Experience
-                </p>
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.experience} </p>
                 <hr className='mb-6  border-black' />
                 <div className='flex flex-col'>
                     <div className='space-y-5'>
@@ -90,10 +92,10 @@ const Template4 = ({ data: dev }) => (
                 </div>
             </div>
         )}
-        {dev?.projects?.length > 0 && (
+        {hide.project && dev?.projects?.length > 0 && (
             <div className='mb-10'>
                 <hr className='mb-2 border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>Projects</p>
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.project}</p>
                 <hr className='mb-6 border-black' />
                 <div className='flex flex-col '>
                     <div className='space-y-5'>
@@ -110,10 +112,10 @@ const Template4 = ({ data: dev }) => (
             </div>
         )}
 
-        {dev?.education?.length > 0 && (
+        {hide.education && dev?.education?.length > 0 && (
             <div className='mb-10'>
                 <hr className='mb-2 border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>Education</p>
+                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.education}</p>
                 <hr className='mb-6 border-black' />
                 <div className='flex flex-col'>
                     <div className='space-y-5'>

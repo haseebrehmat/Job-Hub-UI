@@ -4,44 +4,49 @@ import { formatDate4 } from '@utils/helpers'
 
 import { ResumeSvgs as svgs } from '@svgs'
 
-const Template3 = ({ data: dev }) => (
+const Template3 = ({ data: dev, hide, names }) => (
     <>
         <div className='flex flex-col mb-2'>
-            <p className='text-2xl text-center'>{dev?.basic?.name ?? 'no name'}</p>
-            <p className='text-gray-500 text-md text-center'>{dev?.basic?.designation ?? 'no designation'}</p>
-            <div className='text-gray-500 flex flex-row justify-center'>
-                {dev?.basic?.phone && (
-                    <div className='flex flex-row justify-center text-xs  '>
-                        <p className='font-bold mx-2'> {svgs.phone3}</p>
-                        <p>{dev?.basic?.phone}</p>
+            {hide.name && dev?.basic?.name && <p className='text-2xl text-center'>{dev?.basic?.name}</p>}
+            {hide.designation && dev?.basic?.designation && (
+                <p className='text-gray-500 text-md text-center'>{dev?.basic?.designation}</p>
+            )}
+            {(hide.phone || hide.email || hide.address) &&
+                (dev?.basic?.phone || dev?.basic?.email || dev?.basic?.address) && (
+                    <div className='text-gray-500 flex flex-row justify-center'>
+                        {hide.phone && dev?.basic?.phone && (
+                            <div className='flex flex-row justify-center text-xs'>
+                                <p className='font-bold mx-2'>{svgs.phone3}</p>
+                                <p>{dev?.basic?.phone}</p>
+                            </div>
+                        )}
+                        {hide.email && dev?.basic?.email && (
+                            <div className='flex flex-row justify-center text-xs'>
+                                <p className='font-bold mx-2'>{svgs.gmail3}</p>
+                                <p>{dev?.basic?.email}</p>
+                            </div>
+                        )}
+                        {hide.address && dev?.basic?.address && (
+                            <div className='flex flex-row justify-center text-xs'>
+                                <p className='font-bold mx-2'>{svgs.address3}</p>
+                                <p>{dev?.basic?.address}</p>
+                            </div>
+                        )}
                     </div>
                 )}
-                {dev?.basic?.email && (
-                    <div className='flex flex-row justify-center text-xs  '>
-                        <p className='font-bold mx-2'> {svgs.gmail3}</p>
-                        <p>{dev?.basic?.email ?? ''}</p>
-                    </div>
-                )}
-                {dev?.basic?.address && (
-                    <div className='flex flex-row justify-center text-xs  '>
-                        <p className='font-bold mx-2'> {svgs.address3}</p>
-                        <p>{dev?.basic?.address}</p>
-                    </div>
-                )}
-            </div>
         </div>
-        {dev?.summary?.length > 0 && (
+        {hide.summary && dev?.summary?.length > 0 && (
             <div className='mb-10'>
-                <p className=' text-lg text-center mb-3'>Summary</p>
+                <p className=' text-lg text-center mb-3'>{names.summary}</p>
                 <div className='flex flex-col'>
                     <hr className='mb-3 border-black' />
                     <p className='text-gray-700 text-xs break-words'>{dev?.summary ?? 'no summary'}</p>
                 </div>
             </div>
         )}
-        {dev?.experience?.length > 0 && (
+        {hide.experience && dev?.experience?.length > 0 && (
             <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Professional Experience</p>
+                <p className='text-lg text-center mb-3'>{names.experience}</p>
                 <div className='flex flex-col'>
                     <hr className='mb-3  border-black' />
                     <div className='space-y-5'>
@@ -69,9 +74,9 @@ const Template3 = ({ data: dev }) => (
                 </div>
             </div>
         )}
-        {dev?.projects?.length > 0 && (
+        {hide.project && dev?.projects?.length > 0 && (
             <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Projects</p>
+                <p className='text-lg text-center mb-3'>{names.project}</p>
                 <div className='flex flex-col '>
                     <hr className='mb-3 border-black' />
                     <div className='space-y-5'>
@@ -87,9 +92,9 @@ const Template3 = ({ data: dev }) => (
                 </div>
             </div>
         )}
-        {dev?.skills?.length > 0 && (
+        {hide.skill && dev?.skills?.length > 0 && (
             <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Skills</p>
+                <p className='text-lg text-center mb-3'>{names.skill}</p>
                 <div className='flex flex-col'>
                     <hr className='mb-3 border-black' />
                     <div>
@@ -105,9 +110,9 @@ const Template3 = ({ data: dev }) => (
                 </div>
             </div>
         )}
-        {dev?.education?.length > 0 && (
+        {hide.education && dev?.education?.length > 0 && (
             <div className='mb-10'>
-                <p className='text-lg text-center mb-3'>Education</p>
+                <p className='text-lg text-center mb-3'>{names.education}</p>
                 <div className='flex flex-col'>
                     <hr className='mb-3 border-black' />
                     <div className='space-y-5'>

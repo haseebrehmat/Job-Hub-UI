@@ -293,3 +293,15 @@ export const parseGenericSkills = genericSkills =>
         value: skill.id,
         label: `${skill.name} - ${GENERIC_SKILL_TYPES[skill.type] ?? 'N/A'}`,
     }))
+
+export const getSectionStatus = sections =>
+    Object.keys(sections).reduce((acc, key) => {
+        acc[key] = sections[key].status
+        return acc
+    }, {})
+
+export const getSectionNames = sections =>
+    Object.keys(sections).reduce((acc, key) => {
+        acc[key] = sections[key].name
+        return acc
+    }, {})
