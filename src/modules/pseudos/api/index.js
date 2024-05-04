@@ -129,3 +129,8 @@ export const fetchGenericSkills = url =>
         total: data?.count,
         pages: data?.num_pages,
     }))
+
+export const saveSections = async (url, { arg: sections }) => {
+    const { data } = await rawHttp.post(url, sections)
+    return toast.success(data.detail || 'Sections info saved successfully')
+}
