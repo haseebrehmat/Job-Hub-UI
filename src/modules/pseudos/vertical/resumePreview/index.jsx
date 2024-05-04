@@ -13,7 +13,7 @@ import { DEFAULT_SECTIONS } from '@constants/pseudos'
 const ResumeBuilder = ({ id }) => {
     const [tab, setTab] = useState(1)
     const [hide, setHide] = useState(getSectionStatus(DEFAULT_SECTIONS))
-    const [names] = useState(getSectionNames(DEFAULT_SECTIONS))
+    const [names, setNames] = useState(getSectionNames(DEFAULT_SECTIONS))
 
     const { data, isLoading, mutate } = useSWR(`/api/profile/resume/${id}/`, fetchProfile)
 
@@ -23,7 +23,7 @@ const ResumeBuilder = ({ id }) => {
             <div className='flex justify-around items-start'>
                 {data ? (
                     <>
-                        <Sections hide={hide} setHide={setHide} names={names} />
+                        <Sections hide={hide} setHide={setHide} names={names} setNames={setNames} />
                         <div className='flex flex-col items-center'>
                             <div className='flex flex-row mb-4 gap-5'>
                                 <Button
