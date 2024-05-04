@@ -14,21 +14,21 @@ const Template3 = ({ data: dev, hide, names }) => (
             {(hide.phone || hide.email || hide.address) &&
                 (dev?.basic?.phone || dev?.basic?.email || dev?.basic?.address) && (
                     <div className='text-gray-500 flex flex-row justify-center'>
-                        {dev?.basic?.phone && (
-                            <div className='flex flex-row justify-center text-xs  '>
+                        {hide.phone && dev?.basic?.phone && (
+                            <div className='flex flex-row justify-center text-xs'>
                                 <p className='font-bold mx-2'>{svgs.phone3}</p>
                                 <p>{dev?.basic?.phone}</p>
                             </div>
                         )}
-                        {dev?.basic?.email && (
-                            <div className='flex flex-row justify-center text-xs  '>
-                                <p className='font-bold mx-2'> {svgs.gmail3}</p>
-                                <p>{dev?.basic?.email ?? ''}</p>
+                        {hide.email && dev?.basic?.email && (
+                            <div className='flex flex-row justify-center text-xs'>
+                                <p className='font-bold mx-2'>{svgs.gmail3}</p>
+                                <p>{dev?.basic?.email}</p>
                             </div>
                         )}
-                        {dev?.basic?.address && (
-                            <div className='flex flex-row justify-center text-xs  '>
-                                <p className='font-bold mx-2'> {svgs.address3}</p>
+                        {hide.address && dev?.basic?.address && (
+                            <div className='flex flex-row justify-center text-xs'>
+                                <p className='font-bold mx-2'>{svgs.address3}</p>
                                 <p>{dev?.basic?.address}</p>
                             </div>
                         )}

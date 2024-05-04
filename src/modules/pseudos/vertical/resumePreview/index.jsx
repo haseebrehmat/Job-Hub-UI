@@ -72,7 +72,7 @@ const ResumeBuilder = ({ id }) => {
                             )}
                             {tab === 4 && (
                                 <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
-                                    <Template4 data={data} />
+                                    <Template4 data={data} hide={hide} names={names} />
                                 </div>
                             )}
                         </div>
