@@ -116,3 +116,21 @@ export const GENERIC_SKILL_TYPES = {
     devops: 'DevOps',
     others: 'Others',
 }
+
+export const DEFAULT_SECTIONS = {
+    skill: { name: 'Skill Set', status: true },
+    experience: { name: 'Experience', status: true },
+    education: { name: 'Education History', status: true },
+    link: { name: 'Links', status: true },
+    project: { name: 'Projects', status: true },
+    language: { name: 'Languages', status: true },
+    summary: { name: 'Summary', status: true },
+    email: { name: 'Email', status: true },
+    address: { name: 'Address', status: true },
+    portfolio: { name: 'Portfolio', status: true },
+    designation: { name: 'Designation', status: true },
+    phone: { name: 'Phone', status: true },
+    name: { name: 'Name', status: true },
+    avatar: { name: 'Avatar', status: true },
+    hobby: { name: 'Hobbies', status: true },
+}
