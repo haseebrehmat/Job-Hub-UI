@@ -6,22 +6,23 @@ import { Button, CustomSelector, Drawer, Tooltip, Textarea } from '@components'
 
 import { saveJobSourceLink } from '@modules/scrapper/api'
 
-import { parseJobSource } from '@utils/helpers'
+import { parseJobType, parseJobSource } from '@utils/helpers'
 import { jobSourceLinkSchema } from '@utils/schemas'
-import { JOB_SOURCE_OPTIONS } from '@constants/scrapper'
+import { JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
 
 import { ValidateFalseIcon } from '@icons'
 
 const JobSourceLinkForm = ({ show, setShow, mutate, link }) => {
-    const [fields, setFields] = useState(link?.queries?.map(q => q.link) ?? [''])
-    const submitButtonShow = fields.length > 0 && fields.every(field => field.length > 0)
+    const [fields, setFields] = useState(link?.queries ?? [{ link: '', job_type: '' }])
+    const submitButtonShow =
+        fields.length > 0 && fields.every(field => field.link.length > 0 && field.job_type.length > 0)
 
-    const handleFieldChange = (index, event) => {
+    const handleFieldChange = (index, value, select = false) => {
         const newFields = [...fields]
-        newFields[index] = event.target.value
+        newFields[index][select ? 'job_type' : 'link'] = value
         setFields(newFields)
     }
-    const addField = () => setFields([...fields, ''])
+    const addField = () => setFields([...fields, { link: '', job_type: '' }])
     const removeField = index => setFields(fields.filter((_, i) => i !== index))
 
     const { values, errors, handleSubmit, resetForm, trigger, setFieldValue } = useMutate(
@@ -39,7 +40,6 @@ const JobSourceLinkForm = ({ show, setShow, mutate, link }) => {
             }
         }
     )
-
     return (
         <Drawer show={show} setShow={setShow} w='400px'>
             <form onSubmit={handleSubmit}>
@@ -63,22 +63,31 @@ const JobSourceLinkForm = ({ show, setShow, mutate, link }) => {
                         )}
                     </div>
                     {fields.map((field, index) => (
-                        <div key={index} className='flex items-center justify-between my-1'>
-                            <Textarea
-                                rows={2}
-                                ph={`Enter URL ${index + 1}`}
-                                value={field}
-                                required
-                                classes='mr-1'
-                                onChange={e => handleFieldChange(index, e)}
-                            />
-                            <Tooltip text='Re-move Link'>
-                                <Button
-                                    classes='border-0 !text-lg !w-6 !h-6'
-                                    icon={ValidateFalseIcon}
-                                    onClick={() => removeField(index)}
+                        <div key={index} className='flex flex-col space-y-2'>
+                            <div className='flex items-center my-1'>
+                                <Textarea
+                                    rows={2}
+                                    ph={`Enter URL ${index + 1}`}
+                                    value={field.link}
+                                    required
+                                    classes='mr-1'
+                                    onChange={e => handleFieldChange(index, e.target.value)}
                                 />
-                            </Tooltip>
+                                <Tooltip text='Re-move Link'>
+                                    <Button
+                                        classes='border-0 !text-lg !w-6 !h-6'
+                                        icon={ValidateFalseIcon}
+                                        onClick={() => removeField(index)}
+                                    />
+                                </Tooltip>
+                            </div>
+                            <CustomSelector
+                                options={JOB_TYPES_OPTIONS}
+                                selectorValue={parseJobType(field.job_type)}
+                                handleChange={({ value }) => handleFieldChange(index, value, true)}
+                                placeholder='Select job type'
+                                required
+                            />
                         </div>
                     ))}
                     <div className='pt-4 space-y-2'>
