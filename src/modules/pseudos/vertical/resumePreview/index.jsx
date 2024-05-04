@@ -18,6 +18,14 @@ const ResumeBuilder = ({ id }) => {
     const [names, setNames] = useState(getSectionNames(data?.sections ?? DEFAULT_SECTIONS))
 
     if (isLoading) return <Loading />
+
+    const templatesArray = [
+        <Template1 data={data} hide={hide} names={names} />,
+        <Template2 data={data} hide={hide} names={names} />,
+        <Template3 data={data} hide={hide} names={names} />,
+        <Template4 data={data} hide={hide} names={names} />,
+    ]
+
     return (
         <div className='flex flex-col'>
             <div className='flex justify-around items-start'>
@@ -33,54 +41,23 @@ const ResumeBuilder = ({ id }) => {
                         />
                         <div className='flex flex-col items-center'>
                             <div className='flex flex-row mb-4 gap-5'>
-                                <Button
-                                    label='Template 1'
-                                    fit
-                                    fill={tab === 1}
-                                    classes={`md:px-6 rounded-none ${tab !== 1 && 'border-gray-200'}`}
-                                    onClick={() => setTab(1)}
-                                />
-                                <Button
-                                    label='Template 2'
-                                    fit
-                                    fill={tab === 2}
-                                    classes={`md:px-6 rounded-none ${tab !== 2 && 'border-gray-200'}`}
-                                    onClick={() => setTab(2)}
-                                />
-                                <Button
-                                    label='Template 3'
-                                    fit
-                                    fill={tab === 3}
-                                    classes={`md:px-6 rounded-none ${tab !== 3 && 'border-gray-200'}`}
-                                    onClick={() => setTab(3)}
-                                />
-                                <Button
-                                    label='Template 4'
-                                    fit
-                                    fill={tab === 4}
-                                    classes={`md:px-6 rounded-none ${tab !== 4 && 'border-gray-200'}`}
-                                    onClick={() => setTab(4)}
-                                />
+                                {Array.from({ length: 4 }).map((_, i) => (
+                                    <Button
+                                        key={i}
+                                        label={`Template ${i + 1}`}
+                                        fit
+                                        fill={tab === i + 1}
+                                        classes={`md:px-6 rounded-none ${tab !== i + 1 && 'border-gray-200'}`}
+                                        onClick={() => setTab(i + 1)}
+                                    />
+                                ))}
                             </div>
-                            {tab === 1 && (
-                                <div className='p-8 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
-                                    <Template1 data={data} />
-                                </div>
-                            )}
-                            {tab === 2 && (
-                                <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
-                                    <Template2 data={data} hide={hide} names={names} />
-                                </div>
-                            )}
-                            {tab === 3 && (
-                                <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
-                                    <Template3 data={data} hide={hide} names={names} />
-                                </div>
-                            )}
-                            {tab === 4 && (
-                                <div className='p-10 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full'>
-                                    <Template4 data={data} hide={hide} names={names} />
-                                </div>
+                            {templatesArray.map((component, index) =>
+                                tab === index + 1 ? (
+                                    <div className='__template-wrapper' key={index}>
+                                        {component}
+                                    </div>
+                                ) : null
                             )}
                         </div>
                     </>
