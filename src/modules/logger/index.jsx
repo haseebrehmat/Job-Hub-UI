@@ -86,10 +86,10 @@ const Logger = () => {
                                     </td>
                                     <td
                                         className={`px-3 py-3.5 text-ellipsis w-25 h-25 ${
-                                            row?.user ? 'cursor-pointer' : ''
+                                            row?.traceback ? 'cursor-pointer' : ''
                                         }`}
                                     >
-                                        {row?.user ? (
+                                        {row?.traceback ? (
                                             <Tooltip text={`traceback: ${row?.traceback}`} down>
                                                 {row?.error_line}
                                             </Tooltip>
