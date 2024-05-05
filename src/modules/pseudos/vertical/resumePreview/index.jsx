@@ -11,13 +11,18 @@ import { getSectionNames, getSectionStatus } from '@utils/helpers'
 import { DEFAULT_SECTIONS } from '@constants/pseudos'
 
 const ResumeBuilder = ({ id }) => {
-    const { data, isLoading, mutate } = useSWR(`/api/profile/resume/${id}/`, fetchProfile)
-
     const [tab, setTab] = useState(1)
-    const [hide, setHide] = useState(getSectionStatus(data?.sections ?? DEFAULT_SECTIONS))
-    const [names, setNames] = useState(getSectionNames(data?.sections ?? DEFAULT_SECTIONS))
+    const [hide, setHide] = useState(getSectionStatus(DEFAULT_SECTIONS))
+    const [names, setNames] = useState(getSectionNames(DEFAULT_SECTIONS))
 
-    if (isLoading) return <Loading />
+    const { data, isLoading, mutate } = useSWR(`/api/profile/resume/${id}/`, fetchProfile, {
+        onSuccess: fetchedData => {
+            if (fetchedData?.sections) {
+                setHide(getSectionStatus(fetchedData.sections))
+                setNames(getSectionNames(fetchedData.sections))
+            }
+        },
+    })
 
     const templatesArray = [
         <Template1 data={data} hide={hide} names={names} />,
@@ -26,6 +31,7 @@ const ResumeBuilder = ({ id }) => {
         <Template4 data={data} hide={hide} names={names} />,
     ]
 
+    if (isLoading) return <Loading />
     return (
         <div className='flex flex-col'>
             <div className='flex justify-around items-start'>
