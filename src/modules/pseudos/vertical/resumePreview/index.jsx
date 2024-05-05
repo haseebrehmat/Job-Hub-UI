@@ -22,7 +22,6 @@ const ResumePreview = ({ id }) => {
                     fetchedData?.sections?.constructor === Object
                 )
             ) {
-                console.log('fetchedData?.sections', fetchedData?.sections)
                 setHide(getSectionStatus(fetchedData.sections))
                 setNames(getSectionNames(fetchedData.sections))
             }

@@ -1,4 +1,4 @@
-import { memo, useState, useRef, useEffect } from 'react'
+import { memo, useState, useRef, useMemo } from 'react'
 import html2pdf from 'html2pdf.js'
 
 import { Button } from '@components'
@@ -28,18 +28,18 @@ const Resumes = ({ data, hide, names, set = null }) => {
 
     const downloadPdf = () => html2pdf().set(RESUME_PDF_OPTIONS).from(selectedDiv.current?.innerHTML).outputPdf().save()
 
-    useEffect(() => {
+    useMemo(() => {
         html2pdf()
             .set(RESUME_PDF_OPTIONS)
             .from(selectedDiv?.current?.innerHTML)
             .output('blob')
             .then(blob => set ?? set(blob))
-    }, [selectedDiv, data])
+    }, [selectedDiv])
 
     return (
         <div className='flex flex-col items-center'>
             <div className='flex flex-row mb-5 gap-5'>
-                {Array.from({ length: 4 }).map((_, i) => (
+                {Array.from({ length: templatesArray.length }).map((_, i) => (
                     <Button
                         key={i}
                         label={`Template ${i + 1}`}
