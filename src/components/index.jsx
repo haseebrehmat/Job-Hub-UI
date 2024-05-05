@@ -23,6 +23,7 @@ import Radio from '@components/Radio'
 import TextEditor from '@components/TextEditor'
 import Tooltip from '@components/Tooltip'
 import SliderInput from '@components/SliderInput'
+import Resumes from '@components/Resumes'
 
 export {
     Badge,
@@ -50,4 +51,5 @@ export {
     TextEditor,
     Tooltip,
     SliderInput,
+    Resumes,
 }

@@ -31,7 +31,7 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
     )
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='w-fit'>
             <div className='flex flex-col font-normal'>
                 <h2 className='text-lg font-semibold pl-2.5 mt-4'>Sections</h2>
                 <div className='border p-2.5 m-2 shadow-md rounded-md'>

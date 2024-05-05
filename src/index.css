@@ -55,7 +55,7 @@
 }
 
 .__template-wrapper {
-    @apply p-8 bg-white shadow-2xl border-2 rounded-lg md:w-[21cm] md:min-h-[29.7cm] w-full h-full;
+    @apply md:w-[21cm] md:min-h-[29.7cm] w-full h-full;
 }
 
 /* width */

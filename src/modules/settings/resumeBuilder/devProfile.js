@@ -1,3 +1,5 @@
+import { DEFAULT_SECTIONS } from '@constants/pseudos'
+
 export const devProfile = {
     basic: {
         name: 'Usama Jawad',
@@ -10,16 +12,18 @@ export const devProfile = {
     },
     summary:
         'Highly skilled software developer with 7+ years of experience designing and implementing software solutions. Proficient in multiple programming languages such as Java, Python, and JavaScript. Proven ability to develop scalable and high-performance applications using cloud technologies such as AWS and Azure. Demonstrated expertise in full-stack development, including front-end frameworks such as React and back-end frameworks such as Node.js. Strong problem-solving and analytical skills with a passion for delivering clean and efficient code. Excellent communication and collaboration abilities with cross-functional teams and stakeholders',
-    skills: [
-        { name: 'React', level: 5 }, // level out of 5
-        { name: 'Tailwind CSS', level: 4 },
-        { name: 'JavaScript', level: 4 },
-        { name: 'Typescript', level: 4 },
-        { name: 'HTML', level: 5 },
-        { name: 'CSS', level: 4 },
-        { name: 'NodeJs', level: 4 },
-        { name: 'NextJs', level: 4 },
-    ],
+    skills: {
+        all: [
+            { name: 'React', level: 5 }, // level out of 5
+            { name: 'Tailwind CSS', level: 4 },
+            { name: 'JavaScript', level: 4 },
+            { name: 'Typescript', level: 4 },
+            { name: 'HTML', level: 5 },
+            { name: 'CSS', level: 4 },
+            { name: 'NodeJs', level: 4 },
+            { name: 'NextJs', level: 4 },
+        ],
+    },
     experience: [
         {
             company: 'ABC Company',
@@ -100,4 +104,5 @@ export const devProfile = {
             value: 'Html \n Css \n JavaScript \n',
         },
     ],
+    sections: DEFAULT_SECTIONS,
 }
