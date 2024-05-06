@@ -26,7 +26,7 @@ const row = [
 const JobDetail = () => {
     const { id } = useParams()
     const { data, isLoading } = useSWR(`api/profile/job_vertical/?user_id=${Id()}&job_id=${id}`, fetchJob)
-    console.log(data)
+
     if (isLoading) return <Loading />
     return (
         <div className='px-6'>

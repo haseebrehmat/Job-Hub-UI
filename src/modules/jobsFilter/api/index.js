@@ -25,7 +25,6 @@ const fetchJobs = async url => {
         detail,
     } = await response.json()
 
-    console.log('sdf', recruiter_jobs)
     return {
         status: response.ok ? 'success' : 'error',
         jobsData: data,

@@ -50,6 +50,14 @@
     @apply block px-4 py-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C];
 }
 
+.__input_2 {
+    @apply border-0 !mx-0 !p-0 text-black focus:underline hover:underline;
+}
+
+.__template-wrapper {
+    @apply md:w-[21cm] md:min-h-[29.7cm] w-full h-full;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
