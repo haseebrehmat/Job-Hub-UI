@@ -290,6 +290,19 @@ export const rawpermissions = [
                 parent: ['view_team'],
                 level: 2,
             },
+            {
+                codename: 'view_member_team',
+                name: 'View Team Members',
+                parent: ['view_team'],
+                child: ['edit_member_team'],
+                level: 2,
+            },
+            {
+                codename: 'edit_member_team',
+                name: 'Edit Team Member',
+                parent: ['view_team', 'view_member_team'],
+                level: 2,
+            },
         ],
     },
     {
