@@ -21,7 +21,7 @@ const CreateVertical = ({ show, setShow, mutate, pseudoId }) => {
             mutate()
         }
     )
-    const flag = values.name.length > 0 && values.description.length > 0 && values.email.length > 0
+    const flag = values.name.length > 0 && values.email.length > 0
 
     return (
         <Drawer show={show} setShow={setShow} w='350px'>
@@ -41,7 +41,7 @@ const CreateVertical = ({ show, setShow, mutate, pseudoId }) => {
                         ph='Enter vertical email'
                     />
                     {errors.email && <small className='ml-1 text-xs text-red-600'>{errors.email}</small>}
-                    <span className='text-xs font-semibold'>Description*</span>
+                    <span className='text-xs font-semibold'>Description</span>
                     <Textarea
                         rows={3}
                         name='description'

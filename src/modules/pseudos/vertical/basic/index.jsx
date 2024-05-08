@@ -42,7 +42,10 @@ const Basic = ({ id }) => {
                 <div className='grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3'>
                     {BASIC_INFO_INPUTS.map(input => (
                         <div key={input.name}>
-                            <span className='text-xs font-semibold'>{input.label}*</span>
+                            <span className='text-xs font-semibold'>
+                                {input.label}
+                                {input.required && '*'}
+                            </span>
                             <Input
                                 name={input.name}
                                 type={input.type}
@@ -56,7 +59,7 @@ const Basic = ({ id }) => {
                 </div>
                 <div className='grid grid-cols-2 gap-5 pt-3'>
                     <div>
-                        <span className='text-xs font-semibold'>Address*</span>
+                        <span className='text-xs font-semibold'>Address</span>
                         <Textarea
                             rows={2}
                             name='address'
@@ -67,7 +70,7 @@ const Basic = ({ id }) => {
                         {errors.address && <small className='__error'>{errors.address}</small>}
                     </div>
                     <div>
-                        <span className='text-xs font-semibold'>Description*</span>
+                        <span className='text-xs font-semibold'>Description</span>
                         <Textarea
                             rows={2}
                             name='description'
@@ -79,7 +82,7 @@ const Basic = ({ id }) => {
                     </div>
                 </div>
                 <div>
-                    <span className='text-xs font-semibold'>Summary*</span>
+                    <span className='text-xs font-semibold'>Summary</span>
                     <Textarea
                         rows={5}
                         name='summary'

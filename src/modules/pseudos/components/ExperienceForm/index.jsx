@@ -29,7 +29,7 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
             if (!experience?.id) resetForm()
         }
     )
-    const flag = values.company_name.length > 0 && values.designation.length > 0 && values.description.length > 0
+    const flag = values.company_name.length > 0 && values.designation.length > 0
 
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
@@ -65,7 +65,7 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
                     <span className='text-xs font-semibold'>End Date*</span>
                     <Input name='end_date' type='date' value={values.end_date} onChange={handleChange} max={today} />
                     {errors.end_date && <small className='__error'>{errors.end_date}</small>}
-                    <span className='text-xs font-semibold'>Description*</span>
+                    <span className='text-xs font-semibold'>Description</span>
                     <Textarea
                         name='description'
                         value={values.description}

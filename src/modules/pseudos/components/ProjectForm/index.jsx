@@ -46,16 +46,10 @@ const ProjectForm = ({ show, setShow, mutate, project, id }) => {
                         ph='Enter your title like Frontend Dev'
                     />
                     {errors.title && <small className='__error'>{errors.title}</small>}
-                    <span className='text-xs font-semibold'>Repository*</span>
-                    <Input
-                        name='repo'
-                        type='url'
-                        value={values.repo}
-                        onChange={handleChange}
-                        ph='Enter Repository Url from Github/Bitbucket/Gitlab'
-                    />
+                    <span className='text-xs font-semibold'>URL</span>
+                    <Input name='repo' type='url' value={values.repo} onChange={handleChange} ph='Enter website Url' />
                     {errors.repo && <small className='__error'>{errors.repo}</small>}
-                    <span className='text-xs font-semibold'>Description*</span>
+                    <span className='text-xs font-semibold'>Description</span>
                     <Textarea
                         name='description'
                         value={values.description}

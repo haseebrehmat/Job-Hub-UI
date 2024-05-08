@@ -46,6 +46,7 @@ export const userSchema = Yup.object().shape({
     company: Yup.string().required('Please select company'),
     roles: Yup.string().required('Role is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
+    password: Yup.string().required('Password is required'),
 })
 
 export const integrationSchema = Yup.object().shape({
@@ -149,7 +150,7 @@ export const pseudoSchema = Yup.object().shape({
 
 export const createVerticalSchema = Yup.object().shape({
     name: Yup.string().required('Vertical name is required'),
-    description: Yup.string().required('Ddescription is required'),
+    description: Yup.string().max(250, 'Description is too long'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
 })
 

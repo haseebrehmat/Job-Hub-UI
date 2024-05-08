@@ -32,36 +32,42 @@ export const BASIC_INFO_INPUTS = [
         label: 'Name',
         type: 'text',
         ph: 'Enter vertical name',
+        required: true,
     },
     {
         name: 'designation',
         label: 'Designation',
         type: 'text',
         ph: 'Enter vertical designation',
+        required: true,
     },
     {
         name: 'email',
         label: 'Email',
         type: 'email',
         ph: 'Enter vertical email',
+        required: true,
     },
     {
         name: 'phone',
         label: 'Phone',
         type: 'tel',
         ph: 'Enter vertical phone',
+        required: false,
     },
     {
         name: 'portfolio',
         label: 'Portfolio website',
         type: 'url',
         ph: 'Enter vertical portfolio website',
+        required: false,
     },
     {
         name: 'identity',
         label: 'Identity',
         type: 'text',
         ph: 'Enter vertical identity like Python, Rails, or nothing..',
+        required: false,
     },
 ]
 

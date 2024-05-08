@@ -18,7 +18,6 @@ const Password = ({ id, value, error, onChange = null }) => {
                     onChange={onChange}
                     ph='Password'
                 />
-                {error && <small className='ml-1 text-xs text-red-600'>{error}</small>}
                 <div className='absolute inset-y-0 right-1 flex items-center pl-3 p-2'>
                     <span className='mr-1 cursor-pointer' onClick={() => setHide(!hide)}>
                         {hide ? HidePassIcon : SeePassIcon}
