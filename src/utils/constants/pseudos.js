@@ -5,7 +5,7 @@ export const VERTICAL_SECTIONS = {
     skill: 'Skill Set',
     experience: 'Experience',
     project: 'Projects',
-    education: 'Eduction History',
+    education: 'Education History',
     language: 'Languages',
     link: 'Social Links',
     other: 'Other Sections',
