@@ -17,8 +17,8 @@ const Button = memo(
             className={`w-${fit ? 'fit' : 'full'} ${
                 fill ? 'text-white bg-[#048C8C] hover:bg-[#10a5a5]' : 'text-[#048C8C]'
             } border border-cyan-600 font-medium rounded-lg text-sm px-2 py-2 text-center ${
-                icon || svg ? 'flex items-center justify-center' : 'hover:text-white hover:bg-[#048C8C]'
-            } ${classes}`}
+                label && 'hover:text-white hover:bg-[#048C8C]'
+            } ${(icon || svg) && 'flex items-center justify-center'} ${classes}`}
             onClick={onClick}
             disabled={disabled}
         >
