@@ -7,7 +7,7 @@ import { Button, Drawer, Input } from '@components'
 import { RolesDropdown, CompaniesDropdown, Password } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
-import { userSchema } from '@utils/schemas'
+import { userCreateSchema, userSchema } from '@utils/schemas'
 import { decodeJwt, getMsg, isSuper } from '@utils/helpers'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
@@ -23,7 +23,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             roles: user?.roles?.id,
             password: '',
         },
-        userSchema,
+        user?.id ? userSchema : userCreateSchema,
         async formValues => trigger({ ...formValues, id: user?.id }),
         error => toast.error(getMsg(error)),
         () => {
@@ -32,7 +32,6 @@ const UserForm = ({ show, setShow, mutate, user }) => {
         }
     )
     const allowCompanyEdit = isSuper() && !values.id
-
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>

@@ -46,6 +46,10 @@ export const userSchema = Yup.object().shape({
     company: Yup.string().required('Please select company'),
     roles: Yup.string().required('Role is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
+})
+
+export const userCreateSchema = Yup.object().shape({
+    ...userSchema.fields,
     password: Yup.string().required('Password is required'),
 })
 
