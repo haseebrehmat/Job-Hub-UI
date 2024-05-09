@@ -7,10 +7,10 @@ import { Loading, EmptyTable, Button, Badge, Searchbox, Tooltip } from '@compone
 import { TeamForm, PseudosTeamForm } from '@modules/userManagement/components'
 import { fetchTeams } from '@modules/userManagement/api'
 
+import { can } from '@utils/helpers'
 import { teamHeads } from '@constants/userManagement'
 
-import { can } from '@utils/helpers'
-import { CreateIcon, ActionsIcons, EditIcon } from '@icons'
+import { CreateIcon, VerticalsAddIcon, EditIcon } from '@icons'
 
 const Teams = () => {
     const [team, setTeam] = useState()
@@ -45,28 +45,36 @@ const Teams = () => {
                     <Tooltip text='View members'>{row?.name ?? '-'}</Tooltip>
                 </td>
 
-                <td className='px-3 py-6 capitalize'>
+                <td className='px-3 py-6'>
                     <span className=' flex flex-col justify-center'>
-                        {row?.reporting_to?.username}
+                        <span className='capitalize'>{row?.reporting_to?.username}</span>
                         <span className='font-mono'>{row?.reporting_to?.email}</span>
                     </span>
                 </td>
-                <td className='px-3 py-4'>
-                    <span className='flex items-center gap-1'>
+                <td className='px-3'>
+                    <span className='flex items-center flex-wrap'>
                         {row?.members?.map((member, idxx) => (
-                            <div className='gap-2' key={idxx}>
+                            <div className='mx-1 my-2' key={idxx}>
                                 <Badge label={member?.username} />
                             </div>
                         ))}
                     </span>
                 </td>
-                <td className='px-3 py-6 flex space-x-4'>
-                    <Tooltip text='Assign Pesudos'>
-                        <span onClick={() => handleClick(row, '')}>{can('edit_team') && EditIcon}</span>
-                    </Tooltip>
-                    <Tooltip text='Edit Team'>
-                        <span onClick={() => handleClick(row, 'edit')}>{can('edit_team') && ActionsIcons}</span>
-                    </Tooltip>
+                <td className='px-3 py-6 flex gap-3'>
+                    {can('edit_team') && (
+                        <Tooltip text='Assign Pesudos'>
+                            <span onClick={() => handleClick(row, '')} className='cursor-pointer'>
+                                {VerticalsAddIcon}
+                            </span>
+                        </Tooltip>
+                    )}
+                    {can('edit_team') && (
+                        <Tooltip text='Edit Team'>
+                            <span onClick={() => handleClick(row, 'edit')} className='cursor-pointer'>
+                                {EditIcon}
+                            </span>
+                        </Tooltip>
+                    )}
                 </td>
             </tr>
         ))

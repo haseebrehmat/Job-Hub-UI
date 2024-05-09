@@ -197,8 +197,12 @@ export const parseMembers = (members, leadId) =>
 export const parsePseudos = pseudos =>
     pseudos?.map(pseudo => ({ value: pseudo.id, label: pseudo.name, verticals: pseudo.verticals }))
 
-export const parseVertical = pseudo =>
-    pseudo?.verticals?.map(vertical => ({ value: vertical.id, label: vertical.name }))
+export const parseVertical = (pseudo, showStatus = false) =>
+    pseudo?.verticals?.map(vertical => ({
+        value: vertical.id,
+        label: `${vertical.name} ${showStatus ? (vertical?.assigned ? '(assigned)' : '') : ''}`,
+        isDisabled: vertical?.assigned,
+    }))
 
 export const dataForCsv = data =>
     data.map(obj => ({
