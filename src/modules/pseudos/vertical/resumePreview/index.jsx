@@ -34,7 +34,7 @@ const ResumePreview = ({ id }) => {
             <div className='flex items-start '>
                 {data ? (
                     <>
-                        <div className='w-[30%] border-2 rounded-lg h-screen mr-2 overflow-y-auto'>
+                        <div className='w-[25%] border-2 rounded-lg h-screen mr-2 overflow-y-auto'>
                             <Sections
                                 hide={hide}
                                 setHide={setHide}

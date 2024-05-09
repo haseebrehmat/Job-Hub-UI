@@ -6,7 +6,7 @@ import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
 import { getSectionNames, getSectionStatus } from '@utils/helpers'
 
 const ResumeBuilder = () => (
-    <div className='flex flex-col justify-center w-[80%]'>
+    <div className='flex flex-col-1 w-[80%] mx-auto'>
         <Resumes
             data={devProfile}
             hide={getSectionStatus(devProfile.sections)}
