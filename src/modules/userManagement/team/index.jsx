@@ -10,7 +10,7 @@ import { fetchTeamMembers } from '@modules/userManagement/api'
 import { can } from '@utils/helpers'
 import { teamMemberHeads } from '@constants/userManagement'
 
-import { EditIcon } from '@icons'
+import { EditIcon, BackToIcon } from '@icons'
 
 const Team = () => {
     const { id } = useParams()
@@ -34,17 +34,17 @@ const Team = () => {
             <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                 <td className='px-3 py-6'>{idx + 1}</td>
                 <td className='px-3 py-6 capitalize'>{row?.username ?? '-'}</td>
-                <td className='px-3 py-6 capitalize'>
+                <td className='px-3'>
                     <span className=' flex flex-col justify-center'>
-                        {row?.reporting_to?.username}
+                        <span className='capitalize'>{row?.reporting_to?.username}</span>
                         <span className='font-mono'>{row?.email}</span>
                     </span>
                 </td>
                 <td className='px-3 py-4'>
-                    <span className='flex items-center gap-1 '>
+                    <span className='flex items-center flex-wrap'>
                         {row?.verticals?.length > 0
                             ? row?.verticals?.map(member => (
-                                  <div className='gap-2' key={member?.id}>
+                                  <div className='mx-1 my-2' key={member?.id}>
                                       <Badge label={`${member?.pseudo} | ${member?.name}`} />
                                   </div>
                               ))
@@ -73,14 +73,14 @@ const Team = () => {
                             data?.team?.verticals?.map(tag => (
                                 <span key={tag.id}>
                                     <span className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'>
-                                        {`${tag.name}`}
+                                        {`${tag?.pseudo?.name} | ${tag?.name}`}
                                     </span>
                                 </span>
                             ))}
                     </div>
                 </div>
                 <Link to='/teams' className='float-right'>
-                    <Button label='Back to teams' fit />
+                    <Button label='Back to teams' icon={BackToIcon} fit />
                 </Link>
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>

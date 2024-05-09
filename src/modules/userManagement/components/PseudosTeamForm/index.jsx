@@ -62,7 +62,7 @@ const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
                     ) : (
                         <CustomSelector
                             name='vertical'
-                            options={parseVertical(pseudos.pseudo)}
+                            options={parseVertical(pseudos.pseudo, true)}
                             handleChange={obj => setPseudos({ ...pseudos, vertical: obj })}
                             selectorValue={pseudos.vertical}
                             isMulti

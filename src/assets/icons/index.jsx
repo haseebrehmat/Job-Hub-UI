@@ -38,7 +38,7 @@ import {
     HiOutlineOfficeBuilding,
     HiOutlineLightBulb,
 } from 'react-icons/hi'
-import { HiUserPlus, HiOutlinePencilSquare } from 'react-icons/hi2'
+import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
 import { TbRefresh, TbCalendarTime } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
@@ -144,3 +144,4 @@ export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
 export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
 export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
+export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
