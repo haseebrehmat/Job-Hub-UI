@@ -44,7 +44,7 @@ const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Pseudo Assignment</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Pesudos</span>
+                    <span className='text-xs font-semibold'>Pesudos*</span>
                     {isLoading ? (
                         'Pseudos Loading ...'
                     ) : (
@@ -56,7 +56,7 @@ const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
                             placeholder='Select Pseudos'
                         />
                     )}
-                    <span className='text-xs font-semibold'>Verticals</span>
+                    <span className='text-xs font-semibold'>Verticals*</span>
                     {isLoading ? (
                         'Verticals Loading ...'
                     ) : (

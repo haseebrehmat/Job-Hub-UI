@@ -6,8 +6,9 @@ import { Loading, Button } from '@components'
 import { ActionButtons, SkillActions, SkillForm } from '@modules/pseudos/components'
 import { fetchSkills } from '@modules/pseudos/api'
 
+import { GENERIC_SKILL_TYPES } from '@constants/pseudos'
+
 import { CreateIcon } from '@icons'
-import { GENERIC_SKILL_TYPES } from '@/utils/constants/pseudos'
 
 const Skills = ({ id }) => {
     const [skill, setSkill] = useState()
