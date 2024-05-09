@@ -31,17 +31,19 @@ const ResumePreview = ({ id }) => {
     if (isLoading) return <Loading />
     return (
         <div className='flex flex-col'>
-            <div className='flex justify-around items-start'>
+            <div className='flex items-start '>
                 {data ? (
                     <>
-                        <Sections
-                            hide={hide}
-                            setHide={setHide}
-                            names={names}
-                            setNames={setNames}
-                            mutate={mutate}
-                            id={id}
-                        />
+                        <div className='w-[30%] border-2 rounded-lg h-screen mr-2 overflow-y-auto'>
+                            <Sections
+                                hide={hide}
+                                setHide={setHide}
+                                names={names}
+                                setNames={setNames}
+                                mutate={mutate}
+                                id={id}
+                            />
+                        </div>
                         <Resumes data={data} hide={hide} names={names} />
                     </>
                 ) : (

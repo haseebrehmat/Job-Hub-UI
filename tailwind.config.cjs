@@ -8,6 +8,16 @@ module.exports = {
                 gruppo: ['Gruppo', 'cursive'],
             },
         },
+        screens: {
+            sm: '200px',
+            // => @media (min-width: 576px) { ... }
+
+            md: '1200px',
+            // => @media (min-width: 960px) { ... }
+
+            lg: '1700px',
+            // => @media (min-width: 1440px) { ... }
+        },
     },
     plugins: [],
 }
