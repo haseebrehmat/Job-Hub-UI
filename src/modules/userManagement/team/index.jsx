@@ -41,10 +41,10 @@ const Team = () => {
                     </span>
                 </td>
                 <td className='px-3 py-4'>
-                    <span className='flex items-center gap-1 '>
+                    <span className='flex items-center flex-wrap'>
                         {row?.verticals?.length > 0
                             ? row?.verticals?.map(member => (
-                                  <div className='gap-2' key={member?.id}>
+                                  <div className='mx-1 my-2' key={member?.id}>
                                       <Badge label={`${member?.pseudo} | ${member?.name}`} />
                                   </div>
                               ))
