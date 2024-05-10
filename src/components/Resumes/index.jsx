@@ -10,9 +10,8 @@ import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
 import { SelectedIcon, DownloadIcon } from '@icons'
 
 const Resumes = ({ data, hide, names, set = null }) => {
-    const templateRefs = [useRef(null), useRef(null), useRef(null), useRef(null)]
+    const refs = [useRef(null), useRef(null), useRef(null), useRef(null)]
     const [tab, setTab] = useState(0)
-    const [selectedDiv, setSelectedDiv] = useState(templateRefs[0])
 
     const templatesArray = [
         <Template1 data={data} hide={hide} names={names} />,
@@ -29,16 +28,12 @@ const Resumes = ({ data, hide, names, set = null }) => {
                   .output('blob')
                   .then(blob => set(blob))
             : null
-    const handleClick = (index, ref) => {
-        setTab(index)
-        setSelectedDiv(ref)
-        setBlob(ref)
-    }
-    const downloadPdf = () => html2pdf().set(RESUME_PDF_OPTIONS).from(selectedDiv.current?.innerHTML).outputPdf().save()
+
+    const downloadPdf = () => html2pdf().set(RESUME_PDF_OPTIONS).from(refs[tab].current?.innerHTML).outputPdf().save()
 
     useEffect(() => {
-        setBlob(selectedDiv)
-    }, [])
+        setBlob(refs[tab])
+    }, [tab])
 
     return (
         <div className='flex flex-col items-center'>
@@ -51,7 +46,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         fill={tab === i}
                         icon={tab === i && SelectedIcon}
                         classes={`md:px-6 rounded-none ${tab !== i && 'border-gray-200'}`}
-                        onClick={() => handleClick(i, templateRefs[i])}
+                        onClick={() => setTab(i)}
                     />
                 ))}
             </div>
@@ -59,8 +54,10 @@ const Resumes = ({ data, hide, names, set = null }) => {
                 {templatesArray.map(
                     (component, index) =>
                         tab === index && (
-                            <div className='__template-wrapper' key={index} ref={templateRefs[index]}>
-                                {component}
+                            <div key={index}>
+                                <div className='__template-wrapper' ref={refs[index]}>
+                                    {component}
+                                </div>
                             </div>
                         )
                 )}

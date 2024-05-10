@@ -19,3 +19,8 @@ export const RESUME_PDF_OPTIONS = {
     jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
 }
+
+export const UPLOAD_RESUME_OPTIONS = [
+    { label: 'Choose from templates', value: 'automatic' },
+    { label: 'Upload yourself', value: 'manual' },
+]

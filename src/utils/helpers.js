@@ -266,7 +266,7 @@ export const parseVerticals = verticals =>
     }))
 
 export const parseSelectedVertical = (id, verticals) => {
-    if (id) {
+    if (id && verticals.length > 0) {
         const vertical = verticals.find(row => row?.id === id)
         return { value: vertical?.id, label: `${vertical.name}${vertical.identity ? ` - ${vertical.identity}` : ''}` }
     }
@@ -309,3 +309,21 @@ export const getSectionNames = sections =>
         acc[key] = sections[key].name
         return acc
     }, {})
+
+export const parseTeams = teams => teams?.map(team => ({ value: team.id, label: team.name }))
+
+export const parseSelectedTeam = (id, teams) => {
+    if (id) {
+        const team = teams.find(row => row?.id === id)
+        return { value: team?.id, label: team?.name }
+    }
+    return null
+}
+
+export const getTeamVerticals = (teamId, data) => {
+    if (teamId) {
+        const result = data?.find(row => row.id === teamId)
+        return result?.verticals ?? []
+    }
+    return []
+}
