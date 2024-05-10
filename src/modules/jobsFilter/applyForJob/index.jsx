@@ -4,12 +4,10 @@ import useSWRImmutable from 'swr/immutable'
 
 import { useMutate } from '@/hooks'
 
-import { CustomSelector, TextEditor, Loading, Button } from '@components'
+import { TextEditor, Loading, Button, Input } from '@components'
 
-import { ResumeSelect, VerticalSelect } from '@modules/jobsFilter/components'
+import { ResumeSelect, ResumeTypes, VerticalSelect } from '@modules/jobsFilter/components'
 import { fetchUserVerticals, applyJob } from '@modules/jobsFilter/api'
-
-import { UPLOAD_RESUME_OPTIONS } from '@constants/jobPortal'
 
 const ApplyForJob = () => {
     const { id } = useParams()
@@ -19,9 +17,9 @@ const ApplyForJob = () => {
         verticalId: null,
         teamId: null,
         coverLetter: `Here your cover letter ${id}`,
+        resumeType: null,
     })
     const [pdfBlob, setPdfBlob] = useState(null)
-    const [resumeType, setResumeType] = useState(null)
     const [resumePDF, setResumePDF] = useState('')
 
     const { data: data2, isLoading: isLoading2 } = useSWRImmutable(
@@ -32,7 +30,7 @@ const ApplyForJob = () => {
     const { wait, handleSubmit, trigger } = useMutate(
         '/api/job_portal/job_status/',
         applyJob,
-        { status: 1, job: id, resume: pdfBlob, resume_type: resumeType?.value },
+        { status: 1, job: id, resume_type: vals.resumeType },
         null,
         async formValues => {
             trigger({
@@ -40,9 +38,9 @@ const ApplyForJob = () => {
                 cover_letter: vals.coverLetter,
                 vertical_id: vals.verticalId,
                 resume:
-                    resumeType?.value === 'automatic'
+                    vals.resumeType === 'automatic'
                         ? pdfBlob
-                        : resumeType?.value === 'manual' && resumePDF
+                        : vals.resumeType === 'manual' && resumePDF
                         ? resumePDF
                         : null,
             })
@@ -63,54 +61,36 @@ const ApplyForJob = () => {
                             <VerticalSelect jobId={id} vId={vals.verticalId} teamId={vals.teamId} setVals={setVals} />
                             {vals.verticalId && (
                                 <>
-                                    <p className='text-gray-600 pt-2 pb-1'>Resume Type</p>
-                                    <CustomSelector
-                                        options={UPLOAD_RESUME_OPTIONS}
-                                        placeholder='Select Resume Type'
-                                        handleChange={value => {
-                                            setResumeType(value)
-                                        }}
-                                        required
-                                    />
+                                    <p className='text-gray-600 pt-2 pb-2'>Resume Type</p>
+                                    <ResumeTypes type={vals.resumeType} setVals={setVals} />
                                 </>
                             )}
                         </div>
-                        {vals.verticalId && (
+                        {vals.verticalId && vals.resumeType && (
                             <>
                                 <TextEditor
                                     init={data2?.cover_letter ?? `Here your cover letter ${id}`}
                                     value={vals.coverLetter}
                                     onChange={text => setVals({ coverLetter: text })}
                                 />
-                                {resumeType && (
-                                    <Button
-                                        label='Apply'
-                                        type='submit'
-                                        fill
-                                        fit
-                                        classes='px-8 md:px-12 !rounded-full'
-                                    />
-                                )}{' '}
+                                <Button label='Apply' type='submit' fill fit classes='px-8 md:px-12 !rounded-full' />
                             </>
                         )}
                     </div>
                     <div className='xs:w-1/2'>
                         {vals.verticalId &&
-                            resumeType &&
-                            (resumeType?.value === 'automatic' ? (
+                            vals.resumeType &&
+                            (vals.resumeType === 'automatic' ? (
                                 <ResumeSelect vertical={vals.verticalId} setResume={setPdfBlob} />
                             ) : (
                                 <div className='bg-[#edfdfb] p-5 border border-gray-200 text-center rounded-lg md:mt-8 border-1 text-gray-600'>
                                     <p>Upload Resume in PDF</p>
                                     <p className='my-3'>
-                                        <input
+                                        <Input
                                             type='file'
-                                            accept='.pdf'
+                                            accepts='.pdf'
                                             name='resume'
-                                            onChange={e => {
-                                                setResumePDF(e.target.files[0])
-                                            }}
-                                            required
+                                            onChange={e => setResumePDF(e.target.files[0])}
                                         />
                                     </p>
                                 </div>

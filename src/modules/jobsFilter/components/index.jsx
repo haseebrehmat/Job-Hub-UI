@@ -5,5 +5,6 @@ import ResumeSelect from '@modules/jobsFilter/components/ResumeSelect'
 import VerticalSelect from '@modules/jobsFilter/components/VerticalSelect'
 import JobInfo from '@modules/jobsFilter/components/JobInfo'
 import ApplyHistory from '@modules/jobsFilter/components/ApplyHistory'
+import ResumeTypes from '@modules/jobsFilter/components/ResumeTypes'
 
-export { TableNavigate, GenerateCSV, JobDetail, ResumeSelect, VerticalSelect, JobInfo, ApplyHistory }
+export { TableNavigate, GenerateCSV, JobDetail, ResumeSelect, VerticalSelect, JobInfo, ApplyHistory, ResumeTypes }
