@@ -60,6 +60,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                         <Badge label={jobStatus[job?.status]} type='success' />
                                     </td>
                                     <td className='px-3 py-4'>BD</td>
+                                    <td className='px-3 py-4 font-extrabold'>{job?.vertical?.pseudo ?? 'N/A'}</td>
                                     <td className='px-3 py-4 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
                                     <td className='px-3 py-4'>
                                         <div className='flex space-x-2'>
