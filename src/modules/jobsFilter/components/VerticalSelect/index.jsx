@@ -24,9 +24,9 @@ const VerticalSelect = ({ jobId, vId, teamId, setVals }) => {
     )
 
     if (isLoading) return <Loading />
-    return (
+    return data ? (
         <div>
-            <JobInfo job={data?.job} />
+            {data?.job && <JobInfo job={data?.job} />}
             {data?.history?.length > 0 && <ApplyHistory job={data?.history} />}
             <p className='text-gray-600 pb-1'>Teams</p>
             <CustomSelector
@@ -47,6 +47,8 @@ const VerticalSelect = ({ jobId, vId, teamId, setVals }) => {
                 </>
             )}
         </div>
+    ) : (
+        <span className='mx-auto'>There is error in fetching job or teams or verticals</span>
     )
 }
 

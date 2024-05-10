@@ -6,7 +6,7 @@ const ApplyHistory = ({ history }) => (
     <div className='flex flex-col bg-white border p-3 space-y-1 mb-4'>
         <p className='text-lg'>Job Apply History</p>
         <hr className='pb-2' />
-        <table>
+        <table className='table-auto text-sm text-left text-gray-500 border'>
             <thead>
                 <th>Vertical</th>
                 <th>Team</th>
