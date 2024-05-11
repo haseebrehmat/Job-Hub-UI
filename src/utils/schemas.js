@@ -232,3 +232,7 @@ export const genericSkillSchema = Yup.object().shape({
 export const statusSchema = Yup.object().shape({
     name: Yup.string().required('Status name is required'),
 })
+
+export const companyStatusSchema = Yup.object().shape({
+    status: Yup.array().required('Please choose status'),
+})

@@ -2,38 +2,41 @@ import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Drawer, Input } from '@components'
+import { Button, Drawer, CustomSelector } from '@components'
 
 import { saveGenericSkill } from '@modules/pseudos/api'
 
-import { statusSchema } from '@utils/schemas'
+import { companyStatusSchema } from '@utils/schemas'
+import { GENERIC_SKILL_TYPES_OPTIONS } from '@constants/pseudos'
 
-const CompanyStatusForm = ({ show, setShow, mutate, status = null }) => {
-    const { values, errors, handleSubmit, resetForm, trigger, handleChange } = useMutate(
-        `/api/profile/generic_skill${status?.id ? `/${status?.id}/` : '/'}`,
+const CompanyStatusForm = ({ show, setShow, mutate }) => {
+    const { values, errors, handleSubmit, resetForm, trigger, setFieldValue } = useMutate(
+        '/api/profile/generic_skill/',
         saveGenericSkill,
-        { name: status?.name || '' },
-        statusSchema,
-        async formValues => trigger({ ...formValues, id: status?.id }),
+        { status: [] },
+        companyStatusSchema,
+        async formValues => trigger({ ...formValues }),
         null,
-        () => {
-            mutate()
-            if (!status?.id) resetForm()
-        }
+        () => mutate() && resetForm()
     )
-    const flag = values.name.length > 0
 
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>{status?.id ? 'Edit' : 'Create'} Status</p>
+                    <p className='font-medium text-xl'>Add Status</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Name*</span>
-                    <Input name='name' value={values.name} onChange={handleChange} ph='Enter status name' />
-                    {errors.name && <small className='__error'>{errors.name}</small>}
+                    <span className='text-xs font-semibold'>Status*</span>
+                    <CustomSelector
+                        options={GENERIC_SKILL_TYPES_OPTIONS}
+                        handleChange={obj => setFieldValue('status', obj)}
+                        selectorValue={values.status}
+                        isMulti
+                        placeholder='Select Status'
+                    />
+                    {errors.status && <small className='__error'>{errors.status}</small>}
                     <div className='pt-4 space-y-2'>
-                        {flag && <Button label={status?.id ? 'Update' : 'Submit'} type='submit' fill />}
+                        {values.status.length > 0 && <Button label='Add' type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
                 </div>
