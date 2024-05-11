@@ -32,7 +32,7 @@ const VerticalSelect = ({ jobId, vId, teamId, setVals }) => {
             <CustomSelector
                 options={parseTeams(data?.assigned)}
                 selectorValue={parseSelectedTeam(teamId, data?.assigned)}
-                handleChange={({ value }) => setVals({ teamId: value })}
+                handleChange={({ value }) => setVals({ teamId: value, verticalId: null })}
                 placeholder='Select Team'
             />
             {teamId && (

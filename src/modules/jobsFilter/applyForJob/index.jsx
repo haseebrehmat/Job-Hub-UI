@@ -17,7 +17,7 @@ const ApplyForJob = () => {
         verticalId: null,
         teamId: null,
         coverLetter: `Here your cover letter ${id}`,
-        resumeType: null,
+        resumeType: 'automatic',
     })
     const [pdfBlob, setPdfBlob] = useState(null)
     const [resumePDF, setResumePDF] = useState('')
@@ -85,14 +85,13 @@ const ApplyForJob = () => {
                             ) : (
                                 <div className='bg-[#edfdfb] p-5 border border-gray-200 text-center rounded-lg md:mt-8 border-1 text-gray-600'>
                                     <p>Upload Resume in PDF</p>
-                                    <p className='my-3'>
-                                        <Input
-                                            type='file'
-                                            accepts='.pdf'
-                                            name='resume'
-                                            onChange={e => setResumePDF(e.target.files[0])}
-                                        />
-                                    </p>
+                                    <Input
+                                        type='file'
+                                        accepts='.pdf'
+                                        name='resume'
+                                        onChange={e => setResumePDF(e.target.files[0])}
+                                        classes='my-3'
+                                    />
                                 </div>
                             ))}
                     </div>
