@@ -13,6 +13,6 @@ export const leadsRoutes = [
         component: <CompanyStatus />,
         protect: true,
         title: 'Statuses',
-        permission: 'all',
+        permission: 'view_company_status',
     },
 ]

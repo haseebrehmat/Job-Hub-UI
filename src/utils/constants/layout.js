@@ -176,6 +176,9 @@ export const menuItems = [
             'create_status',
             'edit_status',
             'delete_status',
+            'view_company_status',
+            'add_company_status',
+            'remove_company_status',
         ],
         subItems: [
             {
@@ -195,6 +198,12 @@ export const menuItems = [
                 link: '/status',
                 svg: StatusIcon,
                 perms: ['view_status', 'create_status', 'edit_status', 'delete_status'],
+            },
+            {
+                label: 'Status',
+                link: '/company-status',
+                svg: StatusIcon,
+                perms: ['view_company_status', 'add_company_status', 'remove_company_status'],
             },
         ],
     },

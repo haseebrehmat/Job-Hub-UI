@@ -453,7 +453,7 @@ export const rawpermissions = [
             },
             {
                 codename: 'remove_company_status',
-                name: 'Remove Company_status',
+                name: 'Remove Status',
                 parent: ['view_company_status'],
                 level: 2,
             },
