@@ -228,3 +228,7 @@ export const genericSkillSchema = Yup.object().shape({
         .oneOf(Object.keys(GENERIC_SKILL_TYPES), 'Invalid skill type')
         .required('Please select skill type'),
 })
+
+export const statusSchema = Yup.object().shape({
+    name: Yup.string().required('Status name is required'),
+})
