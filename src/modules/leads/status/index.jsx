@@ -3,10 +3,9 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { GenericSkillActions, GenericSkillForm } from '@modules/pseudos/components'
+import { StatusActions, StatusForm } from '@modules/leads/components'
 import { fetchGenericSkills } from '@modules/pseudos/api'
 
-import { GENERIC_SKILL_TYPES } from '@constants/pseudos'
 import { can } from '@utils/helpers'
 
 import { CreateIcon } from '@icons'
@@ -15,10 +14,10 @@ const Status = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), {
         query: '',
         page: 1,
-        skill: null,
+        status: null,
         show: false,
     })
-    const handleClick = values => dispatch({ skill: values, show: !vals.show })
+    const handleClick = values => dispatch({ status: values, show: !vals.show })
 
     const { data, error, isLoading, mutate } = useSWR(
         `/api/profile/generic_skill/?search=${vals.query}&page=${vals.page}`,
@@ -42,9 +41,8 @@ const Status = () => {
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
                             {(can('edit_status') || can('delete_status')) && (
-                                <GenericSkillActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                                <StatusActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
-                            <div className='text-sm mt-2'>{GENERIC_SKILL_TYPES[row?.type] ?? 'N/A'}</div>
                         </div>
                     ))
                 ) : (
@@ -61,11 +59,11 @@ const Status = () => {
                 </div>
             )}
             {(can('create_status') || can('edit_status')) && vals.show && (
-                <GenericSkillForm
+                <StatusForm
                     show={vals.show}
                     setShow={value => dispatch({ show: value })}
                     mutate={mutate}
-                    skill={vals.skill}
+                    status={vals.status}
                 />
             )}
         </div>
