@@ -25,11 +25,12 @@ import {
     ApplyForJob,
     GenericSkills,
 } from '@modules'
-
 import { JobDetail } from '@modules/jobsFilter/components'
+import App from '@/App'
+
+import { leadsRoutes } from '@router/leadsRoutes'
 
 import { getToken, decodeJwt } from '@utils/helpers'
-import App from './App'
 
 const { user_id } = decodeJwt()
 
@@ -157,7 +158,7 @@ export const routes = [
         component: <ResumeBuilder />,
         protect: true,
         title: 'Resume Builder',
-        permission: 'all',
+        permission: 'view_resume_builder',
     },
     {
         path: '/pseudos',
@@ -194,6 +195,7 @@ export const routes = [
         title: 'Generic Skills',
         permission: 'view_generic_skill',
     },
+    ...leadsRoutes,
 ]
 
 export const authRoutes = [
