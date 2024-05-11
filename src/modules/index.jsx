@@ -23,6 +23,7 @@ import Vertical from '@/modules/pseudos/vertical'
 import ApplyForJob from '@modules/jobsFilter/applyForJob'
 import GenericSkills from '@modules/pseudos/genericSkills'
 import Status from '@modules/leads/status'
+import CompanyStatus from '@modules/leads/companyStatus'
 
 export {
     TeamAppliedJobs,
@@ -51,4 +52,5 @@ export {
     ApplyForJob,
     GenericSkills,
     Status,
+    CompanyStatus,
 }
