@@ -12,7 +12,7 @@ export const leadsRoutes = [
         path: '/company-status',
         component: <CompanyStatus />,
         protect: true,
-        title: 'Statuses',
+        title: 'Status',
         permission: 'view_company_status',
     },
 ]

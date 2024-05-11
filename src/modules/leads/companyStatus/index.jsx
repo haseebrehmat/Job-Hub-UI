@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { StatusActions, StatusForm } from '@modules/leads/components'
+import { CompanyStatusActions, CompanyStatusForm } from '@modules/leads/components'
 import { fetchGenericSkills } from '@modules/pseudos/api'
 
 import { can } from '@utils/helpers'
@@ -30,7 +30,7 @@ const CompanyStatus = () => {
             <div className='flex items-center py-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={vals.query} setQuery={value => dispatch({ query: value })} />
-                    {can('create_status') && (
+                    {can('add_company_status') && (
                         <Button label='Add Status' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                     )}
                 </div>
@@ -40,13 +40,11 @@ const CompanyStatus = () => {
                     data?.skills?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
-                            {(can('edit_status') || can('delete_status')) && (
-                                <StatusActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
-                            )}
+                            {can('remove_company_status') && <CompanyStatusActions id={row?.id} mutate={mutate} />}
                         </div>
                     ))
                 ) : (
-                    <span className='m-auto p-5 text-gray-500'>No statuses found yet!</span>
+                    <span className='m-auto p-5 text-gray-500'>No statuses added yet!</span>
                 )}
             </div>
             {data?.users?.length > 24 && (
@@ -58,8 +56,8 @@ const CompanyStatus = () => {
                     />
                 </div>
             )}
-            {(can('create_status') || can('edit_status')) && vals.show && (
-                <StatusForm
+            {can('add_company_status') && vals.show && (
+                <CompanyStatusForm
                     show={vals.show}
                     setShow={value => dispatch({ show: value })}
                     mutate={mutate}
