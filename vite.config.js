@@ -15,6 +15,7 @@ export default defineConfig({
             '@icons': path.resolve(__dirname, './src/assets/icons'),
             '@svgs': path.resolve(__dirname, './src/assets/svgs'),
             '@constants': path.resolve(__dirname, './src/utils/constants'),
+            '@router': path.resolve(__dirname, './src/router'),
         },
     },
 })
