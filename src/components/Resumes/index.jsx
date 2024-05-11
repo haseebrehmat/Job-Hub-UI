@@ -27,6 +27,9 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template2 data={devProfile} hide={hide} names={names} />,
         <Template3 data={devProfile} hide={hide} names={names} />,
         <Template4 data={devProfile} hide={hide} names={names} />,
+        <Template4 data={devProfile} hide={hide} names={names} />,
+        <Template4 data={devProfile} hide={hide} names={names} />,
+        <Template4 data={devProfile} hide={hide} names={names} />,
     ]
 
     const setBlob = reference =>
