@@ -67,7 +67,7 @@ const Template1 = ({ data: dev, hide, names }) => (
             </div>
         )}
         {hide.experience && dev?.experience?.length > 0 && (
-            <div className='mb-10'>
+            <div className='mb-10 '>
                 <div className='flex flex-row align-baseline gap-2'>
                     <div className='bg-black p-2'>
                         <p className='fill-white'>{svgs.experience1}</p>
@@ -76,7 +76,7 @@ const Template1 = ({ data: dev, hide, names }) => (
                 </div>
                 <hr className='mb-6 border-gray-700' />
                 <div className='flex flex-col'>
-                    <div className='grid grid-col-1 gap-8'>
+                    <div className='grid grid-cols-1 gap-8'>
                         {dev?.experience.map(({ company, title, from, to, description }, index) => (
                             <div className='flex flex-row text-sm' key={index}>
                                 <div className='w-[30%]'>
