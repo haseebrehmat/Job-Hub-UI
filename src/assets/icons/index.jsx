@@ -58,7 +58,7 @@ import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
-import { BiPlusCircle, BiMessageDetail, BiPause } from 'react-icons/bi'
+import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
 import { RiUserSettingsLine, RiLock2Fill, RiTeamLine, RiStackFill, RiProfileLine } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
@@ -145,3 +145,4 @@ export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
 export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
+export const StatusIcon = <BiGitCompare style={{ fontSize: 22 }} />

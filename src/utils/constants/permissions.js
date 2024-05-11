@@ -401,6 +401,45 @@ export const rawpermissions = [
             },
         ],
     },
+    {
+        module: 'Resume Builder',
+        permissions: [
+            {
+                codename: 'view_resume_builder',
+                name: 'View Resume builder',
+                level: 2,
+            },
+        ],
+    },
+    {
+        module: 'Status',
+        permissions: [
+            {
+                codename: 'view_status',
+                name: 'View All Status',
+                child: ['create_status', 'edit_status', 'delete_status'],
+                level: 1,
+            },
+            {
+                codename: 'create_status',
+                name: 'Create Status',
+                parent: ['view_status'],
+                level: 1,
+            },
+            {
+                codename: 'edit_status',
+                name: 'Edit Status',
+                parent: ['view_status'],
+                level: 1,
+            },
+            {
+                codename: 'delete_status',
+                name: 'Delete Status',
+                parent: ['view_status'],
+                level: 1,
+            },
+        ],
+    },
 ]
 
 export const permissions = rawpermissions.map(row => ({

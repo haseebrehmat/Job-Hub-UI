@@ -17,6 +17,7 @@ import {
     LoggerIcon,
     ResumeIcon,
     PseudoIcon,
+    StatusIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -166,7 +167,16 @@ export const menuItems = [
         link: '#!',
         svg: SettingIcon,
         key: 'settings',
-        perms: ['view_integration', 'create_integration', 'edit_integration'],
+        perms: [
+            'view_integration',
+            'create_integration',
+            'edit_integration',
+            'view_resume_builder',
+            'view_status',
+            'create_status',
+            'edit_status',
+            'delete_status',
+        ],
         subItems: [
             {
                 label: 'Integrations',
@@ -178,7 +188,13 @@ export const menuItems = [
                 label: 'Resume Builder',
                 link: '/resume-builder',
                 svg: ResumeIcon,
-                perms: ['view_integration', 'create_integration', 'edit_integration'],
+                perms: ['view_resume_builder'],
+            },
+            {
+                label: 'Statuses',
+                link: '/status',
+                svg: StatusIcon,
+                perms: ['view_status', 'create_status', 'edit_status', 'delete_status'],
             },
         ],
     },
