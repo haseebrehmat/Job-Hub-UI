@@ -438,6 +438,25 @@ export const rawpermissions = [
                 parent: ['view_status'],
                 level: 1,
             },
+            {
+                codename: 'view_company_status',
+                name: 'View Status',
+                parent: ['view_status'],
+                child: ['add_company_status', 'remove_company_status'],
+                level: 2,
+            },
+            {
+                codename: 'add_company_status',
+                name: 'Add Status',
+                parent: ['view_company_status'],
+                level: 2,
+            },
+            {
+                codename: 'remove_company_status',
+                name: 'Remove Company_status',
+                parent: ['view_company_status'],
+                level: 2,
+            },
         ],
     },
 ]
