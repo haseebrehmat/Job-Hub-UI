@@ -3,7 +3,7 @@ import html2pdf from 'html2pdf.js'
 
 import { Button } from '@components'
 
-import { Template1, Template2, Template3, Template4 } from '@modules/settings/templates'
+import { Template1, Template2, Template3, Template4, Template5 } from '@modules/settings/templates'
 
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
 
@@ -12,7 +12,7 @@ import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
 import { DownloadIcon } from '@icons'
 
 const Resumes = ({ data, hide, names, set = null }) => {
-    const refs = [useRef(null), useRef(null), useRef(null), useRef(null)]
+    const refs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)]
     const [tab, setTab] = useState(0)
 
     const templatesArray = [
@@ -20,6 +20,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template2 data={data} hide={hide} names={names} />,
         <Template3 data={data} hide={hide} names={names} />,
         <Template4 data={data} hide={hide} names={names} />,
+        <Template5 data={data} hide={hide} names={names} />,
     ]
 
     const templatesArray1 = [
@@ -27,7 +28,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template2 data={devProfile} hide={hide} names={names} />,
         <Template3 data={devProfile} hide={hide} names={names} />,
         <Template4 data={devProfile} hide={hide} names={names} />,
-        <Template4 data={devProfile} hide={hide} names={names} />,
+        <Template5 data={devProfile} hide={hide} names={names} />,
         <Template4 data={devProfile} hide={hide} names={names} />,
         <Template4 data={devProfile} hide={hide} names={names} />,
     ]
