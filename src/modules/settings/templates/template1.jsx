@@ -2,185 +2,125 @@ import { memo } from 'react'
 
 import { formatDate4 } from '@utils/helpers'
 
-import avatarPlaceholder from '@images/profile-placeholder.png'
 import { ResumeSvgs as svgs } from '@svgs'
 
-const Template1 = ({ data: dev }) => (
+const Template1 = ({ data: dev, hide, names }) => (
     <>
-        <div className='flex items-center'>
-            <img src={dev?.basic?.avatar ?? avatarPlaceholder} alt='Profile' className='w-28 h-w-28 rounded-full' />
-            <div className='flex items-center justify-between w-full'>
-                <div className='ml-4'>
-                    <h2 className='text-xl font-bold'>{dev?.basic?.name ?? 'no name'}</h2>
-                    <p className='text-gray-600'>{dev?.basic?.designation ?? 'no designation'}</p>
-                </div>
-                <div className='ml-4 text-end'>
-                    <p className='text-sm py-0.5 text-gray-800'>{dev?.basic?.email ?? 'no email'}</p>
-                    <p className='text-sm py-0.5 text-gray-800'>{dev?.basic?.phone ?? 'no phone'}</p>
-                    <p className='text-sm py-0.5 text-gray-800'>{dev?.basic?.address ?? 'no address'}</p>
-                </div>
-            </div>
+        <div className='flex flex-col mb-10'>
+            {hide.name && dev?.basic?.name && <p className='text-5xl font-bold'>{dev?.basic?.name}</p>}
+            {hide.designation && dev?.basic?.designation && (
+                <p className='text-gray-500 text-3xl mt-3'>{dev?.basic?.designation}</p>
+            )}
         </div>
-        <hr className='my-6 border-2' />
-        <div className='grid grid-cols-2'>
-            <div>
-                <h3 className='text-lg font-bold'>Summary</h3>
-                <p className='text-gray-600 text-sm break-words'>{dev?.summary ?? ''}</p>
+        {(hide.phone || hide.email || hide.address) && (
+            <div className='flex flex-col mt-6 space-y-4'>
+                {hide.phone && dev?.basic?.phone && (
+                    <div className='flex flex-row space-x-2'>
+                        <p className='fill-white bg-black p-1'>{svgs.phone4}</p>
+                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.phone}</p>
+                    </div>
+                )}
+                {hide.email && dev?.basic?.email && (
+                    <div className='flex flex-row space-x-2'>
+                        <p className='fill-white bg-black p-1'>{svgs.gmail4}</p>
+                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.email}</p>
+                    </div>
+                )}
+                {hide.address && dev?.basic?.address && (
+                    <div className='flex flex-row space-x-2'>
+                        <p className='fill-white bg-black p-1'>{svgs.address4}</p>
+                        <p className='text-gray-500 text-sm float-right'>{dev?.basic?.address}</p>
+                    </div>
+                )}
             </div>
-            <div className='ml-4'>
-                <h3 className='text-lg font-bold mb-2'>Skills</h3>
-                <div className='ml-4 space-y-1.5'>
-                    {dev?.skills?.all?.map(({ name, level }, index) => (
-                        <div className='flex items-center justify-between' key={index}>
-                            <span>{name}</span>
-                            <div className='flex space-x-3'>
-                                <span
-                                    className={`w-5 h-5 rounded-full ${level >= 1 ? 'bg-blue-400' : 'bg-gray-400'}`}
-                                />
-                                <span
-                                    className={`w-5 h-5 rounded-full ${level >= 2 ? 'bg-blue-400' : 'bg-gray-400'}`}
-                                />
-                                <span
-                                    className={`w-5 h-5 rounded-full ${level >= 3 ? 'bg-blue-400' : 'bg-gray-400'}`}
-                                />
-                                <span
-                                    className={`w-5 h-5 rounded-full ${level >= 4 ? 'bg-blue-400' : 'bg-gray-400'}`}
-                                />
-                                <span
-                                    className={`w-5 h-5 rounded-full ${level >= 5 ? 'bg-blue-400' : 'bg-gray-400'}`}
-                                />
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-        <hr className='my-6 border-2' />
-        {dev?.projects?.length > 0 && (
-            <div>
-                <h3 className='text-lg font-bold mb-1'>Projects</h3>
-                <div className='space-y-1.5 grid grid-cols-2'>
-                    {dev?.projects?.map(({ name, description, title, repo }, index) => (
-                        <div className='ml-4 mt-4' key={index}>
-                            <h4 className='text-md font-bold capitalize'>{name}</h4>
-                            <p className='text-gray-600'>{title}</p>
-                            <p className='text-gray-600 italic'>{repo ?? 'open source'}</p>
-                            <div className='ml-4 break-words'>{description ?? 'no description'}</div>
-                        </div>
-                    ))}
+        )}
+        {hide.summary && dev?.summary?.length > 0 && (
+            <div className='flex items-baseline justify-start mb-10 mt-10'>
+                <div className='flex flex-col w-3/4'>
+                    <p className='text-gray-700 text-sm break-words'>{dev?.summary}</p>
                 </div>
             </div>
         )}
-        <hr className='my-6 border-2' />
-        <div className='grid grid-cols-2'>
-            {dev?.experience?.length > 0 && (
-                <div>
-                    <h3 className='text-lg font-bold'>Experience</h3>
-                    <div className='flex flex-col'>
-                        {dev?.experience.map(({ company, title, from, to, description }, index) => (
-                            <div className='ml-4 mt-4' key={index}>
-                                <h4 className='text-md font-bold'>{title}</h4>
-                                <p className='text-gray-600'>
-                                    {company} ({formatDate4(from)} -- {formatDate4(to)})
-                                </p>
-                                <div className='ml-4 break-words'>{description ?? 'no description'}</div>
-                            </div>
-                        ))}
+        {hide.skill && dev?.skills?.all?.length > 0 && (
+            <div className='mb-10'>
+                <div className='flex flex-row align-baseline gap-2'>
+                    <div className='bg-black p-2'>
+                        <p className='fill-white'>{svgs.skill1}</p>
                     </div>
+                    <p className='text-lg text-center mt-3 font-semibold '>{names.skill}</p>
                 </div>
-            )}
-            {dev?.education?.length > 0 && (
-                <div className='ml-4'>
-                    <h3 className='text-lg font-bold'>Education</h3>
-                    <div className='flex flex-col'>
-                        {dev?.education.map(({ institute, degree, from, to, grade }, index) => (
-                            <div className='ml-4 mt-4' key={index}>
-                                <h4 className='text-md font-bold'>{degree}</h4>
-                                <p className='text-gray-600'>
-                                    {institute} ({formatDate4(from)} -- {formatDate4(to)})
-                                </p>
-                                <span>{grade}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-        </div>
-        <hr className='my-6 border-2' />
-        <div className='grid grid-cols-2'>
-            <div className='flex flex-col space-y-1'>
-                {dev?.hobbies?.length > 0 && (
-                    <div>
-                        <h3 className='text-lg font-bold'>Hobbies</h3>
-                        <div className='ml-4'>
-                            {dev?.hobbies.map((name, index) => (
-                                <div className='inline-block' key={index}>
-                                    <span className='pr-2'>{name}</span>
-                                    <span className='pr-2 text-gray-400 text-2xl'>
-                                        {dev?.hobbies.length !== index + 1 && '|'}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-                {Object.entries(dev?.links)?.length > 0 && (
-                    <div>
-                        <h3 className='text-lg font-bold mt-4 mb-3'>Social Links</h3>
-                        <div className='ml-4'>
-                            {Object.entries(dev?.links).map(([name, url], index) => (
-                                <div className='inline-block mr-6 opacity-60' key={index}>
-                                    <a href={url} target='_blank' className='w-10 h-10' rel='noreferrer'>
-                                        {name in svgs ? svgs[name] : svgs.other}
-                                    </a>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </div>
-            <div className='ml-4'>
-                {dev?.languages?.length > 0 && (
-                    <div>
-                        <h3 className='text-lg font-bold mb-2'>Languages</h3>
-                        <div className='ml-4 space-y-2 mb-2'>
-                            {dev?.languages.map(({ name, level }, index) => (
-                                <div className='flex items-center justify-between' key={index}>
-                                    <span>{name}</span>
-                                    <div className='flex space-x-3'>
-                                        <span
-                                            className={`w-5 h-5 rounded-full ${
-                                                level >= 1 ? 'bg-blue-400' : 'bg-gray-400'
-                                            }`}
-                                        />
-                                        <span
-                                            className={`w-5 h-5 rounded-full ${
-                                                level >= 2 ? 'bg-blue-400' : 'bg-gray-400'
-                                            }`}
-                                        />
-                                        <span
-                                            className={`w-5 h-5 rounded-full ${
-                                                level >= 3 ? 'bg-blue-400' : 'bg-gray-400'
-                                            }`}
-                                        />
-                                        <span
-                                            className={`w-5 h-5 rounded-full ${
-                                                level >= 4 ? 'bg-blue-400' : 'bg-gray-400'
-                                            }`}
-                                        />
-                                        <span
-                                            className={`w-5 h-5 rounded-full ${
-                                                level >= 5 ? 'bg-blue-400' : 'bg-gray-400'
-                                            }`}
-                                        />
+                <hr className='mb-6 border-gray-700' />
+                <div className='flex flex-col'>
+                    <div className='grid grid-col-1'>
+                        <div className='flex flex-row text-sm'>
+                            <div className='w-[30%]'>{}</div>
+                            <div className='w-[80%]'>
+                                {dev?.skills?.all.map(({ name }, index) => (
+                                    <div className='inline-block' key={index}>
+                                        <span className='pr-4 text-sm text-gray-800'>{name}</span>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
-                )}
+                </div>
             </div>
-        </div>
+        )}
+        {hide.experience && dev?.experience?.length > 0 && (
+            <div className='mb-10 '>
+                <div className='flex flex-row align-baseline gap-2'>
+                    <div className='bg-black p-2'>
+                        <p className='fill-white'>{svgs.experience1}</p>
+                    </div>
+                    <p className='text-lg text-center mt-3 font-semibold '>{names.experience}</p>
+                </div>
+                <hr className='mb-6 border-gray-700' />
+                <div className='flex flex-col'>
+                    <div className='grid grid-cols-1 gap-8'>
+                        {dev?.experience.map(({ company, title, from, to, description }, index) => (
+                            <div className='flex flex-row text-sm' key={index}>
+                                <div className='w-[30%]'>
+                                    <p className='text-gray-900'>
+                                        {formatDate4(from)} to {formatDate4(to)}
+                                    </p>
+                                </div>
+                                <div className='w-[80%]'>
+                                    <p className='font-bold'>{title}</p>
+                                    <p className='italic'>{company}</p>
+                                    <p className='text-gray-700 break-words'>{description ?? 'no description'}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        )}
+        {hide.education && dev?.education?.length > 0 && (
+            <div className='mb-10'>
+                <div className='flex flex-row align-baseline gap-2'>
+                    <div className='bg-black p-2'>
+                        <p className='fill-white'>{svgs.education1}</p>
+                    </div>
+                    <p className='text-lg text-center mt-3 font-semibold '>{names.education}</p>
+                </div>
+                <hr className='mb-6 border-gray-700' />
+                <div className='flex flex-col'>
+                    <div className='grid grid-col-1 gap-8'>
+                        {dev?.education.map(({ degree, institute }, index) => (
+                            <div className='flex flex-row text-sm' key={index}>
+                                <div className='w-[30%]'>{}</div>
+                                <div className='w-[80%]'>
+                                    <div className='flex flex-col'>
+                                        <p className='font-bold text-xl'>{degree}</p>
+                                        <p className='text-gray-700'>{institute}</p>
+                                    </div>{' '}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        )}
     </>
 )
 

@@ -22,6 +22,8 @@ export const devProfile = {
             { name: 'CSS', level: 4 },
             { name: 'NodeJs', level: 4 },
             { name: 'NextJs', level: 4 },
+            { name: 'NodeJs', level: 4 },
+            { name: 'NextJs', level: 4 },
         ],
     },
     experience: [
@@ -39,13 +41,6 @@ export const devProfile = {
             to: '2019',
             description: 'Implemented UI designs using Tailwind CSS',
         },
-        {
-            company: 'KLM Company',
-            title: 'Backend Developer',
-            from: '2010',
-            to: '2015',
-            description: 'Collaborated with cross-functional teams to deliver high-quality software in Node.js',
-        },
     ],
     education: [
         {
@@ -61,13 +56,6 @@ export const devProfile = {
             from: '2013',
             to: '2015',
             grade: 'A+ Grade',
-        },
-        {
-            institute: 'RTS School',
-            degree: 'Primary School',
-            from: '2013',
-            to: '2011',
-            grade: 'A Grade',
         },
     ],
     links: {

@@ -31,9 +31,11 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
     )
 
     return (
-        <form onSubmit={handleSubmit} className='w-fit'>
+        <form onSubmit={handleSubmit} className='w-[100%]'>
             <div className='flex flex-col font-normal'>
-                <h2 className='text-lg font-semibold pl-2.5 mt-4'>Sections</h2>
+                <div className='bg-[#048C8C] border-2 rounded-lg py-4 text-center text-white text-xl font-semibold'>
+                    Sections
+                </div>
                 <div className='border p-2.5 m-2 shadow-md rounded-md'>
                     <p>Basic Info</p>
                     <hr className='m-1' />

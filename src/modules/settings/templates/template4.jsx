@@ -43,14 +43,14 @@ const Template4 = ({ data: dev, hide, names }) => (
                 </div>
             )}
         </div>
-        {hide.skill && dev?.skills?.length > 0 && (
+        {hide.skill && dev?.skills?.all?.length > 0 && (
             <div className='mb-10'>
                 <hr className='mb-2 border-black' />
                 <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.skill}</p>
                 <hr className='mb-6 border-black' />
                 <div className='flex flex-col'>
                     <div>
-                        {dev?.skills.map(({ name }, index) => (
+                        {dev?.skills?.all.map(({ name }, index) => (
                             <div className='inline-block py-1' key={index}>
                                 <span className='bg-blue-900 text-white text-sm font-medium mr-2 px-2.5 py-1 rounded'>
                                     {name}
