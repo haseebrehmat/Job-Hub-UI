@@ -1,6 +1,6 @@
-import { checkToken, getToken } from '@/utils/helpers'
-import { http, rawHttp } from '@utils/http'
-import { toast } from 'react-hot-toast'
+import {checkToken, getToken} from '@/utils/helpers'
+import {http, rawHttp} from '@utils/http'
+import {toast} from 'react-hot-toast'
 
 const fetchJobs = async url => {
     checkToken()
@@ -41,6 +41,12 @@ const fetchJobs = async url => {
     }
 }
 
+
+const downloadJobsData = async url => {
+    const { data } = await http.get(url)
+    return toast.success(data || 'Export in progress, You will be notify through email', {icon: '🎉', duration: 2000})
+}
+
 const updateJobStatus = async (url, status, job) => {
     checkToken()
     const response = await fetch(url, {
@@ -49,12 +55,12 @@ const updateJobStatus = async (url, status, job) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${getToken()}`,
         },
-        body: JSON.stringify({ status, job }),
+        body: JSON.stringify({status, job}),
     })
 
-    const { detail } = await response.json()
+    const {detail} = await response.json()
 
-    return { status: response.ok ? 'success' : 'error', detail }
+    return {status: response.ok ? 'success' : 'error', detail}
 }
 
 const updateRecruiterStatus = async (url, company_name) => {
@@ -65,12 +71,12 @@ const updateRecruiterStatus = async (url, company_name) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${getToken()}`,
         },
-        body: JSON.stringify({ company_name }),
+        body: JSON.stringify({company_name}),
     })
 
-    const { detail } = await response.json()
+    const {detail} = await response.json()
 
-    return { status: response.ok ? 'success' : 'error', detail }
+    return {status: response.ok ? 'success' : 'error', detail}
 }
 
 const generateCoverLetter = async (url, data) => {
@@ -83,21 +89,21 @@ const generateCoverLetter = async (url, data) => {
         },
         body: JSON.stringify(data),
     })
-    const { detail } = await response.json()
-    return { status: response.ok ? 'success' : 'error', detail }
+    const {detail} = await response.json()
+    return {status: response.ok ? 'success' : 'error', detail}
 }
 
-export { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter }
+export {fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter, downloadJobsData}
 
-export const fetchUserVerticals = link => http.get(link).then(({ data }) => data)
+export const fetchUserVerticals = link => http.get(link).then(({data}) => data)
 
-export const fetchJob = link => http.get(link).then(({ data }) => data)
+export const fetchJob = link => http.get(link).then(({data}) => data)
 
-export const applyJob = async (url, { arg: details }) => {
-    const { data } = await rawHttp.post(url, details, {
+export const applyJob = async (url, {arg: details}) => {
+    const {data} = await rawHttp.post(url, details, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
     })
-    return toast.success(data.detail || 'Job Applied successfully', { icon: '🎉', duration: 1000 })
+    return toast.success(data.detail || 'Job Applied successfully', {icon: '🎉', duration: 1000})
 }

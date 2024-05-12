@@ -1,17 +1,17 @@
-import { useState, memo, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, {useState, memo, useEffect} from 'react'
+import {Link, useNavigate} from 'react-router-dom'
 import Selector from './components/Selector'
 import CustomSelector from '../../components/CustomSelector'
-import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
-import { Checkedbox, unCheckedbox } from '@icons'
-import { JOB_HEADS } from '@constants/jobPortal'
-import { baseURL } from '@utils/http'
-import { toast } from 'react-hot-toast'
-import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@/utils/helpers'
-import { Filters, Badge } from '@/components'
-import { fetchJobs, updateJobStatus, updateRecruiterStatus, generateCoverLetter } from './api'
+import {Paginated, CustomDilog, EmptyTable, TextEditor, Loading} from '@components'
+import {Checkedbox, unCheckedbox} from '@icons'
+import {JOB_HEADS} from '@constants/jobPortal'
+import {baseURL} from '@utils/http'
+import {toast} from 'react-hot-toast'
+import {can, formatDate, checkToken, dataForCsv, formatStringInPascal} from '@/utils/helpers'
+import {Filters, Badge} from '@/components'
+import {fetchJobs, downloadJobsData,  updateJobStatus, updateRecruiterStatus, generateCoverLetter} from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
-import { GenerateCSV } from '@modules/jobsFilter/components'
+import {GenerateCSV} from '@modules/jobsFilter/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -29,9 +29,9 @@ const JobsFilter = memo(() => {
         jobSourceSelector: [],
         jobTypeSelector: 'all',
         jobVisibilitySelector: 'all',
-        stats: { total_job: '0', filtered_job: '0', recruiter_job: '0', non_recruiter_job: '0' },
+        stats: {total_job: '0', filtered_job: '0', recruiter_job: '0', non_recruiter_job: '0'},
         jobStatusChoice: {},
-        dates: { from_date: '', to_date: '' },
+        dates: {from_date: '', to_date: ''},
         jobTitle: '',
         techStackData: [],
         ordering: '-job_posted_date',
@@ -58,11 +58,11 @@ const JobsFilter = memo(() => {
     const [init, setInit] = useState('<p>your Ai Generated Cover Letter Displays here.........</p>')
 
     const error = true
-    const generateParamsString = () => {
+    const generateParamsString = (params_list=jobsFilterParams) => {
         const params = new URLSearchParams()
         let params_count = 0
 
-        Object.entries(jobsFilterParams).forEach(([key, value]) => {
+        Object.entries(params_list).forEach(([key, value]) => {
             params.append(key, value)
             params_count++
         })
@@ -70,12 +70,12 @@ const JobsFilter = memo(() => {
     }
 
     const handleTechStackSelector = techStackSelectorData => {
-        setFilterState({ ...filterState, techStackSelector: techStackSelectorData })
+        setFilterState({...filterState, techStackSelector: techStackSelectorData})
     }
 
     const updateSelectorCount = (selector, new_count_list) =>
         selector
-            .map(({ value }) => {
+            .map(({value}) => {
                 const updated_count = new_count_list.find(item => item.name === value)
                 return (
                     updated_count && {
@@ -87,7 +87,7 @@ const JobsFilter = memo(() => {
             .filter(Boolean)
 
     const fetchJobsData = async url => {
-        setFilterState(prevFilters => ({ ...prevFilters, isLoading: true }))
+        setFilterState(prevFilters => ({...prevFilters, isLoading: true}))
         setData([])
         const {
             jobsData,
@@ -103,7 +103,7 @@ const JobsFilter = memo(() => {
             num_pages,
             detail,
         } = await fetchJobs(`${url}?${generateParamsString()}`)
-        const { techStackSelector, jobSourceSelector } = filterState
+        const {techStackSelector, jobSourceSelector} = filterState
         if (status === 'success') {
             setFilterState({
                 ...filterState,
@@ -125,18 +125,18 @@ const JobsFilter = memo(() => {
             setPagesCount(num_pages)
         } else {
             toast.error(detail)
-            setFilterState({ ...filterState, isLoading: false })
+            setFilterState({...filterState, isLoading: false})
         }
     }
 
-    const updateParams = () => {
-        setFilterState({ ...filterState, isLoading: true })
-        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector } =
+
+    const getJobsParamsFromFilters = () => {
+        const {jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector} =
             filterState
-        const { from_date, to_date } = dates
+        const {from_date, to_date} = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
         const selected_job_sources = jobSourceSelector.map(obj => obj.value).join(',')
-        setJobsFilterParams({
+        return {
             ...jobsFilterParams,
             tech_keywords,
             job_source: selected_job_sources,
@@ -147,7 +147,13 @@ const JobsFilter = memo(() => {
             to_date,
             job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
             search: filterState?.jobTitle,
-        })
+        }
+    }
+
+
+    const updateParams = () => {
+        setFilterState({...filterState, isLoading: true})
+        setJobsFilterParams(getJobsParamsFromFilters())
     }
 
     const resetFilters = () => {
@@ -161,9 +167,9 @@ const JobsFilter = memo(() => {
     }, [jobsFilterParams])
 
     const applyJob = async id => {
-        const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, '1', data[id].id)
+        const {status, detail} = await updateJobStatus(`${apiUrl}job_status/`, '1', data[id].id)
         if (status === 'success') {
-            const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: '1' } : item))
+            const temp_data = data?.map((item, key) => (key === id ? {...item, job_status: '1'} : item))
             setData(temp_data)
             toast.success(detail)
         } else {
@@ -175,7 +181,7 @@ const JobsFilter = memo(() => {
     }
 
     const changeRecruiter = async (company, func) => {
-        const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
+        const {status, detail} = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
         if (status === 'success') {
             fetchJobsData(jobDetailsUrl)
             toast.success(detail)
@@ -185,21 +191,21 @@ const JobsFilter = memo(() => {
     }
 
     const generateLetter = async user_data => {
-        setFilterState({ ...filterState, isLoading: true })
-        const { status, detail } = await generateCoverLetter(`${apiUrl}cover_letter/generate/`, user_data)
+        setFilterState({...filterState, isLoading: true})
+        const {status, detail} = await generateCoverLetter(`${apiUrl}cover_letter/generate/`, user_data)
         if (status === 'success') {
             setInit(detail)
-            setFilterState({ ...filterState, showCoverLetter: true, isLoading: false })
+            setFilterState({...filterState, showCoverLetter: true, isLoading: false})
         } else {
             toast.error(detail)
-            setFilterState({ ...filterState, isLoading: false })
+            setFilterState({...filterState, isLoading: false})
         }
     }
 
     const formatOptions = options_arr =>
-        options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
+        options_arr?.map(({name, value}) => ({label: `${name} (${value})`, value: name}))
 
-    const { CustomModal, openModal } = CustomDilog(
+    const {CustomModal, openModal} = CustomDilog(
         'Please Confirm ',
         'Are you sure you want to change the state of recruiter',
         () => {
@@ -217,7 +223,9 @@ const JobsFilter = memo(() => {
             },
         })
     }
-    if (filterState?.isLoading) return <Loading />
+
+
+    if (filterState?.isLoading) return <Loading/>
     return (
         <div className='text-[#048C8C]'>
             <div className='flex p-3 items-center py-2 justify-between '>
@@ -229,10 +237,15 @@ const JobsFilter = memo(() => {
                         }
                     }}
                     setQuery={title => {
-                        setFilterState({ ...filterState, jobTitle: title })
+                        setFilterState({...filterState, jobTitle: title})
                     }}
                 />
-                {data ? GenerateCSV(dataForCsv(data)) : ''}
+                <button
+                    className='bg-[#10868a] hover:bg-[#209fa3] text-[#ffffff]  py-2 px-3 rounded inline-flex items-center'
+                    onClick={() => downloadJobsData(`${jobDetailsUrl}?${generateParamsString(getJobsParamsFromFilters())}&download=true`)}
+                >
+                    Download CSV
+                </button>
             </div>
             <div className='p-3 border'>
                 <div className='grid grid-cols-3 -my-2 gap-3'>
@@ -247,7 +260,7 @@ const JobsFilter = memo(() => {
                                 onChange={event =>
                                     setFilterState({
                                         ...filterState,
-                                        dates: { ...filterState?.dates, from_date: event.target.value },
+                                        dates: {...filterState?.dates, from_date: event.target.value},
                                     })
                                 }
                             />
@@ -262,7 +275,7 @@ const JobsFilter = memo(() => {
                                 onChange={event =>
                                     setFilterState({
                                         ...filterState,
-                                        dates: { ...filterState?.dates, to_date: event.target.value },
+                                        dates: {...filterState?.dates, to_date: event.target.value},
                                     })
                                 }
                             />
@@ -275,7 +288,7 @@ const JobsFilter = memo(() => {
                             data={filterState?.jobTypeData}
                             selectorValue={filterState?.jobTypeSelector}
                             handleSelectChange={e =>
-                                setFilterState({ ...filterState, jobTypeSelector: e.target.value })
+                                setFilterState({...filterState, jobTypeSelector: e.target.value})
                             }
                         />
                     </div>
@@ -284,7 +297,7 @@ const JobsFilter = memo(() => {
                         <CustomSelector
                             className='mx-auto'
                             options={formatOptions(filterState?.jobSourceData)}
-                            handleChange={value => setFilterState({ ...filterState, jobSourceSelector: value })}
+                            handleChange={value => setFilterState({...filterState, jobSourceSelector: value})}
                             selectorValue={filterState?.jobSourceSelector}
                             isMulti
                             placeholder='Select Job Source'
@@ -313,7 +326,7 @@ const JobsFilter = memo(() => {
                         Job Visibility
                         <select
                             value={filterState?.jobVisibilitySelector}
-                            onChange={e => setFilterState({ ...filterState, jobVisibilitySelector: e.target.value })}
+                            onChange={e => setFilterState({...filterState, jobVisibilitySelector: e.target.value})}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
                             <option value='all'>All</option>
@@ -339,10 +352,10 @@ const JobsFilter = memo(() => {
                         </div>
                         <div className='justify-center  grid-flow-row mt-1'>
                             <div className=' h-8 '>
-                                <Badge label={filterState?.stats?.total_job} type='enabled' />
+                                <Badge label={filterState?.stats?.total_job} type='enabled'/>
                             </div>
                             <div>
-                                <Badge label={filterState?.stats?.filtered_job} type='enabled' />
+                                <Badge label={filterState?.stats?.filtered_job} type='enabled'/>
                             </div>
                         </div>
                     </div>
@@ -353,16 +366,16 @@ const JobsFilter = memo(() => {
                         </div>
                         <div className='justify-center  grid-flow-row mt-1'>
                             <div className=' h-8 '>
-                                <Badge label={filterState?.stats?.recruiter_job} type='enabled' />
+                                <Badge label={filterState?.stats?.recruiter_job} type='enabled'/>
                             </div>
                             <div>
-                                <Badge label={filterState?.stats?.non_recruiter_job} type='enabled' />
+                                <Badge label={filterState?.stats?.non_recruiter_job} type='enabled'/>
                             </div>
                         </div>
                     </div>
                     <div className='flex justify-end px-4 align-baseline'>
                         <div className='my-6'>
-                            <Filters apply={() => updateParams()} clear={() => resetFilters()} />
+                            <Filters apply={() => updateParams()} clear={() => resetFilters()}/>
                         </div>
                     </div>
                 </div>
@@ -371,75 +384,75 @@ const JobsFilter = memo(() => {
                 <div className=' absolute  ml-80 -mt-80 bg-cover bg-[#F5F5F5] border'>
                     <button
                         className='block rounded px-2 py-1 my-2 bg-[#FF0000] text-white'
-                        onClick={() => setFilterState({ ...filterState, showCoverLetter: false })}
+                        onClick={() => setFilterState({...filterState, showCoverLetter: false})}
                     >
                         close
                     </button>
-                    <TextEditor init={init} />
+                    <TextEditor init={init}/>
                 </div>
             )}
             <div className='p-3'>
                 <table className='table-auto w-full table text-lg text-left mt-6 text-[#048C8C]'>
                     <thead className='text-lg uppercase border tex border-[#048C8C] '>
-                        <tr>
-                            {JOB_HEADS?.map(heading => (
-                                <th scope='col' className='px-3 py-4' key={heading}>
-                                    {heading}
-                                </th>
-                            ))}
-                        </tr>
+                    <tr>
+                        {JOB_HEADS?.map(heading => (
+                            <th scope='col' className='px-3 py-4' key={heading}>
+                                {heading}
+                            </th>
+                        ))}
+                    </tr>
                     </thead>
                     <tbody>
-                        {data && data?.length > 0 && error ? (
-                            data?.map((item, key) => (
-                                <tr
-                                    className={`${
-                                        item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
-                                    } border-b border-[#006366] border-opacity-30 hover:bg-gray-100`}
-                                    key={key}
-                                >
-                                    <td className='p-2 w-96'>
-                                        <a
-                                            className='hover:bg-gray-100 cursor-pointer underline underline-offset-4 font-semibold'
-                                            onClick={() => handleJobDetails(item)}
-                                            data-title='click to open Job description'
+                    {data && data?.length > 0 && error ? (
+                        data?.map((item, key) => (
+                            <tr
+                                className={`${
+                                    item?.block ? 'bg-[#d9d5d5]' : 'bg-white'
+                                } border-b border-[#006366] border-opacity-30 hover:bg-gray-100`}
+                                key={key}
+                            >
+                                <td className='p-2 w-96'>
+                                    <a
+                                        className='hover:bg-gray-100 cursor-pointer underline underline-offset-4 font-semibold'
+                                        onClick={() => handleJobDetails(item)}
+                                        data-title='click to open Job description'
+                                    >
+                                        {item?.job_title &&
+                                            item?.job_title.length > 0 &&
+                                            formatStringInPascal(item.job_title)}
+                                    </a>
+                                </td>
+                                <td className='p-2'>
+                                    {item?.company_name &&
+                                        item?.company_name.length > 0 &&
+                                        formatStringInPascal(item.company_name)}
+                                </td>
+                                <td className='p-2 capitalize'>
+                                    <a
+                                        className='underline focus:text-black focus:text-lg'
+                                        target='_blank'
+                                        rel='noreferrer'
+                                        href={item?.job_source_url}
+                                    >
+                                        {item?.job_source}
+                                    </a>
+                                </td>
+                                <td className='p-2'>{item?.tech_keywords}</td>
+                                <td className='p-2'>{item?.job_type}</td>
+                                <td className='p-2'>{formatDate(item?.job_posted_date)}</td>
+                                <td className=''>
+                                    {can('apply_job') && (
+                                        <Link
+                                            to={`/apply-for-job/${item?.id}`}
+                                            className='rounded bg-[#10868a] text-white p-2  text-sm inline-flex'
                                         >
-                                            {item?.job_title &&
-                                                item?.job_title.length > 0 &&
-                                                formatStringInPascal(item.job_title)}
-                                        </a>
-                                    </td>
-                                    <td className='p-2'>
-                                        {item?.company_name &&
-                                            item?.company_name.length > 0 &&
-                                            formatStringInPascal(item.company_name)}
-                                    </td>
-                                    <td className='p-2 capitalize'>
-                                        <a
-                                            className='underline focus:text-black focus:text-lg'
-                                            target='_blank'
-                                            rel='noreferrer'
-                                            href={item?.job_source_url}
-                                        >
-                                            {item?.job_source}
-                                        </a>
-                                    </td>
-                                    <td className='p-2'>{item?.tech_keywords}</td>
-                                    <td className='p-2'>{item?.job_type}</td>
-                                    <td className='p-2'>{formatDate(item?.job_posted_date)}</td>
-                                    <td className=''>
-                                        {can('apply_job') && (
-                                            <Link
-                                                to={`/apply-for-job/${item?.id}`}
-                                                className='rounded bg-[#10868a] text-white p-2  text-sm inline-flex'
-                                            >
-                                                Apply
-                                                <span className='text-bold ml-0.5'>
+                                            Apply
+                                            <span className='text-bold ml-0.5'>
                                                     ({item?.remaining_vertical ?? 0} / {item?.total_vertical ?? 0})
                                                 </span>
-                                            </Link>
-                                        )}
-                                        {/* {can('apply_job') ? (
+                                        </Link>
+                                    )}
+                                    {/* {can('apply_job') ? (
                                             item?.job_status === '0' ? (
                                                 <button
                                                     className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
@@ -453,9 +466,9 @@ const JobsFilter = memo(() => {
                                                 </button>
                                             )
                                             ) : null} */}
-                                    </td>
-                                    {CustomModal}
-                                    <td className='p-5'>
+                                </td>
+                                {CustomModal}
+                                <td className='p-5'>
                                         <span className='flex justify-center'>
                                             {!item?.block ? (
                                                 <button
@@ -479,8 +492,8 @@ const JobsFilter = memo(() => {
                                                 </button>
                                             )}
                                         </span>
-                                    </td>
-                                    {/* <td className='p-5'>
+                                </td>
+                                {/* <td className='p-5'>
                                         <button
                                             className={`block rounded px-2 py-1 my-2 ${
                                                 jobIdForLastCV === item?.id ? 'bg-[#083031]' : 'bg-[#10868a]'
@@ -498,17 +511,17 @@ const JobsFilter = memo(() => {
                                             Generate
                                         </button>
                                     </td> */}
-                                </tr>
-                            ))
-                        ) : (
-                            <EmptyTable cols={8} msg='No Jobs found yet!' />
-                        )}
+                            </tr>
+                        ))
+                    ) : (
+                        <EmptyTable cols={8} msg='No Jobs found yet!'/>
+                    )}
                     </tbody>
                 </table>
                 <Paginated
                     page={jobsFilterParams?.page}
                     setPage={pageNumber => {
-                        setJobsFilterParams({ ...jobsFilterParams, page: pageNumber })
+                        setJobsFilterParams({...jobsFilterParams, page: pageNumber})
                     }}
                     pages={pagesCount}
                 />
