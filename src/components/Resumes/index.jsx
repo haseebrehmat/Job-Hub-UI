@@ -3,7 +3,7 @@ import html2pdf from 'html2pdf.js'
 
 import { Button } from '@components'
 
-import { Template1, Template2, Template3, Template4, Template5 } from '@modules/settings/templates'
+import { Template1, Template2, Template3, Template4, Template5, Template6 } from '@modules/settings/templates'
 
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
 
@@ -14,15 +14,14 @@ import { DownloadIcon } from '@icons'
 const getTemplates = (data, hide, names) => [
     <Template1 data={data} hide={hide} names={names} />,
     <Template2 data={data} hide={hide} names={names} />,
+    <Template6 data={data} hide={hide} names={names} />,
     <Template3 data={data} hide={hide} names={names} />,
-    <Template4 data={data} hide={hide} names={names} />,
-    <Template5 data={data} hide={hide} names={names} />,
     <Template4 data={data} hide={hide} names={names} />,
     <Template5 data={data} hide={hide} names={names} />,
 ]
 
 const Resumes = ({ data, hide, names, set = null }) => {
-    const refs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)]
+    const refs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)]
     const [tab, setTab] = useState(0)
     const setBlob = reference =>
         set
@@ -42,7 +41,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <div className='w-fit'>
             <div className='flex flex-col-2 mx-auto'>
                 <div className='w-[75%]'>
-                    <div className='p-8 bg-white shadow-2xl border-2 rounded-lg h-screen overflow-y-auto'>
+                    <div className='bg-white shadow-2xl border-2 rounded-lg h-screen overflow-y-auto'>
                         {getTemplates(data, hide, names).map(
                             (component, index) =>
                                 tab === index && (
@@ -66,7 +65,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         {getTemplates(devProfile, hide, names).map((component, index) => (
                             <div className='h-6 transform scale-[20%] w-[20%]'>
                                 <div
-                                    className='p-8 bg-white shadow-2xl border-2 rounded-lg w-[21cm] min-h-[29.7cm] hover:cursor-pointer hover:bg-[#F2F2F2] h-6'
+                                    className='bg-white shadow-2xl border-2 rounded-lg w-[21cm] min-h-[29.7cm] hover:cursor-pointer hover:bg-[#F2F2F2] h-6'
                                     key={index}
                                     onClick={() => setTab(index)}
                                 >

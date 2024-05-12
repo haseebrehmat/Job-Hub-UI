@@ -5,7 +5,7 @@ import { formatDate4 } from '@utils/helpers'
 import { ResumeSvgs as svgs } from '@svgs'
 
 const Template2 = ({ data: dev, hide, names }) => (
-    <>
+    <div className='p-8'>
         <div className='flex flex-col mb-10'>
             {hide.name && dev?.basic?.name && <p className='text-blue-900 text-6xl font-bold'>{dev?.basic?.name}</p>}
             {hide.designation && dev?.basic?.designation && (
@@ -140,7 +140,7 @@ const Template2 = ({ data: dev, hide, names }) => (
                     </div>
                 </div>
             )}
-    </>
+    </div>
 )
 
 export default memo(Template2)
