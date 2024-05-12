@@ -15,7 +15,7 @@ export const MANUAL_JOBS_HEADS = ['Job Title', 'Company', 'Job Source', 'Tech St
 export const RESUME_PDF_OPTIONS = {
     margin: 0.5, // may be 0.25
     filename: 'resume.pdf',
-    html2canvas: { scale: 2 },
+    html2canvas: { scale: 4 },
     jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
 }

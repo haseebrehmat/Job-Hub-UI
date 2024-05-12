@@ -17,6 +17,8 @@ const getTemplates = (data, hide, names) => [
     <Template3 data={data} hide={hide} names={names} />,
     <Template4 data={data} hide={hide} names={names} />,
     <Template5 data={data} hide={hide} names={names} />,
+    <Template4 data={data} hide={hide} names={names} />,
+    <Template5 data={data} hide={hide} names={names} />,
 ]
 
 const Resumes = ({ data, hide, names, set = null }) => {
@@ -32,7 +34,6 @@ const Resumes = ({ data, hide, names, set = null }) => {
             : null
 
     const downloadPdf = () => html2pdf().set(RESUME_PDF_OPTIONS).from(refs[tab].current?.innerHTML).outputPdf().save()
-
     useEffect(() => {
         setBlob(refs[tab])
     }, [tab])
@@ -46,7 +47,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                             (component, index) =>
                                 tab === index && (
                                     <div key={index}>
-                                        <div className='__template-wrapper' ref={refs[index]}>
+                                        <div className='' ref={refs[index]}>
                                             {component}
                                         </div>
                                     </div>
