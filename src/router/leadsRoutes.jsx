@@ -20,6 +20,6 @@ export const leadsRoutes = [
         component: <Phases />,
         protect: true,
         title: 'Phases',
-        permission: 'all',
+        permission: 'view_phase',
     },
 ]

@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { StatusActions, StatusForm } from '@modules/leads/components'
+import { StatusActions, PhaseForm } from '@modules/leads/components'
 import { fetchGenericSkills } from '@modules/pseudos/api'
 
 import { can } from '@utils/helpers'
@@ -46,7 +46,7 @@ const Phases = () => {
                         </div>
                     ))
                 ) : (
-                    <span className='m-auto p-5 text-gray-500'>No phasees found yet!</span>
+                    <span className='m-auto p-5 text-gray-500'>No phases found yet!</span>
                 )}
             </div>
             {data?.users?.length > 24 && (
@@ -59,7 +59,7 @@ const Phases = () => {
                 </div>
             )}
             {(can('create_phase') || can('edit_phase')) && vals.show && (
-                <StatusForm
+                <PhaseForm
                     show={vals.show}
                     setShow={value => dispatch({ show: value })}
                     mutate={mutate}
