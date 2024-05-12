@@ -3,7 +3,15 @@ import html2pdf from 'html2pdf.js'
 
 import { Button } from '@components'
 
-import { Template1, Template2, Template3, Template4, Template5, Template6 } from '@modules/settings/templates'
+import {
+    Template1,
+    Template2,
+    Template3,
+    Template4,
+    Template5,
+    Template6,
+    Template7,
+} from '@modules/settings/templates'
 
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
 
@@ -12,7 +20,7 @@ import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
 import { DownloadIcon } from '@icons'
 
 const Resumes = ({ data, hide, names, set = null }) => {
-    const refs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)]
+    const refs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)]
     const [tab, setTab] = useState(0)
     const setBlob = reference =>
         set
@@ -35,6 +43,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template3 data={profile} hide={gethide} names={name} />,
         <Template4 data={profile} hide={gethide} names={name} />,
         <Template5 data={profile} hide={gethide} names={name} />,
+        <Template7 data={profile} hide={gethide} names={name} />,
     ]
     return (
         <div className='w-fit'>
