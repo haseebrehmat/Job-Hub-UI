@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-import Board from '@modules/leads/components'
+import { Board } from '@modules/leads/components'
 
 const Leads = () => (
     <div>
