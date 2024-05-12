@@ -459,6 +459,35 @@ export const rawpermissions = [
             },
         ],
     },
+    {
+        module: 'Phases',
+        permissions: [
+            {
+                codename: 'view_phase',
+                name: 'View Phases',
+                child: ['create_phase', 'edit_phase', 'delete_phase'],
+                level: 1,
+            },
+            {
+                codename: 'create_phase',
+                name: 'Create Phase',
+                parent: ['view_phase'],
+                level: 1,
+            },
+            {
+                codename: 'edit_phase',
+                name: 'Edit Phase',
+                parent: ['view_phase'],
+                level: 1,
+            },
+            {
+                codename: 'delete_phase',
+                name: 'Delete Phase',
+                parent: ['view_phase'],
+                level: 1,
+            },
+        ],
+    },
 ]
 
 export const permissions = rawpermissions.map(row => ({
