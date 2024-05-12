@@ -25,6 +25,7 @@ import GenericSkills from '@modules/pseudos/genericSkills'
 import Status from '@modules/leads/status'
 import CompanyStatus from '@modules/leads/companyStatus'
 import Phases from '@modules/leads/phases'
+import Leads from '@modules/leads'
 
 export {
     TeamAppliedJobs,
@@ -55,4 +56,5 @@ export {
     Status,
     CompanyStatus,
     Phases,
+    Leads,
 }
