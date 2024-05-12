@@ -1,4 +1,4 @@
-import { Status, CompanyStatus } from '@modules'
+import { Status, CompanyStatus, Phases } from '@modules'
 
 export const leadsRoutes = [
     {
@@ -14,5 +14,12 @@ export const leadsRoutes = [
         protect: true,
         title: 'Status',
         permission: 'view_company_status',
+    },
+    {
+        path: '/phases',
+        component: <Phases />,
+        protect: true,
+        title: 'Phases',
+        permission: 'all',
     },
 ]

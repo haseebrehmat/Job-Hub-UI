@@ -24,6 +24,7 @@ import ApplyForJob from '@modules/jobsFilter/applyForJob'
 import GenericSkills from '@modules/pseudos/genericSkills'
 import Status from '@modules/leads/status'
 import CompanyStatus from '@modules/leads/companyStatus'
+import Phases from '@modules/leads/phases'
 
 export {
     TeamAppliedJobs,
@@ -53,4 +54,5 @@ export {
     GenericSkills,
     Status,
     CompanyStatus,
+    Phases,
 }
