@@ -236,3 +236,9 @@ export const statusSchema = Yup.object().shape({
 export const companyStatusSchema = Yup.object().shape({
     status: Yup.array().required('Please choose status'),
 })
+
+export const convertToLeadSchema = Yup.object().shape({
+    status: Yup.mixed().required('Please choose status'),
+    phase: Yup.mixed().required('Please choose phase'),
+    notes: Yup.string().max(250, 'Notes is too long'),
+})

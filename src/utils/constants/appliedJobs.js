@@ -9,7 +9,7 @@ export const tableHeads = [
     'Agent (BD)',
     'Pseudo',
     'Vertical',
-    'Attachments',
+    'Actions',
 ]
 
 export const jobStatus = {

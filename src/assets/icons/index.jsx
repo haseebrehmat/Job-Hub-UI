@@ -14,6 +14,7 @@ import {
     MdOutlinePostAdd,
     MdOutlineDriveFolderUpload,
     MdOutlineKeyboardBackspace,
+    MdOutlineFileDownload,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -26,7 +27,6 @@ import {
     BsCollectionFill,
     BsThreeDotsVertical,
     BsFillKeyFill,
-    BsCloudArrowDownFill,
     BsFillPlayFill,
     BsCardList,
 } from 'react-icons/bs'
@@ -59,14 +59,22 @@ import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
-import { RiUserSettingsLine, RiLock2Fill, RiTeamLine, RiStackFill, RiProfileLine } from 'react-icons/ri'
+import {
+    RiUserSettingsLine,
+    RiLock2Fill,
+    RiTeamLine,
+    RiStackFill,
+    RiProfileLine,
+    RiDownloadCloudLine,
+} from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
-export const DownloadIcon = <BsCloudArrowDownFill style={{ fontSize: '22px' }} />
+export const DownloadIcon = <RiDownloadCloudLine style={{ fontSize: '22px' }} />
+export const DownloadIcon2 = <MdOutlineFileDownload style={{ fontSize: '22px' }} />
 export const Checkedbox = <MdCheckBox style={{ fontSize: '22px' }} />
 export const unCheckedbox = <MdCheckBoxOutlineBlank style={{ fontSize: '22px' }} />
 export const UploadIcon = <AiOutlineCloudUpload style={{ fontSize: '22px' }} />
