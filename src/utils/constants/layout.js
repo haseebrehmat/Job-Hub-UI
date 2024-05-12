@@ -18,6 +18,7 @@ import {
     ResumeIcon,
     PseudoIcon,
     StatusIcon,
+    PhaseIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -204,6 +205,12 @@ export const menuItems = [
                 link: '/company-status',
                 svg: StatusIcon,
                 perms: ['view_company_status', 'add_company_status', 'remove_company_status'],
+            },
+            {
+                label: 'Phase',
+                link: '/phases',
+                svg: PhaseIcon,
+                perms: ['view_phase', 'create_phase', 'edit_phase', 'delete_phase'],
             },
         ],
     },

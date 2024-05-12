@@ -55,7 +55,7 @@ import {
     AiOutlineHistory,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
-import { CgSidebarOpen } from 'react-icons/cg'
+import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
@@ -146,3 +146,4 @@ export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
 export const StatusIcon = <BiGitCompare style={{ fontSize: 22 }} />
+export const PhaseIcon = <CgListTree style={{ fontSize: 22 }} />
