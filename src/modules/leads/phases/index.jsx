@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { StatusActions, PhaseForm } from '@modules/leads/components'
+import { PhaseActions, PhaseForm } from '@modules/leads/components'
 import { fetchGenericSkills } from '@modules/pseudos/api'
 
 import { can } from '@utils/helpers'
@@ -41,7 +41,7 @@ const Phases = () => {
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
                             {(can('edit_phase') || can('delete_phase')) && (
-                                <StatusActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                                <PhaseActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
                         </div>
                     ))
