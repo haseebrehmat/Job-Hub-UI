@@ -1,5 +1,11 @@
 import { memo } from 'react'
 
-const Leads = () => <div>Leads Come here</div>
+import Board from '@modules/leads/components'
+
+const Leads = () => (
+    <div>
+        <Board />
+    </div>
+)
 
 export default memo(Leads)
