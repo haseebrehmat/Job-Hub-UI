@@ -11,15 +11,6 @@ import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
 
 import { DownloadIcon } from '@icons'
 
-const getTemplates = (data, hide, names) => [
-    <Template1 data={data} hide={hide} names={names} />,
-    <Template2 data={data} hide={hide} names={names} />,
-    <Template6 data={data} hide={hide} names={names} />,
-    <Template3 data={data} hide={hide} names={names} />,
-    <Template4 data={data} hide={hide} names={names} />,
-    <Template5 data={data} hide={hide} names={names} />,
-]
-
 const Resumes = ({ data, hide, names, set = null }) => {
     const refs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)]
     const [tab, setTab] = useState(0)
@@ -37,6 +28,14 @@ const Resumes = ({ data, hide, names, set = null }) => {
         setBlob(refs[tab])
     }, [tab])
 
+    const getTemplates = (profile, gethide, name) => [
+        <Template1 data={profile} hide={gethide} names={name} />,
+        <Template2 data={profile} hide={gethide} names={name} />,
+        <Template6 data={profile} hide={gethide} names={name} />,
+        <Template3 data={profile} hide={gethide} names={name} />,
+        <Template4 data={profile} hide={gethide} names={name} />,
+        <Template5 data={profile} hide={gethide} names={name} />,
+    ]
     return (
         <div className='w-fit'>
             <div className='flex flex-col-2 mx-auto'>
