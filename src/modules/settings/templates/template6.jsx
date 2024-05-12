@@ -45,7 +45,7 @@ const Template6 = ({ data: dev, hide, names }) => (
             {hide.skill && dev?.skills?.all?.length > 0 && (
                 <div className='mb-10'>
                     <div className='flex flex-row align-baseline gap-2'>
-                        <p className='text-lg text-center mt-3 font-semibold '>{names.skill}</p>
+                        <p className='text-lg text-center mt-3 font-semibold text-gray-700'>{names.skill}</p>
                     </div>
                     <hr className='mb-6 border-gray-700' />
                     <div className='flex flex-col'>
@@ -67,7 +67,7 @@ const Template6 = ({ data: dev, hide, names }) => (
             {hide.experience && dev?.experience?.length > 0 && (
                 <div className='mb-10 '>
                     <div className='flex flex-row align-baseline gap-2'>
-                        <p className='text-lg text-center mt-3 font-semibold '>{names.experience}</p>
+                        <p className='text-lg text-center mt-3 font-semibold text-gray-700'>{names.experience}</p>
                     </div>
                     <hr className='mb-6 border-gray-700' />
                     <div className='flex flex-col'>
@@ -80,7 +80,7 @@ const Template6 = ({ data: dev, hide, names }) => (
                                         </p>
                                     </div>
                                     <div className='w-[80%]'>
-                                        <p className='font-bold'>{title}</p>
+                                        <p className='font-bold text-gray-700'>{title}</p>
                                         <p className='italic'>{company}</p>
                                         <p className='text-gray-700 break-words'>{description ?? 'no description'}</p>
                                     </div>
@@ -93,7 +93,7 @@ const Template6 = ({ data: dev, hide, names }) => (
             {hide.education && dev?.education?.length > 0 && (
                 <div className='mb-10'>
                     <div className='flex flex-row align-baseline gap-2'>
-                        <p className='text-lg text-center mt-3 font-semibold text--gray-700'>{names.education}</p>
+                        <p className='text-lg text-center mt-3 font-semibold text-gray-700'>{names.education}</p>
                     </div>
                     <hr className='mb-6 border-gray-700' />
                     <div className='flex flex-col'>
@@ -103,7 +103,7 @@ const Template6 = ({ data: dev, hide, names }) => (
                                     <div className='w-[30%]'>{}</div>
                                     <div className='w-[80%]'>
                                         <div className='flex flex-col'>
-                                            <p className='font-bold text-xl'>{degree}</p>
+                                            <p className='font-bold text-xl text-gray-700'>{degree}</p>
                                             <p className='text-gray-700'>{institute}</p>
                                         </div>{' '}
                                     </div>
