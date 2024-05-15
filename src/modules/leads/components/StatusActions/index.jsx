@@ -21,7 +21,7 @@ const StatusActions = memo(({ id, edit, mutate }) => {
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/profile/generic_skill/${id}/`}
+                    url={`/api/lead_managament/statuses/${id}/`}
                     refetch={mutate}
                     perm={STATUS_DELETION}
                 >

@@ -12,4 +12,5 @@ export const VERTICAL_PROJECT_DELETION = true
 export const CRONJOB_SETTING_DELETION = true
 export const GENERIC_SKILL_DELETION = true
 export const STATUS_DELETION = false
+export const COMPANY_STATUS_DELETION = true
 export const PHASE_DELETION = true

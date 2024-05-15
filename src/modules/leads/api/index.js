@@ -12,3 +12,13 @@ export const saveStatus = (url, { arg: status }) => {
     }
     return rawHttp.post(url, status).then(({ data }) => toast.success(data.detail || 'Status is created successfully'))
 }
+
+export const fetchStatusList = url => http.get(url).then(({ data }) => data)
+
+export const fetchCompanyStatuses = url =>
+    http.get(url).then(({ data }) => ({ statuses: data?.results, total: data?.count, pages: data?.num_pages }))
+
+export const saveCompanyStatus = (url, { arg: { status_list } }) =>
+    rawHttp
+        .post(url, { status_list: status_list.map(({ value }) => value) })
+        .then(({ data }) => toast.success(data.detail || 'Status are added successfully'))

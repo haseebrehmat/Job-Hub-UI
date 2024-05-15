@@ -234,7 +234,7 @@ export const statusSchema = Yup.object().shape({
 })
 
 export const companyStatusSchema = Yup.object().shape({
-    status: Yup.array().required('Please choose status'),
+    status_list: Yup.array().required('Please choose status'),
 })
 
 export const convertToLeadSchema = Yup.object().shape({

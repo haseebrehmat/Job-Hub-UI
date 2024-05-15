@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
 import { CompanyStatusActions, CompanyStatusForm } from '@modules/leads/components'
-import { fetchGenericSkills } from '@modules/pseudos/api'
+import { fetchCompanyStatuses } from '@modules/leads/api'
 
 import { can } from '@utils/helpers'
 
@@ -20,8 +20,8 @@ const CompanyStatus = () => {
     const handleClick = values => dispatch({ status: values, show: !vals.show })
 
     const { data, error, isLoading, mutate } = useSWR(
-        `/api/profile/generic_skill/?search=${vals.query}&page=${vals.page}`,
-        fetchGenericSkills
+        `/api/lead_managament/company_statuses/?search=${vals.query}&page=${vals.page}`,
+        fetchCompanyStatuses
     )
 
     if (isLoading) return <Loading />
@@ -36,10 +36,10 @@ const CompanyStatus = () => {
                 </div>
             </div>
             <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
-                {data?.skills?.length > 0 && !error ? (
-                    data?.skills?.map((row, idx) => (
+                {data?.statuses?.length > 0 && !error ? (
+                    data?.statuses?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
-                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
+                            <h2 className='text-lg capitalize'>{row?.status?.name ?? 'Not Specified'}</h2>
                             {can('remove_company_status') && <CompanyStatusActions id={row?.id} mutate={mutate} />}
                         </div>
                     ))
@@ -47,7 +47,7 @@ const CompanyStatus = () => {
                     <span className='m-auto p-5 text-gray-500'>No statuses added yet!</span>
                 )}
             </div>
-            {data?.users?.length > 24 && (
+            {data?.statuses?.length > 24 && (
                 <div className='w-full'>
                     <Paginated
                         pages={data?.pages ?? Math.ceil(data.total / 25)}

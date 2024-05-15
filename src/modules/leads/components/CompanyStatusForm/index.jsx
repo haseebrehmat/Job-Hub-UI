@@ -1,19 +1,21 @@
 import { memo } from 'react'
+import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
 import { Button, Drawer, CustomSelector } from '@components'
 
-import { saveGenericSkill } from '@modules/pseudos/api'
+import { saveCompanyStatus, fetchStatusList } from '@modules/leads/api'
 
 import { companyStatusSchema } from '@utils/schemas'
-import { GENERIC_SKILL_TYPES_OPTIONS } from '@constants/pseudos'
+import { parseStatuses } from '@utils/helpers'
 
 const CompanyStatusForm = ({ show, setShow, mutate }) => {
+    const { data, error, isLoading } = useSWR('/api/lead_managament/status_list/', fetchStatusList)
     const { values, errors, handleSubmit, resetForm, trigger, setFieldValue } = useMutate(
-        '/api/profile/generic_skill/',
-        saveGenericSkill,
-        { status: [] },
+        '/api/lead_managament/company_statuses/',
+        saveCompanyStatus,
+        { status_list: [] },
         companyStatusSchema,
         async formValues => trigger({ ...formValues }),
         null,
@@ -26,17 +28,25 @@ const CompanyStatusForm = ({ show, setShow, mutate }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Add Status</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Status*</span>
-                    <CustomSelector
-                        options={GENERIC_SKILL_TYPES_OPTIONS}
-                        handleChange={obj => setFieldValue('status', obj)}
-                        selectorValue={values.status}
-                        isMulti
-                        placeholder='Select Status'
-                    />
-                    {errors.status && <small className='__error'>{errors.status}</small>}
+                    {isLoading ? (
+                        <span>Loading...</span>
+                    ) : error ? (
+                        <span>Error to load statuses</span>
+                    ) : (
+                        <>
+                            <span className='text-xs font-semibold'>Status*</span>
+                            <CustomSelector
+                                options={parseStatuses(data)}
+                                handleChange={obj => setFieldValue('status_list', obj)}
+                                selectorValue={values.status_list}
+                                isMulti
+                                placeholder='Select Status'
+                            />
+                            {errors.status_list && <small className='__error'>{errors.status_list}</small>}
+                        </>
+                    )}
                     <div className='pt-4 space-y-2'>
-                        {values.status.length > 0 && <Button label='Add' type='submit' fill />}
+                        {values.status_list.length > 0 && <Button label='Add' type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
                 </div>

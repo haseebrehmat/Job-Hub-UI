@@ -327,3 +327,5 @@ export const getTeamVerticals = (teamId, data) => {
     }
     return []
 }
+
+export const parseStatuses = statuses => statuses?.map(status => ({ value: status.id, label: status.name }))

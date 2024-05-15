@@ -2,7 +2,7 @@ import { memo, useState } from 'react'
 
 import { Button, DeleteDialog, Tooltip } from '@components'
 
-import { STATUS_DELETION } from '@constants/allowDeletion'
+import { COMPANY_STATUS_DELETION } from '@constants/allowDeletion'
 import { can } from '@utils/helpers'
 
 import { TrashIcon } from '@icons'
@@ -16,11 +16,11 @@ const CompanyStatusActions = memo(({ id, mutate }) => {
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/profile/generic_skill/${id}/`}
+                    url={`/api/lead_managament/company_statuses/${id}/`}
                     refetch={mutate}
-                    perm={STATUS_DELETION}
+                    perm={COMPANY_STATUS_DELETION}
                 >
-                    <Tooltip text='Delete status'>
+                    <Tooltip text='Remove status'>
                         <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
                     </Tooltip>
                 </DeleteDialog>
