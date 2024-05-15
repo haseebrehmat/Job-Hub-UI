@@ -329,3 +329,13 @@ export const getTeamVerticals = (teamId, data) => {
 }
 
 export const parseStatuses = statuses => statuses?.map(status => ({ value: status.id, label: status.name }))
+
+export const parseCompanyStatus = statuses => statuses?.map(row => ({ value: row.id, label: row?.status?.name }))
+
+export const parseSelectedCompanyStatus = (id, statuses) => {
+    if (id) {
+        const status = statuses.find(row => row?.id === id)
+        return { value: status?.id, label: status?.status?.name }
+    }
+    return null
+}

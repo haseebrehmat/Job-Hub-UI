@@ -230,7 +230,7 @@ export const genericSkillSchema = Yup.object().shape({
 })
 
 export const statusSchema = Yup.object().shape({
-    name: Yup.string().required('Status name is required'),
+    name: Yup.string().required('Status name is required').max(100, 'Status name is too long'),
 })
 
 export const companyStatusSchema = Yup.object().shape({
@@ -241,4 +241,9 @@ export const convertToLeadSchema = Yup.object().shape({
     status: Yup.mixed().required('Please choose status'),
     phase: Yup.mixed().required('Please choose phase'),
     notes: Yup.string().max(250, 'Notes is too long'),
+})
+
+export const phaseSchema = Yup.object().shape({
+    name: Yup.string().required('Phase name is required').max(100, 'Phase name is too long'),
+    company_status_id: Yup.string().required('Please choose status'),
 })

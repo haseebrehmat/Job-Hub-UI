@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
 import { PhaseActions, PhaseForm } from '@modules/leads/components'
-import { fetchGenericSkills } from '@modules/pseudos/api'
+import { fetchPhases } from '@modules/leads/api'
 
 import { can } from '@utils/helpers'
 
@@ -20,8 +20,8 @@ const Phases = () => {
     const handleClick = values => dispatch({ phase: values, show: !vals.show })
 
     const { data, error, isLoading, mutate } = useSWR(
-        `/api/profile/generic_skill/?search=${vals.query}&page=${vals.page}`,
-        fetchGenericSkills
+        `/api/lead_managament/phases/?search=${vals.query}&page=${vals.page}`,
+        fetchPhases
     )
 
     if (isLoading) return <Loading />
@@ -36,10 +36,13 @@ const Phases = () => {
                 </div>
             </div>
             <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
-                {data?.skills?.length > 0 && !error ? (
-                    data?.skills?.map((row, idx) => (
+                {data?.phases?.length > 0 && !error ? (
+                    data?.phases?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
-                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
+                            <h2 className='text-lg capitalize pt-2'>{row?.name ?? 'Not Specified'}</h2>
+                            <h2 className='text-sm capitalize text-gray-500'>
+                                {row?.company_status?.status?.name ?? 'N/A'}
+                            </h2>
                             {(can('edit_phase') || can('delete_phase')) && (
                                 <PhaseActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}

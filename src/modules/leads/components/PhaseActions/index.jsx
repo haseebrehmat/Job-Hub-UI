@@ -21,7 +21,7 @@ const PhaseActions = memo(({ id, edit, mutate }) => {
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/profile/generic_skill/${id}/`}
+                    url={`/api/lead_managament/phases/${id}/`}
                     refetch={mutate}
                     perm={PHASE_DELETION}
                 >

@@ -1,20 +1,22 @@
 import { memo } from 'react'
+import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
 import { Button, Drawer, CustomSelector, Input } from '@components'
 
-import { saveGenericSkill } from '@modules/pseudos/api'
+import { savePhase, fetchCompanyStatusList } from '@modules/leads/api'
 
-import { statusSchema } from '@utils/schemas'
-import { GENERIC_SKILL_TYPES_OPTIONS } from '@constants/pseudos'
+import { phaseSchema } from '@utils/schemas'
+import { parseCompanyStatus, parseSelectedCompanyStatus } from '@utils/helpers'
 
 const PhaseForm = ({ phase = null, show, setShow, mutate }) => {
+    const { data, error, isLoading } = useSWR('/api/lead_managament/company_status_list/', fetchCompanyStatusList)
     const { values, errors, handleSubmit, resetForm, trigger, handleChange, setFieldValue } = useMutate(
-        `/api/profile/generic_skill${phase?.id ? `/${phase?.id}/` : '/'}`,
-        saveGenericSkill,
-        { name: phase?.name || '', status: phase?.status || '' },
-        statusSchema,
+        `/api/lead_managament/phases${phase?.id ? `/${phase?.id}/` : '/'}`,
+        savePhase,
+        { name: phase?.name || '', company_status_id: phase?.company_status?.id || '' },
+        phaseSchema,
         async formValues => trigger({ ...formValues, id: phase?.id }),
         null,
         () => {
@@ -23,7 +25,7 @@ const PhaseForm = ({ phase = null, show, setShow, mutate }) => {
         }
     )
 
-    const flag = values.name.length > 0 && values.status.length > 0
+    const flag = values.name.length > 0 && values.company_status_id
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
@@ -33,14 +35,22 @@ const PhaseForm = ({ phase = null, show, setShow, mutate }) => {
                     <span className='text-xs font-semibold'>Name*</span>
                     <Input name='name' value={values.name} onChange={handleChange} ph='Enter phase name' />
                     {errors.name && <small className='__error'>{errors.name}</small>}
-                    <span className='text-xs font-semibold'>Status*</span>
-                    <CustomSelector
-                        options={GENERIC_SKILL_TYPES_OPTIONS}
-                        handleChange={obj => setFieldValue('status', obj)}
-                        selectorValue={values.status}
-                        placeholder='Select Status'
-                    />
-                    {errors.status && <small className='__error'>{errors.status}</small>}
+                    {isLoading ? (
+                        <span>Loading...</span>
+                    ) : error ? (
+                        <span>Error to load statuses</span>
+                    ) : (
+                        <>
+                            <span className='text-xs font-semibold'>Status*</span>
+                            <CustomSelector
+                                options={parseCompanyStatus(data)}
+                                handleChange={({ value }) => setFieldValue('company_status_id', value)}
+                                selectorValue={parseSelectedCompanyStatus(values.company_status_id, data)}
+                                placeholder='Select Status'
+                            />
+                            {errors.company_status_id && <small className='__error'>{errors.company_status_id}</small>}
+                        </>
+                    )}
                     <div className='pt-4 space-y-2'>
                         {flag && <Button label={phase?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
