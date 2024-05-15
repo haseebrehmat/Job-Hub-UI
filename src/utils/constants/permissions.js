@@ -488,6 +488,29 @@ export const rawpermissions = [
             },
         ],
     },
+    {
+        module: 'Leads',
+        permissions: [
+            {
+                codename: 'view_lead',
+                name: 'View Leads',
+                child: ['create_lead', 'edit_lead'],
+                level: 2,
+            },
+            {
+                codename: 'create_lead',
+                name: 'Create Lead',
+                parent: ['view_lead'],
+                level: 2,
+            },
+            {
+                codename: 'edit_lead',
+                name: 'Edit Lead',
+                parent: ['view_lead'],
+                level: 2,
+            },
+        ],
+    },
 ]
 
 export const permissions = rawpermissions.map(row => ({
