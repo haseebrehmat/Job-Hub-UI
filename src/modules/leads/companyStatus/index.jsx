@@ -39,7 +39,7 @@ const CompanyStatus = () => {
                 {data?.statuses?.length > 0 && !error ? (
                     data?.statuses?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
-                            <h2 className='text-lg capitalize'>{row?.status?.name ?? 'Not Specified'}</h2>
+                            <h2 className='text-lg capitalize pt-2'>{row?.status?.name ?? 'Not Specified'}</h2>
                             {can('remove_company_status') && <CompanyStatusActions id={row?.id} mutate={mutate} />}
                         </div>
                     ))

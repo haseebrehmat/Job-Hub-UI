@@ -215,7 +215,7 @@ export const menuItems = [
                 perms: ['view_company_status', 'add_company_status', 'remove_company_status'],
             },
             {
-                label: 'Phase',
+                label: 'Phases',
                 link: '/phases',
                 svg: PhaseIcon,
                 perms: ['view_phase', 'create_phase', 'edit_phase', 'delete_phase'],
