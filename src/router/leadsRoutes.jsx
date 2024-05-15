@@ -27,6 +27,6 @@ export const leadsRoutes = [
         component: <Leads />,
         protect: true,
         title: 'My Leads',
-        permission: 'all',
+        permission: 'view_lead',
     },
 ]

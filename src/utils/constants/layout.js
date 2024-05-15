@@ -19,6 +19,7 @@ import {
     PseudoIcon,
     StatusIcon,
     PhaseIcon,
+    LeadIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -49,13 +50,14 @@ export const menuItems = [
             'edit_cronjob_setting',
             'delete_cronjob_setting',
             'run_scrapper',
+            'create_lead',
         ],
         subItems: [
             {
                 label: 'My Applied Jobs',
                 link: '/user-applied-jobs',
                 svg: UserAppliedJobIcon,
-                perms: ['view_user_applied_job'],
+                perms: ['view_user_applied_job', 'create_lead'],
             },
             {
                 label: 'Jobs Uploader',
@@ -97,6 +99,12 @@ export const menuItems = [
                 ],
             },
         ],
+    },
+    {
+        label: 'Leads',
+        link: '/leads',
+        svg: LeadIcon,
+        perms: ['view_lead', 'edit_lead'],
     },
     {
         label: 'Management',
