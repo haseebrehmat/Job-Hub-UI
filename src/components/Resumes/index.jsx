@@ -65,7 +65,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         <Button label='Download' icon={DownloadIcon} fit fill onClick={downloadPdf} classes='!m-4' />
                     </div>
                 </div>
-                <div className='w-[30%] border-2 rounded-lg h-screen'>
+                <div className='2xl:w-[30%] xl:w-[20%] border-2 rounded-lg h-screen'>
                     <div className='bg-[#048C8C] border-2 rounded-lg py-4 text-center text-white text-xl font-semibold'>
                         Templates
                     </div>
