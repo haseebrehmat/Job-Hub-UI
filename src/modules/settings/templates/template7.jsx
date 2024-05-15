@@ -31,20 +31,20 @@ const Template7 = ({ data: dev, hide, names }) => (
                         <div className='flex flex-col mt-6 space-y-4'>
                             {hide.phone && dev?.basic?.phone && (
                                 <div className='flex flex-row space-x-2'>
-                                    <p className='font-bold'>Phone</p>
-                                    <p className=' text-sm float-left'>{dev?.basic?.phone}</p>
+                                    <p className='text-sky-800 fill-current'>{svgs.phone4}</p>
+                                    <p className='text-gray-800 text-sm '>{dev?.basic?.phone}</p>
                                 </div>
                             )}
                             {hide.email && dev?.basic?.email && (
                                 <div className='flex flex-row space-x-2'>
-                                    <p className='font-bold'>Email</p>
-                                    <p className=' text-sm'>{dev?.basic?.email}</p>
+                                    <p className='text-sky-800 fill-current'>{svgs.gmail4}</p>
+                                    <p className='text-gray-800 text-sm '>{dev?.basic?.email}</p>
                                 </div>
                             )}
                             {hide.address && dev?.basic?.address && (
                                 <div className='flex flex-row space-x-2'>
-                                    <p className='font-bold'>Address</p>
-                                    <p className='text-sm'>{dev?.basic?.address}</p>
+                                    <p className='text-sky-800 fill-current'>{svgs.address4}</p>
+                                    <p className='text-gray-800 text-sm '>{dev?.basic?.address}</p>
                                 </div>
                             )}
                         </div>
@@ -59,8 +59,7 @@ const Template7 = ({ data: dev, hide, names }) => (
                         <div className='flex flex-col'>
                             <div className='grid grid-col-1'>
                                 <div className='flex flex-row text-sm'>
-                                    <div className='w-[30%]'>{}</div>
-                                    <div className='w-[80%]'>
+                                    <div className=''>
                                         {dev?.skills?.all.map(({ name }, index) => (
                                             <div className='inline-block' key={index}>
                                                 <span className='pr-4 text-sm text-gray-800'>{name}</span>
