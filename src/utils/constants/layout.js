@@ -104,7 +104,8 @@ export const menuItems = [
         label: 'Leads',
         link: '/leads',
         svg: LeadIcon,
-        perms: ['view_lead', 'edit_lead'],
+        perms: ['hide_lead'],
+        // perms: ['view_lead', 'edit_lead'],
     },
     {
         label: 'Management',
