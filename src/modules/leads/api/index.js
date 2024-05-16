@@ -34,3 +34,6 @@ export const savePhase = (url, { arg: phase }) => {
     }
     return rawHttp.post(url, phase).then(({ data }) => toast.success(data.detail || 'Phase is created successfully'))
 }
+
+export const fetchLeads = url =>
+    http.get(url).then(({ data }) => ({ leads: data?.results, total: data?.count, pages: data?.num_pages }))

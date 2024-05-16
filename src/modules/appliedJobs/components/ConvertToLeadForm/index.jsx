@@ -13,14 +13,14 @@ import { today } from '@constants/dashboard'
 
 const ConvertToLeadForm = ({ show, id, setShow, mutate }) => {
     const { data, isLoading, error } = useSWR('/api/lead_managament/company_status_phases/', fetchStatusPhases)
-    const { values, errors, handleSubmit, resetForm, trigger, setFieldValue, handleChange } = useMutate(
+    const { values, errors, handleSubmit, trigger, setFieldValue, handleChange } = useMutate(
         `api/lead_managament/leads/`,
         convertToLead,
         { status: '', phase: '', notes: '', effect_date: today, due_date: today, job: id },
         convertToLeadSchema,
         async formValues => trigger({ ...formValues }),
         null,
-        () => mutate() && resetForm()
+        () => mutate() && setShow(false)
     )
 
     const flag = values.status && values.phase

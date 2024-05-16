@@ -1,6 +1,8 @@
 import { memo, useReducer } from 'react'
+import useSWR from 'swr'
 
 import { Modal, Board, Badge } from '@components'
+import { fetchLeads } from '@modules/leads/api'
 
 const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), {
@@ -8,7 +10,11 @@ const Leads = () => {
         destination: null,
         show: false,
         move: true,
+        page: 1,
+        query: '',
     })
+    const { data, isLoading } = useSWR('/api/lead_managament/leads/', fetchLeads)
+    console.log(data, isLoading)
     const itemsFromBackend = [
         {
             id: 1,
@@ -89,18 +95,6 @@ const Leads = () => {
         },
         3: {
             name: 'Cold Leads',
-            items: [],
-        },
-        4: {
-            name: 'Prospect',
-            items: [],
-        },
-        5: {
-            name: 'Hired',
-            items: [],
-        },
-        6: {
-            name: 'Rejected',
             items: [],
         },
     }
