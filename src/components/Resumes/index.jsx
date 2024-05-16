@@ -13,6 +13,7 @@ import {
     Template7,
     Template8,
     Template9,
+    Template10,
 } from '@modules/settings/templates'
 
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
@@ -23,6 +24,7 @@ import { DownloadIcon } from '@icons'
 
 const Resumes = ({ data, hide, names, set = null }) => {
     const refs = [
+        useRef(null),
         useRef(null),
         useRef(null),
         useRef(null),
@@ -54,6 +56,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template6 data={profile} hide={gethide} names={name} />,
         <Template9 data={profile} hide={gethide} names={name} />,
         <Template3 data={profile} hide={gethide} names={name} />,
+        <Template10 data={profile} hide={gethide} names={name} />,
         <Template4 data={profile} hide={gethide} names={name} />,
         <Template5 data={profile} hide={gethide} names={name} />,
         <Template7 data={profile} hide={gethide} names={name} />,
