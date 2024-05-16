@@ -5,20 +5,20 @@ import { useMutate } from '@/hooks'
 
 import { Button, Drawer, CustomSelector, Textarea, Input } from '@components'
 
-import { fetchStatusPhases } from '@modules/appliedJobs/api'
+import { fetchStatusPhases, convertToLead } from '@modules/appliedJobs/api'
 
 import { convertToLeadSchema } from '@utils/schemas'
 import { parseSelectedStatus, parseStatuses, parseStatusPhases, parseSelectedStatusPhase } from '@utils/helpers'
 import { today } from '@constants/dashboard'
 
-const ConvertToLeadForm = ({ show, setShow, mutate }) => {
+const ConvertToLeadForm = ({ show, id, setShow, mutate }) => {
     const { data, isLoading, error } = useSWR('/api/lead_managament/company_status_phases/', fetchStatusPhases)
     const { values, errors, handleSubmit, resetForm, trigger, setFieldValue, handleChange } = useMutate(
-        `/api/profile/generic_skill/`,
-        fetchStatusPhases,
-        { status: '', phase: '', notes: '', effect_date: today, due_date: today },
+        `api/lead_managament/leads/`,
+        convertToLead,
+        { status: '', phase: '', notes: '', effect_date: today, due_date: today, job: id },
         convertToLeadSchema,
-        async form => trigger({ ...form }),
+        async formValues => trigger({ ...formValues }),
         null,
         () => mutate() && resetForm()
     )

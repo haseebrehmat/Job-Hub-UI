@@ -1,4 +1,5 @@
-import { http } from '@utils/http'
+import { http, rawHttp } from '@utils/http'
+import { toast } from 'react-hot-toast'
 
 export const fetchAppliedJobs = (page, query = '', user_id = '') =>
     http
@@ -15,3 +16,8 @@ export const fetchAppliedJobs = (page, query = '', user_id = '') =>
         }))
 
 export const fetchStatusPhases = url => http.get(url).then(({ data }) => data)
+
+export const convertToLead = (url, { arg: lead }) =>
+    rawHttp
+        .post(url, lead)
+        .then(({ data }) => toast.success(data.detail || 'Applied Job is converted to Lead successfully'))

@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useState, useReducer } from 'react'
 import useSWR from 'swr'
 
 import { Loading, Badge, Tooltip } from '@components'
@@ -12,9 +12,9 @@ import { formatDate, timeSince } from '@utils/helpers'
 import { DownloadIcon, DownloadIcon2, ConvertToLeadIcon } from '@icons'
 
 const AppliedJobs = memo(({ userId = '' }) => {
+    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), { id: null, show: false })
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
-    const [show, setShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR([page, query, userId], () =>
         fetchAppliedJobs(page, query, userId)
     )
@@ -77,7 +77,9 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                                 </a>
                                             )}
                                             <Tooltip text='Convert to Lead'>
-                                                <span onClick={() => setShow(true)}>{ConvertToLeadIcon}</span>
+                                                <span onClick={() => dispatch({ show: true, id: job?.applied_job_id })}>
+                                                    {ConvertToLeadIcon}
+                                                </span>
                                             </Tooltip>
                                         </div>
                                     </td>
@@ -89,7 +91,14 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     </tbody>
                 </table>
                 {!error && <TableNavigate data={data} page={page} handleClick={handleClick} />}
-                {show && <ConvertToLeadForm setShow={setShow} show={show} mutate={mutate} />}
+                {vals.show && (
+                    <ConvertToLeadForm
+                        show={vals.show}
+                        id={vals.id}
+                        setShow={show => dispatch({ show })}
+                        mutate={mutate}
+                    />
+                )}
             </div>
         </div>
     )
