@@ -241,6 +241,8 @@ export const convertToLeadSchema = Yup.object().shape({
     status: Yup.mixed().required('Please choose status'),
     phase: Yup.mixed().required('Please choose phase'),
     notes: Yup.string().max(250, 'Notes is too long'),
+    effect_date: Yup.date().max(today, 'Please choose future date'),
+    due_date: Yup.date().min(Yup.ref('effect_date'), "Due date can't be before Start date"),
 })
 
 export const phaseSchema = Yup.object().shape({

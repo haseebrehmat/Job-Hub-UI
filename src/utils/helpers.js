@@ -339,3 +339,22 @@ export const parseSelectedCompanyStatus = (id, statuses) => {
     }
     return null
 }
+
+export const parseSelectedStatus = (id, statuses) => {
+    if (id) {
+        const status = statuses.find(row => row?.id === id)
+        return { value: status?.id, label: status?.name }
+    }
+    return null
+}
+
+export const parseStatusPhases = (id, statuses) =>
+    id ? statuses?.find(row => row.id === id)?.phases.map(phase => ({ value: phase.id, label: phase.name })) : null
+
+export const parseSelectedStatusPhase = (pid, sid, statuses) => {
+    if (pid && sid) {
+        const status = statuses.find(row => row?.id === sid)?.phases?.find(row => row.id === pid)
+        return { value: status?.id, label: status?.name }
+    }
+    return null
+}

@@ -1,26 +1,29 @@
 import { memo } from 'react'
+import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Drawer, CustomSelector, Textarea } from '@components'
+import { Button, Drawer, CustomSelector, Textarea, Input } from '@components'
 
-import { saveGenericSkill } from '@modules/pseudos/api'
+import { fetchStatusPhases } from '@modules/appliedJobs/api'
 
 import { convertToLeadSchema } from '@utils/schemas'
-import { GENERIC_SKILL_TYPES_OPTIONS } from '@constants/pseudos'
+import { parseSelectedStatus, parseStatuses, parseStatusPhases, parseSelectedStatusPhase } from '@utils/helpers'
+import { today } from '@constants/dashboard'
 
 const ConvertToLeadForm = ({ show, setShow, mutate }) => {
+    const { data, isLoading, error } = useSWR('/api/lead_managament/company_status_phases/', fetchStatusPhases)
     const { values, errors, handleSubmit, resetForm, trigger, setFieldValue, handleChange } = useMutate(
         `/api/profile/generic_skill/`,
-        saveGenericSkill,
-        { status: '', phase: '', notes: '' },
+        fetchStatusPhases,
+        { status: '', phase: '', notes: '', effect_date: today, due_date: today },
         convertToLeadSchema,
-        async form => trigger({ status: form.status.value, phase: form.phase.value, notes: form.notes }),
+        async form => trigger({ ...form }),
         null,
         () => mutate() && resetForm()
     )
 
-    const flag = values.status?.value?.length > 0 && values.phase?.value?.length > 0
+    const flag = values.status && values.phase
     return (
         <Drawer show={show} setShow={setShow} w='700px'>
             <form onSubmit={handleSubmit}>
@@ -28,25 +31,47 @@ const ConvertToLeadForm = ({ show, setShow, mutate }) => {
                     <p className='font-medium text-xl'>Convert to Lead</p>
                     <hr className='mb-2' />
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+                        {isLoading ? (
+                            <span>Loading...</span>
+                        ) : error ? (
+                            <span>Error to Load statuses</span>
+                        ) : (
+                            <>
+                                <div>
+                                    <span className='text-xs font-semibold'>Status*</span>
+                                    <CustomSelector
+                                        options={parseStatuses(data)}
+                                        handleChange={({ value }) => setFieldValue('status', value)}
+                                        selectorValue={parseSelectedStatus(values.status, data)}
+                                        placeholder='Select Status'
+                                    />
+                                    {errors.status && <small className='__error'>{errors.status}</small>}
+                                </div>
+                                <div>
+                                    <span className='text-xs font-semibold'>Phase*</span>
+                                    {values.status ? (
+                                        <CustomSelector
+                                            options={parseStatusPhases(values.status, data)}
+                                            handleChange={({ value }) => setFieldValue('phase', value)}
+                                            selectorValue={parseSelectedStatusPhase(values.phase, values.status, data)}
+                                            placeholder='Select Phase'
+                                        />
+                                    ) : (
+                                        <p className='text-sm mt-2'>Please select status first</p>
+                                    )}
+                                    {errors.phase && <small className='__error'>{errors.phase}</small>}
+                                </div>
+                            </>
+                        )}
                         <div>
-                            <span className='text-xs font-semibold'>Status*</span>
-                            <CustomSelector
-                                options={GENERIC_SKILL_TYPES_OPTIONS}
-                                handleChange={obj => setFieldValue('status', obj)}
-                                selectorValue={values.status}
-                                placeholder='Select Status'
-                            />
-                            {errors.status && <small className='__error'>{errors.status}</small>}
+                            <span className='text-xs font-semibold'>Effective Date*</span>
+                            <Input type='date' onChange={handleChange} name='effect_date' value={values.effect_date} />
+                            {errors.effect_date && <small className='__error'>{errors.effect_date}</small>}
                         </div>
                         <div>
-                            <span className='text-xs font-semibold'>Phase*</span>
-                            <CustomSelector
-                                options={GENERIC_SKILL_TYPES_OPTIONS}
-                                handleChange={obj => setFieldValue('phase', obj)}
-                                selectorValue={values.phase}
-                                placeholder='Select Phase'
-                            />
-                            {errors.phase && <small className='__error'>{errors.phase}</small>}
+                            <span className='text-xs font-semibold'>Due Date*</span>
+                            <Input type='date' onChange={handleChange} name='due_date' value={values.due_date} />
+                            {errors.due_date && <small className='__error'>{errors.due_date}</small>}
                         </div>
                     </div>
                     <span className='text-xs font-semibold'>Notes*</span>

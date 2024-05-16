@@ -70,7 +70,7 @@ import {
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
-import { SiGoogleadsense } from 'react-icons/si'
+import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -157,3 +157,4 @@ export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} /
 export const StatusIcon = <BiGitCompare style={{ fontSize: 22 }} />
 export const PhaseIcon = <CgListTree style={{ fontSize: 22 }} />
 export const LeadIcon = <SiGoogleadsense style={{ fontSize: 22 }} />
+export const ConvertToLeadIcon = <SiConvertio style={{ fontSize: 22 }} />

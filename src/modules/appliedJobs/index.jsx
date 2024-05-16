@@ -9,7 +9,7 @@ import { ConvertToLeadForm, EmptyTable, Searchbox, TableNavigate } from '@module
 import { tableHeads, jobStatus } from '@constants/appliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
 
-import { DownloadIcon, DownloadIcon2, CreateIcon } from '@icons'
+import { DownloadIcon, DownloadIcon2, ConvertToLeadIcon } from '@icons'
 
 const AppliedJobs = memo(({ userId = '' }) => {
     const [page, setPage] = useState(1)
@@ -77,7 +77,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                                 </a>
                                             )}
                                             <Tooltip text='Convert to Lead'>
-                                                <span onClick={() => setShow(true)}>{CreateIcon}</span>
+                                                <span onClick={() => setShow(true)}>{ConvertToLeadIcon}</span>
                                             </Tooltip>
                                         </div>
                                     </td>

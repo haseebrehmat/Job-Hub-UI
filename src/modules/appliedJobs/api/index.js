@@ -13,3 +13,5 @@ export const fetchAppliedJobs = (page, query = '', user_id = '') =>
             last_12_hours_count,
             status: 'success',
         }))
+
+export const fetchStatusPhases = url => http.get(url).then(({ data }) => data)
