@@ -1,7 +1,8 @@
+import { CloseIcon } from '@/assets/icons'
 import { memo, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
-const Dialog = ({ children, content, show, title = 'Confirmation', setShow }) => {
+const Modal = ({ children, content, show, setShow, w = '80%' }) => {
     useEffect(() => {
         const dialogWrapper = document.createElement('div')
         document.body.appendChild(dialogWrapper)
@@ -23,23 +24,22 @@ const Dialog = ({ children, content, show, title = 'Confirmation', setShow }) =>
                                     onClick={() => setShow(false)}
                                 />
                             </div>
-                            <span className='hidden sm:inline-block sm:align-middle sm:h-screen' />
+                            <span className='hidden sm:inline-block sm:align-middle' />
                             &#8203;
                             <div
-                                className='inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-lg sm:w-full'
+                                className='mt-8 inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-y-scroll shadow-xl transform transition-all sm:align-middle'
                                 role='dialog'
                                 aria-modal='true'
                                 aria-labelledby='modal-headline'
+                                style={{ width: w }}
                             >
-                                <div>
-                                    <div className='text-center sm:mt-0 sm:ml-4 sm:text-left'>
-                                        <h3 className='text-gray-900' id='modal-headline'>
-                                            {title}
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div className='mt-5 sm:mt-6'>
-                                    <span className='flex w-full rounded-md shadow-sm gap-4 sm:w-auto'>{content}</span>
+                                <span onClick={() => setShow(false)} className='float-right cursor-pointer'>
+                                    {CloseIcon}
+                                </span>
+                                <div className='mt-6'>
+                                    <span className='flex w-full sm:w-auto overflow-y-scroll min-h-fit max-h-[85vh]'>
+                                        {content}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -50,4 +50,4 @@ const Dialog = ({ children, content, show, title = 'Confirmation', setShow }) =>
     )
 }
 
-export default memo(Dialog)
+export default memo(Modal)
