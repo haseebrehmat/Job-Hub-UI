@@ -2,8 +2,6 @@ import { memo } from 'react'
 
 import { formatDate4 } from '@utils/helpers'
 
-import { ResumeSvgs as svgs } from '@svgs'
-
 const Template9 = ({ data: dev, hide, names }) => (
     <div className='p-8'>
         <div className='flex flex-row w-fit space-x-6'>
@@ -77,14 +75,14 @@ const Template9 = ({ data: dev, hide, names }) => (
             <div className='w-3/4 px-6'>
                 {hide.experience && dev?.experience?.length > 0 && (
                     <div className='mb-10 '>
-                        <div className='flex flex-row align-baseline gap-2'>
+                        <div className='flex flex-row align-baseline'>
                             <p className='text-lg text-center mt-3 font-bold text-indigo-900'>{names.experience}</p>
                         </div>
                         <hr className='mb-6 border-gray-300' />
                         <div className='flex flex-col'>
                             <div className='grid grid-cols-1 gap-8'>
                                 {dev?.experience.map(({ company, title, from, to, description }, index) => (
-                                    <div className='flex flex-row text-sm' key={index}>
+                                    <div className='flex flex-row text-sm gap-4' key={index}>
                                         <div className='w-[30%]'>
                                             <p className='text-gray-900 text-lg'>
                                                 {formatDate4(from)} to {formatDate4(to)}
@@ -105,14 +103,14 @@ const Template9 = ({ data: dev, hide, names }) => (
                 )}
                 {hide.education && dev?.education?.length > 0 && (
                     <div className='mb-10'>
-                        <div className='flex flex-row align-baseline gap-2'>
+                        <div className='flex flex-row align-baseline '>
                             <p className='text-lg text-center mt-3 font-bold text-indigo-900'>{names.education}</p>
                         </div>
                         <hr className='mb-6 border-gray-300' />
                         <div className='flex flex-col'>
                             <div className='grid grid-col-1 gap-8'>
                                 {dev?.education.map(({ degree, institute }, index) => (
-                                    <div className='flex flex-row text-sm' key={index}>
+                                    <div className='flex flex-row text-sm gap-4' key={index}>
                                         <div className='w-[30%]'>{}</div>
                                         <div className='w-[80%]'>
                                             <div className='flex flex-col'>
