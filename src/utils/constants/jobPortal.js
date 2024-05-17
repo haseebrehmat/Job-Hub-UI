@@ -13,10 +13,10 @@ export const JOB_HEADS = [
 export const MANUAL_JOBS_HEADS = ['Job Title', 'Company', 'Job Source', 'Tech Stack', 'Job Type', 'Date Posted']
 
 export const RESUME_PDF_OPTIONS = {
-    margin: 0.15,
+    margin: 0.015,
     filename: 'resume.pdf',
     image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
+    html2canvas: { scale: 1 },
     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
     pagebreak: { mode: ['avoid-all', 'css', 'legacy'] },
 }
