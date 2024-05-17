@@ -47,7 +47,7 @@ const Board = ({ data, move = false, set = null }) => {
                                             {...provided.droppableProps}
                                             ref={provided.innerRef}
                                         >
-                                            <p className='text-lg'>{column.name}</p>
+                                            <p className='text-sm font-bold text-gray-500'>{column.name}</p>
                                             {column.items.map((item, index) => (
                                                 <Draggable key={item.id} draggableId={`${item.id}`} index={index}>
                                                     {(provided, snapshot) => (

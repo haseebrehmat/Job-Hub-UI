@@ -40,7 +40,7 @@ import {
 } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh, TbCalendarTime } from 'react-icons/tb'
+import { TbRefresh, TbCalendarTime, TbBadges } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
 import {
     AiOutlineSearch,
@@ -158,3 +158,4 @@ export const StatusIcon = <BiGitCompare style={{ fontSize: 22 }} />
 export const PhaseIcon = <CgListTree style={{ fontSize: 22 }} />
 export const LeadIcon = <SiGoogleadsense style={{ fontSize: 22 }} />
 export const ConvertToLeadIcon = <SiConvertio style={{ fontSize: 22 }} />
+export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />

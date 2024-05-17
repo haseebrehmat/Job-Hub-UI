@@ -1,8 +1,11 @@
-import { memo, useReducer } from 'react'
+import { memo, useMemo, useReducer } from 'react'
 import useSWR from 'swr'
 
-import { Modal, Board, Badge } from '@components'
+import { Modal, Board, Badge, Loading } from '@components'
+
 import { fetchLeads } from '@modules/leads/api'
+
+import { CurrentPhaseIcon } from '@icons'
 
 const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), {
@@ -14,97 +17,45 @@ const Leads = () => {
         query: '',
     })
     const { data, isLoading } = useSWR('/api/lead_managament/leads/', fetchLeads)
-    console.log(data, isLoading)
-    const itemsFromBackend = [
-        {
-            id: 1,
-            content: (
-                <div
-                    className='bg-white text-gray-500 border border-[#048C8C] rounded-md p-2 space-y-1'
-                    onClick={() => dispatch({ show: true })}
-                >
-                    <h2 className='text-sm capitalize'>application developer, php/.net</h2>
-                    <h2 className='capitalize'>abt associates</h2>
-                    <h2 className='text-xs capitalize'>First Interview</h2>
-                    <h2 className='capitalize text-right'>
-                        <Badge label='c#, .net' />
-                    </h2>
-                </div>
-            ),
-        },
-        {
-            id: 2,
-            content: (
-                <div
-                    className='bg-white text-gray-500 border border-[#048C8C] rounded-md p-2 space-y-1'
-                    onClick={() => dispatch({ show: true })}
-                >
-                    <h2 className='text-sm capitalize'>sr. php developer</h2>
-                    <h2 className='capitalize'>eteam</h2>
-                    <h2 className='text-xs capitalize'>2nd Interview</h2>
-                    <h2 className='capitalize text-right'>
-                        <Badge label='php' />
-                    </h2>
-                </div>
-            ),
-        },
-        {
-            id: 3,
-            content: (
-                <div
-                    className='bg-white text-gray-500 border border-[#048C8C] rounded-md p-2 space-y-1'
-                    onClick={() => dispatch({ show: true })}
-                >
-                    <h2 className='text-sm capitalize'>php full stack developer</h2>
-                    <h2 className='capitalize'>galaxe.solutions</h2>
-                    <h2 className='text-xs capitalize'>First Interview</h2>
-                    <h2 className='capitalize text-right'>
-                        <Badge label='laravel' />
-                    </h2>
-                </div>
-            ),
-        },
-        {
-            id: 4,
-            content: (
-                <div
-                    className='bg-white text-gray-500 border border-[#048C8C] rounded-md p-2 space-y-1'
-                    onClick={() => dispatch({ show: true })}
-                >
-                    <h2 className='text-sm capitalize'>
-                        senior full stack engineer (angular/php) $160-180k - costa mesa!
-                    </h2>
-                    <h2 className='capitalize'>applab systems, inc</h2>
-                    <h2 className='text-xs capitalize'>Final Call</h2>
-                    <h2 className='capitalize text-right'>
-                        <Badge label='angular' />
-                    </h2>
-                </div>
-            ),
-        },
-    ]
 
-    const columnsFromBackend = {
-        1: {
-            name: 'Warm Leads',
-            items: itemsFromBackend,
-        },
-        2: {
-            name: 'Hot Leads',
-            items: [],
-        },
-        3: {
-            name: 'Cold Leads',
-            items: [],
-        },
-    }
+    const memoizedCols = useMemo(() => {
+        if (data) {
+            return data.leads.reduce((acc, row) => {
+                acc[row.id] = {
+                    name: `${row?.status?.toUpperCase()} ${row?.leads?.length} LEADS`,
+                    items: row?.leads?.map(lead => ({
+                        id: lead?.id,
+                        content: (
+                            <div
+                                className='bg-white text-gray-500 border border-[#048C8C] rounded-md p-2'
+                                onClick={() => dispatch({ show: true })}
+                            >
+                                <h2 className='text-sm capitalize'>{lead?.applied_job?.title}</h2>
+                                <h2 className='capitalize italic py-2'>{lead?.applied_job?.company}</h2>
+                                <h2 className='flex'>
+                                    <span>{CurrentPhaseIcon}</span>
+                                    <span className='text-xs'>{lead?.phase_name ?? 'not set'}</span>
+                                </h2>
+                                <h2 className='text-right'>
+                                    <Badge label={lead?.applied_job?.tech_stack} />
+                                </h2>
+                            </div>
+                        ),
+                    })),
+                }
+                return acc
+            }, {})
+        }
+        return []
+    }, [data])
 
+    if (isLoading) return <Loading />
     return (
         <div>
             <Modal
                 show={vals.show}
                 setShow={show => dispatch({ show })}
-                content={<Board data={columnsFromBackend} set={dispatch} />}
+                content={<Board data={memoizedCols} set={dispatch} move={vals.move} />}
             >
                 <span
                     onClick={() => dispatch({ show: true })}
@@ -114,7 +65,7 @@ const Leads = () => {
                     <span>Destination Id : {vals.destination}</span>
                 </span>
             </Modal>
-            <Board data={columnsFromBackend} set={dispatch} move={vals.move} />
+            <Board data={memoizedCols} set={dispatch} move={vals.move} />
         </div>
     )
 }
