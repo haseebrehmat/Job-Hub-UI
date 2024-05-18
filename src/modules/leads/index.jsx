@@ -3,9 +3,9 @@ import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
-import { Modal, Board, Loading } from '@components'
+import { Board, Loading } from '@components'
 
-import { LeadCard } from '@modules/leads/components'
+import { LeadCard, LeadModal } from '@modules/leads/components'
 import { fetchLeads, changeLeadStatus } from '@modules/leads/api'
 
 import { LEADS_INITIAL_VALS } from '@constants/leads'
@@ -18,9 +18,7 @@ const Leads = () => {
         if (data) {
             return data.leads.reduce((acc, row) => {
                 acc[row.id] = {
-                    name: `${row?.status?.toUpperCase()} ${row?.leads?.length} LEAD${
-                        row?.leads?.length > 1 ? 'S' : ''
-                    }`,
+                    name: row?.status?.toUpperCase(),
                     items: row?.leads?.map(lead => ({
                         id: lead?.id,
                         content: <LeadCard lead={lead} dispatch={dispatch} />,
@@ -41,26 +39,13 @@ const Leads = () => {
         null,
         () => mutate()
     )
-
-    if (isLoading) return <Loading />
-    return (
-        <div>
-            <Modal
-                show={vals.show}
-                setShow={show => dispatch({ show })}
-                content={<Board data={memoizedCols} set={dispatch} />}
-            >
-                <span
-                    onClick={() => dispatch({ show: true })}
-                    className='bg-gray-700 text-white p-2 m-2 flex justify-between'
-                >
-                    <span>Source Id : {vals.source}</span>
-                    <span>Destination Id : {vals.destination}</span>
-                    <span>Draggable Id : {vals.draggable}</span>
-                </span>
-            </Modal>
+    return isLoading ? (
+        <Loading />
+    ) : (
+        <>
+            <LeadModal vals={vals} dispatch={dispatch} />
             <Board data={memoizedCols} set={dispatch} handleDrag={handleSubmit} />
-        </div>
+        </>
     )
 }
 export default memo(Leads)

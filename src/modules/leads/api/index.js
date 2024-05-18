@@ -40,3 +40,5 @@ export const fetchLeads = url =>
 
 export const changeLeadStatus = (url, { arg: status }) =>
     rawHttp.put(url, status).then(({ data }) => toast.success(data.detail || 'Lead Status is updated successfully'))
+
+export const fetchLead = url => http.get(url).then(({ data }) => data)

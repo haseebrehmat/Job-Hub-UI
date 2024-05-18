@@ -10,7 +10,7 @@ const LeadCard = ({ lead, dispatch }) => {
             lead && (
                 <div
                     className='bg-white text-gray-500 border border-[#048C8C] rounded-md p-2'
-                    onClick={() => dispatch({ show: true })}
+                    onClick={() => dispatch({ show: true, draggable: lead?.id })}
                 >
                     <h2 className='text-sm capitalize'>{lead?.applied_job?.title}</h2>
                     <h2 className='capitalize italic py-2'>{lead?.applied_job?.company}</h2>
