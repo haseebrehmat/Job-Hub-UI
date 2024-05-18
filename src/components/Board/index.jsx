@@ -2,34 +2,32 @@
 import { useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
 
-const Board = ({ data, move = false, set = null }) => {
+const Board = ({ data, set = null, handleDrag = null }) => {
     const [columns, setColumns] = useState(data)
     const onDragEnd = result => {
-        if (move) {
-            if (!result.destination) return
-            const { source, destination } = result
-            if (source.droppableId !== destination.droppableId) {
-                const sourceColumn = columns[source.droppableId]
-                const destColumn = columns[destination.droppableId]
-                const sourceItems = [...sourceColumn.items]
-                const destItems = [...destColumn.items]
-                const [removed] = sourceItems.splice(source.index, 1)
-                destItems.splice(destination.index, 0, removed)
-                setColumns({
-                    ...columns,
-                    [source.droppableId]: { ...sourceColumn, items: sourceItems },
-                    [destination.droppableId]: { ...destColumn, items: destItems },
-                })
-                set({ source: source.droppableId, destination: destination.droppableId })
-            } else {
-                const column = columns[source.droppableId]
-                const copiedItems = [...column.items]
-                const [removed] = copiedItems.splice(source.index, 1)
-                copiedItems.splice(destination.index, 0, removed)
-                setColumns({ ...columns, [source.droppableId]: { ...column, items: copiedItems } })
-                set({ source: source.droppableId, destination: destination.droppableId })
-            }
+        if (!result.destination) return
+        const { source, destination, draggableId } = result
+        if (source.droppableId !== destination.droppableId) {
+            const sourceColumn = columns[source.droppableId]
+            const destColumn = columns[destination.droppableId]
+            const sourceItems = [...sourceColumn.items]
+            const destItems = [...destColumn.items]
+            const [removed] = sourceItems.splice(source.index, 1)
+            destItems.splice(destination.index, 0, removed)
+            setColumns({
+                ...columns,
+                [source.droppableId]: { ...sourceColumn, items: sourceItems },
+                [destination.droppableId]: { ...destColumn, items: destItems },
+            })
+        } else {
+            const column = columns[source.droppableId]
+            const copiedItems = [...column.items]
+            const [removed] = copiedItems.splice(source.index, 1)
+            copiedItems.splice(destination.index, 0, removed)
+            setColumns({ ...columns, [source.droppableId]: { ...column, items: copiedItems } })
         }
+        set({ source: source.droppableId, destination: destination.droppableId, draggable: draggableId })
+        handleDrag()
     }
     return (
         <div className='max-w-full overflow-x-auto mb-14'>

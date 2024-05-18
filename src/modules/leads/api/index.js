@@ -37,3 +37,6 @@ export const savePhase = (url, { arg: phase }) => {
 
 export const fetchLeads = url =>
     http.get(url).then(({ data }) => ({ leads: data?.results, total: data?.count, pages: data?.num_pages }))
+
+export const changeLeadStatus = (url, { arg: status }) =>
+    rawHttp.put(url, status).then(({ data }) => toast.success(data.detail || 'Lead Status is updated successfully'))
