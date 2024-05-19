@@ -9,7 +9,7 @@ import LeadModal from '@modules/leads/components/LeadModal'
 import JobDetail from '@modules/leads/components/JobDetail'
 import AppliedDetail from '@modules/leads/components/AppliedDetail'
 import Notes from '@modules/leads/components/Notes'
-import UpdateStatus from '@modules/leads/components/UpdateStatus'
+import UpdatePhase from '@modules/leads/components/UpdatePhase'
 
 export {
     StatusForm,
@@ -23,5 +23,5 @@ export {
     JobDetail,
     AppliedDetail,
     Notes,
-    UpdateStatus,
+    UpdatePhase,
 }
