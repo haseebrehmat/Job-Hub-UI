@@ -40,7 +40,7 @@ const LeadModal = ({ vals, dispatch }) => {
                             />
                         </div>
                     </div>
-                    <Notes lead={data} status={status} error={error} loading={statusLoading} />
+                    <Notes lead={data} status={status} error={error} loading={statusLoading} mutate={mutate} />
                 </div>
             }
         />

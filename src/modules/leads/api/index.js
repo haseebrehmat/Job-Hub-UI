@@ -42,3 +42,10 @@ export const changeLeadStatus = (url, { arg: status }) =>
     rawHttp.put(url, status).then(({ data }) => toast.success(data.detail || 'Lead Status is updated successfully'))
 
 export const fetchLead = url => http.get(url).then(({ data }) => data)
+
+export const saveNote = (url, { arg: note }) => {
+    if (note?.id) {
+        return rawHttp.put(url, note).then(({ data }) => toast.success(data.detail || 'Note is updated successfully'))
+    }
+    return rawHttp.post(url, note).then(({ data }) => toast.success(data.detail || 'Note is created successfully'))
+}

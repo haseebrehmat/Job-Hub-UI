@@ -1,6 +1,10 @@
-import { memo } from 'react'
+import { memo, useReducer } from 'react'
 
-import { CustomSelector, Textarea, Button } from '@components'
+import { useMutate } from '@/hooks'
+
+import { CustomSelector, Textarea, Button, DeleteDialog } from '@components'
+
+import { saveNote } from '@modules/leads/api'
 
 import {
     decodeJwt,
@@ -12,8 +16,26 @@ import {
 } from '@utils/helpers'
 import { avatarPlaceholder } from '@constants/profile'
 
-const Notes = ({ lead = null, status = null, error = null, loading = true }) => {
+const Notes = ({ lead = null, status = null, error = null, loading = true, mutate }) => {
     const user = decodeJwt()
+    const [note, setNote] = useReducer((prev, next) => ({ ...prev, ...next }), {
+        id: null,
+        msg: '',
+        edit: '',
+        show: false,
+    })
+    const { handleSubmit, trigger } = useMutate(
+        `/api/lead_managament/lead_activity_notes${note.id ? `/${note.id}/` : '/'}`,
+        saveNote,
+        {},
+        null,
+        async () => trigger({ id: note.id, notes: note.id ? note.edit : note.msg, lead: lead?.id }),
+        null,
+        () => mutate() && setNote({ id: null, msg: '', edit: '' })
+    )
+
+    const handleChange = e => setNote({ id: null, msg: e.target.value, edit: '' })
+    const handleEditChange = e => setNote({ edit: e.target.value })
 
     return lead ? (
         <div className='border p-2'>
@@ -53,35 +75,91 @@ const Notes = ({ lead = null, status = null, error = null, loading = true }) => 
                 </div>
                 <Button label='Get' fit classes='!float-right !py-1.5' />
             </div>
-            <div className='grid grid-cols-[auto_1fr] pt-2.5 gap-x-2.5'>
-                <img
-                    alt={user?.username}
-                    src={user?.file_url ?? avatarPlaceholder}
-                    onError={e => (e.target.src = avatarPlaceholder)}
-                    className='h-12 w-12 rounded-full object-cover shadow-sm'
-                />
-                <Textarea ph='Type your notes' rows={2} />
-            </div>
+            <form onSubmit={handleSubmit}>
+                <div className='grid grid-cols-[auto_1fr] pt-2.5 gap-x-2.5'>
+                    <img
+                        alt={user?.username}
+                        src={user?.file_url ?? avatarPlaceholder}
+                        onError={e => (e.target.src = avatarPlaceholder)}
+                        className='h-12 w-12 rounded-full object-cover shadow-sm'
+                    />
+                    <Textarea name='notes' ph='Type your notes' rows={2} value={note.msg} onChange={handleChange} />
+                </div>
+                {note.msg.length > 0 && !note.id && (
+                    <div className='mt-2 space-x-2 float-right'>
+                        <Button label='Save' classes='!py-1' type='submit' fit fill />
+                        <Button label='Clear' classes='!py-1' fit onClick={() => setNote({ id: null, msg: '' })} />
+                    </div>
+                )}
+            </form>
             <div className='pt-3 pl-3'>
                 {lead?.notes?.length > 0 ? (
                     lead?.notes?.map(row => (
-                        <div className='flex gap-x-2.5' key={row.id}>
+                        <div className='flex gap-x-2.5 pb-3.5' key={row.id}>
                             <img
-                                alt={user?.username}
-                                src={user?.file_url ?? avatarPlaceholder}
+                                alt={row?.user?.name || 'Guest'}
+                                src={row?.user?.avatar ?? avatarPlaceholder}
                                 onError={e => (e.target.src = avatarPlaceholder)}
                                 className='h-9 w-9 rounded-full object-cover shadow-sm'
                             />
                             <div className='flex flex-col w-full gap-y-1'>
                                 <div className='flex gap-x-6 items-center w-full'>
-                                    <span className='text-sm text-gray-900'>Haseeb</span>
-                                    <span className='text-xs text-gray-600'>{formatDate(row.created_at)}</span>
+                                    <span className='text-sm text-gray-900 capitalize'>
+                                        {row?.user?.name || 'guest'}
+                                    </span>
+                                    <span className='text-xs text-gray-600'>{formatDate(row?.updated_at)}</span>
                                 </div>
-                                <span>{row.message}</span>
-                                <span className='flex gap-x-2 font-semibold text-gray-500'>
-                                    <small className='underline cursor-pointer'>Edit</small>
-                                    <small className='underline cursor-pointer'>Delete</small>
-                                </span>
+                                {note.id && note.id === row?.id ? (
+                                    <form onSubmit={handleSubmit}>
+                                        <Textarea
+                                            ph='Type your notes'
+                                            rows={2}
+                                            value={note.edit}
+                                            onChange={handleEditChange}
+                                        />
+                                        {note.edit.length > 0 && note.id && (
+                                            <div className='space-x-2 float-right'>
+                                                <Button label='Update' classes='!py-1' type='submit' fit fill />
+                                                <Button
+                                                    label='Cancel'
+                                                    classes='!py-1'
+                                                    fit
+                                                    onClick={() => setNote({ id: null, edit: '' })}
+                                                />
+                                            </div>
+                                        )}
+                                    </form>
+                                ) : (
+                                    <>
+                                        <span>{row.message}</span>
+                                        {row?.user?.id === user?.user_id && (
+                                            <span className='flex gap-x-2 font-semibold text-gray-500'>
+                                                <small
+                                                    className='underline cursor-pointer'
+                                                    onClick={() =>
+                                                        setNote({ id: row?.id, edit: row?.message, msg: '' })
+                                                    }
+                                                >
+                                                    Edit
+                                                </small>
+                                                <DeleteDialog
+                                                    show={note.show}
+                                                    setShow={val => setNote({ show: val })}
+                                                    url={`/api/lead_managament/lead_activity_notes/${row?.id}/`}
+                                                    refetch={mutate}
+                                                    perm
+                                                >
+                                                    <small
+                                                        className='underline cursor-pointer'
+                                                        onClick={() => setNote({ show: true })}
+                                                    >
+                                                        Delete
+                                                    </small>
+                                                </DeleteDialog>
+                                            </span>
+                                        )}
+                                    </>
+                                )}
                             </div>
                         </div>
                     ))
