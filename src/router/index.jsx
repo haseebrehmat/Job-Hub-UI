@@ -4,7 +4,7 @@ import { Protected } from '@components'
 
 import { AppLayout } from '@modules'
 
-import { routes, authRoutes } from '@/routes'
+import { routes, authRoutes } from '@/router/routes'
 
 const browserRoutes = routes.map(({ path, protect, component, title, permission }) => ({
     path,

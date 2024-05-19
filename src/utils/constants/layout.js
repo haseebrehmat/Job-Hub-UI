@@ -17,6 +17,9 @@ import {
     LoggerIcon,
     ResumeIcon,
     PseudoIcon,
+    StatusIcon,
+    PhaseIcon,
+    LeadIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -47,13 +50,14 @@ export const menuItems = [
             'edit_cronjob_setting',
             'delete_cronjob_setting',
             'run_scrapper',
+            'create_lead',
         ],
         subItems: [
             {
                 label: 'My Applied Jobs',
                 link: '/user-applied-jobs',
                 svg: UserAppliedJobIcon,
-                perms: ['view_user_applied_job'],
+                perms: ['view_user_applied_job', 'create_lead'],
             },
             {
                 label: 'Jobs Uploader',
@@ -95,6 +99,12 @@ export const menuItems = [
                 ],
             },
         ],
+    },
+    {
+        label: 'Leads',
+        link: '/leads',
+        svg: LeadIcon,
+        perms: ['view_lead', 'edit_lead'],
     },
     {
         label: 'Management',
@@ -166,7 +176,19 @@ export const menuItems = [
         link: '#!',
         svg: SettingIcon,
         key: 'settings',
-        perms: ['view_integration', 'create_integration', 'edit_integration'],
+        perms: [
+            'view_integration',
+            'create_integration',
+            'edit_integration',
+            'view_resume_builder',
+            'view_status',
+            'create_status',
+            'edit_status',
+            'delete_status',
+            'view_company_status',
+            'add_company_status',
+            'remove_company_status',
+        ],
         subItems: [
             {
                 label: 'Integrations',
@@ -178,7 +200,25 @@ export const menuItems = [
                 label: 'Resume Builder',
                 link: '/resume-builder',
                 svg: ResumeIcon,
-                perms: ['view_integration', 'create_integration', 'edit_integration'],
+                perms: ['view_resume_builder'],
+            },
+            {
+                label: 'Statuses',
+                link: '/status',
+                svg: StatusIcon,
+                perms: ['view_status', 'create_status', 'edit_status', 'delete_status'],
+            },
+            {
+                label: 'Status',
+                link: '/company-status',
+                svg: StatusIcon,
+                perms: ['view_company_status', 'add_company_status', 'remove_company_status'],
+            },
+            {
+                label: 'Phases',
+                link: '/phases',
+                svg: PhaseIcon,
+                perms: ['view_phase', 'create_phase', 'edit_phase', 'delete_phase'],
             },
         ],
     },

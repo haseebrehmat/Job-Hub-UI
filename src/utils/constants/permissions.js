@@ -401,6 +401,116 @@ export const rawpermissions = [
             },
         ],
     },
+    {
+        module: 'Resume Builder',
+        permissions: [
+            {
+                codename: 'view_resume_builder',
+                name: 'View Resume builder',
+                level: 2,
+            },
+        ],
+    },
+    {
+        module: 'Status',
+        permissions: [
+            {
+                codename: 'view_status',
+                name: 'View All Status',
+                child: ['create_status', 'edit_status', 'delete_status'],
+                level: 1,
+            },
+            {
+                codename: 'create_status',
+                name: 'Create Status',
+                parent: ['view_status'],
+                level: 1,
+            },
+            {
+                codename: 'edit_status',
+                name: 'Edit Status',
+                parent: ['view_status'],
+                level: 1,
+            },
+            {
+                codename: 'delete_status',
+                name: 'Delete Status',
+                parent: ['view_status'],
+                level: 1,
+            },
+            {
+                codename: 'view_company_status',
+                name: 'View Status',
+                parent: ['view_status'],
+                child: ['add_company_status', 'remove_company_status'],
+                level: 2,
+            },
+            {
+                codename: 'add_company_status',
+                name: 'Add Status',
+                parent: ['view_company_status'],
+                level: 2,
+            },
+            {
+                codename: 'remove_company_status',
+                name: 'Remove Status',
+                parent: ['view_company_status'],
+                level: 2,
+            },
+        ],
+    },
+    {
+        module: 'Phases',
+        permissions: [
+            {
+                codename: 'view_phase',
+                name: 'View Phases',
+                child: ['create_phase', 'edit_phase', 'delete_phase'],
+                level: 2,
+            },
+            {
+                codename: 'create_phase',
+                name: 'Create Phase',
+                parent: ['view_phase'],
+                level: 2,
+            },
+            {
+                codename: 'edit_phase',
+                name: 'Edit Phase',
+                parent: ['view_phase'],
+                level: 2,
+            },
+            {
+                codename: 'delete_phase',
+                name: 'Delete Phase',
+                parent: ['view_phase'],
+                level: 2,
+            },
+        ],
+    },
+    {
+        module: 'Leads',
+        permissions: [
+            {
+                codename: 'view_lead',
+                name: 'View Leads',
+                child: ['create_lead', 'edit_lead'],
+                level: 2,
+            },
+            {
+                codename: 'create_lead',
+                name: 'Create Lead',
+                parent: ['view_lead'],
+                level: 2,
+            },
+            {
+                codename: 'edit_lead',
+                name: 'Edit Lead',
+                parent: ['view_lead'],
+                level: 2,
+            },
+        ],
+    },
 ]
 
 export const permissions = rawpermissions.map(row => ({

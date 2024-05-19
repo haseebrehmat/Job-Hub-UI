@@ -24,6 +24,8 @@ import TextEditor from '@components/TextEditor'
 import Tooltip from '@components/Tooltip'
 import SliderInput from '@components/SliderInput'
 import Resumes from '@components/Resumes'
+import Modal from '@components/Modal'
+import Board from '@components/Board'
 
 export {
     Badge,
@@ -52,4 +54,6 @@ export {
     Tooltip,
     SliderInput,
     Resumes,
+    Modal,
+    Board,
 }

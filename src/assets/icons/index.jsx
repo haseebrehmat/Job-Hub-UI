@@ -14,6 +14,7 @@ import {
     MdOutlinePostAdd,
     MdOutlineDriveFolderUpload,
     MdOutlineKeyboardBackspace,
+    MdOutlineFileDownload,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -26,7 +27,6 @@ import {
     BsCollectionFill,
     BsThreeDotsVertical,
     BsFillKeyFill,
-    BsCloudArrowDownFill,
     BsFillPlayFill,
     BsCardList,
 } from 'react-icons/bs'
@@ -40,7 +40,7 @@ import {
 } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh, TbCalendarTime } from 'react-icons/tb'
+import { TbRefresh, TbCalendarTime, TbBadges } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
 import {
     AiOutlineSearch,
@@ -55,18 +55,27 @@ import {
     AiOutlineHistory,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
-import { CgSidebarOpen } from 'react-icons/cg'
+import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
-import { BiPlusCircle, BiMessageDetail, BiPause } from 'react-icons/bi'
-import { RiUserSettingsLine, RiLock2Fill, RiTeamLine, RiStackFill, RiProfileLine } from 'react-icons/ri'
+import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
+import {
+    RiUserSettingsLine,
+    RiLock2Fill,
+    RiTeamLine,
+    RiStackFill,
+    RiProfileLine,
+    RiDownloadCloudLine,
+} from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
+import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
-export const DownloadIcon = <BsCloudArrowDownFill style={{ fontSize: '22px' }} />
+export const DownloadIcon = <RiDownloadCloudLine style={{ fontSize: '22px' }} />
+export const DownloadIcon2 = <MdOutlineFileDownload style={{ fontSize: '22px' }} />
 export const Checkedbox = <MdCheckBox style={{ fontSize: '22px' }} />
 export const unCheckedbox = <MdCheckBoxOutlineBlank style={{ fontSize: '22px' }} />
 export const UploadIcon = <AiOutlineCloudUpload style={{ fontSize: '22px' }} />
@@ -145,3 +154,8 @@ export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
 export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
+export const StatusIcon = <BiGitCompare style={{ fontSize: 22 }} />
+export const PhaseIcon = <CgListTree style={{ fontSize: 22 }} />
+export const LeadIcon = <SiGoogleadsense style={{ fontSize: 22 }} />
+export const ConvertToLeadIcon = <SiConvertio style={{ fontSize: 22 }} />
+export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />

@@ -228,3 +228,24 @@ export const genericSkillSchema = Yup.object().shape({
         .oneOf(Object.keys(GENERIC_SKILL_TYPES), 'Invalid skill type')
         .required('Please select skill type'),
 })
+
+export const statusSchema = Yup.object().shape({
+    name: Yup.string().required('Status name is required').max(100, 'Status name is too long'),
+})
+
+export const companyStatusSchema = Yup.object().shape({
+    status_list: Yup.array().required('Please choose status'),
+})
+
+export const convertToLeadSchema = Yup.object().shape({
+    status: Yup.mixed().required('Please choose status'),
+    phase: Yup.mixed().required('Please choose phase'),
+    notes: Yup.string().max(250, 'Notes is too long'),
+    effect_date: Yup.date().max(today, 'Please choose future date'),
+    due_date: Yup.date().min(Yup.ref('effect_date'), "Due date can't be before Start date"),
+})
+
+export const phaseSchema = Yup.object().shape({
+    name: Yup.string().required('Phase name is required').max(100, 'Phase name is too long'),
+    company_status_id: Yup.string().required('Please choose status'),
+})
