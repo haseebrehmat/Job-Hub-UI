@@ -16,13 +16,15 @@ import {
 } from '@utils/helpers'
 import { avatarPlaceholder } from '@constants/profile'
 
-const Notes = ({ lead = null, status = null, error = null, loading = true, mutate }) => {
+const Notes = ({ lead = null, notes = [], status = null, error = null, loading = true, mutate, dispatch = null }) => {
     const user = decodeJwt()
     const [note, setNote] = useReducer((prev, next) => ({ ...prev, ...next }), {
         id: null,
         msg: '',
         edit: '',
         show: false,
+        status: '',
+        phase: '',
     })
     const { handleSubmit, trigger } = useMutate(
         `/api/lead_managament/lead_activity_notes${note.id ? `/${note.id}/` : '/'}`,
@@ -36,6 +38,8 @@ const Notes = ({ lead = null, status = null, error = null, loading = true, mutat
 
     const handleChange = e => setNote({ id: null, msg: e.target.value, edit: '' })
     const handleEditChange = e => setNote({ edit: e.target.value })
+    const filterNotes = () => dispatch({ status: note.status, phase: note.phase })
+    const clearFilters = () => setNote({ status: '', phase: '' }) && dispatch({ status: '', phase: '' })
 
     return lead ? (
         <div className='border p-2'>
@@ -53,27 +57,24 @@ const Notes = ({ lead = null, status = null, error = null, loading = true, mutat
                             <div className='w-1/4'>
                                 <CustomSelector
                                     options={parseStatuses(status)}
-                                    handleChange={({ value }) => console.log('status', value)}
-                                    selectorValue={parseSelectedStatus(lead?.company_status?.id, status)}
+                                    handleChange={({ value }) => setNote({ status: value, phase: '' })}
+                                    selectorValue={parseSelectedStatus(note.status, status)}
                                     placeholder='Select Status'
                                 />
                             </div>
                             <div className='w-1/4'>
                                 <CustomSelector
-                                    options={parseStatusPhases(lead?.company_status?.id, status)}
-                                    handleChange={({ value }) => console.log('status', value)}
-                                    selectorValue={parseSelectedStatusPhase(
-                                        lead?.phase?.id,
-                                        lead?.company_status?.id,
-                                        status
-                                    )}
+                                    options={parseStatusPhases(note.status, status)}
+                                    handleChange={({ value }) => setNote({ phase: value })}
+                                    selectorValue={parseSelectedStatusPhase(note.phase, note.status, status)}
                                     placeholder='Select Phase'
                                 />
                             </div>
                         </>
                     )}
                 </div>
-                <Button label='Get' fit classes='!float-right !py-1.5' />
+                <Button label='Get' fit classes='!float-right !py-1' onClick={filterNotes} />
+                <Button label='Clear' fit classes='!float-right !py-1 ml-1.5' onClick={clearFilters} />
             </div>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-cols-[auto_1fr] pt-2.5 gap-x-2.5'>
@@ -93,8 +94,8 @@ const Notes = ({ lead = null, status = null, error = null, loading = true, mutat
                 )}
             </form>
             <div className='pt-3 pl-3'>
-                {lead?.notes?.length > 0 ? (
-                    lead?.notes?.map(row => (
+                {notes?.length > 0 ? (
+                    notes?.map(row => (
                         <div className='flex gap-x-2.5 pb-3.5' key={row.id}>
                             <img
                                 alt={row?.user?.name || 'Guest'}

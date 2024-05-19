@@ -4,13 +4,21 @@ import useSWR from 'swr'
 import { Modal, Loading } from '@components'
 
 import { AppliedDetail, JobDetail, Notes, UpdatePhase } from '@modules/leads/components'
-import { fetchLead } from '@modules/leads/api'
+import { fetchLead, fetchNotes } from '@modules/leads/api'
 import { fetchStatusPhases } from '@modules/appliedJobs/api'
 
 const LeadModal = ({ vals, dispatch }) => {
     const { data, isLoading, mutate } = useSWR(
         `/api/lead_managament/leads/${vals.draggable}/`,
         vals.show && vals.draggable && fetchLead
+    )
+    const {
+        data: notes,
+        isLoading: notesLoading,
+        mutate: mutateNotes,
+    } = useSWR(
+        `/api/lead_managament/lead_activity_notes/?lead=${vals.draggable}&status=${vals.status}&phase=${vals.phase}`,
+        vals.show && vals.draggable && fetchNotes
     )
     const {
         data: status,
@@ -40,7 +48,15 @@ const LeadModal = ({ vals, dispatch }) => {
                             />
                         </div>
                     </div>
-                    <Notes lead={data} status={status} error={error} loading={statusLoading} mutate={mutate} />
+                    <Notes
+                        lead={data}
+                        status={status}
+                        error={error}
+                        loading={statusLoading && notesLoading}
+                        mutate={mutateNotes}
+                        notes={notes}
+                        dispatch={dispatch}
+                    />
                 </div>
             }
         />

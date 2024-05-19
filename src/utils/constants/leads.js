@@ -5,4 +5,6 @@ export const LEADS_INITIAL_VALS = {
     page: 1,
     query: '',
     draggable: null,
+    status: '',
+    phase: '',
 }

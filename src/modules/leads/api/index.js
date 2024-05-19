@@ -49,3 +49,5 @@ export const saveNote = (url, { arg: note }) => {
     }
     return rawHttp.post(url, note).then(({ data }) => toast.success(data.detail || 'Note is created successfully'))
 }
+
+export const fetchNotes = url => http.get(url).then(({ data }) => data)
