@@ -7,21 +7,19 @@ import { AppliedDetail, JobDetail, Notes, UpdatePhase } from '@modules/leads/com
 import { fetchLead, fetchNotes } from '@modules/leads/api'
 import { fetchStatusPhases } from '@modules/appliedJobs/api'
 
-import { BreadIcon } from '@icons'
-import { formatDate2 } from '@/utils/helpers'
+import { formatDate2 } from '@utils/helpers'
 
-const LeadModal = ({ vals, dispatch }) => {
-    const { data, isLoading, mutate } = useSWR(
-        `/api/lead_managament/leads/${vals.draggable}/`,
-        vals.show && vals.draggable && fetchLead
-    )
+import { BreadIcon } from '@icons'
+
+const LeadModal = ({ vals, dispatch, refetch = null }) => {
+    const { data, isLoading, mutate } = useSWR(`/api/lead_managament/leads/${vals.draggable}/`, fetchLead)
     const {
         data: notes,
         isLoading: notesLoading,
         mutate: mutateNotes,
     } = useSWR(
         `/api/lead_managament/lead_activity_notes/?lead=${vals.draggable}&status=${vals.status}&phase=${vals.phase}`,
-        vals.show && vals.draggable && fetchNotes
+        fetchNotes
     )
     const {
         data: status,
@@ -59,7 +57,7 @@ const LeadModal = ({ vals, dispatch }) => {
                                 status={status}
                                 error={error}
                                 loading={statusLoading}
-                                mutate={mutate}
+                                mutate={() => mutate() && refetch()}
                             />
                         </div>
                     </div>
