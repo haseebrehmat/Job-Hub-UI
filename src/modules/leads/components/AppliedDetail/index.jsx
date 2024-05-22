@@ -13,16 +13,24 @@ const AppliedDetail = ({ applied = null }) =>
             <hr />
             <div className='grid grid-cols-2 gap-x-4 gap-y-2 pt-2.5'>
                 <div className='flex justify-between flex-wrap'>
+                    <span className='text-gray-600 text-sm'>Team</span>
+                    <span className='capitalize'>{applied?.team?.name ?? '-'}</span>
+                </div>
+                <div className='flex justify-between flex-wrap'>
                     <span className='text-gray-600 text-sm'>Pseudo</span>
-                    <span className='capitalize'>{applied?.vertical?.pseudo ?? '-'}</span>
+                    <span className='capitalize'>{applied?.vertical?.pseudo?.name ?? '-'}</span>
                 </div>
                 <div className='flex justify-between flex-wrap'>
                     <span className='text-gray-600 text-sm'>Vertical</span>
-                    <span className='capitalize'>{applied?.vertical?.pseudo ?? '-'}</span>
+                    <span className='capitalize'>{applied?.vertical?.name ?? '-'}</span>
+                </div>
+                <div className='flex justify-between flex-wrap'>
+                    <span className='text-gray-600 text-sm'>Identity</span>
+                    <span className='capitalize'>{applied?.vertical?.identity ?? '-'}</span>
                 </div>
                 <div className='flex justify-between flex-wrap'>
                     <span className='text-gray-600 text-sm'>Attachements</span>
-                    <span className='capitalize'>
+                    <span className='flex space-x-2'>
                         {applied?.cover_letter ? (
                             <a href={applied?.cover_letter} download target='_blank' rel='noreferrer'>
                                 <Tooltip text='Download Cover Letter'>{DownloadIcon}</Tooltip>

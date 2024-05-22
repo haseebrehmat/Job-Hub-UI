@@ -71,6 +71,7 @@ import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
+import { RxDoubleArrowRight } from 'react-icons/rx'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -159,3 +160,4 @@ export const PhaseIcon = <CgListTree style={{ fontSize: 22 }} />
 export const LeadIcon = <SiGoogleadsense style={{ fontSize: 22 }} />
 export const ConvertToLeadIcon = <SiConvertio style={{ fontSize: 22 }} />
 export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />
+export const BreadIcon = <RxDoubleArrowRight style={{ fontSize: 20 }} />

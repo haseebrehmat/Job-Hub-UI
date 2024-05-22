@@ -7,6 +7,9 @@ import { AppliedDetail, JobDetail, Notes, UpdatePhase } from '@modules/leads/com
 import { fetchLead, fetchNotes } from '@modules/leads/api'
 import { fetchStatusPhases } from '@modules/appliedJobs/api'
 
+import { BreadIcon } from '@icons'
+import { formatDate2 } from '@/utils/helpers'
+
 const LeadModal = ({ vals, dispatch }) => {
     const { data, isLoading, mutate } = useSWR(
         `/api/lead_managament/leads/${vals.draggable}/`,
@@ -35,6 +38,18 @@ const LeadModal = ({ vals, dispatch }) => {
                 <div className='flex flex-col w-full gap-2.5'>
                     <div className='flex gap-x-2.5'>
                         <div className='w-3/4 flex flex-col gap-y-2.5'>
+                            <div className='flex justify-between'>
+                                <div className='flex items-center space-x-2.5 uppercase'>
+                                    <span>{data?.company_status?.status?.name ?? 'Unassigned'}</span>
+                                    <span className='text-gray-500'>{BreadIcon}</span>
+                                    <span>{data?.phase?.name ?? 'Unphased'}</span>
+                                </div>
+                                <div className='flex items-center space-x-2 text-sm'>
+                                    <span>{formatDate2(data?.effect_date)}</span>
+                                    <span>--</span>
+                                    <span>{formatDate2(data?.due_date)}</span>
+                                </div>
+                            </div>
                             <JobDetail job={data?.applied_job_status?.job} />
                             <AppliedDetail applied={data?.applied_job_status} />
                         </div>

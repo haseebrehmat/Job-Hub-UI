@@ -199,11 +199,13 @@ export const rawpermissions = [
                 codename: 'view_cover_letter',
                 name: 'View Cover Letter',
                 parent: ['view_cover_letter'],
+                level: 1,
             },
             {
                 codename: 'create_cover_letter',
                 name: 'Create Cover Letter',
                 parent: ['create_cover_letter'],
+                level: 1,
             },
             {
                 codename: 'view_job_scrapper',
