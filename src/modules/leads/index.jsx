@@ -13,7 +13,7 @@ import { LEADS_INITIAL_VALS } from '@constants/leads'
 preload('/api/lead_managament/leads/', fetchLeads)
 const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
-    const { data, isLoading, mutate } = useSWR('/api/lead_managament/leads/', fetchLeads)
+    const { data, isLoading, mutate } = useSWR('/api/lead_managament/leads/', fetchLeads, { suspense: true })
 
     const convertToColumns = columns =>
         columns.reduce((acc, row) => {
@@ -42,7 +42,9 @@ const Leads = () => {
     ) : (
         <>
             {vals.draggable && <LeadModal vals={vals} dispatch={dispatch} refetch={mutate} />}
-            <Board data={convertToColumns(data?.leads)} set={dispatch} handleDrag={handleSubmit} />
+            {data?.leads?.length > 0 && (
+                <Board data={convertToColumns(data?.leads)} set={dispatch} handleDrag={handleSubmit} />
+            )}
         </>
     )
 }

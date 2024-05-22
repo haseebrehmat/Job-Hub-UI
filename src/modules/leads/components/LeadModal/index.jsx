@@ -57,7 +57,11 @@ const LeadModal = ({ vals, dispatch, refetch = null }) => {
                                 status={status}
                                 error={error}
                                 loading={statusLoading}
-                                mutate={() => mutate() && refetch()}
+                                mutate={() => {
+                                    mutate()
+                                    refetch()
+                                    mutateNotes()
+                                }}
                             />
                         </div>
                     </div>
