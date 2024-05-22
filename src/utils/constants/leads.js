@@ -8,3 +8,12 @@ export const LEADS_INITIAL_VALS = {
     status: '',
     phase: '',
 }
+
+export const NOTE_INITIAL_STATE = {
+    id: null,
+    msg: '',
+    edit: '',
+    show: false,
+    status: '',
+    phase: '',
+}
