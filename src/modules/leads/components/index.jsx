@@ -10,6 +10,10 @@ import JobDetail from '@modules/leads/components/JobDetail'
 import AppliedDetail from '@modules/leads/components/AppliedDetail'
 import Notes from '@modules/leads/components/Notes'
 import UpdatePhase from '@modules/leads/components/UpdatePhase'
+import NotesFilter from '@modules/leads/components/NotesFilter'
+import NoteCreateForm from '@modules/leads/components/NoteCreateForm'
+import NoteEditForm from '@modules/leads/components/NoteEditForm'
+import NoteActions from '@modules/leads/components/NoteActions'
 
 export {
     StatusForm,
@@ -24,4 +28,8 @@ export {
     AppliedDetail,
     Notes,
     UpdatePhase,
+    NotesFilter,
+    NoteCreateForm,
+    NoteEditForm,
+    NoteActions,
 }
