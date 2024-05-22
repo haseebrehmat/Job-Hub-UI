@@ -76,11 +76,17 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                                     <Tooltip text='Download Resume'>{DownloadIcon2}</Tooltip>
                                                 </a>
                                             )}
-                                            <Tooltip text='Convert to Lead'>
-                                                <span onClick={() => dispatch({ show: true, id: job?.applied_job_id })}>
-                                                    {ConvertToLeadIcon}
-                                                </span>
-                                            </Tooltip>
+                                            {!job?.is_deleted && (
+                                                <Tooltip text='Convert to Lead'>
+                                                    <span
+                                                        onClick={() =>
+                                                            dispatch({ show: true, id: job?.applied_job_id })
+                                                        }
+                                                    >
+                                                        {ConvertToLeadIcon}
+                                                    </span>
+                                                </Tooltip>
+                                            )}
                                         </div>
                                     </td>
                                 </tr>
