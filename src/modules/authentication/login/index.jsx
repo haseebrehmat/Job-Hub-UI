@@ -25,13 +25,13 @@ const Login = memo(() => {
             const { status, message } = await loginUser(email, password)
             if (status === 'error') {
                 toast.error(message)
+                setDisabled(false)
             } else {
                 toast.success(message)
                 setTimeout(() => {
                     // navigate('/') // For time being, this is not working.
-                    setDisabled(false)
                     window.location.reload()
-                }, 3000)
+                }, 2000)
             }
         },
     })
