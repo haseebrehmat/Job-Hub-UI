@@ -76,7 +76,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                                     <Tooltip text='Download Resume'>{DownloadIcon2}</Tooltip>
                                                 </a>
                                             )}
-                                            {!job?.is_deleted && (
+                                            {!job?.is_converted && (
                                                 <Tooltip text='Convert to Lead'>
                                                     <span
                                                         onClick={() =>
