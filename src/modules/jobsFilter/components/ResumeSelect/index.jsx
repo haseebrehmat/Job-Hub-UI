@@ -30,7 +30,7 @@ const ResumeSelect = ({ vertical, setResume }) => {
     if (isLoading) return <Loading />
     return (
         <div className='flex flex-col items-center'>
-            <Resumes data={data.profile} hide={hide} names={names} set={setResume} />
+            {data?.profile && <Resumes data={data?.profile} hide={hide} names={names} set={setResume} />}
         </div>
     )
 }
