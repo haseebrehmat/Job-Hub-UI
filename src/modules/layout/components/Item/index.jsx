@@ -18,7 +18,7 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                 onClick={() => handleSubMenu(item.key)}
                 onMouseEnter={() => handleHover(item.key)}
             >
-                <Link key={item.label} to={item.link} className='flex items-center text-md p-2'>
+                <Link key={item.label} to={item.link} className='flex items-center text-md p-2 w-full'>
                     <span className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'>{item.svg}</span>
                     {show ? <span className='ml-3 hidden lg:block'>{item.label}</span> : ''}
                 </Link>
