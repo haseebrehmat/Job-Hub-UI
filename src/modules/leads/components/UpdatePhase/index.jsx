@@ -15,7 +15,7 @@ const UpdatePhase = ({ lead = null, status = null, error = null, loading = true,
         changeLeadStatus,
         {
             status: lead?.company_status?.id,
-            phase: '',
+            phase: lead?.phase?.id || '',
             effect_date: lead?.effect_date ?? today,
             due_date: lead?.due_date ?? today,
         },
@@ -40,7 +40,7 @@ const UpdatePhase = ({ lead = null, status = null, error = null, loading = true,
                         <CustomSelector
                             options={parseStatusPhases(lead?.company_status?.id, status)}
                             handleChange={({ value }) => setFieldValue('phase', value)}
-                            selectorValue={parseSelectedStatusPhase(lead?.phase?.id, lead?.company_status?.id, status)}
+                            selectorValue={parseSelectedStatusPhase(values.phase, lead?.company_status?.id, status)}
                             placeholder='Select Phase'
                         />
                         {errors.phase && <small className='__error'>{errors.phase}</small>}

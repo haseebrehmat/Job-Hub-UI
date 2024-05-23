@@ -1,5 +1,5 @@
 import { memo, useReducer } from 'react'
-import useSWR, { preload } from 'swr'
+import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
@@ -10,10 +10,9 @@ import { fetchLeads, changeLeadStatus } from '@modules/leads/api'
 
 import { LEADS_INITIAL_VALS } from '@constants/leads'
 
-preload('/api/lead_managament/leads/', fetchLeads)
 const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
-    const { data, isLoading, mutate } = useSWR('/api/lead_managament/leads/', fetchLeads, { suspense: true })
+    const { data, isLoading, mutate } = useSWR('/api/lead_managament/leads/', fetchLeads)
 
     const convertToColumns = columns =>
         columns.reduce((acc, row) => {
