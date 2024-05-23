@@ -34,9 +34,11 @@ const Pseudos = () => {
                 {can('create_pseudo') && (
                     <Button label='Create Pseudo' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
-                <Link to='/generic-skills'>
-                    <Button label='Generic Skills' icon={GenericSkillIcon} />
-                </Link>
+                {can('view_generic_skill') && (
+                    <Link to='/generic-skills'>
+                        <Button label='Generic Skills' icon={GenericSkillIcon} />
+                    </Link>
+                )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
