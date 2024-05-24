@@ -69,11 +69,11 @@ const CoverLetterTemplate = ({ id }) => {
                     </small>
                     {popdown && (
                         <div className='top-full left-0 w-full mt-1 border shadow-lg'>
-                            <div className='flex py-2'>
+                            <div className='flex py-2 flex-wrap'>
                                 {COVER_LETTER_PLACEHOLDERS.map((placeholder, index) => (
                                     <span
                                         key={index}
-                                        className='ml-2 px-4 py-2 cursor-pointer bg-gray-200 text-sm rounded-lg hover:bg-gray-100 hover:text-[#338d8c]'
+                                        className='ml-2 px-4 py-2 my-1 cursor-pointer bg-gray-200 text-sm rounded-lg hover:bg-gray-100 hover:text-[#338d8c]'
                                         onClick={() => handleSelect(placeholder)}
                                     >
                                         {placeholder}
