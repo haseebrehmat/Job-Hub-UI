@@ -12,8 +12,14 @@ const LeadCard = ({ lead, dispatch }) => (
         <p className='text-sm capitalize'>{lead?.applied_job?.title}</p>
         <p className='capitalize italic py-2'>{lead?.applied_job?.company}</p>
         <p className='flex space-x-1 mb-2'>
-            <span>{LeadVerticalIcon}</span>
-            <span className='text-xs capitalize'>{lead?.applied_job?.vertical_name ?? 'N/A'}</span>
+            {lead?.applied_job?.vertical_name && lead?.applied_job?.vertical_name?.length > 0 ? (
+                <>
+                    <span>{LeadVerticalIcon}</span>
+                    <span className='text-xs capitalize'>{lead?.applied_job?.vertical_name}</span>
+                </>
+            ) : (
+                <span className='text-xs capitalize'>N/A</span>
+            )}
         </p>
         <p className='flex'>
             <span>{CurrentPhaseIcon}</span>
