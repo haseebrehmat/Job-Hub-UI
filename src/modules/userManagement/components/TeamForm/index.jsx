@@ -15,7 +15,7 @@ import { TrashIcon } from '@icons'
 import { can } from '@/utils/helpers'
 
 const TeamForm = ({ show, setShow, mutate, team }) => {
-    const [role, setRole] = useState(team?.reporting_to?.roles)
+    const [role, setRole] = useState(team?.reporting_to?.roles?.id)
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/team${team?.id ? `/${team?.id}/` : '/'}`,
         saveTeam,
