@@ -17,3 +17,22 @@ export const NOTE_INITIAL_STATE = {
     status: '',
     phase: '',
 }
+
+export const CANDIDATE_INITIAL_STATE = {
+    query: '',
+    page: 1,
+    show: false,
+    user: null,
+}
+
+export const CANDIDATE_HEADS = [
+    'Sr.',
+    'Name',
+    'Email',
+    'Phone',
+    'Experience (years)',
+    'Total Leads',
+    'Skills',
+    'Designation',
+    '',
+]

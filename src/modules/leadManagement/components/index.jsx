@@ -14,6 +14,8 @@ import NotesFilter from '@modules/leadManagement/components/NotesFilter'
 import NoteCreateForm from '@modules/leadManagement/components/NoteCreateForm'
 import NoteEditForm from '@modules/leadManagement/components/NoteEditForm'
 import NoteActions from '@modules/leadManagement/components/NoteActions'
+import CandidateForm from '@modules/leadManagement/components/CandidateForm'
+import CandidateActions from '@modules/leadManagement/components/CandidateActions'
 
 export {
     StatusForm,
@@ -32,4 +34,6 @@ export {
     NoteCreateForm,
     NoteEditForm,
     NoteActions,
+    CandidateForm,
+    CandidateActions,
 }

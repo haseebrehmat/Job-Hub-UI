@@ -1,21 +1,21 @@
 import { memo } from 'react'
 
-const Badge = ({ label, type = 'default' }) => {
-    let classes
+const Badge = ({ label, type = 'default', classes = null }) => {
+    let typeClass
     switch (type) {
         case 'success':
-            classes = 'bg-green-100 text-green-800'
+            typeClass = 'bg-green-100 text-green-800'
             break
         case 'enabled':
-            classes = 'bg-[#048C8C] text-white'
+            typeClass = 'bg-[#048C8C] text-white'
             break
         case 'disabled':
-            classes = 'bg-[#FF6280] text-white'
+            typeClass = 'bg-[#FF6280] text-white'
             break
         default:
-            classes = 'bg-blue-100 text-blue-800'
+            typeClass = 'bg-blue-100 text-blue-800'
     }
-    return <span className={`${classes} text-sm font-medium px-2 py-1 rounded-full`}>{label || '-'}</span>
+    return <span className={`${typeClass} text-sm font-medium px-2 py-1 rounded-full ${classes}`}>{label || '-'}</span>
 }
 
 export default memo(Badge)

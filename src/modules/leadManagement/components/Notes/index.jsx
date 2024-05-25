@@ -7,7 +7,7 @@ import { NotesFilter, NoteCreateForm, NoteEditForm, NoteActions } from '@modules
 
 import { decodeJwt, formatDate } from '@utils/helpers'
 import { avatarPlaceholder } from '@constants/profile'
-import { NOTE_INITIAL_STATE } from '@constants/leads'
+import { NOTE_INITIAL_STATE } from '@constants/leadManagement'
 
 const Notes = ({ lead = null, notes = [], status = null, error = null, loading = true, mutate, dispatch = null }) => {
     const user = decodeJwt()

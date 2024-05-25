@@ -8,7 +8,7 @@ import { Board, Loading } from '@components'
 import { LeadCard, LeadModal } from '@modules/leadManagement/components'
 import { fetchLeads, changeLeadStatus } from '@modules/leadManagement/api'
 
-import { LEADS_INITIAL_VALS } from '@constants/leads'
+import { LEADS_INITIAL_VALS } from '@constants/leadManagement'
 
 const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
