@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { useMutate } from '@/hooks'
 
 import { CustomSelector, Button, Input } from '@components'
-import { changeLeadStatus } from '@modules/leads/api'
+import { changeLeadStatus } from '@modules/leadManagement/api'
 
 import { parseStatusPhases, parseSelectedStatusPhase } from '@utils/helpers'
 import { convertToLeadSchema } from '@utils/schemas'

@@ -2,8 +2,8 @@ import { memo, useReducer } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { saveNote } from '@modules/leads/api'
-import { NotesFilter, NoteCreateForm, NoteEditForm, NoteActions } from '@modules/leads/components'
+import { saveNote } from '@modules/leadManagement/api'
+import { NotesFilter, NoteCreateForm, NoteEditForm, NoteActions } from '@modules/leadManagement/components'
 
 import { decodeJwt, formatDate } from '@utils/helpers'
 import { avatarPlaceholder } from '@constants/profile'

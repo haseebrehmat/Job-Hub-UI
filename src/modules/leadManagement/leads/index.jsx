@@ -5,8 +5,8 @@ import { useMutate } from '@/hooks'
 
 import { Board, Loading } from '@components'
 
-import { LeadCard, LeadModal } from '@modules/leads/components'
-import { fetchLeads, changeLeadStatus } from '@modules/leads/api'
+import { LeadCard, LeadModal } from '@modules/leadManagement/components'
+import { fetchLeads, changeLeadStatus } from '@modules/leadManagement/api'
 
 import { LEADS_INITIAL_VALS } from '@constants/leads'
 

@@ -4,7 +4,7 @@ import { useMutate } from '@/hooks'
 
 import { Button, Drawer, Input } from '@components'
 
-import { saveStatus } from '@modules/leads/api'
+import { saveStatus } from '@modules/leadManagement/api'
 
 import { statusSchema } from '@utils/schemas'
 

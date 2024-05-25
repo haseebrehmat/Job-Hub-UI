@@ -3,8 +3,8 @@ import useSWR from 'swr'
 
 import { Modal, Loading } from '@components'
 
-import { AppliedDetail, JobDetail, Notes, UpdatePhase } from '@modules/leads/components'
-import { fetchLead, fetchNotes } from '@modules/leads/api'
+import { AppliedDetail, JobDetail, Notes, UpdatePhase } from '@modules/leadManagement/components'
+import { fetchLead, fetchNotes } from '@modules/leadManagement/api'
 import { fetchStatusPhases } from '@modules/appliedJobs/api'
 
 import { formatDate2 } from '@utils/helpers'

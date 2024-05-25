@@ -5,7 +5,7 @@ import { useMutate } from '@/hooks'
 
 import { Button, Drawer, CustomSelector, Input } from '@components'
 
-import { savePhase, fetchCompanyStatusList } from '@modules/leads/api'
+import { savePhase, fetchCompanyStatusList } from '@modules/leadManagement/api'
 
 import { phaseSchema } from '@utils/schemas'
 import { parseCompanyStatus, parseSelectedCompanyStatus } from '@utils/helpers'
