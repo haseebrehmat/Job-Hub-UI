@@ -8,7 +8,7 @@ export const tableHeads = [
     'Applied By',
     'Vertical',
     'Attachments',
-    'Status',
+    // 'Status',
 ]
 
 export const jobStatus = {

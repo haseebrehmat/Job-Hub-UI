@@ -27,7 +27,7 @@ const UpdatePhase = ({ lead = null, status = null, error = null, loading = true,
 
     return lead ? (
         <div className='border p-2'>
-            <p className='text-lg'>Update Phases</p>
+            <p className='text-lg'>Update Phase</p>
             <hr />
             <form onSubmit={handleSubmit} className='flex flex-col mt-2 p-1 gap-2 text-sm text-cyan-700'>
                 {loading ? (

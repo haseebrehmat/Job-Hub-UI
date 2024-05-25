@@ -57,7 +57,7 @@ import {
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
@@ -161,3 +161,4 @@ export const LeadIcon = <SiGoogleadsense style={{ fontSize: 22 }} />
 export const ConvertToLeadIcon = <SiConvertio style={{ fontSize: 22 }} />
 export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />
 export const BreadIcon = <RxDoubleArrowRight style={{ fontSize: 20 }} />
+export const LeadVerticalIcon = <FaRegUserCircle style={{ fontSize: 16 }} />

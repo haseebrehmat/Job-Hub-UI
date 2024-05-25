@@ -125,7 +125,7 @@ const TeamAppliedJobs = memo(() => {
                                         )}
                                     </div>
                                 </td>
-                                <td className='px-3 py-4'>
+                                {/* <td className='px-3 py-4'>
                                     <select
                                         name='job_status'
                                         className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg'
@@ -139,7 +139,7 @@ const TeamAppliedJobs = memo(() => {
                                                 </option>
                                             ))}
                                     </select>
-                                </td>
+                                </td> */}
                             </tr>
                         ))
                     ) : (

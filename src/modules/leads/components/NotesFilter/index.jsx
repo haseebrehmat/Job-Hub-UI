@@ -26,14 +26,16 @@ const NotesFilter = ({ status = null, error = null, loading = true, dispatch = n
                                 placeholder='Select Status'
                             />
                         </div>
-                        <div className='w-1/4'>
-                            <CustomSelector
-                                options={parseStatusPhases(note.status, status)}
-                                handleChange={({ value }) => setNote({ phase: value })}
-                                selectorValue={parseSelectedStatusPhase(note.phase, note.status, status)}
-                                placeholder='Select Phase'
-                            />
-                        </div>
+                        {note.status && (
+                            <div className='w-1/4'>
+                                <CustomSelector
+                                    options={parseStatusPhases(note.status, status)}
+                                    handleChange={({ value }) => setNote({ phase: value })}
+                                    selectorValue={parseSelectedStatusPhase(note.phase, note.status, status)}
+                                    placeholder='Select Phase'
+                                />
+                            </div>
+                        )}
                     </>
                 )}
             </div>

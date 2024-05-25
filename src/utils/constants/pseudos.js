@@ -107,6 +107,10 @@ export const COVER_LETTER_PLACEHOLDERS = [
     'server_side_skills',
     'devops_side_skills',
     'years_of_experience',
+    'core_side_skills',
+    'database_side_skills',
+    'libraries_side_skills',
+    'tools_side_skills',
 ]
 
 export const GENERIC_SKILL_TYPES_OPTIONS = [
