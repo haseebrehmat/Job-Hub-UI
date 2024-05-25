@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { useMutate } from '@/hooks'
 import { Button, Modal, Input } from '@components'
 
-import { DesignationSelect } from '@modules/leadManagement/components'
+import { DesignationSelect, SkillsInput } from '@modules/leadManagement/components'
 import { Password } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
@@ -69,11 +69,7 @@ const CandidateForm = ({ show, setShow, mutate, user }) => {
                             />
                         </div>
                     </div>
-                    <div className='mt-2'>
-                        <span className='text-xs font-semibold'>Skill*</span>
-                        <Input name='skills' value={values.skills} onChange={handleChange} ph='Enter skills' />
-                        {errors.skills && <small className='__error'>{errors.skills}</small>}
-                    </div>
+                    <SkillsInput value={values.skills} error={errors.skills} set={setFieldValue} />
                     <div className='pt-4 gap-2 flex items-center float-right'>
                         <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
