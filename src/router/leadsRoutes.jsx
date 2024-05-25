@@ -29,4 +29,11 @@ export const leadsRoutes = [
         title: 'My Leads',
         permission: 'view_lead',
     },
+    {
+        path: '/candidates',
+        component: <Leads />,
+        protect: true,
+        title: 'Candidates',
+        permission: 'view_lead',
+    },
 ]

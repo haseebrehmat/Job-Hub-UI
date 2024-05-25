@@ -146,6 +146,12 @@ export const menuItems = [
                 svg: PhaseIcon,
                 perms: ['view_phase', 'create_phase', 'edit_phase', 'delete_phase'],
             },
+            {
+                label: 'Candidates',
+                link: '/candidates',
+                svg: PhaseIcon,
+                perms: ['view_candidate', 'create_candidate', 'edit_candidate', 'delete_candidate'],
+            },
         ],
     },
     {
