@@ -156,8 +156,8 @@ export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
 export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
-export const StatusIcon = <BiGitCompare style={{ fontSize: 22 }} />
-export const PhaseIcon = <CgListTree style={{ fontSize: 22 }} />
+export const StatusIcon = <BiGitCompare style={{ fontSize: 18 }} />
+export const PhaseIcon = <CgListTree style={{ fontSize: 18 }} />
 export const LeadIcon = <SiGoogleadsense style={{ fontSize: 18 }} />
 export const ConvertToLeadIcon = <SiConvertio style={{ fontSize: 22 }} />
 export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />
