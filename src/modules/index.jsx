@@ -26,6 +26,7 @@ import Status from '@modules/leadManagement/status'
 import CompanyStatus from '@modules/leadManagement/companyStatus'
 import Phases from '@modules/leadManagement/phases'
 import Leads from '@modules/leadManagement/leads'
+import Candidates from '@modules/leadManagement/candidates'
 
 export {
     TeamAppliedJobs,
@@ -57,4 +58,5 @@ export {
     CompanyStatus,
     Phases,
     Leads,
+    Candidates,
 }

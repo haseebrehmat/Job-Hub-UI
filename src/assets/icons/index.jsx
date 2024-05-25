@@ -67,6 +67,7 @@ import {
     RiStackFill,
     RiProfileLine,
     RiDownloadCloudLine,
+    RiStarFill,
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
@@ -164,3 +165,4 @@ export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />
 export const BreadIcon = <RxDoubleArrowRight style={{ fontSize: 20 }} />
 export const LeadVerticalIcon = <FaRegUserCircle style={{ fontSize: 16 }} />
 export const LeadManagementIcon = <MdLeaderboard style={{ fontSize: 22 }} />
+export const CandidateIcon = <RiStarFill style={{ fontSize: 18 }} />

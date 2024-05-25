@@ -21,6 +21,7 @@ import {
     PhaseIcon,
     LeadIcon,
     LeadManagementIcon,
+    CandidateIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -149,8 +150,9 @@ export const menuItems = [
             {
                 label: 'Candidates',
                 link: '/candidates',
-                svg: PhaseIcon,
-                perms: ['view_candidate', 'create_candidate', 'edit_candidate', 'delete_candidate'],
+                svg: CandidateIcon,
+                perms: ['view_lead', 'edit_lead'],
+                // perms: ['view_candidate', 'create_candidate', 'edit_candidate', 'delete_candidate'],
             },
         ],
     },
