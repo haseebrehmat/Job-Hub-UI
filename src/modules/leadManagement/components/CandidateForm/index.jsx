@@ -10,26 +10,26 @@ import { saveUser } from '@modules/userManagement/api'
 import { userCreateSchema, userSchema } from '@utils/schemas'
 import { CANDIDATE_INPUTS } from '@constants/leadManagement'
 
-const CandidateForm = ({ show, setShow, mutate, user }) => {
+const CandidateForm = ({ show, setShow, mutate, candidate }) => {
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
-        `/api/auth/user${user?.id ? `/${user?.id}/` : '/'}`,
+        `/api/auth/user${candidate?.id ? `/${candidate?.id}/` : '/'}`,
         saveUser,
         {
-            name: user?.name || '',
-            email: user?.email || '',
-            phone: user?.phone || '',
-            id: user?.id || '',
+            name: candidate?.name || '',
+            email: candidate?.email || '',
+            phone: candidate?.phone || '',
+            id: candidate?.id || '',
             password: '',
-            desgination: user?.desgination?.id || '',
-            skills: user?.skills || [],
-            experience: user?.experience || 1,
+            desgination: candidate?.desgination?.id || '',
+            skills: candidate?.skills || [],
+            experience: candidate?.experience || 1,
         },
-        user?.id ? userSchema : userCreateSchema,
-        async formValues => trigger({ ...formValues, id: user?.id }),
+        candidate?.id ? userSchema : userCreateSchema,
+        async formValues => trigger({ ...formValues, id: candidate?.id }),
         null,
         () => {
             mutate()
-            if (!user?.id) resetForm()
+            if (!candidate?.id) resetForm()
         }
     )
     return (
@@ -39,7 +39,7 @@ const CandidateForm = ({ show, setShow, mutate, user }) => {
             setShow={setShow}
             content={
                 <form onSubmit={handleSubmit} className='w-full'>
-                    <p className='font-medium text-xl'>{user?.id ? 'Edit' : 'Create'} Candidate</p>
+                    <p className='font-medium text-xl'>{candidate?.id ? 'Edit' : 'Create'} Candidate</p>
                     <hr className='my-2' />
                     <div className='grid grid-cols-2 gap-2'>
                         <DesignationSelect value={values.desgination} error={errors.desgination} set={setFieldValue} />
@@ -65,13 +65,13 @@ const CandidateForm = ({ show, setShow, mutate, user }) => {
                                 value={values.password}
                                 error={errors.password}
                                 onChange={handleChange}
-                                id={user?.id}
+                                id={candidate?.id}
                             />
                         </div>
                     </div>
                     <SkillsInput value={values.skills} error={errors.skills} set={setFieldValue} />
                     <div className='pt-4 gap-2 flex items-center float-right'>
-                        <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
+                        <Button label={candidate?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
                 </form>

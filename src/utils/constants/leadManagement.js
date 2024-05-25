@@ -22,7 +22,7 @@ export const CANDIDATE_INITIAL_STATE = {
     query: '',
     page: 1,
     show: false,
-    user: null,
+    candidate: null,
 }
 
 export const CANDIDATE_HEADS = [

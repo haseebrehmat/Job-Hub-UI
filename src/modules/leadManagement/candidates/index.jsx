@@ -17,7 +17,7 @@ const Candidates = () => {
         `/api/auth/user/?page=${vals.page}&search=${vals.query}`,
         fetchUsers
     )
-    const handleClick = values => dispatch({ show: !vals.show, user: values })
+    const handleClick = values => dispatch({ show: !vals.show, candidate: values })
 
     if (isLoading) return <Loading />
     return (
@@ -43,72 +43,27 @@ const Candidates = () => {
                         data?.users?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6 capitalize'>{row?.username}</td>
-                                <td className='px-3 py-6'>{row?.email}</td>
-                                <td className='px-3 py-6 italic'>+932233455980</td>
-                                <td className='px-6 py-6 text-lg'>10</td>
-                                <td className='px-6 py-6 text-lg'>45</td>
+                                <td className='px-3 py-6 capitalize'>{row?.name ?? 'N/A'}</td>
+                                <td className='px-3 py-6'>{row?.email ?? 'N/A'}</td>
+                                <td className='px-3 py-6 italic'>{row?.phone ?? 'N/A'}</td>
+                                <td className='px-6 py-6'>{row?.experience ?? 'N/A'}</td>
+                                <td className='px-6 py-6'>{row?.leads ?? 'N/A'}</td>
                                 <td className='px-2 py-1'>
                                     <span className='flex items-center flex-wrap space-x-1.5 space-y-1.5'>
-                                        <Badge
-                                            label='python'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='python'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='python'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='python'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='python'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='python'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='python'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='ruby on rails'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='ruby on rails'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='ruby on rails'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
-                                        <Badge
-                                            label='ruby on rails'
-                                            type='success'
-                                            classes='text-xs border border-green-300'
-                                        />
+                                        {row?.skills?.length > 0
+                                            ? row?.skills?.map((skill, index) => (
+                                                  <Badge
+                                                      key={index}
+                                                      label={skill}
+                                                      type='success'
+                                                      classes='text-xs border border-green-300'
+                                                  />
+                                              ))
+                                            : 'N/A'}
                                     </span>
                                 </td>
-                                <td className='px-3 py-6 font-bold'>
-                                    <Badge label='SSE' />
+                                <td className='px-2 py-1'>
+                                    {row?.designation ? <Badge label={row?.designation?.title} /> : 'N/A'}
                                 </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_user', 'delete_user']) && (
@@ -132,7 +87,12 @@ const Candidates = () => {
                 </div>
             )}
             {can('edit_user') && vals.show && (
-                <CandidateForm show={vals.show} setShow={show => dispatch({ show })} mutate={mutate} user={vals.user} />
+                <CandidateForm
+                    show={vals.show}
+                    setShow={show => dispatch({ show })}
+                    mutate={mutate}
+                    candidate={vals.candidate}
+                />
             )}
         </div>
     )
