@@ -16,6 +16,7 @@ import NoteEditForm from '@modules/leadManagement/components/NoteEditForm'
 import NoteActions from '@modules/leadManagement/components/NoteActions'
 import CandidateForm from '@modules/leadManagement/components/CandidateForm'
 import CandidateActions from '@modules/leadManagement/components/CandidateActions'
+import DesignationSelect from '@modules/leadManagement/components/DesignationSelect'
 
 export {
     StatusForm,
@@ -36,4 +37,5 @@ export {
     NoteActions,
     CandidateForm,
     CandidateActions,
+    DesignationSelect,
 }

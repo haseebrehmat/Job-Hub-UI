@@ -1,65 +1,86 @@
 import { memo } from 'react'
-import { toast } from 'react-hot-toast'
 
 import { useMutate } from '@/hooks'
-import { Button, Drawer, Input } from '@components'
+import { Button, Modal, Input } from '@components'
 
-import { RolesDropdown, CompaniesDropdown, Password } from '@modules/userManagement/components'
+import { DesignationSelect } from '@modules/leadManagement/components'
+import { Password } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
 import { userCreateSchema, userSchema } from '@utils/schemas'
-import { decodeJwt, getMsg, isSuper } from '@utils/helpers'
+import { CANDIDATE_INPUTS } from '@constants/leadManagement'
 
 const CandidateForm = ({ show, setShow, mutate, user }) => {
-    const loggedUser = decodeJwt()
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/user${user?.id ? `/${user?.id}/` : '/'}`,
         saveUser,
         {
-            username: user?.username,
-            email: user?.email,
-            id: user?.id,
-            company: user?.company?.id || loggedUser?.company,
-            roles: user?.roles?.id,
+            name: user?.name || '',
+            email: user?.email || '',
+            phone: user?.phone || '',
+            id: user?.id || '',
             password: '',
+            desgination: user?.desgination?.id || '',
+            skills: user?.skills || [],
+            experience: user?.experience || 1,
         },
         user?.id ? userSchema : userCreateSchema,
         async formValues => trigger({ ...formValues, id: user?.id }),
-        error => toast.error(getMsg(error)),
+        null,
         () => {
             mutate()
             if (!user?.id) resetForm()
         }
     )
-    const allowCompanyEdit = isSuper() && !values.id
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
-            <form onSubmit={handleSubmit}>
-                <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>{user?.id ? 'Edit' : 'Create'} User</p>
-                    <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Email*</span>
-                    <Input name='email' type='email' value={values.email} onChange={handleChange} ph='Enter email' />
-                    {errors.email && <small className='ml-1 text-xs text-red-600'>{errors.email}</small>}
-                    <span className='text-xs font-semibold'>Username*</span>
-                    <Input name='username' value={values.username} onChange={handleChange} ph='Enter username' />
-                    {errors.username && <small className='ml-1 text-xs text-red-600'>{errors.username}</small>}
-                    <RolesDropdown value={values.roles} error={errors.roles} setFieldValue={setFieldValue} />
-                    {allowCompanyEdit && (
-                        <CompaniesDropdown
-                            value={values.company}
-                            error={errors.company}
-                            setFieldValue={setFieldValue}
-                        />
-                    )}
-                    <Password value={values.password} error={errors.password} onChange={handleChange} id={user?.id} />
-                    <div className='pt-4 space-y-2'>
+        <Modal
+            classes='md:!w-[40%] overflow-y-auto'
+            show={show}
+            setShow={setShow}
+            content={
+                <form onSubmit={handleSubmit} className='w-full'>
+                    <p className='font-medium text-xl'>{user?.id ? 'Edit' : 'Create'} Candidate</p>
+                    <hr className='my-2' />
+                    <div className='grid grid-cols-2 gap-2'>
+                        <DesignationSelect value={values.desgination} error={errors.desgination} set={setFieldValue} />
+                        {CANDIDATE_INPUTS.map((input, idx) => (
+                            <div key={idx}>
+                                <span className='text-xs font-semibold'>
+                                    {input.label}
+                                    {input.required ? '*' : null}
+                                </span>
+                                <Input
+                                    name={input.name}
+                                    type={input.type}
+                                    value={values[input.name]}
+                                    onChange={handleChange}
+                                    ph={input.ph}
+                                    step={input?.step}
+                                />
+                                {errors[input.name] && <small className='__error'>{errors[input.name]}</small>}
+                            </div>
+                        ))}
+                        <div>
+                            <Password
+                                value={values.password}
+                                error={errors.password}
+                                onChange={handleChange}
+                                id={user?.id}
+                            />
+                        </div>
+                    </div>
+                    <div className='mt-2'>
+                        <span className='text-xs font-semibold'>Skill*</span>
+                        <Input name='skills' value={values.skills} onChange={handleChange} ph='Enter skills' />
+                        {errors.skills && <small className='__error'>{errors.skills}</small>}
+                    </div>
+                    <div className='pt-4 gap-2 flex items-center float-right'>
                         <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
-                </div>
-            </form>
-        </Drawer>
+                </form>
+            }
+        />
     )
 }
 

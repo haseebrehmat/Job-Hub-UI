@@ -36,3 +36,35 @@ export const CANDIDATE_HEADS = [
     'Designation',
     '',
 ]
+
+export const CANDIDATE_INPUTS = [
+    {
+        name: 'name',
+        label: 'Name',
+        type: 'text',
+        ph: 'Enter name',
+        required: true,
+    },
+    {
+        name: 'email',
+        label: 'Email',
+        type: 'email',
+        ph: 'Enter email',
+        required: true,
+    },
+    {
+        name: 'phone',
+        label: 'Phone',
+        type: 'tel',
+        ph: 'Enter phone',
+        required: true,
+    },
+    {
+        name: 'experience',
+        label: 'Years of experience',
+        type: 'number',
+        step: '0.5',
+        ph: '',
+        required: false,
+    },
+]

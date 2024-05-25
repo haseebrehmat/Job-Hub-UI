@@ -2,7 +2,7 @@ import { CloseIcon } from '@/assets/icons'
 import { memo, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
-const Modal = ({ children, content, show, setShow, w = '80%' }) => {
+const Modal = ({ children, content, show, setShow, classes = null }) => {
     useEffect(() => {
         const dialogWrapper = document.createElement('div')
         document.body.appendChild(dialogWrapper)
@@ -27,11 +27,10 @@ const Modal = ({ children, content, show, setShow, w = '80%' }) => {
                             <span className='hidden sm:inline-block sm:align-middle' />
                             &#8203;
                             <div
-                                className='mt-8 inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-y-scroll shadow-xl transform transition-all sm:align-middle'
+                                className={`mt-8 inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-y-scroll shadow-xl transform transition-all sm:align-middle md:w-[80%] w-full ${classes}`}
                                 role='dialog'
                                 aria-modal='true'
                                 aria-labelledby='modal-headline'
-                                style={{ width: w }}
                             >
                                 <span onClick={() => setShow(false)} className='float-right cursor-pointer'>
                                     {CloseIcon}
