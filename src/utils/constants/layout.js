@@ -20,6 +20,7 @@ import {
     StatusIcon,
     PhaseIcon,
     LeadIcon,
+    LeadManagementIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -101,10 +102,19 @@ export const menuItems = [
         ],
     },
     {
-        label: 'Leads',
-        link: '/leads',
-        svg: LeadIcon,
+        label: 'Lead Management',
+        link: '#!',
+        svg: LeadManagementIcon,
+        key: 'leads',
         perms: ['view_lead', 'edit_lead'],
+        subItems: [
+            {
+                label: 'My Leads',
+                link: '/leads',
+                svg: LeadIcon,
+                perms: ['view_lead', 'edit_lead'],
+            },
+        ],
     },
     {
         label: 'Management',

@@ -15,6 +15,7 @@ import {
     MdOutlineDriveFolderUpload,
     MdOutlineKeyboardBackspace,
     MdOutlineFileDownload,
+    MdLeaderboard,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -157,8 +158,9 @@ export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} /
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
 export const StatusIcon = <BiGitCompare style={{ fontSize: 22 }} />
 export const PhaseIcon = <CgListTree style={{ fontSize: 22 }} />
-export const LeadIcon = <SiGoogleadsense style={{ fontSize: 22 }} />
+export const LeadIcon = <SiGoogleadsense style={{ fontSize: 18 }} />
 export const ConvertToLeadIcon = <SiConvertio style={{ fontSize: 22 }} />
 export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />
 export const BreadIcon = <RxDoubleArrowRight style={{ fontSize: 20 }} />
 export const LeadVerticalIcon = <FaRegUserCircle style={{ fontSize: 16 }} />
+export const LeadManagementIcon = <MdLeaderboard style={{ fontSize: 22 }} />
