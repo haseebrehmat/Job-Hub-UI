@@ -1,5 +1,6 @@
 import { memo, useReducer } from 'react'
 import useSWR from 'swr'
+import { Link } from 'react-router-dom'
 
 import { Loading, Searchbox, EmptyTable, Button, Paginated, Badge } from '@components'
 
@@ -26,6 +27,11 @@ const Candidates = () => {
                 <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
                 {can('create_user') && (
                     <Button label='Create Candidate' fit icon={CreateIcon} onClick={() => handleClick(null)} />
+                )}
+                {can('create_user') && (
+                    <Link to='/designations'>
+                        <Button label='Designations' icon={CreateIcon} />
+                    </Link>
                 )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
