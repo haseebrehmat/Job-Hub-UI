@@ -18,6 +18,8 @@ import CandidateForm from '@modules/leadManagement/components/CandidateForm'
 import CandidateActions from '@modules/leadManagement/components/CandidateActions'
 import DesignationSelect from '@modules/leadManagement/components/DesignationSelect'
 import SkillsInput from '@modules/leadManagement/components/SkillsInput'
+import DesignationActions from '@modules/leadManagement/components/DesignationActions'
+import DesignationForm from '@modules/leadManagement/components/DesignationForm'
 
 export {
     StatusForm,
@@ -40,4 +42,6 @@ export {
     CandidateActions,
     DesignationSelect,
     SkillsInput,
+    DesignationActions,
+    DesignationForm,
 }

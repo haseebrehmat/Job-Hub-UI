@@ -68,3 +68,10 @@ export const CANDIDATE_INPUTS = [
         required: false,
     },
 ]
+
+export const DESIGNATION_INITIAL_STATE = {
+    query: '',
+    page: 1,
+    show: false,
+    designation: null,
+}
