@@ -1,4 +1,4 @@
-import { Status, CompanyStatus, Phases, Leads, Candidates } from '@modules'
+import { Status, CompanyStatus, Phases, Leads, Candidates, Designations } from '@modules'
 
 export const leadsRoutes = [
     {
@@ -34,6 +34,13 @@ export const leadsRoutes = [
         component: <Candidates />,
         protect: true,
         title: 'Candidates',
+        permission: 'view_lead',
+    },
+    {
+        path: '/designations',
+        component: <Designations />,
+        protect: true,
+        title: 'Designations',
         permission: 'view_lead',
     },
 ]
