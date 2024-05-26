@@ -55,6 +55,7 @@ import {
     AiFillSetting,
     AiOutlineHistory,
     AiOutlinePlus,
+    AiOutlinePartition,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
@@ -168,3 +169,4 @@ export const LeadVerticalIcon = <FaRegUserCircle style={{ fontSize: 16 }} />
 export const LeadManagementIcon = <MdLeaderboard style={{ fontSize: 22 }} />
 export const CandidateIcon = <RiStarFill style={{ fontSize: 18 }} />
 export const AddSkillIcon = <AiOutlinePlus style={{ fontSize: 14 }} />
+export const DesignationIcon = <AiOutlinePartition style={{ fontSize: 22 }} />
