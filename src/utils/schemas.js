@@ -249,3 +249,8 @@ export const phaseSchema = Yup.object().shape({
     name: Yup.string().required('Phase name is required').max(100, 'Phase name is too long'),
     company_status_id: Yup.string().required('Please choose status'),
 })
+
+export const designationSchema = Yup.object().shape({
+    title: Yup.string().required('Title is required').max(200, 'Title is too long'),
+    description: Yup.string().max(500, 'Description is too long'),
+})

@@ -21,7 +21,7 @@ const DesignationActions = memo(({ id, edit, mutate }) => {
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/profile/generic_skill/${id}/`}
+                    url={`/api/candidate_management/designation/${id}/`}
                     refetch={mutate}
                     perm={GENERIC_SKILL_DELETION}
                 >

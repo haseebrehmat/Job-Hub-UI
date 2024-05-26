@@ -64,7 +64,7 @@ const Designations = () => {
                     show={vals.show}
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
-                    skill={vals.designation}
+                    designation={vals.designation}
                 />
             )}
         </div>
