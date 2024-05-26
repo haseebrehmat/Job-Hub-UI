@@ -5,19 +5,18 @@ import useSWR from 'swr'
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
 import { DesignationActions, DesignationForm } from '@modules/leadManagement/components'
-import { fetchGenericSkills } from '@modules/pseudos/api'
+import { fetchDesignations } from '@modules/leadManagement/api'
 
-import { GENERIC_SKILL_TYPES } from '@constants/pseudos'
 import { can } from '@utils/helpers'
+import { DESIGNATION_INITIAL_STATE } from '@constants/leadManagement'
 
 import { CreateIcon, BackToIcon } from '@icons'
-import { DESIGNATION_INITIAL_STATE } from '@/utils/constants/leadManagement'
 
 const Designations = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), DESIGNATION_INITIAL_STATE)
     const { data, error, isLoading, mutate } = useSWR(
-        `/api/profile/generic_skill/?search=${vals.query}&page=${vals.page}`,
-        fetchGenericSkills
+        `/api/candidate_management/designation/?search=${vals.query}&page=${vals.page}`,
+        fetchDesignations
     )
 
     const handleClick = values => dispatch({ show: !vals.show, designation: values })
@@ -37,14 +36,14 @@ const Designations = () => {
                 </Link>
             </div>
             <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
-                {data?.skills?.length > 0 && !error ? (
-                    data?.skills?.map((row, idx) => (
+                {data?.designations?.length > 0 && !error ? (
+                    data?.designations?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
-                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
+                            <h2 className='text-lg'>{row?.title ?? 'N/A'}</h2>
                             {can('edit_generic_skill') && can('delete_generic_skill') && (
                                 <DesignationActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
-                            <div className='text-sm mt-2'>{GENERIC_SKILL_TYPES[row?.type] ?? 'N/A'}</div>
+                            <p className='text-sm'>{row?.description ?? 'N/A'}</p>
                         </div>
                     ))
                 ) : (

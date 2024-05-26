@@ -51,3 +51,17 @@ export const saveNote = (url, { arg: note }) => {
 }
 
 export const fetchNotes = url => http.get(url).then(({ data }) => data)
+
+export const fetchDesignations = url =>
+    http.get(url).then(({ data }) => ({ designations: data?.results, total: data?.count, pages: data?.num_pages }))
+
+export const saveDesignation = (url, { arg: designation }) => {
+    if (designation?.id) {
+        return rawHttp
+            .put(url, designation)
+            .then(({ data }) => toast.success(data.detail || 'Designation is updated successfully'))
+    }
+    return rawHttp
+        .post(url, designation)
+        .then(({ data }) => toast.success(data.detail || 'Designation is created successfully'))
+}
