@@ -75,3 +75,11 @@ export const DESIGNATION_INITIAL_STATE = {
     show: false,
     designation: null,
 }
+
+export const EXPOSED_CANDIDATE_HEADS = ['', 'Candidate', 'Skills', 'Designation', 'Exposed To']
+
+export const EXPOSED_CANDIDATE_INITIAL_STATE = {
+    query: '',
+    show: false,
+    ids: [],
+}
