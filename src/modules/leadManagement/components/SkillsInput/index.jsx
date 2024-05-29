@@ -24,10 +24,9 @@ const SkillsInput = ({ value, error = null, set }) => {
     useMemo(() => tags.length > 0 && set({ skills: tags }), [value])
     return (
         <div className='mt-2 pb-5'>
-            <span className='text-xs font-semibold'>Skills*</span>
+            <span className='text-xs font-semibold'>Skills</span>
             <div className='flex flex-wrap gap-3 items-center'>
                 <Input value={inputValue} onChange={handleChange} ph='Add a skill...' />
-                {error && <small className='__error'>{error}</small>}
                 <Button icon={AddSkillIcon} fit onClick={handleClick} classes='!rounded-full !px-1' />
                 {tags?.length > 0 &&
                     tags.map(tag => (
@@ -50,6 +49,7 @@ const SkillsInput = ({ value, error = null, set }) => {
                         />
                     ))}
             </div>
+            {error && <small className='__error'>{error}</small>}
         </div>
     )
 }

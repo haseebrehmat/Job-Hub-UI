@@ -3,12 +3,12 @@ import useSWR from 'swr'
 
 import { CustomSelector } from '@components'
 
-import { fetchRoles } from '@modules/userManagement/api'
+import { fetchDesignations } from '@modules/leadManagement/api'
 
-import { parseRoles, parseSelectedRole } from '@utils/helpers'
+import { parseDesignations, parseSelectedDesignation } from '@utils/helpers'
 
 const DesignationSelect = ({ value: selected, error = null, set }) => {
-    const { data, isLoading, error: fetchError } = useSWR('/api/auth/role/', fetchRoles)
+    const { data, isLoading, error: fetchError } = useSWR('/api/candidate_management/designation/', fetchDesignations)
 
     return isLoading ? (
         <small className='ml-1 mt-3 p-3 text-xs text-gray-400'>Designation Loading...</small>
@@ -18,9 +18,9 @@ const DesignationSelect = ({ value: selected, error = null, set }) => {
         <div>
             <span className='text-xs font-semibold'>Designation*</span>
             <CustomSelector
-                options={parseRoles(data?.roles)}
-                selectorValue={parseSelectedRole(selected, data?.roles)}
-                handleChange={({ value }) => set('desgination', value)}
+                options={parseDesignations(data?.designations)}
+                selectorValue={parseSelectedDesignation(selected, data?.designations)}
+                handleChange={({ value }) => set('designation', value)}
                 placeholder='Select Designation'
             />
             {error && <small className='__error'>{error}</small>}

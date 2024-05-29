@@ -358,3 +358,14 @@ export const parseSelectedStatusPhase = (pid, sid, statuses) => {
     }
     return null
 }
+
+export const parseDesignations = designations =>
+    designations.map(designation => ({ value: designation.id, label: designation?.title }))
+
+export const parseSelectedDesignation = (id, designations) => {
+    if (id) {
+        const designation = designations.find(row => row?.id === id)
+        return { value: designation?.id, label: designation?.title }
+    }
+    return null
+}
