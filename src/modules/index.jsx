@@ -28,6 +28,7 @@ import Phases from '@modules/leadManagement/phases'
 import Leads from '@modules/leadManagement/leads'
 import Candidates from '@modules/leadManagement/candidates'
 import Designations from '@modules/leadManagement/designations'
+import ExposedCandidates from '@modules/leadManagement/exposedCandidates'
 
 export {
     TeamAppliedJobs,
@@ -61,4 +62,5 @@ export {
     Leads,
     Candidates,
     Designations,
+    ExposedCandidates,
 }
