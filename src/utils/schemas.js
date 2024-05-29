@@ -255,7 +255,7 @@ export const designationSchema = Yup.object().shape({
     description: Yup.string().max(500, 'Description is too long'),
 })
 
-export const candidateSchema = Yup.object().shape({
+export const candidateEditSchema = Yup.object().shape({
     name: Yup.string().required('Name is required').max(200, 'Name is too long'),
     experience: Yup.number('Experience must be an number').min(1, 'Experience must be greater than 0'),
     phone: Yup.string()
@@ -263,5 +263,9 @@ export const candidateSchema = Yup.object().shape({
         .required('Phone is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
     designation: Yup.string().required('Designation is required'),
+})
+
+export const candidateCreateSchema = Yup.object().shape({
+    ...candidateEditSchema.fields,
     password: Yup.string().required('Pasword is required').min(8, 'Password must be atleast 8 characters'),
 })

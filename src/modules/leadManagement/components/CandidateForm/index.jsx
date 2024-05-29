@@ -8,11 +8,11 @@ import { Password } from '@modules/userManagement/components'
 import { DesignationSelect, SkillsInput } from '@modules/leadManagement/components'
 import { saveCandidate } from '@modules/leadManagement/api'
 
-import { candidateSchema } from '@utils/schemas'
+import { candidateEditSchema, candidateCreateSchema } from '@utils/schemas'
 import { CANDIDATE_INPUTS } from '@constants/leadManagement'
 
 const CandidateForm = ({ show, setShow, mutate, candidate }) => {
-    const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
+    const { values, errors, handleSubmit, handleChange, trigger, setFieldValue } = useMutate(
         `/api/candidate_management/candidate${candidate?.id ? `/${candidate?.id}/` : '/'}`,
         saveCandidate,
         {
@@ -25,13 +25,10 @@ const CandidateForm = ({ show, setShow, mutate, candidate }) => {
             skills: candidate?.skills || [],
             experience: candidate?.experience || 1,
         },
-        candidateSchema,
+        candidate?.id ? candidateEditSchema : candidateCreateSchema,
         async formValues => trigger({ ...formValues, id: candidate?.id }),
         null,
-        () => {
-            mutate()
-            if (!candidate?.id) resetForm()
-        }
+        () => mutate() && setShow(false)
     )
     return (
         <Modal

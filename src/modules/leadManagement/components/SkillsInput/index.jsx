@@ -22,7 +22,7 @@ const SkillsInput = ({ value, error = null, set }) => {
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
 
     useEffect(() => {
-        if (tags.length > 0) set('skills', tags)
+        set('skills', tags)
     }, [tags])
 
     return (

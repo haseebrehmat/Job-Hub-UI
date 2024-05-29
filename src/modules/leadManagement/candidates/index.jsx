@@ -54,8 +54,8 @@ const Candidates = () => {
                                 <td className='px-3 py-6 italic'>{row?.phone ?? 'N/A'}</td>
                                 <td className='px-6 py-6'>{row?.experience ?? 'N/A'}</td>
                                 <td className='px-6 py-6'>{row?.leads ?? 'N/A'}</td>
-                                <td className='px-2 py-1'>
-                                    <span className='flex items-center flex-wrap space-x-1.5 space-y-1.5'>
+                                <td className='px-2'>
+                                    <span className='flex items-center flex-wrap space-x-1.5 gap-y-1.5'>
                                         {row?.skills?.length > 0
                                             ? row?.skills?.map((skill, index) => (
                                                   <Badge
