@@ -38,6 +38,7 @@ import {
     HiOutlineWifi,
     HiOutlineOfficeBuilding,
     HiOutlineLightBulb,
+    HiLockOpen,
 } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
@@ -170,3 +171,4 @@ export const LeadManagementIcon = <MdLeaderboard style={{ fontSize: 22 }} />
 export const CandidateIcon = <RiStarFill style={{ fontSize: 18 }} />
 export const AddSkillIcon = <AiOutlinePlus style={{ fontSize: 14 }} />
 export const DesignationIcon = <AiOutlinePartition style={{ fontSize: 22 }} />
+export const ExposedCandidateIcon = <HiLockOpen style={{ fontSize: 22 }} />
