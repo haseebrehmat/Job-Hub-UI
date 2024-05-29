@@ -1,19 +1,20 @@
 import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
+
 import { Button, Modal, Input } from '@components'
 
-import { DesignationSelect, SkillsInput } from '@modules/leadManagement/components'
 import { Password } from '@modules/userManagement/components'
-import { saveUser } from '@modules/userManagement/api'
+import { DesignationSelect, SkillsInput } from '@modules/leadManagement/components'
+import { saveCandidate } from '@modules/leadManagement/api'
 
 import { candidateSchema } from '@utils/schemas'
 import { CANDIDATE_INPUTS } from '@constants/leadManagement'
 
 const CandidateForm = ({ show, setShow, mutate, candidate }) => {
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
-        `/api/auth/user${candidate?.id ? `/${candidate?.id}/` : '/'}`,
-        saveUser,
+        `/api/candidate_management/candidate${candidate?.id ? `/${candidate?.id}/` : '/'}`,
+        saveCandidate,
         {
             name: candidate?.name || '',
             email: candidate?.email || '',

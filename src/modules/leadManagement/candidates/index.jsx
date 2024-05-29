@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { Loading, Searchbox, EmptyTable, Button, Paginated, Badge } from '@components'
 
 import { CandidateForm, CandidateActions } from '@modules/leadManagement/components'
-import { fetchUsers } from '@modules/userManagement/api'
+import { fetchCandidates } from '@modules/leadManagement/api'
 
 import { can } from '@utils/helpers'
 import { CANDIDATE_HEADS, CANDIDATE_INITIAL_STATE } from '@constants/leadManagement'
@@ -15,8 +15,8 @@ import { CreateIcon, DesignationIcon } from '@icons'
 const Candidates = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), CANDIDATE_INITIAL_STATE)
     const { data, error, isLoading, mutate } = useSWR(
-        `/api/auth/user/?page=${vals.page}&search=${vals.query}`,
-        fetchUsers
+        `/api/candidate_management/candidate/?page=${vals.page}&search=${vals.query}`,
+        fetchCandidates
     )
     const handleClick = values => dispatch({ show: !vals.show, candidate: values })
 
@@ -45,8 +45,8 @@ const Candidates = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.users?.length > 0 && !error ? (
-                        data?.users?.map((row, idx) => (
+                    {data?.candidates?.length > 0 && !error ? (
+                        data?.candidates?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6 capitalize'>{row?.name ?? 'N/A'}</td>

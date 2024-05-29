@@ -65,3 +65,17 @@ export const saveDesignation = (url, { arg: designation }) => {
         .post(url, designation)
         .then(({ data }) => toast.success(data.detail || 'Designation is created successfully'))
 }
+
+export const fetchCandidates = url =>
+    http.get(url).then(({ data }) => ({ candidates: data?.results, total: data?.count, pages: data?.num_pages }))
+
+export const saveCandidate = (url, { arg: candidate }) => {
+    if (candidate?.id) {
+        return rawHttp
+            .put(url, candidate)
+            .then(({ data }) => toast.success(data.detail || 'Candidate is updated successfully'))
+    }
+    return rawHttp
+        .post(url, candidate)
+        .then(({ data }) => toast.success(data.detail || 'Candidate is created successfully'))
+}

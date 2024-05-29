@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button, Input, Badge } from '@components'
 
@@ -21,7 +21,10 @@ const SkillsInput = ({ value, error = null, set }) => {
     }
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
 
-    useMemo(() => tags.length > 0 && set({ skills: tags }), [value])
+    useEffect(() => {
+        if (tags.length > 0) set('skills', tags)
+    }, [tags])
+
     return (
         <div className='mt-2 pb-5'>
             <span className='text-xs font-semibold'>Skills</span>
