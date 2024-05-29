@@ -7,7 +7,7 @@ import { DesignationSelect, SkillsInput } from '@modules/leadManagement/componen
 import { Password } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
 
-import { userCreateSchema, userSchema } from '@utils/schemas'
+import { candidateSchema } from '@utils/schemas'
 import { CANDIDATE_INPUTS } from '@constants/leadManagement'
 
 const CandidateForm = ({ show, setShow, mutate, candidate }) => {
@@ -20,11 +20,11 @@ const CandidateForm = ({ show, setShow, mutate, candidate }) => {
             phone: candidate?.phone || '',
             id: candidate?.id || '',
             password: '',
-            desgination: candidate?.desgination?.id || '',
+            designation: candidate?.designation?.id || '',
             skills: candidate?.skills || [],
             experience: candidate?.experience || 1,
         },
-        candidate?.id ? userSchema : userCreateSchema,
+        candidateSchema,
         async formValues => trigger({ ...formValues, id: candidate?.id }),
         null,
         () => {
@@ -42,7 +42,7 @@ const CandidateForm = ({ show, setShow, mutate, candidate }) => {
                     <p className='font-medium text-xl'>{candidate?.id ? 'Edit' : 'Create'} Candidate</p>
                     <hr className='my-2' />
                     <div className='grid grid-cols-2 gap-2'>
-                        <DesignationSelect value={values.desgination} error={errors.desgination} set={setFieldValue} />
+                        <DesignationSelect value={values.designation} error={errors.designation} set={setFieldValue} />
                         {CANDIDATE_INPUTS.map((input, idx) => (
                             <div key={idx}>
                                 <span className='text-xs font-semibold'>

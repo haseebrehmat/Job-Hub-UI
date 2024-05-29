@@ -254,3 +254,14 @@ export const designationSchema = Yup.object().shape({
     title: Yup.string().required('Title is required').max(200, 'Title is too long'),
     description: Yup.string().max(500, 'Description is too long'),
 })
+
+export const candidateSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required').max(200, 'Name is too long'),
+    experience: Yup.number('Experience must be an number').min(1, 'Experience must be greater than 0'),
+    phone: Yup.string()
+        .matches(/^[0-9+()\-\s]*$/, 'Invalid phone number')
+        .required('Phone is required'),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
+    designation: Yup.string().required('Designation is required'),
+    password: Yup.string().required('Pasword is required').min(8, 'Password must be atleast 8 characters'),
+})
