@@ -14,9 +14,13 @@ const ExposedCandidates = () => {
         `/api/candidate_management/candidate/?search=${vals.query}`,
         fetchCandidates
     )
-
     const handleChange = ({ target: { value, checked } }) =>
-        checked ? dispatch({ ids: [...vals.ids, value] }) : dispatch({ ids: vals.ids.filter(id => id !== value) })
+        checked
+            ? dispatch({ ids: [...vals.ids, Number(value)] })
+            : dispatch({ ids: vals.ids.filter(id => id !== Number(value)) })
+
+    const handleChangeAll = ({ target: { checked } }) =>
+        checked ? dispatch({ ids: data?.candidates?.map(({ id }) => id) ?? [] }) : dispatch({ ids: [] })
 
     if (isLoading) return <Loading />
     return (
@@ -30,7 +34,15 @@ const ExposedCandidates = () => {
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        {EXPOSED_CANDIDATE_HEADS.map(heading => (
+                        <th scope='col' className='px-3 py-4'>
+                            <input
+                                type='checkbox'
+                                className='__checkbox'
+                                onChange={handleChangeAll}
+                                checked={vals.ids.length === data?.candidates?.length}
+                            />
+                        </th>
+                        {EXPOSED_CANDIDATE_HEADS.slice(1).map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -41,12 +53,12 @@ const ExposedCandidates = () => {
                     {data?.candidates?.length > 0 && !error ? (
                         data?.candidates?.map(row => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
-                                <td className='px-1 py-6'>
+                                <td className='px-3 py-4'>
                                     <input
                                         type='checkbox'
                                         value={row.id}
-                                        checked={vals.ids[row.id]}
-                                        className='w-5 h-5 accent-[#4f9d9b] cursor-pointer'
+                                        checked={vals.ids.includes(row.id)}
+                                        className='__checkbox'
                                         onChange={handleChange}
                                     />
                                 </td>
