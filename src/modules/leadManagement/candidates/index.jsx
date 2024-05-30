@@ -10,7 +10,7 @@ import { fetchCandidates } from '@modules/leadManagement/api'
 import { can } from '@utils/helpers'
 import { CANDIDATE_HEADS, CANDIDATE_INITIAL_STATE } from '@constants/leadManagement'
 
-import { CreateIcon, DesignationIcon, ExposedCandidateIcon } from '@icons'
+import { CreateIcon, DesignationIcon } from '@icons'
 
 const Candidates = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), CANDIDATE_INITIAL_STATE)
@@ -31,11 +31,6 @@ const Candidates = () => {
                 {can('create_user') && (
                     <Link to='/designations'>
                         <Button label='Designations' icon={DesignationIcon} />
-                    </Link>
-                )}
-                {can('create_user') && (
-                    <Link to='/exposed-candidates'>
-                        <Button label='Exposed Candidates' icon={ExposedCandidateIcon} />
                     </Link>
                 )}
             </div>
