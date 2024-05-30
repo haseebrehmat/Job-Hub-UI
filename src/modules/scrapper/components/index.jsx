@@ -8,6 +8,10 @@ import JobSourceLinkActions from '@modules/scrapper/components/JobSourceLinkActi
 import SyncNow from '@modules/scrapper/components/SyncNow'
 import ScraperStatus from '@modules/scrapper/components/ScraperStatus'
 import Logs from '@modules/scrapper/components/Logs'
+import ScrappingGroup from '@modules/scrapper/components/ScrappingGroup'
+import GroupForm from '@modules/scrapper/components/GroupForm'
+import GroupSettingActions from '@modules/scrapper/components/GroupSettingActions'
+import GroupLinks from '@modules/scrapper/components/GroupLinks'
 
 export {
     CronjobSetting,
@@ -20,4 +24,8 @@ export {
     SyncNow,
     ScraperStatus,
     Logs,
+    ScrappingGroup,
+    GroupForm,
+    GroupSettingActions,
+    GroupLinks,
 }
