@@ -3,14 +3,14 @@ import useSWR from 'swr'
 
 import { Loading, Searchbox, EmptyTable } from '@components'
 
-import { CandidateDesignationAndSkills } from '@modules/leadManagement/components'
+import { CandidateDesignationAndSkills, ExposedForm } from '@modules/leadManagement/components'
 import { fetchCandidates } from '@modules/leadManagement/api'
 
 import { EXPOSED_CANDIDATE_HEADS, EXPOSED_CANDIDATE_INITIAL_STATE } from '@constants/leadManagement'
 
 const ExposedCandidates = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), EXPOSED_CANDIDATE_INITIAL_STATE)
-    const { data, error, isLoading } = useSWR(
+    const { data, error, isLoading, mutate } = useSWR(
         `/api/candidate_management/candidate/?search=${vals.query}`,
         fetchCandidates
     )
@@ -21,8 +21,11 @@ const ExposedCandidates = () => {
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 py-6'>
-                <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
+            <div className='flex items-center py-6 justify-between'>
+                <div className='flex space-x-4 items-center'>
+                    <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
+                </div>
+                {vals.ids.length > 0 && <ExposedForm candidates={vals.ids} mutate={mutate} dispatch={dispatch} />}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -43,7 +46,7 @@ const ExposedCandidates = () => {
                                         type='checkbox'
                                         value={row.id}
                                         checked={vals.ids[row.id]}
-                                        className='w-5 h-5 accent-[#4f9d9b]'
+                                        className='w-5 h-5 accent-[#4f9d9b] cursor-pointer'
                                         onChange={handleChange}
                                     />
                                 </td>
