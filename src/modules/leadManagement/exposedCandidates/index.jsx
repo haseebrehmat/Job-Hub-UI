@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Searchbox, EmptyTable } from '@components'
 
-import { CandidateDesignationAndSkills, ExposedForm, ExposedTo } from '@modules/leadManagement/components'
+import { CandidateInfo, ExposedForm, ExposedTo } from '@modules/leadManagement/components'
 import { fetchCandidatesAndCompanies } from '@modules/leadManagement/api'
 
 import { can } from '@utils/helpers'
@@ -77,16 +77,7 @@ const ExposedCandidates = () => {
                                         />
                                     </td>
                                 )}
-                                <td className='px-3 py-6'>
-                                    <span className='capitalize'>{row?.candidate?.name ?? 'N/A'}</span>
-                                    {row?.candidate?.email && (
-                                        <span className='text-xs ml-1 italic'>{`(${row?.candidate?.email})`}</span>
-                                    )}
-                                </td>
-                                <CandidateDesignationAndSkills
-                                    skills={row?.candidate?.skills}
-                                    designation={row?.candidate?.designation}
-                                />
+                                <CandidateInfo info={row} exposed />
                                 <ExposedTo companies={row?.exposed_to} mutate={mutate} />
                             </tr>
                         ))

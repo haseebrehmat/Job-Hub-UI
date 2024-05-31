@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
-import { CandidateForm, CandidateActions, CandidateDesignationAndSkills } from '@modules/leadManagement/components'
+import { CandidateForm, CandidateActions, CandidateInfo } from '@modules/leadManagement/components'
 import { fetchCandidates } from '@modules/leadManagement/api'
 
 import { can } from '@utils/helpers'
@@ -49,13 +49,7 @@ const Candidates = () => {
                         data?.candidates?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6 capitalize'>{row?.name ?? 'N/A'}</td>
-                                <td className='px-3 py-6'>{row?.email ?? 'N/A'}</td>
-                                <td className='px-3 py-6 italic'>{row?.phone ?? 'N/A'}</td>
-                                <td className='px-6 py-6'>{row?.experience ?? 'N/A'}</td>
-                                <td className='px-6 py-6'>{row?.leads ?? 'N/A'}</td>
-                                <CandidateDesignationAndSkills skills={row?.skills} designation={row?.designation} />
-                                <td className='px-3 py-6 font-bold uppercase italic'>{row?.company?.name ?? 'N/A'}</td>
+                                <CandidateInfo info={row} />
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_candidate', 'delete_candidate']) && (
                                         <CandidateActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
