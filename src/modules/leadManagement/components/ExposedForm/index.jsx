@@ -1,43 +1,35 @@
-import { memo, useState } from 'react'
-import useSWR from 'swr'
+import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
 
 import { Button, CustomSelector } from '@components'
 
-import { fetchCompanies } from '@modules/userManagement/api'
 import { saveDesignation } from '@modules/leadManagement/api'
 
 import { parseComapnies } from '@utils/helpers'
 
-const ExposedForm = ({ mutate, candidates = [], dispatch = null }) => {
-    const [selectedCompanies, setSelectedCompanies] = useState([])
-    const { data, isLoading, error } = useSWR('/api/auth/company/', fetchCompanies)
+const ExposedForm = ({ candidates = [], companies = [], selectedCompanies = [], dispatch = null, mutate }) => {
     const { handleSubmit, trigger } = useMutate(
-        `/api/candidate_management/designation/`,
+        `/api/candidate_management/candidate_exposed/`,
         saveDesignation,
-        { companies: selectedCompanies, candidates },
+        { company_ids: selectedCompanies, candidate_ids: candidates },
         null,
-        async formValues => trigger({ ...formValues, companies: selectedCompanies.map(({ value }) => value) }),
+        async formValues => trigger({ ...formValues, company_ids: selectedCompanies.map(({ value }) => value) }),
         null,
         () => {
             mutate()
-            dispatch({ ids: [] })
+            dispatch({ ids: [], selectedCompanies: [] })
         }
     )
 
-    return isLoading ? (
-        <span>Loading Companies...</span>
-    ) : error ? (
-        <small>Failed to load companies</small>
-    ) : (
+    return (
         <form onSubmit={handleSubmit} className='grid grid-flow-col'>
             <div className='flex items-center gap-x-3'>
                 <div className='w-full md:w-96'>
                     <CustomSelector
                         name='members'
-                        options={parseComapnies(data?.companies)}
-                        handleChange={obj => setSelectedCompanies(obj)}
+                        options={parseComapnies(companies)}
+                        handleChange={obj => dispatch({ selectedCompanies: obj })}
                         selectorValue={selectedCompanies}
                         isMulti
                         placeholder='Select companies'
