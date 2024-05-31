@@ -29,6 +29,7 @@ export const CANDIDATE_HEADS = [
     'Sr.',
     'Name',
     'Email',
+    'Company',
     'Phone',
     'Experience (years)',
     'Total Leads',
