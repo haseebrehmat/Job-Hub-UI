@@ -42,8 +42,19 @@ export const JOB_SOURCES = {
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
+export const GROUP_SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', 'Days', '']
 export const LOGS_HEADS = ['ID', 'Source', 'Total jobs', 'Created_at', 'Updated_at']
 export const JOB_SOURCE_LINK_HEADS = ['ID', 'Source', 'Links', '']
 export const SCRAPER_STATUS_HEADS = ['ID', 'Source', 'Type', 'Status']
 export const SCRAPER_GROUP_HEADS = ['ID', 'Name', 'Type', 'Setting']
 export const GROUP_SOURCE_LINK_HEADS = ['ID', 'Group', 'Links', '']
+
+export const WEEK_DAYS_OPTIONS = [
+    { label: 'Monday', value: 'mon' },
+    { label: 'Tuesday', value: 'tue' },
+    { label: 'Wednesday', value: 'wed' },
+    { label: 'Thursday', value: 'thu' },
+    { label: 'Friday', value: 'fri' },
+    { label: 'Saturday', value: 'sat' },
+    { label: 'Sunday', value: 'sun' },
+]

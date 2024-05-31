@@ -15,3 +15,4 @@ export const STATUS_DELETION = true
 export const COMPANY_STATUS_DELETION = true
 export const PHASE_DELETION = true
 export const GROUP_SETTING_DELETION = true
+export const GROUP_LINK_DELETION = true

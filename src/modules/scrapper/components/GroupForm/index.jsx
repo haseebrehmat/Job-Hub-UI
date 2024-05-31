@@ -7,9 +7,9 @@ import { Button, CustomSelector, Drawer, Input } from '@components'
 import { CronjobTypes } from '@modules/scrapper/components'
 import { saveGroupSetting } from '@modules/scrapper/api'
 
-import { parseIntervalType } from '@utils/helpers'
-import { GroupSchema } from '@utils/schemas'
-import { INTERVAL_TYPE_OPTIONS } from '@constants/scrapper'
+import { parseIntervalType, getSelectedDays } from '@utils/helpers'
+import { groupSchema } from '@utils/schemas'
+import { INTERVAL_TYPE_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
 
 const GroupForm = ({ show, setShow, mutate, setting }) => {
     const [scrapperType, setScrapperType] = useState({ time: setting?.time_based, interval: setting?.interval_based })
@@ -24,14 +24,16 @@ const GroupForm = ({ show, setShow, mutate, setting }) => {
             interval: setting?.scheduler_settings?.interval || 1,
             interval_type: setting?.scheduler_settings?.interval_type || '',
             time: setting?.scheduler_settings?.time || '',
+            week_days: getSelectedDays(setting?.scheduler_settings?.week_days),
         },
-        GroupSchema,
+        groupSchema,
         async formValues =>
             trigger({
                 ...formValues,
                 id: setting?.id,
                 time_based: scrapperType.time,
                 interval_based: scrapperType.interval,
+                week_days: formValues.week_days.map(({ value }) => value).join(','),
             }),
         null,
         () => {
@@ -39,7 +41,7 @@ const GroupForm = ({ show, setShow, mutate, setting }) => {
             if (!setting?.id) resetForm()
         }
     )
-    console.log(setting?.scheduler_settings?.time_based)
+    console.log(values.week_days.length === 7)
     return (
         <Drawer show={show} setShow={setShow} w='400px'>
             <form onSubmit={handleSubmit}>
@@ -62,6 +64,16 @@ const GroupForm = ({ show, setShow, mutate, setting }) => {
                             <span className='text-xs font-semibold'>Time*</span>
                             <Input type='time' name='time' value={values.time} onChange={handleChange} />
                             {errors.time && <small className='ml-1 text-xs text-red-600'>{errors.time}</small>}
+                            <span className='text-xs font-semibold'>Days*</span>
+                            <CustomSelector
+                                name='week_days'
+                                options={WEEK_DAYS_OPTIONS}
+                                handleChange={obj => setFieldValue('week_days', obj)}
+                                selectorValue={values.week_days}
+                                isMulti
+                                placeholder='Select week days'
+                            />
+                            {errors.weekDays && <small className='ml-1 text-xs text-red-600'>{errors.weekDays}</small>}
                         </>
                     )}
                     {scrapperType.interval && (

@@ -122,33 +122,6 @@ export const cronjobSettingSchema = Yup.object().shape({
         }),
 })
 
-export const GroupSchema = Yup.object().shape({
-    name: Yup.string().required('Group name is required'),
-    interval: Yup.number()
-        .positive()
-        .when('type', {
-            is: type => type === 'interval',
-            then: () => Yup.number().positive().required('Interval is required'),
-        })
-        .when('interval_type', {
-            is: interval_type => interval_type === 'minutes',
-            then: () =>
-                Yup.number()
-                    .positive()
-                    .required('Interval is required')
-                    .min(25, 'Interval must be greater than or equal to 25 minutes'),
-        }),
-    interval_type: Yup.mixed()
-        .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
-        .when('type', {
-            is: type => type === 'interval',
-            then: () =>
-                Yup.mixed()
-                    .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
-                    .required('Please select interval type'),
-        }),
-})
-
 export const coverLetterSchema = Yup.object().shape({
     name: Yup.string().required('Applicant name is required'),
     company: Yup.string().required('Company name is required'),
@@ -275,4 +248,31 @@ export const convertToLeadSchema = Yup.object().shape({
 export const phaseSchema = Yup.object().shape({
     name: Yup.string().required('Phase name is required').max(100, 'Phase name is too long'),
     company_status_id: Yup.string().required('Please choose status'),
+})
+
+export const groupSchema = Yup.object().shape({
+    name: Yup.string().required('Group name is required'),
+    interval: Yup.number()
+        .positive()
+        .when('type', {
+            is: type => type === 'interval',
+            then: () => Yup.number().positive().required('Interval is required'),
+        })
+        .when('interval_type', {
+            is: interval_type => interval_type === 'minutes',
+            then: () =>
+                Yup.number()
+                    .positive()
+                    .required('Interval is required')
+                    .min(25, 'Interval must be greater than or equal to 25 minutes'),
+        }),
+    interval_type: Yup.mixed()
+        .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
+        .when('type', {
+            is: type => type === 'interval',
+            then: () =>
+                Yup.mixed()
+                    .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
+                    .required('Please select interval type'),
+        }),
 })

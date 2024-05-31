@@ -1,13 +1,13 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Button, EmptyTable, Loading } from '@components'
+import { Button, EmptyTable, Loading, Tooltip, Badge } from '@components'
 
 import { GroupSettingActions, GroupForm } from '@modules/scrapper/components'
 import { fetchGroupDetails } from '@modules/scrapper/api'
 
 import { can, convertFrom24To12Format, formatStringInPascal } from '@utils/helpers'
-import { SETTING_HEADS } from '@constants/scrapper'
+import { GROUP_SETTING_HEADS } from '@constants/scrapper'
 
 import { CreateIcon } from '@icons'
 
@@ -34,7 +34,7 @@ const GroupSetting = () => {
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        {SETTING_HEADS.map(heading => (
+                        {GROUP_SETTING_HEADS.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -56,6 +56,18 @@ const GroupSetting = () => {
                                         : row?.scheduler_settings?.interval && row?.scheduler_settings?.interval_type
                                         ? `After every ${row?.scheduler_settings?.interval} ${row?.scheduler_settings?.interval_type}`
                                         : 'not-specified'}
+                                </td>
+                                <td className='px-3 py-6'>
+                                    {row?.scheduler_settings?.week_days?.split(',')?.length > 0 &&
+                                        row?.scheduler_settings?.week_days?.split(',')?.map((q, index) => (
+                                            <span className='font-mono m-1 inline-block' key={index}>
+                                                <a href={q} target='_blank' rel='noreferrer'>
+                                                    <Tooltip text={q}>
+                                                        <Badge label={`${q} `} type='success' />
+                                                    </Tooltip>
+                                                </a>
+                                            </span>
+                                        ))}
                                 </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_cronjob_setting', 'delete_cronjob_setting']) && (

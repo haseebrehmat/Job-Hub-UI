@@ -3,10 +3,10 @@ import useSWR from 'swr'
 
 import { Button, EmptyTable, Loading, Badge, Tooltip } from '@components'
 
-import { JobSourceLinkActions, JobSourceLinkForm } from '@modules/scrapper/components'
+import { GroupLinkActions, GroupLinksForm } from '@modules/scrapper/components'
 import { fetchGroupLinks } from '@modules/scrapper/api'
 
-import { can } from '@utils/helpers'
+import { can, formatStringInPascal } from '@utils/helpers'
 import { GROUP_SOURCE_LINK_HEADS } from '@constants/scrapper'
 
 import { CreateIcon } from '@icons'
@@ -28,7 +28,7 @@ const GroupLinks = () => {
         <div className='max-w-full overflow-x-auto mb-14'>
             <div className='flex items-center space-x-4 pb-6'>
                 {can('create_job_source_link') && (
-                    <Button label='Create Job Source Link' fit icon={CreateIcon} onClick={() => handleClick()} />
+                    <Button label='Create Group Links' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
@@ -46,7 +46,7 @@ const GroupLinks = () => {
                         data?.grouplinks?.map((row, idx) => (
                             <tr className='border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                                 <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{row?.group_scraper}</td>
+                                <td className='px-3 py-6'>{formatStringInPascal(row?.group_scraper?.name)}</td>
                                 <td className='px-3 py-6'>
                                     {row?.queries?.length > 0 &&
                                         row?.queries.map((q, index) => (
@@ -66,11 +66,7 @@ const GroupLinks = () => {
                                 </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_job_source_link', 'delete_job_source_link']) && (
-                                        <JobSourceLinkActions
-                                            id={row?.id}
-                                            edit={() => handleClick(row)}
-                                            mutate={mutate}
-                                        />
+                                        <GroupLinkActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
                                     )}
                                 </td>
                             </tr>
@@ -81,7 +77,7 @@ const GroupLinks = () => {
                 </tbody>
             </table>
             {can(['edit_job_source_link', 'delete_job_source_link']) && show && (
-                <JobSourceLinkForm show={show} setShow={setShow} mutate={mutate} link={link} />
+                <GroupLinksForm show={show} setShow={setShow} mutate={mutate} link={link} />
             )}
         </div>
     )
