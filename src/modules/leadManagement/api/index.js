@@ -79,3 +79,6 @@ export const saveCandidate = (url, { arg: candidate }) => {
         .post(url, candidate)
         .then(({ data }) => toast.success(data.detail || 'Candidate is created successfully'))
 }
+
+export const fetchCandidatesAndCompanies = url =>
+    http.get(url).then(({ data }) => ({ candidates: data?.candidates, companies: data?.companies }))

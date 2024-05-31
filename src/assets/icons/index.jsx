@@ -16,6 +16,7 @@ import {
     MdOutlineKeyboardBackspace,
     MdOutlineFileDownload,
     MdLeaderboard,
+    MdCancel,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -172,3 +173,4 @@ export const CandidateIcon = <RiStarFill style={{ fontSize: 18 }} />
 export const AddSkillIcon = <AiOutlinePlus style={{ fontSize: 14 }} />
 export const DesignationIcon = <AiOutlinePartition style={{ fontSize: 22 }} />
 export const ExposedCandidateIcon = <HiLockOpen style={{ fontSize: 18 }} />
+export const RemoveExposedToIcon = <MdCancel style={{ fontSize: 18 }} />

@@ -82,4 +82,5 @@ export const EXPOSED_CANDIDATE_INITIAL_STATE = {
     query: '',
     show: false,
     ids: [],
+    selectedCompanies: [],
 }
