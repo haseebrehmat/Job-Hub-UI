@@ -12,7 +12,7 @@ const CandidateActions = memo(({ id, edit, mutate }) => {
 
     return (
         <div className='flex items-center'>
-            {can('delete_user') && (
+            {can('delete_candidate') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
@@ -25,7 +25,7 @@ const CandidateActions = memo(({ id, edit, mutate }) => {
                     </Tooltip>
                 </DeleteDialog>
             )}
-            {can('edit_user') && (
+            {can('edit_candidate') && (
                 <Tooltip text='Edit candidate'>
                     <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                 </Tooltip>

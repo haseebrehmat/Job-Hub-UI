@@ -25,10 +25,10 @@ const Candidates = () => {
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
-                {can('create_user') && (
+                {can('create_candidate') && (
                     <Button label='Create Candidate' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                 )}
-                {can('create_user') && (
+                {can('view_designation') && (
                     <Link to='/designations'>
                         <Button label='Designations' icon={DesignationIcon} />
                     </Link>
@@ -57,7 +57,7 @@ const Candidates = () => {
                                 <CandidateDesignationAndSkills skills={row?.skills} designation={row?.designation} />
                                 <td className='px-3 py-6 font-bold uppercase italic'>{row?.company?.name ?? 'N/A'}</td>
                                 <td className='px-3 py-6 float-right'>
-                                    {can(['edit_user', 'delete_user']) && (
+                                    {can(['edit_candidate', 'delete_candidate']) && (
                                         <CandidateActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
                                     )}
                                 </td>
@@ -77,7 +77,7 @@ const Candidates = () => {
                     />
                 </div>
             )}
-            {can('edit_user') && vals.show && (
+            {can('edit_candidate') && vals.show && (
                 <CandidateForm
                     show={vals.show}
                     setShow={show => dispatch({ show })}
