@@ -513,6 +513,82 @@ export const rawpermissions = [
             },
         ],
     },
+    {
+        module: 'Candidates',
+        permissions: [
+            {
+                codename: 'view_candidate',
+                name: 'View Candidates',
+                child: ['create_candidate', 'edit_candidate', 'delete_candidate', 'view_designation'],
+                level: 2,
+            },
+            {
+                codename: 'create_candidate',
+                name: 'Create Candidate',
+                parent: ['view_candidate'],
+                level: 2,
+            },
+            {
+                codename: 'edit_candidate',
+                name: 'Edit Candidate',
+                parent: ['view_candidate'],
+                level: 2,
+            },
+            {
+                codename: 'delete_candidate',
+                name: 'Delete Candidate',
+                parent: ['view_candidate'],
+                level: 2,
+            },
+            {
+                codename: 'view_designation',
+                name: 'View Designations',
+                child: ['create_designation', 'edit_designation', 'delete_designation'],
+                level: 2,
+            },
+            {
+                codename: 'create_designation',
+                name: 'Create Designation',
+                parent: ['view_designation'],
+                level: 2,
+            },
+            {
+                codename: 'edit_designation',
+                name: 'Edit Designation',
+                parent: ['view_designation'],
+                level: 2,
+            },
+            {
+                codename: 'delete_designation',
+                name: 'Delete Designation',
+                parent: ['view_designation'],
+                level: 2,
+            },
+        ],
+    },
+    {
+        module: 'Exposed Candidates',
+        permissions: [
+            {
+                codename: 'view_exposed_candidate',
+                name: 'View Exposed Candidates',
+                child: ['remove_exposed_to', 'expose_to'],
+                level: 2,
+            },
+            {
+                codename: 'expose_to',
+                name: 'Expose To (Company)',
+                parent: ['view_exposed_candidate'],
+                level: 2,
+            },
+            {
+                codename: 'remove_exposed_to',
+                name: 'Remove Exposed To (Company)',
+                parent: ['view_exposed_candidate'],
+                level: 2,
+            },
+        ],
+    },
 ]
 
 export const permissions = rawpermissions.map(row => ({
