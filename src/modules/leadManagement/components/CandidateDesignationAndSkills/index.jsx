@@ -20,7 +20,7 @@ const CandidateDesignationAndSkills = ({ skills, designation }) => {
                             : 'N/A'}
                     </span>
                 </td>
-                <td className='px-2 py-1'>{designation ? <Badge label={designation?.title} /> : 'N/A'}</td>
+                <td className='px-2 py-1'>{designation ? <Badge label={designation} /> : 'N/A'}</td>
             </>
         ),
         [skills, designation]
