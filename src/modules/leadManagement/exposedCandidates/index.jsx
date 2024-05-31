@@ -6,6 +6,7 @@ import { Loading, Searchbox, EmptyTable } from '@components'
 import { CandidateDesignationAndSkills, ExposedForm, ExposedTo } from '@modules/leadManagement/components'
 import { fetchCandidatesAndCompanies } from '@modules/leadManagement/api'
 
+import { can } from '@utils/helpers'
 import { EXPOSED_CANDIDATE_HEADS, EXPOSED_CANDIDATE_INITIAL_STATE } from '@constants/leadManagement'
 
 const ExposedCandidates = () => {
@@ -44,14 +45,16 @@ const ExposedCandidates = () => {
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        <th scope='col' className='px-3 py-4'>
-                            <input
-                                type='checkbox'
-                                className='__checkbox'
-                                onChange={handleChangeAll}
-                                checked={vals.ids.length === data?.candidates?.length}
-                            />
-                        </th>
+                        {can('expose_to') && (
+                            <th scope='col' className='px-3 py-4'>
+                                <input
+                                    type='checkbox'
+                                    className='__checkbox'
+                                    onChange={handleChangeAll}
+                                    checked={vals.ids.length === data?.candidates?.length}
+                                />
+                            </th>
+                        )}
                         {EXPOSED_CANDIDATE_HEADS.slice(1).map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
@@ -63,15 +66,17 @@ const ExposedCandidates = () => {
                     {data?.candidates?.length > 0 && !error ? (
                         data?.candidates?.map(row => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
-                                <td className='px-3 py-4'>
-                                    <input
-                                        type='checkbox'
-                                        value={row?.candidate?.id}
-                                        checked={vals.ids.includes(row?.candidate?.id)}
-                                        className='__checkbox'
-                                        onChange={handleChange}
-                                    />
-                                </td>
+                                {can('expose_to') && (
+                                    <td className='px-3 py-4'>
+                                        <input
+                                            type='checkbox'
+                                            value={row?.candidate?.id}
+                                            checked={vals.ids.includes(row?.candidate?.id)}
+                                            className='__checkbox'
+                                            onChange={handleChange}
+                                        />
+                                    </td>
+                                )}
                                 <td className='px-3 py-6'>
                                     <span className='capitalize'>{row?.candidate?.name ?? 'N/A'}</span>
                                     {row?.candidate?.email && (

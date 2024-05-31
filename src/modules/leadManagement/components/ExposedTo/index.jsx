@@ -2,6 +2,7 @@ import { memo, useState } from 'react'
 
 import { DeleteDialog, Tooltip, Badge } from '@components'
 
+import { can } from '@utils/helpers'
 import { GENERIC_SKILL_DELETION } from '@constants/allowDeletion'
 
 import { RemoveExposedToIcon } from '@icons'
@@ -19,26 +20,28 @@ const ExposedTo = ({ companies, mutate = null }) => {
                           label={
                               <span className='flex items-center'>
                                   <span>{company?.name ?? 'N/A'}</span>
-                                  <DeleteDialog
-                                      show={show}
-                                      setShow={setShow}
-                                      url={`/api/candidate_management/candidate_exposed/${id}/`}
-                                      refetch={mutate}
-                                      perm={GENERIC_SKILL_DELETION}
-                                  >
-                                      <Tooltip text='Remove exposure'>
-                                          <button
-                                              type='button'
-                                              onClick={() => {
-                                                  setShow(true)
-                                                  setId(company?.exposed_candidate_id)
-                                              }}
-                                              className='ml-1 hover:text-red-500'
-                                          >
-                                              {RemoveExposedToIcon}
-                                          </button>
-                                      </Tooltip>
-                                  </DeleteDialog>
+                                  {can('remove_exposed_to') && (
+                                      <DeleteDialog
+                                          show={show}
+                                          setShow={setShow}
+                                          url={`/api/candidate_management/candidate_exposed/${id}/`}
+                                          refetch={mutate}
+                                          perm={GENERIC_SKILL_DELETION}
+                                      >
+                                          <Tooltip text='Remove exposure'>
+                                              <button
+                                                  type='button'
+                                                  onClick={() => {
+                                                      setShow(true)
+                                                      setId(company?.exposed_candidate_id)
+                                                  }}
+                                                  className='ml-1 hover:text-red-500'
+                                              >
+                                                  {RemoveExposedToIcon}
+                                              </button>
+                                          </Tooltip>
+                                      </DeleteDialog>
+                                  )}
                               </span>
                           }
                           type='success'
