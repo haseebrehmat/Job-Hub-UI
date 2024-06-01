@@ -85,3 +85,9 @@ export const EXPOSED_CANDIDATE_INITIAL_STATE = {
     ids: [],
     selectedCompanies: [],
 }
+
+export const CANDIDATE_SELECT_STATE = {
+    query: '',
+    page: 1,
+    candidate_id: null,
+}
