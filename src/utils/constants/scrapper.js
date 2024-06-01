@@ -14,6 +14,8 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Monster', value: 'monster' },
     { label: 'Zip Recruiter', value: 'ziprecruiter' },
     { label: 'Career Builder', value: 'careerbuilder' },
+    { label: 'Google', value: 'google' },
+    { label: 'Jooble', value: 'jooble' },
     { label: 'Other', value: 'other' },
 ]
 
