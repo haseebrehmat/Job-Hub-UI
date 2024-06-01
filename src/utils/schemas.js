@@ -269,3 +269,30 @@ export const candidateCreateSchema = Yup.object().shape({
     ...candidateEditSchema.fields,
     password: Yup.string().required('Pasword is required').min(8, 'Password must be atleast 8 characters'),
 })
+
+export const groupSchema = Yup.object().shape({
+    name: Yup.string().required('Group name is required'),
+    interval: Yup.number()
+        .positive()
+        .when('type', {
+            is: type => type === 'interval',
+            then: () => Yup.number().positive().required('Interval is required'),
+        })
+        .when('interval_type', {
+            is: interval_type => interval_type === 'minutes',
+            then: () =>
+                Yup.number()
+                    .positive()
+                    .required('Interval is required')
+                    .min(25, 'Interval must be greater than or equal to 25 minutes'),
+        }),
+    interval_type: Yup.mixed()
+        .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
+        .when('type', {
+            is: type => type === 'interval',
+            then: () =>
+                Yup.mixed()
+                    .oneOf(['minutes', 'hours', 'days'], 'Invalid interval type')
+                    .required('Please select interval type'),
+        }),
+})

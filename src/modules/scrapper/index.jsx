@@ -2,12 +2,25 @@ import { memo, useState } from 'react'
 
 import { Button } from '@components'
 
-import { CronjobSetting, JobSourceLinks, ScraperStatus, Logs } from '@modules/scrapper/components'
+import {
+    CronjobSetting,
+    ScrappingGroup,
+    JobSourceLinks,
+    ScraperStatus,
+    GroupLinks,
+    Logs,
+} from '@modules/scrapper/components'
 
 import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon } from '@icons'
 
 const Profile = () => {
-    const [activeTab, setActiveTab] = useState({ setting: true, links: false, status: false, logs: false })
+    const [activeTab, setActiveTab] = useState({
+        setting: true,
+        links: false,
+        status: false,
+        logs: false,
+        grouplinks: false,
+    })
 
     const handleClick = key => {
         Object.keys(activeTab).forEach(k => (activeTab[k] = false))
@@ -37,6 +50,22 @@ const Profile = () => {
                             onClick={() => handleClick('links')}
                         />
                         <Button
+                            label='Group Setting'
+                            fit
+                            fill={activeTab.group}
+                            icon={CronjobSettingIcon}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.group && 'border-gray-200'}`}
+                            onClick={() => handleClick('group')}
+                        />
+                        <Button
+                            label='Group Source Links / URLs'
+                            fit
+                            fill={activeTab.grouplinks}
+                            icon={JobSourceLinkIcon}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.grouplinks && 'border-gray-200'}`}
+                            onClick={() => handleClick('grouplinks')}
+                        />
+                        <Button
                             label='Running Scrapers'
                             fit
                             fill={activeTab.status}
@@ -58,9 +87,19 @@ const Profile = () => {
                             <CronjobSetting />
                         </div>
                     )}
+                    {activeTab.group && (
+                        <div className='mt-5'>
+                            <ScrappingGroup />
+                        </div>
+                    )}
                     {activeTab.links && (
                         <div className='mt-5'>
                             <JobSourceLinks />
+                        </div>
+                    )}
+                    {activeTab.grouplinks && (
+                        <div className='mt-5'>
+                            <GroupLinks />
                         </div>
                     )}
                     {activeTab.status && (

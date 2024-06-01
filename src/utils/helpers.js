@@ -1,6 +1,6 @@
 import jwt_decode from 'jwt-decode'
 
-import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
+import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
 import { GENERIC_SKILL_TYPES, GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
 import { today } from '@constants/dashboard'
@@ -151,8 +151,6 @@ export const parseSelectedCompany = (id, companies) => {
     }
     return null
 }
-
-export const parseGroups = groups => groups.map(group => ({ value: group.id, label: group.name }))
 
 export const parseSelectedGroup = (id, groups) => {
     if (id) {
@@ -369,3 +367,7 @@ export const parseSelectedDesignation = (id, designations) => {
     }
     return null
 }
+export const parseGroups = groups => groups.map(group => ({ value: group.id, label: formatStringInPascal(group.name) }))
+
+export const getSelectedDays = days =>
+    days ? WEEK_DAYS_OPTIONS.filter(({ value }) => days.includes(value)) : WEEK_DAYS_OPTIONS
