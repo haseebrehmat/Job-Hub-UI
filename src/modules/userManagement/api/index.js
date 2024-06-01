@@ -2,6 +2,9 @@ import { http, rawHttp } from '@utils/http'
 import { toast } from 'react-hot-toast'
 
 export const fetchCompanies = url => http.get(url).then(({ data }) => ({ companies: data.results, status: 'success' }))
+
+//export const fetchGroups = url => http.get(url).then(({ data }) => ({ groups: data.results, status: 'success' }))
+
 export const fetchBlacklistCompanies = url =>
     http
         .get(url, {

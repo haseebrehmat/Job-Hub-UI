@@ -18,8 +18,17 @@ export const saveCronjobSetting = (url, { arg: setting }) => {
         .post(url, setting)
         .then(({ data }) => toast.success(data.detail || 'Cronjob Setting created successfully'))
 }
+export const saveGroupSetting = (url, { arg: setting }) => {
+    if (setting?.id) {
+        return rawHttp.put(url, setting).then(({ data }) => toast.success(data.detail || 'Group updated successfully'))
+    }
+    return rawHttp.post(url, setting).then(({ data }) => toast.success(data.detail || 'Group created successfully'))
+}
 
 export const fetchJobSourceLinks = url => http.get(url).then(({ data }) => ({ links: data?.detail, status: 'success' }))
+export const fetchGroupLinks = url => http.get(url).then(({ data }) => ({ grouplinks: data, status: 'success' }))
+
+export const fetchGroupDetails = url => http.get(url).then(({ data }) => ({ groups: data, status: 'success' }))
 
 export const saveJobSourceLink = (url, { arg: link }) => {
     if (link?.id) {
@@ -30,6 +39,14 @@ export const saveJobSourceLink = (url, { arg: link }) => {
     return rawHttp
         .post(url, link)
         .then(({ data }) => toast.success(data.detail || 'Job Source Link created successfully'))
+}
+export const saveGroupLink = (url, { arg: link }) => {
+    if (link?.id) {
+        return rawHttp
+            .put(url, link)
+            .then(({ data }) => toast.success(data.detail || 'Group Link updated successfully'))
+    }
+    return rawHttp.post(url, link).then(({ data }) => toast.success(data.detail || 'Group Link created successfully'))
 }
 
 export const fetchScraperStatus = url => http.get(url).then(({ data }) => data)
