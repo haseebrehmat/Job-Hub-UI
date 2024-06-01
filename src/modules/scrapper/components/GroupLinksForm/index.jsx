@@ -53,7 +53,7 @@ const GroupLinksForm = ({ show, setShow, mutate, link }) => {
                     {errors.job_source && <small className='ml-1 text-xs text-red-600'>{errors.job_source}</small>}
                     <div className='flex items-center justify-between my-2'>
                         <p>Links</p>
-                        {fields.length < 30 && (
+                        {fields.length < 1000 && (
                             <Tooltip text='Add Link'>
                                 <Button onClick={addField} icon='+' classes='!px-1 !py-0.5' />
                             </Tooltip>
