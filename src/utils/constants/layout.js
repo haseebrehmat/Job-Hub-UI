@@ -22,6 +22,7 @@ import {
     LeadIcon,
     LeadManagementIcon,
     CandidateIcon,
+    ExposedCandidateIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -121,6 +122,14 @@ export const menuItems = [
             'create_phase',
             'edit_phase',
             'delete_phase',
+            'view_candidate',
+            'create_candidate',
+            'edit_candidate',
+            'delete_candidate',
+            'view_designation',
+            'create_designation',
+            'edit_designation',
+            'delete_designation',
         ],
         subItems: [
             {
@@ -151,8 +160,22 @@ export const menuItems = [
                 label: 'Candidates',
                 link: '/candidates',
                 svg: CandidateIcon,
-                perms: ['view_lead', 'edit_lead'],
-                // perms: ['view_candidate', 'create_candidate', 'edit_candidate', 'delete_candidate'],
+                perms: [
+                    'view_candidate',
+                    'create_candidate',
+                    'edit_candidate',
+                    'delete_candidate',
+                    'view_designation',
+                    'create_designation',
+                    'edit_designation',
+                    'delete_designation',
+                ],
+            },
+            {
+                label: 'Exposed Candidates',
+                link: '/exposed-candidates',
+                svg: ExposedCandidateIcon,
+                perms: ['view_exposed_candidate', 'remove_exposed_to', 'expose_to'],
             },
         ],
     },

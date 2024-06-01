@@ -34,6 +34,7 @@ export const CANDIDATE_HEADS = [
     'Total Leads',
     'Skills',
     'Designation',
+    'Company',
     '',
 ]
 
@@ -74,4 +75,13 @@ export const DESIGNATION_INITIAL_STATE = {
     page: 1,
     show: false,
     designation: null,
+}
+
+export const EXPOSED_CANDIDATE_HEADS = ['', 'Candidate', 'Skills', 'Designation', 'Exposed To']
+
+export const EXPOSED_CANDIDATE_INITIAL_STATE = {
+    query: '',
+    show: false,
+    ids: [],
+    selectedCompanies: [],
 }

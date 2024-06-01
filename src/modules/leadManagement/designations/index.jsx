@@ -27,7 +27,7 @@ const Designations = () => {
             <div className='flex items-center py-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
-                    {can('create_generic_skill') && (
+                    {can('create_designation') && (
                         <Button label='Create Designation' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                     )}
                 </div>
@@ -40,7 +40,7 @@ const Designations = () => {
                     data?.designations?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.title ?? 'N/A'}</h2>
-                            {can('edit_generic_skill') && can('delete_generic_skill') && (
+                            {can('edit_designation') && can('delete_designation') && (
                                 <DesignationActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
                             <p className='text-sm'>{row?.description ?? 'N/A'}</p>
@@ -59,7 +59,7 @@ const Designations = () => {
                     />
                 </div>
             )}
-            {vals.show && (
+            {can('edit_designation') && vals.show && (
                 <DesignationForm
                     show={vals.show}
                     setShow={show => dispatch({ show })}

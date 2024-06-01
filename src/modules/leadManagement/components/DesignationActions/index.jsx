@@ -12,12 +12,12 @@ const DesignationActions = memo(({ id, edit, mutate }) => {
 
     return (
         <div className='absolute top-0 right-0 pl-2 mr-1 flex'>
-            {can('edit_generic_skill') && (
+            {can('edit_designation') && (
                 <Tooltip text='Edit desgination'>
                     <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                 </Tooltip>
             )}
-            {can('delete_generic_skill') && (
+            {can('delete_designation') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}

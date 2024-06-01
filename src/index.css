@@ -58,6 +58,10 @@
     @apply md:w-[21cm] md:min-h-[29.7cm] w-full h-full;
 }
 
+.__checkbox {
+    @apply w-5 h-5 accent-[#4f9d9b] cursor-pointer;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 0px;
