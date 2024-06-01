@@ -22,12 +22,6 @@ const CandidateInfo = ({ info, exposed = false }) => {
                         <td className='px-6 py-6'>{info?.leads ?? 'N/A'}</td>
                     </>
                 )}
-                <td className='px-3 py-6'>
-                    <span className='capitalize'>{info?.candidate?.name ?? 'N/A'}</span>
-                    {info?.candidate?.email && (
-                        <span className='text-xs ml-1 italic'>{`(${info?.candidate?.email})`}</span>
-                    )}
-                </td>
                 <td className='px-2'>
                     <span className='flex items-center flex-wrap space-x-1.5 gap-y-1.5'>
                         {info?.skills?.length > 0
