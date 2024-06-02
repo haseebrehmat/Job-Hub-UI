@@ -6,7 +6,7 @@ import { Loading, Tooltip } from '@components'
 
 import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
-
+import { JobSourceAnalytics } from '@modules/teamAppliedJobs/components'
 import { checkToken, formatDate, timeSince } from '@utils/helpers'
 import { baseURL } from '@utils/http'
 import { tableHeads, jobStatus } from '@constants/teamAppliedJobs'
@@ -82,7 +82,13 @@ const TeamAppliedJobs = memo(() => {
                         ))}
                 </select>
             </div>
-            <table className='table-auto w-full text-sm text-left text-gray-500'>
+
+            <div className=''>
+                <JobSourceAnalytics chartName='Job Source Analytics' chartHeight='400px' />
+                {/* <JobSourceAnalytics chartName='Job Type Analytics' chartHeight='400px' /> */}
+            </div>
+
+            <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
                 <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
                         {tableHeads.map(heading => (

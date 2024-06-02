@@ -8,7 +8,7 @@ import Total from '@svgs/total.svg'
 import FiltersSVG from '@svgs/filters.svg'
 import IntegrationsSVG from '@svgs/integrations.svg'
 import ResetFiltersSVG from '@svgs/re.svg'
-import { ResumeSvgs } from '@svgs/svgs'
+import { ResumeSvgs, JobSourceIcons } from '@svgs/svgs'
 
 export { OctagonLogo, OctagonSmallIcon, LinksSvgs } from '@svgs/svg-icons'
 
@@ -16,4 +16,17 @@ const Integrations = () => <img src={IntegrationsSVG} alt='I' />
 const Filters = () => <img src={FiltersSVG} alt='I' />
 const ResetFilters = () => <img src={ResetFiltersSVG} alt='I' />
 
-export { Cold, Hired, Rejected, Prospects, Hot, Warm, Total, Filters, Integrations, ResetFilters, ResumeSvgs }
+export {
+    Cold,
+    Hired,
+    Rejected,
+    Prospects,
+    Hot,
+    Warm,
+    Total,
+    Filters,
+    Integrations,
+    ResetFilters,
+    ResumeSvgs,
+    JobSourceIcons,
+}
