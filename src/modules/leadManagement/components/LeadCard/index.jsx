@@ -1,8 +1,9 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
 
-import { Badge } from '@components'
+import { Badge, Tooltip } from '@components'
 
-import { CurrentPhaseIcon, LeadVerticalIcon } from '@icons'
+import { CurrentPhaseIcon, LeadVerticalIcon, AssignCandidateIcon } from '@icons'
 
 const LeadCard = ({ lead, dispatch }) => (
     <div
@@ -25,9 +26,12 @@ const LeadCard = ({ lead, dispatch }) => (
             <span>{CurrentPhaseIcon}</span>
             <span className='text-xs'>{lead?.phase_name ?? 'not set'}</span>
         </p>
-        <p className='text-right'>
-            <Badge label={lead?.applied_job?.tech_stack} />
-        </p>
+        <div className='flex items-center justify-end gap-2'>
+            <Tooltip text='Assign Candidate'>
+                <Link to={`/assign-candidate/${lead?.id}`}>{AssignCandidateIcon}</Link>
+            </Tooltip>
+            <Badge label={lead?.applied_job?.tech_stack} classes='text-xs' />
+        </div>
     </div>
 )
 

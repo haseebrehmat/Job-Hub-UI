@@ -62,7 +62,7 @@ import {
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle, FaUserEdit } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
@@ -175,3 +175,4 @@ export const DesignationIcon = <AiOutlinePartition style={{ fontSize: 22 }} />
 export const ExposedCandidateIcon = <HiLockOpen style={{ fontSize: 18 }} />
 export const RemoveExposedToIcon = <MdCancel style={{ fontSize: 18 }} />
 export const CandidateFilterIcon = <VscSettings style={{ fontSize: 18 }} />
+export const AssignCandidateIcon = <FaUserEdit style={{ fontSize: 16 }} />
