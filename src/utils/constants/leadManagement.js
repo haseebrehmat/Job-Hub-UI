@@ -90,4 +90,7 @@ export const CANDIDATE_SELECT_STATE = {
     query: '',
     page: 1,
     candidate_id: null,
+    skills: '',
+    designations: '',
+    show: false,
 }

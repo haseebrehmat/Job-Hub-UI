@@ -21,3 +21,12 @@ export const convertToLead = (url, { arg: lead }) =>
     rawHttp
         .post(url, lead)
         .then(({ data }) => toast.success(data.detail || 'Applied Job is converted to Lead successfully'))
+
+export const fetchSelectedCandidates = url =>
+    http.get(url).then(({ data }) => ({
+        candidates: data?.results,
+        skills: data?.skills,
+        designations: data?.designations,
+        total: data?.count,
+        pages: data?.num_pages,
+    }))

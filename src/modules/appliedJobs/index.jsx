@@ -1,10 +1,11 @@
-import { memo, useState, useReducer } from 'react'
+import { memo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { Loading, Badge, Tooltip } from '@components'
 
 import { fetchAppliedJobs } from '@modules/appliedJobs/api'
-import { ConvertToLeadForm, EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
+import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
 
 import { tableHeads, jobStatus } from '@constants/appliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
@@ -12,12 +13,9 @@ import { formatDate, timeSince } from '@utils/helpers'
 import { DownloadIcon, DownloadIcon2, ConvertToLeadIcon } from '@icons'
 
 const AppliedJobs = memo(({ userId = '' }) => {
-    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), { id: null, show: false })
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
-    const { data, error, isLoading, mutate } = useSWR([page, query, userId], () =>
-        fetchAppliedJobs(page, query, userId)
-    )
+    const { data, error, isLoading } = useSWR([page, query, userId], () => fetchAppliedJobs(page, query, userId))
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
     if (isLoading) return <Loading />
     return (
@@ -78,13 +76,9 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                             )}
                                             {!job?.is_converted && (
                                                 <Tooltip text='Convert to Lead'>
-                                                    <span
-                                                        onClick={() =>
-                                                            dispatch({ show: true, id: job?.applied_job_id })
-                                                        }
-                                                    >
+                                                    <Link to={`/convert-to-lead/${job?.applied_job_id}`}>
                                                         {ConvertToLeadIcon}
-                                                    </span>
+                                                    </Link>
                                                 </Tooltip>
                                             )}
                                         </div>
@@ -97,14 +91,6 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     </tbody>
                 </table>
                 {!error && <TableNavigate data={data} page={page} handleClick={handleClick} />}
-                {vals.show && (
-                    <ConvertToLeadForm
-                        show={vals.show}
-                        id={vals.id}
-                        setShow={show => dispatch({ show })}
-                        mutate={mutate}
-                    />
-                )}
             </div>
         </div>
     )

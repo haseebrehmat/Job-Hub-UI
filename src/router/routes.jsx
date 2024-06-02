@@ -24,6 +24,7 @@ import {
     Vertical,
     ApplyForJob,
     GenericSkills,
+    ConvertToLead,
 } from '@modules'
 import { JobDetail } from '@modules/jobsFilter/components'
 import App from '@/App'
@@ -123,6 +124,13 @@ export const routes = [
         component: <AppliedJobs userId={user_id} />,
         protect: true,
         title: 'My Applied Jobs',
+        permission: 'view_user_applied_job',
+    },
+    {
+        path: '/convert-to-lead/:id',
+        component: <ConvertToLead />,
+        protect: true,
+        title: 'Convert to Lead',
         permission: 'view_user_applied_job',
     },
     {

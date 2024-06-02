@@ -75,7 +75,7 @@ import {
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
-import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
+import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight } from 'react-icons/rx'
 
@@ -174,3 +174,4 @@ export const AddSkillIcon = <AiOutlinePlus style={{ fontSize: 14 }} />
 export const DesignationIcon = <AiOutlinePartition style={{ fontSize: 22 }} />
 export const ExposedCandidateIcon = <HiLockOpen style={{ fontSize: 18 }} />
 export const RemoveExposedToIcon = <MdCancel style={{ fontSize: 18 }} />
+export const CandidateFilterIcon = <VscSettings style={{ fontSize: 18 }} />
