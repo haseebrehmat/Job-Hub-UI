@@ -14,7 +14,7 @@ const AssignCandidate = () => {
     const { id } = useParams()
     const redirect = useNavigate()
 
-    const { values, errors, handleSubmit, trigger, setFieldValue } = useMutate(
+    const { values, handleSubmit, trigger, setFieldValue } = useMutate(
         `api/lead_managament/leads/`,
         convertToLead,
         { lead: id, candidate: '' },
@@ -24,15 +24,14 @@ const AssignCandidate = () => {
         () => redirect('/leads')
     )
 
-    const flag = errors.length === 0 && values.candidate
     return (
         <div className='max-w-full overflow-x-auto hide_scrollbar p-4 mt-4'>
             <form onSubmit={handleSubmit}>
                 <CandidateSelect selected={values.candidate} handleSelect={setFieldValue} />
                 <div className='py-5 flex space-x-3 float-right'>
-                    {flag && <Button label='Save' type='submit' fit fill classes='!px-12' />}
+                    {values.candidate && <Button label='Save' type='submit' fit fill classes='!px-12' />}
                     <Button
-                        label='Back to Applied Jobs'
+                        label='Back to Leads'
                         icon={BackToIcon}
                         fit
                         onClick={() => redirect('/leads')}

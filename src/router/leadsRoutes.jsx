@@ -63,7 +63,7 @@ export const leadsRoutes = [
         path: '/assign-candidate/:id',
         component: <AssignCandidate />,
         protect: true,
-        title: 'Assign / Re-assign Candidate',
+        title: 'Assign / Re-Assign Candidate',
         permission: 'view_lead',
     },
 ]
