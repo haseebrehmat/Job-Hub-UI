@@ -1,16 +1,14 @@
 import { memo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
-import { Button, CustomSelector, Textarea, Input } from '@components'
+import { Button, Textarea, Input } from '@components'
 
-import { fetchStatusPhases, convertToLead } from '@modules/appliedJobs/api'
-import { CandidateSelect } from '@modules/appliedJobs/components'
+import { convertToLead } from '@modules/appliedJobs/api'
+import { CandidateSelect, StatusAndPhase } from '@modules/appliedJobs/components'
 
 import { convertToLeadSchema } from '@utils/schemas'
-import { parseSelectedStatus, parseStatuses, parseStatusPhases, parseSelectedStatusPhase } from '@utils/helpers'
 import { today } from '@constants/dashboard'
 
 import { BackToIcon } from '@icons'
@@ -19,7 +17,6 @@ const ConvertToLead = () => {
     const { id } = useParams()
     const redirect = useNavigate()
 
-    const { data, isLoading, error } = useSWR('/api/lead_managament/company_status_phases/', fetchStatusPhases)
     const { values, errors, handleSubmit, trigger, setFieldValue, handleChange } = useMutate(
         `api/lead_managament/leads/`,
         convertToLead,
@@ -36,38 +33,7 @@ const ConvertToLead = () => {
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-cols-2 gap-4'>
                     <div className='grid grid-cols-2 gap-2'>
-                        {isLoading ? (
-                            <span>Loading...</span>
-                        ) : error ? (
-                            <span>Error to Load statuses</span>
-                        ) : (
-                            <>
-                                <div>
-                                    <span className='text-sm font-semibold'>Status*</span>
-                                    <CustomSelector
-                                        options={parseStatuses(data)}
-                                        handleChange={({ value }) => setFieldValue('status', value)}
-                                        selectorValue={parseSelectedStatus(values.status, data)}
-                                        placeholder='Select Status'
-                                    />
-                                    {errors.status && <small className='__error'>{errors.status}</small>}
-                                </div>
-                                <div>
-                                    <span className='text-sm font-semibold'>Phase*</span>
-                                    {values.status ? (
-                                        <CustomSelector
-                                            options={parseStatusPhases(values.status, data)}
-                                            handleChange={({ value }) => setFieldValue('phase', value)}
-                                            selectorValue={parseSelectedStatusPhase(values.phase, values.status, data)}
-                                            placeholder='Select Phase'
-                                        />
-                                    ) : (
-                                        <p className='text-sm mt-2'>Please select status first</p>
-                                    )}
-                                    {errors.phase && <small className='__error'>{errors.phase}</small>}
-                                </div>
-                            </>
-                        )}
+                        <StatusAndPhase errors={errors} values={values} setFieldValue={setFieldValue} />
                         <div>
                             <span className='text-sm font-semibold'>Effective Date*</span>
                             <Input type='date' onChange={handleChange} name='effect_date' value={values.effect_date} />
