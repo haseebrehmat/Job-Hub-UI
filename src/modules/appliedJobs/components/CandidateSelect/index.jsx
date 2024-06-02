@@ -1,7 +1,7 @@
 import { memo, useMemo, useReducer } from 'react'
 import useSWR from 'swr'
 
-import { Searchbox, EmptyTable, Loading, Badge, Button } from '@components'
+import { Searchbox, Loading, Badge, Button } from '@components'
 
 import { fetchSelectedCandidates } from '@modules/appliedJobs/api'
 import { CandidateFilters } from '@modules/appliedJobs/components'
@@ -12,10 +12,12 @@ import { CandidateFilterIcon } from '@icons'
 
 const CandidateSelect = ({ selected = null, handleSelect = null }) => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), CANDIDATE_SELECT_STATE)
+
     const { data, error, isLoading } = useSWR(
         `/api/candidate_management/selected_candidate/?search=${vals.query}&skills=${vals.skills}&designations=${vals.designations}`,
         fetchSelectedCandidates
     )
+
     const handleChange = ({ target: { value } }) => {
         dispatch({ candidate_id: value })
         handleSelect('candidate', value)
@@ -76,7 +78,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
                     ))}
                 </div>
             ) : (
-                <EmptyTable cols={6} msg='No candidates found yet!' />
+                <span className='italic'>No candidates found yet!</span>
             )}
         </div>
     )
