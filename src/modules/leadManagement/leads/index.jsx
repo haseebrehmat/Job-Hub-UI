@@ -3,16 +3,21 @@ import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
-import { Board, Loading } from '@components'
+import { Board, Loading, Searchbox, Button, Paginated } from '@components'
 
 import { LeadCard, LeadModal } from '@modules/leadManagement/components'
 import { fetchLeads, changeLeadStatus } from '@modules/leadManagement/api'
 
 import { LEADS_INITIAL_VALS } from '@constants/leadManagement'
 
+import { CandidateFilterIcon } from '@icons'
+
 const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
-    const { data, isLoading, mutate } = useSWR('/api/lead_managament/leads/', fetchLeads)
+    const { data, isLoading, mutate } = useSWR(
+        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}`,
+        fetchLeads
+    )
 
     const convertToColumns = columns =>
         columns.reduce((acc, row) => {
@@ -42,7 +47,32 @@ const Leads = () => {
         <>
             {vals.draggable && <LeadModal vals={vals} dispatch={dispatch} refetch={mutate} />}
             {data?.leads?.length > 0 && (
-                <Board data={convertToColumns(data?.leads)} set={dispatch} handleDrag={handleSubmit} />
+                <div className='flex flex-col'>
+                    <div className='flex items-center justify-between py-2 px-4 gap-2 flex-wrap'>
+                        <div className='flex items-center gap-2'>
+                            <Searchbox
+                                query={vals.query}
+                                setQuery={query => dispatch({ query })}
+                                clear={() => dispatch({ query: '' })}
+                            />
+                            <Button
+                                icon={CandidateFilterIcon}
+                                label='Filters'
+                                classes='!font-bold'
+                                onClick={() => dispatch({ filter: !vals.filter })}
+                                fit
+                            />
+                        </div>
+                        {data?.pages > 1 && (
+                            <Paginated
+                                pages={data?.pages ?? Math.ceil(data.total / 25)}
+                                setPage={page => dispatch({ page })}
+                                page={vals.page}
+                            />
+                        )}
+                    </div>
+                    <Board data={convertToColumns(data?.leads)} set={dispatch} handleDrag={handleSubmit} />
+                </div>
             )}
         </>
     )

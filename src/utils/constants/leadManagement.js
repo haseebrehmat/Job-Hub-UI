@@ -2,6 +2,7 @@ export const LEADS_INITIAL_VALS = {
     source: null,
     destination: null,
     show: false,
+    filter: false,
     page: 1,
     query: '',
     draggable: null,
