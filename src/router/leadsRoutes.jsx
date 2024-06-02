@@ -1,4 +1,13 @@
-import { Status, CompanyStatus, Phases, Leads, Candidates, Designations, ExposedCandidates } from '@modules'
+import {
+    Status,
+    CompanyStatus,
+    Phases,
+    Leads,
+    Candidates,
+    Designations,
+    ExposedCandidates,
+    AssignCandidate,
+} from '@modules'
 
 export const leadsRoutes = [
     {
@@ -49,5 +58,12 @@ export const leadsRoutes = [
         protect: true,
         title: 'Exposed Candidates',
         permission: 'view_exposed_candidate',
+    },
+    {
+        path: '/assign-candidate/:id',
+        component: <AssignCandidate />,
+        protect: true,
+        title: 'Assign / Re-assign Candidate',
+        permission: 'view_lead',
     },
 ]
