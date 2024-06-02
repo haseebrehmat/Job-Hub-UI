@@ -1,4 +1,4 @@
-import { memo, useReducer } from 'react'
+import { memo, useMemo, useReducer } from 'react'
 import useSWR from 'swr'
 
 import { Searchbox, EmptyTable, Loading, Badge, Button } from '@components'
@@ -10,13 +10,21 @@ import { CANDIDATE_SELECT_STATE } from '@constants/leadManagement'
 
 import { CandidateFilterIcon } from '@icons'
 
-const CandidateSelect = () => {
+const CandidateSelect = ({ selected = null, handleSelect = null }) => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), CANDIDATE_SELECT_STATE)
     const { data, error, isLoading } = useSWR(
         `/api/candidate_management/selected_candidate/?search=${vals.query}&skills=${vals.skills}&designations=${vals.designations}`,
         fetchSelectedCandidates
     )
-    const handleChange = ({ target: { value } }) => dispatch({ candidate_id: value })
+    const handleChange = ({ target: { value } }) => {
+        dispatch({ candidate_id: value })
+        handleSelect('candidate', value)
+    }
+
+    useMemo(() => {
+        if (selected) dispatch({ candidate_id: selected })
+        return () => {}
+    }, [])
 
     if (isLoading) return <Loading />
     return error ? (
@@ -35,6 +43,7 @@ const CandidateSelect = () => {
                     <Button
                         icon={CandidateFilterIcon}
                         label='Filters'
+                        classes='!font-bold'
                         onClick={() => dispatch({ show: !vals.show })}
                         fit
                     />

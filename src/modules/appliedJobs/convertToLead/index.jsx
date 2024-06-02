@@ -23,14 +23,14 @@ const ConvertToLead = () => {
     const { values, errors, handleSubmit, trigger, setFieldValue, handleChange } = useMutate(
         `api/lead_managament/leads/`,
         convertToLead,
-        { status: '', phase: '', notes: '', effect_date: today, due_date: today, job: id },
+        { status: '', phase: '', notes: '', effect_date: today, due_date: today, job: id, candidate: '' },
         convertToLeadSchema,
         async formValues => trigger({ ...formValues }),
         null,
         () => redirect('/user-applied-jobs')
     )
 
-    const flag = values.status && values.phase
+    const flag = values.status && values.phase && values.candidate
     return (
         <div className='max-w-full overflow-x-auto hide_scrollbar p-4 mt-4'>
             <form onSubmit={handleSubmit}>
@@ -85,7 +85,7 @@ const ConvertToLead = () => {
                         {errors.notes && <small className='__error'>{errors.notes}</small>}
                     </div>
                 </div>
-                <CandidateSelect />
+                <CandidateSelect selected={values.candidate} handleSelect={setFieldValue} />
                 <div className='py-5 flex space-x-3 float-right'>
                     {flag && <Button label='Save' type='submit' fit fill classes='!px-12' />}
                     <Button
