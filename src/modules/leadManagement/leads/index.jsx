@@ -17,8 +17,15 @@ const Leads = () => {
         ...LEADS_INITIAL_VALS,
         ...LEADS_FILTERS,
     })
+
     const { data, isLoading, mutate } = useSWR(
-        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${vals.to}`,
+        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${
+            vals.to
+        }&teams=${vals.teams.map(t => t.value).join(',')}&members=${vals.members
+            .map(m => m.value)
+            .join(',')}&skills=${vals.skills.map(s => s.value).join(',')}&companies=${vals.companies
+            .map(c => c.value)
+            .join(',')}`,
         fetchLeads
     )
 
@@ -44,6 +51,7 @@ const Leads = () => {
         () => mutate()
         // () => setTimeout(() => window.location.reload(), 1000)
     )
+
     return isLoading ? (
         <Loading />
     ) : (
@@ -74,7 +82,7 @@ const Leads = () => {
                             />
                         )}
                     </div>
-                    {vals.filter && <LeadFilters filtered={vals} dispatch={dispatch} />}
+                    {vals.filter && <LeadFilters data={data} filtered={vals} dispatch={dispatch} />}
                     <Board data={convertToColumns(data?.leads)} set={dispatch} handleDrag={handleSubmit} />
                 </div>
             ) : (
