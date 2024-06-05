@@ -29,6 +29,8 @@ import Leads from '@modules/leadManagement/leads'
 import Candidates from '@modules/leadManagement/candidates'
 import Designations from '@modules/leadManagement/designations'
 import ExposedCandidates from '@modules/leadManagement/exposedCandidates'
+import ConvertToLead from '@modules/appliedJobs/convertToLead'
+import AssignCandidate from '@modules/leadManagement/assignCandidate'
 
 export {
     TeamAppliedJobs,
@@ -63,4 +65,6 @@ export {
     Candidates,
     Designations,
     ExposedCandidates,
+    ConvertToLead,
+    AssignCandidate,
 }

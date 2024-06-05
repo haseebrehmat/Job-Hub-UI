@@ -62,7 +62,7 @@ import {
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle } from 'react-icons/fa'
+import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle, FaUserEdit } from 'react-icons/fa'
 import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
@@ -72,12 +72,13 @@ import {
     RiProfileLine,
     RiDownloadCloudLine,
     RiStarFill,
+    RiShieldUserLine,
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
-import { VscVmRunning, VscSourceControl } from 'react-icons/vsc'
+import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
-import { RxDoubleArrowRight } from 'react-icons/rx'
+import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -174,3 +175,7 @@ export const AddSkillIcon = <AiOutlinePlus style={{ fontSize: 14 }} />
 export const DesignationIcon = <AiOutlinePartition style={{ fontSize: 22 }} />
 export const ExposedCandidateIcon = <HiLockOpen style={{ fontSize: 18 }} />
 export const RemoveExposedToIcon = <MdCancel style={{ fontSize: 18 }} />
+export const CandidateFilterIcon = <VscSettings style={{ fontSize: 18 }} />
+export const AssignCandidateIcon = <FaUserEdit style={{ fontSize: 16 }} />
+export const LeadCandidateIcon = <RiShieldUserLine style={{ fontSize: 18 }} />
+export const LeadAppliedByIcon = <RxFace style={{ fontSize: 18 }} />

@@ -82,3 +82,8 @@ export const saveCandidate = (url, { arg: candidate }) => {
 
 export const fetchCandidatesAndCompanies = url =>
     http.get(url).then(({ data }) => ({ candidates: data?.candidates, companies: data?.companies }))
+
+export const assignCandidate = (url, { arg: candidate }) =>
+    rawHttp
+        .put(url, candidate)
+        .then(({ data }) => toast.success(data.detail || 'Candidate is assigned / reassigned successfully'))

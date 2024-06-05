@@ -23,6 +23,7 @@ import DesignationForm from '@modules/leadManagement/components/DesignationForm'
 import ExposedForm from '@modules/leadManagement/components/ExposedForm'
 import ExposedTo from '@modules/leadManagement/components/ExposedTo'
 import CandidateInfo from '@modules/leadManagement/components/CandidateInfo'
+import LeadFilters from '@modules/leadManagement/components/LeadFilters'
 
 export {
     StatusForm,
@@ -50,4 +51,5 @@ export {
     ExposedForm,
     ExposedTo,
     CandidateInfo,
+    LeadFilters,
 }
