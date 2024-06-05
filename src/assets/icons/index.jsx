@@ -72,12 +72,13 @@ import {
     RiProfileLine,
     RiDownloadCloudLine,
     RiStarFill,
+    RiShieldUserLine,
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
-import { RxDoubleArrowRight } from 'react-icons/rx'
+import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -176,3 +177,5 @@ export const ExposedCandidateIcon = <HiLockOpen style={{ fontSize: 18 }} />
 export const RemoveExposedToIcon = <MdCancel style={{ fontSize: 18 }} />
 export const CandidateFilterIcon = <VscSettings style={{ fontSize: 18 }} />
 export const AssignCandidateIcon = <FaUserEdit style={{ fontSize: 16 }} />
+export const LeadCandidateIcon = <RiShieldUserLine style={{ fontSize: 18 }} />
+export const LeadAppliedByIcon = <RxFace style={{ fontSize: 18 }} />
