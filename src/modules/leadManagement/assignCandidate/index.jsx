@@ -1,23 +1,24 @@
 import { memo } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 
 import { useMutate } from '@/hooks'
 
 import { Button } from '@components'
 
-import { convertToLead } from '@modules/appliedJobs/api'
+import { assignCandidate } from '@modules/leadManagement/api'
 import { CandidateSelect } from '@modules/appliedJobs/components'
 
 import { BackToIcon } from '@icons'
 
 const AssignCandidate = () => {
     const { id } = useParams()
+    const { state } = useLocation()
     const redirect = useNavigate()
 
     const { values, handleSubmit, trigger, setFieldValue } = useMutate(
-        `api/lead_managament/leads/`,
-        convertToLead,
-        { lead: id, candidate: '' },
+        `api/lead_managament/leads/${id}/`,
+        assignCandidate,
+        { candidate: state?.candidate ?? '' },
         null,
         async formValues => trigger({ ...formValues }),
         null,

@@ -24,7 +24,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
     }
 
     useMemo(() => {
-        if (selected) dispatch({ candidate_id: selected })
+        if (selected) dispatch({ candidate_id: selected?.toString() })
         return () => {}
     }, [])
 

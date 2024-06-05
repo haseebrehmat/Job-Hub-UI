@@ -24,7 +24,9 @@ const LeadCard = ({ lead, dispatch }) => (
         </p>
         <div className='flex items-center justify-end gap-2'>
             <Tooltip text='Assign Candidate'>
-                <Link to={`/assign-candidate/${lead?.id}`}>{AssignCandidateIcon}</Link>
+                <Link to={`/assign-candidate/${lead?.id}`} state={{ candidate: lead?.candidate?.id }}>
+                    {AssignCandidateIcon}
+                </Link>
             </Tooltip>
             <Badge label={lead?.applied_job?.tech_stack} classes='text-xs' type='success' />
         </div>
