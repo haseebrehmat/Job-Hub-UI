@@ -101,4 +101,8 @@ export const LEADS_FILTERS = {
     query: '',
     from: today,
     to: today,
+    teams: [],
+    members: [],
+    skills: [],
+    companies: [],
 }
