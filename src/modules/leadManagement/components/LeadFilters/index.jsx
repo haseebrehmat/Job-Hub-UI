@@ -1,16 +1,14 @@
 import { memo, useReducer } from 'react'
 
 import { Input, Button, CustomSelector } from '@components'
-import { WEEK_DAYS_OPTIONS } from '@constants/scrapper'
 
 const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         from: filtered.from,
         to: filtered.to,
         members: filtered.members,
-        teams: filtered.teams,
-        skills: filtered.skills,
-        companies: filtered.companies,
+        team: filtered.team,
+        stacks: filtered.stacks,
     })
 
     const applyFilters = () =>
@@ -18,27 +16,28 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
             from: vals.from,
             to: vals.to,
             members: vals.members,
-            teams: vals.teams,
-            skills: vals.skills,
-            companies: vals.companies,
+            team: vals.team,
+            stacks: vals.stacks,
         })
 
     return (
         <div className='flex flex-wrap auto-cols-max items-end gap-x-4 gap-y-1 px-5 text-[#338d8c]'>
             <div>
-                <span className='text-xs font-semibold'>From Date*</span>
+                <span className='text-xs font-semibold'>From Date</span>
                 <Input
                     type='date'
-                    onChange={({ target: { value } }) => update({ from: value, to: value > vals.to ? value : vals.to })}
+                    onChange={({ target: { value } }) =>
+                        update({ from: value, to: vals.to && value > vals.to ? value : vals.to })
+                    }
                     value={vals.from}
                 />
             </div>
             <div>
-                <span className='text-xs font-semibold'>To Date*</span>
+                <span className='text-xs font-semibold'>To Date</span>
                 <Input type='date' onChange={e => update({ to: e.target.value })} value={vals.to} min={vals.from} />
             </div>
             <div>
-                <span className='text-xs font-semibold'>Members*</span>
+                <span className='text-xs font-semibold'>Members</span>
                 <CustomSelector
                     options={data?.members}
                     handleChange={obj => update({ members: obj })}
@@ -48,36 +47,25 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
                 />
             </div>
             <div>
-                <span className='text-xs font-semibold'>Teams*</span>
+                <span className='text-xs font-semibold'>Team</span>
                 <CustomSelector
                     options={data?.teams}
-                    handleChange={obj => update({ teams: obj })}
-                    selectorValue={vals.teams}
-                    isMulti
-                    placeholder='Select Teams'
+                    handleChange={obj => update({ team: obj })}
+                    selectorValue={vals.team}
+                    placeholder='Select Team'
                 />
             </div>
             <div>
-                <span className='text-xs font-semibold'>Skills*</span>
+                <span className='text-xs font-semibold'>Tech Stacks</span>
                 <CustomSelector
-                    options={WEEK_DAYS_OPTIONS}
-                    handleChange={obj => update({ skills: obj })}
-                    selectorValue={vals.skills}
+                    options={data?.stacks}
+                    handleChange={obj => update({ stacks: obj })}
+                    selectorValue={vals.stacks}
                     isMulti
-                    placeholder='Select Skills'
+                    placeholder='Select Stacks'
                 />
             </div>
-            <div>
-                <span className='text-xs font-semibold'>Companies*</span>
-                <CustomSelector
-                    options={WEEK_DAYS_OPTIONS}
-                    handleChange={obj => update({ companies: obj })}
-                    selectorValue={vals.companies}
-                    isMulti
-                    placeholder='Select Companies'
-                />
-            </div>
-            <Button label='Get' classes='!px-4 !py-2.5' fit onClick={applyFilters} />
+            <Button label='Get' classes='!px-4 !py-2' fit onClick={applyFilters} />
         </div>
     )
 }

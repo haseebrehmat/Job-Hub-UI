@@ -42,6 +42,7 @@ export const fetchLeads = url =>
         pages: data?.num_pages,
         teams: data?.team ?? [],
         members: data?.members ?? [],
+        stacks: data?.tech_stack ?? [],
     }))
 
 export const changeLeadStatus = (url, { arg: status }) =>

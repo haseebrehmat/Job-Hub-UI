@@ -1,5 +1,3 @@
-import { today } from '@constants/dashboard'
-
 export const LEADS_INITIAL_VALS = {
     source: null,
     destination: null,
@@ -8,6 +6,13 @@ export const LEADS_INITIAL_VALS = {
     draggable: null,
     status: '',
     phase: '',
+    filter: false,
+    query: '',
+    from: '',
+    to: '',
+    team: '',
+    members: [],
+    stacks: [],
 }
 
 export const NOTE_INITIAL_STATE = {
@@ -94,15 +99,4 @@ export const CANDIDATE_SELECT_STATE = {
     skills: '',
     designations: '',
     show: false,
-}
-
-export const LEADS_FILTERS = {
-    filter: false,
-    query: '',
-    from: today,
-    to: today,
-    teams: [],
-    members: [],
-    skills: [],
-    companies: [],
 }
