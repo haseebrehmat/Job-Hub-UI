@@ -16,13 +16,18 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Career Builder', value: 'careerbuilder' },
     { label: 'Google', value: 'google' },
     { label: 'Jooble', value: 'jooble' },
+    { label: 'Career Jet', value: 'careerjet' },
+    { label: 'Talent', value: 'talent' },
     { label: 'Other', value: 'other' },
 ]
 
 export const JOB_TYPES_OPTIONS = [
     { label: 'Full Time Remote', value: 'Full Time Remote' },
     { label: 'Full Time on Site', value: 'Full Time on Site' },
-    { label: 'Contract', value: 'Contract' },
+    { label: 'Hybrid Full Time', value: 'Hybrid Full Time' },
+    { label: 'Hybrid Contract', value: 'Hybrid Contract' },
+    { label: 'Contract Onsite', value: 'Contract Onsite' },
+    { label: 'Contract Remote', value: 'Contract Remote' },
 ]
 
 export const JOB_SOURCES = {
@@ -34,6 +39,10 @@ export const JOB_SOURCES = {
     ziprecruiter: 'Zip Recruiter',
     glassdoor: 'Glassdoor',
     monster: 'Monster',
+    google: 'Google',
+    jooble: 'Jooble',
+    careerjet: 'Career Jet',
+    talent: 'Talent',
     simplyhired: 'Simply Hired',
     other: 'Other',
     all: 'All',
