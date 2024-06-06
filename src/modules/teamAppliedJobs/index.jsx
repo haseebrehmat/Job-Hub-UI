@@ -60,8 +60,8 @@ const TeamAppliedJobs = memo(() => {
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
-            <div className='flex items-center justify-between'>
+        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14 px-2'>
+            <div className='flex items-center justify-between px-4'>
                 <div>
                     <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>
                         Applied Jobs: {data.last_12_hours_count} (Last 12 hours)
@@ -82,17 +82,15 @@ const TeamAppliedJobs = memo(() => {
                         ))}
                 </select>
             </div>
-
             <div className=''>
-                <JobSourceAnalytics chartName='Job Source Analytics' chartHeight='400px' />
-                {/* <JobSourceAnalytics chartName='Job Type Analytics' chartHeight='400px' /> */}
+                <JobSourceAnalytics job_sources={data.job_analytics} total={data.total} />
             </div>
 
             <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
-                <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
+                <thead className='text-sm text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
                         {tableHeads.map(heading => (
-                            <th scope='col' className='px-3 py-4 text-[#006366]' key={heading}>
+                            <th scope='col' className='px-4 py-6 text-[#006366]' key={heading}>
                                 {heading}
                             </th>
                         ))}

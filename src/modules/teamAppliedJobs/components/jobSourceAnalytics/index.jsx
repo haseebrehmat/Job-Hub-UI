@@ -1,99 +1,54 @@
-import { memo } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
-import { JobSourceIcons as svgs } from '@svgs'
+import AnimatedNumber from 'react-animated-number'
 
 import './style.css'
 
-const data = [
-    {
-        name: 'LinkedIn',
-        icon: svgs.linkedin,
-        key: 'linkedin',
-        value: 4000,
-    },
-    {
-        name: 'Indeed',
-        icon: svgs.indeed,
-        key: 'indeed',
-        value: 2000,
-    },
-    {
-        name: 'Glassdoor',
-        icon: svgs.glassdoor,
-        key: 'glassdoor',
-        value: 1900,
-    },
-    {
-        name: 'Monster',
-        icon: svgs.linkedin,
-        key: 'monster',
-        value: 1500,
-    },
-    {
-        name: 'Dice',
-        icon: svgs.dice,
-        key: 'dice',
-        value: 4000,
-    },
-    {
-        name: 'Jooble',
-        icon: svgs.jooble,
-        key: 'jooble',
-        value: 2000,
-    },
-    {
-        name: 'Zip Recuiter',
-        icon: svgs.ziprecruiter,
-        key: 'ziprecruiter',
-        value: 1900,
-    },
-    {
-        name: 'Adzuna',
-        icon: svgs.adzuna,
-        key: 'adzuna',
-        value: 1500,
-    },
-]
-
-const JobSourceAnalytics = () => (
-    <div className='grid grid-cols-8 items-center'>
-        {data &&
-            data.map(item => (
-                <div className='border border-1 p-4 m-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-end'>
-                    <div className='m-auto text-xl'>{item.icon}</div>
-                    <div>
-                        <h1 className='text-xl font-bold'>{item.value}</h1>
-                        <h3>{item.name}</h3>
+const JobSourceAnalytics = ({ job_sources, total }) => (
+    <div className='flex flex-row justify-center'>
+        <div className='border border-1 p-4 m-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%] w-48 z-10 '>
+            <div className='flex flex-col justify-center'>
+                <h1 className='text-md font-bold'>
+                    <AnimatedNumber
+                        component='text'
+                        initialValue={0}
+                        value={total}
+                        stepPrecision={0}
+                        style={{
+                            transition: '0.8s ease-out',
+                            fontSize: 44,
+                            transitionProperty: 'background-color, color, opacity',
+                        }}
+                        duration={1000}
+                        formatValue={n => Intl.NumberFormat('en-US').format(n)}
+                    />
+                </h1>
+                <p className='text-lg'>Total Applied Jobs</p>
+            </div>
+        </div>
+        <div className='grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 items-center px-10 bg-slate-100 py-4 rounded-3xl -ml-8'>
+            {job_sources &&
+                job_sources.map(item => (
+                    <div className='border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'>
+                        <div className=''>
+                            <h1 className='text-md font-bold '>
+                                <AnimatedNumber
+                                    component='text'
+                                    initialValue={0}
+                                    value={item.total_applied_jobs}
+                                    stepPrecision={0}
+                                    style={{
+                                        transition: '0.8s ease-out',
+                                        fontSize: 28,
+                                        transitionProperty: 'background-color, color, opacity',
+                                    }}
+                                    duration={1000}
+                                    formatValue={n => Intl.NumberFormat('en-US').format(n)}
+                                />
+                            </h1>
+                            <p className='text-sm'>{item.job__job_source.toUpperCase()}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+        </div>
     </div>
 )
-
-// const JobSourceAnalytics = memo(({ chartName, chartHeight }) => (
-//   <div className='simple_line_chart_analytics border-1 border p-2 m-2' style={{ height: chartHeight }}>
-//     <h3 className='text-center text-[#006366] my-2'>{chartName}</h3>
-//     <ResponsiveContainer width='100%' height='100%'>
-//       <LineChart
-//         width={500}
-//         height={300}
-//         data={data}
-//         margin={{
-//           top: 5,
-//           right: 20,
-//           left: 20,
-//           bottom: 50,
-//         }}
-//       >
-//         <CartesianGrid strokeDasharray='3 3' />
-//         <XAxis dataKey='name' />
-//         <YAxis />
-//         <Tooltip />
-//         <Legend />
-//         <Line dataKey='value' stroke='#8884d8' />
-//       </LineChart>
-//     </ResponsiveContainer>
-//   </div>
-// ))
-
 export default JobSourceAnalytics
