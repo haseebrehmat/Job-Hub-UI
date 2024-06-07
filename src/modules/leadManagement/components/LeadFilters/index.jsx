@@ -9,7 +9,7 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
         selectedMembers: filtered.members,
         team: filtered.team,
         stacks: filtered.stacks,
-        members: data?.members || [],
+        members: filtered.team ? data?.members?.filter(t => t?.team?.includes(filtered.team.value)) : data?.members,
     })
     const applyFilters = () =>
         dispatch({
@@ -19,10 +19,11 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
             team: vals.team,
             stacks: vals.stacks,
         })
-    const changeTeam = team => update({ team, members: data?.members?.filter(t => t?.team === team?.value) })
+    const changeTeam = team =>
+        update({ team, members: data?.members?.filter(t => t?.team?.includes(team?.value)), selectedMembers: [] })
 
     return (
-        <div className='flex flex-wrap auto-cols-max items-end gap-x-4 gap-y-1 px-5 text-[#338d8c]'>
+        <div className='grid grid-cols-4 auto-cols-max items-end gap-x-4 gap-y-1 mx-5 p-2 text-[#338d8c] bg-gray-50 border'>
             <div>
                 <span className='text-xs font-semibold'>From Date</span>
                 <Input
