@@ -83,7 +83,11 @@ const TeamAppliedJobs = memo(() => {
                 </select>
             </div>
             <div className=''>
-                <JobSourceAnalytics job_sources={data.job_analytics} total={data.total} />
+                <JobSourceAnalytics
+                    job_sources={data.job_source_analytics}
+                    job_types={data.job_type_analytics}
+                    total={data.total}
+                />
             </div>
 
             <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
