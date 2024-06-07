@@ -19,8 +19,7 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
             team: vals.team,
             stacks: vals.stacks,
         })
-    const changeTeam = team =>
-        update({ team, members: team.value ? data?.members : data?.members?.filter(t => t?.team === team?.value) })
+    const changeTeam = team => update({ team, members: data?.members?.filter(t => t?.team === team?.value) })
 
     return (
         <div className='flex flex-wrap auto-cols-max items-end gap-x-4 gap-y-1 px-5 text-[#338d8c]'>

@@ -49,6 +49,10 @@ const Leads = () => {
         () => mutate()
         // () => setTimeout(() => window.location.reload(), 1000)
     )
+    const clearFilters = () => {
+        mutate({ url: `/api/lead_managament/leads/?search=&page=1` })
+        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '' })
+    }
 
     return isLoading ? (
         <Loading />
@@ -58,11 +62,7 @@ const Leads = () => {
             <div className='flex flex-col gap-3'>
                 <div className='flex items-center justify-between px-4 gap-2 flex-wrap'>
                     <div className='flex items-center gap-2'>
-                        <Searchbox
-                            query={vals.query}
-                            setQuery={query => dispatch({ query })}
-                            clear={() => dispatch({ members: [], team: '', stacks: [], to: '', from: '' })}
-                        />
+                        <Searchbox query={vals.query} setQuery={query => dispatch({ query })} clear={clearFilters} />
                         <Button
                             icon={CandidateFilterIcon}
                             label='Filters'
