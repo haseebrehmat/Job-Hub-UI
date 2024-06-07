@@ -10,19 +10,6 @@ import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon } f
 
 import { formatDate, Id } from '@/utils/helpers'
 
-const row = [
-    { name: 'ali hassan' },
-    { name: 'Usman asif' },
-    { name: 'zahid' },
-    { name: 'ahsan' },
-    { name: 'uzair' },
-    { name: 'ali' },
-    { name: 'obaid' },
-    { name: 'zahid' },
-    { name: 'ahsan' },
-    { name: 'uzair' },
-]
-
 const JobDetail = () => {
     const { id } = useParams()
     const { data, isLoading } = useSWR(`api/profile/job_vertical/?user_id=${Id()}&job_id=${id}`, fetchJob)
