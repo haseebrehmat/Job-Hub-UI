@@ -94,3 +94,8 @@ export const assignCandidate = (url, { arg: candidate }) =>
     rawHttp
         .put(url, candidate)
         .then(({ data }) => toast.success(data.detail || 'Candidate is assigned / reassigned successfully'))
+
+export const allowCandidateForLeads = (url, { arg: candidate }) =>
+    rawHttp
+        .post(url, candidate)
+        .then(({ data }) => toast.success(data.detail || 'Leads for candidate are allowed / denied successfully'))
