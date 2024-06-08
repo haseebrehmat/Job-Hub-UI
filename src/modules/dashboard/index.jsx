@@ -43,7 +43,7 @@ const Dashboard = () => {
 
     if (isLoading || companyLoading) return <Loading />
 
-    return user?.permissions?.length > 0 ? (
+    return user?.permissions?.length > 0 && can(['view_dashboard', 'view_statistics']) ? (
         <div className='flex flex-col w-full space-y-14'>
             {!error ? (
                 <>
@@ -57,11 +57,15 @@ const Dashboard = () => {
                         </div>
                     )}
                     <div className='flex items-start justify-between'>
-                        <div className='flex flex-col w-4/5 space-y-16'>
-                            {data?.leads && data?.leads?.length > 0 && <Leads data={data?.leads} />}
-                            {data?.tech_jobs && data?.tech_jobs?.length > 0 && <TechStacks data={data?.tech_jobs} />}
-                            {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
-                        </div>
+                        {can('view_dashboard') && (
+                            <div className='flex flex-col w-4/5 space-y-16'>
+                                {data?.leads && data?.leads?.length > 0 && <Leads data={data?.leads} />}
+                                {data?.tech_jobs && data?.tech_jobs?.length > 0 && (
+                                    <TechStacks data={data?.tech_jobs} />
+                                )}
+                                {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
+                            </div>
+                        )}
                         <div className='w-1/5 pl-6 invisible xl:visible'>
                             {can('view_statistics') && data?.statistics && (
                                 <Statistics classes='flex-col space-y-8' data={data?.statistics} />
