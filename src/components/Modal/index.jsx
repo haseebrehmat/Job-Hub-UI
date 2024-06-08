@@ -19,10 +19,7 @@ const Modal = ({ children, content, show, setShow, classes = null }) => {
                     <div className='fixed z-20 inset-0 overflow-y-auto'>
                         <div className='flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
                             <div className='fixed inset-0 transition-opacity'>
-                                <div
-                                    className='absolute inset-0 backdrop-blur-[5px] bg-[rgba(0,0,0,0.3)] transition-[background-color] duration-[0.5s]'
-                                    onClick={() => setShow(false)}
-                                />
+                                <div className='absolute inset-0 backdrop-blur-[5px] bg-[rgba(0,0,0,0.3)] transition-[background-color] duration-[0.5s]' />
                             </div>
                             <span className='hidden sm:inline-block sm:align-middle' />
                             &#8203;
