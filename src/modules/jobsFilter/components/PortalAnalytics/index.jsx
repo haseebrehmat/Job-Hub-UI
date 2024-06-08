@@ -20,7 +20,7 @@ const JobPortalAnalytics = ({ job_sources, total }) => (
                             fontSize: 44,
                             transitionProperty: 'background-color, color, opacity',
                         }}
-                        duration={50}
+                        duration={1000}
                         formatValue={n => formatNum(n)}
                     />
                 </h1>
@@ -42,11 +42,11 @@ const JobPortalAnalytics = ({ job_sources, total }) => (
                                     value={Number(item.count)}
                                     stepPrecision={0}
                                     style={{
-                                        transition: '0.01s ease-out',
+                                        transition: '0.8s ease-out',
                                         fontSize: 28,
                                         transitionProperty: 'background-color, color, opacity',
                                     }}
-                                    duration={1000000}
+                                    duration={1000}
                                     formatValue={n => formatNum(n)}
                                 />
                             </h1>
