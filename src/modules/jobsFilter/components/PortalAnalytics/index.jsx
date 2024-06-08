@@ -17,7 +17,7 @@ const JobPortalAnalytics = ({ job_sources, total }) => (
                         stepPrecision={0}
                         style={{
                             transition: '0.8s ease-out',
-                            fontSize: 42,
+                            fontSize: 44,
                             transitionProperty: 'background-color, color, opacity',
                         }}
                         duration={1000}
@@ -43,7 +43,7 @@ const JobPortalAnalytics = ({ job_sources, total }) => (
                                     stepPrecision={0}
                                     style={{
                                         transition: '0.8s ease-out',
-                                        fontSize: 24,
+                                        fontSize: 28,
                                         transitionProperty: 'background-color, color, opacity',
                                     }}
                                     duration={1000}
