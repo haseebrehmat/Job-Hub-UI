@@ -6,9 +6,9 @@ import { Badge, Button, Loading } from '@components'
 
 import { fetchJob } from '@modules/jobsFilter/api'
 
-import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon } from '@icons'
+import { formatDate, Id } from '@utils/helpers'
 
-import { formatDate, Id } from '@/utils/helpers'
+import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon } from '@icons'
 
 const JobDetail = () => {
     const { id } = useParams()
