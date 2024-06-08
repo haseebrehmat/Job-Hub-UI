@@ -52,7 +52,7 @@ const Candidates = () => {
                                 <CandidateInfo info={row} />
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_candidate', 'delete_candidate']) && (
-                                        <CandidateActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
+                                        <CandidateActions row={row} edit={handleClick} mutate={mutate} />
                                     )}
                                 </td>
                             </tr>
