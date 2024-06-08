@@ -6,7 +6,7 @@ import { Loading, Tooltip } from '@components'
 
 import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
 import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
-
+import { JobSourceAnalytics } from '@modules/teamAppliedJobs/components'
 import { checkToken, formatDate, timeSince } from '@utils/helpers'
 import { baseURL } from '@utils/http'
 import { tableHeads, jobStatus } from '@constants/teamAppliedJobs'
@@ -60,8 +60,8 @@ const TeamAppliedJobs = memo(() => {
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14'>
-            <div className='flex items-center justify-between'>
+        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14 px-2'>
+            <div className='flex items-center justify-between px-4'>
                 <div>
                     <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>
                         Applied Jobs: {data.last_12_hours_count} (Last 12 hours)
@@ -82,11 +82,19 @@ const TeamAppliedJobs = memo(() => {
                         ))}
                 </select>
             </div>
-            <table className='table-auto w-full text-sm text-left text-gray-500'>
-                <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
+            <div className=''>
+                <JobSourceAnalytics
+                    job_sources={data.job_source_analytics}
+                    job_types={data.job_type_analytics}
+                    total={data.total}
+                />
+            </div>
+
+            <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
+                <thead className='text-sm text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
                         {tableHeads.map(heading => (
-                            <th scope='col' className='px-3 py-4 text-[#006366]' key={heading}>
+                            <th scope='col' className='px-4 py-6 text-[#006366]' key={heading}>
                                 {heading}
                             </th>
                         ))}

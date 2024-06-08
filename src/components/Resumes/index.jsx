@@ -89,8 +89,6 @@ const Resumes = ({ data, hide, names, set = null }) => {
                     <div className='h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-auto gap-y-56'>
                         {getTemplates(devProfile, hide, names).map((component, index) => (
                             <div className='h-6 transform scale-[20%] w-[20%]'>
-                                {console.log(tab)}
-                                {console.log(index)}
                                 <div
                                     className={`${
                                         index === tab ? 'border-zinc-800 border-r-2' : 'bg-white '

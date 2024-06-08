@@ -110,6 +110,7 @@ export const ManagementIcon = <HiOutlineUsers style={{ fontSize: '20px' }} />
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
 export const Jobs = <FaBriefcase style={{ fontSize: '22px' }} />
+export const AppliedJobs = <FaBriefcase style={{ fontSize: '46px' }} />
 export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
 export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
 export const SeePassIcon = <AiOutlineEye fontSize='1.4em' color='#048C8C' />
