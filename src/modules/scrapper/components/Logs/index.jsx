@@ -34,6 +34,7 @@ const Logs = () => {
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.job_source}</td>
                                 <td className='px-3 py-6'>{row?.total_jobs}</td>
+                                <td className='px-3 py-6'>{row?.uploaded_jobs}</td>
                                 <td className='px-3 py-6'>{formatDate(row?.created_at)}</td>
                                 <td className='px-3 py-6'>{formatDate(row?.updated_at)}</td>
                             </tr>
