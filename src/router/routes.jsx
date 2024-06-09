@@ -30,6 +30,7 @@ import { JobDetail } from '@modules/jobsFilter/components'
 import App from '@/App'
 
 import { leadsRoutes } from '@router/leadsRoutes'
+import { analyticsRoutes } from '@router/analyticsRoutes'
 
 import { getToken, decodeJwt } from '@utils/helpers'
 
@@ -204,6 +205,7 @@ export const routes = [
         permission: 'view_generic_skill',
     },
     ...leadsRoutes,
+    ...analyticsRoutes,
 ]
 
 export const authRoutes = [

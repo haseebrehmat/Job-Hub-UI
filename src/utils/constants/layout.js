@@ -23,6 +23,7 @@ import {
     LeadManagementIcon,
     CandidateIcon,
     ExposedCandidateIcon,
+    AnalyticsIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -31,6 +32,12 @@ export const menuItems = [
         link: '/',
         svg: DashboardIcon,
         perms: ['view_dashboard', 'view_statistics'],
+    },
+    {
+        label: 'Analytics',
+        link: '/analytics',
+        svg: AnalyticsIcon,
+        perms: ['view_dashboard'],
     },
     {
         label: 'Jobs',
