@@ -1,43 +1,87 @@
 import { memo, useState } from 'react'
 
-import { Button, DeleteDialog, Tooltip, Checkbox } from '@components'
+import { useMutate } from '@/hooks'
+import { Button, DeleteDialog, Tooltip, Modal } from '@components'
 
-import { can } from '@utils/helpers'
+import { allowCandidateForLeads } from '@modules/leadManagement/api'
+
+import { can, decodeJwt } from '@utils/helpers'
 import { CANDIDATE_DELETION } from '@constants/allowDeletion'
 
-import { TrashIcon, EditIcon } from '@icons'
+import { TrashIcon, EditIcon, SeePassIcon } from '@icons'
 
-const CandidateActions = memo(({ id, edit, mutate }) => {
+const CandidateActions = ({ row, edit, mutate }) => {
+    const user = decodeJwt()
     const [show, setShow] = useState(false)
-    const [check, setCheck] = useState({ [id]: true })
+    const [statusUpdate, setStatusUpdate] = useState(false)
 
+    const { handleSubmit, trigger } = useMutate(
+        '/api/candidate_management/candidate/',
+        allowCandidateForLeads,
+        { status: !row?.allowed_status, candidate: row?.id },
+        null,
+        async formValues => trigger({ ...formValues }),
+        null,
+        () => mutate()
+    )
+
+    const flag = row?.company?.id === user?.company
     return (
         <div className='flex items-center'>
+            {flag && (
+                <>
+                    {can('delete_candidate') && (
+                        <DeleteDialog
+                            show={show}
+                            setShow={setShow}
+                            url={`api/candidate_management/candidate/${row?.id}/`}
+                            refetch={mutate}
+                            perm={CANDIDATE_DELETION}
+                        >
+                            <Tooltip text='Delete candidate'>
+                                <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
+                            </Tooltip>
+                        </DeleteDialog>
+                    )}
+                    {can('edit_candidate') && (
+                        <Tooltip text='Edit candidate'>
+                            <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit(row)} />
+                        </Tooltip>
+                    )}
+                </>
+            )}
             {can('edit_candidate') && (
-                <Tooltip text={`${check[id] ? 'Deny' : 'Allow'} Leads`}>
-                    <Checkbox onChange={() => setCheck({ [id]: !check[id] })} checked={check[id]} />
+                <Tooltip text={`${row?.allowed_status ? 'Deny' : 'Allow'} Leads`}>
+                    <Button classes='_icon-btn' icon={SeePassIcon} onClick={() => setStatusUpdate(true)} />
                 </Tooltip>
             )}
-            {can('delete_candidate') && (
-                <DeleteDialog
-                    show={show}
-                    setShow={setShow}
-                    url={`api/candidate_management/candidate/${id}/`}
-                    refetch={mutate}
-                    perm={CANDIDATE_DELETION}
-                >
-                    <Tooltip text='Delete candidate'>
-                        <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
-                    </Tooltip>
-                </DeleteDialog>
-            )}
-            {can('edit_candidate') && (
-                <Tooltip text='Edit candidate'>
-                    <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
-                </Tooltip>
-            )}
+            <Modal
+                classes='!w-1/3'
+                show={statusUpdate}
+                setShow={setStatusUpdate}
+                content={
+                    <div className='w-full'>
+                        <h3 className='mt-1'>
+                            Are you sure to {row?.allowed_status ? 'deny' : 'allow'} this candidate
+                            <span className='font-bold mx-2'>{row?.name}</span>to take leads?
+                        </h3>
+                        <div className='flex items-center mt-3 gap-3 float-right'>
+                            <Button
+                                classes='bg-red-500 border-red-500 hover:bg-red-600'
+                                label='Confirm'
+                                fill
+                                onClick={() => {
+                                    handleSubmit()
+                                    setStatusUpdate(false)
+                                }}
+                            />
+                            <Button label='Cancel' onClick={() => setStatusUpdate(false)} />
+                        </div>
+                    </div>
+                }
+            />
         </div>
     )
-})
+}
 
 export default memo(CandidateActions)

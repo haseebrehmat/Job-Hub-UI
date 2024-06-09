@@ -1,6 +1,8 @@
 import { memo, useMemo } from 'react'
 
-import { Badge } from '@components'
+import { Badge, Tooltip } from '@components'
+
+import { AllowLeadIcon, DenyLeadIcon } from '@icons'
 
 const CandidateInfo = ({ info, exposed = false }) => {
     const memoized = useMemo(
@@ -38,7 +40,14 @@ const CandidateInfo = ({ info, exposed = false }) => {
                 </td>
                 <td className='px-2 py-1'>{info?.designation ? <Badge label={info?.designation} /> : 'N/A'}</td>
                 {exposed ? null : (
-                    <td className='px-3 py-6 font-bold uppercase italic'>{info?.company?.name ?? 'N/A'}</td>
+                    <>
+                        <td className='px-3 py-6 font-bold uppercase italic'>{info?.company?.name ?? 'N/A'}</td>
+                        <td className={`px-3 py-6 ${info?.allowed_status ? 'text-green-500' : 'text-red-500'}`}>
+                            <Tooltip text={info?.allowed_status ? 'Allowed' : 'Denied'} down>
+                                {info?.allowed_status ? AllowLeadIcon : DenyLeadIcon}
+                            </Tooltip>
+                        </td>
+                    </>
                 )}
             </>
         ),

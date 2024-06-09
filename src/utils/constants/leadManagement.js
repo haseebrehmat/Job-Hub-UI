@@ -41,6 +41,7 @@ export const CANDIDATE_HEADS = [
     'Skills',
     'Designation',
     'Company',
+    'Going to Leads',
     '',
 ]
 

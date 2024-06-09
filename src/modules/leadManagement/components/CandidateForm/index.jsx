@@ -21,7 +21,7 @@ const CandidateForm = ({ show, setShow, mutate, candidate }) => {
             phone: candidate?.phone || '',
             id: candidate?.id || '',
             password: '',
-            designation: candidate?.designation?.id || '',
+            designation: candidate?.designation || '',
             skills: candidate?.skills || [],
             experience: candidate?.experience || 1,
         },

@@ -17,6 +17,7 @@ import {
     MdOutlineFileDownload,
     MdLeaderboard,
     MdCancel,
+    MdDoNotDisturbOn,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -31,6 +32,7 @@ import {
     BsFillKeyFill,
     BsFillPlayFill,
     BsCardList,
+    BsCheckCircleFill,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -180,3 +182,5 @@ export const CandidateFilterIcon = <VscSettings style={{ fontSize: 18 }} />
 export const AssignCandidateIcon = <FaUserEdit style={{ fontSize: 16 }} />
 export const LeadCandidateIcon = <RiShieldUserLine style={{ fontSize: 18 }} />
 export const LeadAppliedByIcon = <RxFace style={{ fontSize: 18 }} />
+export const AllowLeadIcon = <BsCheckCircleFill style={{ fontSize: 22 }} />
+export const DenyLeadIcon = <MdDoNotDisturbOn style={{ fontSize: 22 }} />
