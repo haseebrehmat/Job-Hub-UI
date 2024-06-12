@@ -1,14 +1,21 @@
-import { memo } from 'react'
+import { memo, useReducer } from 'react'
 
-import { JobTypesStats, TechStackStats } from '@modules/analytics/components'
+import { JobTypesStats, TechStackStats, Filters } from '@modules/analytics/components'
 
 import { stacksData, jobstypeData } from './data'
+import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
 
-const Analytics = () => (
-    <div className='max-w-full mb-14 px-3 mt-6'>
-        <JobTypesStats data={jobstypeData} />
-        <TechStackStats data={stacksData} />
-    </div>
-)
+const Analytics = () => {
+    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), ANALYTIC_INITIAL_VALUES)
 
+    const filterData = data => data.filter(p => p.name.toLowerCase().includes(vals.query.toLowerCase()))
+
+    return (
+        <div className='max-w-full mb-14 px-3 mt-6'>
+            <Filters values={vals} set={dispatch} />
+            <JobTypesStats data={vals.query ? filterData(jobstypeData) : jobstypeData} />
+            <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
+        </div>
+    )
+}
 export default memo(Analytics)

@@ -9,3 +9,9 @@ export const TECH_STACK_NUMBER_STYLE = {
     fontSize: 22,
     transitionProperty: 'background-color, color, opacity',
 }
+
+export const ANALYTIC_INITIAL_VALUES = {
+    from: '',
+    to: '',
+    query: '',
+}
