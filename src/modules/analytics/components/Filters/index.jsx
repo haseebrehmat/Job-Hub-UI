@@ -38,7 +38,7 @@ const Filters = ({ values, set }) => {
                         <Input
                             onChange={({ target: { value: query } }) => update({ query })}
                             value={vals.query}
-                            classes='lg:!w-40'
+                            classes='lg:!w-52'
                             ph='Enter Keywords'
                         />
                     </div>
@@ -50,7 +50,7 @@ const Filters = ({ values, set }) => {
                                 update({ from: value, to: vals.to.length === 0 || value > vals.to ? value : vals.to })
                             }
                             value={vals.from}
-                            classes='lg:!w-40'
+                            classes='lg:!w-52'
                         />
                     </div>
                     <div>
@@ -60,7 +60,7 @@ const Filters = ({ values, set }) => {
                             onChange={e => update({ to: e.target.value })}
                             value={vals.to}
                             min={vals.from}
-                            classes='lg:!w-40'
+                            classes='lg:!w-52'
                         />
                     </div>
                     <Button onClick={applyFilters} label='Apply' classes='!py-2.5 w-max' icon={DateTimeIcon} />
