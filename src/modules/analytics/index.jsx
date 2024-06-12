@@ -1,6 +1,6 @@
 import { memo, useReducer } from 'react'
 
-import { JobTypeStats, TechStackStats, Filters } from '@modules/analytics/components'
+import { JobTypeStats, TechStackStats, Filters, JobTypePies, TechStackPies } from '@modules/analytics/components'
 
 import { stacksData, jobstypeData } from './data'
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
@@ -15,6 +15,11 @@ const Analytics = () => {
             <Filters values={vals} set={dispatch} />
             <JobTypeStats data={vals.query ? filterData(jobstypeData) : jobstypeData} />
             <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
+            <div className='flex gap-2'>
+                <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} />
+                <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} value />
+            </div>
+            <TechStackPies data={vals.query ? filterData(stacksData) : stacksData} />
         </div>
     )
 }
