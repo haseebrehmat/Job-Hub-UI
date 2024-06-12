@@ -21,10 +21,10 @@ const Filters = ({ values, set }) => {
     }
 
     return (
-        <div className='border px-2 pt-6 pb-4 text-[#1E6570] mt-10 relative'>
-            <p className='-mt-12 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>Filteration</p>
+        <div className='border pl-2 pt-2 pb-3 text-[#1E6570] mt-10 relative'>
+            <p className='-mt-8 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>Filteration</p>
             <div className='flex flex-col lg:flex-row items-center justify-between px-3'>
-                <div className='flex items-end gap-x-4 text-lg tracking-wider'>
+                <div className='flex md:gap-x-8 text-lg tracking-wider mt-4'>
                     <div>
                         <small className='text-sm'>From:</small> {formatDate2(values?.from || today)}
                     </div>
