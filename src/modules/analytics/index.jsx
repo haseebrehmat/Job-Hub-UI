@@ -1,6 +1,6 @@
 import { memo, useReducer } from 'react'
 
-import { JobTypesStats, TechStackStats, Filters } from '@modules/analytics/components'
+import { JobTypeStats, TechStackStats, Filters } from '@modules/analytics/components'
 
 import { stacksData, jobstypeData } from './data'
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
@@ -13,7 +13,7 @@ const Analytics = () => {
     return (
         <div className='max-w-full mb-14 px-3 mt-6'>
             <Filters values={vals} set={dispatch} />
-            <JobTypesStats data={vals.query ? filterData(jobstypeData) : jobstypeData} />
+            <JobTypeStats data={vals.query ? filterData(jobstypeData) : jobstypeData} />
             <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
         </div>
     )

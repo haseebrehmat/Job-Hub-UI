@@ -1,5 +1,5 @@
-import JobTypesStats from '@modules/analytics/components/JobTypesStats'
+import JobTypeStats from '@/modules/analytics/components/JobTypeStats'
 import TechStackStats from '@modules/analytics/components/TechStackStats'
 import Filters from '@modules/analytics/components/Filters'
 
-export { JobTypesStats, TechStackStats, Filters }
+export { JobTypeStats, TechStackStats, Filters }

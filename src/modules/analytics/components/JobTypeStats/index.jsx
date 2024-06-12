@@ -4,7 +4,7 @@ import AnimatedNumber2 from 'react-animated-number'
 import { formatNum } from '@utils/helpers'
 import { JOB_TYPE_NUMBER_STYLE } from '@constants/analytics'
 
-const JobTypesStats = ({ data = [] }) => (
+const JobTypeStats = ({ data = [] }) => (
     <div className='border px-2 pt-10 pb-4 text-[#1E6570] mt-10 relative'>
         <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>Job Types Analytics</p>
         {data?.length > 0 ? (
@@ -37,4 +37,4 @@ const JobTypesStats = ({ data = [] }) => (
     </div>
 )
 
-export default memo(JobTypesStats)
+export default memo(JobTypeStats)

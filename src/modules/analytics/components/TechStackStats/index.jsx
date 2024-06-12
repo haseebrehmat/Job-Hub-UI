@@ -4,7 +4,7 @@ import AnimatedNumber2 from 'react-animated-number'
 import { formatNum } from '@utils/helpers'
 import { TECH_STACK_NUMBER_STYLE } from '@constants/analytics'
 
-const TechStacksStats = ({ data = [] }) => (
+const TechStackStats = ({ data = [] }) => (
     <div className='border px-2 pt-10 pb-4 text-[#1E6570] mt-10 relative'>
         <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>Tech Stacks Analytics</p>
         {data?.length > 0 ? (
@@ -34,4 +34,4 @@ const TechStacksStats = ({ data = [] }) => (
     </div>
 )
 
-export default memo(TechStacksStats)
+export default memo(TechStackStats)
