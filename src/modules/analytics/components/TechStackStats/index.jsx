@@ -6,7 +6,7 @@ import { TECH_STACK_NUMBER_STYLE } from '@constants/analytics'
 
 const TechStackStats = ({ data = [] }) => (
     <div className='border px-2 pt-10 pb-4 text-[#1E6570] mt-10 relative'>
-        <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>Tech Stacks Analytics</p>
+        <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>Tech Stacks Counts</p>
         {data?.length > 0 ? (
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
                 {data?.map((d, index) => (

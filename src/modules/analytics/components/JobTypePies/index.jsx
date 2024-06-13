@@ -1,11 +1,12 @@
+import { formatNum } from '@utils/helpers'
 import { memo } from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 
-const JobTypePies = ({ data, value = false }) => {
-    const randomColor = idx => Math.floor(Math.random() * (16777215 + parseInt(idx, 10))).toString(16)
+import { JOB_TYPE_COLORS } from '@constants/analytics'
 
+const JobTypePies = ({ data, value = false }) => {
     const renderCustomizedLabel = ({ percent, payload }) =>
-        value ? payload.value : `${(percent * 100).toFixed(0)}% ${payload.name}`
+        value ? payload.value : `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(0)}%)`
 
     return (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative w-1/2'>
@@ -16,7 +17,7 @@ const JobTypePies = ({ data, value = false }) => {
                 <PieChart>
                     <Pie data={data} label={renderCustomizedLabel} outerRadius={150} dataKey='value'>
                         {data.map((entry, index) => (
-                            <Cell key={`cell-job-type-${index}`} fill={`#${randomColor(entry.value)}`} />
+                            <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS[index]} />
                         ))}
                     </Pie>
                     <Tooltip />

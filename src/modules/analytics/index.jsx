@@ -13,13 +13,13 @@ const Analytics = () => {
     return (
         <div className='max-w-full mb-14 px-3 mt-6'>
             <Filters values={vals} set={dispatch} />
-            <JobTypeStats data={vals.query ? filterData(jobstypeData) : jobstypeData} />
-            <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
             <div className='flex gap-2'>
+                <JobTypeStats data={vals.query ? filterData(jobstypeData) : jobstypeData} />
                 <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} />
-                <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} value />
             </div>
+            {/* <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} value /> */}
             <TechStackBars data={vals.query ? filterData(stacksData) : stacksData} />
+            <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
         </div>
     )
 }
