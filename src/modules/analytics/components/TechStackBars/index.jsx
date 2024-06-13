@@ -1,7 +1,7 @@
 import { memo } from 'react'
-import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
+import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from 'recharts'
 
-const TechStackPies = ({ data }) => {
+const TechStackBars = ({ data }) => {
     console.log(data.length)
 
     return (
@@ -29,12 +29,13 @@ const TechStackPies = ({ data }) => {
                         type='number'
                         domain={[0, 'auto']}
                     />
-                    <Tooltip />
-                    <Bar dataKey='value' fill='#4ab9a7' />
+                    <Bar dataKey='value' fill='#4ab9a7'>
+                        <LabelList dataKey='value' position='top' fontSize={13} fontWeight='bold' fill='#4ab9a7' />
+                    </Bar>
                 </BarChart>
             </ResponsiveContainer>
         </div>
     )
 }
 
-export default memo(TechStackPies)
+export default memo(TechStackBars)
