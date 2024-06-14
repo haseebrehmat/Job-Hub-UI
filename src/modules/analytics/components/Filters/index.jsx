@@ -23,7 +23,6 @@ const Filters = ({ values, set }) => {
         update({ from: '', to: '', query: '' })
     }
 
-    console.log(vals.week)
     return (
         <div className='text-[#1E6570]'>
             <div className='flex items-center justify-between pb-2'>

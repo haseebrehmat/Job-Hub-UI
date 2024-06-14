@@ -141,25 +141,31 @@ export const jobstypeData = [
     {
         name: 'Contract On Site',
         value: 100250,
+        key: 'contract_on_site',
     },
     {
         name: 'Contract Remote',
         value: 1250,
+        key: 'contract_remote',
     },
     {
         name: 'Full Time On Site',
         value: 91505,
+        key: 'full_time_on_site',
     },
     {
         name: 'Full Time Remote',
         value: 23717,
+        key: 'full_time_remote',
     },
     {
         name: 'Hybrid On Site',
         value: 18177,
+        key: 'hybrid_on_site',
     },
     {
         name: 'Hybrid Remote',
         value: 1877,
+        key: 'hybrid_remote',
     },
 ]

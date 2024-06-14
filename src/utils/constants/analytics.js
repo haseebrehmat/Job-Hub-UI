@@ -15,6 +15,17 @@ export const ANALYTIC_INITIAL_VALUES = {
     to: '',
     filter: false,
     query: '',
+    bar: 'total',
 }
 
 export const JOB_TYPE_COLORS = ['#532747', '#1c5655', '#526acb', '#9e6dd5', '#8e272b', '#2d455c', '#4ab9a7']
+
+export const JOB_TYPES = {
+    total: 'Total',
+    contract_on_site: 'Contract On Site',
+    contract_remote: 'Contract Remote',
+    full_time_on_site: 'Full Time On Site',
+    full_time_remote: 'Full Time Remote',
+    hybrid_on_site: 'Hybrid On Site',
+    hybrid_remote: 'Hybrid Remote',
+}

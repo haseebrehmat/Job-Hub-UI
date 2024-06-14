@@ -4,7 +4,7 @@ import AnimatedNumber2 from 'react-animated-number'
 import { formatNum } from '@utils/helpers'
 import { JOB_TYPE_NUMBER_STYLE } from '@constants/analytics'
 
-const JobTypeStats = ({ data = [] }) => (
+const JobTypeStats = ({ data = [], set = null }) => (
     <div className='border px-2 pt-10 pb-4 mt-10 relative w-1/2'>
         <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-[#1E6570] text-lg tracking-widest'>
             Job Types Counts
@@ -15,8 +15,9 @@ const JobTypeStats = ({ data = [] }) => (
                     <div
                         className={`border shadow-md p-3 rounded-xl _gradient-${
                             index + 7
-                        } w-full h-40 flex items-center`}
+                        } w-full h-40 flex items-center cursor-pointer`}
                         key={index}
+                        onClick={() => set({ bar: d.key })}
                     >
                         <div className='flex items-center justify-between text-white'>
                             <div className='flex flex-col'>
