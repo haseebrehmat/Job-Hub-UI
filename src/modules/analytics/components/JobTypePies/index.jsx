@@ -9,7 +9,7 @@ const JobTypePies = ({ data, value = false }) => {
         value ? payload.value : `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(0)}%)`
 
     return (
-        <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative w-1/2'>
+        <div className={`border px-2 pt-10 text-[#1E6570] mt-10 relative ${value ? 'w-1/3' : 'w-1/2'}`}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Job Types Analytics By {value ? 'Values' : 'Percentages'} - Charts
             </p>

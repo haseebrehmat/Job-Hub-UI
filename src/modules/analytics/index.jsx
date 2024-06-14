@@ -17,9 +17,11 @@ const Analytics = () => {
                 <JobTypeStats data={vals.query ? filterData(jobstypeData) : jobstypeData} set={dispatch} />
                 <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} />
             </div>
-            {/* <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} value /> */}
             <TechStackBars data={vals.query ? filterData(stacksData) : stacksData} type={vals.bar} set={dispatch} />
-            <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
+            <div className='flex gap-2'>
+                <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
+                <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} value />
+            </div>
         </div>
     )
 }
