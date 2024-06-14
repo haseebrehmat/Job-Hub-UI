@@ -1,8 +1,8 @@
 import { memo } from 'react'
 
-import { Input, Radio } from '@components'
+import { Input, Radio, CustomSelector } from '@components'
 
-import { year } from '@constants/dashboard'
+import { getYearsOptions } from '@utils/helpers'
 
 const FilterOptions = ({ vals = null, update = null }) =>
     vals && (
@@ -61,29 +61,31 @@ const FilterOptions = ({ vals = null, update = null }) =>
                 <>
                     <div>
                         <span className='text-xs pl-1'>Year</span>
-                        <Input
-                            type='number'
-                            onChange={e => update({ year: e.target.value })}
-                            value={vals.year}
-                            min='2000'
-                            max={year}
-                            classes='lg:!w-56'
-                        />
-                    </div>
-                    <div>
-                        <span className='text-xs pl-1'>Choose quarter</span>
-                        <div className='flex gap-8 my-2'>
-                            {[...Array(4)].map((_, i) => (
-                                <Radio
-                                    key={i}
-                                    name='quarter'
-                                    value={`q${i + 1}`}
-                                    label={`Q ${i + 1}`}
-                                    onChange={e => update({ quarter: e.target.value })}
-                                />
-                            ))}
+                        <div className='lg:!w-56'>
+                            <CustomSelector
+                                options={getYearsOptions()}
+                                handleChange={({ value }) => update({ year: value })}
+                                selectorValue={{ value: vals.year, label: vals.year }}
+                                placeholder='Select Year'
+                            />
                         </div>
                     </div>
+                    {vals.year && (
+                        <div>
+                            <span className='text-xs pl-1'>Choose quarter</span>
+                            <div className='flex gap-8 my-2'>
+                                {[...Array(4)].map((_, i) => (
+                                    <Radio
+                                        key={i}
+                                        name='quarter'
+                                        value={`q${i + 1}`}
+                                        label={`Q ${i + 1}`}
+                                        onChange={e => update({ quarter: e.target.value })}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </>
             )}
         </>
