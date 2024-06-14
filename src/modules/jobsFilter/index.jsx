@@ -29,7 +29,13 @@ const JobsFilter = memo(() => {
         jobSourceSelector: [],
         jobTypeSelector: 'all',
         jobVisibilitySelector: 'all',
-        stats: { total_job: '0', filtered_job: '0', recruiter_job: '0', non_recruiter_job: '0' },
+        stats: {
+            total_job: '0',
+            filtered_job: '0',
+            recruiter_job: '0',
+            non_recruiter_job: '0',
+            today_uploaded_job: 0,
+        },
         jobStatusChoice: {},
         dates: { from_date: '', to_date: '' },
         jobTitle: '',
@@ -94,6 +100,7 @@ const JobsFilter = memo(() => {
             filtered_jobs,
             recruiter_jobs,
             non_recruiter_jobs,
+            today_uploaded_jobs,
             job_status_choice,
             tech_keywords_count_list,
             job_source_count_list,
@@ -110,6 +117,7 @@ const JobsFilter = memo(() => {
                     filtered_job: filtered_jobs,
                     non_recruiter_job: non_recruiter_jobs,
                     recruiter_job: recruiter_jobs,
+                    today_uploaded_job: today_uploaded_jobs,
                 },
                 jobStatusChoice: job_status_choice,
                 techStackData: tech_keywords_count_list,
@@ -217,6 +225,7 @@ const JobsFilter = memo(() => {
                         { type: 'Filtered', count: filterState?.stats?.filtered_job },
                         { type: 'Recruiters', count: filterState?.stats?.recruiter_job },
                         { type: 'Non Recruiters', count: filterState?.stats?.non_recruiter_job },
+                        { type: 'Today Uploaded Jobs', count: filterState?.stats?.today_uploaded_job },
                     ]}
                     total={filterState?.stats?.total_job}
                 />

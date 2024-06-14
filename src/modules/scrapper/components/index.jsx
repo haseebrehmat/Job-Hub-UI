@@ -15,6 +15,7 @@ import GroupLinks from '@modules/scrapper/components/GroupLinks'
 import GroupLinksForm from '@modules/scrapper/components/GroupLinksForm'
 import GroupsDropDown from '@modules/scrapper/components/GroupsDropDown'
 import GroupLinkActions from '@modules/scrapper/components/GroupLinkActions'
+import ScraperAnalytics from '@modules/scrapper/components/GroupLinkActions'
 
 export {
     CronjobSetting,
