@@ -30,7 +30,7 @@ const Profile = () => {
 
     return (
         <div className='p-2'>
-            <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
+            <div className='p-4 rounded-lg shadow-md'>
                 <div className='flex flex-col mb-4'>
                     <div className='flex flex-col mb-4 space-y-2 md:gap-5 sm:flex-row sm:space-y-0'>
                         <Button
