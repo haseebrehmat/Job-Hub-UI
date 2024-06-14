@@ -15,8 +15,8 @@ const JobTypePies = ({ data, value = false }) => {
             </p>
             <ResponsiveContainer width='100%' height={400}>
                 <PieChart>
-                    <Pie data={data} label={renderCustomizedLabel} outerRadius={150} dataKey='value'>
-                        {data.map((entry, index) => (
+                    <Pie data={data} label={renderCustomizedLabel} outerRadius={130} dataKey='value'>
+                        {data.map((_, index) => (
                             <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS[index]} />
                         ))}
                     </Pie>

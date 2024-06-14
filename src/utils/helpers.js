@@ -372,4 +372,4 @@ export const parseGroups = groups => groups.map(group => ({ value: group.id, lab
 export const getSelectedDays = days =>
     days ? WEEK_DAYS_OPTIONS.filter(({ value }) => days.includes(value)) : WEEK_DAYS_OPTIONS
 
-export const formatNum = num => Intl.NumberFormat('en-US').format(num)
+export const formatNum = num => (num ? Intl.NumberFormat('en-US').format(num) : 'Invalid Number')

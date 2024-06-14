@@ -19,7 +19,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => (
             </div>
         )}
         <ResponsiveContainer width='100%' height={750}>
-            <BarChart height={300} data={data} margin={{ top: 5, bottom: 165, right: 10, left: 10 }}>
+            <BarChart height={300} data={data} margin={{ top: 5, bottom: 150, right: 10, left: 10 }}>
                 <CartesianGrid strokeDasharray='3 3' />
                 <XAxis
                     dataKey='name'

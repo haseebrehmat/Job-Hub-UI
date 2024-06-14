@@ -16,6 +16,10 @@ export const ANALYTIC_INITIAL_VALUES = {
     filter: false,
     query: '',
     bar: 'total',
+    week: '',
+    month: '',
+    year: '',
+    quarter: '',
 }
 
 export const JOB_TYPE_COLORS = ['#532747', '#1c5655', '#526acb', '#9e6dd5', '#8e272b', '#2d455c', '#4ab9a7']
