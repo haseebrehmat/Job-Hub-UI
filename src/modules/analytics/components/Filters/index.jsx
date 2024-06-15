@@ -1,13 +1,13 @@
 import { memo, useReducer } from 'react'
 
-import { Button } from '@components'
+import { Button, Input } from '@components'
 
 import { FilterOptions, FilterTypes } from '@modules/analytics/components'
 
 import { formatDate2 } from '@utils/helpers'
 import { today } from '@constants/dashboard'
 
-import { DateTimeIcon, CandidateFilterIcon } from '@icons'
+import { DateTimeIcon, CandidateFilterIcon, AllowLeadIcon } from '@icons'
 
 const Filters = ({ values, set }) => {
     const [vals, update] = useReducer((state, newState) => ({ ...state, ...newState }), {
@@ -47,13 +47,29 @@ const Filters = ({ values, set }) => {
                         <small className='text-sm'>To:</small> {formatDate2(values?.to || today)}
                     </div>
                 </div>
-                <Button
-                    icon={CandidateFilterIcon}
-                    label='Filters'
-                    onClick={() => set({ filter: !values.filter })}
-                    fit
-                    fill={values.filter}
-                />
+                <div className='flex gap-3'>
+                    <Input
+                        ph='Enter Keywords'
+                        onChange={e => update({ query: e.target.value })}
+                        value={vals.query}
+                        classes='lg:!w-56'
+                    />
+                    <Button onClick={applyFilters} icon={AllowLeadIcon} classes='!px-1' />
+                    <Button
+                        icon={CandidateFilterIcon}
+                        label='Filters'
+                        onClick={() => set({ filter: !values.filter })}
+                        fit
+                        fill={values.filter}
+                    />
+                    {(values.from ||
+                        values.to ||
+                        values.query ||
+                        values.year ||
+                        values.month ||
+                        values.week ||
+                        values.quarter) && <Button onClick={clearFilters} label='Clear' />}
+                </div>
             </div>
             {values.filter && (
                 <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
@@ -61,9 +77,6 @@ const Filters = ({ values, set }) => {
                     <div className='flex items-end gap-4 pb-3 px-2'>
                         <FilterOptions vals={vals} update={update} />
                         <Button onClick={applyFilters} label='Apply' classes='!py-2.5 w-max' icon={DateTimeIcon} />
-                        {(values.from || values.to || values.query) && (
-                            <Button onClick={clearFilters} label='Clear' classes='!py-[11px] w-max' />
-                        )}
                     </div>
                 </div>
             )}
