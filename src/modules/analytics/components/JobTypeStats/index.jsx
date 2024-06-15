@@ -19,7 +19,7 @@ const JobTypeStats = ({ data = [], set = null }) => (
                         key={index}
                         onClick={() => set({ bar: d.key })}
                     >
-                        <div className='flex items-center justify-between text-white'>
+                        <div className='flex items-center justify-between text-white pl-2'>
                             <div className='flex flex-col'>
                                 <p className='uppercase text-sm tracking-widest'>{d.name}</p>
                                 <AnimatedNumber2
