@@ -20,9 +20,10 @@ export const ANALYTIC_INITIAL_VALUES = {
     month: '',
     year: '',
     quarter: '',
+    stack: 'others dev',
 }
 
-export const JOB_TYPE_COLORS = ['#532747', '#1c5655', '#526acb', '#9e6dd5', '#8e272b', '#2d455c', '#4ab9a7']
+export const JOB_TYPE_COLORS = ['#532747', '#1c5655', '#526acb', '#644897', '#8e272b', '#2d455c', '#4ab9a7']
 
 export const JOB_TYPES = {
     contract_on_site: 'Contract On Site',
