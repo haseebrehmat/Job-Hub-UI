@@ -20,7 +20,7 @@ const Analytics = () => {
             <TechStackBars data={vals.query ? filterData(stacksData) : stacksData} type={vals.bar} set={dispatch} />
             <div className='flex gap-2'>
                 <TechStackStats data={vals.query ? filterData(stacksData) : stacksData} />
-                <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} value />
+                <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} />
             </div>
         </div>
     )
