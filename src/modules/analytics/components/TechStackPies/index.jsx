@@ -1,11 +1,16 @@
-import { memo } from 'react'
+import { memo, useRef } from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 
-import { formatNum, transformPascal } from '@utils/helpers'
+import { Tooltip as CustomTooltip } from '@components'
+
+import { formatNum, transformPascal, htmlToPng } from '@utils/helpers'
 import { JOB_TYPES, JOB_TYPE_COLORS } from '@constants/analytics'
-import { BreadIcon } from '@/assets/icons'
+
+import { BreadIcon, DownloadIcon2 } from '@icons'
 
 const TechStackPies = ({ data, stack = null }) => {
+    const chartRef = useRef('')
+
     const renderCustomizedLabel = ({ percent, payload }) =>
         `${formatNum(payload.value)} ${transformPascal(payload.name)
             .split(' ')
@@ -17,30 +22,44 @@ const TechStackPies = ({ data, stack = null }) => {
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stack Analytics - Charts
             </p>
-            <ResponsiveContainer width='100%' height={400}>
-                <PieChart>
-                    <Pie data={data} label={renderCustomizedLabel} innerRadius={90} outerRadius={120} dataKey='value'>
-                        {data.map((_, index) => (
-                            <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS[index]} fillOpacity={0.8} />
-                        ))}
-                    </Pie>
-                    <Tooltip />
-                </PieChart>
-            </ResponsiveContainer>
-            <p className='text-center text-lg font-bold uppercase tracking-wider'>{stack ?? 'No stack'}</p>
-            <div className='grid grid-cols-2 p-4 mt-6'>
-                {Object.keys(JOB_TYPES).map(key => (
-                    <div className='flex items-center' key={key}>
-                        <span>
-                            {transformPascal(JOB_TYPES[key])
-                                .split(' ')
-                                .map(word => word.charAt(0).toUpperCase())
-                                .join('')}
-                        </span>
-                        <span className='mx-2'>{BreadIcon}</span>
-                        <span className='text-sm'>{transformPascal(JOB_TYPES[key])}</span>
-                    </div>
-                ))}
+            <span
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                onClick={() => htmlToPng(chartRef?.current)}
+            >
+                <CustomTooltip text='Export to png'>{DownloadIcon2}Export</CustomTooltip>
+            </span>
+            <div ref={chartRef}>
+                <ResponsiveContainer width='100%' height={400}>
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            label={renderCustomizedLabel}
+                            innerRadius={90}
+                            outerRadius={120}
+                            dataKey='value'
+                        >
+                            {data.map((_, index) => (
+                                <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS[index]} fillOpacity={0.8} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                    </PieChart>
+                </ResponsiveContainer>
+                <p className='text-center text-lg font-bold uppercase tracking-wider'>{stack ?? 'No stack'}</p>
+                <div className='grid grid-cols-2 p-4 mt-6'>
+                    {Object.keys(JOB_TYPES).map(key => (
+                        <div className='flex items-center' key={key}>
+                            <span>
+                                {transformPascal(JOB_TYPES[key])
+                                    .split(' ')
+                                    .map(word => word.charAt(0).toUpperCase())
+                                    .join('')}
+                            </span>
+                            <span className='mx-2'>{BreadIcon}</span>
+                            <span className='text-sm'>{transformPascal(JOB_TYPES[key])}</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

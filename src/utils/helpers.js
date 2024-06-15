@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode'
+import { toPng } from 'html-to-image'
 
 import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
@@ -380,4 +381,17 @@ export const getYearsOptions = () => {
         years.push({ value: i, label: i })
     }
     return years
+}
+
+export const htmlToPng = htmlRef => {
+    toPng(htmlRef, { cacheBust: false, backgroundColor: 'white' })
+        .then(dataUrl => {
+            const link = document.createElement('a')
+            link.download = 'export.png'
+            link.href = dataUrl
+            link.click()
+        })
+        .catch(err => {
+            console.log('Error ==>', err)
+        })
 }
