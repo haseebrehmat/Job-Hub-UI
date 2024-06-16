@@ -8,7 +8,7 @@ import { JOB_TYPE_NUMBER_STYLE } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 
-const JobTypeStats = ({ data = [], set = null }) => {
+const JobTypeCounts = ({ data = [], set = null }) => {
     const statRef = useRef('')
 
     return (
@@ -56,4 +56,4 @@ const JobTypeStats = ({ data = [], set = null }) => {
     )
 }
 
-export default memo(JobTypeStats)
+export default memo(JobTypeCounts)

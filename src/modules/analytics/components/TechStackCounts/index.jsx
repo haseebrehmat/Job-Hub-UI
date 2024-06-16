@@ -7,7 +7,7 @@ import { TECH_STACK_NUMBER_STYLE } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 
-const TechStackStats = ({ data = [], set = null, stack = null }) => {
+const TechStackCounts = ({ data = [], set = null, stack = null }) => {
     const statsRef = useRef('')
 
     return (
@@ -46,4 +46,4 @@ const TechStackStats = ({ data = [], set = null, stack = null }) => {
         </div>
     )
 }
-export default memo(TechStackStats)
+export default memo(TechStackCounts)
