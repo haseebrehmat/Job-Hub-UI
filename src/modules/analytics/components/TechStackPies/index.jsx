@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react'
+import { memo, useRef, useMemo } from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 
 import { Tooltip as CustomTooltip } from '@components'
@@ -8,9 +8,15 @@ import { JOB_TYPES, JOB_TYPE_COLORS } from '@constants/analytics'
 
 import { BreadIcon, DownloadIcon2 } from '@icons'
 
-const TechStackPies = ({ data, stack = null }) => {
+const TechStackPies = ({ data = {}, stack = null }) => {
     const chartRef = useRef('')
-
+    const memoizedData = useMemo(
+        () =>
+            Object.entries(data)
+                .slice(1)
+                .map(([name, value]) => ({ name: JOB_TYPES[name], value })),
+        [data, stack]
+    )
     const renderCustomizedLabel = ({ percent, payload }) =>
         `${formatNum(payload.value)} ${transformPascal(payload.name)
             .split(' ')
@@ -32,13 +38,15 @@ const TechStackPies = ({ data, stack = null }) => {
                 <ResponsiveContainer width='100%' height={400}>
                     <PieChart>
                         <Pie
-                            data={data}
+                            data={memoizedData}
                             label={renderCustomizedLabel}
                             innerRadius={90}
                             outerRadius={120}
                             dataKey='value'
+                            animationBegin={0}
+                            animationDuration={300}
                         >
-                            {data.map((_, index) => (
+                            {memoizedData.map((_, index) => (
                                 <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS[index]} fillOpacity={0.8} />
                             ))}
                         </Pie>
