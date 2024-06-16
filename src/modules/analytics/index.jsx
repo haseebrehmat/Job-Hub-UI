@@ -26,11 +26,7 @@ const Analytics = () => {
             </div>
             <TechStackBars data={vals.query ? filterQuery(stacksData) : stacksData} type={vals.bar} set={dispatch} />
             <div className='flex gap-2'>
-                <TechStackStats
-                    data={vals.query ? filterQuery(stacksData) : stacksData}
-                    set={dispatch}
-                    vals={vals.stack}
-                />
+                <TechStackStats data={vals.query ? filterQuery(stacksData) : stacksData} set={dispatch} vals={vals} />
                 <TechStackPies data={vals.query ? filterQuery(jobstypeData) : jobstypeData} stack={vals.stack} />
             </div>
         </div>

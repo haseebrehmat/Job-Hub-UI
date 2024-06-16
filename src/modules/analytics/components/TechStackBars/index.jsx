@@ -10,7 +10,7 @@ import { SearchClearIcon, DownloadIcon2 } from '@icons'
 
 const TechStackBars = ({ data = [], type = 'total', set = null }) => {
     const barRef = useRef('')
-    const memoizedData = useMemo(() => data.filter(row => ({ name: row.name, [type]: row[type] })), [data, type])
+    const memoizedData = useMemo(() => data.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
 
     return (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
