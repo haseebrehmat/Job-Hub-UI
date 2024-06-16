@@ -180,3 +180,13 @@ export const jobstypeData = [
         key: 'hybrid_remote',
     },
 ]
+
+export const trendsData = [
+    { date: 'Jan', jobs: 100 },
+    { date: 'Feb', jobs: 120 },
+    { date: 'Mar', jobs: 90 },
+    { date: 'Apr', jobs: 80 },
+    { date: 'May', jobs: 70 },
+    { date: 'Jun', jobs: 200 },
+    { date: 'Aug', jobs: 290 },
+]

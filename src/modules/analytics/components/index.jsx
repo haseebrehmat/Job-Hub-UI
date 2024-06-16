@@ -6,6 +6,7 @@ import TechStackBars from '@modules/analytics/components/TechStackBars'
 import FilterOptions from '@modules/analytics/components/FilterOptions'
 import FilterTypes from '@modules/analytics/components/FilterTypes'
 import TechStackPies from '@modules/analytics/components/TechStackPies'
+import Trends from '@modules/analytics/components/Trends'
 
 export {
     JobTypeCounts,
@@ -16,4 +17,5 @@ export {
     FilterOptions,
     FilterTypes,
     TechStackPies,
+    Trends,
 }

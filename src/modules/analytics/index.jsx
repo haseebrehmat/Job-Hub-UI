@@ -7,9 +7,10 @@ import {
     JobTypePies,
     TechStackBars,
     TechStackPies,
+    Trends,
 } from '@modules/analytics/components'
 
-import { stacksData, jobstypeData } from '@modules/analytics/api/data'
+import { stacksData, jobstypeData, trendsData } from '@modules/analytics/api/data'
 
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
 
@@ -34,6 +35,7 @@ const Analytics = () => {
                 />
                 <TechStackPies data={stacksData.find(row => row.name === vals.stack)} stack={vals.stack} />
             </div>
+            <Trends data={trendsData} />
         </div>
     )
 }
