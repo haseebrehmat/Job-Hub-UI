@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react'
+import { memo, useMemo, useRef } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from 'recharts'
 
 import { Tooltip } from '@components'
@@ -10,6 +10,7 @@ import { SearchClearIcon, DownloadIcon2 } from '@icons'
 
 const TechStackBars = ({ data = [], type = 'total', set = null }) => {
     const barRef = useRef('')
+    const memoizedData = useMemo(() => data.filter(row => ({ name: row.name, [type]: row[type] })), [data, type])
 
     return (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
@@ -31,7 +32,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => {
                 </div>
             )}
             <ResponsiveContainer width='100%' height={750} ref={barRef}>
-                <BarChart height={300} data={data} margin={{ top: 5, bottom: 150, right: 10, left: 10 }}>
+                <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
                     <CartesianGrid strokeDasharray='3 3' />
                     <XAxis
                         dataKey='name'
@@ -42,7 +43,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => {
                         textAnchor='end'
                         allowDuplicatedCategory={false}
                         padding={{ left: 30 }}
-                        fontSize={17 - Math.round(data.length / 15)}
+                        fontSize={17 - Math.round(memoizedData.length / 15)}
                     />
                     <YAxis
                         label={{ angle: -90, position: 'insideLeft' }}

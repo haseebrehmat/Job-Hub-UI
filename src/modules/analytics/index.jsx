@@ -29,7 +29,7 @@ const Analytics = () => {
                 <TechStackStats
                     data={vals.query ? filterQuery(stacksData) : stacksData}
                     set={dispatch}
-                    stack={vals.stack}
+                    vals={vals.stack}
                 />
                 <TechStackPies data={vals.query ? filterQuery(jobstypeData) : jobstypeData} stack={vals.stack} />
             </div>
