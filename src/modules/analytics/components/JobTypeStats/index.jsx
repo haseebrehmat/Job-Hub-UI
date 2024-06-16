@@ -14,7 +14,7 @@ const JobTypeStats = ({ data = [], set = null }) => {
     return (
         <div className='border px-2 pt-10 pb-4 mt-10 relative w-1/2'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-[#1E6570] text-lg tracking-widest'>
-                Job Types Counts
+                Job Types<span className='text-sm'> - Counts</span>
             </p>
             <span
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border text-[#1E6570] bg-[#EDFDFB] right-2 cursor-pointer text-sm'

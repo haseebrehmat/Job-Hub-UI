@@ -13,7 +13,7 @@ const TechStackStats = ({ data = [], set = null, stack = null }) => {
     return (
         <div className='border px-2 pt-10 pb-4 text-[#1E6570] mt-10 relative'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
-                Tech Stacks Counts
+                Tech Stacks<span className='text-sm'> - Counts</span>
             </p>
             <span
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
