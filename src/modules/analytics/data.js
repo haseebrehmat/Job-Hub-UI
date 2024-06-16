@@ -1,141 +1,152 @@
-export const stacksData = [
+export const rawStacksData = [
     {
         name: 'others dev',
-        value: 100250,
+        total: 100250,
     },
     {
         name: 'others',
-        value: 91505,
+        total: 91505,
     },
     {
         name: 'java',
-        value: 23717,
+        total: 23717,
     },
     {
         name: 'c#/dot net',
-        value: 18177,
+        total: 18177,
     },
     {
         name: 'devops',
-        value: 17112,
+        total: 17112,
     },
     {
         name: 'database',
-        value: 11411,
+        total: 11411,
     },
     {
         name: 'qa',
-        value: 10330,
+        total: 10330,
     },
     {
         name: 'ui/ux',
-        value: 9982,
+        total: 9982,
     },
     {
         name: 'data engineering/data engineer',
-        value: 6890,
+        total: 6890,
     },
     {
         name: 'python',
-        value: 6293,
+        total: 6293,
     },
     {
         name: 'salesforce',
-        value: 6291,
+        total: 6291,
     },
     {
         name: 'javascript',
-        value: 6187,
+        total: 6187,
     },
     {
         name: 'ios',
-        value: 4347,
+        total: 4347,
     },
     {
         name: 'android',
-        value: 3493,
+        total: 3493,
     },
     {
         name: 'service now',
-        value: 3183,
+        total: 3183,
     },
     {
         name: 'c/c++',
-        value: 3085,
+        total: 3085,
     },
     {
         name: 'mern',
-        value: 2459,
+        total: 2459,
     },
     {
         name: 'data science/data scientist',
-        value: 2401,
+        total: 2401,
     },
     {
         name: 'php',
-        value: 1918,
+        total: 1918,
     },
     {
         name: 'dynamics',
-        value: 1906,
+        total: 1906,
     },
     {
         name: 'networking',
-        value: 1841,
+        total: 1841,
     },
     {
         name: 'go/golang',
-        value: 1535,
+        total: 1535,
     },
     {
         name: 'react-js',
-        value: 1517,
+        total: 1517,
     },
     {
         name: 'ml engineer',
-        value: 1462,
+        total: 1462,
     },
     {
         name: 'ml enginner',
-        value: 982,
+        total: 982,
     },
     {
         name: 'ruby on rails',
-        value: 846,
+        total: 846,
     },
     {
         name: 'blockchain',
-        value: 805,
+        total: 805,
     },
     {
         name: 'react native',
-        value: 312,
+        total: 312,
     },
     {
         name: 'flutter',
-        value: 123,
+        total: 123,
     },
     {
         name: 'wordpress',
-        value: 17,
+        total: 17,
     },
     {
         name: 'full-stack',
-        value: 15,
+        total: 15,
     },
     {
         name: 'ror',
-        value: 15,
+        total: 15,
     },
     {
         name: 'full-stack .net',
-        value: 1,
+        total: 1,
     },
     {
         name: 'sdet',
-        value: 1,
+        total: 1,
     },
 ]
+
+export const stacksData = rawStacksData.map(entry => ({
+    name: entry.name,
+    total: entry.total,
+    contract_on_site: parseInt(entry.total / 7),
+    contract_remote: parseInt(entry.total / 6),
+    full_time_on_site: parseInt(entry.total / 5),
+    full_time_remote: parseInt(entry.total / 4),
+    hybrid_on_site: parseInt(entry.total / 3),
+    hybrid_remote: parseInt(entry.total / 2),
+}))
 
 export const jobstypeData = [
     {

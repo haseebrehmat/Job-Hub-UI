@@ -50,82 +50,19 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => {
                         type='number'
                         domain={[0, 'auto']}
                     />
-                    {type === 'contract_on_site' && (
-                        <Bar dataKey={entry => parseInt(entry.value / 2)} stackId='a' fill={JOB_TYPE_COLORS[0]}>
-                            <LabelList
-                                dataKey={entry => parseInt(entry.value / 2)}
-                                position='top'
-                                fontSize={13}
-                                fontWeight='bold'
-                                fill={JOB_TYPE_COLORS[0]}
-                            />
-                        </Bar>
-                    )}
-                    {type === 'contract_remote' && (
-                        <Bar dataKey={entry => parseInt(entry.value / 2.5)} stackId='a' fill={JOB_TYPE_COLORS[1]}>
-                            <LabelList
-                                dataKey={entry => parseInt(entry.value / 2.5)}
-                                position='top'
-                                fontSize={13}
-                                fontWeight='bold'
-                                fill={JOB_TYPE_COLORS[1]}
-                            />
-                        </Bar>
-                    )}
-                    {type === 'full_time_on_site' && (
-                        <Bar dataKey={entry => parseInt(entry.value / 3)} stackId='a' fill={JOB_TYPE_COLORS[2]}>
-                            <LabelList
-                                dataKey={entry => parseInt(entry.value / 3)}
-                                position='top'
-                                fontSize={13}
-                                fontWeight='bold'
-                                fill={JOB_TYPE_COLORS[2]}
-                            />
-                        </Bar>
-                    )}
-                    {type === 'full_time_remote' && (
-                        <Bar dataKey={entry => parseInt(entry.value / 4)} stackId='a' fill={JOB_TYPE_COLORS[3]}>
-                            <LabelList
-                                dataKey={entry => parseInt(entry.value / 4)}
-                                position='top'
-                                fontSize={13}
-                                fontWeight='bold'
-                                fill={JOB_TYPE_COLORS[3]}
-                            />
-                        </Bar>
-                    )}
-                    {type === 'hybrid_on_site' && (
-                        <Bar dataKey={entry => parseInt(entry.value / 5)} stackId='a' fill={JOB_TYPE_COLORS[4]}>
-                            <LabelList
-                                dataKey={entry => parseInt(entry.value / 5)}
-                                position='top'
-                                fontSize={13}
-                                fontWeight='bold'
-                                fill={JOB_TYPE_COLORS[4]}
-                            />
-                        </Bar>
-                    )}
-                    {type === 'hybrid_remote' && (
-                        <Bar dataKey={entry => parseInt(entry.value / 6)} stackId='a' fill={JOB_TYPE_COLORS[5]}>
-                            <LabelList
-                                dataKey={entry => parseInt(entry.value / 6)}
-                                position='top'
-                                fontSize={13}
-                                fontWeight='bold'
-                                fill={JOB_TYPE_COLORS[5]}
-                            />
-                        </Bar>
-                    )}
-                    {type === 'total' && (
-                        <Bar dataKey='value' stackId='a' fill={JOB_TYPE_COLORS[6]}>
-                            <LabelList
-                                dataKey='value'
-                                position='top'
-                                fontSize={13}
-                                fontWeight='bold'
-                                fill={JOB_TYPE_COLORS[6]}
-                            />
-                        </Bar>
+                    {Object.keys(JOB_TYPES).map(
+                        (row, index) =>
+                            type === row && (
+                                <Bar dataKey={row} stackId='a' fill={JOB_TYPE_COLORS[index]} key={index}>
+                                    <LabelList
+                                        dataKey={row}
+                                        position='top'
+                                        fontSize={13}
+                                        fontWeight='bold'
+                                        fill={JOB_TYPE_COLORS[index]}
+                                    />
+                                </Bar>
+                            )
                     )}
                 </BarChart>
             </ResponsiveContainer>

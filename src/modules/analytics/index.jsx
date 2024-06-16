@@ -15,23 +15,23 @@ import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
 const Analytics = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), ANALYTIC_INITIAL_VALUES)
 
-    const filterData = data => data.filter(p => p.name.toLowerCase().includes(vals.query.toLowerCase()))
+    const filterQuery = data => data.filter(p => p.name.toLowerCase().includes(vals.query.toLowerCase()))
 
     return (
         <div className='max-w-full mb-14 px-3 mt-6'>
             <Filters values={vals} set={dispatch} />
             <div className='flex gap-2'>
-                <JobTypeStats data={vals.query ? filterData(jobstypeData) : jobstypeData} set={dispatch} />
-                <JobTypePies data={vals.query ? filterData(jobstypeData) : jobstypeData} />
+                <JobTypeStats data={vals.query ? filterQuery(jobstypeData) : jobstypeData} set={dispatch} />
+                <JobTypePies data={vals.query ? filterQuery(jobstypeData) : jobstypeData} />
             </div>
-            <TechStackBars data={vals.query ? filterData(stacksData) : stacksData} type={vals.bar} set={dispatch} />
+            <TechStackBars data={vals.query ? filterQuery(stacksData) : stacksData} type={vals.bar} set={dispatch} />
             <div className='flex gap-2'>
                 <TechStackStats
-                    data={vals.query ? filterData(stacksData) : stacksData}
+                    data={vals.query ? filterQuery(stacksData) : stacksData}
                     set={dispatch}
                     stack={vals.stack}
                 />
-                <TechStackPies data={vals.query ? filterData(jobstypeData) : jobstypeData} stack={vals.stack} />
+                <TechStackPies data={vals.query ? filterQuery(jobstypeData) : jobstypeData} stack={vals.stack} />
             </div>
         </div>
     )
