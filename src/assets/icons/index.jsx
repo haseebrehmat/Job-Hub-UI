@@ -65,7 +65,7 @@ import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle, FaUserEdit } from 'react-icons/fa'
-import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare } from 'react-icons/bi'
+import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare, BiTrendingUp } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
     RiLock2Fill,
@@ -184,3 +184,4 @@ export const LeadCandidateIcon = <RiShieldUserLine style={{ fontSize: 18 }} />
 export const LeadAppliedByIcon = <RxFace style={{ fontSize: 18 }} />
 export const AllowLeadIcon = <BsCheckCircleFill style={{ fontSize: 22 }} />
 export const DenyLeadIcon = <MdDoNotDisturbOn style={{ fontSize: 22 }} />
+export const AnalyticsIcon = <BiTrendingUp style={{ fontSize: 22 }} />

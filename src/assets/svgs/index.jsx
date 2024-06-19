@@ -9,6 +9,21 @@ import FiltersSVG from '@svgs/filters.svg'
 import IntegrationsSVG from '@svgs/integrations.svg'
 import ResetFiltersSVG from '@svgs/re.svg'
 import { ResumeSvgs, JobSourceIcons } from '@svgs/svgs'
+import JavaSvg from '@svgs/java.svg'
+import DotnetSvg from '@svgs/dot-net.svg'
+import DevOopsSvg from '@svgs/devoops.svg'
+import DatabaseSvg from '@svgs/database.svg'
+import OthersSvg from '@svgs/others-dev.svg'
+import ReactSvg from '@svgs/react-js.svg'
+import AndroidSvg from '@svgs/android.svg'
+import ServicenowSvg from '@svgs/servicenow.svg'
+import QaSvg from '@svgs/qa.svg'
+import UiUxSvg from '@svgs/ui-ux.svg'
+import PythonSvg from '@svgs/python.svg'
+import JavascriptSvg from '@svgs/javascript.svg'
+import IOSSvg from '@svgs/ios.svg'
+import DataEngineeringSvg from '@svgs/data-engineer.svg'
+import SalesforceSvg from '@svgs/salesforce.svg'
 
 export { OctagonLogo, OctagonSmallIcon, LinksSvgs } from '@svgs/svg-icons'
 
@@ -29,4 +44,19 @@ export {
     ResetFilters,
     ResumeSvgs,
     JobSourceIcons,
+    JavaSvg,
+    DotnetSvg,
+    DevOopsSvg,
+    DatabaseSvg,
+    OthersSvg,
+    ReactSvg,
+    AndroidSvg,
+    ServicenowSvg,
+    QaSvg,
+    UiUxSvg,
+    PythonSvg,
+    JavascriptSvg,
+    IOSSvg,
+    DataEngineeringSvg,
+    SalesforceSvg,
 }

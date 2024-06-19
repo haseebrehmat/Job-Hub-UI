@@ -1,9 +1,10 @@
 import jwt_decode from 'jwt-decode'
+import { toPng } from 'html-to-image'
 
 import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
 import { GENERIC_SKILL_TYPES, GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
-import { today } from '@constants/dashboard'
+import { today, year } from '@constants/dashboard'
 
 export const saveToken = token => localStorage.setItem('token', JSON.stringify(token))
 
@@ -372,4 +373,25 @@ export const parseGroups = groups => groups.map(group => ({ value: group.id, lab
 export const getSelectedDays = days =>
     days ? WEEK_DAYS_OPTIONS.filter(({ value }) => days.includes(value)) : WEEK_DAYS_OPTIONS
 
-export const formatNum = num => Intl.NumberFormat('en-US').format(num)
+export const formatNum = num => Intl.NumberFormat('en-US').format(num ?? 0)
+
+export const getYearsOptions = () => {
+    const years = []
+    for (let i = 2000; i <= year; i++) {
+        years.push({ value: i, label: i })
+    }
+    return years
+}
+
+export const htmlToPng = htmlRef => {
+    toPng(htmlRef, { cacheBust: false, backgroundColor: 'white' })
+        .then(dataUrl => {
+            const link = document.createElement('a')
+            link.download = 'export.png'
+            link.href = dataUrl
+            link.click()
+        })
+        .catch(err => {
+            console.log('Error ==>', err)
+        })
+}

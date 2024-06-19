@@ -14,7 +14,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Monster', value: 'monster' },
     { label: 'Zip Recruiter', value: 'ziprecruiter' },
     { label: 'Career Builder', value: 'careerbuilder' },
-    { label: 'Google', value: 'google' },
+    { label: 'Google Careers', value: 'googlecareers' },
     { label: 'Jooble', value: 'jooble' },
     { label: 'Career Jet', value: 'careerjet' },
     { label: 'Talent', value: 'talent' },
@@ -39,7 +39,7 @@ export const JOB_SOURCES = {
     ziprecruiter: 'Zip Recruiter',
     glassdoor: 'Glassdoor',
     monster: 'Monster',
-    google: 'Google',
+    googlecareers: 'Google Careers',
     jooble: 'Jooble',
     careerjet: 'Career Jet',
     talent: 'Talent',
@@ -50,6 +50,7 @@ export const JOB_SOURCES = {
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
     simply_hired: 'Simply Hired',
+    google_careers: 'Google Careers',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']

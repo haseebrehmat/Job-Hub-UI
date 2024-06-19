@@ -38,6 +38,30 @@
     @apply bg-[linear-gradient(to_left,#32BA7C_0%,#93DEBC_14.9%,#AFE2CB_30%,#C7ECDB_44.06%,#FFFFFF_100%)];
 }
 
+._gradient-7 {
+    @apply bg-[linear-gradient(90deg,hsla(265,53%,29%,1)0%,hsla(24,93%,22%,1)100%)];
+}
+
+._gradient-8 {
+    @apply bg-[linear-gradient(90deg,hsla(247,60%,21%,1)0%,hsla(160,50%,29%,1)100%)];
+}
+
+._gradient-9 {
+    @apply bg-[linear-gradient(90deg,hsla(222,77%,33%,1)0%,hsla(235,100%,78%,1)100%)];
+}
+
+._gradient-10 {
+    @apply bg-[linear-gradient(90deg,hsla(252,40%,29%,1)0%,hsla(270,77%,71%,1)100%)];
+}
+
+._gradient-11 {
+    @apply bg-[linear-gradient(90deg,hsla(242,42%,40%,1)0%,hsla(347,89%,30%,1)100%)];
+}
+
+._gradient-12 {
+    @apply bg-[linear-gradient(90deg,hsla(208,33%,21%,1)0%,hsla(211,36%,46%,1)100%)];
+}
+
 ._icon-btn {
     @apply bg-transparent border-0 !px-0;
 }
