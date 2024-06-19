@@ -27,6 +27,7 @@ const Leads = () => {
             revalidateIfStale: false,
             revalidateOnFocus: false,
             shouldRetryOnError: false,
+            revalidateOnMount: true,
         }
     )
 
