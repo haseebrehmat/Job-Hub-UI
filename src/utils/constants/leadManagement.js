@@ -13,6 +13,7 @@ export const LEADS_INITIAL_VALS = {
     team: '',
     members: [],
     stacks: [],
+    candidates: [],
 }
 
 export const NOTE_INITIAL_STATE = {

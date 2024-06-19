@@ -395,3 +395,6 @@ export const htmlToPng = htmlRef => {
             console.log('Error ==>', err)
         })
 }
+
+export const getSelectedVals = options =>
+    options?.length > 0 ? options?.map(m => m.value).join(',') : options?.value || ''
