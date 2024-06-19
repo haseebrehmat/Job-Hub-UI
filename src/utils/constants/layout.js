@@ -24,6 +24,7 @@ import {
     CandidateIcon,
     ExposedCandidateIcon,
     AnalyticsIcon,
+    JobCompaniesIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -107,6 +108,12 @@ export const menuItems = [
                     'edit_job_source_link',
                     'delete_job_source_link',
                 ],
+            },
+            {
+                label: 'Job Companies',
+                link: '/job-companies',
+                svg: JobCompaniesIcon,
+                perms: ['view_user'],
             },
         ],
     },

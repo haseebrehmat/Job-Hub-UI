@@ -25,6 +25,7 @@ import {
     ApplyForJob,
     GenericSkills,
     ConvertToLead,
+    JobCompanies,
 } from '@modules'
 import { JobDetail } from '@modules/jobsFilter/components'
 import App from '@/App'
@@ -203,6 +204,13 @@ export const routes = [
         protect: true,
         title: 'Generic Skills',
         permission: 'view_generic_skill',
+    },
+    {
+        path: '/job-companies',
+        component: <JobCompanies />,
+        protect: true,
+        title: 'Block / Unblock Job Companies',
+        permission: 'view_user',
     },
     ...leadsRoutes,
     ...analyticsRoutes,
