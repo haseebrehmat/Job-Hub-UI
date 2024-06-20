@@ -62,6 +62,8 @@ export const menuItems = [
             'delete_cronjob_setting',
             'run_scrapper',
             'create_lead',
+            'view_job_company',
+            'block_unblock_job_company',
         ],
         subItems: [
             {
@@ -113,7 +115,7 @@ export const menuItems = [
                 label: 'Job Companies',
                 link: '/job-companies',
                 svg: JobCompaniesIcon,
-                perms: ['view_user'],
+                perms: ['view_job_company', 'block_unblock_job_company'],
             },
         ],
     },

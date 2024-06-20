@@ -25,7 +25,7 @@ const BlockOrUnblock = ({ row, mutate }) => {
 
     return (
         <div className='absolute top-0 right-0 pl-2 flex'>
-            {can('edit_candidate') && (
+            {can('block_unblock_job_company') && (
                 <Tooltip text={`${row?.is_block ? 'Unblock' : 'Block'} Company`}>
                     <Button
                         classes='_icon-btn'

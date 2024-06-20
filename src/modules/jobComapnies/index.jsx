@@ -37,7 +37,7 @@ const JobCompanies = () => {
                             key={idx}
                         >
                             <h2 className='text-sm capitalize mt-3'>{row?.company ?? 'Not Specified'}</h2>
-                            {(can('edit_user') || can('delete_user')) && <BlockOrUnblock row={row} mutate={mutate} />}
+                            {can('block_unblock_job_company') && <BlockOrUnblock row={row} mutate={mutate} />}
                         </div>
                     ))
                 ) : (
