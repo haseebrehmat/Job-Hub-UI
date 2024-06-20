@@ -26,6 +26,7 @@ import {
     AnalyticsIcon,
     JobCompaniesIcon,
     GenericSkillIcon,
+    ApiLogsIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -302,6 +303,12 @@ export const menuItems = [
                 link: '/logger',
                 svg: LoggerIcon,
                 perms: ['view_logger', 'show_log_details'],
+            },
+            {
+                label: 'API Logs',
+                link: '/api-logs',
+                svg: ApiLogsIcon,
+                perms: ['view_api_logs'],
             },
         ],
     },

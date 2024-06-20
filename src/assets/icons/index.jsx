@@ -91,6 +91,7 @@ import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
+import { GoTasklist } from 'react-icons/go'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -161,7 +162,7 @@ export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22p
 export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
 export const RunningScrapperIcon = <VscVmRunning style={{ fontSize: '22px' }} />
-export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
+export const LoggerIcon = <BsCardList style={{ fontSize: '16px' }} />
 export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px' }} />
 export const ResumeIcon = <GrDocumentUser style={{ fontSize: 16 }} />
 export const JobSource = <VscSourceControl style={{ fontSize: '22px' }} />
@@ -198,3 +199,4 @@ export const AnalyticsIcon = <BiTrendingUp style={{ fontSize: 22 }} />
 export const JobCompaniesIcon = <FaUsersCog style={{ fontSize: 22 }} />
 export const BlockJobCompanyIcon = <MdBlock style={{ fontSize: 18 }} />
 export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
+export const ApiLogsIcon = <GoTasklist style={{ fontSize: 16 }} />
