@@ -12,18 +12,14 @@ import {
     Companies,
     Roles,
     Users,
-    Integrations,
     Teams,
     Team,
     Profile,
     CoverLetter,
     Scrapper,
-    Logger,
-    ResumeBuilder,
     Pseudos,
     Vertical,
     ApplyForJob,
-    GenericSkills,
     ConvertToLead,
     JobCompanies,
 } from '@modules'
@@ -32,6 +28,7 @@ import App from '@/App'
 
 import { leadsRoutes } from '@router/leadsRoutes'
 import { analyticsRoutes } from '@router/analyticsRoutes'
+import { settingsRoutes } from '@router/settingsRoutes'
 
 import { getToken, decodeJwt } from '@utils/helpers'
 
@@ -115,13 +112,6 @@ export const routes = [
         permission: 'view_team',
     },
     {
-        path: '/integrations',
-        component: <Integrations />,
-        protect: true,
-        title: 'Integration Management',
-        permission: 'view_integration',
-    },
-    {
         path: '/user-applied-jobs',
         component: <AppliedJobs userId={user_id} />,
         protect: true,
@@ -157,20 +147,6 @@ export const routes = [
         permission: 'view_job_scrapper',
     },
     {
-        path: '/logger',
-        component: <Logger />,
-        protect: true,
-        title: 'Logger',
-        permission: 'all',
-    },
-    {
-        path: '/resume-builder',
-        component: <ResumeBuilder />,
-        protect: true,
-        title: 'Resume Builder',
-        permission: 'view_resume_builder',
-    },
-    {
         path: '/pseudos',
         component: <Pseudos />,
         protect: true,
@@ -199,13 +175,6 @@ export const routes = [
         permission: 'all',
     },
     {
-        path: '/generic-skills',
-        component: <GenericSkills />,
-        protect: true,
-        title: 'Generic Skills',
-        permission: 'view_generic_skill',
-    },
-    {
         path: '/job-companies',
         component: <JobCompanies />,
         protect: true,
@@ -214,6 +183,7 @@ export const routes = [
     },
     ...leadsRoutes,
     ...analyticsRoutes,
+    ...settingsRoutes,
 ]
 
 export const authRoutes = [
