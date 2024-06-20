@@ -333,6 +333,12 @@ export const rawpermissions = [
                 parent: ['view_logger'],
                 level: 1,
             },
+            {
+                codename: 'view_api_logs',
+                name: 'View API logs',
+                parent: ['view_logger'],
+                level: 1,
+            },
         ],
     },
     {
