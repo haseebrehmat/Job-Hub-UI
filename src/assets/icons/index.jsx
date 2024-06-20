@@ -18,6 +18,7 @@ import {
     MdLeaderboard,
     MdCancel,
     MdDoNotDisturbOn,
+    MdBlock,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -62,7 +63,7 @@ import {
     AiOutlinePartition,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
-import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
+import { CgSidebarOpen, CgListTree, CgUnblock } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import {
     FaBriefcase,
@@ -195,3 +196,5 @@ export const AllowLeadIcon = <BsCheckCircleFill style={{ fontSize: 22 }} />
 export const DenyLeadIcon = <MdDoNotDisturbOn style={{ fontSize: 22 }} />
 export const AnalyticsIcon = <BiTrendingUp style={{ fontSize: 22 }} />
 export const JobCompaniesIcon = <FaUsersCog style={{ fontSize: 22 }} />
+export const BlockJobCompanyIcon = <MdBlock style={{ fontSize: 18 }} />
+export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
