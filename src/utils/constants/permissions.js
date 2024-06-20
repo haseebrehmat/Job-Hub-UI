@@ -341,14 +341,7 @@ export const rawpermissions = [
             {
                 codename: 'view_pseudo',
                 name: 'View Pseudos',
-                child: [
-                    'create_pseudo',
-                    'view_pseudo',
-                    'edit_pseudo',
-                    'create_vertical',
-                    'edit_vertical',
-                    'view_generic_skill',
-                ],
+                child: ['create_pseudo', 'view_pseudo', 'edit_pseudo', 'create_vertical', 'edit_vertical'],
                 level: 2,
             },
             {
@@ -387,29 +380,33 @@ export const rawpermissions = [
                 parent: ['view_pseudo'],
                 level: 2,
             },
+        ],
+    },
+    {
+        module: 'Generic Skills',
+        permissions: [
             {
                 codename: 'view_generic_skill',
                 name: 'View Generic Skills',
-                parent: ['view_pseudo'],
                 child: ['create_generic_skill', 'edit_generic_skill', 'delete_generic_skill'],
                 level: 2,
             },
             {
                 codename: 'create_generic_skill',
                 name: 'Create Generic Skill',
-                parent: ['view_pseudo', 'view_generic_skill'],
+                parent: ['view_generic_skill'],
                 level: 2,
             },
             {
                 codename: 'edit_generic_skill',
                 name: 'Edit Generic Skill',
-                parent: ['view_pseudo', 'view_generic_skill'],
+                parent: ['view_generic_skill'],
                 level: 2,
             },
             {
                 codename: 'delete_generic_skill',
                 name: 'Delete Generic Skill',
-                parent: ['view_pseudo', 'view_generic_skill'],
+                parent: ['view_generic_skill'],
                 level: 2,
             },
         ],

@@ -1,5 +1,4 @@
 import { memo, useState } from 'react'
-import { Link } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
@@ -10,7 +9,7 @@ import { fetchGenericSkills } from '@modules/pseudos/api'
 import { GENERIC_SKILL_TYPES } from '@constants/pseudos'
 import { can } from '@utils/helpers'
 
-import { CreateIcon, BackToIcon } from '@icons'
+import { CreateIcon } from '@icons'
 
 const GenericSkills = () => {
     const [query, setQuery] = useState('')
@@ -38,9 +37,6 @@ const GenericSkills = () => {
                         <Button label='Create Generic Skill' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                     )}
                 </div>
-                <Link to='/pseudos'>
-                    <Button label='Back to pseudos' icon={BackToIcon} />
-                </Link>
             </div>
             <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
                 {data?.skills?.length > 0 && !error ? (

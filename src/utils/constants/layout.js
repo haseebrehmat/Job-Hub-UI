@@ -25,6 +25,7 @@ import {
     ExposedCandidateIcon,
     AnalyticsIcon,
     JobCompaniesIcon,
+    GenericSkillIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -218,6 +219,10 @@ export const menuItems = [
             'edit_pseudo',
             'create_vertical',
             'edit_vertical',
+            'view_generic_skill',
+            'create_generic_skill',
+            'edit_generic_skill',
+            'delete_generic_skill',
         ],
         subItems: [
             {
@@ -257,6 +262,13 @@ export const menuItems = [
                     'edit_vertical',
                     'delete_vertical',
                 ],
+            },
+
+            {
+                label: 'Generic Skills',
+                link: '/generic-skills',
+                svg: GenericSkillIcon,
+                perms: ['view_generic_skill', 'create_generic_skill', 'edit_generic_skill', 'delete_generic_skill'],
             },
         ],
     },
