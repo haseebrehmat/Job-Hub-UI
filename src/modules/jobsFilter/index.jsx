@@ -417,20 +417,24 @@ const JobsFilter = memo(() => {
                                     <td className='p-2'>{item?.tech_keywords}</td>
                                     <td className='p-2'>{item?.job_type}</td>
                                     <td className='p-2'>{formatDate(item?.job_posted_date)}</td>
-                                    <td className='px-3'>
-                                        {can('apply_job') && item?.total_vertical > 0 ? (
+                                    <td>
+                                        {can('apply_job') && item?.total_vertical > 0 && !jobsFilterParams.blocked ? (
                                             <Link
                                                 to={`/apply-for-job/${item?.id}`}
-                                                className='rounded bg-[#10868a] text-white p-1 text-sm flex items-center gap-1'
+                                                className='rounded bg-[#10868a] text-white text-sm inline-flex w-fit p-1'
                                             >
                                                 Apply
-                                                <span className='text-bold'>
+                                                <span className='text-bold ml-0.5'>
                                                     ({item?.remaining_vertical ?? 0} / {item?.total_vertical ?? 0})
                                                 </span>
                                             </Link>
                                         ) : (
                                             <small className='text-xs text-gray-500 border px-1.5 border-gray-500 rounded-lg'>
-                                                {item?.total_vertical > 0 ? 'unauthorized' : 'no vertical'}
+                                                {item?.total_vertical > 0
+                                                    ? jobsFilterParams.blocked
+                                                        ? 'blocked'
+                                                        : 'unauthorized'
+                                                    : 'no vertical'}
                                             </small>
                                         )}
                                         {/* {can('apply_job') ? (
