@@ -219,10 +219,6 @@ export const menuItems = [
             'edit_pseudo',
             'create_vertical',
             'edit_vertical',
-            'view_generic_skill',
-            'create_generic_skill',
-            'edit_generic_skill',
-            'delete_generic_skill',
         ],
         subItems: [
             {
@@ -263,13 +259,6 @@ export const menuItems = [
                     'delete_vertical',
                 ],
             },
-
-            {
-                label: 'Generic Skills',
-                link: '/generic-skills',
-                svg: GenericSkillIcon,
-                perms: ['view_generic_skill', 'create_generic_skill', 'edit_generic_skill', 'delete_generic_skill'],
-            },
         ],
     },
     {
@@ -277,7 +266,18 @@ export const menuItems = [
         link: '#!',
         svg: SettingIcon,
         key: 'settings',
-        perms: ['view_integration', 'create_integration', 'edit_integration', 'view_resume_builder'],
+        perms: [
+            'view_integration',
+            'create_integration',
+            'edit_integration',
+            'view_resume_builder',
+            'view_generic_skill',
+            'create_generic_skill',
+            'edit_generic_skill',
+            'delete_generic_skill',
+            'view_logger',
+            'show_log_details',
+        ],
         subItems: [
             {
                 label: 'Integrations',
@@ -291,12 +291,18 @@ export const menuItems = [
                 svg: ResumeIcon,
                 perms: ['view_resume_builder'],
             },
+            {
+                label: 'Generic Skills',
+                link: '/generic-skills',
+                svg: GenericSkillIcon,
+                perms: ['view_generic_skill', 'create_generic_skill', 'edit_generic_skill', 'delete_generic_skill'],
+            },
+            {
+                label: 'Logger',
+                link: '/logger',
+                svg: LoggerIcon,
+                perms: ['view_logger', 'show_log_details'],
+            },
         ],
-    },
-    {
-        label: 'Logger',
-        link: '/logger',
-        svg: LoggerIcon,
-        perms: ['view_logger', 'show_log_details'],
     },
 ]

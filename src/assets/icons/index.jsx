@@ -172,7 +172,7 @@ export const PauseIcon = <BiPause style={{ fontSize: '22px' }} />
 export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }} />
 export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
 export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
-export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
+export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 16 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
 export const StatusIcon = <BiGitCompare style={{ fontSize: 18 }} />
