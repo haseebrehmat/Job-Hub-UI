@@ -13,3 +13,14 @@ export const integrationNames = [
     { value: 'google', label: 'Google Maps API' },
     { value: 'Twillio API', label: 'Twillio API' },
 ]
+
+export const API_LOGS_HEADS = ['Sr.', 'Source', 'Created At', 'Total Jobs']
+
+export const API_LOGS_INITIAL_VALUES = {
+    query: '',
+    page: 1,
+    filter: false,
+    from: '',
+    to: '',
+    sources: [],
+}

@@ -4,21 +4,33 @@ export const INTERVAL_TYPE_OPTIONS = [
     { label: 'Days', value: 'days' },
 ]
 
-export const JOB_SOURCE_OPTIONS = [
+export const JOB_SOURCES_SINGLES = [
     { label: 'Adzuna', value: 'adzuna' },
     { label: 'Dice', value: 'dice' },
     { label: 'Indeed', value: 'indeed' },
     { label: 'Glassdoor', value: 'glassdoor' },
     { label: 'LinkedIn', value: 'linkedin' },
-    { label: 'Simply Hired', value: 'simplyhired' },
     { label: 'Monster', value: 'monster' },
+    { label: 'Talent', value: 'talent' },
+    { label: 'Jooble', value: 'jooble' },
+    { label: 'Careerjet', value: 'careerjet' },
+    { label: 'Other', value: 'other' },
+]
+
+export const JOB_SOURCE_OPTIONS = [
+    { label: 'Simply Hired', value: 'simplyhired' },
     { label: 'Zip Recruiter', value: 'ziprecruiter' },
     { label: 'Career Builder', value: 'careerbuilder' },
     { label: 'Google Careers', value: 'googlecareers' },
-    { label: 'Jooble', value: 'jooble' },
-    { label: 'Career Jet', value: 'careerjet' },
-    { label: 'Talent', value: 'talent' },
-    { label: 'Other', value: 'other' },
+    ...JOB_SOURCES_SINGLES,
+]
+
+export const JOB_SOURCE_OPTIONS_UNDERSCORE = [
+    { label: 'Simply Hired', value: 'simply_hired' },
+    { label: 'Zip Recruiter', value: 'zip_recruiter' },
+    { label: 'Career Builder', value: 'career_builder' },
+    { label: 'Google Careers', value: 'google_careers' },
+    ...JOB_SOURCES_SINGLES,
 ]
 
 export const JOB_TYPES_OPTIONS = [
@@ -41,7 +53,7 @@ export const JOB_SOURCES = {
     monster: 'Monster',
     googlecareers: 'Google Careers',
     jooble: 'Jooble',
-    careerjet: 'Career Jet',
+    careerjet: 'Careerjet',
     talent: 'Talent',
     simplyhired: 'Simply Hired',
     other: 'Other',

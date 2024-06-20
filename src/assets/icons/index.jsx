@@ -91,7 +91,7 @@ import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
-import { GoTasklist } from 'react-icons/go'
+import { TfiLayoutListThumb } from 'react-icons/tfi'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -199,4 +199,4 @@ export const AnalyticsIcon = <BiTrendingUp style={{ fontSize: 22 }} />
 export const JobCompaniesIcon = <FaUsersCog style={{ fontSize: 22 }} />
 export const BlockJobCompanyIcon = <MdBlock style={{ fontSize: 18 }} />
 export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
-export const ApiLogsIcon = <GoTasklist style={{ fontSize: 16 }} />
+export const ApiLogsIcon = <TfiLayoutListThumb style={{ fontSize: 16 }} />

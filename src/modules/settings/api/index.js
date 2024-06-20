@@ -12,3 +12,6 @@ export const saveIntegration = (url, { arg: integration }) => {
     }
     return rawHttp.post(url, integration).then(({ data }) => toast.success(data.detail))
 }
+
+export const fetchApiLogs = url =>
+    http.get(url).then(({ data }) => ({ logs: data?.data, pages: data?.links?.num_pages }))
