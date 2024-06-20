@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading } from '@/components'
 
-import { CandidateProfile, LineGraph } from '@modules/leadManagement/components'
+import { CandidateProfile, LineGraph, Skills } from '@modules/leadManagement/components'
 
 import { fetchMyProfile } from '@modules/leadManagement/api'
 
@@ -13,22 +13,13 @@ const MyProfile = () => {
     if (isLoading) return <Loading />
     return (
         <div>
-            <div>
-                <CandidateProfile data={data} mutate={mutate} />
-            </div>
             <div className='grid grid-cols-2 px-6'>
-                <div className='px-4'>
-                    <LineGraph data={data} />
+                <div className='grid grid-cols-1 h-fit space-y-8'>
+                    <CandidateProfile data={data} mutate={mutate} />
+                    <Skills data={data} />
                 </div>
-                <div className='px-4'>
+                <div className='grid grid-cols-1'>
                     <LineGraph data={data} />
-                </div>
-            </div>
-            <div className='grid grid-cols-2 px-6 mt-6'>
-                <div className='px-4'>
-                    <LineGraph data={data} />
-                </div>
-                <div className='px-4'>
                     <LineGraph data={data} />
                 </div>
             </div>

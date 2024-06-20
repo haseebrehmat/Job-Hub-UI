@@ -18,6 +18,8 @@ import CandidateForm from '@modules/leadManagement/components/CandidateForm'
 import CandidateActions from '@modules/leadManagement/components/CandidateActions'
 import DesignationSelect from '@modules/leadManagement/components/DesignationSelect'
 import SkillsInput from '@modules/leadManagement/components/SkillsInput'
+import ToolsInput from '@modules/leadManagement/components/ToolsInput'
+import RegionInput from '@modules/leadManagement/components/RegionInput'
 import DesignationActions from '@modules/leadManagement/components/DesignationActions'
 import DesignationForm from '@modules/leadManagement/components/DesignationForm'
 import ExposedForm from '@modules/leadManagement/components/ExposedForm'
@@ -26,7 +28,7 @@ import CandidateInfo from '@modules/leadManagement/components/CandidateInfo'
 import LeadFilters from '@modules/leadManagement/components/LeadFilters'
 import CandidateProfile from '@modules/leadManagement/components/CandidateProfile'
 import LineGraph from '@modules/leadManagement/components/CandidateLeadAnalytics'
-
+import Skills from '@modules/leadManagement/components/Skills'
 
 export {
     StatusForm,
@@ -57,4 +59,7 @@ export {
     LeadFilters,
     CandidateProfile,
     LineGraph,
+    Skills,
+    ToolsInput,
+    RegionInput,
 }

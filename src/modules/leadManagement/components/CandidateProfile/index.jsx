@@ -1,20 +1,20 @@
 import { memo, useState } from 'react'
 
-import { Badge } from '@components'
-
 import { CandidateForm } from '@modules/leadManagement/components'
+
 import { ResumeSvgs as svgs } from '@svgs'
 import { can } from '@utils/helpers'
 
 const CandidtaeProfile = ({ data, mutate }) => {
     const [show, setShow] = useState(false)
+
     return (
-        <div className='p-6'>
+        <div className='h-fit'>
             {console.log(data)}
-            <div className='flex flex-col border rounded-lg overflow-hidden bg-white text-[#006366]'>
-                <div className='grid grid-cols-1 sm:grid-cols-4'>
-                    <div className='flex flex-col col-span-3'>
-                        <div className='flex flex-cols-2 p-6'>
+            <div className='rounded-lg overflow-hidden bg-white text-[#006366]'>
+                <div className='grid grid-cols-1 space-x-6'>
+                    <div className='flex flex-col w-100'>
+                        <div className='flex flex-cols-2 p-6 rounded-t-2xl border'>
                             <div className='flex-shrink-0 w-fit mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0 shadow-xl'>
                                 <img
                                     src='https://source.unsplash.com/100x100/?portrait?1'
@@ -52,7 +52,7 @@ const CandidtaeProfile = ({ data, mutate }) => {
                             </div>
                         </div>
                         <div className='flex flex-col w-full relative'>
-                            <div className='grid grid-cols-3 border divide-x bg-gray-100  py-3'>
+                            <div className='grid grid-cols-3 border divide-x bg-gray-100 rounded-b-2xl py-3'>
                                 <div className='text-xs flex flex-row items-center justify-center underline-offset-4 underline'>
                                     <span className='fill-teal-700 mr-3'>{svgs.gmail4}</span>
                                     {data?.candidates?.email}
@@ -82,20 +82,17 @@ const CandidtaeProfile = ({ data, mutate }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='flex flex-col border-l  sm:h-full'>
-                        <span className='font-semibold  text-xl uppercase mt-4 ml-4 '>Skills</span>
-                        <div className='grid grid-rows-3 grid-flow-col gap-1 mt-3 px-4'>
-                            {data?.candidates?.skills?.map((skill, idxx) => (
-                                <div className='gap-2' key={idxx}>
-                                    <Badge label={skill} type='success' />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
                 </div>
             </div>
+            {console.log(data)}
             {can('edit_candidate_profile') && show && (
-                <CandidateForm show={show} setShow={setShow} mutate={mutate} candidate={data.candidates} />
+                <CandidateForm
+                    show={show}
+                    setShow={setShow}
+                    mutate={mutate}
+                    candidate={data.candidates}
+                    allRegions={data.regions}
+                />
             )}
         </div>
     )

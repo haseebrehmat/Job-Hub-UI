@@ -368,6 +368,9 @@ export const parseSelectedDesignation = (label, designations) => {
     }
     return null
 }
+
+export const parseRegions = regions => regions.map(region => ({ value: region.id, label: region.name }))
+
 export const parseGroups = groups => groups.map(group => ({ value: group.id, label: formatStringInPascal(group.name) }))
 
 export const getSelectedDays = days =>
@@ -394,4 +397,15 @@ export const htmlToPng = htmlRef => {
         .catch(err => {
             console.log('Error ==>', err)
         })
+}
+
+export const getWidthClass = index => {
+    const widths = {
+        1: 'w-[20%]',
+        2: 'w-[40%]',
+        3: 'w-[60%]',
+        4: 'w-[80%]',
+        5: 'w-[100%]',
+    }
+    return widths[index]
 }

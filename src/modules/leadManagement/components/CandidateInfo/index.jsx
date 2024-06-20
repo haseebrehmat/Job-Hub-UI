@@ -30,7 +30,7 @@ const CandidateInfo = ({ info, exposed = false }) => {
                             ? info?.skills?.map((skill, index) => (
                                   <Badge
                                       key={index}
-                                      label={skill}
+                                      label={skill.skill}
                                       type='success'
                                       classes='text-xs border border-green-300'
                                   />

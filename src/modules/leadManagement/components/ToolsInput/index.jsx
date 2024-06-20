@@ -4,15 +4,15 @@ import { Button, Input, Badge } from '@components'
 
 import { AddSkillIcon } from '@icons'
 
-const SkillsInput = ({ value, error = null, set }) => {
-    const [tags, setTags] = useState(value?.map(s => s.skill))
-    const [inputValue, setInputValue] = useState([{ skill: '', level: 0 }])
+const ToolsInput = ({ value, error = null, set }) => {
+    const [tags, setTags] = useState(value?.map(s => s.tool))
+    const [inputValue, setInputValue] = useState('')
 
     const handleChange = e => setInputValue(e.target.value)
     const handleClick = () => {
         if (inputValue) {
             if (tags.includes(inputValue)) {
-                setTags(tags.filter(tag => tag !== inputValue.skill))
+                setTags(tags.filter(tag => tag !== inputValue))
             } else {
                 setTags([...tags, inputValue])
                 setInputValue('')
@@ -27,10 +27,9 @@ const SkillsInput = ({ value, error = null, set }) => {
 
     return (
         <div className='mt-2 pb-5'>
-            <span className='text-xs font-semibold'>Skills</span>
+            <span className='text-xs font-semibold'>Tools</span>
             <div className='flex flex-wrap gap-3 items-center'>
                 <Input value={inputValue} onChange={handleChange} ph='Add a skill...' />
-                {/* <Input value={inputValue.level} onChange={handleChange} ph='Add a skill...' /> */}
                 <Button icon={AddSkillIcon} fit onClick={handleClick} classes='!rounded-full !px-1' />
                 {tags?.length > 0 &&
                     tags.map(tag => (
@@ -58,4 +57,4 @@ const SkillsInput = ({ value, error = null, set }) => {
     )
 }
 
-export default SkillsInput
+export default ToolsInput
