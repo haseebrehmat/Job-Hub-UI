@@ -8,7 +8,7 @@ import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@/utils/helpers'
-import { Filters, Badge } from '@/components'
+import { Filters, Badge, Checkbox } from '@/components'
 import { fetchJobs, downloadJobsData, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
 import { GenerateCSV, JobPortalAnalytics } from '@modules/jobsFilter/components'
@@ -43,6 +43,7 @@ const JobsFilter = memo(() => {
         ordering: '-job_posted_date',
         showCoverLetter: false,
         isLoading: true,
+        blocked: false,
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
@@ -58,6 +59,7 @@ const JobsFilter = memo(() => {
         search: '',
         page: 1,
         job_visibility: 'all',
+        blocked: false,
     }
 
     const [jobsFilterParams, setJobsFilterParams] = useState(defaulJobsFiltersParams)
@@ -136,7 +138,7 @@ const JobsFilter = memo(() => {
     }
 
     const getJobsParamsFromFilters = () => {
-        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector } =
+        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector, blocked } =
             filterState
         const { from_date, to_date } = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
@@ -152,6 +154,7 @@ const JobsFilter = memo(() => {
             to_date,
             job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
             search: filterState?.jobTitle,
+            blocked,
         }
     }
 
@@ -351,8 +354,15 @@ const JobsFilter = memo(() => {
                         />
                     </div>
                 </div>
-                <div className='flex justify-end px-4 align-baseline'>
-                    <div className='my-6'>
+                <div className='flex justify-between items-center mb-2'>
+                    <div>
+                        <Checkbox
+                            label='Show Blocked Jobs'
+                            checked={filterState?.blocked}
+                            onChange={e => setFilterState({ ...filterState, blocked: e.target.checked })}
+                        />
+                    </div>
+                    <div>
                         <Filters apply={() => updateParams()} clear={() => resetFilters()} />
                     </div>
                 </div>
