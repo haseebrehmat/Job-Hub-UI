@@ -263,6 +263,17 @@ export const rawpermissions = [
                 parent: ['view_job_scrapper'],
                 level: 1,
             },
+            {
+                codename: 'view_job_company',
+                name: 'View Job Companies',
+                level: 2,
+            },
+            {
+                codename: 'block_unblock_job_company',
+                name: 'Block / Unblock Job Company',
+                parent: ['view_job_company'],
+                level: 2,
+            },
         ],
     },
     {
