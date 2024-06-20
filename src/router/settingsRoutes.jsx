@@ -1,4 +1,4 @@
-import { Integrations, Logger, ResumeBuilder, GenericSkills } from '@modules'
+import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs } from '@modules'
 
 export const settingsRoutes = [
     {
@@ -13,7 +13,7 @@ export const settingsRoutes = [
         component: <Logger />,
         protect: true,
         title: 'Logger',
-        permission: 'all',
+        permission: 'view_logger',
     },
     {
         path: '/resume-builder',
@@ -28,5 +28,12 @@ export const settingsRoutes = [
         protect: true,
         title: 'Generic Skills',
         permission: 'view_generic_skill',
+    },
+    {
+        path: '/api-logs',
+        component: <ApiLogs />,
+        protect: true,
+        title: 'API Logs (Sales Engine)',
+        permission: 'all',
     },
 ]

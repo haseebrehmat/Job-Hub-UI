@@ -33,6 +33,7 @@ import ConvertToLead from '@modules/appliedJobs/convertToLead'
 import AssignCandidate from '@modules/leadManagement/assignCandidate'
 import Analytics from '@modules/analytics'
 import JobCompanies from '@modules/jobComapnies'
+import ApiLogs from '@modules/settings/apiLogs'
 
 export {
     TeamAppliedJobs,
@@ -71,4 +72,5 @@ export {
     AssignCandidate,
     Analytics,
     JobCompanies,
+    ApiLogs,
 }
