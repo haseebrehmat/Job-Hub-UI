@@ -29,6 +29,7 @@ import LeadFilters from '@modules/leadManagement/components/LeadFilters'
 import CandidateProfile from '@modules/leadManagement/components/CandidateProfile'
 import LineGraph from '@modules/leadManagement/components/CandidateLeadAnalytics'
 import Skills from '@modules/leadManagement/components/Skills'
+import Projects from '@modules/leadManagement/components/Projects'
 
 export {
     StatusForm,
@@ -62,4 +63,5 @@ export {
     Skills,
     ToolsInput,
     RegionInput,
+    Projects,
 }

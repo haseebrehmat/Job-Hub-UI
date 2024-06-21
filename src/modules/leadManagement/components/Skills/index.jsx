@@ -17,8 +17,8 @@ const Skills = ({ data }) => (
                     <div key={index}>
                         <div className='mb-8'>
                             <div className='flex flex-row justify-between mb-1'>
-                                <p className='text-sm uppercase'>{item.skill}</p>
-                                <p className='text-sm uppercase'>{item.level * 20}%</p>
+                                <p className='text-sm uppercase'>{item.name}</p>
+                                <p className='text-sm uppercase'>{item.level}</p>
                             </div>
                             <hr className='h-1  bg-gray-400 z-10' />
                             <hr className={`h-1 bg-teal-700 -mt-1 ${getWidthClass(item.level)}`} />

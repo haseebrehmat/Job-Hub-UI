@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Input, Badge } from '@components'
+import { Button, Input, Badge, SliderInput } from '@components'
 
 import { AddSkillIcon } from '@icons'
 
 const SkillsInput = ({ value, error = null, set }) => {
-    const [tags, setTags] = useState(value?.map(s => s.skill))
-    const [inputValue, setInputValue] = useState([{ skill: '', level: 0 }])
+    const [tags, setTags] = useState(value)
+    const [inputValue, setInputValue] = useState({ name: '', level: 0 })
 
-    const handleChange = e => setInputValue(e.target.value)
-    const handleClick = () => {
-        if (inputValue) {
-            if (tags.includes(inputValue)) {
-                setTags(tags.filter(tag => tag !== inputValue.skill))
-            } else {
-                setTags([...tags, inputValue])
-                setInputValue('')
-            }
+    const handleSkill = e => {
+        if (e.target.value) {
+            setInputValue({ ...inputValue, name: e.target.value })
         }
+    }
+
+    const handelLevel = ({ target: { value: level } }) => setInputValue({ ...inputValue, level })
+
+    const handleClick = () => {
+        setTags([...tags, inputValue])
+        setInputValue({ name: '', level: 0 })
     }
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
 
@@ -29,15 +30,17 @@ const SkillsInput = ({ value, error = null, set }) => {
         <div className='mt-2 pb-5'>
             <span className='text-xs font-semibold'>Skills</span>
             <div className='flex flex-wrap gap-3 items-center'>
-                <Input value={inputValue} onChange={handleChange} ph='Add a skill...' />
-                {/* <Input value={inputValue.level} onChange={handleChange} ph='Add a skill...' /> */}
+                <div className='flex flex-col gap-4'>
+                    <Input value={inputValue.name} onChange={handleSkill} ph='Add a skill...' />
+                    <SliderInput value={inputValue.level} onChange={handelLevel} name='level' max={5} min={0} />
+                </div>
                 <Button icon={AddSkillIcon} fit onClick={handleClick} classes='!rounded-full !px-1' />
                 {tags?.length > 0 &&
                     tags.map(tag => (
                         <Badge
                             label={
                                 <span className='inline-block items-center'>
-                                    <span>{tag}</span>
+                                    <span>{tag.name}</span>
                                     <button
                                         type='button'
                                         onClick={() => handleTagRemove(tag)}
@@ -49,7 +52,7 @@ const SkillsInput = ({ value, error = null, set }) => {
                             }
                             type='success'
                             classes='border border-green-300'
-                            key={tag}
+                            key={tag.name}
                         />
                     ))}
             </div>

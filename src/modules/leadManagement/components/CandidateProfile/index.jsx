@@ -1,5 +1,7 @@
 import { memo, useState } from 'react'
 
+import { Badge } from '@components'
+
 import { CandidateForm } from '@modules/leadManagement/components'
 
 import { ResumeSvgs as svgs } from '@svgs'
@@ -10,7 +12,6 @@ const CandidtaeProfile = ({ data, mutate }) => {
 
     return (
         <div className='h-fit'>
-            {console.log(data)}
             <div className='rounded-lg overflow-hidden bg-white text-[#006366]'>
                 <div className='grid grid-cols-1 space-x-6'>
                     <div className='flex flex-col w-100'>
@@ -46,6 +47,25 @@ const CandidtaeProfile = ({ data, mutate }) => {
                                         <span className='font-semibold mr-2 text-lg uppercase'>Experience :</span>
                                         <span className='text-gray-800 text-md'>
                                             {data?.candidates?.experience} Years
+                                        </span>
+                                    </p>
+                                </div>
+                                <div className='flex flex-row'>
+                                    <p className=''>
+                                        <span className='font-semibold mr-2 text-lg uppercase'>Regions :</span>
+                                        <span className='text-gray-800 text-md space-x-2'>
+                                            {data?.candidates?.regions.map(region => (
+                                                <Badge
+                                                    label={
+                                                        <span className='inline-block items-center'>
+                                                            <span>{region.name}</span>
+                                                        </span>
+                                                    }
+                                                    type='success'
+                                                    classes='border border-green-300'
+                                                    key={region.id}
+                                                />
+                                            ))}
                                         </span>
                                     </p>
                                 </div>
