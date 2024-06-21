@@ -417,6 +417,35 @@ export const rawpermissions = [
         ],
     },
     {
+        module: 'Regions',
+        permissions: [
+            {
+                codename: 'view_region',
+                name: 'View Regions',
+                child: ['create_region', 'edit_region', 'delete_region'],
+                level: 2,
+            },
+            {
+                codename: 'create_region',
+                name: 'Create Region',
+                parent: ['view_region'],
+                level: 2,
+            },
+            {
+                codename: 'edit_region',
+                name: 'Edit Region',
+                parent: ['view_region'],
+                level: 2,
+            },
+            {
+                codename: 'delete_region',
+                name: 'Delete Region',
+                parent: ['view_region'],
+                level: 2,
+            },
+        ],
+    },
+    {
         module: 'Resume Builder',
         permissions: [
             {
