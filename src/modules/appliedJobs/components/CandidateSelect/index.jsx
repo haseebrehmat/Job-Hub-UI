@@ -14,7 +14,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), CANDIDATE_SELECT_STATE)
 
     const { data, error, isLoading } = useSWR(
-        `/api/candidate_management/selected_candidate/?search=${vals.query}&skills=${vals.skills}&designations=${vals.designations}`,
+        `/api/candidate_management/selected_candidate/?search=${vals.query}&skills=${vals.skills}&designations=${vals.designations}&regions=${vals.regions}`,
         fetchSelectedCandidates
     )
 
@@ -39,7 +39,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
                         <Searchbox
                             query={vals.query}
                             setQuery={query => dispatch({ query })}
-                            clear={() => dispatch({ query: '', skills: '', designations: '' })}
+                            clear={() => dispatch({ query: '', skills: '', designations: '', regions: '' })}
                         />
                     </div>
                     <Button

@@ -100,5 +100,6 @@ export const CANDIDATE_SELECT_STATE = {
     candidate_id: null,
     skills: '',
     designations: '',
+    regions: '',
     show: false,
 }
