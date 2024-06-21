@@ -24,3 +24,10 @@ export const API_LOGS_INITIAL_VALUES = {
     to: '',
     sources: [],
 }
+
+export const REGIONS_INITIAL_VALUES = {
+    query: '',
+    page: 1,
+    show: false,
+    region: null,
+}
