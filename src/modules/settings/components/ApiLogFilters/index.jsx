@@ -13,7 +13,7 @@ const ApiLogFilters = ({ filtered, dispatch }) => {
     const applyFilters = () => dispatch({ from: vals.from, to: vals.to, sources: vals.sources })
 
     return (
-        <div className='grid grid-cols-4 auto-cols-max items-end gap-x-4 gap-y-1 p-3 mt-3 text-[#338d8c] bg-slate-100 border rounded-lg'>
+        <div className='flex items-end gap-x-4 gap-y-1 p-3 mt-3 text-[#338d8c] bg-slate-100 border rounded-lg'>
             <div>
                 <span className='text-xs font-semibold'>From Date</span>
                 <Input
