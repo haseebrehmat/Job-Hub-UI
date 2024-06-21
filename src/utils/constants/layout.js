@@ -27,6 +27,7 @@ import {
     JobCompaniesIcon,
     GenericSkillIcon,
     ApiLogsIcon,
+    RegionIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -278,6 +279,10 @@ export const menuItems = [
             'delete_generic_skill',
             'view_logger',
             'show_log_details',
+            'view_region',
+            'create_region',
+            'edit_region',
+            'delete_region',
         ],
         subItems: [
             {
@@ -309,6 +314,13 @@ export const menuItems = [
                 link: '/api-logs',
                 svg: ApiLogsIcon,
                 perms: ['view_api_logs'],
+            },
+            {
+                label: 'Regions',
+                link: '/regions',
+                svg: RegionIcon,
+                perms: ['view_api_logs'],
+                // perms: ['view_region', 'create_region', 'edit_region', 'delete_region'],
             },
         ],
     },
