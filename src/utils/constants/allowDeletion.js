@@ -17,3 +17,4 @@ export const PHASE_DELETION = true
 export const CANDIDATE_DELETION = true
 export const GROUP_SETTING_DELETION = true
 export const GROUP_LINK_DELETION = true
+export const REGION_DELETION = true

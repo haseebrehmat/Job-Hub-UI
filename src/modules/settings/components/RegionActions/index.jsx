@@ -2,7 +2,7 @@ import { memo, useState } from 'react'
 
 import { Button, DeleteDialog, Tooltip } from '@components'
 
-import { GENERIC_SKILL_DELETION } from '@constants/allowDeletion'
+import { REGION_DELETION } from '@constants/allowDeletion'
 import { can } from '@utils/helpers'
 
 import { TrashIcon, EditIcon } from '@icons'
@@ -13,7 +13,7 @@ const RegionActions = memo(({ id, edit, mutate }) => {
     return (
         <div className='absolute top-0 right-0 pl-2 mr-1 flex'>
             {can('edit_generic_skill') && (
-                <Tooltip text='Edit generic skill'>
+                <Tooltip text='Edit region'>
                     <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                 </Tooltip>
             )}
@@ -23,9 +23,9 @@ const RegionActions = memo(({ id, edit, mutate }) => {
                     setShow={setShow}
                     url={`api/profile/generic_skill/${id}/`}
                     refetch={mutate}
-                    perm={GENERIC_SKILL_DELETION}
+                    perm={REGION_DELETION}
                 >
-                    <Tooltip text='Delete generic skill'>
+                    <Tooltip text='Delete region'>
                         <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
                     </Tooltip>
                 </DeleteDialog>
