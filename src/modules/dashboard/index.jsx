@@ -1,4 +1,5 @@
 import { memo, useState, useMemo } from 'react'
+import { Navigate } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { Loading, SelectBox } from '@components'
@@ -11,6 +12,9 @@ import { can, decodeJwt, isSuper, parseComapnies, parseSelectedCompany } from '@
 
 const Dashboard = () => {
     const user = decodeJwt()
+    if (user.role === 'candidate') {
+        return <Navigate to='/my-profile' />
+    }
     const [filters, setFilters] = useState({ from_date: '', to_date: '', company: '' })
     const { data, error, isLoading } = useSWR([filters], () => fetchDashboardData(filters), {
         revalidateOnFocus: false,
