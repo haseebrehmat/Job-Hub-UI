@@ -104,7 +104,6 @@ const CandidtaeProfile = ({ data, mutate }) => {
                     </div>
                 </div>
             </div>
-            {console.log(data)}
             {can('edit_candidate_profile') && show && (
                 <CandidateForm
                     show={show}

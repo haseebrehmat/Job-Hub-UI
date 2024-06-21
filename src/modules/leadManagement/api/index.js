@@ -74,7 +74,12 @@ export const saveDesignation = (url, { arg: designation }) => {
 }
 
 export const fetchCandidates = url =>
-    http.get(url).then(({ data }) => ({ candidates: data?.results, total: data?.count, pages: data?.num_pages }))
+    http.get(url).then(({ data }) => ({
+        candidates: data?.results,
+        total: data?.count,
+        pages: data?.num_pages,
+        all_regions: data.regions,
+    }))
 
 export const saveCandidate = (url, { arg: candidate }) => {
     if (candidate?.id) {
@@ -106,10 +111,6 @@ export const fetchMyProfile = url =>
 export const fetchMyProjects = url => http.get(url).then(({ data }) => ({ data }))
 
 export const saveCandidateProjects = async (url, { arg: candidate }) => {
-    if (candidate?.id) {
-        const { data } = await rawHttp.put(url, candidate)
-        return toast.success(data.detail || 'Candidate is updated successfully')
-    }
-    const { data: data_1 } = await rawHttp.post(url, candidate)
-    return toast.success(data_1.detail || 'Candidate is created successfully')
+    const { data } = await rawHttp.put(url, candidate)
+    return toast.success(data.detail || 'Candidate is updated successfully')
 }

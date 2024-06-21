@@ -416,3 +416,6 @@ export const findRegion = (region, regions) => {
     const R = regions.map(reg => reg.name)
     return R.includes(region)
 }
+
+export const parseProjects = projects =>
+    projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))

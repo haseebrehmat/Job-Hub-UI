@@ -15,12 +15,12 @@ const Skills = ({ data }) => (
             <div className='flex flex-col w-full px-12 bg-slate-100 py-8 rounded-3xl -ml-8'>
                 {data?.candidates?.skills.map((item, index) => (
                     <div key={index}>
-                        <div className='mb-8'>
+                        <div className='mb-8 shadow-xl hover:translate hover:scale-[101%]'>
                             <div className='flex flex-row justify-between mb-1'>
                                 <p className='text-sm uppercase'>{item.name}</p>
-                                <p className='text-sm uppercase'>{item.level}</p>
+                                <p className='text-sm uppercase'>{item.level}/5</p>
                             </div>
-                            <hr className='h-1  bg-gray-400 z-10' />
+                            <hr className='h-1  bg-gray-300 z-10' />
                             <hr className={`h-1 bg-teal-700 -mt-1 ${getWidthClass(item.level)}`} />
                         </div>
                     </div>
