@@ -28,3 +28,5 @@ export const saveRegion = (url, { arg: region }) => {
     }
     return rawHttp.post(url, region).then(({ data }) => toast.success(data.detail))
 }
+
+export const fetchAllRegions = url => http.get(url).then(({ data }) => data)

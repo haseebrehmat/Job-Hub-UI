@@ -15,7 +15,6 @@ const Basic = ({ id }) => {
     const [hobbies, setHobbies] = useState([])
     const [regions, setRegions] = useState([])
     const { data, isLoading, mutate } = useSWR(`/api/profile/vertical/${id}/`, fetchBasicInfo)
-
     const { values, errors, handleSubmit, handleChange, trigger } = useMutate(
         `/api/profile/vertical/${id}/`,
         updateBasicInfo,
@@ -31,12 +30,12 @@ const Basic = ({ id }) => {
             identity: data?.identity || '',
         },
         verticalBasicInfoSchema,
-        async formValues => trigger({ ...formValues, vertical_id: id, hobbies, regions: regions.map(r => r.id) }),
+        async formValues => trigger({ ...formValues, vertical_id: id, hobbies, regions: regions.map(r => r.value) }),
         null,
         () => mutate()
     )
-    if (isLoading) return <Loading />
 
+    if (isLoading) return <Loading />
     return (
         <div className='py-4 px-1'>
             <form onSubmit={handleSubmit}>
