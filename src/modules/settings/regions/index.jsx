@@ -14,7 +14,7 @@ import { CreateIcon } from '@icons'
 const Regions = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), REGIONS_INITIAL_VALUES)
     const { data, error, isLoading, mutate } = useSWR(
-        `/api/profile/generic_skill/?search=${vals.query}&page=${vals.page}`,
+        `/api/candidate_management/regions/?search=${vals.query}&page=${vals.page}`,
         fetchRegions
     )
 
@@ -26,17 +26,17 @@ const Regions = () => {
             <div className='flex items-center pt-3 pb-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
-                    {can('create_generic_skill') && (
+                    {can('create_region') && (
                         <Button label='Create Region' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                     )}
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
+            <div className='grid grid-cols-2 gap-2 md:grid-cols-5'>
                 {data?.regions?.length > 0 && !error ? (
                     data?.regions?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
-                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
-                            {can('edit_generic_skill') && can('delete_generic_skill') && (
+                            <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
+                            {false && can('edit_region') && can('delete_region') && (
                                 <RegionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
                         </div>
@@ -50,7 +50,7 @@ const Regions = () => {
                     <Paginated pages={data?.pages} setPage={page => dispatch({ page })} page={vals.page} />
                 </div>
             )}
-            {vals.show && (
+            {can('create_region') && vals.show && (
                 <RegionForm
                     show={vals.show}
                     setShow={show => dispatch({ show })}

@@ -52,7 +52,7 @@ const ApiLogs = () => {
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='p-3 break-words'>{idx + 1}</td>
                                 <td className='p-3 break-words capitalize'>
-                                    {JOB_SOURCES[row?.job_source] ?? convertToTitleCase(row?.job_source)}
+                                    {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
                                 </td>
                                 <td className='p-3 break-words'>{formatDate2(row?.created_at)}</td>
                                 <td className='px-4 py-3 break-words font-bold text-lg'>{row?.jobs_count || 0}</td>

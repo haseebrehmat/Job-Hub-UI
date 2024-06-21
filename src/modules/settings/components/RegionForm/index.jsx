@@ -10,9 +10,9 @@ import { regionSchema } from '@utils/schemas'
 
 const RegionForm = ({ show, setShow, mutate, region = null, close = false }) => {
     const { values, errors, handleSubmit, resetForm, trigger, handleChange } = useMutate(
-        `/api/profile/generic_skill${region?.id ? `/${region?.id}/` : '/'}`,
+        `/api/candidate_management/regions${region?.id ? `/${region?.id}/` : '/'}`,
         saveRegion,
-        { name: region?.name || '' },
+        { name: region?.region || '' },
         regionSchema,
         async formValues => trigger({ ...formValues, id: region?.id }),
         null,

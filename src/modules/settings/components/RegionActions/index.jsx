@@ -12,16 +12,16 @@ const RegionActions = memo(({ id, edit, mutate }) => {
 
     return (
         <div className='absolute top-0 right-0 pl-2 mr-1 flex'>
-            {can('edit_generic_skill') && (
+            {can('edit_region') && (
                 <Tooltip text='Edit region'>
                     <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                 </Tooltip>
             )}
-            {can('delete_generic_skill') && (
+            {can('delete_region') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/profile/generic_skill/${id}/`}
+                    url={`api/candidate_management/regions/${id}/`}
                     refetch={mutate}
                     perm={REGION_DELETION}
                 >

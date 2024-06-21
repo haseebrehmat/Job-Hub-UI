@@ -41,6 +41,6 @@ export const settingsRoutes = [
         component: <Regions />,
         protect: true,
         title: 'Regions',
-        permission: 'all',
+        permission: 'view_region',
     },
 ]

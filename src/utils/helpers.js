@@ -408,3 +408,5 @@ export const convertToTitleCase = str => {
     const result = capitalizedWords.join(' ')
     return result
 }
+
+export const parseRegions = regions => regions.map(region => ({ value: region.id, label: region.name }))
