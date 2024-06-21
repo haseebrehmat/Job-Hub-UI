@@ -28,6 +28,7 @@ import {
     GenericSkillIcon,
     ApiLogsIcon,
     RegionIcon,
+    AppliedJobsIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -69,6 +70,12 @@ export const menuItems = [
             'block_unblock_job_company',
         ],
         subItems: [
+            {
+                label: 'Applied Jobs',
+                link: '/applied-jobs',
+                svg: AppliedJobsIcon,
+                perms: ['view_applied_job', 'create_lead'],
+            },
             {
                 label: 'My Applied Jobs',
                 link: '/user-applied-jobs',

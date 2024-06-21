@@ -42,13 +42,13 @@ export const routes = [
         title: 'Octagon Dashboard',
         permission: 'all',
     },
-    // {
-    //     path: '/applied-jobs',
-    //     component: <AppliedJobs />,
-    //     protect: true,
-    //     title: 'Applied Jobs',
-    //     permission: 'view_applied_job',
-    // },
+    {
+        path: '/applied-jobs',
+        component: <AppliedJobs />,
+        protect: true,
+        title: 'Applied Jobs',
+        permission: 'view_applied_job',
+    },
     {
         path: '/team-applied-jobs',
         component: <TeamAppliedJobs />,

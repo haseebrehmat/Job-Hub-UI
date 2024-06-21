@@ -75,7 +75,15 @@ import {
     FaUserEdit,
     FaUsersCog,
 } from 'react-icons/fa'
-import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare, BiTrendingUp, BiMap } from 'react-icons/bi'
+import {
+    BiPlusCircle,
+    BiMessageDetail,
+    BiPause,
+    BiGitCompare,
+    BiTrendingUp,
+    BiMap,
+    BiBriefcaseAlt2,
+} from 'react-icons/bi'
 import {
     RiUserSettingsLine,
     RiLock2Fill,
@@ -201,3 +209,4 @@ export const BlockJobCompanyIcon = <MdBlock style={{ fontSize: 18 }} />
 export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
 export const ApiLogsIcon = <TfiLayoutListThumb style={{ fontSize: 16 }} />
 export const RegionIcon = <BiMap style={{ fontSize: 16 }} />
+export const AppliedJobsIcon = <BiBriefcaseAlt2 style={{ fontSize: 22 }} />
