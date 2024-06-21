@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { RegionActions, RegionForm } from '@modules/pseudos/components'
+import { RegionActions, RegionForm } from '@modules/settings/components'
 import { fetchGenericSkills } from '@modules/pseudos/api'
 
 import { GENERIC_SKILL_TYPES } from '@constants/pseudos'

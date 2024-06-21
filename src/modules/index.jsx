@@ -34,6 +34,7 @@ import AssignCandidate from '@modules/leadManagement/assignCandidate'
 import Analytics from '@modules/analytics'
 import JobCompanies from '@modules/jobComapnies'
 import ApiLogs from '@modules/settings/apiLogs'
+import Regions from '@modules/settings/regions'
 
 export {
     TeamAppliedJobs,
@@ -73,4 +74,5 @@ export {
     Analytics,
     JobCompanies,
     ApiLogs,
+    Regions,
 }

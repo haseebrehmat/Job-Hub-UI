@@ -1,4 +1,4 @@
-import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs } from '@modules'
+import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs, Regions } from '@modules'
 
 export const settingsRoutes = [
     {
@@ -34,6 +34,13 @@ export const settingsRoutes = [
         component: <ApiLogs />,
         protect: true,
         title: 'API Logs (Sales Engine)',
+        permission: 'view_api_logs',
+    },
+    {
+        path: '/regions',
+        component: <Regions />,
+        protect: true,
+        title: 'Regions',
         permission: 'all',
     },
 ]
