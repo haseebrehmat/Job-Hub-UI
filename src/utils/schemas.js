@@ -297,3 +297,8 @@ export const groupSchema = Yup.object().shape({
                     .required('Please select interval type'),
         }),
 })
+
+export const accountSchema = Yup.object().shape({
+    email: Yup.string().email().required('email is required'),
+    password: Yup.string().required('password is required'),
+})

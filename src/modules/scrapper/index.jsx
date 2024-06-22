@@ -9,6 +9,7 @@ import {
     ScraperStatus,
     GroupLinks,
     Logs,
+    Accounts,
 } from '@modules/scrapper/components'
 
 import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon } from '@icons'
@@ -20,6 +21,7 @@ const Profile = () => {
         status: false,
         logs: false,
         grouplinks: false,
+        accounts: false,
     })
 
     const handleClick = key => {
@@ -81,6 +83,14 @@ const Profile = () => {
                             classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.status && 'border-gray-200'}`}
                             onClick={() => handleClick('logs')}
                         />
+                        <Button
+                            label='Accounts Management'
+                            fit
+                            fill={activeTab.accounts}
+                            icon={LogsIcon}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.status && 'border-gray-200'}`}
+                            onClick={() => handleClick('accounts')}
+                        />
                     </div>
                     {activeTab.setting && (
                         <div className='mt-5'>
@@ -110,6 +120,11 @@ const Profile = () => {
                     {activeTab.logs && (
                         <div className='mt-5'>
                             <Logs />
+                        </div>
+                    )}
+                    {activeTab.accounts && (
+                        <div className='mt-5'>
+                            <Accounts />
                         </div>
                     )}
                 </div>
