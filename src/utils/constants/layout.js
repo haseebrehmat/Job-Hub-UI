@@ -80,7 +80,7 @@ export const menuItems = [
                 label: 'My Applied Jobs',
                 link: '/user-applied-jobs',
                 svg: UserAppliedJobIcon,
-                perms: ['view_user_applied_job', 'create_lead'],
+                perms: ['view_user_applied_job'],
             },
             {
                 label: 'Jobs Uploader',

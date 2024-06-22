@@ -8,7 +8,7 @@ import { fetchAppliedJobs } from '@modules/appliedJobs/api'
 import { EmptyTable, Searchbox, TableNavigate } from '@modules/appliedJobs/components'
 
 import { tableHeads, jobStatus } from '@constants/appliedJobs'
-import { formatDate, timeSince } from '@utils/helpers'
+import { can, formatDate, timeSince } from '@utils/helpers'
 
 import { DownloadIcon, DownloadIcon2, ConvertToLeadIcon } from '@icons'
 
@@ -59,7 +59,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                     <td className='w-28 py-4'>
                                         <Badge label={jobStatus[job?.status]} type='success' />
                                     </td>
-                                    <td className='px-3 py-4'>BD</td>
+                                    <td className='px-3 py-4 capitalize'>{userId ? 'ME' : job?.applied_by}</td>
                                     <td className='px-3 py-4 font-extrabold'>{job?.vertical?.pseudo ?? 'N/A'}</td>
                                     <td className='px-3 py-4 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
                                     <td className='px-3 py-4'>
@@ -74,7 +74,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                                     <Tooltip text='Download Resume'>{DownloadIcon2}</Tooltip>
                                                 </a>
                                             )}
-                                            {!job?.is_converted && (
+                                            {can('create_lead') && !job?.is_converted && (
                                                 <Tooltip text='Convert to Lead'>
                                                     <Link to={`/convert-to-lead/${job?.applied_job_id}`}>
                                                         {ConvertToLeadIcon}
@@ -90,7 +90,9 @@ const AppliedJobs = memo(({ userId = '' }) => {
                         )}
                     </tbody>
                 </table>
-                {!error && <TableNavigate data={data} page={page} handleClick={handleClick} />}
+                {data?.jobs?.length > 0 && !error && (
+                    <TableNavigate data={data} page={page} handleClick={handleClick} />
+                )}
             </div>
         </div>
     )

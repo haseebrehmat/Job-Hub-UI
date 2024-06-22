@@ -152,6 +152,7 @@ export const rawpermissions = [
             {
                 codename: 'view_applied_job',
                 name: 'View Applied Jobs',
+                child: ['create_lead'],
                 level: 2,
             },
             {
@@ -272,6 +273,12 @@ export const rawpermissions = [
                 codename: 'block_unblock_job_company',
                 name: 'Block / Unblock Job Company',
                 parent: ['view_job_company'],
+                level: 2,
+            },
+            {
+                codename: 'create_lead',
+                name: 'Convert to Lead',
+                parent: ['view_applied_job'],
                 level: 2,
             },
         ],
@@ -538,13 +545,7 @@ export const rawpermissions = [
             {
                 codename: 'view_lead',
                 name: 'View Leads',
-                child: ['create_lead', 'edit_lead'],
-                level: 2,
-            },
-            {
-                codename: 'create_lead',
-                name: 'Create Lead',
-                parent: ['view_lead'],
+                child: ['edit_lead'],
                 level: 2,
             },
             {
