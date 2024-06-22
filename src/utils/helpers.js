@@ -368,6 +368,9 @@ export const parseSelectedDesignation = (label, designations) => {
     }
     return null
 }
+
+export const parseRegions = regions => regions?.map(region => ({ value: region.id, label: region.name }))
+
 export const parseGroups = groups => groups.map(group => ({ value: group.id, label: formatStringInPascal(group.name) }))
 
 export const getSelectedDays = days =>
@@ -409,4 +412,23 @@ export const convertToTitleCase = str => {
     return result
 }
 
-export const parseRegions = regions => regions.map(region => ({ value: region.id, label: region.name }))
+export const getWidthClass = index => {
+    const widths = {
+        0: 'w-[0%]',
+        1: 'w-[20%]',
+        2: 'w-[40%]',
+        3: 'w-[60%]',
+        4: 'w-[80%]',
+        5: 'w-[100%]',
+    }
+    return widths[index]
+}
+
+export const findRegion = (region, regions) => {
+    region = region.toLowerCase()
+    const R = regions.map(reg => reg.name)
+    return R.includes(region)
+}
+
+export const parseProjects = projects =>
+    projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))

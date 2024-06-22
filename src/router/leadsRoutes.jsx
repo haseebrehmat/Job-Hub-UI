@@ -7,6 +7,7 @@ import {
     Designations,
     ExposedCandidates,
     AssignCandidate,
+    MyProfile,
 } from '@modules'
 
 export const leadsRoutes = [
@@ -65,5 +66,12 @@ export const leadsRoutes = [
         protect: true,
         title: 'Assign / Re-Assign Candidate',
         permission: 'view_lead',
+    },
+    {
+        path: '/my-profile',
+        component: <MyProfile />,
+        protect: true,
+        title: 'My Profile',
+        permission: 'view_candidate_profile',
     },
 ]

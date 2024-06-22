@@ -75,7 +75,12 @@ export const saveDesignation = (url, { arg: designation }) => {
 }
 
 export const fetchCandidates = url =>
-    http.get(url).then(({ data }) => ({ candidates: data?.results, total: data?.count, pages: data?.num_pages }))
+    http.get(url).then(({ data }) => ({
+        candidates: data?.results,
+        total: data?.count,
+        pages: data?.num_pages,
+        all_regions: data.regions,
+    }))
 
 export const saveCandidate = (url, { arg: candidate }) => {
     if (candidate?.id) {
@@ -100,3 +105,13 @@ export const allowCandidateForLeads = (url, { arg: candidate }) =>
     rawHttp
         .post(url, candidate)
         .then(({ data }) => toast.success(data.detail || 'Leads for candidate are allowed / denied successfully'))
+
+export const fetchMyProfile = url =>
+    http.get(url).then(({ data }) => ({ candidates: data?.candidate, regions: data?.all_regions }))
+
+export const fetchMyProjects = url => http.get(url).then(({ data }) => ({ data }))
+
+export const saveCandidateProjects = async (url, { arg: candidate }) => {
+    const { data } = await rawHttp.put(url, candidate)
+    return toast.success(data.detail || 'Candidate is updated successfully')
+}

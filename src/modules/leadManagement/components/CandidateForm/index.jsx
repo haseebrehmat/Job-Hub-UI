@@ -5,13 +5,13 @@ import { useMutate } from '@/hooks'
 import { Button, Modal, Input } from '@components'
 
 import { Password } from '@modules/userManagement/components'
-import { DesignationSelect, SkillsInput } from '@modules/leadManagement/components'
+import { DesignationSelect, SkillsInput, ToolsInput, RegionInput } from '@modules/leadManagement/components'
 import { saveCandidate } from '@modules/leadManagement/api'
 
 import { candidateEditSchema, candidateCreateSchema } from '@utils/schemas'
 import { CANDIDATE_INPUTS } from '@constants/leadManagement'
 
-const CandidateForm = ({ show, setShow, mutate, candidate }) => {
+const CandidateForm = ({ show, setShow, mutate, candidate, allRegions }) => {
     const { values, errors, handleSubmit, handleChange, trigger, setFieldValue } = useMutate(
         `/api/candidate_management/candidate${candidate?.id ? `/${candidate?.id}/` : '/'}`,
         saveCandidate,
@@ -21,9 +21,11 @@ const CandidateForm = ({ show, setShow, mutate, candidate }) => {
             phone: candidate?.phone || '',
             id: candidate?.id || '',
             password: '',
-            designation: candidate?.designation || '',
+            designation: candidate?.id || '',
             skills: candidate?.skills || [],
+            tools: candidate?.tools || [],
             experience: candidate?.experience || 1,
+            regions: candidate?.regions || [],
         },
         candidate?.id ? candidateEditSchema : candidateCreateSchema,
         async formValues => trigger({ ...formValues, id: candidate?.id }),
@@ -67,7 +69,14 @@ const CandidateForm = ({ show, setShow, mutate, candidate }) => {
                             />
                         </div>
                     </div>
+                    <RegionInput
+                        value={values.regions}
+                        error={errors.regions}
+                        set={setFieldValue}
+                        regions={allRegions}
+                    />
                     <SkillsInput value={values.skills} error={errors.skills} set={setFieldValue} />
+                    <ToolsInput value={values.tools} error={errors.tools} set={setFieldValue} />
                     <div className='pt-4 gap-2 flex items-center float-right'>
                         <Button label={candidate?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />

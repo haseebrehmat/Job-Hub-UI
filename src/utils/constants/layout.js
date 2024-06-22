@@ -330,4 +330,10 @@ export const menuItems = [
             },
         ],
     },
+    {
+        label: 'My Profile',
+        link: '/my-profile',
+        svg: UserIcon,
+        perms: ['view_candidate_profile', 'edit_candidate_profile'],
+    },
 ]
