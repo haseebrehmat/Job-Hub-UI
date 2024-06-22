@@ -278,4 +278,10 @@ export const menuItems = [
         svg: LoggerIcon,
         perms: ['view_logger', 'show_log_details'],
     },
+    {
+        label: 'My Profile',
+        link: '/my-profile',
+        svg: UserIcon,
+        perms: ['view_candidate_profile', 'edit_candidate_profile'],
+    },
 ]

@@ -19,7 +19,6 @@ const Candidates = () => {
         fetchCandidates
     )
     const handleClick = values => dispatch({ show: !vals.show, candidate: values })
-
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
@@ -77,6 +76,7 @@ const Candidates = () => {
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
                     candidate={vals.candidate}
+                    allRegions={data?.all_regions}
                 />
             )}
         </div>
