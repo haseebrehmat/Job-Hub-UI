@@ -70,8 +70,13 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
                                 <Badge label={row?.designation ?? 'N/A'} classes='text-xs' />
                             </span>
                             <div className='flex flex-wrap gap-1 w-2/3'>
-                                {row?.skills?.map(s => (
-                                    <Badge label={s} classes='text-xs border border-green-300' type='success' key={s} />
+                                {row?.skills?.map((s, idx) => (
+                                    <Badge
+                                        label={s.name}
+                                        classes='text-xs border border-green-300'
+                                        type='success'
+                                        key={idx}
+                                    />
                                 ))}
                             </div>
                         </div>

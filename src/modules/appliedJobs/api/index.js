@@ -27,6 +27,7 @@ export const fetchSelectedCandidates = url =>
         candidates: data?.results,
         skills: data?.skills,
         designations: data?.designations,
+        regions: data?.regions,
         total: data?.count,
         pages: data?.num_pages,
     }))
