@@ -79,6 +79,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
                                     />
                                 ))}
                             </div>
+                            <small className='text-xs'>{row?.regions?.map(r => `${r.name}`)?.join(',')}</small>
                         </div>
                     ))}
                 </div>
