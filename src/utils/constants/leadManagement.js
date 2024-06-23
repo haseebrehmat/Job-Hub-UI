@@ -13,6 +13,7 @@ export const LEADS_INITIAL_VALS = {
     team: '',
     members: [],
     stacks: [],
+    candidates: [],
 }
 
 export const NOTE_INITIAL_STATE = {
@@ -99,5 +100,6 @@ export const CANDIDATE_SELECT_STATE = {
     candidate_id: null,
     skills: '',
     designations: '',
+    regions: '',
     show: false,
 }

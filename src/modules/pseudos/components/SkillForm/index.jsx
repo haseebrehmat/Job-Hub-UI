@@ -9,7 +9,7 @@ import { GenericSkillForm } from '@modules/pseudos/components'
 import { saveSkill, fetchGenericSkills } from '@modules/pseudos/api'
 
 import { skillSchema } from '@utils/schemas'
-import { parseSelectedGenericSkill, parseGenericSkills } from '@utils/helpers'
+import { parseSelectedGenericSkill, parseGenericSkills, can } from '@utils/helpers'
 
 const SkillForm = ({ show, setShow, mutate, skill, id }) => {
     const [skillCreate, setSkillCreate] = useState(false)
@@ -42,9 +42,15 @@ const SkillForm = ({ show, setShow, mutate, skill, id }) => {
                         <>
                             <span className='text-xs font-semibold flex justify-between items-center'>
                                 Skill*
-                                <Tooltip text='Add skill'>
-                                    <Button label='+' classes='!px-1.5 !py-0.5' onClick={() => setSkillCreate(true)} />
-                                </Tooltip>
+                                {can('create_generic_skill') && (
+                                    <Tooltip text='Add skill'>
+                                        <Button
+                                            label='+'
+                                            classes='!px-1.5 !py-0.5'
+                                            onClick={() => setSkillCreate(true)}
+                                        />
+                                    </Tooltip>
+                                )}
                             </span>
                             <CustomSelector
                                 options={parseGenericSkills(data?.skills)}

@@ -9,6 +9,7 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
         selectedMembers: filtered.members,
         team: filtered.team,
         stacks: filtered.stacks,
+        candidates: filtered.candidates,
         members: filtered.team ? data?.members?.filter(t => t?.team?.includes(filtered.team.value)) : data?.members,
     })
     const applyFilters = () =>
@@ -18,6 +19,7 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
             members: vals.selectedMembers,
             team: vals.team,
             stacks: vals.stacks,
+            candidates: vals.candidates,
         })
     const changeTeam = team =>
         update({ team, members: data?.members?.filter(t => t?.team?.includes(team?.value)), selectedMembers: [] })
@@ -69,6 +71,16 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
                     selectorValue={vals.stacks}
                     isMulti
                     placeholder='Select Stacks'
+                />
+            </div>
+            <div>
+                <span className='text-xs font-semibold'>Candidates</span>
+                <CustomSelector
+                    options={data?.candidates}
+                    handleChange={obj => update({ candidates: obj })}
+                    selectorValue={vals.candidates}
+                    isMulti
+                    placeholder='Select Candidates'
                 />
             </div>
             <Button label='Get' classes='!px-4 !py-2' fit onClick={applyFilters} />

@@ -5,7 +5,7 @@ import { useMutate } from '@/hooks'
 
 import { Input, Textarea, Loading } from '@components'
 
-import { ActionButtons, Hobbies } from '@modules/pseudos/components'
+import { ActionButtons, Hobbies, RegionsDropdown } from '@modules/pseudos/components'
 import { fetchBasicInfo, updateBasicInfo } from '@modules/pseudos/api'
 
 import { verticalBasicInfoSchema } from '@utils/schemas'
@@ -13,8 +13,8 @@ import { BASIC_INFO_INPUTS } from '@constants/pseudos'
 
 const Basic = ({ id }) => {
     const [hobbies, setHobbies] = useState([])
+    const [regions, setRegions] = useState([])
     const { data, isLoading, mutate } = useSWR(`/api/profile/vertical/${id}/`, fetchBasicInfo)
-
     const { values, errors, handleSubmit, handleChange, trigger } = useMutate(
         `/api/profile/vertical/${id}/`,
         updateBasicInfo,
@@ -30,12 +30,12 @@ const Basic = ({ id }) => {
             identity: data?.identity || '',
         },
         verticalBasicInfoSchema,
-        async formValues => trigger({ ...formValues, vertical_id: id, hobbies }),
+        async formValues => trigger({ ...formValues, vertical_id: id, hobbies, regions: regions.map(r => r.value) }),
         null,
         () => mutate()
     )
-    if (isLoading) return <Loading />
 
+    if (isLoading) return <Loading />
     return (
         <div className='py-4 px-1'>
             <form onSubmit={handleSubmit}>
@@ -92,7 +92,10 @@ const Basic = ({ id }) => {
                     />
                     {errors.summary && <small className='__error'>{errors.summary}</small>}
                 </div>
-                <Hobbies hobbies={data?.hobbies} setHobbies={setHobbies} />
+                <div className='flex gap-4 items-center'>
+                    <RegionsDropdown value={data?.regions} set={setRegions} />
+                    <Hobbies hobbies={data?.hobbies} setHobbies={setHobbies} />
+                </div>
                 <ActionButtons form mutate={mutate} />
             </form>
         </div>

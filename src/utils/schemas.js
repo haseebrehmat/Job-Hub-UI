@@ -297,3 +297,7 @@ export const groupSchema = Yup.object().shape({
                     .required('Please select interval type'),
         }),
 })
+
+export const regionSchema = Yup.object().shape({
+    name: Yup.string().required('Region name is required'),
+})

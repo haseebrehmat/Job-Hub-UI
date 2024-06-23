@@ -12,25 +12,23 @@ import {
     Companies,
     Roles,
     Users,
-    Integrations,
     Teams,
     Team,
     Profile,
     CoverLetter,
     Scrapper,
-    Logger,
-    ResumeBuilder,
     Pseudos,
     Vertical,
     ApplyForJob,
-    GenericSkills,
     ConvertToLead,
+    JobCompanies,
 } from '@modules'
 import { JobDetail } from '@modules/jobsFilter/components'
 import App from '@/App'
 
 import { leadsRoutes } from '@router/leadsRoutes'
 import { analyticsRoutes } from '@router/analyticsRoutes'
+import { settingsRoutes } from '@router/settingsRoutes'
 
 import { getToken, decodeJwt } from '@utils/helpers'
 
@@ -44,13 +42,13 @@ export const routes = [
         title: 'Octagon Dashboard',
         permission: 'all',
     },
-    // {
-    //     path: '/applied-jobs',
-    //     component: <AppliedJobs />,
-    //     protect: true,
-    //     title: 'Applied Jobs',
-    //     permission: 'view_applied_job',
-    // },
+    {
+        path: '/applied-jobs',
+        component: <AppliedJobs />,
+        protect: true,
+        title: 'Applied Jobs',
+        permission: 'view_applied_job',
+    },
     {
         path: '/team-applied-jobs',
         component: <TeamAppliedJobs />,
@@ -114,13 +112,6 @@ export const routes = [
         permission: 'view_team',
     },
     {
-        path: '/integrations',
-        component: <Integrations />,
-        protect: true,
-        title: 'Integration Management',
-        permission: 'view_integration',
-    },
-    {
         path: '/user-applied-jobs',
         component: <AppliedJobs userId={user_id} />,
         protect: true,
@@ -156,20 +147,6 @@ export const routes = [
         permission: 'view_job_scrapper',
     },
     {
-        path: '/logger',
-        component: <Logger />,
-        protect: true,
-        title: 'Logger',
-        permission: 'all',
-    },
-    {
-        path: '/resume-builder',
-        component: <ResumeBuilder />,
-        protect: true,
-        title: 'Resume Builder',
-        permission: 'view_resume_builder',
-    },
-    {
         path: '/pseudos',
         component: <Pseudos />,
         protect: true,
@@ -198,14 +175,15 @@ export const routes = [
         permission: 'all',
     },
     {
-        path: '/generic-skills',
-        component: <GenericSkills />,
+        path: '/job-companies',
+        component: <JobCompanies />,
         protect: true,
-        title: 'Generic Skills',
-        permission: 'view_generic_skill',
+        title: 'Block / Unblock Job Companies',
+        permission: 'view_user',
     },
     ...leadsRoutes,
     ...analyticsRoutes,
+    ...settingsRoutes,
 ]
 
 export const authRoutes = [

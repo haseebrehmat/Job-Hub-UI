@@ -24,6 +24,11 @@ import {
     CandidateIcon,
     ExposedCandidateIcon,
     AnalyticsIcon,
+    JobCompaniesIcon,
+    GenericSkillIcon,
+    ApiLogsIcon,
+    RegionIcon,
+    AppliedJobsIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -61,13 +66,21 @@ export const menuItems = [
             'delete_cronjob_setting',
             'run_scrapper',
             'create_lead',
+            'view_job_company',
+            'block_unblock_job_company',
         ],
         subItems: [
+            {
+                label: 'Applied Jobs',
+                link: '/applied-jobs',
+                svg: AppliedJobsIcon,
+                perms: ['view_applied_job', 'create_lead'],
+            },
             {
                 label: 'My Applied Jobs',
                 link: '/user-applied-jobs',
                 svg: UserAppliedJobIcon,
-                perms: ['view_user_applied_job', 'create_lead'],
+                perms: ['view_user_applied_job'],
             },
             {
                 label: 'Jobs Uploader',
@@ -107,6 +120,12 @@ export const menuItems = [
                     'edit_job_source_link',
                     'delete_job_source_link',
                 ],
+            },
+            {
+                label: 'Job Companies',
+                link: '/job-companies',
+                svg: JobCompaniesIcon,
+                perms: ['view_job_company', 'block_unblock_job_company'],
             },
         ],
     },
@@ -256,7 +275,22 @@ export const menuItems = [
         link: '#!',
         svg: SettingIcon,
         key: 'settings',
-        perms: ['view_integration', 'create_integration', 'edit_integration', 'view_resume_builder'],
+        perms: [
+            'view_integration',
+            'create_integration',
+            'edit_integration',
+            'view_resume_builder',
+            'view_generic_skill',
+            'create_generic_skill',
+            'edit_generic_skill',
+            'delete_generic_skill',
+            'view_logger',
+            'show_log_details',
+            'view_region',
+            'create_region',
+            'edit_region',
+            'delete_region',
+        ],
         subItems: [
             {
                 label: 'Integrations',
@@ -270,13 +304,31 @@ export const menuItems = [
                 svg: ResumeIcon,
                 perms: ['view_resume_builder'],
             },
+            {
+                label: 'Generic Skills',
+                link: '/generic-skills',
+                svg: GenericSkillIcon,
+                perms: ['view_generic_skill', 'create_generic_skill', 'edit_generic_skill', 'delete_generic_skill'],
+            },
+            {
+                label: 'Logger',
+                link: '/logger',
+                svg: LoggerIcon,
+                perms: ['view_logger', 'show_log_details'],
+            },
+            {
+                label: 'API Logs',
+                link: '/api-logs',
+                svg: ApiLogsIcon,
+                perms: ['view_api_logs'],
+            },
+            {
+                label: 'Regions',
+                link: '/regions',
+                svg: RegionIcon,
+                perms: ['view_region', 'create_region', 'edit_region', 'delete_region'],
+            },
         ],
-    },
-    {
-        label: 'Logger',
-        link: '/logger',
-        svg: LoggerIcon,
-        perms: ['view_logger', 'show_log_details'],
     },
     {
         label: 'My Profile',

@@ -29,7 +29,7 @@ const ConvertToLead = () => {
 
     const flag = values.status && values.phase && values.candidate
     return (
-        <div className='max-w-full overflow-x-auto hide_scrollbar p-4 mt-4'>
+        <div className='max-w-full hide_scrollbar p-4 mt-4'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-cols-2 gap-4'>
                     <div className='grid grid-cols-2 gap-2'>

@@ -399,6 +399,19 @@ export const htmlToPng = htmlRef => {
         })
 }
 
+export const getSelectedVals = options =>
+    options?.length > 0 ? options?.map(m => m.value).join(',') : options?.value || ''
+
+export const convertToTitleCase = str => {
+    if (!str) {
+        return str
+    }
+    const words = str.split('_')
+    const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    const result = capitalizedWords.join(' ')
+    return result
+}
+
 export const getWidthClass = index => {
     const widths = {
         0: 'w-[0%]',

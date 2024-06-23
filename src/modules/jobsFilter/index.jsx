@@ -8,7 +8,7 @@ import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
 import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@/utils/helpers'
-import { Filters, Badge } from '@/components'
+import { Filters, Badge, Checkbox } from '@/components'
 import { fetchJobs, downloadJobsData, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
 import { GenerateCSV, JobPortalAnalytics } from '@modules/jobsFilter/components'
@@ -43,6 +43,7 @@ const JobsFilter = memo(() => {
         ordering: '-job_posted_date',
         showCoverLetter: false,
         isLoading: true,
+        blocked: false,
     }
 
     const [filterState, setFilterState] = useState(defaultFilterState)
@@ -58,6 +59,7 @@ const JobsFilter = memo(() => {
         search: '',
         page: 1,
         job_visibility: 'all',
+        blocked: false,
     }
 
     const [jobsFilterParams, setJobsFilterParams] = useState(defaulJobsFiltersParams)
@@ -136,7 +138,7 @@ const JobsFilter = memo(() => {
     }
 
     const getJobsParamsFromFilters = () => {
-        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector } =
+        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector, blocked } =
             filterState
         const { from_date, to_date } = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
@@ -152,6 +154,7 @@ const JobsFilter = memo(() => {
             to_date,
             job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
             search: filterState?.jobTitle,
+            blocked,
         }
     }
 
@@ -351,8 +354,15 @@ const JobsFilter = memo(() => {
                         />
                     </div>
                 </div>
-                <div className='flex justify-end px-4 align-baseline'>
-                    <div className='my-6'>
+                <div className='flex justify-between items-center mb-2'>
+                    <div>
+                        <Checkbox
+                            label='Show Blocked Companies Jobs'
+                            checked={filterState?.blocked}
+                            onChange={e => setFilterState({ ...filterState, blocked: e.target.checked })}
+                        />
+                    </div>
+                    <div>
                         <Filters apply={() => updateParams()} clear={() => resetFilters()} />
                     </div>
                 </div>
@@ -407,17 +417,25 @@ const JobsFilter = memo(() => {
                                     <td className='p-2'>{item?.tech_keywords}</td>
                                     <td className='p-2'>{item?.job_type}</td>
                                     <td className='p-2'>{formatDate(item?.job_posted_date)}</td>
-                                    <td className=''>
-                                        {can('apply_job') && (
+                                    <td>
+                                        {can('apply_job') && item?.total_vertical > 0 && !jobsFilterParams.blocked ? (
                                             <Link
                                                 to={`/apply-for-job/${item?.id}`}
-                                                className='rounded bg-[#10868a] text-white p-2  text-sm inline-flex'
+                                                className='rounded bg-[#10868a] text-white text-sm inline-flex w-fit p-1'
                                             >
                                                 Apply
                                                 <span className='text-bold ml-0.5'>
                                                     ({item?.remaining_vertical ?? 0} / {item?.total_vertical ?? 0})
                                                 </span>
                                             </Link>
+                                        ) : (
+                                            <small className='text-xs text-gray-500 border px-1.5 border-gray-500 rounded-lg'>
+                                                {item?.total_vertical > 0
+                                                    ? jobsFilterParams.blocked
+                                                        ? 'blocked'
+                                                        : 'unauthorized'
+                                                    : 'no vertical'}
+                                            </small>
                                         )}
                                         {/* {can('apply_job') ? (
                                             item?.job_status === '0' ? (

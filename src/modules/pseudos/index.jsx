@@ -10,7 +10,7 @@ import { fetchPseudos } from '@modules/pseudos/api'
 import { can } from '@utils/helpers'
 import { PSEUDO_HEADS } from '@constants/pseudos'
 
-import { CreateIcon, EditIcon, GenericSkillIcon } from '@icons'
+import { CreateIcon, EditIcon } from '@icons'
 
 const Pseudos = () => {
     const [query, setQuery] = useState('')
@@ -26,18 +26,12 @@ const Pseudos = () => {
     }
 
     if (isLoading) return <Loading />
-
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
                 <Searchbox query={query} setQuery={setQuery} />
                 {can('create_pseudo') && (
                     <Button label='Create Pseudo' fit icon={CreateIcon} onClick={() => handleClick()} />
-                )}
-                {can('view_generic_skill') && (
-                    <Link to='/generic-skills'>
-                        <Button label='Generic Skills' icon={GenericSkillIcon} />
-                    </Link>
                 )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>

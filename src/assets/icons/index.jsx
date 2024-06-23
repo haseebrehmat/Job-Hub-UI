@@ -18,6 +18,7 @@ import {
     MdLeaderboard,
     MdCancel,
     MdDoNotDisturbOn,
+    MdBlock,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -62,10 +63,27 @@ import {
     AiOutlinePartition,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
-import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
+import { CgSidebarOpen, CgListTree, CgUnblock } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle, FaUserEdit } from 'react-icons/fa'
-import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare, BiTrendingUp } from 'react-icons/bi'
+import {
+    FaBriefcase,
+    FaHotjar,
+    FaUsers,
+    FaRegTrashAlt,
+    FaPowerOff,
+    FaRegUserCircle,
+    FaUserEdit,
+    FaUsersCog,
+} from 'react-icons/fa'
+import {
+    BiPlusCircle,
+    BiMessageDetail,
+    BiPause,
+    BiGitCompare,
+    BiTrendingUp,
+    BiMap,
+    BiBriefcaseAlt2,
+} from 'react-icons/bi'
 import {
     RiUserSettingsLine,
     RiLock2Fill,
@@ -81,6 +99,7 @@ import { Integrations, Filters, ResetFilters } from '@svgs'
 import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
+import { TfiLayoutListThumb } from 'react-icons/tfi'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -151,7 +170,7 @@ export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22p
 export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
 export const RunningScrapperIcon = <VscVmRunning style={{ fontSize: '22px' }} />
-export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
+export const LoggerIcon = <BsCardList style={{ fontSize: '16px' }} />
 export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px' }} />
 export const ResumeIcon = <GrDocumentUser style={{ fontSize: 16 }} />
 export const JobSource = <VscSourceControl style={{ fontSize: '22px' }} />
@@ -162,7 +181,7 @@ export const PauseIcon = <BiPause style={{ fontSize: '22px' }} />
 export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }} />
 export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
 export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
-export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
+export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 16 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
 export const StatusIcon = <BiGitCompare style={{ fontSize: 18 }} />
@@ -185,3 +204,9 @@ export const LeadAppliedByIcon = <RxFace style={{ fontSize: 18 }} />
 export const AllowLeadIcon = <BsCheckCircleFill style={{ fontSize: 22 }} />
 export const DenyLeadIcon = <MdDoNotDisturbOn style={{ fontSize: 22 }} />
 export const AnalyticsIcon = <BiTrendingUp style={{ fontSize: 22 }} />
+export const JobCompaniesIcon = <FaUsersCog style={{ fontSize: 22 }} />
+export const BlockJobCompanyIcon = <MdBlock style={{ fontSize: 18 }} />
+export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
+export const ApiLogsIcon = <TfiLayoutListThumb style={{ fontSize: 16 }} />
+export const RegionIcon = <BiMap style={{ fontSize: 16 }} />
+export const AppliedJobsIcon = <BiBriefcaseAlt2 style={{ fontSize: 22 }} />

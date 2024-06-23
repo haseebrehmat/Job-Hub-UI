@@ -8,6 +8,7 @@ import { Board, Loading, Searchbox, Button, Paginated } from '@components'
 import { LeadCard, LeadModal, LeadFilters } from '@modules/leadManagement/components'
 import { fetchLeads, changeLeadStatus } from '@modules/leadManagement/api'
 
+import { getSelectedVals } from '@utils/helpers'
 import { LEADS_INITIAL_VALS } from '@constants/leadManagement'
 
 import { CandidateFilterIcon } from '@icons'
@@ -16,14 +17,17 @@ const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
 
     const { data, isLoading, error, mutate } = useSWR(
-        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${vals.to}&team=${
-            vals.team?.value ?? ''
-        }&members=${vals.members.map(m => m.value).join(',')}&stacks=${vals.stacks.map(s => s.value).join(',')}`,
+        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${
+            vals.to
+        }&team=${getSelectedVals(vals?.team)}&members=${getSelectedVals(vals.members)}&stacks=${getSelectedVals(
+            vals.stacks
+        )}&candidates=${getSelectedVals(vals.candidates)}`,
         fetchLeads,
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
             shouldRetryOnError: false,
+            revalidateOnMount: true,
         }
     )
 
@@ -51,7 +55,7 @@ const Leads = () => {
     )
     const clearFilters = () => {
         mutate({ url: `/api/lead_managament/leads/?search=&page=1` })
-        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '' })
+        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '', candidates: [] })
     }
 
     return isLoading ? (
