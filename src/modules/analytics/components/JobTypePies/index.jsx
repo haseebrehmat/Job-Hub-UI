@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import { Tooltip } from '@components'
 
 import { formatNum, htmlToPng } from '@utils/helpers'
-import { JOB_TYPE_COLORS } from '@constants/analytics'
+import { JOB_TYPE_COLORS2 } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 
@@ -28,16 +28,18 @@ const JobTypePies = ({ data }) => {
             <ResponsiveContainer width='100%' height={400} ref={chartRef}>
                 <PieChart>
                     <Pie
-                        data={data}
+                        data={data?.filter(({ value }) => value > 0)}
                         label={renderCustomizedLabel}
                         outerRadius={130}
                         dataKey='value'
                         animationBegin={0}
                         animationDuration={300}
                     >
-                        {data.map((_, index) => (
-                            <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS[index]} />
-                        ))}
+                        {data
+                            ?.filter(({ value }) => value > 0)
+                            .map((row, index) => (
+                                <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS2[row.key]} />
+                            ))}
                     </Pie>
                     <Tooltip />
                 </PieChart>
