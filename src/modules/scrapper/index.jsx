@@ -12,7 +12,7 @@ import {
     Accounts,
 } from '@modules/scrapper/components'
 
-import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon } from '@icons'
+import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon, UsersIcon } from '@icons'
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState({
@@ -87,7 +87,7 @@ const Profile = () => {
                             label='Accounts Management'
                             fit
                             fill={activeTab.accounts}
-                            icon={LogsIcon}
+                            icon={UsersIcon}
                             classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.status && 'border-gray-200'}`}
                             onClick={() => handleClick('accounts')}
                         />

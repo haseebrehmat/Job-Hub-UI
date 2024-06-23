@@ -12,7 +12,10 @@ import { groupSchema } from '@utils/schemas'
 import { INTERVAL_TYPE_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
 
 const GroupForm = ({ show, setShow, mutate, setting }) => {
-    const [scrapperType, setScrapperType] = useState({ time: setting?.time_based, interval: setting?.interval_based })
+    const [scrapperType, setScrapperType] = useState({
+        time: setting?.scheduler_settings?.time_based,
+        interval: setting?.scheduler_settings?.interval_based,
+    })
 
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/job_scraper/group_scheduler${setting?.id ? `/${setting?.id}/` : '/'}`,
@@ -41,7 +44,6 @@ const GroupForm = ({ show, setShow, mutate, setting }) => {
             if (!setting?.id) resetForm()
         }
     )
-    console.log(values.week_days.length === 7)
     return (
         <Drawer show={show} setShow={setShow} w='400px'>
             <form onSubmit={handleSubmit}>
