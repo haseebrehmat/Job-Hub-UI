@@ -12,7 +12,7 @@ const JobTypePies = ({ data }) => {
     const chartRef = useRef('')
 
     const renderCustomizedLabel = ({ percent, payload }) =>
-        `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(0)}%)`
+        `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(2)}%)`
 
     return (
         <div className='border px-200000 pt-10 text-[#1E6570] mt-10 relative w-1/2'>
