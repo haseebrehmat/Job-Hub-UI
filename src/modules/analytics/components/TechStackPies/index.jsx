@@ -13,15 +13,16 @@ const TechStackPies = ({ data = {}, stack = null }) => {
     const memoizedData = useMemo(
         () =>
             Object.entries(data)
-                .slice(1)
-                .map(([name, value]) => ({ name: JOB_TYPES[name], value })),
+                ?.slice(1)
+                ?.map(([name, value]) => ({ name: JOB_TYPES[name], value }))
+                ?.filter(({ value }) => value > 0),
         [data, stack]
     )
     const renderCustomizedLabel = ({ percent, payload }) =>
         `${formatNum(payload.value)} ${transformPascal(payload.name)
             .split(' ')
             .map(word => word.charAt(0).toUpperCase())
-            .join('')} (${(percent * 100).toFixed(0)}%)`
+            .join('')} (${(percent * 100).toFixed(2)}%)`
 
     return (
         <div className='border px-200000 pt-10 text-[#1E6570] mt-10 relative w-1/2'>
