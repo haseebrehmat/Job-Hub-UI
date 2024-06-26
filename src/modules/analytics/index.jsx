@@ -22,7 +22,11 @@ const Analytics = () => {
 
     const { data, isLoading } = useSWR(
         `/api/job_portal/generate_analytics/?start_date=${vals.from}&end_date=${vals.to}&week=${vals.week}&month=${vals.month}&year=${vals.year}&quarter=${vals.quarter}`,
-        fetchAnalytics
+        fetchAnalytics,
+        {
+            revalidateOnFocus: false,
+            revalidateIfStale: false,
+        }
     )
 
     const filterQuery = rawData => rawData?.filter(p => p.name.toLowerCase().includes(vals.query.toLowerCase()))
