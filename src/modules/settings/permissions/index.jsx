@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { RegionActions, RegionForm } from '@modules/settings/components'
+import { PermissionActions, PermissionForm } from '@modules/settings/components'
 import { fetchRegions } from '@modules/settings/api'
 
 import { can } from '@utils/helpers'
@@ -26,7 +26,7 @@ const Permissions = () => {
             <div className='flex items-center pt-3 pb-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
-                    {can('create_region') && (
+                    {true && (
                         <Button label='Create Permission' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                     )}
                 </div>
@@ -37,7 +37,7 @@ const Permissions = () => {
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
                             {false && can('edit_region') && can('delete_region') && (
-                                <RegionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
+                                <PermissionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
                             <span className='text-sm'>codename</span>
                             <span>Module</span>
@@ -52,8 +52,8 @@ const Permissions = () => {
                     <Paginated pages={data?.pages} setPage={page => dispatch({ page })} page={vals.page} />
                 </div>
             )}
-            {can('create_region') && vals.show && (
-                <RegionForm
+            {true && vals.show && (
+                <PermissionForm
                     show={vals.show}
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
