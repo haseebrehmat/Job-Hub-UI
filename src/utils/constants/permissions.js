@@ -147,6 +147,35 @@ export const rawpermissions = [
         ],
     },
     {
+        module: 'Permission Management',
+        permissions: [
+            {
+                codename: 'view_permission',
+                name: 'View Permissions',
+                child: ['create_permission', 'view_permission', 'edit_permission', 'delete_permission'],
+                level: 1,
+            },
+            {
+                codename: 'create_permission',
+                name: 'Create Permission',
+                parent: ['view_permission'],
+                level: 1,
+            },
+            {
+                codename: 'edit_permission',
+                name: 'Edit Permission',
+                parent: ['view_permission'],
+                level: 1,
+            },
+            {
+                codename: 'delete_permission',
+                name: 'Delete Permission',
+                parent: ['view_permission'],
+                level: 1,
+            },
+        ],
+    },
+    {
         module: 'Jobs',
         permissions: [
             {
