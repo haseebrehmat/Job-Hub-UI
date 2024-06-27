@@ -10,17 +10,21 @@ export const TECH_STACK_NUMBER_STYLE = {
     transitionProperty: 'background-color, color, opacity',
 }
 
-export const ANALYTIC_INITIAL_VALUES = {
-    from: '',
-    to: '',
-    filter: false,
-    query: '',
-    bar: 'total',
+export const DEFAULT_FILTER_VALS = {
     week: '',
     month: '',
     year: '',
     quarter: '',
+    from: '',
+    to: '',
+}
+
+export const ANALYTIC_INITIAL_VALUES = {
+    filter: false,
+    query: '',
+    bar: 'total',
     stack: 'others dev',
+    ...DEFAULT_FILTER_VALS,
 }
 
 export const JOB_TYPE_COLORS = ['#532747', '#1c5655', '#526acb', '#644897', '#8e272b', '#2d455c', '#4ab9a7']
