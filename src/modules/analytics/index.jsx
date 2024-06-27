@@ -7,6 +7,7 @@ import {
     JobTypeCounts,
     TechStackCounts,
     Filters,
+    SubFilters,
     JobTypePies,
     TechStackBars,
     TechStackPies,
@@ -28,13 +29,13 @@ const Analytics = () => {
             revalidateIfStale: false,
         }
     )
-
     const filterQuery = rawData => rawData?.filter(p => p.name.toLowerCase().includes(vals.query.toLowerCase()))
 
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full mb-14 px-3 mt-6'>
             <Filters values={vals} set={dispatch} />
+            <SubFilters options={data?.filters} set={dispatch} vals={vals} />
             <div className='flex gap-2'>
                 <JobTypeCounts
                     data={vals.query ? filterQuery(data?.job_type_data) : data?.job_type_data}
