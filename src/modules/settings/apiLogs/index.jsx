@@ -38,41 +38,43 @@ const ApiLogs = () => {
                 />
             </div>
             {vals.filter && <ApiLogFilters filtered={vals} dispatch={dispatch} />}
-            <table className='table-auto w-full text-sm text-left text-[#048C8C] mt-3'>
-                <thead className='text-xs uppercase border border-[#048C8C]'>
-                    <tr>
-                        {API_LOGS_HEADS.map(heading => (
-                            <th scope='col' className='px-3 py-4' key={heading}>
-                                {heading}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data?.logs?.length > 0 && !error ? (
-                        data?.logs?.map((row, idx) => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
-                                <td className='p-3 break-words'>{row?.id}</td>
-                                <td className='p-3 break-words'>
-                                    {row?.source === 'SalesEngineLogsNaming.PRODUCTION_TO_SALES_ENGINE'
-                                        ? 'Production --> Sales Engine'
-                                        : 'Staging --> Production'}
-                                </td>
-                                <td className='p-3 break-words capitalize'>
-                                    {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
-                                </td>
-                                <td className='p-3 break-words'>{formatDate(row?.created_at)}</td>
-                                <td className='px-4 py-3 break-words text-md'>{row?.jobs_count || 0}</td>
-                                <td className='p-3 text-2xl font-bold'>
-                                    {row?.upload_status ? ValidateTrueIcon : ValidateFalseIcon}
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <EmptyTable cols={4} msg='No logs found yet!' />
-                    )}
-                </tbody>
-            </table>
+            <div className='overflow-x-auto w-full hide_scrollbar'>
+                <table className='table-auto w-full text-sm text-left text-[#048C8C] mt-3'>
+                    <thead className='text-xs uppercase border border-[#048C8C]'>
+                        <tr>
+                            {API_LOGS_HEADS.map(heading => (
+                                <th scope='col' className='px-3 py-4' key={heading}>
+                                    {heading}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data?.logs?.length > 0 && !error ? (
+                            data?.logs?.map((row, idx) => (
+                                <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
+                                    <td className='p-3 break-words'>{row?.id}</td>
+                                    <td className='p-3 break-words'>
+                                        {row?.source === 'SalesEngineLogsNaming.PRODUCTION_TO_SALES_ENGINE'
+                                            ? 'Production --> Sales Engine'
+                                            : 'Staging --> Production'}
+                                    </td>
+                                    <td className='p-3 break-words capitalize'>
+                                        {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
+                                    </td>
+                                    <td className='p-3 break-words'>{formatDate(row?.created_at)}</td>
+                                    <td className='px-4 py-3 break-words text-md'>{row?.jobs_count || 0}</td>
+                                    <td className='p-3 text-2xl font-bold'>
+                                        {row?.upload_status ? ValidateTrueIcon : ValidateFalseIcon}
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <EmptyTable cols={4} msg='No logs found yet!' />
+                        )}
+                    </tbody>
+                </table>
+            </div>
             {data?.pages > 1 && data?.logs && (
                 <div className='w-full'>
                     <Paginated pages={data?.pages} setPage={page => dispatch({ page })} page={vals.page} />
