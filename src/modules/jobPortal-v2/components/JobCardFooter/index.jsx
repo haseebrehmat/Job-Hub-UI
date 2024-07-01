@@ -8,15 +8,15 @@ import { timeSince, can, formatDate } from '@utils/helpers'
 import { UptoIcon, PaginateNext } from '@icons'
 
 const JobCardFooter = ({ job = null }) => {
-    const [blocked] = useJobPortalV2Store(state => [state?.blocked])
+    const [blocked, updated_at] = useJobPortalV2Store(state => [state?.blocked, state?.updated_at])
     const [setVisitedJobs] = useVisitedJobsStore(state => [state.setVisitedJobs])
 
     return job ? (
         <div className='flex items-center justify-between mt-3 md:mr-1.5'>
             <span className='text-slate-500 font-semibold -skew-x-3 md:pl-2 inline-flex items-center gap-1 flex-wrap'>
-                <span className='text-sm'>Posted</span>
-                {timeSince(job?.job_posted_date)}
-                <span className='text-sm font-normal'>({formatDate(job?.job_posted_date)})</span>
+                <span className='text-sm'>{updated_at ? 'Uploaded' : 'Posted'}</span>
+                {timeSince(updated_at ? job?.updated_at : job?.job_posted_date)}
+                <span className='text-sm font-normal'>({formatDate(updated_at ? job?.updated_at : job?.job_posted_date)})</span>
             </span>
             <div className='flex items-center gap-4 flex-wrap'>
                 <a

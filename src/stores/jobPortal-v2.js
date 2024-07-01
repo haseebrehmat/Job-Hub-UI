@@ -17,10 +17,12 @@ export const useJobPortalV2Store = create(set => ({
     show: false,
     edit: false,
     id: null,
+    updated_at: false,
 
     applyFilters: () =>
         set(state => ({
             ...state,
+            updated_at: state?.filters?.order === '-updated_at',
             url: {
                 filters: `${JOB_PORTAL_INITIAL_URLS?.filters}${getFilterAppliedURL(state?.query, state?.filters)}`,
                 jobs: `${JOB_PORTAL_INITIAL_URLS?.jobs}${getFilterAppliedURL(state?.query, state?.filters)}`,
