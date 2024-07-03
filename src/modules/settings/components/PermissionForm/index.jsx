@@ -46,7 +46,7 @@ const PermissionForm = ({ show, setShow, mutate, link }) => {
             show={show}
             setShow={setShow}
             content={
-                <form onSubmit={handleSubmit} className='w-full'>
+                <form onSubmit={handleSubmit} className='w-full hide_scrollbar overflow-x-auto'>
                     <div className='grid grid-flow-row gap-2'>
                         <p className='font-medium text-xl'>{link?.id ? 'Edit' : 'Create'} Permissions</p>
                         <hr className='mb-1 w-full' />
@@ -74,11 +74,13 @@ const PermissionForm = ({ show, setShow, mutate, link }) => {
                                     />
 
                                     <div className='flex gap-2 items-center'>
-                                        <Input
-                                            ph={`Enter Permisssion Name ${index + 1}`}
-                                            value={field.link}
-                                            onChange={e => handleFieldChange(index, e.target.value)}
-                                        />
+                                        <div className='flex-grow'>
+                                            <Input
+                                                ph={`Enter Permisssion Name ${index + 1}`}
+                                                value={field.link}
+                                                onChange={e => handleFieldChange(index, e.target.value)}
+                                            />
+                                        </div>
                                         <Tooltip text='Re-move Link'>
                                             <Button
                                                 classes='border-0 !text-lg !w-6 !h-6'

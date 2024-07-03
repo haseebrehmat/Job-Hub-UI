@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
 import { PermissionActions, PermissionForm } from '@modules/settings/components'
-import { fetchRegions } from '@modules/settings/api'
+import { fetchPermissions } from '@modules/settings/api'
 
 import { can } from '@utils/helpers'
 import { REGIONS_INITIAL_VALUES } from '@constants/settings'
@@ -14,8 +14,8 @@ import { CreateIcon } from '@icons'
 const Permissions = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), REGIONS_INITIAL_VALUES)
     const { data, error, isLoading, mutate } = useSWR(
-        `/api/candidate_management/regions/?search=${vals.query}&page=${vals.page}`,
-        fetchRegions
+        `/api/auth/permission/?search=${vals.query}&page=${vals.page}`,
+        fetchPermissions
     )
 
     const handleClick = values => dispatch({ region: values, show: !vals.show })
@@ -31,20 +31,22 @@ const Permissions = () => {
                     )}
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-2 md:grid-cols-5'>
-                {data?.regions?.length > 0 && !error ? (
-                    data?.regions?.map((row, idx) => (
+            <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
+                {data?.length > 0 && !error ? (
+                    data?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
-                            <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
+                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
                             {false && can('edit_region') && can('delete_region') && (
                                 <PermissionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
-                            <span className='text-sm'>codename</span>
-                            <span>Module</span>
+                            <div className='flex text-sm justify-between gap-2'>
+                                <span className='text-gray-600 italic'>{row?.codename}</span>
+                                <span>{row?.module}</span>
+                            </div>
                         </div>
                     ))
                 ) : (
-                    <span className='m-auto p-5 text-gray-500'>No regions found yet!</span>
+                    <span className='m-auto p-5 text-gray-500'>No permissions found yet!</span>
                 )}
             </div>
             {data?.pages > 1 && (
