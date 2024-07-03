@@ -1,4 +1,4 @@
-import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs, Regions } from '@modules'
+import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs, Regions, Permissions } from '@modules'
 
 export const settingsRoutes = [
     {
@@ -42,5 +42,12 @@ export const settingsRoutes = [
         protect: true,
         title: 'Regions',
         permission: 'view_region',
+    },
+    {
+        path: '/permissions',
+        component: <Permissions />,
+        protect: true,
+        title: 'Permissions',
+        permission: 'all',
     },
 ]

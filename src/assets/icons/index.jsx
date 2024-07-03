@@ -100,6 +100,7 @@ import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
 import { TfiLayoutListThumb } from 'react-icons/tfi'
+import { GoShield } from 'react-icons/go'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -210,3 +211,4 @@ export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
 export const ApiLogsIcon = <TfiLayoutListThumb style={{ fontSize: 16 }} />
 export const RegionIcon = <BiMap style={{ fontSize: 16 }} />
 export const AppliedJobsIcon = <BiBriefcaseAlt2 style={{ fontSize: 22 }} />
+export const PermissionsIcon = <GoShield style={{ fontSize: 16 }} />

@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import { Tooltip } from '@components'
 
 import { formatNum, htmlToPng } from '@utils/helpers'
-import { JOB_TYPE_COLORS } from '@constants/analytics'
+import { JOB_TYPE_COLORS2 } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 
@@ -12,7 +12,7 @@ const JobTypePies = ({ data }) => {
     const chartRef = useRef('')
 
     const renderCustomizedLabel = ({ percent, payload }) =>
-        `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(0)}%)`
+        `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(2)}%)`
 
     return (
         <div className='border px-200000 pt-10 text-[#1E6570] mt-10 relative w-1/2'>
@@ -28,16 +28,18 @@ const JobTypePies = ({ data }) => {
             <ResponsiveContainer width='100%' height={400} ref={chartRef}>
                 <PieChart>
                     <Pie
-                        data={data}
+                        data={data?.filter(({ value }) => value > 0)}
                         label={renderCustomizedLabel}
                         outerRadius={130}
                         dataKey='value'
                         animationBegin={0}
                         animationDuration={300}
                     >
-                        {data.map((_, index) => (
-                            <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS[index]} />
-                        ))}
+                        {data
+                            ?.filter(({ value }) => value > 0)
+                            .map((row, index) => (
+                                <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS2[row.key]} />
+                            ))}
                     </Pie>
                     <Tooltip />
                 </PieChart>

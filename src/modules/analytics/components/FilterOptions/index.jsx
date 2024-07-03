@@ -78,6 +78,7 @@ const FilterOptions = ({ vals = null, update = null }) =>
                                     <Radio
                                         key={i}
                                         name='quarter'
+                                        checked={vals.quarter === `q${i + 1}`}
                                         value={`q${i + 1}`}
                                         label={`Q ${i + 1}`}
                                         onChange={e => update({ quarter: e.target.value })}

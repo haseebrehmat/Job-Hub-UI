@@ -29,6 +29,7 @@ import {
     ApiLogsIcon,
     RegionIcon,
     AppliedJobsIcon,
+    PermissionsIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -290,6 +291,10 @@ export const menuItems = [
             'create_region',
             'edit_region',
             'delete_region',
+            'view_permission',
+            'create_permission',
+            'edit_permission',
+            'delete_permission',
         ],
         subItems: [
             {
@@ -327,6 +332,12 @@ export const menuItems = [
                 link: '/regions',
                 svg: RegionIcon,
                 perms: ['view_region', 'create_region', 'edit_region', 'delete_region'],
+            },
+            {
+                label: 'Permissions',
+                link: '/permissions',
+                svg: PermissionsIcon,
+                perms: ['view_permission', 'create_permission', 'edit_permission', 'delete_permission'],
             },
         ],
     },

@@ -36,6 +36,7 @@ import JobCompanies from '@modules/jobComapnies'
 import ApiLogs from '@modules/settings/apiLogs'
 import Regions from '@modules/settings/regions'
 import MyProfile from '@modules/leadManagement/candidateProfile'
+import Permissions from '@modules/settings/permissions'
 
 export {
     TeamAppliedJobs,
@@ -77,4 +78,5 @@ export {
     ApiLogs,
     Regions,
     MyProfile,
+    Permissions,
 }

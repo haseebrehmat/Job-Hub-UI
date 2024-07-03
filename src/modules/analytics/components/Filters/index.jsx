@@ -18,7 +18,7 @@ const Filters = ({ values, set }) => {
         week: values?.week,
         quarter: values?.quarter,
         query: values?.query,
-        tab: 'custom',
+        tab: values?.tab || 'custom',
     })
 
     const applyFilters = () =>
@@ -30,6 +30,7 @@ const Filters = ({ values, set }) => {
             month: vals.month,
             week: vals.week,
             quarter: vals.quarter,
+            tab: vals.tab,
         })
     const clearFilters = () => {
         set({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '', filter: false })

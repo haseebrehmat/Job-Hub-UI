@@ -11,7 +11,7 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
     const statsRef = useRef('')
 
     return (
-        <div className='border px-2 pt-10 pb-4 text-[#1E6570] mt-10 relative'>
+        <div className='border px-2 pt-10 pb-4 text-[#1E6570] mt-10 relative w-1/2'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stacks<span className='text-sm'> - Counts</span>
             </p>
