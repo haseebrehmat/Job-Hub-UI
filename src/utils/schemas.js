@@ -263,7 +263,7 @@ export const candidateEditSchema = Yup.object().shape({
         .matches(/^[0-9+()\-\s]*$/, 'Invalid phone number')
         .required('Phone is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
-    designation: Yup.string().required('Designation is required'),
+    designation: Yup.mixed().required('Designation is required'),
 })
 
 export const candidateCreateSchema = Yup.object().shape({

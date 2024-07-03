@@ -9,7 +9,6 @@ import { parseDesignations, parseSelectedDesignation } from '@utils/helpers'
 
 const DesignationSelect = ({ value: selected, error = null, set }) => {
     const { data, isLoading, error: fetchError } = useSWR('/api/candidate_management/designation/', fetchDesignations)
-
     return isLoading ? (
         <small className='ml-1 mt-3 p-3 text-xs text-gray-400'>Designation Loading...</small>
     ) : fetchError ? (
@@ -19,7 +18,7 @@ const DesignationSelect = ({ value: selected, error = null, set }) => {
             <span className='text-xs font-semibold'>Designation*</span>
             <CustomSelector
                 options={parseDesignations(data?.designations)}
-                selectorValue={parseSelectedDesignation(selected, data?.designations)}
+                selectorValue={parseSelectedDesignation(selected)}
                 handleChange={({ value }) => set('designation', value)}
                 placeholder='Select Designation'
             />
