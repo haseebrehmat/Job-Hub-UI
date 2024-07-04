@@ -55,13 +55,6 @@ export const CANDIDATE_INPUTS = [
         required: true,
     },
     {
-        name: 'email',
-        label: 'Email',
-        type: 'email',
-        ph: 'Enter email',
-        required: true,
-    },
-    {
         name: 'phone',
         label: 'Phone',
         type: 'tel',

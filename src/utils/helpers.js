@@ -365,7 +365,11 @@ export const parseDesignations = designations =>
         description: designation.description,
     }))
 
-export const parseSelectedDesignation = designation => ({ value: designation?.id, label: designation?.name })
+export const parseSelectedDesignation = designation => ({
+    value: designation?.id,
+    label: designation?.name,
+    description: designation.description,
+})
 
 export const parseRegions = regions => regions?.map(region => ({ value: region.id, label: region.name }))
 

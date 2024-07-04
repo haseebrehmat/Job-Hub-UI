@@ -61,6 +61,18 @@ const CandidateForm = ({ show, setShow, mutate, candidate, allRegions }) => {
                             </div>
                         ))}
                         <div>
+                            <span className='text-xs font-semibold'>Email*</span>
+                            <Input
+                                name='email'
+                                type='email'
+                                value={values.email}
+                                onChange={handleChange}
+                                ph='Enter email'
+                                readonly={!!candidate?.id}
+                            />
+                            {errors.email && <small className='__error'>{errors.email}</small>}
+                        </div>
+                        <div>
                             <Password
                                 value={values.password}
                                 error={errors.password}
