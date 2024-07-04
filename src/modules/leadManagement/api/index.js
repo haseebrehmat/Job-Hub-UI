@@ -84,8 +84,9 @@ export const fetchCandidates = url =>
 
 export const saveCandidate = (url, { arg: candidate }) => {
     if (candidate?.id) {
+        console.log({ ...candidate, designation: candidate?.designation?.id })
         return rawHttp
-            .put(url, candidate)
+            .put(url, { ...candidate, designation: candidate?.designation?.id })
             .then(({ data }) => toast.success(data.detail || 'Candidate is updated successfully'))
     }
     return rawHttp
