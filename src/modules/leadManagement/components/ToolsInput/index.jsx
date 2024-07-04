@@ -8,16 +8,10 @@ const ToolsInput = ({ value, error = null, set }) => {
     const [tags, setTags] = useState(value)
     const [inputValue, setInputValue] = useState({ tool: '', description: '' })
 
-    const handleTool = e => {
-        if (e.target.value) {
-            setInputValue({ ...inputValue, tool: e.target.value })
-        }
-    }
-    const handleDes = e => {
-        if (e.target.value) {
-            setInputValue({ ...inputValue, description: e.target.value })
-        }
-    }
+    const handleTool = e => setInputValue({ ...inputValue, tool: e.target.value })
+
+    const handleDes = e => setInputValue({ ...inputValue, description: e.target.value })
+
     const handleClick = () => {
         setTags([...tags, inputValue])
         setInputValue({ tool: '', description: '' })

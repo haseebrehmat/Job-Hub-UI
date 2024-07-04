@@ -33,7 +33,9 @@ const CandidtaeProfile = ({ data, mutate }) => {
                                 <div className='flex flex-row'>
                                     <p className='flex items-center'>
                                         <span className='font-semibold mr-3 text-lg uppercase'>Designation :</span>
-                                        <span className='text-gray-800 text-md'>{data?.candidates?.designation}</span>
+                                        <span className='text-gray-800 text-md'>
+                                            {data?.candidates?.designation?.name}
+                                        </span>
                                     </p>
                                 </div>
                                 <div className='flex flex-row'>

@@ -21,7 +21,7 @@ const CandidateForm = ({ show, setShow, mutate, candidate, allRegions }) => {
             phone: candidate?.phone || '',
             id: candidate?.id || '',
             password: '',
-            designation: candidate?.id || '',
+            designation: candidate?.designation || '',
             skills: candidate?.skills || [],
             tools: candidate?.tools || [],
             experience: candidate?.experience || 1,
@@ -60,6 +60,18 @@ const CandidateForm = ({ show, setShow, mutate, candidate, allRegions }) => {
                                 {errors[input.name] && <small className='__error'>{errors[input.name]}</small>}
                             </div>
                         ))}
+                        <div>
+                            <span className='text-xs font-semibold'>Email*</span>
+                            <Input
+                                name='email'
+                                type='email'
+                                value={values.email}
+                                onChange={handleChange}
+                                ph='Enter email'
+                                readonly={!!candidate?.id}
+                            />
+                            {errors.email && <small className='__error'>{errors.email}</small>}
+                        </div>
                         <div>
                             <Password
                                 value={values.password}

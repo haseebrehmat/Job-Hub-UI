@@ -8,11 +8,7 @@ const SkillsInput = ({ value, error = null, set }) => {
     const [tags, setTags] = useState(value)
     const [inputValue, setInputValue] = useState({ name: '', level: 0 })
 
-    const handleSkill = e => {
-        if (e.target.value) {
-            setInputValue({ ...inputValue, name: e.target.value })
-        }
-    }
+    const handleSkill = e => setInputValue({ ...inputValue, name: e.target.value })
 
     const handelLevel = ({ target: { value: level } }) => setInputValue({ ...inputValue, level })
 

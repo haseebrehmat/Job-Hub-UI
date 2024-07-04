@@ -16,7 +16,7 @@ const Projects = ({ data }) => {
     const [inputs, setInputs] = useState(PROJECT_INITIAL_VALS)
 
     const { isLoading, mutate } = useSWR(
-        `api/candidate_management/candidate_projects/${data?.candidates?.id}/`,
+        `api/candidate_management/candidate_projects/${data?.candidates?.id ? `${data?.candidates?.id}` : '0'}/`,
         fetchMyProjects,
         {
             onSuccess: ({ data: projects }) => setTags(parseProjects(projects)),
@@ -24,7 +24,7 @@ const Projects = ({ data }) => {
     )
 
     const { handleSubmit, trigger } = useMutate(
-        `/api/candidate_management/candidate_projects/${data?.candidates?.id}/`,
+        `/api/candidate_management/candidate_projects/${data?.candidates?.id ? `${data?.candidates?.id}` : '0'}/`,
         saveCandidateProjects,
         {},
         null,

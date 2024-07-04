@@ -359,15 +359,17 @@ export const parseSelectedStatusPhase = (pid, sid, statuses) => {
 }
 
 export const parseDesignations = designations =>
-    designations.map(designation => ({ value: designation.id, label: designation?.title }))
+    designations.map(designation => ({
+        value: designation.id,
+        label: designation?.title,
+        description: designation.description,
+    }))
 
-export const parseSelectedDesignation = (label, designations) => {
-    if (label) {
-        const designation = designations.find(row => row?.title === label)
-        return { value: designation?.id, label: designation?.title }
-    }
-    return null
-}
+export const parseSelectedDesignation = designation => ({
+    value: designation?.id,
+    label: designation?.name,
+    description: designation.description,
+})
 
 export const parseRegions = regions => regions?.map(region => ({ value: region.id, label: region.name }))
 
