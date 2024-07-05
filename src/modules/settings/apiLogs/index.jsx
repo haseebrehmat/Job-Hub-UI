@@ -50,8 +50,8 @@ const ApiLogs = () => {
                 <tbody>
                     {data?.logs?.length > 0 && !error ? (
                         data?.logs?.map((row, idx) => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
-                                <td className='p-3 break-words'>{idx + 1}</td>
+                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
+                                <td className='p-3 break-words'>{row?.id}</td>
                                 <td className='p-3 break-words capitalize'>
                                     {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
                                 </td>
