@@ -20,17 +20,18 @@ const ApiLogs = () => {
         }&job_sources=${getSelectedVals(vals.sources)}`,
         fetchApiLogs
     )
-    const clearFilters = () => dispatch({ filter: false, sources: [], query: '', from: '', to: '' })
+
+    const clearFilters = () => dispatch({ filter: false, sources: [], page: 1, query: '', from: '', to: '' })
 
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full mb-14 px-5'>
             <div className='flex items-center space-x-3 pt-6'>
-                <Searchbox query={vals.query} setQuery={query => dispatch({ query })} clear={clearFilters} />
+                <Searchbox query={vals.query} setQuery={query => dispatch({ query, page: 1 })} clear={clearFilters} />
                 <Button
                     icon={CandidateFilterIcon}
                     label='Filters'
-                    onClick={() => dispatch({ filter: !vals.filter })}
+                    onClick={() => dispatch({ filter: !vals.filter, page: 1 })}
                     fit
                     fill={vals.filter}
                 />
@@ -63,7 +64,7 @@ const ApiLogs = () => {
                     )}
                 </tbody>
             </table>
-            {data?.pages > 1 && (
+            {data?.pages > 1 && data?.logs && (
                 <div className='w-full'>
                     <Paginated pages={data?.pages} setPage={page => dispatch({ page })} page={vals.page} />
                 </div>
