@@ -10,13 +10,15 @@ import { BreadIcon, DownloadIcon2 } from '@icons'
 
 const TechStackPies = ({ data = {}, stack = null }) => {
     const chartRef = useRef('')
+    const particularData = data
+    delete particularData.total
     const memoizedData = useMemo(
         () =>
             Object.entries(data)
                 ?.slice(1)
                 ?.map(([name, value]) => ({ name: JOB_TYPES[name], value, key: name }))
                 ?.filter(({ value }) => value > 0),
-        [data, stack]
+        [particularData, stack]
     )
     const renderCustomizedLabel = ({ percent, payload }) =>
         `${formatNum(payload.value)} ${transformPascal(payload.name)
