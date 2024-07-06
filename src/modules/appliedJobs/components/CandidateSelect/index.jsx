@@ -67,7 +67,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
                                 <span className='capitalize'>{row?.name ?? 'N/A'}</span>
                             </div>
                             <span className='uppercase w-28'>
-                                <Badge label={row?.designation.name ?? 'N/A'} classes='text-xs' />
+                                <Badge label={row?.designation?.name ?? 'N/A'} classes='text-xs' />
                             </span>
                             <div className='flex flex-wrap gap-1 w-2/3'>
                                 {row?.skills?.map((s, idx) => (

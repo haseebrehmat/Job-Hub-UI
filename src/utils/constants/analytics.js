@@ -36,7 +36,6 @@ export const JOB_TYPES = {
     full_time_remote: 'Full Time Remote',
     hybrid_on_site: 'Hybrid On Site',
     hybrid_remote: 'Hybrid Remote',
-    total: 'Total',
 }
 
 export const JOB_TYPE_COLORS2 = {
@@ -46,5 +45,4 @@ export const JOB_TYPE_COLORS2 = {
     full_time_remote: '#644897',
     hybrid_on_site: '#8e272b',
     hybrid_remote: '#2d455c',
-    total: '#4ab9a7',
 }
