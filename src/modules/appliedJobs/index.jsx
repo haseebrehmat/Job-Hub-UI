@@ -59,8 +59,8 @@ const AppliedJobs = memo(({ userId = '' }) => {
                                     <td className='w-28 py-4'>
                                         <Badge label={jobStatus[job?.status]} type='success' />
                                     </td>
-                                    <td className='px-3 py-4 capitalize'>{userId ? 'ME' : job?.applied_by}</td>
-                                    <td className='px-3 py-4 font-extrabold'>{job?.vertical?.pseudo ?? 'N/A'}</td>
+                                    <td className='px-3 py-4 capitalize'>{userId ? 'ME' : job?.applied_by_name}</td>
+                                    <td className='px-3 py-4 font-extrabold'>{job?.pseudo?.name ?? 'N/A'}</td>
                                     <td className='px-3 py-4 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
                                     <td className='px-3 py-4'>
                                         <AppliedJobActions job={job} />
