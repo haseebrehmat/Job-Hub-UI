@@ -7,14 +7,23 @@ import { AddSkillIcon } from '@icons'
 const ToolsInput = ({ value, error = null, set }) => {
     const [tags, setTags] = useState(value)
     const [inputValue, setInputValue] = useState({ tool: '', description: '' })
+    const [errors, setErrors] = useState('')
 
-    const handleTool = e => setInputValue({ ...inputValue, tool: e.target.value })
+    const handleTool = e => {
+        setErrors('')
+        setInputValue({ ...inputValue, tool: e.target.value })
+    }
 
     const handleDes = e => setInputValue({ ...inputValue, description: e.target.value })
 
     const handleClick = () => {
-        setTags([...tags, inputValue])
-        setInputValue({ tool: '', description: '' })
+        if (inputValue.tool.length > 0) {
+            setErrors('')
+            setTags([...tags, inputValue])
+            setInputValue({ tool: '', description: '' })
+        } else {
+            setErrors('tool name is required')
+        }
     }
 
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
@@ -26,8 +35,13 @@ const ToolsInput = ({ value, error = null, set }) => {
         <div className='mt-2 pb-5'>
             <span className='text-xs font-semibold'>Tools</span>
             <div className='flex flex-wrap gap-3 items-center'>
-                <Input value={inputValue.tool} onChange={handleTool} ph='Add a Tool...' />
-                <Input value={inputValue.description} onChange={handleDes} ph='Add desription...' />
+                <div className='flex flex-row gap-3'>
+                    <div>
+                        <Input value={inputValue.tool} onChange={handleTool} ph='Add a Tool...' />
+                        {errors.length > 0 && <small className='__error'>{errors}</small>}
+                    </div>
+                    <Input value={inputValue.description} onChange={handleDes} ph='Add desription...' />
+                </div>
                 <Button icon={AddSkillIcon} fit onClick={handleClick} classes='!rounded-full !px-1' />
                 {tags?.length > 0 &&
                     tags.map(tag => (
