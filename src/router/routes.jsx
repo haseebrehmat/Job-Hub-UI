@@ -123,7 +123,7 @@ export const routes = [
         component: <ConvertToLead />,
         protect: true,
         title: 'Convert to Lead',
-        permission: 'view_user_applied_job',
+        permission: 'view_lead',
     },
     {
         path: '/profile',

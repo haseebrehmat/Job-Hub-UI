@@ -21,7 +21,7 @@ const AppliedJobActions = ({ job }) => (
         )}
         {can('create_lead') && !job?.is_converted && (
             <Tooltip text='Convert to Lead'>
-                <Link to={`/convert-to-lead/${job?.applied_job_id}`}>{ConvertToLeadIcon}</Link>
+                <Link to={`/convert-to-lead/${job?.applied_job}`}>{ConvertToLeadIcon}</Link>
             </Tooltip>
         )}
     </div>
