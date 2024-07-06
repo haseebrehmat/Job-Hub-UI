@@ -8,18 +8,23 @@ import { AddSkillIcon } from '@icons'
 const RegionInput = ({ value, error = null, set, regions }) => {
     const [tags, setTags] = useState(value ? parseRegions(value) : [])
     const [inputValue, setInputValue] = useState({ label: '', value: '' })
+    const [errors, setErrors] = useState('')
 
     const handleClick = () => {
-        if (inputValue) {
+        if (inputValue.label.length > 0) {
             if (findRegion(inputValue.label, regions)) {
+                setErrors('region name already exists')
                 setTags(tags.filter(tag => tag !== inputValue))
             } else {
                 setTags([...tags, inputValue])
                 setInputValue({ label: '', value: '' })
             }
+        } else {
+            setErrors('region name is required')
         }
     }
     const handleChange = e => {
+        setErrors('')
         setInputValue({ label: e.target.value, value: '' })
     }
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
@@ -31,7 +36,7 @@ const RegionInput = ({ value, error = null, set, regions }) => {
     return (
         <div className='mt-2 pb-5'>
             <span className='text-xs font-semibold'>Regions</span>
-            <div className='flex flex-col-3 gap-3'>
+            <div className='flex  gap-3'>
                 <div className='w-[50%]'>
                     <CustomSelector
                         options={parseRegions(regions)}
@@ -41,8 +46,13 @@ const RegionInput = ({ value, error = null, set, regions }) => {
                         placeholder='select regions'
                     />
                 </div>
-                <Input value={inputValue.label} onChange={handleChange} ph='Add a Region...' />
-                <Button icon={AddSkillIcon} fit onClick={handleClick} classes='!rounded-full !p-1 ' />
+                <div>
+                    <Input value={inputValue.label} onChange={handleChange} ph='Add a Region...' />
+                    {errors.length > 0 && <small className='__error'>{errors}</small>}
+                </div>
+                <div>
+                    <Button icon={AddSkillIcon} fit onClick={handleClick} classes='!rounded-full !p-3 ' />
+                </div>
             </div>
             <div className='flex flex-wrap gap-3 items-center mt-2'>
                 {tags?.length > 0 &&

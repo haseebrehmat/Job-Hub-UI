@@ -427,9 +427,17 @@ export const getWidthClass = index => {
 }
 
 export const findRegion = (region, regions) => {
+    console.log(regions)
     region = region.toLowerCase()
     const R = regions.map(reg => reg.name)
     return R.includes(region)
+}
+
+export const findSkill = (skill, skills) => {
+    console.log(skills)
+    skill = skill.toLowerCase()
+    const R = skills.map(reg => reg.name.toLowerCase())
+    return R.includes(skill)
 }
 
 export const parseProjects = projects =>
