@@ -9,7 +9,7 @@ import { today } from '@constants/dashboard'
 
 import { DateTimeIcon, CandidateFilterIcon, AllowLeadIcon } from '@icons'
 
-const Filters = ({ values, set }) => {
+const Filters = ({ values, set, data = null }) => {
     const [vals, update] = useReducer((state, newState) => ({ ...state, ...newState }), {
         from: values?.from,
         to: values?.to,
@@ -42,10 +42,10 @@ const Filters = ({ values, set }) => {
             <div className='flex items-center justify-between'>
                 <div className='flex md:gap-x-8 text-lg tracking-wider ml-3'>
                     <div>
-                        <small className='text-sm'>From:</small> {formatDate2(values?.from || today)}
+                        <small className='text-sm'>From:</small> {formatDate2(data?.start_date || today)}
                     </div>
                     <div>
-                        <small className='text-sm'>To:</small> {formatDate2(values?.to || today)}
+                        <small className='text-sm'>To:</small> {formatDate2(data?.end_date || today)}
                     </div>
                 </div>
                 <div className='flex gap-3'>
