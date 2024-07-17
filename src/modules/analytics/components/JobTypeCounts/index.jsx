@@ -50,7 +50,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                     ))}
                 </div>
             ) : (
-                <span className='italic ml-2'>No statics found yet</span>
+                <span className='italic ml-2'>No statistics found yet</span>
             )}
         </div>
     )

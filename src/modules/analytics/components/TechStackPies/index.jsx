@@ -10,16 +10,16 @@ import { BreadIcon, DownloadIcon2 } from '@icons'
 
 const TechStackPies = ({ data = {}, stack = null }) => {
     const chartRef = useRef('')
-    const particularData = data
-    delete particularData.total
+
     const memoizedData = useMemo(
         () =>
             Object.entries(data)
-                ?.slice(1)
+                ?.filter(([key]) => !['total', 'name'].includes(key))
                 ?.map(([name, value]) => ({ name: JOB_TYPES[name], value, key: name }))
                 ?.filter(({ value }) => value > 0),
-        [particularData, stack]
+        [data, stack]
     )
+
     const renderCustomizedLabel = ({ percent, payload }) =>
         `${formatNum(payload.value)} ${transformPascal(payload.name)
             .split(' ')
@@ -62,18 +62,20 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                 </ResponsiveContainer>
                 <p className='text-center text-lg font-bold uppercase tracking-wider'>{stack ?? 'No stack'}</p>
                 <div className='grid grid-cols-2 p-4 mt-6'>
-                    {Object.keys(JOB_TYPES).map(key => (
-                        <div className='flex items-center' key={key}>
-                            <span>
-                                {transformPascal(JOB_TYPES[key])
-                                    .split(' ')
-                                    .map(word => word.charAt(0).toUpperCase())
-                                    .join('')}
-                            </span>
-                            <span className='mx-2'>{BreadIcon}</span>
-                            <span className='text-sm'>{transformPascal(JOB_TYPES[key])}</span>
-                        </div>
-                    ))}
+                    {Object.keys(JOB_TYPES)
+                        .filter(key => key !== 'total')
+                        .map(key => (
+                            <div className='flex items-center' key={key}>
+                                <span>
+                                    {transformPascal(JOB_TYPES[key])
+                                        .split(' ')
+                                        .map(word => word.charAt(0).toUpperCase())
+                                        .join('')}
+                                </span>
+                                <span className='mx-2'>{BreadIcon}</span>
+                                <span className='text-sm'>{transformPascal(JOB_TYPES[key])}</span>
+                            </div>
+                        ))}
                 </div>
             </div>
         </div>
