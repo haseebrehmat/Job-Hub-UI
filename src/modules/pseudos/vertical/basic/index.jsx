@@ -14,7 +14,9 @@ import { BASIC_INFO_INPUTS } from '@constants/pseudos'
 const Basic = ({ id }) => {
     const [hobbies, setHobbies] = useState([])
     const [regions, setRegions] = useState([])
+
     const { data, isLoading, mutate } = useSWR(`/api/profile/vertical/${id}/`, fetchBasicInfo)
+
     const { values, errors, handleSubmit, handleChange, trigger } = useMutate(
         `/api/profile/vertical/${id}/`,
         updateBasicInfo,
@@ -92,8 +94,17 @@ const Basic = ({ id }) => {
                     />
                     {errors.summary && <small className='__error'>{errors.summary}</small>}
                 </div>
-                <div className='flex gap-4 items-center'>
-                    <RegionsDropdown value={data?.regions} set={setRegions} />
+                <div className='flex gap-4 items-baseline mb-2'>
+                    <div className='flex flex-col flex-wrap'>
+                        <RegionsDropdown value={data?.regions} set={setRegions} />
+                        {data?.regions?.length > 0 && (
+                            <small className='-mt-5 text-[#048c8c] p-1 w-80 text-justify'>
+                                <span className='font-bold text-red-500'>Warning: </span>
+                                By changing above selected regions,
+                                <span className='font-bold ml-1'>users`s assigned verticals can also be removed.</span>
+                            </small>
+                        )}
+                    </div>
                     <Hobbies hobbies={data?.hobbies} setHobbies={setHobbies} />
                 </div>
                 <ActionButtons form mutate={mutate} />
