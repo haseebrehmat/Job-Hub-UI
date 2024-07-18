@@ -1,17 +1,19 @@
-import { memo } from 'react'
-import { toast } from 'react-hot-toast'
+import { memo, useState } from 'react'
 
 import { useMutate } from '@/hooks'
 import { Button, Drawer, Input } from '@components'
 
 import { RolesDropdown, CompaniesDropdown, Password } from '@modules/userManagement/components'
 import { saveUser } from '@modules/userManagement/api'
+import { RegionsDropdown } from '@modules/pseudos/components'
 
 import { userCreateSchema, userSchema } from '@utils/schemas'
-import { decodeJwt, getMsg, isSuper } from '@utils/helpers'
+import { decodeJwt, isSuper } from '@utils/helpers'
 
 const UserForm = ({ show, setShow, mutate, user }) => {
     const loggedUser = decodeJwt()
+    const [regions, setRegions] = useState(user?.regions || [])
+
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/user${user?.id ? `/${user?.id}/` : '/'}`,
         saveUser,
@@ -24,11 +26,14 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             password: '',
         },
         user?.id ? userSchema : userCreateSchema,
-        async formValues => trigger({ ...formValues, id: user?.id }),
-        error => toast.error(getMsg(error)),
+        async formValues => trigger({ ...formValues, id: user?.id, regions: regions.map(r => r.value).join(',') }),
+        null,
         () => {
             mutate()
-            if (!user?.id) resetForm()
+            if (!user?.id) {
+                resetForm()
+                setRegions([])
+            }
         }
     )
     const allowCompanyEdit = isSuper() && !values.id
@@ -45,12 +50,14 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                     <Input name='username' value={values.username} onChange={handleChange} ph='Enter username' />
                     {errors.username && <small className='ml-1 text-xs text-red-600'>{errors.username}</small>}
                     <RolesDropdown value={values.roles} error={errors.roles} setFieldValue={setFieldValue} />
-                    {allowCompanyEdit && (
+                    {allowCompanyEdit ? (
                         <CompaniesDropdown
                             value={values.company}
                             error={errors.company}
                             setFieldValue={setFieldValue}
                         />
+                    ) : (
+                        <RegionsDropdown value={regions} set={setRegions} />
                     )}
                     <Password value={values.password} error={errors.password} onChange={handleChange} id={user?.id} />
                     <div className='pt-4 space-y-2'>

@@ -19,8 +19,8 @@ const Users = () => {
 
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}&search=${query}`, fetchUsers)
 
-    const handleClick = ({ username, email, roles, company, id }) => {
-        setUser({ username, email, roles, company, id })
+    const handleClick = ({ username, email, roles, company, regions, id }) => {
+        setUser({ username, email, roles, company, regions, id })
         setShow(!show)
     }
 
