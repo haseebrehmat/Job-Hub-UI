@@ -14,6 +14,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Talent', value: 'talent' },
     { label: 'Jooble', value: 'jooble' },
     { label: 'Careerjet', value: 'careerjet' },
+    { label: 'Daily Remote', value: 'dailyremote' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -63,6 +64,7 @@ export const JOB_SOURCES = {
     zip_recruiter: 'Zip Recruiter',
     simply_hired: 'Simply Hired',
     google_careers: 'Google Careers',
+    dailyremote: 'DailyRemote',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
