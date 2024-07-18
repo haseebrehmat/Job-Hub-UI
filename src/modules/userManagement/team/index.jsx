@@ -42,6 +42,20 @@ const Team = () => {
                 </td>
                 <td className='px-3 py-4'>
                     <span className='flex items-center flex-wrap'>
+                        {row?.regions?.length > 0
+                            ? row?.regions?.map(region => (
+                                  <Badge
+                                      key={region?.value}
+                                      label={region?.label}
+                                      type='success'
+                                      classes='!py-0.5 !px-1.5 mx-1 my-2 text-xs border border-green-500'
+                                  />
+                              ))
+                            : '-'}
+                    </span>
+                </td>
+                <td className='px-3 py-4'>
+                    <span className='flex items-center flex-wrap'>
                         {row?.verticals?.length > 0
                             ? row?.verticals?.map(member => (
                                   <div className='mx-1 my-2' key={member?.id}>
