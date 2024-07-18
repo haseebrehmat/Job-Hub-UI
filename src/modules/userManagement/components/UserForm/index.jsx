@@ -57,7 +57,16 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                             setFieldValue={setFieldValue}
                         />
                     ) : (
-                        <RegionsDropdown value={regions} set={setRegions} />
+                        <>
+                            <RegionsDropdown value={regions} set={setRegions} />
+                            {user?.verticals?.length > 0 && (
+                                <small className='-mt-5 px-1'>
+                                    <span className='font-bold text-red-500'>Warning: </span>
+                                    By changing above selected regions,
+                                    <span className='font-bold'> assigned verticals can be removed.</span>
+                                </small>
+                            )}
+                        </>
                     )}
                     <Password value={values.password} error={errors.password} onChange={handleChange} id={user?.id} />
                     <div className='pt-4 space-y-2'>
