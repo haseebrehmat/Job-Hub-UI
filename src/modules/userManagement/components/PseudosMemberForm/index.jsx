@@ -5,7 +5,6 @@ import { Button, Drawer, CustomSelector } from '@components'
 
 import { assignVertical } from '@modules/userManagement/api'
 
-import { verticalmemberSchema } from '@utils/schemas'
 import { parseVerticals } from '@utils/helpers'
 
 const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
@@ -26,7 +25,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
         'api/profile/user_vertical_assignment/',
         assignVertical,
         { user_id: user.id, team_id: teamId },
-        verticalmemberSchema,
+        null,
         async formValues => trigger({ ...formValues, verticals: verticals.map(obj => obj.value) }),
         null,
         () => mutate()
