@@ -39,7 +39,7 @@ const VerticalSelect = ({ jobId, vId, teamId, setVals }) => {
                 <>
                     <p className='text-gray-600 pt-2 pb-1'>Verticals</p>
                     <CustomSelector
-                        options={parseVerticals(getTeamVerticals(teamId, data?.assigned))}
+                        options={parseVerticals(getTeamVerticals(teamId, data?.assigned), true)}
                         selectorValue={parseSelectedVertical(vId, getTeamVerticals(teamId, data?.assigned))}
                         handleChange={({ value }) => setVals({ verticalId: value })}
                         placeholder='Select Vertical'

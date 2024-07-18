@@ -258,10 +258,14 @@ export const parsePlatform = value => (value ? SOCIAL_PLATFORM_OPTIONS.find(row 
 
 export const replaceNewLine = str => str.replace(/\n/g, '<br>')
 
-export const parseVerticals = verticals =>
+export const parseVerticals = (verticals, identity = false, regions = false) =>
     verticals?.map(vertical => ({
         value: vertical.id,
-        label: `${vertical.name}${vertical.identity ? ` - ${vertical.identity}` : ''}`,
+        label: `${vertical.name}${identity && vertical.identity ? ` - ${vertical.identity}` : ''} ${
+            regions && vertical?.regions?.length > 0
+                ? ` - ${vertical?.regions?.map(region => region.label).join(', ')}`
+                : ''
+        }`,
     }))
 
 export const parseSelectedVertical = (id, verticals) => {
