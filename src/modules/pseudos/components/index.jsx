@@ -21,6 +21,7 @@ import GenericSkillForm from '@modules/pseudos/components/GenericSkillForm'
 import GenericSkillActions from '@modules/pseudos/components/GenericSkillActions'
 import Sections from '@modules/pseudos/components/Sections'
 import RegionsDropdown from '@modules/pseudos/components/RegionsDropdown'
+import BasicInfoTextareas from '@modules/pseudos/components/BasicInfoTextareas'
 
 export {
     PseudoActions,
@@ -46,4 +47,5 @@ export {
     GenericSkillActions,
     Sections,
     RegionsDropdown,
+    BasicInfoTextareas,
 }
