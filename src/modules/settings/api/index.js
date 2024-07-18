@@ -30,3 +30,5 @@ export const saveRegion = (url, { arg: region }) => {
 }
 
 export const fetchAllRegions = url => http.get(url).then(({ data }) => data)
+
+export const fetchPermissions = url => http.get(url).then(({ data }) => data)
