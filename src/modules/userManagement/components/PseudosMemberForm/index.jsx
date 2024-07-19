@@ -1,45 +1,37 @@
-import { memo, useState } from 'react'
-import { toast } from 'react-hot-toast'
+import { memo, useMemo, useState } from 'react'
 
 import { useMutate } from '@/hooks'
-import { Button, Drawer } from '@components'
-import CustomSelector from '@components/CustomSelector'
+import { Button, Drawer, CustomSelector } from '@components'
+
 import { assignVertical } from '@modules/userManagement/api'
 
-import { verticalmemberSchema } from '@utils/schemas'
-import { getMsg, parsePseudos } from '@utils/helpers'
+import { parseVerticals } from '@utils/helpers'
 
 const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
-    const [pseudos, setPseudos] = useState({
-        pseudo: [],
-        vertical: user?.verticals?.length > 0 ? parsePseudos(user?.verticals) : [],
-    })
+    const memoizedOptions = useMemo(() => {
+        if (vert?.length < 0) return []
+        const userRegions = user?.regions?.map(region => region.value)
+        return parseVerticals(
+            vert?.filter(v => v?.regions.some(region => userRegions.includes(region.value))),
+            false,
+            true
+        )
+    }, [vert])
+    const [verticals, setVerticals] = useState(
+        user?.verticals?.length > 0 ? parseVerticals(user?.verticals, false, true) : []
+    )
+
     const { handleSubmit, trigger } = useMutate(
         'api/profile/user_vertical_assignment/',
         assignVertical,
-        {
-            user_id: user.id,
-            verticals: pseudos.vertical.map(obj => obj.value),
-        },
-        verticalmemberSchema,
-        async formValues =>
-            trigger({
-                ...formValues,
-                user_id: user.id,
-                team_id: teamId,
-                verticals: pseudos.vertical.map(obj => obj.value),
-            }),
-        error => toast.error(getMsg(error)),
-        () => {
-            mutate()
-            setPseudos({ ...pseudos, pseudo: [], vertical: [] })
-        }
+        { user_id: user.id, team_id: teamId },
+        null,
+        async formValues => trigger({ ...formValues, verticals: verticals.map(obj => obj.value) }),
+        null,
+        () => mutate()
     )
+    const removeVertical = id => setVerticals(verticals.filter(item => item.value !== id))
 
-    const removeVertical = id => {
-        const verticals = pseudos.vertical
-        setPseudos({ ...pseudos, vertical: verticals.filter(item => item.value !== id) })
-    }
     return (
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
@@ -48,10 +40,9 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Verticals</span>
                     <CustomSelector
-                        name='vertical'
-                        options={parsePseudos(vert)}
-                        handleChange={obj => setPseudos({ ...pseudos, vertical: obj })}
-                        selectorValue={pseudos.vertical}
+                        options={memoizedOptions}
+                        handleChange={obj => setVerticals(obj)}
+                        selectorValue={verticals}
                         isMulti
                         placeholder='Select verticals'
                     />
@@ -59,13 +50,13 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
                         <Button label='Assign' type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
-                    <div>
-                        <h1 className='my-2 font-medium'>Selcted Verticals</h1>
-                        {pseudos.vertical?.length > 0 &&
-                            pseudos.vertical?.map(tag => (
+                    {verticals?.length > 0 && (
+                        <div>
+                            <h1 className='my-2 font-medium'>Selcted Verticals</h1>
+                            {verticals?.map(tag => (
                                 <span
                                     key={tag.value}
-                                    className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'
+                                    className='inline-block my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'
                                 >
                                     <span>{tag.label}</span>
                                     <button
@@ -77,7 +68,8 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
                                     </button>
                                 </span>
                             ))}
-                    </div>
+                        </div>
+                    )}
                 </div>
             </form>
         </Drawer>

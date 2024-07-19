@@ -19,13 +19,12 @@ const Users = () => {
 
     const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}&search=${query}`, fetchUsers)
 
-    const handleClick = ({ username, email, roles, company, id }) => {
-        setUser({ username, email, roles, company, id })
+    const handleClick = values => {
+        setUser(values)
         setShow(!show)
     }
 
     if (isLoading) return <Loading />
-
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>

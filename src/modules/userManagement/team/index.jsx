@@ -42,17 +42,31 @@ const Team = () => {
                 </td>
                 <td className='px-3 py-4'>
                     <span className='flex items-center flex-wrap'>
+                        {row?.regions?.length > 0
+                            ? row?.regions?.map(region => (
+                                  <Badge
+                                      key={region?.value}
+                                      label={region?.label}
+                                      type='success'
+                                      classes='!py-0.5 !px-1.5 mx-1 my-2 text-xs border border-green-500'
+                                  />
+                              ))
+                            : '-'}
+                    </span>
+                </td>
+                <td className='px-3 py-4'>
+                    <span className='flex items-center flex-wrap'>
                         {row?.verticals?.length > 0
                             ? row?.verticals?.map(member => (
                                   <div className='mx-1 my-2' key={member?.id}>
-                                      <Badge label={`${member?.pseudo} | ${member?.name}`} />
+                                      <Badge label={`${member?.pseudo?.name} | ${member?.name}`} />
                                   </div>
                               ))
                             : '-'}
                     </span>
                 </td>
                 <td className='px-3 py-4'>
-                    {can('edit_member_team') && (
+                    {can('edit_member_team') && row?.regions?.length > 0 && (
                         <Tooltip text='Assign verticals'>
                             <span onClick={() => handleClick(row, '')}>{EditIcon}</span>
                         </Tooltip>
@@ -65,15 +79,20 @@ const Team = () => {
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex border shadow text-[#006366] py-8 font-semibold px-6 mb-4 justify-between'>
+            <div className='flex border shadow text-[#006366] py-8 px-6 mb-4 justify-between'>
                 <div className='flex flex-col'>
-                    <h1>Assigned Verticals</h1>
+                    <p className='text-xl'>Assigned Verticals</p>
                     <div className='mt-4'>
                         {data?.team?.verticals?.length > 0 &&
                             data?.team?.verticals?.map(tag => (
                                 <span key={tag.id}>
-                                    <span className='inline-block  my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'>
-                                        {`${tag?.pseudo?.name} | ${tag?.name}`}
+                                    <span className='inline-block my-2 px-2.5 py-1.5 text-sm bg-gray-200 rounded-full items-center mx-1'>
+                                        <span className='font-semibold'>{`${tag?.pseudo?.name} | ${tag?.name} | `}</span>
+                                        {tag?.regions?.length > 0 ? (
+                                            tag?.regions?.map(r => r?.label).join(', ')
+                                        ) : (
+                                            <span className='text-red-600'>Please assign region</span>
+                                        )}
                                     </span>
                                 </span>
                             ))}
@@ -101,7 +120,7 @@ const Team = () => {
                     setShow={setShow}
                     mutate={mutate}
                     user={user}
-                    vert={data?.team?.verticals}
+                    vert={data?.team?.verticals?.filter(row => row?.regions?.length > 0)}
                     teamId={id}
                 />
             )}

@@ -151,7 +151,7 @@ export const routes = [
         component: <Pseudos />,
         protect: true,
         title: 'Pseudos',
-        permission: 'all',
+        permission: 'view_pseudo',
     },
     {
         path: '/vertical/:id',
