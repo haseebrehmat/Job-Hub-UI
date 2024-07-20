@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Selector from './components/Selector'
 import CustomSelector from '../../components/CustomSelector'
 import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
-import { Checkedbox, unCheckedbox } from '@icons'
+import { Checkedbox } from '@icons'
 import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
@@ -456,28 +456,20 @@ const JobsFilter = memo(() => {
                                     </td>
                                     {CustomModal}
                                     <td className='p-5'>
-                                        <span className='flex justify-center'>
-                                            {!item?.block ? (
-                                                <button
-                                                    onClick={() => {
-                                                        setCurrentCompany([item?.company_name, 'add/'])
-                                                        openModal()
-                                                    }}
-                                                >
-                                                    {unCheckedbox}
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    onClick={() => {
-                                                        setCurrentCompany([item?.company_name, 'remove/'])
-                                                        openModal()
-                                                    }}
-                                                >
-                                                    {Checkedbox}
-                                                </button>
-                                            )}
-                                            <JobActions edit={() => setJob({ data: item, show: true })} id={item?.id} />
-                                        </span>
+                                        <JobActions
+                                            id={item?.id}
+                                            blocked={item?.block}
+                                            edit={() => setJob({ data: item, show: true })}
+                                            add={() => {
+                                                setCurrentCompany([item?.company_name, 'add/'])
+                                                openModal()
+                                            }}
+                                            remove={() => {
+                                                setCurrentCompany([item?.company_name, 'remove/'])
+                                                openModal()
+                                            }}
+                                            mutate={() => fetchJobsData(jobDetailsUrl)}
+                                        />
                                     </td>
                                     {/* <td className='p-5'>
                                         <button
