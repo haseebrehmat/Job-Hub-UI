@@ -9,6 +9,7 @@ import ResumeTypes from '@modules/jobsFilter/components/ResumeTypes'
 import JobPortalAnalytics from '@modules/jobsFilter/components/PortalAnalytics'
 import JobActions from '@modules/jobsFilter/components/JobActions'
 import EditJobForm from '@modules/jobsFilter/components/EditJobForm'
+import TechStacksDropdown from '@modules/jobsFilter/components/TechStacksDropdown'
 
 export {
     TableNavigate,
@@ -22,4 +23,5 @@ export {
     JobPortalAnalytics,
     JobActions,
     EditJobForm,
+    TechStacksDropdown,
 }

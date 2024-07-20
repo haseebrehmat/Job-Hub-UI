@@ -1,28 +1,19 @@
 import { memo, useState } from 'react'
-import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
 import { Button, Modal, Input, CustomSelector, TextEditor } from '@components'
 
-import { fetchTechStacks, saveJob } from '@modules/jobsUploader/api'
+import { saveJob } from '@modules/jobsUploader/api'
+import { TechStacksDropdown } from '@modules/jobsFilter/components'
 
-import {
-    parseJobSource,
-    parseTechKeywords,
-    parseSelectedTechKeyword,
-    formatDate5,
-    formatTime,
-    parseJobType2,
-} from '@utils/helpers'
 import { manualJobSchema } from '@utils/schemas'
+import { parseJobSource, formatDate5, formatTime, parseJobType2 } from '@utils/helpers'
 import { JOB_TYPES_OPTIONS_SMALLCASE, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
-import { today } from '@/utils/constants/dashboard'
+import { today } from '@constants/dashboard'
 
 const EditJobForm = ({ job, set, mutate = null }) => {
     const [stackType, setStackType] = useState(false)
-
-    const { data, isLoading, error } = useSWR('/api/job_portal/tech_keywords/', fetchTechStacks)
 
     const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
         'api/job_portal/manual_jobs/',
@@ -54,18 +45,6 @@ const EditJobForm = ({ job, set, mutate = null }) => {
     )
     const setTechStack = value => (value === 'other' ? setStackType(!stackType) : setFieldValue('job_source', value))
 
-    const renderTech = isLoading ? (
-        <div>Loading tech stacks....</div>
-    ) : error ? (
-        <div className='text-red-500 text-xs'>Failed to fetch tech stacks</div>
-    ) : (
-        <CustomSelector
-            options={parseTechKeywords(data.techStacks)}
-            selectorValue={parseSelectedTechKeyword(values.tech_keywords, parseTechKeywords(data.techStacks))}
-            handleChange={e => setFieldValue('tech_keywords', e.value)}
-            placeholder='Select tech stacks'
-        />
-    )
     return (
         <Modal
             classes='!w-4/5'
@@ -112,11 +91,11 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                     />
                                     {errors.job_type && <small className='_error'>{errors.job_type}</small>}
                                 </div>
-                                <div className='z-20'>
-                                    <span className='text-xs font-semibold'>Tech Keywords*</span>
-                                    {renderTech}
-                                    {errors.tech_keywords && <small className='_error'>{errors.tech_keywords}</small>}
-                                </div>
+                                <TechStacksDropdown
+                                    value={values.tech_keywords}
+                                    error={errors.tech_keywords}
+                                    set={setFieldValue}
+                                />
                                 <div>
                                     <span className='text-xs font-semibold'>Job Location*</span>
                                     <Input name='address' onChange={handleChange} value={values.address} />
