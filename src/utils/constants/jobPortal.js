@@ -25,3 +25,69 @@ export const UPLOAD_RESUME_OPTIONS = [
     { label: 'Choose from templates', value: 'automatic' },
     { label: 'Upload yourself', value: 'manual' },
 ]
+
+export const EDIT_JOB_INPUTS = [
+    {
+        name: 'job_title',
+        label: 'Job Title',
+        type: 'text',
+        ph: 'Enter Job Title',
+        required: true,
+    },
+    {
+        name: 'company_name',
+        label: 'Company Name',
+        type: 'text',
+        ph: 'Enter Company Name',
+        required: true,
+    },
+    {
+        name: 'address',
+        label: 'Job Location',
+        type: 'text',
+        ph: 'Enter Job Location',
+        required: true,
+    },
+    {
+        name: 'job_posted_date',
+        label: 'Job Posted Date',
+        type: 'date',
+        ph: 'Enter date',
+        required: false,
+    },
+    {
+        name: 'time',
+        label: 'Job Posted Time',
+        type: 'time',
+        ph: 'Enter time',
+        required: false,
+    },
+    {
+        name: 'job_role',
+        label: 'Job Role',
+        type: 'text',
+        ph: 'Enter Job Role',
+        required: false,
+    },
+    {
+        name: 'salary_format',
+        label: 'Salary Format',
+        type: 'text',
+        ph: 'Enter Salary Format',
+        required: false,
+    },
+    {
+        name: 'salary_max',
+        label: 'Maximum Salary',
+        type: 'text',
+        ph: 'Enter Maximum Salary',
+        required: false,
+    },
+    {
+        name: 'salary_min',
+        label: 'Minimum Salary',
+        type: 'text',
+        ph: 'Enter Minimum Salary',
+        required: false,
+    },
+]
