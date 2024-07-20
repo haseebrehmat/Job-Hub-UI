@@ -1,20 +1,17 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Modal, Input, CustomSelector, TextEditor } from '@components'
+import { Button, Modal, Input, TextEditor } from '@components'
 
 import { saveJob } from '@modules/jobsUploader/api'
-import { JobTypesDropdown, TechStacksDropdown } from '@modules/jobsFilter/components'
+import { JobSourcesDropdown, JobTypesDropdown, TechStacksDropdown } from '@modules/jobsFilter/components'
 
 import { manualJobSchema } from '@utils/schemas'
-import { parseJobSource, formatDate5, formatTime } from '@utils/helpers'
-import { JOB_SOURCE_OPTIONS } from '@constants/scrapper'
+import { formatDate5, formatTime } from '@utils/helpers'
 import { today } from '@constants/dashboard'
 
 const EditJobForm = ({ job, set, mutate = null }) => {
-    const [stackType, setStackType] = useState(false)
-
     const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
         'api/job_portal/manual_jobs/',
         saveJob,
@@ -40,10 +37,8 @@ const EditJobForm = ({ job, set, mutate = null }) => {
         () => {
             mutate()
             resetForm()
-            setStackType(false)
         }
     )
-    const setTechStack = value => (value === 'other' ? setStackType(!stackType) : setFieldValue('job_source', value))
 
     return (
         <Modal
@@ -67,20 +62,12 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                     <Input name='company_name' onChange={handleChange} value={values.company_name} />
                                     {errors.company_name && <small className='_error'>{errors.company_name}</small>}
                                 </div>
-                                <div className='z-30'>
-                                    <span className='text-xs font-semibold'>Job Source*</span>
-                                    {stackType ? (
-                                        <Input name='job_source' onChange={handleChange} />
-                                    ) : (
-                                        <CustomSelector
-                                            options={JOB_SOURCE_OPTIONS}
-                                            selectorValue={parseJobSource(values.job_source)}
-                                            handleChange={e => setTechStack(e.value)}
-                                            placeholder='Select job source'
-                                        />
-                                    )}
-                                    {errors.job_source && <small className='_error'>{errors.job_source}</small>}
-                                </div>
+                                <JobSourcesDropdown
+                                    value={values.job_source}
+                                    error={errors.job_source}
+                                    set={setFieldValue}
+                                    onChange={handleChange}
+                                />
                                 <JobTypesDropdown value={values.job_type} error={errors.job_type} set={setFieldValue} />
                                 <TechStacksDropdown
                                     value={values.tech_keywords}

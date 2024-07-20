@@ -11,6 +11,7 @@ import JobActions from '@modules/jobsFilter/components/JobActions'
 import EditJobForm from '@modules/jobsFilter/components/EditJobForm'
 import TechStacksDropdown from '@modules/jobsFilter/components/TechStacksDropdown'
 import JobTypesDropdown from '@modules/jobsFilter/components/JobTypesDropdown'
+import JobSourcesDropdown from '@modules/jobsFilter/components/JobSourcesDropdown'
 
 export {
     TableNavigate,
@@ -26,4 +27,5 @@ export {
     EditJobForm,
     TechStacksDropdown,
     JobTypesDropdown,
+    JobSourcesDropdown,
 }
