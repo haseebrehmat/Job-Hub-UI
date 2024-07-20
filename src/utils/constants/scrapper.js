@@ -15,6 +15,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Jooble', value: 'jooble' },
     { label: 'Careerjet', value: 'careerjet' },
     { label: 'Daily Remote', value: 'dailyremote' },
+    { label: 'Recruit', value: 'recruit' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -56,6 +57,7 @@ export const JOB_SOURCES = {
     jooble: 'Jooble',
     careerjet: 'Careerjet',
     talent: 'Talent',
+    recruit: 'Recruit',
     simplyhired: 'Simply Hired',
     other: 'Other',
     all: 'All',
