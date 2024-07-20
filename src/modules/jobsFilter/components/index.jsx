@@ -7,6 +7,8 @@ import JobInfo from '@modules/jobsFilter/components/JobInfo'
 import ApplyHistory from '@modules/jobsFilter/components/ApplyHistory'
 import ResumeTypes from '@modules/jobsFilter/components/ResumeTypes'
 import JobPortalAnalytics from '@modules/jobsFilter/components/PortalAnalytics'
+import JobActions from '@modules/jobsFilter/components/JobActions'
+import EditJobForm from '@modules/jobsFilter/components/EditJobForm'
 
 export {
     TableNavigate,
@@ -18,4 +20,6 @@ export {
     ApplyHistory,
     ResumeTypes,
     JobPortalAnalytics,
+    JobActions,
+    EditJobForm,
 }

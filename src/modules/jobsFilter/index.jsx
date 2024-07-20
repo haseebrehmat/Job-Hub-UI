@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react'
+import React, { useState, memo, useEffect, useReducer } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Selector from './components/Selector'
 import CustomSelector from '../../components/CustomSelector'
@@ -11,7 +11,7 @@ import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@
 import { Filters, Badge, Checkbox } from '@/components'
 import { fetchJobs, downloadJobsData, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
-import { GenerateCSV, JobPortalAnalytics } from '@modules/jobsFilter/components'
+import { EditJobForm, GenerateCSV, JobActions, JobPortalAnalytics } from '@modules/jobsFilter/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -20,6 +20,8 @@ const JobsFilter = memo(() => {
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
     const [jobIdForLastCV, setJobIdForLastCV] = useState('')
+
+    const [job, setJob] = useReducer((prev, next) => ({ ...prev, ...next }), { show: false, data: {} })
 
     const defaultFilterState = {
         techStacData: [],
@@ -457,7 +459,6 @@ const JobsFilter = memo(() => {
                                         <span className='flex justify-center'>
                                             {!item?.block ? (
                                                 <button
-                                                    className=''
                                                     onClick={() => {
                                                         setCurrentCompany([item?.company_name, 'add/'])
                                                         openModal()
@@ -467,7 +468,6 @@ const JobsFilter = memo(() => {
                                                 </button>
                                             ) : (
                                                 <button
-                                                    className=' '
                                                     onClick={() => {
                                                         setCurrentCompany([item?.company_name, 'remove/'])
                                                         openModal()
@@ -476,6 +476,7 @@ const JobsFilter = memo(() => {
                                                     {Checkedbox}
                                                 </button>
                                             )}
+                                            <JobActions edit={() => setJob({ data: item, show: true })} id={item?.id} />
                                         </span>
                                     </td>
                                     {/* <td className='p-5'>
@@ -511,6 +512,7 @@ const JobsFilter = memo(() => {
                     pages={pagesCount}
                 />
             </div>
+            {job.show && <EditJobForm job={job} set={setJob} />}
         </div>
     )
 })
