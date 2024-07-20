@@ -1,14 +1,26 @@
 import { memo, useMemo } from 'react'
 
-import { CustomSelector, Input } from '@components'
+import { CustomSelector, Input, Tooltip } from '@components'
 
 import { parseJobSource } from '@utils/helpers'
 import { JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 
+import { BackToIcon } from '@icons'
+
 const JobSourcesDropdown = ({ value, error, set, onChange }) => {
     const renderJobSourcesAndInput = useMemo(() =>
         value === 'other' ? (
-            <Input name='job_source' onChange={onChange} ph='Please enter job source' />
+            <div className='flex items-center gap-1'>
+                <Input name='job_source' onChange={onChange} ph='Please enter job source' />
+                <Tooltip text='Back to List'>
+                    <span
+                        className='border rounded-full border-[#048c8c] p-1 cursor-pointer hover:bg-[#048c8c] hover:text-white'
+                        onClick={() => set('job_source', '')}
+                    >
+                        {BackToIcon}
+                    </span>
+                </Tooltip>
+            </div>
         ) : (
             <CustomSelector
                 options={JOB_SOURCE_OPTIONS}
