@@ -6,7 +6,7 @@ export const JOB_HEADS = [
     'Job Type',
     'Date Posted',
     'Status',
-    'recruiter',
+    'Actions',
     // 'cover letter',
 ]
 
