@@ -5,11 +5,11 @@ import { useMutate } from '@/hooks'
 import { Button, Modal, Input, CustomSelector, TextEditor } from '@components'
 
 import { saveJob } from '@modules/jobsUploader/api'
-import { TechStacksDropdown } from '@modules/jobsFilter/components'
+import { JobTypesDropdown, TechStacksDropdown } from '@modules/jobsFilter/components'
 
 import { manualJobSchema } from '@utils/schemas'
-import { parseJobSource, formatDate5, formatTime, parseJobType2 } from '@utils/helpers'
-import { JOB_TYPES_OPTIONS_SMALLCASE, JOB_SOURCE_OPTIONS } from '@constants/scrapper'
+import { parseJobSource, formatDate5, formatTime } from '@utils/helpers'
+import { JOB_SOURCE_OPTIONS } from '@constants/scrapper'
 import { today } from '@constants/dashboard'
 
 const EditJobForm = ({ job, set, mutate = null }) => {
@@ -81,16 +81,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                     )}
                                     {errors.job_source && <small className='_error'>{errors.job_source}</small>}
                                 </div>
-                                <div className='z-20'>
-                                    <span className='text-xs font-semibold'>Job Type*</span>
-                                    <CustomSelector
-                                        options={JOB_TYPES_OPTIONS_SMALLCASE}
-                                        selectorValue={parseJobType2(values.job_type)}
-                                        handleChange={e => setFieldValue('job_type', e.value)}
-                                        placeholder='Select job type'
-                                    />
-                                    {errors.job_type && <small className='_error'>{errors.job_type}</small>}
-                                </div>
+                                <JobTypesDropdown value={values.job_type} error={errors.job_type} set={setFieldValue} />
                                 <TechStacksDropdown
                                     value={values.tech_keywords}
                                     error={errors.tech_keywords}
@@ -168,7 +159,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 fit
                                 type='submit'
                                 disabled={wait}
-                                classes='!px-8 bg-gray-100 border-gray-400 text-gray-800 hover:bg-gray-100 hover:text-[#048c8c]'
+                                classes='!px-8 bg-gray-100 border-gray-400 text-gray-800 hover:bg-gray-100 hover:!text-[#048c8c] hover:!border-[#048c8c]'
                             />
                         </div>
                     </form>
