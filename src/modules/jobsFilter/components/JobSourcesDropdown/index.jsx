@@ -11,7 +11,9 @@ const JobSourcesDropdown = ({ value, error, set, onChange }) => {
     const renderJobSourcesAndInput = useMemo(() =>
         value === 'other' ? (
             <div className='flex items-center gap-1'>
-                <Input name='job_source' onChange={onChange} ph='Please enter job source' />
+                <div className='flex-1'>
+                    <Input name='job_source' onChange={onChange} ph='Please enter job source' />
+                </div>
                 <Tooltip text='Back to List'>
                     <span
                         className='border rounded-full border-[#048c8c] p-1 cursor-pointer hover:bg-[#048c8c] hover:text-white'
@@ -35,7 +37,7 @@ const JobSourcesDropdown = ({ value, error, set, onChange }) => {
         <div className='z-30'>
             <span className='text-xs font-semibold'>Job Source*</span>
             {renderJobSourcesAndInput}
-            {error && <small className='_error'>{error}</small>}
+            {error && <small>{error}</small>}
         </div>
     )
 }

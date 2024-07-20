@@ -22,12 +22,12 @@ const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => 
                 </Tooltip>
             )}
             <div className='flex ml-1'>
-                {can('view_region') && (
+                {can('view_user') && (
                     <Tooltip text='Edit job'>
                         <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                     </Tooltip>
                 )}
-                {can('view_region') && (
+                {can('view_user') && (
                     <DeleteDialog
                         show={show}
                         setShow={setShow}

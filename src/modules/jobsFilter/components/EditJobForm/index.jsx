@@ -55,12 +55,12 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 <div>
                                     <span className='text-xs font-semibold'>Job Title*</span>
                                     <Input name='job_title' onChange={handleChange} value={values.job_title} />
-                                    {errors.job_title && <small className='_error'>{errors.job_title}</small>}
+                                    {errors.job_title && <small>{errors.job_title}</small>}
                                 </div>
                                 <div>
                                     <span className='text-xs font-semibold'>Company Name*</span>
                                     <Input name='company_name' onChange={handleChange} value={values.company_name} />
-                                    {errors.company_name && <small className='_error'>{errors.company_name}</small>}
+                                    {errors.company_name && <small>{errors.company_name}</small>}
                                 </div>
                                 <JobSourcesDropdown
                                     value={values.job_source}
@@ -77,7 +77,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 <div>
                                     <span className='text-xs font-semibold'>Job Location*</span>
                                     <Input name='address' onChange={handleChange} value={values.address} />
-                                    {errors.address && <small className='_error'>{errors.address}</small>}
+                                    {errors.address && <small>{errors.address}</small>}
                                 </div>
                                 <div>
                                     <span className='text-xs font-semibold'>Job Posted Date</span>
@@ -88,34 +88,32 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                         onChange={handleChange}
                                         max={today}
                                     />
-                                    {errors.job_posted_date && (
-                                        <small className='_error'>{errors.job_posted_date}</small>
-                                    )}
+                                    {errors.job_posted_date && <small>{errors.job_posted_date}</small>}
                                 </div>
                                 <div>
                                     <span className='text-xs font-semibold'>Job Posted Time</span>
                                     <Input name='time' type='time' value={values.time} onChange={handleChange} />
-                                    {errors.time && <small className='_error'>{errors.time}</small>}
+                                    {errors.time && <small>{errors.time}</small>}
                                 </div>
                                 <div>
                                     <span className='text-xs font-semibold'>Job Role</span>
                                     <Input name='job_role' onChange={handleChange} value={values.job_role} />
-                                    {errors.job_role && <small className='_error'>{errors.job_role}</small>}
+                                    {errors.job_role && <small>{errors.job_role}</small>}
                                 </div>
                                 <div>
                                     <span className='text-xs font-semibold'>Salary Format</span>
                                     <Input name='salary_format' onChange={handleChange} value={values.salary_format} />
-                                    {errors.salary_format && <small className='_error'>{errors.salary_format}</small>}
+                                    {errors.salary_format && <small>{errors.salary_format}</small>}
                                 </div>
                                 <div>
                                     <span className='text-xs font-semibold'>Maximum Salary</span>
                                     <Input name='salary_max' onChange={handleChange} value={values.salary_max} />
-                                    {errors.salary_max && <small className='_error'>{errors.salary_max}</small>}
+                                    {errors.salary_max && <small>{errors.salary_max}</small>}
                                 </div>
                                 <div>
                                     <span className='text-xs font-semibold'>Minimum Salary</span>
                                     <Input name='salary_min' onChange={handleChange} value={values.salary_min} />
-                                    {errors.salary_min && <small className='_error'>{errors.salary_min}</small>}
+                                    {errors.salary_min && <small>{errors.salary_min}</small>}
                                 </div>
                                 <div className='col-span-2'>
                                     <span className='text-xs font-semibold'>Job Source URL*</span>
@@ -125,7 +123,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                         value={values.job_source_url}
                                         type='url'
                                     />
-                                    {errors.job_source_url && <small className='_error'>{errors.job_source_url}</small>}
+                                    {errors.job_source_url && <small>{errors.job_source_url}</small>}
                                 </div>
                             </div>
                             <div className='w-1/2'>
@@ -135,7 +133,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                     value={values.job_description}
                                     onChange={text => setFieldValue('job_description', text)}
                                 />
-                                {errors.job_description && <small className='_error'>{errors.job_description}</small>}
+                                {errors.job_description && <small>{errors.job_description}</small>}
                             </div>
                         </div>
                         <div className='pt-4 flex justify-end gap-2'>
