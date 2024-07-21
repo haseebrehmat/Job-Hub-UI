@@ -2,10 +2,15 @@ import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Modal, Input, TextEditor } from '@components'
+import { Modal, Input, TextEditor } from '@components'
 
 import { saveJob } from '@modules/jobsUploader/api'
-import { JobSourcesDropdown, JobTypesDropdown, TechStacksDropdown } from '@modules/jobsFilter/components'
+import {
+    JobSourcesDropdown,
+    JobTypesDropdown,
+    TechStacksDropdown,
+    EditFormButtons,
+} from '@modules/jobsFilter/components'
 
 import { manualJobSchema } from '@utils/schemas'
 import { formatDate5, formatTime } from '@utils/helpers'
@@ -39,7 +44,6 @@ const EditJobForm = ({ job, set, mutate = null }) => {
             resetForm()
         }
     )
-
     return (
         <Modal
             classes='!w-4/5'
@@ -101,17 +105,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 {errors.job_description && <small>{errors.job_description}</small>}
                             </div>
                         </div>
-                        <div className='pt-4 flex justify-end gap-2'>
-                            <Button label='Cancel' fit onClick={() => set({ show: false })} classes='!px-4' />
-                            <Button label='Update' fit fill type='submit' disabled={wait} classes='!px-8' />
-                            <Button
-                                label='Update & Apply'
-                                fit
-                                type='submit'
-                                disabled={wait}
-                                classes='!px-8 bg-gray-100 border-gray-400 text-gray-800 hover:bg-gray-100 hover:!text-[#048c8c] hover:!border-[#048c8c]'
-                            />
-                        </div>
+                        <EditFormButtons wait={wait} set={set} />
                     </form>
                 </div>
             }
