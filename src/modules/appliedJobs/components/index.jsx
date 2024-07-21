@@ -5,5 +5,15 @@ import CandidateSelect from '@modules/appliedJobs/components/CandidateSelect'
 import CandidateFilters from '@modules/appliedJobs/components/CandidateFilters'
 import StatusAndPhase from '@modules/appliedJobs/components/StatusAndPhase'
 import AppliedJobActions from '@modules/appliedJobs/components/AppliedJobActions'
+import Filters from '@modules/appliedJobs/components/Filters'
 
-export { EmptyTable, Searchbox, TableNavigate, CandidateSelect, CandidateFilters, StatusAndPhase, AppliedJobActions }
+export {
+    EmptyTable,
+    Searchbox,
+    TableNavigate,
+    CandidateSelect,
+    CandidateFilters,
+    StatusAndPhase,
+    AppliedJobActions,
+    Filters,
+}
