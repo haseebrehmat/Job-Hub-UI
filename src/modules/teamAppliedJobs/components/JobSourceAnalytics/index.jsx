@@ -79,8 +79,11 @@ const JobSourceAnalytics = ({ job_sources, total, job_types }) => {
                         ))}
                     {job_types &&
                         jobType &&
-                        job_types.map(item => (
-                            <div className='border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'>
+                        job_types.map((item, index) => (
+                            <div
+                                className='border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'
+                                key={index}
+                            >
                                 <div>
                                     <h1 className='text-md font-bold'>
                                         <AnimatedNumber

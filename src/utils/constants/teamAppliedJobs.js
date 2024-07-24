@@ -21,3 +21,13 @@ export const jobStatus = {
     6: 'Hot Lead',
     7: 'Prospect',
 }
+
+export const TEAM_APPLIED_JOBS_INITIAL_VALS = {
+    filter: false,
+    from: '',
+    to: '',
+    stacks: [],
+    sources: [],
+    types: [],
+    bd: { value: 'all', label: 'All Team Members' },
+}

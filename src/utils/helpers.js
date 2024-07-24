@@ -219,8 +219,11 @@ export const removeOrAddElementsFromArray = (array, elements) => {
     return array
 }
 
-export const parseMembers = (members, leadId) =>
-    members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
+export const parseMembers = (members, leadId = null, all = false) => {
+    const parsedMembers = members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
+    if (all) parsedMembers.unshift({ value: 'all', label: 'All Team Members' })
+    return parsedMembers
+}
 
 export const parsePseudos = pseudos =>
     pseudos?.map(pseudo => ({ value: pseudo.id, label: pseudo.name, verticals: pseudo.verticals }))
