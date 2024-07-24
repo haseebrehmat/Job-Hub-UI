@@ -58,8 +58,8 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                         <div className='flex gap-5 items-start'>
                             <div className='grid grid-cols-2 gap-2 w-1/2'>
                                 {EDIT_JOB_INPUTS.map(row => (
-                                    <div>
-                                        <span className='text-xs font-semibold'>
+                                    <div key={row.name}>
+                                        <span className='text-xs font-semibold text-[#048c8c]'>
                                             {row.label}
                                             {row.required ? '*' : ''}
                                         </span>
@@ -70,7 +70,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                             type={row.type}
                                             ph={row.ph}
                                         />
-                                        {errors[row.name] && <small>{errors[row.name]}</small>}
+                                        {errors[row.name] && <small className='__error'>{errors[row.name]}</small>}
                                     </div>
                                 ))}
                                 <JobSourcesDropdown
@@ -86,14 +86,17 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                     set={setFieldValue}
                                 />
                                 <div className='col-span-2'>
-                                    <span className='text-xs font-semibold'>Job Source URL*</span>
+                                    <span className='text-xs font-semibold text-[#048c8c]'>Job Source URL*</span>
                                     <Input
                                         name='job_source_url'
                                         onChange={handleChange}
                                         value={values.job_source_url}
                                         type='url'
+                                        ph='Enter Job Source Link / URL'
                                     />
-                                    {errors.job_source_url && <small>{errors.job_source_url}</small>}
+                                    {errors.job_source_url && (
+                                        <small className='__error'>{errors.job_source_url}</small>
+                                    )}
                                 </div>
                                 <div className='mt-1.5'>
                                     <Checkbox
@@ -104,13 +107,15 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 </div>
                             </div>
                             <div className='w-1/2'>
-                                <span className='font-semibold'>Job Description*</span>
+                                <span className='font-semibold text-[#048c8c]'>Job Description*</span>
                                 <TextEditor
                                     init={job?.data?.job_description_tags}
                                     value={values.job_description_tags}
                                     onChange={text => setFieldValue('job_description_tags', text)}
                                 />
-                                {errors.job_description_tags && <small>{errors.job_description_tags}</small>}
+                                {errors.job_description_tags && (
+                                    <small className='__error'>{errors.job_description_tags}</small>
+                                )}
                             </div>
                         </div>
                         <EditFormButtons wait={wait} set={set} />
