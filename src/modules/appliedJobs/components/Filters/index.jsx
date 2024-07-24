@@ -1,50 +1,37 @@
 import { memo, useReducer } from 'react'
 
-import { Input, Button, CustomSelector } from '@components'
+import { Button, CustomSelector } from '@components'
 
-import { JOB_SOURCE_OPTIONS_UNDERSCORE } from '@constants/scrapper'
+import { FilterDates } from '@modules/appliedJobs/components'
 
-const Filters = ({ filtered = null, dispatch = null }) => {
+import { JOB_SOURCE_OPTIONS_UNDERSCORE, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
+
+const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         from: filtered.from,
         to: filtered.to,
         stacks: filtered.stacks,
+        sources: filtered.sources,
+        types: filtered.types,
+        agent: filtered.agent,
     })
     const applyFilters = () =>
         dispatch({
             from: vals.from,
             to: vals.to,
             stacks: vals.stacks,
+            sources: vals.sources,
+            types: vals.types,
+            agent: vals.agent,
         })
-
     const clearFilters = () => {
-        dispatch({ from: '', to: '', stacks: [], filter: false })
-        update({ from: '', to: '', stacks: [] })
+        dispatch({ from: '', to: '', stacks: [], sources: [], types: [], agent: '', filter: false })
+        update({ from: '', to: '', stacks: [], sources: [], types: [], agent: '' })
     }
 
     return (
         <div className='grid grid-cols-4 auto-cols-max items-end gap-x-3 gap-y-1 mx-2 mb-3 p-4 shadow-md text-[#338d8c] rounded-xl bg-slate-100 border'>
-            <div>
-                <span className='text-xs font-semibold'>From Date</span>
-                <Input
-                    type='date'
-                    onChange={({ target: { value } }) =>
-                        update({ from: value, to: vals.to && value > vals.to ? value : vals.to })
-                    }
-                    value={vals.from}
-                    classes='bg-white'
-                />
-            </div>
-            <div>
-                <span className='text-xs font-semibold'>To Date</span>
-                <Input
-                    type='date'
-                    onChange={e => update({ to: e.target.value })}
-                    value={vals.to}
-                    min={vals.from}
-                    classes='bg-white'
-                />
-            </div>
+            <FilterDates vals={vals} update={update} />
             <div>
                 <span className='text-xs font-semibold'>Tech Stacks</span>
                 <CustomSelector
@@ -55,6 +42,38 @@ const Filters = ({ filtered = null, dispatch = null }) => {
                     placeholder='Select Stacks'
                 />
             </div>
+            <div>
+                <span className='text-xs font-semibold'>Job Sources</span>
+                <CustomSelector
+                    options={JOB_SOURCE_OPTIONS}
+                    handleChange={obj => update({ sources: obj })}
+                    selectorValue={vals.sources}
+                    isMulti
+                    placeholder='Select Sources'
+                />
+            </div>
+            <div>
+                <span className='text-xs font-semibold'>Job Types</span>
+                <CustomSelector
+                    options={JOB_TYPES_OPTIONS}
+                    handleChange={obj => update({ types: obj })}
+                    selectorValue={vals.types}
+                    isMulti
+                    placeholder='Select Types'
+                />
+            </div>
+            {agent && (
+                <div>
+                    <span className='text-xs font-semibold'>Agent (BD)</span>
+                    <CustomSelector
+                        options={JOB_TYPES_OPTIONS}
+                        handleChange={obj => update({ agent: obj })}
+                        selectorValue={vals.agent}
+                        isMulti
+                        placeholder='Select Agent (BD)'
+                    />
+                </div>
+            )}
             <div className='flex items-center gap-2'>
                 <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
                 {(filtered.from || filtered.to || filtered.stacks.length > 0) && (

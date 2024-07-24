@@ -4,14 +4,13 @@ import useSWR from 'swr'
 import { Loading, Badge } from '@components'
 
 import { fetchAppliedJobs } from '@modules/appliedJobs/api'
-import { EmptyTable, Searchbox, TableNavigate, AppliedJobActions } from '@modules/appliedJobs/components'
+import { EmptyTable, Searchbox, TableNavigate, AppliedJobActions, Filters } from '@modules/appliedJobs/components'
 
-import { tableHeads, jobStatus, APPLIED_JOBS_INITIAL_VALS } from '@constants/appliedJobs'
+import { tableHeads, jobStatus, APPLIED_JOBS_FILTERS_INITIAL_VALS } from '@constants/appliedJobs'
 import { formatDate, timeSince } from '@utils/helpers'
-import Filters from './components/Filters'
 
 const AppliedJobs = memo(({ userId = '' }) => {
-    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), APPLIED_JOBS_INITIAL_VALS)
+    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), APPLIED_JOBS_FILTERS_INITIAL_VALS)
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
 
@@ -31,7 +30,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     filter={vals.filter}
                     last12HoursJobsCount={data?.last_12_hours_count ?? 0}
                 />
-                {vals.filter && <Filters filtered={vals} dispatch={dispatch} />}
+                {vals.filter && <Filters filtered={vals} dispatch={dispatch} agent={userId === ''} />}
                 <table className='table-auto w-full text-sm text-left text-gray-500'>
                     <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
                         <tr>
