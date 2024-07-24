@@ -15,20 +15,12 @@ const ManualJobs = () => {
     const [show, setShow] = useState(false)
     const { data, error, isLoading, mutate } = useSWR('api/job_portal/manual_jobs/', fetchManualJobs)
 
-    const handleClick = () => setShow(!show)
-
     if (isLoading) return <Loading />
-
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center py-3 justify-end'>
                 {can(['create_manual_job']) && (
-                    <Button
-                        label='Create a Job'
-                        fit
-                        icon={CreateIcon}
-                        onClick={() => handleClick({ name: '', status: true })}
-                    />
+                    <Button label='Create a Job' fit icon={CreateIcon} onClick={() => setShow(!show)} />
                 )}
             </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
@@ -67,7 +59,7 @@ const ManualJobs = () => {
                     )}
                 </tbody>
             </table>
-            <JobForm show={show} setShow={setShow} mutate={mutate} />
+            {show && <JobForm show={show} setShow={setShow} mutate={mutate} />}
         </div>
     )
 }
