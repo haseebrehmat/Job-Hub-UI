@@ -30,6 +30,13 @@ export const CANDIDATE_INITIAL_STATE = {
     page: 1,
     show: false,
     candidate: null,
+    filter: false,
+    skills: [],
+    regions: [],
+    companies: [],
+    designations: '',
+    from: '',
+    to: '',
 }
 
 export const CANDIDATE_HEADS = [

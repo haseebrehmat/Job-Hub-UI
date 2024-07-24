@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 
 import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
 
-import { CandidateForm, CandidateActions, CandidateInfo } from '@modules/leadManagement/components'
+import { CandidateForm, CandidateActions, CandidateInfo, CandidateFilters } from '@modules/leadManagement/components'
 import { fetchCandidates } from '@modules/leadManagement/api'
 
 import { can } from '@utils/helpers'
 import { CANDIDATE_HEADS, CANDIDATE_INITIAL_STATE } from '@constants/leadManagement'
 
-import { CreateIcon, DesignationIcon } from '@icons'
+import { CreateIcon, DesignationIcon, CandidateFilterIcon } from '@icons'
 
 const Candidates = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), CANDIDATE_INITIAL_STATE)
@@ -22,7 +22,7 @@ const Candidates = () => {
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 py-6'>
+            <div className='flex items-center space-x-4 py-4'>
                 <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
                 {can('create_candidate') && (
                     <Button label='Create Candidate' fit icon={CreateIcon} onClick={() => handleClick(null)} />
@@ -32,7 +32,16 @@ const Candidates = () => {
                         <Button label='Designations' icon={DesignationIcon} />
                     </Link>
                 )}
+                <Button
+                    icon={CandidateFilterIcon}
+                    label='Filters'
+                    onClick={() => dispatch({ filter: !vals.filter })}
+                    fit
+                    classes='!ml-auto'
+                    fill={vals.filter}
+                />
             </div>
+            {vals.filter && <CandidateFilters filtered={vals} dispatch={dispatch} />}
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
