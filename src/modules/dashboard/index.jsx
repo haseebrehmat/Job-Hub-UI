@@ -47,40 +47,46 @@ const Dashboard = () => {
 
     if (isLoading || companyLoading) return <Loading />
 
-    return user?.permissions?.length > 0 && can(['view_dashboard', 'view_statistics']) ? (
-        <div className='flex flex-col w-full space-y-14'>
-            {!error ? (
-                <>
-                    <div className='flex justify-between'>
-                        <Filters filters={filters} setFilters={setFilters} />
-                        {memoizedCompaniesSelect}
-                    </div>
-                    {can('view_statistics') && data?.statistics && (
-                        <div className='block xl:hidden'>
-                            <Statistics classes='grid grid-cols-3 space-y-4 space-x-3' data={data?.statistics} />
+    return user?.permissions?.length > 0 ? (
+        can(['view_dashboard', 'view_statistics']) ? (
+            <div className='flex flex-col w-full space-y-14'>
+                {!error ? (
+                    <>
+                        <div className='flex justify-between'>
+                            <Filters filters={filters} setFilters={setFilters} />
+                            {memoizedCompaniesSelect}
                         </div>
-                    )}
-                    <div className='flex items-start justify-between'>
-                        {can('view_dashboard') && (
-                            <div className='flex flex-col w-4/5 space-y-16'>
-                                {data?.leads && data?.leads?.length > 0 && <Leads data={data?.leads} />}
-                                {data?.tech_jobs && data?.tech_jobs?.length > 0 && (
-                                    <TechStacks data={data?.tech_jobs} />
-                                )}
-                                {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
+                        {can('view_statistics') && data?.statistics && (
+                            <div className='block xl:hidden'>
+                                <Statistics classes='grid grid-cols-3 space-y-4 space-x-3' data={data?.statistics} />
                             </div>
                         )}
-                        <div className='w-1/5 pl-6 invisible xl:visible'>
-                            {can('view_statistics') && data?.statistics && (
-                                <Statistics classes='flex-col space-y-8' data={data?.statistics} />
+                        <div className='flex items-start justify-between'>
+                            {can('view_dashboard') && (
+                                <div className='flex flex-col w-4/5 space-y-16'>
+                                    {data?.leads && data?.leads?.length > 0 && <Leads data={data?.leads} />}
+                                    {data?.tech_jobs && data?.tech_jobs?.length > 0 && (
+                                        <TechStacks data={data?.tech_jobs} />
+                                    )}
+                                    {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
+                                </div>
                             )}
+                            <div className='w-1/5 pl-6 invisible xl:visible'>
+                                {can('view_statistics') && data?.statistics && (
+                                    <Statistics classes='flex-col space-y-8' data={data?.statistics} />
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </>
-            ) : (
-                <p className='mx-auto'>No Graphs or data Found!</p>
-            )}
-        </div>
+                    </>
+                ) : (
+                    <p className='mx-auto'>No Graphs or data Found!</p>
+                )}
+            </div>
+        ) : (
+            <div className='flex flex-col w-full space-y-14'>
+                <p className='mx-auto mt-10 italic'>You don`t have permission to view dashboard and statistics.</p>
+            </div>
+        )
     ) : (
         <div className='flex flex-col w-full space-y-14'>
             <p className='mx-auto mt-10 italic text-lg'>You don`t have any permission. Please contact your admin.</p>
