@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, EmptyTable, Button } from '@components'
 
-import { JobForm } from '@modules/jobsUploader/components'
+import { CreateJobForm } from '@modules/jobsUploader/components'
 import { fetchManualJobs } from '@modules/jobsUploader/api'
 
 import { can, formatDate } from '@utils/helpers'
@@ -59,7 +59,7 @@ const ManualJobs = () => {
                     )}
                 </tbody>
             </table>
-            {show && <JobForm show={show} setShow={setShow} mutate={mutate} />}
+            {show && <CreateJobForm show={show} setShow={setShow} mutate={mutate} />}
         </div>
     )
 }

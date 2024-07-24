@@ -17,9 +17,9 @@ const JobTypesDropdown = ({ value, error, set }) => {
 
     return (
         <div className='z-20'>
-            <span className='text-xs font-semibold'>Job Type*</span>
+            <span className='text-xs font-semibold text-[#048c8c]'>Job Type*</span>
             {renderJobTypes}
-            {error && <small className='_error'>{error}</small>}
+            {error && <small className='__error'>{error}</small>}
         </div>
     )
 }

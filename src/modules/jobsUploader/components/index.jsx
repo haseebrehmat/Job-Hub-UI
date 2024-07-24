@@ -1,6 +1,7 @@
 import FilesUploader from '@modules/jobsUploader/components/filesUploader'
-import JobForm from '@modules/jobsUploader/components/JobForm'
+import CreateJobForm from '@modules/jobsUploader/components/CreateJobForm'
 import JobActions from '@modules/jobsUploader/components/JobActions'
 import ManualJobs from '@modules/jobsUploader/components/ManualJobs'
+import CreateFormButtons from '@modules/jobsUploader/components/CreateFormButtons'
 
-export { FilesUploader, JobForm, JobActions, ManualJobs }
+export { FilesUploader, CreateJobForm, JobActions, ManualJobs, CreateFormButtons }

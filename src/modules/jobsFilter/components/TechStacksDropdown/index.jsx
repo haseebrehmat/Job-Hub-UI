@@ -27,9 +27,9 @@ const TechStacksDropdown = ({ value, error, set }) => {
 
     return (
         <div className='z-20'>
-            <span className='text-xs font-semibold'>Tech Keywords*</span>
+            <span className='text-xs font-semibold text-[#048c8c]'>Tech Keywords*</span>
             {renderTechStacks}
-            {error && <small>{error}</small>}
+            {error && <small className='__error'>{error}</small>}
         </div>
     )
 }

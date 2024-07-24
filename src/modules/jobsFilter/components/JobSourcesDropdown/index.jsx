@@ -35,9 +35,9 @@ const JobSourcesDropdown = ({ value, error, set, onChange }) => {
 
     return (
         <div className='z-30'>
-            <span className='text-xs font-semibold'>Job Source*</span>
+            <span className='text-xs font-semibold text-[#048c8c]'>Job Source*</span>
             {renderJobSourcesAndInput}
-            {error && <small>{error}</small>}
+            {error && <small className='__error'>{error}</small>}
         </div>
     )
 }

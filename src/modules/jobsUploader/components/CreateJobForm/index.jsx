@@ -5,37 +5,33 @@ import { useMutate } from '@/hooks'
 import { Modal, Input, TextEditor, Checkbox } from '@components'
 
 import { saveJob } from '@modules/jobsUploader/api'
-import {
-    JobSourcesDropdown,
-    JobTypesDropdown,
-    TechStacksDropdown,
-    EditFormButtons,
-} from '@modules/jobsFilter/components'
+import { CreateFormButtons } from '@modules/jobsUploader/components'
+import { JobSourcesDropdown, JobTypesDropdown, TechStacksDropdown } from '@modules/jobsFilter/components'
 
 import { manualJobSchema } from '@utils/schemas'
-import { formatDate5, formatTime } from '@utils/helpers'
+import { today } from '@constants/dashboard'
 import { EDIT_JOB_INPUTS } from '@constants/jobPortal'
 
-const EditJobForm = ({ job, set, mutate = null }) => {
+const CreateJobForm = ({ show, setShow, mutate }) => {
     const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
         'api/job_portal/manual_jobs/',
         saveJob,
         {
-            job_title: job?.data?.job_title,
-            company_name: job?.data?.company_name,
-            job_source: job?.data?.job_source,
-            job_type: job?.data?.job_type,
-            address: job?.data?.address,
-            job_posted_date: formatDate5(job?.data?.job_posted_date),
-            time: formatTime(job?.data?.job_posted_date),
-            job_source_url: job?.data?.job_source_url,
-            job_description_tags: job?.data?.job_description_tags,
-            tech_keywords: job?.data?.tech_keywords,
-            salary_max: job?.data?.salary_max,
-            salary_min: job?.data?.salary_min,
-            salary_format: job?.data?.salary_format,
-            job_role: job?.data?.job_role || '',
-            expired: job?.data?.expired,
+            job_title: '',
+            company_name: '',
+            job_source: '',
+            job_type: '',
+            address: '',
+            job_posted_date: today,
+            time: '',
+            job_source_url: '',
+            job_description_tags: '',
+            tech_keywords: '',
+            salary_max: '',
+            salary_min: '',
+            salary_format: '',
+            job_role: '',
+            expired: '',
         },
         manualJobSchema,
         async formValues => trigger({ ...formValues }),
@@ -45,21 +41,22 @@ const EditJobForm = ({ job, set, mutate = null }) => {
             resetForm()
         }
     )
+
     return (
         <Modal
             classes='!w-4/5'
-            show={job.show}
-            setShow={show => set({ show })}
+            show={show}
+            setShow={() => setShow(!show)}
             content={
                 <div className='w-full'>
-                    <p className='font-medium text-xl'>Edit Job</p>
+                    <p className='font-medium text-xl'>Create Job</p>
                     <hr className='my-2' />
-                    <form onSubmit={handleSubmit} className='text-[#048c8c]'>
+                    <form onSubmit={handleSubmit}>
                         <div className='flex gap-5 items-start'>
-                            <div className='grid grid-cols-2 gap-2 w-1/2'>
+                            <div className='grid grid-cols-2 gap-x-2 gap-y-1 w-1/2'>
                                 {EDIT_JOB_INPUTS.map(row => (
                                     <div>
-                                        <span className='text-xs font-semibold'>
+                                        <span className='text-xs font-semibold text-[#048c8c]'>
                                             {row.label}
                                             {row.required ? '*' : ''}
                                         </span>
@@ -70,7 +67,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                             type={row.type}
                                             ph={row.ph}
                                         />
-                                        {errors[row.name] && <small>{errors[row.name]}</small>}
+                                        {errors[row.name] && <small className='__error'>{errors[row.name]}</small>}
                                     </div>
                                 ))}
                                 <JobSourcesDropdown
@@ -86,14 +83,17 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                     set={setFieldValue}
                                 />
                                 <div className='col-span-2'>
-                                    <span className='text-xs font-semibold'>Job Source URL*</span>
+                                    <span className='text-xs font-semibold text-[#048c8c]'>Job Source URL*</span>
                                     <Input
                                         name='job_source_url'
                                         onChange={handleChange}
                                         value={values.job_source_url}
                                         type='url'
+                                        ph='Enter Job Source Link / URL'
                                     />
-                                    {errors.job_source_url && <small>{errors.job_source_url}</small>}
+                                    {errors.job_source_url && (
+                                        <small className='__error'>{errors.job_source_url}</small>
+                                    )}
                                 </div>
                                 <div className='mt-1.5'>
                                     <Checkbox
@@ -104,16 +104,18 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 </div>
                             </div>
                             <div className='w-1/2'>
-                                <span className='font-semibold'>Job Description*</span>
+                                <span className='font-semibold text-[#048c8c]'>Job Description*</span>
                                 <TextEditor
-                                    init={job?.data?.job_description_tags}
+                                    init='Enter your Job description'
                                     value={values.job_description_tags}
                                     onChange={text => setFieldValue('job_description_tags', text)}
                                 />
-                                {errors.job_description_tags && <small>{errors.job_description_tags}</small>}
+                                {errors.job_description_tags && (
+                                    <small className='__error'>{errors.job_description_tags}</small>
+                                )}
                             </div>
                         </div>
-                        <EditFormButtons wait={wait} set={set} />
+                        <CreateFormButtons wait={wait} set={() => setShow(!show)} />
                     </form>
                 </div>
             }
@@ -121,4 +123,4 @@ const EditJobForm = ({ job, set, mutate = null }) => {
     )
 }
 
-export default memo(EditJobForm)
+export default memo(CreateJobForm)
