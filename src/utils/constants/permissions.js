@@ -19,6 +19,16 @@ export const rawpermissions = [
         ],
     },
     {
+        module: 'Analytics',
+        permissions: [
+            {
+                codename: 'view_analytics',
+                name: 'View Analytics',
+                level: 2,
+            },
+        ],
+    },
+    {
         module: 'User Management',
         permissions: [
             {
@@ -214,6 +224,18 @@ export const rawpermissions = [
                 level: 2,
             },
             {
+                codename: 'create_manual_job',
+                name: 'Create Manual Job',
+                parent: ['view_job_uploader'],
+                level: 2,
+            },
+            {
+                codename: 'view_manual_job',
+                name: 'View Manual Job',
+                parent: ['view_job_uploader'],
+                level: 2,
+            },
+            {
                 codename: 'view_job_portal',
                 name: 'View Job Portal',
                 child: ['apply_job'],
@@ -228,13 +250,13 @@ export const rawpermissions = [
             {
                 codename: 'edit_job',
                 name: 'Edit Job',
-                parent: ['view_job_portal'],
+                parent: ['view_job_portal', 'view_manual_job'],
                 level: 2,
             },
             {
                 codename: 'delete_job',
                 name: 'Delete Job',
-                parent: ['view_job_portal'],
+                parent: ['view_job_portal', 'view_manual_job'],
                 level: 2,
             },
             {
