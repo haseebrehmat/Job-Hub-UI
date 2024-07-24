@@ -6,6 +6,7 @@ import CandidateFilters from '@modules/appliedJobs/components/CandidateFilters'
 import StatusAndPhase from '@modules/appliedJobs/components/StatusAndPhase'
 import AppliedJobActions from '@modules/appliedJobs/components/AppliedJobActions'
 import Filters from '@modules/appliedJobs/components/Filters'
+import FilterDates from '@modules/appliedJobs/components/FilterDates'
 
 export {
     EmptyTable,
@@ -16,4 +17,5 @@ export {
     StatusAndPhase,
     AppliedJobActions,
     Filters,
+    FilterDates,
 }

@@ -23,9 +23,12 @@ export const jobStatus = {
     7: 'Prospect',
 }
 
-export const APPLIED_JOBS_INITIAL_VALS = {
+export const APPLIED_JOBS_FILTERS_INITIAL_VALS = {
     filter: false,
     from: '',
     to: '',
     stacks: [],
+    sources: [],
+    types: [],
+    agent: '',
 }
