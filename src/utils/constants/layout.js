@@ -43,7 +43,7 @@ export const menuItems = [
         label: 'Analytics',
         link: '/analytics',
         svg: AnalyticsIcon,
-        perms: ['view_dashboard'],
+        perms: ['view_analytics'],
     },
     {
         label: 'Jobs',
