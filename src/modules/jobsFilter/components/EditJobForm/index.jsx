@@ -97,7 +97,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 </div>
                                 <div className='mt-1.5'>
                                     <Checkbox
-                                        label='Mark job as expired'
+                                        label={values.expired ? 'Unmark job as active' : 'Mark job as expired'}
                                         checked={values.expired}
                                         onChange={e => setFieldValue('expired', e.target.checked)}
                                     />
