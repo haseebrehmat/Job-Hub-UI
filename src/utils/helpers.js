@@ -446,12 +446,3 @@ export const findSkill = (skill, skills) => {
 
 export const parseProjects = projects =>
     projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))
-
-export const formateDesignation = designation => {
-    const des = {
-        value: designation.id,
-        label: designation.name,
-    }
-
-    return des
-}

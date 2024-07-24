@@ -29,7 +29,7 @@ const CandidateForm = ({ show, setShow, mutate, candidate, allRegions }) => {
             regions: candidate?.regions || [],
         },
         candidate?.id ? candidateEditSchema : candidateCreateSchema,
-        async formValues => console.log({ ...formValues }),
+        async formValues => trigger({ ...formValues }),
         null,
         () => mutate() && setShow(false)
     )
