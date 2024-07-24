@@ -76,9 +76,12 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
             )}
             <div className='flex items-center gap-2'>
                 <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
-                {(filtered.from || filtered.to || filtered.stacks.length > 0) && (
-                    <Button fit onClick={clearFilters} label='Clear' />
-                )}
+                {(filtered.from ||
+                    filtered.to ||
+                    filtered.stacks.length > 0 ||
+                    filtered.sources.length > 0 ||
+                    filtered.types.length > 0 ||
+                    (agent && filtered.agent)) && <Button fit onClick={clearFilters} label='Clear' />}
             </div>
         </div>
     )
