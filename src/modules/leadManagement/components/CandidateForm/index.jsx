@@ -8,6 +8,7 @@ import { Password } from '@modules/userManagement/components'
 import { DesignationSelect, SkillsInput, ToolsInput, RegionInput } from '@modules/leadManagement/components'
 import { saveCandidate } from '@modules/leadManagement/api'
 
+import { parseSelectedDesignation } from '@utils/helpers'
 import { candidateEditSchema, candidateCreateSchema } from '@utils/schemas'
 import { CANDIDATE_INPUTS } from '@constants/leadManagement'
 
@@ -21,14 +22,14 @@ const CandidateForm = ({ show, setShow, mutate, candidate, allRegions }) => {
             phone: candidate?.phone || '',
             id: candidate?.id || '',
             password: '',
-            designation: candidate?.designation || '',
+            designation: candidate?.designation ? parseSelectedDesignation(candidate?.designation) : '',
             skills: candidate?.skills || [],
             tools: candidate?.tools || [],
             experience: candidate?.experience || 1,
             regions: candidate?.regions || [],
         },
         candidate?.id ? candidateEditSchema : candidateCreateSchema,
-        async formValues => trigger({ ...formValues, id: candidate?.id }),
+        async formValues => trigger({ ...formValues }),
         null,
         () => mutate() && setShow(false)
     )
