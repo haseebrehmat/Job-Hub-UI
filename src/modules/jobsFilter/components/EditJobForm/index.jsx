@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { Modal, Input, TextEditor } from '@components'
+import { Modal, Input, TextEditor, Checkbox } from '@components'
 
 import { saveJob } from '@modules/jobsUploader/api'
 import {
@@ -35,6 +35,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
             salary_min: job?.data?.salary_min,
             salary_format: job?.data?.salary_format,
             job_role: job?.data?.job_role || '',
+            expired: job?.data?.expired,
         },
         manualJobSchema,
         async formValues => trigger({ ...formValues }),
@@ -94,9 +95,16 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                     />
                                     {errors.job_source_url && <small>{errors.job_source_url}</small>}
                                 </div>
+                                <div className='mt-1.5'>
+                                    <Checkbox
+                                        label='Mark job as expired'
+                                        checked={values.expired}
+                                        onChange={e => setFieldValue('expired', e.target.checked)}
+                                    />
+                                </div>
                             </div>
                             <div className='w-1/2'>
-                                <span className='text-xs font-semibold'>Job Description*</span>
+                                <span className='font-semibold'>Job Description*</span>
                                 <TextEditor
                                     init={job?.data?.job_description_tags}
                                     value={values.job_description}
