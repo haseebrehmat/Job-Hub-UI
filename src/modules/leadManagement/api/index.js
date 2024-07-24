@@ -115,12 +115,3 @@ export const saveCandidateProjects = async (url, { arg: candidate }) => {
     const { data } = await rawHttp.put(url, candidate)
     return toast.success(data.detail || 'Candidate is updated successfully')
 }
-
-export const formateDesignation = designation => {
-    const des = {
-        value: designation.id,
-        label: designation.name,
-    }
-
-    return des
-}
