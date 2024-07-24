@@ -370,8 +370,8 @@ export const parseDesignations = designations =>
     }))
 
 export const parseSelectedDesignation = designation => ({
-    value: designation?.id,
-    label: designation?.name,
+    value: designation?.vale,
+    label: designation?.label,
     description: designation.description,
 })
 
