@@ -24,12 +24,12 @@ const Modal = ({ children, content, show, setShow, classes = null }) => {
                             <span className='hidden sm:inline-block sm:align-middle' />
                             &#8203;
                             <div
-                                className={`mt-8 inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-y-scroll shadow-xl transform transition-all sm:align-middle md:w-[80%] w-full ${classes}`}
+                                className={`mt-8 inline-block align-bottom bg-white rounded-lg px-4 pb-4 text-left overflow-y-scroll shadow-xl transform transition-all sm:align-middle md:w-[80%] w-full ${classes}`}
                                 role='dialog'
                                 aria-modal='true'
                                 aria-labelledby='modal-headline'
                             >
-                                <span onClick={() => setShow(false)} className='float-right cursor-pointer'>
+                                <span onClick={() => setShow(false)} className='float-right cursor-pointer pt-3'>
                                     {CloseIcon}
                                 </span>
                                 <div className='mt-6'>
