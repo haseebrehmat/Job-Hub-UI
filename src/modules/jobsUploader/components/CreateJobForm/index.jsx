@@ -31,7 +31,7 @@ const CreateJobForm = ({ show, setShow, mutate }) => {
             salary_min: '',
             salary_format: '',
             job_role: '',
-            expired: '',
+            expired: false,
         },
         manualJobSchema,
         async formValues => trigger({ ...formValues }),
@@ -41,7 +41,6 @@ const CreateJobForm = ({ show, setShow, mutate }) => {
             resetForm()
         }
     )
-
     return (
         <Modal
             classes='!w-4/5'
@@ -55,7 +54,7 @@ const CreateJobForm = ({ show, setShow, mutate }) => {
                         <div className='flex gap-5 items-start'>
                             <div className='grid grid-cols-2 gap-x-2 gap-y-1 w-1/2'>
                                 {EDIT_JOB_INPUTS.map(row => (
-                                    <div>
+                                    <div key={row.name}>
                                         <span className='text-xs font-semibold text-[#048c8c]'>
                                             {row.label}
                                             {row.required ? '*' : ''}
