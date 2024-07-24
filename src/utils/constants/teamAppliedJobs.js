@@ -24,8 +24,8 @@ export const jobStatus = {
 
 export const TEAM_APPLIED_JOBS_INITIAL_VALS = {
     filter: false,
-    from: '',
-    to: '',
+    start: '',
+    end: '',
     stacks: [],
     sources: [],
     types: [],

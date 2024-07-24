@@ -10,8 +10,8 @@ import { TEAM_APPLIED_JOBS_INITIAL_VALS as initFilters } from '@constants/teamAp
 
 const Filters = ({ filtered = null, dispatch = null, data = null }) => {
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
-        from: filtered.from,
-        to: filtered.to,
+        start: filtered.start,
+        end: filtered.end,
         stacks: filtered.stacks,
         sources: filtered.sources,
         types: filtered.types,
@@ -19,8 +19,8 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
     })
     const applyFilters = () =>
         dispatch({
-            from: vals.from,
-            to: vals.to,
+            start: vals.start,
+            end: vals.end,
             stacks: vals.stacks,
             sources: vals.sources,
             types: vals.types,
@@ -28,7 +28,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
         })
     const clearFilters = () => {
         dispatch({ ...initFilters })
-        update({ from: '', to: '', stacks: [], sources: [], types: [], bd: initFilters.bd })
+        update({ start: '', end: '', stacks: [], sources: [], types: [], bd: initFilters.bd })
     }
 
     return (
@@ -75,9 +75,12 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
             </div>
             <div className='flex items-center gap-2'>
                 <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
-                {(filtered.from || filtered.to || filtered.bd?.value !== 'all') && (
-                    <Button fit onClick={clearFilters} label='Clear' />
-                )}
+                {(filtered.start ||
+                    filtered.end ||
+                    filtered.bd?.value !== 'all' ||
+                    filtered.stacks.length > 0 ||
+                    filtered.sources.length > 0 ||
+                    filtered.types.length > 0) && <Button fit onClick={clearFilters} label='Clear' />}
             </div>
         </div>
     )
