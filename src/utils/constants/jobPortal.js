@@ -10,8 +10,6 @@ export const JOB_HEADS = [
     // 'cover letter',
 ]
 
-export const MANUAL_JOBS_HEADS = ['Job Title', 'Company', 'Job Source', 'Tech Stack', 'Job Type', 'Date Posted']
-
 export const RESUME_PDF_OPTIONS = {
     margin: 0.015,
     filename: 'resume.pdf',

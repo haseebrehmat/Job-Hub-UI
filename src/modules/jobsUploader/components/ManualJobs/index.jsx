@@ -7,7 +7,7 @@ import { CreateJobForm } from '@modules/jobsUploader/components'
 import { fetchManualJobs } from '@modules/jobsUploader/api'
 
 import { can, formatDate } from '@utils/helpers'
-import { MANUAL_JOBS_HEADS } from '@constants/jobPortal'
+import { MANUAL_JOBS_HEADS } from '@constants/jobUploader'
 
 import { CreateIcon } from '@icons'
 
