@@ -26,3 +26,6 @@ export const fetchTechStacks = url =>
     http.get(url).then(({ data }) => ({ techStacks: data.keywords, status: 'success' }))
 
 export default uploadJobs
+
+export const updateJob = (url, { arg: job }) =>
+    rawHttp.put(url, job).then(({ data }) => toast.success(data.detail || 'Job is updated successfully'))

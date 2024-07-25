@@ -4,7 +4,7 @@ import { useMutate } from '@/hooks'
 
 import { Modal, Input, TextEditor, Checkbox } from '@components'
 
-import { saveJob } from '@modules/jobsUploader/api'
+import { updateJob } from '@modules/jobsUploader/api'
 import {
     JobSourcesDropdown,
     JobTypesDropdown,
@@ -18,8 +18,8 @@ import { EDIT_JOB_INPUTS } from '@constants/jobPortal'
 
 const EditJobForm = ({ job, set, mutate = null }) => {
     const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
-        'api/job_portal/manual_jobs/',
-        saveJob,
+        `api/job_portal/manual_jobs/${job?.data?.id}/`,
+        updateJob,
         {
             job_title: job?.data?.job_title,
             company_name: job?.data?.company_name,
@@ -35,7 +35,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
             salary_min: job?.data?.salary_min,
             salary_format: job?.data?.salary_format,
             job_role: job?.data?.job_role || '',
-            expired: job?.data?.expired,
+            expired: job?.data?.expired_at,
         },
         manualJobSchema,
         async formValues => trigger({ ...formValues }),
