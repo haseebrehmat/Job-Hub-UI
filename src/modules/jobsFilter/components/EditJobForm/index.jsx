@@ -38,7 +38,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
             expired: job?.data?.expired_at,
         },
         manualJobSchema,
-        async formValues => trigger({ ...formValues }),
+        async formValues => console.log({ ...formValues }),
         null,
         () => {
             mutate()
