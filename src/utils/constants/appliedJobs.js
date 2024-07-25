@@ -30,5 +30,6 @@ export const APPLIED_JOBS_FILTERS_INITIAL_VALS = {
     stacks: [],
     sources: [],
     types: [],
+    verticals: [],
     agent: '',
 }

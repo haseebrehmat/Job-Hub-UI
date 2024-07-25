@@ -21,7 +21,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
     if (isLoading) return <Loading />
     return (
         <div>
-            <div className='max-w-full overflow-x-auto hide_scrollbar shadow-md sm:rounded-lg mb-14'>
+            <div className='max-w-full shadow-md sm:rounded-lg mb-14'>
                 <Searchbox
                     query={query}
                     setQuery={setQuery}

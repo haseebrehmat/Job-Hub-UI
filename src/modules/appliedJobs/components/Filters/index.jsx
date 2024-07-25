@@ -13,6 +13,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
         stacks: filtered.stacks,
         sources: filtered.sources,
         types: filtered.types,
+        verticals: filtered.verticals,
         agent: filtered.agent,
     })
     const applyFilters = () =>
@@ -22,11 +23,12 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
             stacks: vals.stacks,
             sources: vals.sources,
             types: vals.types,
+            verticals: vals.types,
             agent: vals.agent,
         })
     const clearFilters = () => {
-        dispatch({ from: '', to: '', stacks: [], sources: [], types: [], agent: '', filter: false })
-        update({ from: '', to: '', stacks: [], sources: [], types: [], agent: '' })
+        dispatch({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agent: '', filter: false })
+        update({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agent: '' })
     }
 
     return (
@@ -62,15 +64,25 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
                     placeholder='Select Types'
                 />
             </div>
+            <div>
+                <span className='text-xs font-semibold'>Agent (BD)</span>
+                <CustomSelector
+                    options={JOB_TYPES_OPTIONS}
+                    handleChange={obj => update({ agent: obj })}
+                    selectorValue={vals.agent}
+                    isMulti
+                    placeholder='Select Agent (BD)'
+                />
+            </div>
             {agent && (
                 <div>
-                    <span className='text-xs font-semibold'>Agent (BD)</span>
+                    <span className='text-xs font-semibold'>Verticals</span>
                     <CustomSelector
                         options={JOB_TYPES_OPTIONS}
                         handleChange={obj => update({ agent: obj })}
                         selectorValue={vals.agent}
                         isMulti
-                        placeholder='Select Agent (BD)'
+                        placeholder='Select Verticals'
                     />
                 </div>
             )}
