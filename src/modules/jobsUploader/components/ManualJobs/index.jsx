@@ -36,10 +36,14 @@ const ManualJobs = () => {
                 <tbody>
                     {data?.jobs?.length > 0 && !error ? (
                         data.jobs.map(job => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={job?.id}>
-                                <td className='p-5'>{job?.job_title}</td>
-                                <td className='p-5'>{job?.company_name}</td>
-                                <td className='p-5 capitalize'>
+                            <tr
+                                className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-slate-100'
+                                key={job?.id}
+                            >
+                                <td className='p-3 w-32'>{formatDate(job?.job_posted_date)}</td>
+                                <td className='p-3'>{job?.job_title}</td>
+                                <td className='p-3'>{job?.company_name}</td>
+                                <td className='p-3 capitalize'>
                                     <a
                                         className='underline focus:text-black focus:text-lg'
                                         target='_blank'
@@ -49,9 +53,10 @@ const ManualJobs = () => {
                                         {job?.job_source}
                                     </a>
                                 </td>
-                                <td className='p-5'>{job?.tech_keywords}</td>
-                                <td className='p-5'>{job?.job_type}</td>
-                                <td className='p-5'>{formatDate(job?.job_posted_date)}</td>
+                                <td className='p-3'>{job?.tech_keywords}</td>
+                                <td className='p-3'>{job?.job_type}</td>
+                                <td className='p-3'>{job?.job_role || '--'}</td>
+                                <td className='p-3'>{job?.salary_format || '--'}</td>
                             </tr>
                         ))
                     ) : (
