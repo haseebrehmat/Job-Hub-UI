@@ -14,11 +14,11 @@ const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => 
         <span className='flex justify-center'>
             {!blocked ? (
                 <Tooltip text='Mark as recruiter'>
-                    <button onClick={() => add()}>{unCheckedbox}</button>
+                    <button onClick={add}>{unCheckedbox}</button>
                 </Tooltip>
             ) : (
                 <Tooltip text='Unmark as recruiter'>
-                    <button onClick={() => remove()}>{Checkedbox}</button>
+                    <button onClick={remove}>{Checkedbox}</button>
                 </Tooltip>
             )}
             <div className='flex ml-1'>
