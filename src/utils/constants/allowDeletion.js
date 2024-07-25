@@ -18,3 +18,4 @@ export const CANDIDATE_DELETION = true
 export const GROUP_SETTING_DELETION = true
 export const GROUP_LINK_DELETION = true
 export const REGION_DELETION = true
+export const JOB_DELETION = true

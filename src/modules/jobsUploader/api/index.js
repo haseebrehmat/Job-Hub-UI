@@ -29,3 +29,8 @@ export default uploadJobs
 
 export const updateJob = (url, { arg: job }) =>
     rawHttp.put(url, job).then(({ data }) => toast.success(data.detail || 'Job is updated successfully'))
+
+export const toggleMarkAsExpired = id =>
+    http
+        .get(`api/job_portal/job_expired_at/${id}/`)
+        .then(({ data }) => toast.success(data.detail || 'Job is updated successfully'))

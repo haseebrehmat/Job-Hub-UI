@@ -22,6 +22,7 @@ const Vertical = () => {
     const { id } = useParams()
     const { state } = useLocation()
     const [activeTab, setActiveTab] = useState(VERTICAL_INITIAL_TABS)
+    const [name, setName] = useState(state?.name ?? 'No name')
 
     const handleClick = key => {
         Object.keys(activeTab).forEach(k => (activeTab[k] = false))
@@ -32,7 +33,7 @@ const Vertical = () => {
     return (
         <div className='p-2'>
             <p className='pl-2 pr-6 mb-2 w-fit rounded-r-full bg-[#328d8c] text-2xl text-white'>
-                {id} --- {state?.name ?? 'No name'}
+                {id} --- {name}
             </p>
             <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
                 <div className='flex flex-col mb-4 space-y-2 md:gap-2 md:flex-row md:space-y-1'>
@@ -46,7 +47,7 @@ const Vertical = () => {
                         />
                     ))}
                 </div>
-                {activeTab.basic && <BasicInfo id={id} />}
+                {activeTab.basic && <BasicInfo id={id} set={setName} />}
                 {activeTab.skill && <Skills id={id} />}
                 {activeTab.experience && <Experiences id={id} />}
                 {activeTab.education && <Education id={id} />}

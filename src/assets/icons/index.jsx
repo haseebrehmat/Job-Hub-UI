@@ -93,6 +93,7 @@ import {
     RiDownloadCloudLine,
     RiStarFill,
     RiShieldUserLine,
+    RiMoneyEuroCircleLine,
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
@@ -212,3 +213,4 @@ export const ApiLogsIcon = <TfiLayoutListThumb style={{ fontSize: 16 }} />
 export const RegionIcon = <BiMap style={{ fontSize: 16 }} />
 export const AppliedJobsIcon = <BiBriefcaseAlt2 style={{ fontSize: 22 }} />
 export const PermissionsIcon = <GoShield style={{ fontSize: 16 }} />
+export const SalaryIcon = <RiMoneyEuroCircleLine style={{ fontSize: 20 }} />

@@ -17,8 +17,8 @@ import { formatDate5, formatTime } from '@utils/helpers'
 import { EDIT_JOB_INPUTS } from '@constants/jobPortal'
 
 const EditJobForm = ({ job, set, mutate = null }) => {
-    const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
-        `api/job_portal/manual_jobs/${job?.data?.id}/`,
+    const { values, errors, handleChange, handleSubmit, trigger, wait, setFieldValue } = useMutate(
+        `api/job_portal/job_modification/${job?.data?.id}/`,
         updateJob,
         {
             job_title: job?.data?.job_title,
@@ -38,11 +38,11 @@ const EditJobForm = ({ job, set, mutate = null }) => {
             expired: job?.data?.expired_at,
         },
         manualJobSchema,
-        async formValues => console.log({ ...formValues }),
+        async formValues => trigger({ ...formValues }),
         null,
         () => {
             mutate()
-            resetForm()
+            set({ show: false })
         }
     )
     return (

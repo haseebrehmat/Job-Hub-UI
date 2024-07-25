@@ -504,7 +504,7 @@ const JobsFilter = memo(() => {
                     pages={pagesCount}
                 />
             </div>
-            {job.show && <EditJobForm job={job} set={setJob} />}
+            {job.show && <EditJobForm job={job} set={setJob} mutate={() => fetchJobsData(jobDetailsUrl)} />}
         </div>
     )
 })
