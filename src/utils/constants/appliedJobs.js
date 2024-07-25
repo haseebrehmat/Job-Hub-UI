@@ -31,5 +31,5 @@ export const APPLIED_JOBS_FILTERS_INITIAL_VALS = {
     sources: [],
     types: [],
     verticals: [],
-    agent: '',
+    agents: [],
 }

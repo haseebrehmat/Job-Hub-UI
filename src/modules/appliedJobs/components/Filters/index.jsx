@@ -14,7 +14,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
         sources: filtered.sources,
         types: filtered.types,
         verticals: filtered.verticals,
-        agent: filtered.agent,
+        agents: filtered.agents,
     })
     const applyFilters = () =>
         dispatch({
@@ -23,12 +23,12 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
             stacks: vals.stacks,
             sources: vals.sources,
             types: vals.types,
-            verticals: vals.types,
-            agent: vals.agent,
+            verticals: vals.verticals,
+            agents: vals.agents,
         })
     const clearFilters = () => {
-        dispatch({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agent: '', filter: false })
-        update({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agent: '' })
+        dispatch({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agents: [], filter: false })
+        update({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agents: [] })
     }
 
     return (
@@ -65,24 +65,24 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
                 />
             </div>
             <div>
-                <span className='text-xs font-semibold'>Agent (BD)</span>
+                <span className='text-xs font-semibold'>Verticals</span>
                 <CustomSelector
                     options={JOB_TYPES_OPTIONS}
-                    handleChange={obj => update({ agent: obj })}
-                    selectorValue={vals.agent}
+                    handleChange={obj => update({ verticals: obj })}
+                    selectorValue={vals.verticals}
                     isMulti
-                    placeholder='Select Agent (BD)'
+                    placeholder='Select Verticals'
                 />
             </div>
             {agent && (
                 <div>
-                    <span className='text-xs font-semibold'>Verticals</span>
+                    <span className='text-xs font-semibold'>Agents (BD)</span>
                     <CustomSelector
                         options={JOB_TYPES_OPTIONS}
-                        handleChange={obj => update({ agent: obj })}
-                        selectorValue={vals.agent}
+                        handleChange={obj => update({ agents: obj })}
+                        selectorValue={vals.agents}
                         isMulti
-                        placeholder='Select Verticals'
+                        placeholder='Select Agent (BD)'
                     />
                 </div>
             )}

@@ -1,11 +1,17 @@
 import { http, rawHttp } from '@utils/http'
 import { toast } from 'react-hot-toast'
 
-export const fetchAppliedJobs = (page, query = '', user_id = '') => {
+export const fetchAppliedJobs = (page, query = '', user_id = '', vals = {}) => {
+    const filters = `&start_date=${vals?.from}&end_date=${vals?.to}&stacks=${vals?.stacks?.map(
+        stack => stack.value
+    )}&sources=${vals?.sources?.map(source => source.value)}&types=${vals?.types?.map(
+        type => type.value
+    )}&agents=${vals?.agents?.map(agent => agent.value)}&verticals=${vals?.verticals?.map(vertical => vertical.value)}`
+
     const url =
         user_id?.length > 0
             ? `api/job_portal/applied_job_details/?&ordering=-job_posted_date&page=${page}&page_size=12&search=${query}&user_id=${user_id}`
-            : `api/job_portal/applied_jobs/?&ordering=-job_posted_date&page=${page}&page_size=12&search=${query}&user_id=${user_id}`
+            : `api/job_portal/applied_jobs/?&ordering=-job_posted_date&page=${page}&page_size=12&search=${query}&user_id=${user_id}${filters}`
 
     return http.get(url).then(({ data: { data, links, filtered_jobs, last_12_hours_count } }) => ({
         jobs: data,
