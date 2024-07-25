@@ -3,6 +3,7 @@ import { memo, useState } from 'react'
 import { Button, DeleteDialog, Tooltip } from '@components'
 
 import { can } from '@utils/helpers'
+import { JOB_DELETION } from '@constants/allowDeletion'
 
 import { TrashIcon, EditIcon, Checkedbox, unCheckedbox } from '@icons'
 
@@ -30,9 +31,9 @@ const JobActions = memo(({ id, expired = false, edit, mutate }) => {
                     <DeleteDialog
                         show={show}
                         setShow={setShow}
-                        url={`api/candidate_managements/regions/${id}/`}
+                        url={`api/job_portal/manual_jobs/${id}/`}
                         refetch={mutate}
-                        perm={false}
+                        perm={JOB_DELETION}
                     >
                         <Tooltip text='Delete job'>
                             <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
