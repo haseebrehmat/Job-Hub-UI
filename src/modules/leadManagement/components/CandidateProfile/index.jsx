@@ -6,6 +6,7 @@ import { CandidateForm } from '@modules/leadManagement/components'
 
 import { ResumeSvgs as svgs } from '@svgs'
 import { can } from '@utils/helpers'
+import { avatarPlaceholder } from '@constants/profile'
 
 const CandidtaeProfile = ({ data, mutate }) => {
     const [show, setShow] = useState(false)
@@ -18,8 +19,8 @@ const CandidtaeProfile = ({ data, mutate }) => {
                         <div className='flex flex-cols-2 p-6 rounded-t-2xl border'>
                             <div className='flex-shrink-0 w-fit mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0 shadow-xl'>
                                 <img
-                                    src='https://source.unsplash.com/100x100/?portrait?1'
-                                    alt=''
+                                    src={avatarPlaceholder}
+                                    alt='avatar'
                                     className='object-cover object-center w-full h-full rounded dark:bg-gray-500'
                                 />
                             </div>

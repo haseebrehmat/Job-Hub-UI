@@ -43,7 +43,7 @@ export const menuItems = [
         label: 'Analytics',
         link: '/analytics',
         svg: AnalyticsIcon,
-        perms: ['view_dashboard'],
+        perms: ['view_analytics'],
     },
     {
         label: 'Jobs',
@@ -69,6 +69,10 @@ export const menuItems = [
             'create_lead',
             'view_job_company',
             'block_unblock_job_company',
+            'create_manual_job',
+            'view_manual_job',
+            'edit_job',
+            'delete_job',
         ],
         subItems: [
             {
@@ -87,7 +91,14 @@ export const menuItems = [
                 label: 'Jobs Uploader',
                 link: '/jobs-uploader',
                 svg: JobsUploaderIcon,
-                perms: ['view_job_uploader', 'upload_csv', 'create_manual_job', 'view_manual_job'],
+                perms: [
+                    'view_job_uploader',
+                    'upload_csv',
+                    'create_manual_job',
+                    'view_manual_job',
+                    'edit_job',
+                    'delete_job',
+                ],
             },
             {
                 label: 'Team Applied Jobs',

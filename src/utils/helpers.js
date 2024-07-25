@@ -1,7 +1,13 @@
 import jwt_decode from 'jwt-decode'
 import { toPng } from 'html-to-image'
 
-import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
+import {
+    INTERVAL_TYPE_OPTIONS,
+    JOB_SOURCE_OPTIONS,
+    JOB_TYPES_OPTIONS,
+    JOB_TYPES_OPTIONS_SMALLCASE,
+    WEEK_DAYS_OPTIONS,
+} from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
 import { GENERIC_SKILL_TYPES, GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
 import { today, year } from '@constants/dashboard'
@@ -100,6 +106,29 @@ export const formatDate3 = date =>
 export const formatDate4 = date =>
     new Date(date ?? today).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 
+export const formatDate5 = (dateString, format = 'yyyy-mm-dd') => {
+    const date = new Date(dateString || today)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const yearr = date.getFullYear()
+    let formattedDate = format
+    formattedDate = formattedDate.replace('mm', (month < 10 ? '0' : '') + month)
+    formattedDate = formattedDate.replace('dd', (day < 10 ? '0' : '') + day)
+    formattedDate = formattedDate.replace('yyyy', yearr)
+    return formattedDate
+}
+
+export const formatTime = (timeString, format = 'H:i') => {
+    const date = new Date(timeString || today)
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
+    let formattedTime = format
+    formattedTime = formattedTime.replace('H', hours)
+    formattedTime = formattedTime.replace('i', (minutes < 10 ? '0' : '') + minutes)
+    formattedTime = formattedTime.replace('s', (seconds < 10 ? '0' : '') + seconds)
+    return formattedTime
+}
 export const checkToken = () => {
     const user = decodeJwt()
     if (!user?.user_id) {
@@ -234,9 +263,14 @@ export const parseJobSource = value => (value ? JOB_SOURCE_OPTIONS.find(row => r
 
 export const parseJobType = value => (value ? JOB_TYPES_OPTIONS.find(row => row.value === value) : null)
 
+export const parseJobType2 = value => (value ? JOB_TYPES_OPTIONS_SMALLCASE.find(row => row.value === value) : null)
+
 export const parseTechKeywords = techStacks => techStacks.map(techStack => ({ value: techStack, label: techStack }))
 
 export const parseTechKeyword = value => (value ? JOB_SOURCE_OPTIONS.find(row => row.value === value) : null)
+
+export const parseSelectedTechKeyword = (value, techStacks) =>
+    value ? techStacks.find(row => row.value === value) : null
 
 export const formatStringInPascal = str => {
     if (!str) {

@@ -1,9 +1,9 @@
-import React, { useState, memo, useEffect } from 'react'
+import React, { useState, memo, useEffect, useReducer } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Selector from './components/Selector'
 import CustomSelector from '../../components/CustomSelector'
 import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
-import { Checkedbox, unCheckedbox } from '@icons'
+import { Checkedbox } from '@icons'
 import { JOB_HEADS } from '@constants/jobPortal'
 import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
@@ -11,7 +11,7 @@ import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@
 import { Filters, Badge, Checkbox } from '@/components'
 import { fetchJobs, downloadJobsData, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
-import { GenerateCSV, JobPortalAnalytics } from '@modules/jobsFilter/components'
+import { EditJobForm, GenerateCSV, JobActions, JobPortalAnalytics } from '@modules/jobsFilter/components'
 
 const JobsFilter = memo(() => {
     const apiUrl = `${baseURL}api/job_portal/`
@@ -20,6 +20,8 @@ const JobsFilter = memo(() => {
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
     const [jobIdForLastCV, setJobIdForLastCV] = useState('')
+
+    const [job, setJob] = useReducer((prev, next) => ({ ...prev, ...next }), { show: false, data: {} })
 
     const defaultFilterState = {
         techStacData: [],
@@ -454,29 +456,20 @@ const JobsFilter = memo(() => {
                                     </td>
                                     {CustomModal}
                                     <td className='p-5'>
-                                        <span className='flex justify-center'>
-                                            {!item?.block ? (
-                                                <button
-                                                    className=''
-                                                    onClick={() => {
-                                                        setCurrentCompany([item?.company_name, 'add/'])
-                                                        openModal()
-                                                    }}
-                                                >
-                                                    {unCheckedbox}
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    className=' '
-                                                    onClick={() => {
-                                                        setCurrentCompany([item?.company_name, 'remove/'])
-                                                        openModal()
-                                                    }}
-                                                >
-                                                    {Checkedbox}
-                                                </button>
-                                            )}
-                                        </span>
+                                        <JobActions
+                                            id={item?.id}
+                                            blocked={item?.block}
+                                            edit={() => setJob({ data: item, show: true })}
+                                            add={() => {
+                                                setCurrentCompany([item?.company_name, 'add/'])
+                                                openModal()
+                                            }}
+                                            remove={() => {
+                                                setCurrentCompany([item?.company_name, 'remove/'])
+                                                openModal()
+                                            }}
+                                            mutate={() => fetchJobsData(jobDetailsUrl)}
+                                        />
                                     </td>
                                     {/* <td className='p-5'>
                                         <button
@@ -511,6 +504,7 @@ const JobsFilter = memo(() => {
                     pages={pagesCount}
                 />
             </div>
+            {job.show && <EditJobForm job={job} set={setJob} />}
         </div>
     )
 })

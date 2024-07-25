@@ -86,3 +86,12 @@ export const WEEK_DAYS_OPTIONS = [
     { label: 'Saturday', value: 'sat' },
     { label: 'Sunday', value: 'sun' },
 ]
+
+export const JOB_TYPES_OPTIONS_SMALLCASE = [
+    { label: 'Full Time Remote', value: 'full time remote' },
+    { label: 'Full Time on Site', value: 'full time on site' },
+    { label: 'Hybrid Full Time', value: 'hybrid full time' },
+    { label: 'Hybrid Contract', value: 'hybrid contract' },
+    { label: 'Contract Onsite', value: 'contract onsite' },
+    { label: 'Contract Remote', value: 'contract remote' },
+]
