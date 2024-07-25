@@ -1,45 +1,25 @@
 import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
-
-import { Modal, Input, TextEditor, Checkbox } from '@components'
+import { Modal, Input, TextEditor } from '@components'
 
 import { saveJob } from '@modules/jobsUploader/api'
 import { CreateFormButtons } from '@modules/jobsUploader/components'
 import { JobSourcesDropdown, JobTypesDropdown, TechStacksDropdown } from '@modules/jobsFilter/components'
 
 import { manualJobSchema } from '@utils/schemas'
-import { today } from '@constants/dashboard'
+import { CREATE_JOB_FORM_INITIAL_VALUES } from '@constants/jobUploader'
 import { EDIT_JOB_INPUTS } from '@constants/jobPortal'
 
 const CreateJobForm = ({ show, setShow, mutate }) => {
-    const { values, errors, handleChange, handleSubmit, resetForm, trigger, wait, setFieldValue } = useMutate(
+    const { values, errors, handleChange, handleSubmit, trigger, wait, setFieldValue } = useMutate(
         'api/job_portal/manual_jobs/',
         saveJob,
-        {
-            job_title: '',
-            company_name: '',
-            job_source: '',
-            job_type: '',
-            address: '',
-            job_posted_date: today,
-            time: '',
-            job_source_url: '',
-            job_description_tags: '',
-            tech_keywords: '',
-            salary_max: '',
-            salary_min: '',
-            salary_format: '',
-            job_role: '',
-            expired: false,
-        },
+        { ...CREATE_JOB_FORM_INITIAL_VALUES },
         manualJobSchema,
         async formValues => trigger({ ...formValues }),
         null,
-        () => {
-            mutate()
-            resetForm()
-        }
+        () => mutate() && setShow(!show)
     )
     return (
         <Modal
@@ -93,13 +73,6 @@ const CreateJobForm = ({ show, setShow, mutate }) => {
                                     {errors.job_source_url && (
                                         <small className='__error'>{errors.job_source_url}</small>
                                     )}
-                                </div>
-                                <div className='mt-1.5'>
-                                    <Checkbox
-                                        label={values.expired ? 'Unmark job as active' : 'Mark job as expired'}
-                                        checked={values.expired}
-                                        onChange={e => setFieldValue('expired', e.target.checked)}
-                                    />
                                 </div>
                             </div>
                             <div className='w-1/2'>
