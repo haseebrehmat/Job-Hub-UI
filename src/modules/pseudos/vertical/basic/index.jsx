@@ -11,11 +11,13 @@ import { fetchBasicInfo, updateBasicInfo } from '@modules/pseudos/api'
 import { verticalBasicInfoSchema } from '@utils/schemas'
 import { BASIC_INFO_INPUTS } from '@constants/pseudos'
 
-const Basic = ({ id }) => {
+const Basic = ({ id, set = null }) => {
     const [hobbies, setHobbies] = useState([])
     const [regions, setRegions] = useState([])
 
-    const { data, isLoading, mutate } = useSWR(`/api/profile/vertical/${id}/`, fetchBasicInfo)
+    const { data, isLoading, mutate } = useSWR(`/api/profile/vertical/${id}/`, fetchBasicInfo, {
+        onSuccess: fetchedData => set(fetchedData?.name),
+    })
 
     const { values, errors, handleSubmit, handleChange, trigger } = useMutate(
         `/api/profile/vertical/${id}/`,
