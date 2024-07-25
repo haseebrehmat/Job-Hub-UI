@@ -31,7 +31,7 @@ const JobActions = memo(({ id, expired = false, edit, mutate }) => {
                     <DeleteDialog
                         show={show}
                         setShow={setShow}
-                        url={`api/job_portal/manual_jobs/${id}/`}
+                        url={`api/job_portal/job_modification/${id}/`}
                         refetch={mutate}
                         perm={JOB_DELETION}
                     >

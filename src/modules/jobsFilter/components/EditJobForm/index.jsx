@@ -18,7 +18,7 @@ import { EDIT_JOB_INPUTS } from '@constants/jobPortal'
 
 const EditJobForm = ({ job, set, mutate = null }) => {
     const { values, errors, handleChange, handleSubmit, trigger, wait, setFieldValue } = useMutate(
-        `api/job_portal/manual_jobs/${job?.data?.id}/`,
+        `api/job_portal/job_modification/${job?.data?.id}/`,
         updateJob,
         {
             job_title: job?.data?.job_title,
