@@ -34,7 +34,7 @@ const Analytics = () => {
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full mb-14 px-3 mt-6'>
-            <Filters values={vals} set={dispatch} dates={data} />
+            <Filters values={vals} set={dispatch} data={data} />
             <SubFilters options={data?.filters} set={dispatch} vals={vals} />
             <div className='flex gap-2'>
                 <JobTypeCounts
