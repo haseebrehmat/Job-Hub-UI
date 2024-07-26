@@ -233,12 +233,16 @@ export const companyStatusSchema = Yup.object().shape({
     status_list: Yup.array().required('Please choose status'),
 })
 
-export const convertToLeadSchema = Yup.object().shape({
+export const updatePhaseSchema = Yup.object().shape({
     status: Yup.mixed().required('Please choose status'),
     phase: Yup.mixed().required('Please choose phase'),
-    notes: Yup.string().max(250, 'Notes is too long'),
     effect_date: Yup.date().min(today, 'Please choose future date'),
     due_date: Yup.date().min(Yup.ref('effect_date'), "Due date can't be before Start date"),
+})
+
+export const convertToLeadSchema = Yup.object().shape({
+    ...updatePhaseSchema.fields,
+    notes: Yup.string().max(250, 'Notes is too long'),
     candidate: Yup.mixed().required('Please choose candidate'),
 })
 
