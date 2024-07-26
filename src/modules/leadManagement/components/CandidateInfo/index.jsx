@@ -26,7 +26,18 @@ const CandidateInfo = ({ info, exposed = false }) => {
                 )}
                 <td className='px-2'>
                     <span className='flex items-center flex-wrap space-x-1.5 gap-y-1.5'>
-                        {info?.skills?.length > 0
+                        {exposed
+                            ? info?.candidate?.skills?.length > 0
+                                ? info?.candidate?.skills?.map((skill, index) => (
+                                      <Badge
+                                          key={index}
+                                          label={skill}
+                                          type='success'
+                                          classes='text-xs border border-green-300'
+                                      />
+                                  ))
+                                : 'N/A'
+                            : info?.skills?.length > 0
                             ? info?.skills?.map((skill, index) => (
                                   <Badge
                                       key={index}
@@ -39,7 +50,13 @@ const CandidateInfo = ({ info, exposed = false }) => {
                     </span>
                 </td>
                 <td className='px-2 py-1'>
-                    {info?.designation?.name ? <Badge label={info?.designation?.name} /> : 'N/A'}
+                    {exposed ? (
+                        <Badge label={info?.candidate?.designation || 'N/A'} />
+                    ) : info?.designation?.name ? (
+                        <Badge label={info?.designation?.name} />
+                    ) : (
+                        'N/A'
+                    )}
                 </td>
                 {exposed ? null : (
                     <>
