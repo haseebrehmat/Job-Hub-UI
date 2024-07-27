@@ -25,7 +25,7 @@ const LeadFilters = ({ data, filtered = null, dispatch = null }) => {
         update({ team, members: data?.members?.filter(t => t?.team?.includes(team?.value)), selectedMembers: [] })
 
     return (
-        <div className='grid grid-cols-4 auto-cols-max items-end gap-x-4 gap-y-2 p-4 text-[#338d8c] bg-slate-100 border rounded-xl'>
+        <div className='grid grid-cols-4 auto-cols-max items-end gap-x-4 gap-y-2 p-4 text-[#338d8c] bg-slate-50 border border-cyan-600 rounded-xl'>
             <div>
                 <span className='text-xs font-semibold'>From Date</span>
                 <Input

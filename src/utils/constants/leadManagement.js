@@ -106,13 +106,15 @@ export const CANDIDATE_SELECT_STATE = {
 
 export const LEAD_HEADS = [
     'Sr.',
-    'Title',
-    'Company',
+    'Job Title',
+    'Job Company',
     'Applier',
-    'Candidate',
     'Vertical',
+    'Candidate',
+    'Stack',
     'Status',
     'Phase',
     'Created At',
+    'Updated At',
     '',
 ]

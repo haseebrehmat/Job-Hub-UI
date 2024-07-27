@@ -4,9 +4,9 @@ import useSWR from 'swr'
 import { EmptyTable, Loading, Searchbox, Button, Paginated } from '@components'
 
 import { LeadModal, LeadFilters } from '@modules/leadManagement/components'
-import { fetchLeads } from '@modules/leadManagement/api'
+import { fetchLeadsData } from '@modules/leadManagement/api'
 
-import { getSelectedVals } from '@utils/helpers'
+import { formatDate2, getSelectedVals } from '@utils/helpers'
 import { LEADS_INITIAL_VALS, LEAD_HEADS } from '@constants/leadManagement'
 
 import { CandidateFilterIcon } from '@icons'
@@ -15,12 +15,12 @@ const LeadsTable = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
 
     const { data, isLoading, error, mutate } = useSWR(
-        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${
+        `/api/lead_managament/leads_data/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${
             vals.to
         }&team=${getSelectedVals(vals?.team)}&members=${getSelectedVals(vals.members)}&stacks=${getSelectedVals(
             vals.stacks
         )}&candidates=${getSelectedVals(vals.candidates)}`,
-        fetchLeads,
+        fetchLeadsData,
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
@@ -63,18 +63,30 @@ const LeadsTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data?.candidates?.length > 0 && !error ? (
-                            data?.candidates?.map((row, idx) => (
-                                <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6'>{idx + 1}</td>
-                                    <td className='px-3 py-6 float-right'>Actions</td>
+                        {data?.leads?.length > 0 && !error ? (
+                            data?.leads?.map((row, idx) => (
+                                <tr
+                                    className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-slate-100'
+                                    key={row.id}
+                                >
+                                    <td className='px-3 py-4 w-10'>{idx + 1}</td>
+                                    <td className='px-3 py-4 capitalize w-1/5'>{row?.applied_job?.title || '-'}</td>
+                                    <td className='px-3 py-4 capitalize w-1/6'>{row?.applied_job?.company || '-'}</td>
+                                    <td className='px-3 py-4 capitalize italic'>
+                                        {row?.applied_job?.applied_by?.name || '-'}
+                                    </td>
+                                    <td className='px-3 py-4 capitalize font-semibold'>
+                                        {row?.applied_job?.vertical_name || '-'}
+                                    </td>
+                                    <td className='px-3 py-4 capitalize font-semibold italic'>
+                                        {row?.candidate?.name || 'unassigned'}
+                                    </td>
+                                    <td className='px-3 py-4'>{row?.applied_job?.tech_stack || '-'}</td>
+                                    <td className='px-3 py-4'>{row?.status?.name || '-'}</td>
+                                    <td className='px-3 py-4'>{row?.phase?.name || '-'}</td>
+                                    <td className='px-3 py-4'>{formatDate2(row?.created_at)}</td>
+                                    <td className='px-3 py-4'>{formatDate2(row?.updated_at)}</td>
+                                    <td className='px-3 py-4 float-right'>Actions</td>
                                 </tr>
                             ))
                         ) : (
