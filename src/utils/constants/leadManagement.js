@@ -103,3 +103,16 @@ export const CANDIDATE_SELECT_STATE = {
     regions: '',
     show: false,
 }
+
+export const LEAD_HEADS = [
+    'Sr.',
+    'Title',
+    'Company',
+    'Applier',
+    'Candidate',
+    'Vertical',
+    'Status',
+    'Phase',
+    'Created At',
+    '',
+]
