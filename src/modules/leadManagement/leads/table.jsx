@@ -93,7 +93,7 @@ const LeadsTable = () => {
             </div>
         </>
     ) : (
-        <span>Some gone wrong while fetching leads</span>
+        <span className='m-10 italic'>Something gone wrong while fetching leads</span>
     )
 }
 export default memo(LeadsTable)
