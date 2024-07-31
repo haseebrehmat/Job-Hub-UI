@@ -54,7 +54,7 @@ const LeadModal = ({ vals, dispatch, refetch = null }) => {
                         <div className='w-1/4'>
                             <UpdatePhase
                                 lead={data}
-                                status={status}
+                                statuses={status}
                                 error={error}
                                 loading={statusLoading}
                                 mutate={() => {
@@ -70,7 +70,10 @@ const LeadModal = ({ vals, dispatch, refetch = null }) => {
                         status={status}
                         error={error}
                         loading={statusLoading && notesLoading}
-                        mutate={mutateNotes}
+                        mutate={() => {
+                            mutateNotes()
+                            mutate()
+                        }}
                         notes={notes}
                         dispatch={dispatch}
                     />

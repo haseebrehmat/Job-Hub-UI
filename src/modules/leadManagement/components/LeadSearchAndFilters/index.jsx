@@ -8,7 +8,11 @@ import { fetchLeadFilters } from '@modules/leadManagement/api'
 import { CandidateFilterIcon } from '@icons'
 
 const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
-    const { data, error } = useSWR('/api/lead_managament/leads_filters/', fetchLeadFilters)
+    const { data, error } = useSWR('/api/lead_managament/leads_filters/', fetchLeadFilters, {
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        shouldRetryOnError: false,
+    })
 
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         from: filtered.from,
@@ -31,8 +35,10 @@ const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
     const changeTeam = team =>
         update({ team, members: data?.members?.filter(t => t?.team?.includes(team?.value)), selectedMembers: [] })
 
-    const clearFilters = () =>
-        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '', candidates: [] })
+    const clearFilters = () => {
+        update({ to: '', from: '', members: [], stacks: [], team: '', candidates: [] })
+        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '', candidates: [], query: '' })
+    }
 
     return (
         <>

@@ -394,7 +394,7 @@ export const parseStatusPhases = (id, statuses) =>
 export const parseSelectedStatusPhase = (pid, sid, statuses) => {
     if (pid && sid) {
         const status = statuses.find(row => row?.id === sid)?.phases?.find(row => row.id === pid)
-        return { value: status?.id, label: status?.name }
+        return status ? { value: status?.id, label: status?.name } : null
     }
     return null
 }

@@ -11,7 +11,6 @@ import { LEADS_INITIAL_VALS, LEAD_HEADS } from '@constants/leadManagement'
 
 const LeadsTable = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
-
     const { data, isLoading, error, mutate } = useSWR(
         `/api/lead_managament/leads_data/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${
             vals.to
@@ -26,7 +25,6 @@ const LeadsTable = () => {
             revalidateOnMount: true,
         }
     )
-
     return isLoading ? (
         <Loading />
     ) : !error ? (
@@ -75,7 +73,9 @@ const LeadsTable = () => {
                                     <td className='px-3 py-4'>{row?.phase?.name || '-'}</td>
                                     <td className='px-3 py-4'>{formatDate2(row?.created_at)}</td>
                                     <td className='px-3 py-4'>{formatDate2(row?.updated_at)}</td>
-                                    <td className='px-3 py-4 text-right'>Actions</td>
+                                    <td className='px-3 py-4 text-right'>
+                                        <span onClick={() => dispatch({ draggable: row.id, show: true })}>Show</span>
+                                    </td>
                                 </tr>
                             ))
                         ) : (
