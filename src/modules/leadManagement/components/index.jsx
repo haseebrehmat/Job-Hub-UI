@@ -36,6 +36,7 @@ import CandidateFilters from '@modules/leadManagement/components/CandidateFilter
 import CandidateActionsModel from '@modules/leadManagement/components/CandidateActionsModel'
 import LeadFilterByStatus from '@modules/leadManagement/components/LeadFilterByStatus'
 import LeadActions from '@modules/leadManagement/components/LeadActions'
+import LeadFilterDropdowns from '@modules/leadManagement/components/LeadFilterDropdowns'
 
 export {
     CandidateActionsModel,
@@ -76,4 +77,5 @@ export {
     CandidateFilters,
     LeadFilterByStatus,
     LeadActions,
+    LeadFilterDropdowns,
 }

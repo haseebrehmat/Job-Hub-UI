@@ -1,15 +1,15 @@
 import { memo, useReducer } from 'react'
 import useSWR from 'swr'
 
-import { Input, Button, CustomSelector, Searchbox } from '@components'
+import { Input, Button, Searchbox } from '@components'
 
-import { LeadFilterByStatus } from '@modules/leadManagement/components'
+import { LeadFilterByStatus, LeadFilterDropdowns } from '@modules/leadManagement/components'
 import { fetchLeadFilters } from '@modules/leadManagement/api'
 
 import { CandidateFilterIcon } from '@icons'
 
 const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
-    const { data, error } = useSWR('/api/lead_managament/leads_filters/', fetchLeadFilters, {
+    const { data, error } = useSWR('/api/lead_managament/leads_filters/', filtered.filter && fetchLeadFilters, {
         revalidateIfStale: false,
         revalidateOnFocus: false,
         shouldRetryOnError: false,
@@ -33,9 +33,6 @@ const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
             stacks: vals.stacks,
             candidates: vals.candidates,
         })
-    const changeTeam = team =>
-        update({ team, members: data?.members?.filter(t => t?.team?.includes(team?.value)), selectedMembers: [] })
-
     const clearFilters = () => {
         update({ to: '', from: '', members: [], stacks: [], team: '', candidates: [] })
         dispatch({
@@ -87,59 +84,7 @@ const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
                             min={vals.from}
                         />
                     </div>
-                    {!error ? (
-                        <>
-                            {data?.members?.length > 0 && (
-                                <div>
-                                    <span className='text-xs font-semibold'>Members</span>
-                                    <CustomSelector
-                                        options={vals.members}
-                                        handleChange={obj => update({ selectedMembers: obj })}
-                                        selectorValue={vals.selectedMembers}
-                                        isMulti
-                                        placeholder='Select Members'
-                                    />
-                                </div>
-                            )}
-                            {data?.teams?.length > 0 && (
-                                <div>
-                                    <span className='text-xs font-semibold'>Team</span>
-                                    <CustomSelector
-                                        options={data?.teams}
-                                        handleChange={obj => changeTeam(obj)}
-                                        selectorValue={vals.team}
-                                        placeholder='Select Team'
-                                    />
-                                </div>
-                            )}
-                            {data?.stacks?.length > 0 && (
-                                <div>
-                                    <span className='text-xs font-semibold'>Tech Stacks</span>
-                                    <CustomSelector
-                                        options={data?.stacks}
-                                        handleChange={obj => update({ stacks: obj })}
-                                        selectorValue={vals.stacks}
-                                        isMulti
-                                        placeholder='Select Stacks'
-                                    />
-                                </div>
-                            )}
-                            {data?.candidates?.length > 0 && (
-                                <div>
-                                    <span className='text-xs font-semibold'>Candidates</span>
-                                    <CustomSelector
-                                        options={data?.candidates}
-                                        handleChange={obj => update({ candidates: obj })}
-                                        selectorValue={vals.candidates}
-                                        isMulti
-                                        placeholder='Select Candidates'
-                                    />
-                                </div>
-                            )}
-                        </>
-                    ) : (
-                        <small>There is an error in loading filters data</small>
-                    )}
+                    <LeadFilterDropdowns vals={vals} update={update} data={data} error={error} />
                     <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
                 </div>
             ) : null}
