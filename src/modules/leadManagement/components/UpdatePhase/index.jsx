@@ -32,7 +32,7 @@ const UpdatePhase = ({ lead = null, statuses = null, error = null, loading = tru
                 {loading ? (
                     <span>Loading...</span>
                 ) : error ? (
-                    <span>Error to Load phases</span>
+                    <span>Error to Load phases & statuses</span>
                 ) : (
                     <>
                         <div>
