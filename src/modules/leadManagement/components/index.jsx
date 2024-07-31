@@ -25,7 +25,7 @@ import DesignationForm from '@modules/leadManagement/components/DesignationForm'
 import ExposedForm from '@modules/leadManagement/components/ExposedForm'
 import ExposedTo from '@modules/leadManagement/components/ExposedTo'
 import CandidateInfo from '@modules/leadManagement/components/CandidateInfo'
-import LeadFilters from '@modules/leadManagement/components/LeadFilters'
+import LeadSearchAndFilters from '@modules/leadManagement/components/LeadSearchAndFilters'
 import CandidateProfile from '@modules/leadManagement/components/CandidateProfile'
 import LineGraph from '@modules/leadManagement/components/CandidateLeadAnalytics'
 import Skills from '@modules/leadManagement/components/Skills'
@@ -62,7 +62,7 @@ export {
     ExposedForm,
     ExposedTo,
     CandidateInfo,
-    LeadFilters,
+    LeadSearchAndFilters,
     CandidateProfile,
     LineGraph,
     Skills,

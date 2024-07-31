@@ -51,6 +51,10 @@ export const fetchLeadsData = url =>
         leads: data?.results ?? [],
         total: data?.count,
         pages: data?.num_pages,
+    }))
+
+export const fetchLeadFilters = url =>
+    http.get(url).then(({ data }) => ({
         teams: data?.team ?? [],
         members: data?.members ?? [],
         stacks: data?.tech_stack ?? [],
