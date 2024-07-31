@@ -14,6 +14,7 @@ export const LEADS_INITIAL_VALS = {
     members: [],
     stacks: [],
     candidates: [],
+    statusFilter: '',
 }
 
 export const NOTE_INITIAL_STATE = {

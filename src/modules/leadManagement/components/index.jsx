@@ -34,6 +34,7 @@ import Tools from '@modules/leadManagement/components/Tools'
 import FilterDates from '@modules/leadManagement/components/FilterDates'
 import CandidateFilters from '@modules/leadManagement/components/CandidateFilters'
 import CandidateActionsModel from '@modules/leadManagement/components/CandidateActionsModel'
+import LeadFilterByStatus from '@modules/leadManagement/components/LeadFilterByStatus'
 
 export {
     CandidateActionsModel,
@@ -72,4 +73,5 @@ export {
     Tools,
     FilterDates,
     CandidateFilters,
+    LeadFilterByStatus,
 }

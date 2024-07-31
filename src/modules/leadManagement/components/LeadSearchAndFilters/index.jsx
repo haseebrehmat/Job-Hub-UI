@@ -3,6 +3,7 @@ import useSWR from 'swr'
 
 import { Input, Button, CustomSelector, Searchbox } from '@components'
 
+import { LeadFilterByStatus } from '@modules/leadManagement/components'
 import { fetchLeadFilters } from '@modules/leadManagement/api'
 
 import { CandidateFilterIcon } from '@icons'
@@ -37,7 +38,17 @@ const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
 
     const clearFilters = () => {
         update({ to: '', from: '', members: [], stacks: [], team: '', candidates: [] })
-        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '', candidates: [], query: '' })
+        dispatch({
+            filter: false,
+            to: '',
+            from: '',
+            members: [],
+            stacks: [],
+            team: '',
+            candidates: [],
+            query: '',
+            statusFilter: '',
+        })
     }
 
     return (
@@ -54,6 +65,7 @@ const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
                     />
                 </div>
             </div>
+            <LeadFilterByStatus active={filtered.statusFilter} dispatch={dispatch} />
             {filtered.filter ? (
                 <div className='grid grid-cols-4 auto-cols-max items-end gap-x-4 gap-y-2 p-4 text-[#338d8c] bg-slate-50 border border-cyan-600 rounded-xl'>
                     <div>

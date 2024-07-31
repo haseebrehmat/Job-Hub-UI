@@ -16,7 +16,7 @@ const LeadsTable = () => {
             vals.to
         }&team=${getSelectedVals(vals?.team)}&members=${getSelectedVals(vals.members)}&stacks=${getSelectedVals(
             vals.stacks
-        )}&candidates=${getSelectedVals(vals.candidates)}`,
+        )}&candidates=${getSelectedVals(vals.candidates)}&status=${vals.statusFilter}`,
         fetchLeadsData,
         {
             revalidateIfStale: false,
