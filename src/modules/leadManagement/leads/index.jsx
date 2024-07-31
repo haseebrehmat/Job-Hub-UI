@@ -5,7 +5,7 @@ import { useMutate } from '@/hooks'
 
 import { Board, Loading, Searchbox, Button, Paginated } from '@components'
 
-import { LeadCard, LeadModal, LeadFilters } from '@modules/leadManagement/components'
+import { LeadCard, LeadModal, LeadSearchAndFilters } from '@modules/leadManagement/components'
 import { fetchLeads, changeLeadStatus } from '@modules/leadManagement/api'
 
 import { getSelectedVals } from '@utils/helpers'
@@ -64,26 +64,14 @@ const Leads = () => {
         <>
             {vals.draggable && <LeadModal vals={vals} dispatch={dispatch} refetch={mutate} />}
             <div className='flex flex-col gap-3'>
-                <div className='flex items-center justify-between px-4 gap-2 flex-wrap'>
-                    <div className='flex items-center gap-2'>
-                        <Searchbox query={vals.query} setQuery={query => dispatch({ query })} clear={clearFilters} />
-                        <Button
-                            icon={CandidateFilterIcon}
-                            label='Filters'
-                            onClick={() => dispatch({ filter: !vals.filter })}
-                            fit
-                            fill={vals.filter}
-                        />
-                    </div>
-                    {data?.pages > 1 && (
-                        <Paginated
-                            pages={data?.pages ?? Math.ceil(data.total / 25)}
-                            setPage={page => dispatch({ page })}
-                            page={vals.page}
-                        />
-                    )}
-                </div>
-                {vals.filter && <LeadFilters data={data} filtered={vals} dispatch={dispatch} />}
+                <LeadSearchAndFilters filtered={vals} dispatch={dispatch} />
+                {data?.pages > 1 && (
+                    <Paginated
+                        pages={data?.pages ?? Math.ceil(data.total / 25)}
+                        setPage={page => dispatch({ page })}
+                        page={vals.page}
+                    />
+                )}
                 {data?.leads?.length > 0 ? (
                     <Board data={convertToColumns(data?.leads)} set={dispatch} handleDrag={handleSubmit} />
                 ) : (
