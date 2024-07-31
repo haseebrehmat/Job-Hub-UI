@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { EmptyTable, Loading, Paginated, Badge } from '@components'
 
-import { LeadModal, LeadSearchAndFilters } from '@modules/leadManagement/components'
+import { LeadActions, LeadModal, LeadSearchAndFilters } from '@modules/leadManagement/components'
 import { fetchLeadsData } from '@modules/leadManagement/api'
 
 import { formatDate2, getSelectedVals } from '@utils/helpers'
@@ -74,7 +74,7 @@ const LeadsTable = () => {
                                     <td className='px-3 py-4'>{formatDate2(row?.created_at)}</td>
                                     <td className='px-3 py-4'>{formatDate2(row?.updated_at)}</td>
                                     <td className='px-3 py-4 text-right'>
-                                        <span onClick={() => dispatch({ draggable: row.id, show: true })}>Show</span>
+                                        <LeadActions lead={row} dispatch={dispatch} />
                                     </td>
                                 </tr>
                             ))
