@@ -117,6 +117,11 @@ export const allowCandidateForLeads = (url, { arg: candidate }) =>
         .post(url, candidate)
         .then(({ data }) => toast.success(data.detail || 'Leads for candidate are allowed / denied successfully'))
 
+export const allowCandidateForLogin = (url, { arg: candidate }) =>
+    rawHttp
+        .post(url, candidate)
+        .then(({ data }) => toast.success(data.detail || 'Candidate are allowed / restricted to login successfully'))
+
 export const fetchMyProfile = url =>
     http.get(url).then(({ data }) => ({ candidates: data?.candidate, regions: data?.all_regions }))
 

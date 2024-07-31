@@ -359,7 +359,7 @@ const JobsFilter = memo(() => {
                 <div className='flex justify-between items-center mb-2'>
                     <div>
                         <Checkbox
-                            label='Show Blocked Companies Jobs'
+                            label='Show Only Blocked Companies Jobs'
                             checked={filterState?.blocked}
                             onChange={e => setFilterState({ ...filterState, blocked: e.target.checked })}
                         />

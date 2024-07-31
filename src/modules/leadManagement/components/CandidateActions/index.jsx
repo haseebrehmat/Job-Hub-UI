@@ -3,12 +3,12 @@ import { memo, useState } from 'react'
 import { useMutate } from '@/hooks'
 import { Button, DeleteDialog, Tooltip, Modal } from '@components'
 
-import { allowCandidateForLeads } from '@modules/leadManagement/api'
+import { allowCandidateForLeads, allowCandidateForLogin } from '@modules/leadManagement/api'
 
 import { can, decodeJwt } from '@utils/helpers'
 import { CANDIDATE_DELETION } from '@constants/allowDeletion'
 
-import { TrashIcon, EditIcon, SeePassIcon } from '@icons'
+import { TrashIcon, EditIcon, SeePassIcon, AllowLogin, RestrictLogin } from '@icons'
 
 const CandidateActions = ({ row, edit, mutate }) => {
     const user = decodeJwt()
@@ -24,7 +24,17 @@ const CandidateActions = ({ row, edit, mutate }) => {
         null,
         () => mutate()
     )
+    const [loginStatusUpdate, setLoginStatusUpdate] = useState(false)
 
+    const { handleSubmit: handleLoginSubmit, trigger: logintrigger } = useMutate(
+        '/api/candidate_management/candidate/',
+        allowCandidateForLogin,
+        { login_status: !row?.allowed_login, candidate: row?.id },
+        null,
+        async formValues => logintrigger({ ...formValues }),
+        null,
+        () => mutate()
+    )
     const flag = row?.company?.id === user?.company
     return (
         <div className='flex items-center'>
@@ -46,6 +56,15 @@ const CandidateActions = ({ row, edit, mutate }) => {
                     {can('edit_candidate') && (
                         <Tooltip text='Edit candidate'>
                             <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit(row)} />
+                        </Tooltip>
+                    )}
+                    {can('edit_candidate') && (
+                        <Tooltip text={`${row?.allowed_login ? 'Allow' : 'Restrict'} Login`}>
+                            <Button
+                                classes='_icon-btn'
+                                icon={row?.allowed_login ? RestrictLogin : AllowLogin}
+                                onClick={() => setLoginStatusUpdate(true)}
+                            />
                         </Tooltip>
                     )}
                 </>
@@ -76,6 +95,30 @@ const CandidateActions = ({ row, edit, mutate }) => {
                                 }}
                             />
                             <Button label='Cancel' onClick={() => setStatusUpdate(false)} />
+                        </div>
+                    </div>
+                }
+            />
+            <Modal
+                classes='!w-1/3'
+                show={loginStatusUpdate}
+                setShow={setLoginStatusUpdate}
+                content={
+                    <div className='w-full'>
+                        <h3 className='mt-1'>
+                            Are you sure to {row?.allowed_login ? 'allow' : 'restrict'} login for <b>{row?.name}</b> ?
+                        </h3>
+                        <div className='flex items-center mt-3 gap-3 float-right'>
+                            <Button
+                                classes='bg-red-500 border-red-500 hover:bg-red-600'
+                                label='Confirm'
+                                fill
+                                onClick={() => {
+                                    handleLoginSubmit()
+                                    setLoginStatusUpdate(false)
+                                }}
+                            />
+                            <Button label='Cancel' onClick={() => setLoginStatusUpdate(false)} />
                         </div>
                     </div>
                 }
