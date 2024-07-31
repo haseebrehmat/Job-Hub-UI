@@ -22,3 +22,14 @@ export const jobStatus = {
     6: 'Hot Lead',
     7: 'Prospect',
 }
+
+export const APPLIED_JOBS_FILTERS_INITIAL_VALS = {
+    filter: false,
+    from: '',
+    to: '',
+    stacks: [],
+    sources: [],
+    types: [],
+    verticals: [],
+    agents: [],
+}

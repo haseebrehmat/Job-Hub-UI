@@ -26,6 +26,7 @@ import Status from '@modules/leadManagement/status'
 import CompanyStatus from '@modules/leadManagement/companyStatus'
 import Phases from '@modules/leadManagement/phases'
 import Leads from '@modules/leadManagement/leads'
+import LeadsTable from '@modules/leadManagement/leads/table'
 import Candidates from '@modules/leadManagement/candidates'
 import Designations from '@modules/leadManagement/designations'
 import ExposedCandidates from '@modules/leadManagement/exposedCandidates'
@@ -79,4 +80,5 @@ export {
     Regions,
     MyProfile,
     Permissions,
+    LeadsTable,
 }

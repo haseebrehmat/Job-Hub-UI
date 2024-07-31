@@ -30,6 +30,13 @@ export const CANDIDATE_INITIAL_STATE = {
     page: 1,
     show: false,
     candidate: null,
+    filter: false,
+    skills: [],
+    regions: [],
+    companies: [],
+    designations: '',
+    from: '',
+    to: '',
 }
 
 export const CANDIDATE_HEADS = [
@@ -96,3 +103,18 @@ export const CANDIDATE_SELECT_STATE = {
     regions: '',
     show: false,
 }
+
+export const LEAD_HEADS = [
+    'Sr.',
+    'Job Title',
+    'Job Company',
+    'Applier',
+    'Vertical',
+    'Candidate',
+    'Stack',
+    'Status',
+    'Phase',
+    'Created At',
+    'Updated At',
+    '',
+]

@@ -6,7 +6,7 @@ import { CustomSelector, Button, Input } from '@components'
 import { changeLeadStatus } from '@modules/leadManagement/api'
 
 import { parseStatusPhases, parseSelectedStatusPhase } from '@utils/helpers'
-import { convertToLeadSchema } from '@utils/schemas'
+import { updatePhaseSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
 
 const UpdatePhase = ({ lead = null, status = null, error = null, loading = true, mutate }) => {
@@ -19,7 +19,7 @@ const UpdatePhase = ({ lead = null, status = null, error = null, loading = true,
             effect_date: lead?.effect_date ?? today,
             due_date: lead?.due_date ?? today,
         },
-        convertToLeadSchema,
+        updatePhaseSchema,
         async formValues => trigger({ ...formValues }),
         null,
         () => mutate()

@@ -1,10 +1,10 @@
 import { memo, useState } from 'react'
 
-import { Input } from '@components'
+import { Input, Button } from '@components'
 
-import { SearchIcon, SearchClearIcon } from '@icons'
+import { SearchIcon, SearchClearIcon, CandidateFilterIcon } from '@icons'
 
-const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount }) => {
+const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount, toggle, filter }) => {
     const [value, setValue] = useState(query)
     const handleChange = e => setValue(e.target.value)
     const handleClick = () => {
@@ -30,8 +30,7 @@ const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount })
             <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>
                 Applied Jobs: {last12HoursJobsCount} (Last 12 hours)
             </p>
-
-            <div className='p-4'>
+            <div className='p-4 flex items-center gap-2'>
                 <label htmlFor='table-search' className='sr-only'>
                     Search
                 </label>
@@ -60,6 +59,7 @@ const Searchbox = memo(({ query = '', setQuery, setPage, last12HoursJobsCount })
                         </div>
                     )}
                 </div>
+                <Button icon={CandidateFilterIcon} label='Filters' onClick={toggle} fit fill={filter} />
             </div>
         </div>
     )

@@ -31,6 +31,8 @@ import LineGraph from '@modules/leadManagement/components/CandidateLeadAnalytics
 import Skills from '@modules/leadManagement/components/Skills'
 import Projects from '@modules/leadManagement/components/Projects'
 import Tools from '@modules/leadManagement/components/Tools'
+import FilterDates from '@modules/leadManagement/components/FilterDates'
+import CandidateFilters from '@modules/leadManagement/components/CandidateFilters'
 
 export {
     StatusForm,
@@ -66,4 +68,6 @@ export {
     RegionInput,
     Projects,
     Tools,
+    FilterDates,
+    CandidateFilters,
 }
