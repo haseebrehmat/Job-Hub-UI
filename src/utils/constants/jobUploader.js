@@ -1,6 +1,6 @@
 import { today } from '@constants/dashboard'
 
-export const MANUAL_JOBS_HEADS = ['Date Posted', 'Title', 'Company', 'Source', 'Tech', 'Type', 'Role', 'Salary', '']
+export const MANUAL_JOBS_HEADS = ['Date Posted', 'Title', 'Company', 'Source', 'Tech', 'Type', 'Salary', '']
 
 export const CREATE_JOB_FORM_INITIAL_VALUES = {
     job_title: '',
