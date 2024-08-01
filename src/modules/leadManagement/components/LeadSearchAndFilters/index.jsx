@@ -9,11 +9,7 @@ import { fetchLeadFilters } from '@modules/leadManagement/api'
 import { CandidateFilterIcon } from '@icons'
 
 const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
-    const { data, error } = useSWR('/api/lead_managament/leads_filters/', filtered.filter && fetchLeadFilters, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        shouldRetryOnError: false,
-    })
+    const { data, error } = useSWR('/api/lead_managament/leads_filters/', fetchLeadFilters)
 
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         from: filtered.from,
