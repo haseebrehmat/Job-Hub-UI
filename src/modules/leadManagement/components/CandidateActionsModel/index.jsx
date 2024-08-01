@@ -1,4 +1,5 @@
 import { memo } from 'react'
+
 import { Button, Modal } from '@components'
 
 const CandidateActionsModel = ({ show, setShow, message, handleSubmit }) => (

@@ -112,7 +112,7 @@ export const assignCandidate = (url, { arg: candidate }) =>
         .put(url, candidate)
         .then(({ data }) => toast.success(data.detail || 'Candidate is assigned / reassigned successfully'))
 
-export const allowCandidateForLeads = (url, { arg: candidate }) =>
+export const changeCandidateStatus = (url, { arg: candidate }) =>
     rawHttp.post(url, candidate).then(({ data }) => toast.success(data.detail))
 
 export const fetchMyProfile = url =>

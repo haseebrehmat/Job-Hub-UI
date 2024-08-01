@@ -3,7 +3,7 @@ import { memo, useState } from 'react'
 import { useMutate } from '@/hooks'
 import { Button, DeleteDialog, Tooltip } from '@components'
 
-import { allowCandidateForLeads } from '@modules/leadManagement/api'
+import { changeCandidateStatus } from '@modules/leadManagement/api'
 import { CandidateActionsModel } from '@modules/leadManagement/components'
 import { can, decodeJwt } from '@utils/helpers'
 import { CANDIDATE_DELETION } from '@constants/allowDeletion'
@@ -18,7 +18,7 @@ const CandidateActions = ({ row, edit, mutate }) => {
 
     const { handleSubmit, trigger } = useMutate(
         '/api/candidate_management/candidate/',
-        allowCandidateForLeads,
+        changeCandidateStatus,
         statusUpdate ? { status: !row?.allowed_status } : { login_status: !row?.allowed_login },
         null,
         async formValues => trigger({ ...formValues, candidate: row?.id }),
