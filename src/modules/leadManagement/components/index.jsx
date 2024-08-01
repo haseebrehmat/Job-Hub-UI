@@ -33,8 +33,10 @@ import Projects from '@modules/leadManagement/components/Projects'
 import Tools from '@modules/leadManagement/components/Tools'
 import FilterDates from '@modules/leadManagement/components/FilterDates'
 import CandidateFilters from '@modules/leadManagement/components/CandidateFilters'
+import CandidateActionsModel from '@modules/leadManagement/components/CandidateActionsModel'
 
 export {
+    CandidateActionsModel,
     StatusForm,
     StatusActions,
     CompanyStatusForm,

@@ -46,7 +46,7 @@ import {
 } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh, TbCalendarTime, TbBadges } from 'react-icons/tb'
+import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
 import {
     AiOutlineSearch,
@@ -214,3 +214,5 @@ export const RegionIcon = <BiMap style={{ fontSize: 16 }} />
 export const AppliedJobsIcon = <BiBriefcaseAlt2 style={{ fontSize: 22 }} />
 export const PermissionsIcon = <GoShield style={{ fontSize: 16 }} />
 export const SalaryIcon = <RiMoneyEuroCircleLine style={{ fontSize: 20 }} />
+export const RestrictLogin = <TbKeyOff style={{ fontSize: 20 }} />
+export const AllowLogin = <TbKey style={{ fontSize: 20 }} />
