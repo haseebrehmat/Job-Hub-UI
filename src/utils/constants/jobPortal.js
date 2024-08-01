@@ -61,13 +61,6 @@ export const EDIT_JOB_INPUTS = [
         required: false,
     },
     {
-        name: 'job_role',
-        label: 'Job Role',
-        type: 'text',
-        ph: 'Enter Job Role',
-        required: false,
-    },
-    {
         name: 'salary_format',
         label: 'Salary Format',
         type: 'text',
