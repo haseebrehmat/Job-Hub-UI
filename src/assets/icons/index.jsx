@@ -74,6 +74,7 @@ import {
     FaRegUserCircle,
     FaUserEdit,
     FaUsersCog,
+    FaBan,
 } from 'react-icons/fa'
 import {
     BiPlusCircle,
@@ -216,3 +217,4 @@ export const PermissionsIcon = <GoShield style={{ fontSize: 16 }} />
 export const SalaryIcon = <RiMoneyEuroCircleLine style={{ fontSize: 20 }} />
 export const RestrictLogin = <TbKeyOff style={{ fontSize: 20 }} />
 export const AllowLogin = <TbKey style={{ fontSize: 20 }} />
+export const ExpiredJobsIcon = <FaBan style={{ fontSize: 20 }} />
