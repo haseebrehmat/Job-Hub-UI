@@ -1,39 +1,23 @@
-import { React, useReducer } from 'react'
 import useSWR from 'swr'
 
-import { Loading, EmptyTable, Button } from '@components'
+import { Loading, EmptyTable } from '@components'
 
-import { fetchManualJobs } from '@modules/jobsUploader/api'
-import { CreateJobForm, ManualJobActions } from '@modules/jobsUploader/components'
-import { EditJobForm } from '@modules/jobsFilter/components'
+import { fetchManualJobs as fetchExpiredJobs } from '@modules/jobsUploader/api'
+import { ManualJobActions as ExpiredJobActions } from '@modules/jobsUploader/components'
 
-import { can, formatDate } from '@utils/helpers'
-import { MANUAL_JOBS_HEADS } from '@constants/jobUploader'
-
-import { CreateIcon } from '@icons'
+import { formatDate } from '@utils/helpers'
+import { MANUAL_JOBS_HEADS as EXPIRED_JOBS_HEADS } from '@constants/jobUploader'
 
 const ExpiredJobs = () => {
-    const [job, setJob] = useReducer((state, value) => ({ ...state, ...value }), {
-        show: false,
-        createShow: false,
-        data: null,
-    })
-    const { data, error, isLoading, mutate } = useSWR('api/job_portal/manual_jobs/', fetchManualJobs)
-
-    const handleClick = values => setJob({ data: values, show: true })
+    const { data, error, isLoading, mutate } = useSWR('api/job_portal/manual_jobs/?expired=true', fetchExpiredJobs)
 
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center py-3 justify-end'>
-                {can(['create_manual_job']) && (
-                    <Button label='Create a Job' fit icon={CreateIcon} onClick={() => setJob({ createShow: true })} />
-                )}
-            </div>
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
-                        {MANUAL_JOBS_HEADS.map(heading => (
+                        {EXPIRED_JOBS_HEADS.map(heading => (
                             <th scope='col' className='px-3 py-4' key={heading}>
                                 {heading}
                             </th>
@@ -62,29 +46,24 @@ const ExpiredJobs = () => {
                                 </td>
                                 <td className='p-3'>{row?.tech_keywords}</td>
                                 <td className='p-3'>{row?.job_type}</td>
-                                <td className='p-3'>{row?.job_role || '--'}</td>
                                 <td className='p-3'>
                                     {row?.salary_min || '--'} - {row?.salary_max || '--'}
                                 </td>
                                 <td>
-                                    <ManualJobActions
+                                    <ExpiredJobActions
                                         id={row?.id}
                                         mutate={mutate}
                                         expired={row?.expired_at}
-                                        edit={() => handleClick(row)}
+                                        editAndDel={false}
                                     />
                                 </td>
                             </tr>
                         ))
                     ) : (
-                        <EmptyTable cols={6} msg='No Jobs found yet!' />
+                        <EmptyTable cols={8} msg='No expired Jobs found yet!' />
                     )}
                 </tbody>
             </table>
-            {job.createShow && (
-                <CreateJobForm show={job.createShow} setShow={show => setJob({ createShow: show })} mutate={mutate} />
-            )}
-            {job.show && <EditJobForm job={job} mutate={mutate} set={setJob} />}
         </div>
     )
 }
