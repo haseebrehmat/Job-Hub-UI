@@ -513,3 +513,9 @@ export const parseTeamCandidates = candidates =>
 
 export const removeFilterCounts = selected =>
     selected?.map(obj => ({ ...obj, label: obj.label?.replace(/\s*\(\d+\)\s*/, '') })) || []
+export const parseModule = module => {
+    if (module) {
+        return { value: module, label: module }
+    }
+    return null
+}

@@ -11,30 +11,11 @@ import { MODULE_NAMES_OPTIONS } from '@constants/permissions'
 
 import { ValidateFalseIcon } from '@icons'
 
-const PermissionForm = ({ show, setShow, mutate, permission }) => {
-    const [fields, setFields] = useState(
-        permission[0]?.id ? permission : [{ module: '', codename: '', name: '', level: '', id: '' }]
-    )
-    const submitButtonShow = fields.length > 0
-
-    const handleFieldChange = (index, value, key) => {
-        const newFields = [...fields]
-        newFields[index][key] = value
-        setFields(newFields)
-    }
-    const addField = () => setFields([...fields, { module: '', codename: '', name: '', level: '', id: '' }])
-    const removeField = index => setFields(fields.filter((_, i) => i !== index))
-
+const PermissionForm = ({ show, setShow, mutate, roles }) => {
     const { handleSubmit, resetForm, trigger } = useMutate(
         `/api/auth/permission${permission[0]?.id ? `/${permission[0]?.id}/` : '/'}`,
         savePermission,
-        {
-            module: permission[0]?.module || '',
-            codename: permission[0]?.codename || '',
-            name: permission[0]?.name || '',
-            level: permission[0]?.level || '',
-            id: permission[0]?.id || '',
-        },
+        {},
         null,
         async () => trigger({ permissions: fields }),
         null,

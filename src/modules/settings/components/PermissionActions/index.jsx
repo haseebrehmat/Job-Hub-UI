@@ -12,16 +12,16 @@ const PermissionActions = ({ id, edit, mutate }) => {
 
     return (
         <div className='absolute top-0 right-0 pl-2 mr-1 flex'>
-            {can('edit_region') && (
-                <Tooltip text='Edit region'>
+            {can('edit_permission') && (
+                <Tooltip text='Edit Permission'>
                     <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                 </Tooltip>
             )}
-            {can('delete_region') && (
+            {can('delete_permission') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/candidate_management/regions/${id}/`}
+                    url={`api/auth/permission/${id}/`}
                     refetch={mutate}
                     perm={REGION_DELETION}
                 >

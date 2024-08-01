@@ -7,18 +7,18 @@ import { PermissionActions, PermissionForm } from '@modules/settings/components'
 import { fetchPermissions } from '@modules/settings/api'
 
 import { can } from '@utils/helpers'
-import { REGIONS_INITIAL_VALUES } from '@constants/settings'
+import { PERMISSIONS_INITIAL_VALUES } from '@constants/settings'
 
 import { CreateIcon } from '@icons'
 
 const Permissions = () => {
-    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), REGIONS_INITIAL_VALUES)
+    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), PERMISSIONS_INITIAL_VALUES)
     const { data, error, isLoading, mutate } = useSWR(
         `/api/auth/permission/?search=${vals.query}&page=${vals.page}`,
         fetchPermissions
     )
 
-    const handleClick = values => dispatch({ region: values, show: !vals.show })
+    const handleClick = row => dispatch({ show: !vals.show, permission: row })
 
     if (isLoading) return <Loading />
     return (
@@ -26,8 +26,8 @@ const Permissions = () => {
             <div className='flex items-center pt-3 pb-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
-                    {true && (
-                        <Button label='Create Permission' fit icon={CreateIcon} onClick={() => handleClick(null)} />
+                    {can('create_permission') && (
+                        <Button label='Create Permission' fit icon={CreateIcon} onClick={() => handleClick()} />
                     )}
                 </div>
             </div>
@@ -36,7 +36,7 @@ const Permissions = () => {
                     data?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
-                            {false && can('edit_region') && can('delete_region') && (
+                            {can('edit_permission') && can('delete_permission') && (
                                 <PermissionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
                             <div className='flex text-sm justify-between gap-2'>
@@ -59,7 +59,7 @@ const Permissions = () => {
                     show={vals.show}
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
-                    region={vals.region}
+                    permission={[vals?.permission]}
                 />
             )}
         </div>
