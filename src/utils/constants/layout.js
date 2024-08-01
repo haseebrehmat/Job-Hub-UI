@@ -168,6 +168,8 @@ export const menuItems = [
             'create_designation',
             'edit_designation',
             'delete_designation',
+            'view_lead_details',
+            'assign_candidate',
         ],
         subItems: [
             {

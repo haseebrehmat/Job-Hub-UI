@@ -608,12 +608,24 @@ export const rawpermissions = [
             {
                 codename: 'view_lead',
                 name: 'View Leads',
-                child: ['edit_lead'],
+                child: ['edit_lead', 'view_lead_details', 'assign_candidate'],
                 level: 2,
             },
             {
                 codename: 'edit_lead',
                 name: 'Edit Lead',
+                parent: ['view_lead'],
+                level: 2,
+            },
+            {
+                codename: 'view_lead_details',
+                name: 'View Lead Details',
+                parent: ['view_lead'],
+                level: 2,
+            },
+            {
+                codename: 'assign_candidate',
+                name: 'Assign / Reassign Candidate',
                 parent: ['view_lead'],
                 level: 2,
             },
