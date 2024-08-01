@@ -15,15 +15,16 @@ const ManualJobActions = memo(({ id, expired = false, edit = null, mutate, editA
 
     return (
         <span className='flex justify-center'>
-            {!expired ? (
-                <Tooltip text='Mark as expired'>
-                    <button onClick={() => setConfirm(true)}>{unCheckedbox}</button>
-                </Tooltip>
-            ) : (
-                <Tooltip text='Unmark as active'>
-                    <button onClick={() => setConfirm(true)}>{Checkedbox}</button>
-                </Tooltip>
-            )}
+            {can('mark_as_expired') &&
+                (!expired ? (
+                    <Tooltip text='Mark as expired'>
+                        <button onClick={() => setConfirm(true)}>{unCheckedbox}</button>
+                    </Tooltip>
+                ) : (
+                    <Tooltip text='Unmark as active'>
+                        <button onClick={() => setConfirm(true)}>{Checkedbox}</button>
+                    </Tooltip>
+                ))}
             {editAndDel && (
                 <div className='flex ml-1'>
                     {can('edit_job') && (
