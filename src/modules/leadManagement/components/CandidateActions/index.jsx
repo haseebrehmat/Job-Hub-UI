@@ -5,6 +5,7 @@ import { Button, DeleteDialog, Tooltip } from '@components'
 
 import { changeCandidateStatus } from '@modules/leadManagement/api'
 import { CandidateActionsModel } from '@modules/leadManagement/components'
+
 import { can, decodeJwt } from '@utils/helpers'
 import { CANDIDATE_DELETION } from '@constants/allowDeletion'
 
