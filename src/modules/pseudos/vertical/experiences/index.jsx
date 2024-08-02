@@ -39,7 +39,7 @@ const Experiences = ({ id }) => {
                                 <div className='ml-2 font-semibold'>{row?.company_name ?? 'Not Specified'}</div>
                                 <div className='ml-2 text-sm italic'>
                                     From {formatDate2(row?.start_date) ?? 'N/A'} to{'  '}
-                                    {formatDate2(row?.end_date) ?? 'N/A'}
+                                    {row?.currently ? 'currently working' : formatDate2(row?.end_date) ?? 'N/A'}
                                 </div>
                                 <div className='ml-2 mt-2 text-gray-600 break-words'>
                                     {row?.description ?? 'Not description'}
