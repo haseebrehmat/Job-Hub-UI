@@ -23,7 +23,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
             {data?.length > 0 ? (
-                <div className='grid grid-cols-1 lg:grid-cols-3 gap-4' ref={statRef}>
+                <div className='grid grid-cols-1 lg:grid-cols-3 gap-4' ref={statRef} id='job-type-counts'>
                     {data?.map((d, index) => (
                         <div
                             className={`border shadow-md p-3 rounded-xl _gradient-${
