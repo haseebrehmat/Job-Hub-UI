@@ -8,11 +8,24 @@ import { DownloadIcon2 } from '@icons'
 
 const ExportAll = () => {
     const [exporting, setExporting] = useState(false)
-    const handleClick = () => {
+    const handleClick = async () => {
         setExporting(true)
-        const jobTypeCountDiv = document.getElementById('job-type-counts')
-        htmlToPng(jobTypeCountDiv, { name: 'job-type-counts' })
+        const divIds = [
+            'job-type-counts',
+            'job-type-pies',
+            'tech-stack-counts',
+            'tech-stack-pies',
+            'tech-stack-bars',
+            'jobs-trends-chart',
+        ]
+        const exportDiv = document.getElementById('export-div')
+        divIds.forEach(id => {
+            const div = document.getElementById(id)
+            exportDiv.appendChild(div.cloneNode(true))
+        })
+        await htmlToPng(exportDiv, { name: 'single_export' })
         setExporting(false)
+        exportDiv.innerHTML = ''
     }
 
     return (
@@ -22,6 +35,7 @@ const ExportAll = () => {
             loading={exporting}
             onClick={handleClick}
             classes='!pl-2 !pr-3 whitespace-nowrap !rounded-full'
+            disabled={exporting}
         />
     )
 }
