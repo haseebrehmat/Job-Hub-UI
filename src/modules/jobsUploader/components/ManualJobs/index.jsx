@@ -62,7 +62,6 @@ const ManualJobs = () => {
                                 </td>
                                 <td className='p-3'>{row?.tech_keywords}</td>
                                 <td className='p-3'>{row?.job_type}</td>
-                                <td className='p-3'>{row?.job_role || '--'}</td>
                                 <td className='p-3'>
                                     {row?.salary_min || '--'} - {row?.salary_max || '--'}
                                 </td>
