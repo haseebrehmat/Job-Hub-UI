@@ -22,7 +22,7 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
         {
             id: team?.id,
             name: team?.name,
-            reporting_to: team?.reporting_to?.id,
+            reporting_to: team?.reporting_to?.id || null,
             members: team?.members?.map(m => ({ value: m.id, label: m.username })),
         },
         teamSchema,
@@ -30,7 +30,10 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
         error => toast.error(getMsg(error)),
         () => {
             mutate()
-            if (!team?.id) resetForm()
+            if (!team?.id) {
+                resetForm()
+                setRole(null)
+            }
         }
     )
     const { data, isLoading: uLoading } = useSWR(`/api/auth/role_users/${role}/`, role ? fetchRoleWiseUsers : null)

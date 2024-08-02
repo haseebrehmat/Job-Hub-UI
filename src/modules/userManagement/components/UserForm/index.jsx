@@ -22,7 +22,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             email: user?.email,
             id: user?.id,
             company: user?.company?.id || loggedUser?.company,
-            roles: user?.roles?.id,
+            roles: user?.roles?.id || null,
             password: '',
         },
         user?.id ? userSchema : userCreateSchema,
