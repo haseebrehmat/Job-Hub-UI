@@ -429,11 +429,11 @@ export const getYearsOptions = () => {
     return years
 }
 
-export const htmlToPng = htmlRef => {
-    toPng(htmlRef, { cacheBust: false, backgroundColor: 'white' })
+export const htmlToPng = (htmlRef, options = null) => {
+    toPng(htmlRef, { cacheBust: false, backgroundColor: options?.bgColor || 'white' })
         .then(dataUrl => {
             const link = document.createElement('a')
-            link.download = 'export.png'
+            link.download = `${options?.name || 'export'}.png`
             link.href = dataUrl
             link.click()
         })
