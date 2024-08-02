@@ -31,7 +31,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => {
                     </span>
                 </div>
             )}
-            <ResponsiveContainer width='100%' height={750} ref={barRef}>
+            <ResponsiveContainer width='100%' height={750} ref={barRef} id='tech-stack-bars'>
                 <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
                     <CartesianGrid strokeDasharray='3 3' />
                     <XAxis
