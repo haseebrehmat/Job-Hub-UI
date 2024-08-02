@@ -57,6 +57,7 @@ const Analytics = () => {
                 <TechStackPies data={data?.tech_stack_data?.find(row => row.name === vals.stack)} stack={vals.stack} />
             </div>
             <Trends data={trendsData} />
+            <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
         </div>
     )
 }

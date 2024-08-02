@@ -48,3 +48,12 @@ export const JOB_TYPE_COLORS2 = {
     hybrid_contract: '#2d455c',
     total: '#4ab9a7',
 }
+
+export const GRAPHS_DIVS_IDS = [
+    'job-type-counts',
+    'job-type-pies',
+    'tech-stack-counts',
+    'tech-stack-pies',
+    'tech-stack-bars',
+    'jobs-trends-chart',
+]

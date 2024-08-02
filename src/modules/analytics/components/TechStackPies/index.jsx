@@ -37,7 +37,7 @@ const TechStackPies = ({ data = {}, stack = null }) => {
             >
                 <CustomTooltip text='Export to png'>{DownloadIcon2}Export</CustomTooltip>
             </span>
-            <div ref={chartRef}>
+            <div ref={chartRef} id='tech-stack-pies'>
                 <ResponsiveContainer width='100%' height={400}>
                     <PieChart>
                         <Pie
