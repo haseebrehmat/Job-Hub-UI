@@ -25,7 +25,7 @@ import DesignationForm from '@modules/leadManagement/components/DesignationForm'
 import ExposedForm from '@modules/leadManagement/components/ExposedForm'
 import ExposedTo from '@modules/leadManagement/components/ExposedTo'
 import CandidateInfo from '@modules/leadManagement/components/CandidateInfo'
-import LeadFilters from '@modules/leadManagement/components/LeadFilters'
+import LeadSearchAndFilters from '@modules/leadManagement/components/LeadSearchAndFilters'
 import CandidateProfile from '@modules/leadManagement/components/CandidateProfile'
 import LineGraph from '@modules/leadManagement/components/CandidateLeadAnalytics'
 import Skills from '@modules/leadManagement/components/Skills'
@@ -34,6 +34,9 @@ import Tools from '@modules/leadManagement/components/Tools'
 import FilterDates from '@modules/leadManagement/components/FilterDates'
 import CandidateFilters from '@modules/leadManagement/components/CandidateFilters'
 import CandidateActionsModel from '@modules/leadManagement/components/CandidateActionsModel'
+import LeadFilterByStatus from '@modules/leadManagement/components/LeadFilterByStatus'
+import LeadActions from '@modules/leadManagement/components/LeadActions'
+import LeadFilterDropdowns from '@modules/leadManagement/components/LeadFilterDropdowns'
 
 export {
     CandidateActionsModel,
@@ -62,7 +65,7 @@ export {
     ExposedForm,
     ExposedTo,
     CandidateInfo,
-    LeadFilters,
+    LeadSearchAndFilters,
     CandidateProfile,
     LineGraph,
     Skills,
@@ -72,4 +75,7 @@ export {
     Tools,
     FilterDates,
     CandidateFilters,
+    LeadFilterByStatus,
+    LeadActions,
+    LeadFilterDropdowns,
 }
