@@ -1,4 +1,5 @@
 import { memo, useState } from 'react'
+import { toast } from 'react-hot-toast'
 
 import { Button } from '@components'
 
@@ -11,14 +12,20 @@ const ExportAll = () => {
     const [exporting, setExporting] = useState(false)
 
     const handleClick = async () => {
-        setExporting(true)
         const exportDiv = document.getElementById('export-div')
-        GRAPHS_DIVS_IDS.forEach(id => {
-            const div = document.getElementById(id)
-            exportDiv.appendChild(div.cloneNode(true))
-        })
-        await htmlToPng(exportDiv, { name: 'single_export' })
-        setExporting(false)
+        try {
+            setExporting(true)
+            GRAPHS_DIVS_IDS.forEach(id => {
+                const div = document.getElementById(id)
+                exportDiv.appendChild(div.cloneNode(true))
+            })
+            await htmlToPng(exportDiv, { name: 'single_export' })
+            setExporting(false)
+            toast.success(`Graphs are exported successfully.`)
+        } catch (error) {
+            toast.error(`Error exporting graphs: ${error}`)
+            setExporting(false)
+        }
         exportDiv.innerHTML = ''
     }
 
