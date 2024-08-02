@@ -3,23 +3,17 @@ import { memo, useState } from 'react'
 import { Button } from '@components'
 
 import { htmlToPng } from '@utils/helpers'
+import { GRAPHS_DIVS_IDS } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 
 const ExportAll = () => {
     const [exporting, setExporting] = useState(false)
+
     const handleClick = async () => {
         setExporting(true)
-        const divIds = [
-            'job-type-counts',
-            'job-type-pies',
-            'tech-stack-counts',
-            'tech-stack-pies',
-            'tech-stack-bars',
-            'jobs-trends-chart',
-        ]
         const exportDiv = document.getElementById('export-div')
-        divIds.forEach(id => {
+        GRAPHS_DIVS_IDS.forEach(id => {
             const div = document.getElementById(id)
             exportDiv.appendChild(div.cloneNode(true))
         })
