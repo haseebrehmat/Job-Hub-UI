@@ -179,7 +179,14 @@ export const experienceSchema = Yup.object().shape({
     designation: Yup.string().required('Designation is required'),
     description: Yup.string().max(250, 'Description is too long'),
     start_date: Yup.date().max(today, 'Please choose future date'),
-    end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
+    currently: Yup.boolean(),
+    end_date: Yup.date().when('currently', {
+        is: currently => currently === false,
+        then: () =>
+            Yup.date()
+                .required('End date is required')
+                .min(Yup.ref('start_date'), "End date can't be before Start date"),
+    }),
 })
 
 export const educationSchema = Yup.object().shape({
