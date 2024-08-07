@@ -526,6 +526,31 @@ export const rawpermissions = [
         ],
     },
     {
+        module: 'Trends Analytics',
+        permissions: [
+            {
+                codename: 'view_trend_analytics',
+                name: 'View Trend Analytics',
+                level: 2,
+            },
+            {
+                codename: 'create_trend_analytics',
+                name: 'Create Trend Analytics',
+                level: 2,
+            },
+            {
+                codename: 'edit_trend_analytics',
+                name: 'Edit Trend Analytics',
+                level: 2,
+            },
+            {
+                codename: 'delete_trend_analytics',
+                name: 'Delete Trend Analytics',
+                level: 2,
+            },
+        ],
+    },
+    {
         module: 'Status',
         permissions: [
             {

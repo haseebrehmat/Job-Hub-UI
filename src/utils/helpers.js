@@ -486,3 +486,5 @@ export const findSkill = (skill, skills) => {
 
 export const parseProjects = projects =>
     projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))
+
+export const parseTechStacks = techStacks => techStacks.map(tech => ({ value: tech, label: tech }))

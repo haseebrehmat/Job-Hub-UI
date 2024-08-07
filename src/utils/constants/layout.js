@@ -352,6 +352,12 @@ export const menuItems = [
                 svg: PermissionsIcon,
                 perms: ['view_permission', 'create_permission', 'edit_permission', 'delete_permission'],
             },
+            {
+                label: 'Trends Analytics',
+                link: '/trends-analytics',
+                svg: PermissionsIcon,
+                perms: ['view_region', 'create_region', 'edit_region', 'delete_region'],
+            },
         ],
     },
     {

@@ -38,6 +38,7 @@ import ApiLogs from '@modules/settings/apiLogs'
 import Regions from '@modules/settings/regions'
 import MyProfile from '@modules/leadManagement/candidateProfile'
 import Permissions from '@modules/settings/permissions'
+import TechStacks from '@modules/settings/techStacks'
 
 export {
     TeamAppliedJobs,
@@ -81,4 +82,5 @@ export {
     MyProfile,
     Permissions,
     LeadsTable,
+    TechStacks,
 }

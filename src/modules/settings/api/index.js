@@ -29,6 +29,15 @@ export const saveRegion = (url, { arg: region }) => {
     return rawHttp.post(url, region).then(({ data }) => toast.success(data.detail))
 }
 
+export const saveTrend = (url, { arg: Trend }) => {
+    if (Trend?.id) {
+        return rawHttp.put(url, Trend).then(({ data }) => toast.success(data.detail || 'Trend updated successfully'))
+    }
+    return rawHttp.post(url, Trend).then(({ data }) => toast.success(data.detail))
+}
+
 export const fetchAllRegions = url => http.get(url).then(({ data }) => data)
 
 export const fetchPermissions = url => http.get(url).then(({ data }) => data)
+
+export const fetchTechStacks = url => http.get(url).then(({ data }) => data)

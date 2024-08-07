@@ -1,4 +1,4 @@
-import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs, Regions, Permissions } from '@modules'
+import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs, Regions, Permissions, TechStacks } from '@modules'
 
 export const settingsRoutes = [
     {
@@ -48,6 +48,13 @@ export const settingsRoutes = [
         component: <Permissions />,
         protect: true,
         title: 'Permissions',
-        permission: 'all',
+        permission: 'view_permission',
+    },
+    {
+        path: '/trends-analytics',
+        component: <TechStacks />,
+        protect: true,
+        title: 'Trends Analytics',
+        permission: 'view_trend_analytics',
     },
 ]
