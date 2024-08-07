@@ -1,7 +1,7 @@
 import { memo, useReducer } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Button, Searchbox, EmptyTable } from '@components'
+import { Loading, Button, Searchbox, EmptyTable, Badge } from '@components'
 
 import { TechForm, TrendsActions } from '@modules/settings/components'
 
@@ -13,10 +13,12 @@ import { TECH_STACKS_HEADS, TRENDS_ANALYTICS_INITIAL_STATE } from '@constants/se
 import { CreateIcon } from '@icons'
 
 const TechStacks = () => {
-    const { data, error, isLoading, mutate } = useSWR('api/job_portal/trends_analytics/', fetchTechStacks)
-
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), TRENDS_ANALYTICS_INITIAL_STATE)
-    const handleClick = values => dispatch({ show: !vals.show, trend: values })
+    const { data, error, isLoading, mutate } = useSWR(
+        `api/job_portal/trends_analytics/?search=${vals.query}`,
+        fetchTechStacks
+    )
+    const handleClick = values => dispatch({ show: !vals.show, trend_analytics: values })
 
     if (isLoading) return <Loading />
     return (
@@ -39,13 +41,27 @@ const TechStacks = () => {
                 </thead>
                 <tbody>
                     {data?.data?.length > 0 && !error ? (
-                        data?.data?.map((row, idx) => (
+                        data?.data?.map(row => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
-                                <td className='px-3 py-6'>{idx + 1}</td>
+                                <td className='px-3 py-6'>{row?.id}</td>
                                 <td className='px-3 py-6'>{row?.category}</td>
-                                <td className='px-3 py-6'>{row?.tech_stacks}</td>
+                                <td className='px-3 py-6'>
+                                    <div className='flex flex-wrap gap-3'>
+                                        {row?.tech_stacks?.split(',').length > 0 &&
+                                            row?.tech_stacks
+                                                ?.split(',')
+                                                ?.map(tag => (
+                                                    <Badge
+                                                        label={tag}
+                                                        type='success'
+                                                        classes='border border-green-300'
+                                                        key={tag.value}
+                                                    />
+                                                ))}
+                                    </div>
+                                </td>
                                 <td className='px-3 py-6 '>
-                                    {true && <TrendsActions row={row.id} edit={handleClick} mutate={mutate} />}
+                                    {true && <TrendsActions row={row} edit={handleClick} mutate={mutate} />}
                                 </td>
                             </tr>
                         ))
@@ -54,12 +70,12 @@ const TechStacks = () => {
                     )}
                 </tbody>
             </table>
-            {can('create_region') && vals.show && (
+            {can('create_trend_analytics') && vals.show && (
                 <TechForm
                     show={vals.show}
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
-                    trend_analytics={vals.trend}
+                    trend_analytics={vals.trend_analytics}
                     tech_stacks_options={data.tech_stacks}
                 />
             )}

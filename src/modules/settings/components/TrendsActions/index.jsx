@@ -7,20 +7,20 @@ import { can } from '@utils/helpers'
 
 import { TrashIcon, EditIcon } from '@icons'
 
-const TrendsActions = ({ id, edit, mutate }) => {
+const TrendsActions = ({ row, edit, mutate }) => {
     const [show, setShow] = useState(false)
     return (
         <div className='pl-2 mr-1 flex'>
             {can('edit_trend_analytics') && (
                 <Tooltip text='Edit region'>
-                    <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
+                    <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit(row)} />
                 </Tooltip>
             )}
             {can('delete_trend_analytics') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`/api/job_portal/trends_analytics/${id}/`}
+                    url={`/api/job_portal/trends_analytics/${row.id}/`}
                     refetch={mutate}
                     perm={REGION_DELETION}
                 >

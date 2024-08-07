@@ -9,13 +9,16 @@ import { saveTrend } from '@modules/settings/api'
 import { parseTechStacks } from '@utils/helpers'
 
 const TechForm = ({ show, setShow, mutate, trend_analytics, tech_stacks_options }) => {
-    const [tags, setTags] = useState(trend_analytics?.tech_stacks ? parseTechStacks(trend_analytics?.tech_stacks) : [])
+    const [tags, setTags] = useState(
+        trend_analytics?.tech_stacks ? parseTechStacks(trend_analytics?.tech_stacks.split(',')) : []
+    )
     const { values, handleSubmit, resetForm, trigger, handleChange } = useMutate(
         `api/job_portal/trends_analytics${trend_analytics?.id ? `/${trend_analytics?.id}/` : '/'}`,
         saveTrend,
-        { category: trend_analytics?.category || '', tech_stacks: tags.map(item => item.value).join() },
+        { category: trend_analytics?.id ? trend_analytics?.category : '' },
         null,
-        async formValues => trigger({ ...formValues }),
+        async formValues =>
+            trigger({ ...formValues, id: trend_analytics?.id, tech_stacks: tags.map(item => item.value).join() }),
         null,
         () => {
             mutate()

@@ -16,7 +16,7 @@ export const integrationNames = [
 
 export const API_LOGS_HEADS = ['Sr.', 'Source', 'Created At', 'Total Jobs']
 
-export const TECH_STACKS_HEADS = ['Sr.', 'category', 'Tech Stacks', 'actions']
+export const TECH_STACKS_HEADS = ['id', 'category', 'Tech Stacks', 'actions']
 
 export const API_LOGS_INITIAL_VALUES = {
     query: '',
@@ -38,5 +38,5 @@ export const TRENDS_ANALYTICS_INITIAL_STATE = {
     query: '',
     page: 1,
     show: false,
-    trend: null,
+    trend_analytics: null,
 }
