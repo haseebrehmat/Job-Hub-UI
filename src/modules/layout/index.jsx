@@ -3,6 +3,7 @@ import { memo, useState } from 'react'
 import SideBar from '@modules/layout/sidebar'
 import Navbar from '@modules/layout/navbar'
 import Overlay from '@modules/layout/overlay'
+import RolesSidebar from '@modules/layout/rolesSidebar'
 
 import { useLocation } from 'react-router-dom'
 
@@ -16,6 +17,7 @@ const layout = memo(({ children, title }) => {
 
     return (
         <main className='flex h-screen hide_scrollbar'>
+            <RolesSidebar />
             <SideBar toggle={toggle} setToggle={setToggle} />
             <Overlay show={show} setShow={setShow} />
             <div className='w-[85%] flex-1  '>
