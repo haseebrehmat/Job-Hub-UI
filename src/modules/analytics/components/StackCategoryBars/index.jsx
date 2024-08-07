@@ -10,7 +10,10 @@ import { SearchClearIcon, DownloadIcon2 } from '@icons'
 
 const StackCategoryBars = ({ data = [], type = 'total', set = null }) => {
     const barRef = useRef('')
-    const memoizedData = useMemo(() => data.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
+    const memoizedData = useMemo(
+        () => data.filter(d => d[type] > 1000).map(row => ({ name: row.name, [type]: row[type] })),
+        [data, type]
+    )
 
     return (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
@@ -33,24 +36,17 @@ const StackCategoryBars = ({ data = [], type = 'total', set = null }) => {
             )}
             <ResponsiveContainer width='100%' height={750} ref={barRef} id='stack-category-bars'>
                 <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
-                    <CartesianGrid strokeDasharray='3 3' />
+                    <CartesianGrid strokeDasharray='1 1' />
                     <XAxis
                         dataKey='name'
                         label={{ position: 'insideBottomRight' }}
                         angle={-40}
-                        stroke='#037571'
                         interval={0}
                         textAnchor='end'
                         allowDuplicatedCategory={false}
-                        padding={{ left: 30 }}
                         fontSize={17 - Math.round(memoizedData.length / 15)}
                     />
-                    <YAxis
-                        label={{ angle: -90, position: 'insideLeft' }}
-                        stroke='#037571'
-                        type='number'
-                        domain={[0, 'auto']}
-                    />
+                    <YAxis label={{ angle: -90, position: 'insideRight' }} type='number' domain={[0, 'auto']} />
                     {Object.keys(JOB_TYPES).map(
                         (row, index) =>
                             type === row && (
@@ -58,8 +54,7 @@ const StackCategoryBars = ({ data = [], type = 'total', set = null }) => {
                                     <LabelList
                                         dataKey={row}
                                         position='top'
-                                        fontSize={13}
-                                        fontWeight='bold'
+                                        fontSize={15}
                                         fill={JOB_TYPE_COLORS[index]}
                                     />
                                 </Bar>
