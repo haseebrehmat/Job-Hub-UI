@@ -25,7 +25,7 @@ const RolesSidebar = () => (
         <div className='flex flex-col gap-3.5 justify-center items-center'>
             {roles.map(role => (
                 <Tooltip text={role.title} down key={role.id}>
-                    <div className='bg-[#4ab9a7] text-white p-2 uppercase font-semibold rounded-lg cursor-pointer hover:bg-[#048C8C] active:bg-[#1c5655]'>
+                    <div className='bg-[#4ab9a7] text-white p-2 uppercase font-semibold rounded-lg cursor-pointer hover:bg-[#048C8C] active:bg-[#1c5655] min-w-[2.5rem] text-center'>
                         {role.title.length < 2 ? role.title : role.title.slice(0, 2)}
                     </div>
                 </Tooltip>
