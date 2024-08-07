@@ -8,14 +8,14 @@ import { JOB_TYPE_COLORS, JOB_TYPES } from '@constants/analytics'
 
 import { SearchClearIcon, DownloadIcon2 } from '@icons'
 
-const TechStackBars = ({ data = [], type = 'total', set = null, title = '' }) => {
+const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) => {
     const barRef = useRef('')
     const memoizedData = useMemo(() => data.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
 
     return (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
-                {title}
+                {options?.title ?? ''}
                 <span className='text-sm'> - Charts</span>
             </p>
             <span
@@ -59,7 +59,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null, title = '' }) =>
                                     <LabelList
                                         dataKey={row}
                                         position='top'
-                                        fontSize={13}
+                                        fontSize={options?.fs ?? 13}
                                         fontWeight='bold'
                                         fill={JOB_TYPE_COLORS[index]}
                                     />

@@ -44,10 +44,10 @@ const Analytics = () => {
                 <JobTypePies data={vals.query ? filterQuery(data?.job_type_data) : data?.job_type_data} />
             </div>
             <TechStackBars
-                title='Tech Stacks'
                 data={vals.query ? filterQuery(data?.tech_stack_data) : data?.tech_stack_data}
                 type={vals.bar}
                 set={dispatch}
+                options={{ title: 'Tech Stacks' }}
             />
             <div className='flex gap-2'>
                 <TechStackCounts
@@ -58,10 +58,10 @@ const Analytics = () => {
                 <TechStackPies data={data?.tech_stack_data?.find(row => row.name === vals.stack)} stack={vals.stack} />
             </div>
             <TechStackBars
-                title='Tech Stack Trend Categories'
                 data={vals.query ? filterQuery(data?.trend_analytics) : data?.trend_analytics}
                 type={vals.bar}
                 set={dispatch}
+                options={{ title: 'Tech Stack Trend Categories', fs: 18 }}
             />
             <Trends data={trendsData} />
             <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
