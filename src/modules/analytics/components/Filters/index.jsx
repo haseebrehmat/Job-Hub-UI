@@ -33,7 +33,7 @@ const Filters = ({ values, set, data = null }) => {
             tab: vals.tab,
         })
     const clearFilters = () => {
-        set({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '', filter: false })
+        set({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '', filter: false, bar: 'total' })
         update({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '' })
     }
 
