@@ -12,6 +12,7 @@ import {
     TechStackBars,
     TechStackPies,
     Trends,
+    StackCategoryBars,
 } from '@modules/analytics/components'
 import { fetchAnalytics } from '@modules/analytics/api'
 import { trendsData } from '@modules/analytics/api/data'
@@ -56,6 +57,11 @@ const Analytics = () => {
                 />
                 <TechStackPies data={data?.tech_stack_data?.find(row => row.name === vals.stack)} stack={vals.stack} />
             </div>
+            <StackCategoryBars
+                data={vals.query ? filterQuery(data?.tech_stack_data) : data?.tech_stack_data}
+                type={vals.bar}
+                set={dispatch}
+            />
             <Trends data={trendsData} />
             <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
         </div>
