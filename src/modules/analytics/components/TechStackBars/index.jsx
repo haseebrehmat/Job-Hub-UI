@@ -12,7 +12,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
     const barRef = useRef('')
     const memoizedData = useMemo(() => data.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
 
-    return (
+    return memoizedData.length > 0 ? (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 {options?.title ?? ''}
@@ -32,7 +32,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
                     </span>
                 </div>
             )}
-            <ResponsiveContainer width='100%' height={750} ref={barRef} id='tech-stack-bars'>
+            <ResponsiveContainer width='100%' height={750} ref={barRef} id={options?.id}>
                 <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
                     <CartesianGrid strokeDasharray='3 3' />
                     <XAxis
@@ -69,7 +69,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
                 </BarChart>
             </ResponsiveContainer>
         </div>
-    )
+    ) : null
 }
 
 export default memo(TechStackBars)

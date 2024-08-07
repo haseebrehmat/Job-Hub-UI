@@ -43,7 +43,7 @@ const Analytics = () => {
                 data={data?.tech_stack_data}
                 type={vals.bar}
                 set={dispatch}
-                options={{ title: 'Tech Stacks' }}
+                options={{ title: 'Tech Stacks', id: 'tech-stack-bars' }}
             />
             <div className='flex gap-2'>
                 <TechStackCounts data={data?.tech_stack_data} set={dispatch} stack={vals.stack} />
@@ -53,7 +53,7 @@ const Analytics = () => {
                 data={data?.trend_analytics}
                 type={vals.bar}
                 set={dispatch}
-                options={{ title: 'Tech Stack Trend Categories', fs: 18 }}
+                options={{ title: 'Tech Stack Trend Categories', fs: 18, id: 'tech-stack-category-trends-bars' }}
             />
             <Trends data={trendsData} />
             <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
