@@ -9,7 +9,6 @@ import TechStackPies from '@modules/analytics/components/TechStackPies'
 import Trends from '@modules/analytics/components/Trends'
 import SubFilters from '@modules/analytics/components/SubFilters'
 import ExportAll from '@modules/analytics/components/ExportAll'
-import StackCategoryBars from '@modules/analytics/components/StackCategoryBars'
 
 export {
     JobTypeCounts,
@@ -23,5 +22,4 @@ export {
     Trends,
     SubFilters,
     ExportAll,
-    StackCategoryBars,
 }

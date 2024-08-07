@@ -12,7 +12,6 @@ import {
     TechStackBars,
     TechStackPies,
     Trends,
-    StackCategoryBars,
 } from '@modules/analytics/components'
 import { fetchAnalytics } from '@modules/analytics/api'
 import { trendsData } from '@modules/analytics/api/data'
@@ -45,6 +44,7 @@ const Analytics = () => {
                 <JobTypePies data={vals.query ? filterQuery(data?.job_type_data) : data?.job_type_data} />
             </div>
             <TechStackBars
+                title='Tech Stacks'
                 data={vals.query ? filterQuery(data?.tech_stack_data) : data?.tech_stack_data}
                 type={vals.bar}
                 set={dispatch}
@@ -57,8 +57,9 @@ const Analytics = () => {
                 />
                 <TechStackPies data={data?.tech_stack_data?.find(row => row.name === vals.stack)} stack={vals.stack} />
             </div>
-            <StackCategoryBars
-                data={vals.query ? filterQuery(data?.tech_stack_data) : data?.tech_stack_data}
+            <TechStackBars
+                title='Tech Stack Trend Categories'
+                data={vals.query ? filterQuery(data?.trend_analytics) : data?.trend_analytics}
                 type={vals.bar}
                 set={dispatch}
             />
