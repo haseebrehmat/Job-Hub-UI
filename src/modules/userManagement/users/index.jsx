@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
+import { Loading, Searchbox, EmptyTable, Button, Paginated, Badge } from '@components'
 
 import { UserForm, UsersActions } from '@modules/userManagement/components'
 import { fetchUsers } from '@modules/userManagement/api'
@@ -55,7 +55,11 @@ const Users = () => {
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.email}</td>
                                 <td className='px-3 py-6'>{row?.username}</td>
-                                <td className='px-3 py-6'>{row?.roles?.name || 'not assigned'}</td>
+                                <td className='px-3 py-6'>
+                                    {row?.roles?.length > 0
+                                        ? row?.roles?.map(r => <Badge label={r?.name} key={r?.id} classes='!text-sm' />)
+                                        : 'not assigned'}
+                                </td>
                                 <td className='px-3 py-6 font-bold'>{row?.company ? row?.company?.name : '-'}</td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_user', 'delete_user']) && (
