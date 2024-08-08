@@ -7,7 +7,7 @@ import { GENERIC_SKILL_DELETION } from '@constants/allowDeletion'
 
 import { RemoveExposedToIcon } from '@icons'
 
-const ExposedTo = ({ companies, mutate = null }) => {
+const TeamExposedTo = ({ companies, mutate = null }) => {
     const [show, setShow] = useState(false)
     const [id, setId] = useState(null)
 
@@ -53,4 +53,4 @@ const ExposedTo = ({ companies, mutate = null }) => {
     )
 }
 
-export default memo(ExposedTo)
+export default memo(TeamExposedTo)

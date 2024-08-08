@@ -88,7 +88,16 @@ export const DESIGNATION_INITIAL_STATE = {
 
 export const EXPOSED_CANDIDATE_HEADS = ['', 'Candidate', 'Skills', 'Designation', 'Exposed To']
 
+export const EXPOSED_TEAMS_HEADS = ['', 'Teams', 'candidates', 'Exposed To']
+
 export const EXPOSED_CANDIDATE_INITIAL_STATE = {
+    query: '',
+    show: false,
+    ids: [],
+    selectedCompanies: [],
+}
+
+export const EXPOSED_TEAMS_INITIAL_STATE = {
     query: '',
     show: false,
     ids: [],

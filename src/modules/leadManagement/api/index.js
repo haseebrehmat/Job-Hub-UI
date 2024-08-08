@@ -111,6 +111,11 @@ export const saveCandidate = (url, { arg: candidate }) => {
 export const fetchCandidatesAndCompanies = url =>
     http.get(url).then(({ data }) => ({ candidates: data?.candidates, companies: data?.companies }))
 
+export const fetchTeamsCandidatesAndCompanies = url =>
+    http
+        .get(url)
+        .then(({ data }) => ({ teams: data?.teams, candidates: data?.exposed_candidates, companies: data?.companies }))
+
 export const assignCandidate = (url, { arg: candidate }) =>
     rawHttp
         .put(url, candidate)
