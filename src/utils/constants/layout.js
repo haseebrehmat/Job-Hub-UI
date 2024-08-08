@@ -30,6 +30,7 @@ import {
     RegionIcon,
     AppliedJobsIcon,
     PermissionsIcon,
+    TechSTack,
 } from '@icons'
 
 export const menuItems = [
@@ -355,7 +356,7 @@ export const menuItems = [
             {
                 label: 'Tech Stacks Categories',
                 link: '/tech-stacks-categories',
-                svg: PermissionsIcon,
+                svg: TechSTack,
                 perms: [
                     'view_tech_stacks_categories',
                     'create_tech_stacks_categories',
