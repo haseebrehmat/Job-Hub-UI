@@ -26,7 +26,13 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             password: '',
         },
         user?.id ? userSchema : userCreateSchema,
-        async formValues => trigger({ ...formValues, id: user?.id, regions: regions.map(r => r.value).join(',') }),
+        async formValues =>
+            trigger({
+                ...formValues,
+                id: user?.id,
+                regions: regions.map(r => r.value).join(','),
+                roles: formValues?.roles?.map(r => r.value).join(','),
+            }),
         null,
         () => {
             mutate()
