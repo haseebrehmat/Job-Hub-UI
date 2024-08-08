@@ -7,11 +7,12 @@ import { switchRole } from '@modules/layout/api'
 
 import { userRoles, activeRole } from '@utils/helpers'
 
-const RolesSidebar = () => {
+const RolesSidebar = ({ set = null }) => {
     const { isMutating, trigger } = useSWRMutation('api/auth/roles/', switchRole, {
         shouldRetryOnError: true,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
+        onSuccess: () => set(false),
     })
 
     if (isMutating) return <Loading />
@@ -28,7 +29,12 @@ const RolesSidebar = () => {
                                 className={`${
                                     activeRole()?.id === id ? 'bg-[#1c5655] pointer-events-none' : 'bg-[#4ab9a7]'
                                 } text-white p-2 uppercase font-semibold rounded-lg cursor-pointer hover:bg-[#048C8C] active:bg-[#1c5655] min-w-[2.5rem] text-center`}
-                                onClick={() => (activeRole()?.id === id ? null : trigger({ role_id: id }))}
+                                onClick={() => {
+                                    if (activeRole()?.id !== id) {
+                                        set(true)
+                                        trigger({ role_id: id })
+                                    }
+                                }}
                             >
                                 {name.length < 2 ? name : name.slice(0, 2)}
                             </div>
