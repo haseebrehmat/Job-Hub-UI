@@ -4,25 +4,25 @@ import { useMutate } from '@/hooks'
 
 import { Button, Drawer, Input, Badge, CustomSelector } from '@components'
 
-import { saveTrend } from '@modules/settings/api'
+import { saveTechStackCategory } from '@modules/settings/api'
 
 import { parseTechStacks } from '@utils/helpers'
 
-const TechStacksCategoryForm = ({ show, setShow, mutate, trend_analytics, tech_stacks_options }) => {
+const TechStacksCategoryForm = ({ show, setShow, mutate, trendAnalytics, techStacksOptions }) => {
     const [tags, setTags] = useState(
-        trend_analytics?.tech_stacks ? parseTechStacks(trend_analytics?.tech_stacks.split(',')) : []
+        trendAnalytics?.tech_stacks ? parseTechStacks(trendAnalytics?.tech_stacks.split(',')) : []
     )
     const { values, handleSubmit, resetForm, trigger, handleChange } = useMutate(
-        `api/job_portal/trends_analytics${trend_analytics?.id ? `/${trend_analytics?.id}/` : '/'}`,
-        saveTrend,
-        { category: trend_analytics?.category || '' },
+        `api/job_portal/trends_analytics${trendAnalytics?.id ? `/${trendAnalytics?.id}/` : '/'}`,
+        saveTechStackCategory,
+        { category: trendAnalytics?.category || '' },
         null,
         async formValues =>
-            trigger({ ...formValues, id: trend_analytics?.id, tech_stacks: tags.map(item => item.value).join() }),
+            trigger({ ...formValues, id: trendAnalytics?.id, tech_stacks: tags.map(item => item.value).join() }),
         null,
         () => {
             mutate()
-            if (!trend_analytics?.id) resetForm()
+            if (!trendAnalytics?.id) resetForm()
             setShow(false)
         }
     )
@@ -33,14 +33,14 @@ const TechStacksCategoryForm = ({ show, setShow, mutate, trend_analytics, tech_s
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>
-                        {trend_analytics?.id ? 'Edit' : 'Create'} Tech Stacks Categories
+                        {trendAnalytics?.id ? 'Edit' : 'Create'} Tech Stacks Categories
                     </p>
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Name</span>
                     <Input name='category' value={values.category} onChange={handleChange} ph='Enter Category name' />
                     <span className='text-xs font-semibold'>Tech Stacks</span>
                     <CustomSelector
-                        options={parseTechStacks(tech_stacks_options)}
+                        options={parseTechStacks(techStacksOptions)}
                         handleChange={obj => setTags(obj)}
                         selectorValue={tags}
                         isMulti
@@ -69,7 +69,7 @@ const TechStacksCategoryForm = ({ show, setShow, mutate, trend_analytics, tech_s
                             ))}
                     </div>
                     <div className='pt-4 space-y-2'>
-                        <Button label={trend_analytics?.id ? 'Update' : 'Submit'} type='submit' fill />
+                        <Button label={trendAnalytics?.id ? 'Update' : 'Submit'} type='submit' fill />
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
                 </div>

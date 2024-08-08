@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Button, Searchbox, EmptyTable, Badge } from '@components'
 
 import { TechStacksCategoryForm, TechStackCategoryActions } from '@modules/settings/components'
-import { fetchTechStacks } from '@modules/settings/api'
+import { fetchTechStacksCategory } from '@modules/settings/api'
 
 import { can } from '@utils/helpers'
 import { TECH_STACKS_CATEGORIES_HEADS, TECH_STACKS_CATEGORIES_INITIAL_STATE } from '@constants/settings'
@@ -15,7 +15,7 @@ const TechStacksCategories = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), TECH_STACKS_CATEGORIES_INITIAL_STATE)
     const { data, error, isLoading, mutate } = useSWR(
         `api/job_portal/trends_analytics/?search=${vals.query}`,
-        fetchTechStacks
+        fetchTechStacksCategory
     )
     const handleClick = values => dispatch({ show: !vals.show, trend_analytics: values })
 
@@ -48,7 +48,7 @@ const TechStacksCategories = () => {
                         data?.data?.map(row => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
                                 <td className='px-3 py-6'>{row?.id}</td>
-                                <td className='px-3 py-6'>{row?.category.toUpperCase()}</td>
+                                <td className='px-3 py-6 uppercase'>{row?.category}</td>
                                 <td className='px-3 py-6'>
                                     <div className='flex flex-wrap gap-3'>
                                         {row?.tech_stacks?.length > 0 &&
@@ -79,8 +79,8 @@ const TechStacksCategories = () => {
                     show={vals.show}
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
-                    trend_analytics={vals.trend_analytics}
-                    tech_stacks_options={data?.tech_stacks}
+                    trendAnalytics={vals.trend_analytics}
+                    techStacksOptions={data?.tech_stacks}
                 />
             )}
         </div>
