@@ -31,11 +31,13 @@ export const saveRegion = (url, { arg: region }) => {
 
 export const saveTechStackCategory = (url, { arg: category }) => {
     if (category?.id) {
-        return rawHttp.put(url, category).then(({ data }) => toast.success(data.detail || 'Trend updated successfully'))
+        return rawHttp
+            .put(url, category)
+            .then(({ data }) => toast.success(data.detail || 'TechStack Category updated successfully'))
     }
     return rawHttp
         .post(url, category)
-        .then(({ data }) => toast.success(data.detail || 'New trend created successfully'))
+        .then(({ data }) => toast.success(data.detail || 'New Category created successfully'))
 }
 
 export const fetchAllRegions = url => http.get(url).then(({ data }) => data)
