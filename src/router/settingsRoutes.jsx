@@ -1,4 +1,13 @@
-import { Integrations, Logger, ResumeBuilder, GenericSkills, ApiLogs, Regions, Permissions } from '@modules'
+import {
+    Integrations,
+    Logger,
+    ResumeBuilder,
+    GenericSkills,
+    ApiLogs,
+    Regions,
+    Permissions,
+    TechStacksCategories,
+} from '@modules'
 
 export const settingsRoutes = [
     {
@@ -48,6 +57,13 @@ export const settingsRoutes = [
         component: <Permissions />,
         protect: true,
         title: 'Permissions',
-        permission: 'all',
+        permission: 'view_permission',
+    },
+    {
+        path: '/tech-stacks-categories',
+        component: <TechStacksCategories />,
+        protect: true,
+        title: 'Tech Stacks Categories',
+        permission: 'view_tech_stacks_categories',
     },
 ]

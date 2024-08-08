@@ -526,6 +526,31 @@ export const rawpermissions = [
         ],
     },
     {
+        module: 'Tech Stack Categories',
+        permissions: [
+            {
+                codename: 'view_tech_stacks_categories',
+                name: 'View Tech Stacks Categories',
+                level: 1,
+            },
+            {
+                codename: 'create_tech_stacks_categories',
+                name: 'Create Tech Stacks Categories',
+                level: 1,
+            },
+            {
+                codename: 'edit_tech_stacks_categories',
+                name: 'Edit Tech Stacks Categories',
+                level: 1,
+            },
+            {
+                codename: 'delete_tech_stacks_categories',
+                name: 'Delete Tech Stacks Categories',
+                level: 1,
+            },
+        ],
+    },
+    {
         module: 'Status',
         permissions: [
             {
