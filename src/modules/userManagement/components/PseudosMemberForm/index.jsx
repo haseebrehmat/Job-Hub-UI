@@ -6,6 +6,7 @@ import { Button, Drawer, CustomSelector } from '@components'
 import { assignVertical } from '@modules/userManagement/api'
 
 import { parseVerticals } from '@utils/helpers'
+import UserRolesDropdown from '../UserRolesDropdown'
 
 const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
     const memoizedOptions = useMemo(() => {
@@ -21,12 +22,12 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
         user?.verticals?.length > 0 ? parseVerticals(user?.verticals, false, true) : []
     )
 
-    const { handleSubmit, trigger } = useMutate(
+    const { values, handleSubmit, trigger, setFieldValue } = useMutate(
         'api/profile/user_vertical_assignment/',
         assignVertical,
-        { user_id: user.id, team_id: teamId },
+        { user_id: user.id, team_id: teamId, role: user?.role },
         null,
-        async formValues => trigger({ ...formValues, verticals: verticals.map(obj => obj.value) }),
+        async vals => trigger({ ...vals, verticals: verticals.map(obj => obj.value), role_id: vals?.role?.value }),
         null,
         () => mutate()
     )
@@ -38,6 +39,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Vertical Assignment</p>
                     <hr className='mb-2' />
+                    <UserRolesDropdown set={setFieldValue} value={values.role} options={{ userId: user?.id }} />
                     <span className='text-xs font-semibold'>Verticals</span>
                     <CustomSelector
                         options={memoizedOptions}
