@@ -57,7 +57,9 @@ const Users = () => {
                                 <td className='px-3 py-6'>{row?.username}</td>
                                 <td className='px-3 py-6'>
                                     {row?.roles?.length > 0
-                                        ? row?.roles?.map(r => <Badge label={r?.name} key={r?.id} classes='!text-sm' />)
+                                        ? row?.roles?.map(r => (
+                                              <Badge label={r?.label} key={r?.value} classes='!text-sm' />
+                                          ))
                                         : 'not assigned'}
                                 </td>
                                 <td className='px-3 py-6 font-bold'>{row?.company ? row?.company?.name : '-'}</td>
