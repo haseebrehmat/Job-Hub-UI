@@ -8,7 +8,8 @@ import { Filters, Statistics, Leads, WarmLeads, TechStacks } from '@modules/dash
 import { fetchDashboardData } from '@modules/dashboard/api'
 import { fetchCompanies } from '@modules/userManagement/api'
 
-import { can, decodeJwt, isSuper, parseComapnies, parseSelectedCompany } from '@/utils/helpers'
+import { can, decodeJwt, isSuper, parseComapnies, parseSelectedCompany } from '@utils/helpers'
+import { TECH_STACKS_RANDOM_MAX } from '@constants/dashboard'
 
 const Dashboard = () => {
     const user = decodeJwt()
@@ -65,9 +66,10 @@ const Dashboard = () => {
                             {can('view_dashboard') && (
                                 <div className='flex flex-col w-4/5 space-y-16'>
                                     {data?.leads && data?.leads?.length > 0 && <Leads data={data?.leads} />}
-                                    {data?.tech_jobs && data?.tech_jobs?.length > 0 && (
-                                        <TechStacks data={data?.tech_jobs} />
-                                    )}
+                                    {data?.tech_jobs?.length > 0 &&
+                                        data?.tech_jobs?.length < TECH_STACKS_RANDOM_MAX && (
+                                            <TechStacks data={data?.tech_jobs} />
+                                        )}
                                     {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
                                 </div>
                             )}
