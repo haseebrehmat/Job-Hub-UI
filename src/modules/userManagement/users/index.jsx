@@ -16,9 +16,10 @@ const Users = () => {
     const [user, setUser] = useState()
     const [page, setPage] = useState(1)
     const [show, setShow] = useState(false)
-
-    const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}&search=${query}`, fetchUsers)
-
+    const { data, error, isLoading, mutate } = useSWR(
+        `/api/auth/user/?page=${page}&search=${query}&limit=20`,
+        fetchUsers
+    )
     const handleClick = values => {
         setUser(values)
         setShow(!show)
@@ -79,9 +80,9 @@ const Users = () => {
                     )}
                 </tbody>
             </table>
-            {data?.users?.length > 24 && (
-                <div className='w-full'>
-                    <Paginated pages={data?.pages ?? Math.ceil(data.total / 25)} setPage={setPage} page={page} />
+            {data?.pages > 1 && (
+                <div className='w-full flex justify-center'>
+                    <Paginated pages={data?.pages} setPage={setPage} page={page} />
                 </div>
             )}
             {can('edit_user') && show && <UserForm show={show} setShow={setShow} mutate={mutate} user={user} />}
