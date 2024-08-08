@@ -1,37 +1,42 @@
 import { memo } from 'react'
+import useSWRMutation from 'swr/mutation'
 
-import { Tooltip } from '@components'
+import { Tooltip, Loading } from '@components'
 
-const roles = [
-    {
-        id: '1',
-        title: 'Admin',
-    },
-    {
-        id: '2',
-        title: 'Coordinator',
-    },
-    {
-        id: '3',
-        title: 'Applier',
-    },
-]
+import { switchRole } from '@modules/layout/api'
 
-const RolesSidebar = () => (
-    <aside
-        className='sm:flex hidden w-fit
+import { userRoles, activeRole } from '@utils/helpers'
+
+const RolesSidebar = () => {
+    const { isMutating, trigger } = useSWRMutation('api/auth/roles/', switchRole, {
+        shouldRetryOnError: true,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+    })
+
+    if (isMutating) return <Loading />
+    return (
+        userRoles()?.length > 0 && (
+            <aside
+                className='sm:flex hidden w-fit
              sm:flex-col border-2 py-6 text-[#048C8C] bg-[#EDFFFB] h-screen hide_scrollbar px-1.5'
-    >
-        <div className='flex flex-col gap-3.5 justify-center items-center'>
-            {roles.map(role => (
-                <Tooltip text={role.title} down key={role.id}>
-                    <div className='bg-[#4ab9a7] text-white p-2 uppercase font-semibold rounded-lg cursor-pointer hover:bg-[#048C8C] active:bg-[#1c5655] min-w-[2.5rem] text-center'>
-                        {role.title.length < 2 ? role.title : role.title.slice(0, 2)}
-                    </div>
-                </Tooltip>
-            ))}
-        </div>
-    </aside>
-)
-
+            >
+                <div className='flex flex-col gap-3.5 justify-center items-center'>
+                    {userRoles()?.map(({ name, id }) => (
+                        <Tooltip text={name} down key={id}>
+                            <div
+                                className={`${
+                                    activeRole()?.id === id ? 'bg-[#1c5655] pointer-events-none' : 'bg-[#4ab9a7]'
+                                } text-white p-2 uppercase font-semibold rounded-lg cursor-pointer hover:bg-[#048C8C] active:bg-[#1c5655] min-w-[2.5rem] text-center`}
+                                onClick={() => (activeRole()?.id === id ? null : trigger({ role_id: id }))}
+                            >
+                                {name.length < 2 ? name : name.slice(0, 2)}
+                            </div>
+                        </Tooltip>
+                    ))}
+                </div>
+            </aside>
+        )
+    )
+}
 export default memo(RolesSidebar)
