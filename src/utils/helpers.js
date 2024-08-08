@@ -26,7 +26,11 @@ export const isSuper = () => decodeJwt()?.is_superuser
 
 export const Id = () => decodeJwt()?.user_id
 
-export const getMsg = error => error?.response?.data?.detail || 'Network error'
+export const activeRole = () => ({ role: decodeJwt()?.role, id: decodeJwt()?.role_id })
+
+export const userRoles = () => (decodeJwt()?.roles?.length > 1 ? decodeJwt()?.roles : [])
+
+export const getMsg = error => error?.response?.data?.detail || 'Server error'
 
 export const getBaseUrl = nodeEnv => {
     switch (nodeEnv) {
