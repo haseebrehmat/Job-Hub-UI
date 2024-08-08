@@ -5,8 +5,8 @@ import RegionForm from '@modules/settings/components/RegionForm'
 import RegionActions from '@modules/settings/components/RegionActions'
 import PermissionForm from '@modules/settings/components/PermissionForm'
 import PermissionActions from '@modules/settings/components/PermissionActions'
-import TechForm from '@modules/settings/components/TechForm'
-import TrendsActions from '@modules/settings/components/TrendsActions'
+import TechStacksCategoryForm from '@modules/settings/components/TechStacksCategoryForm'
+import TechStackCategoryActions from '@/modules/settings/components/TechStackCategoryActions'
 
 export {
     IntegrationForm,
@@ -16,6 +16,6 @@ export {
     RegionActions,
     PermissionForm,
     PermissionActions,
-    TechForm,
-    TrendsActions,
+    TechStacksCategoryForm,
+    TechStackCategoryActions,
 }

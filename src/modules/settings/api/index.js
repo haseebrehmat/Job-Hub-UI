@@ -29,11 +29,11 @@ export const saveRegion = (url, { arg: region }) => {
     return rawHttp.post(url, region).then(({ data }) => toast.success(data.detail))
 }
 
-export const saveTrend = (url, { arg: Trend }) => {
-    if (Trend?.id) {
-        return rawHttp.put(url, Trend).then(({ data }) => toast.success(data.detail || 'Trend updated successfully'))
+export const saveTrend = (url, { arg: trend }) => {
+    if (trend?.id) {
+        return rawHttp.put(url, trend).then(({ data }) => toast.success(data.detail || 'Trend updated successfully'))
     }
-    return rawHttp.post(url, Trend).then(({ data }) => toast.success(data.detail))
+    return rawHttp.post(url, trend).then(({ data }) => toast.success(data.detail || 'New trend created successfully'))
 }
 
 export const fetchAllRegions = url => http.get(url).then(({ data }) => data)

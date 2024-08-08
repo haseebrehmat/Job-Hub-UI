@@ -8,14 +8,14 @@ import { saveTrend } from '@modules/settings/api'
 
 import { parseTechStacks } from '@utils/helpers'
 
-const TechForm = ({ show, setShow, mutate, trend_analytics, tech_stacks_options }) => {
+const TechStacksCategoryForm = ({ show, setShow, mutate, trend_analytics, tech_stacks_options }) => {
     const [tags, setTags] = useState(
         trend_analytics?.tech_stacks ? parseTechStacks(trend_analytics?.tech_stacks.split(',')) : []
     )
     const { values, handleSubmit, resetForm, trigger, handleChange } = useMutate(
         `api/job_portal/trends_analytics${trend_analytics?.id ? `/${trend_analytics?.id}/` : '/'}`,
         saveTrend,
-        { category: trend_analytics?.id ? trend_analytics?.category : '' },
+        { category: trend_analytics?.category || '' },
         null,
         async formValues =>
             trigger({ ...formValues, id: trend_analytics?.id, tech_stacks: tags.map(item => item.value).join() }),
@@ -23,16 +23,18 @@ const TechForm = ({ show, setShow, mutate, trend_analytics, tech_stacks_options 
         () => {
             mutate()
             if (!trend_analytics?.id) resetForm()
-            if (close) setShow(false)
+            setShow(false)
         }
     )
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='420px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>{trend_analytics?.id ? 'Edit' : 'Create'} Trends Analytics</p>
+                    <p className='font-medium text-xl'>
+                        {trend_analytics?.id ? 'Edit' : 'Create'} Tech Stacks Categories
+                    </p>
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Name</span>
                     <Input name='category' value={values.category} onChange={handleChange} ph='Enter Category name' />
@@ -42,7 +44,7 @@ const TechForm = ({ show, setShow, mutate, trend_analytics, tech_stacks_options 
                         handleChange={obj => setTags(obj)}
                         selectorValue={tags}
                         isMulti
-                        placeholder='select tech stacks'
+                        placeholder='Select  Tech Stacks'
                     />
                     <div className='flex flex-wrap gap-3 items-center mt-2'>
                         {tags?.length > 0 &&
@@ -76,4 +78,4 @@ const TechForm = ({ show, setShow, mutate, trend_analytics, tech_stacks_options 
     )
 }
 
-export default memo(TechForm)
+export default memo(TechStacksCategoryForm)
