@@ -56,11 +56,15 @@ const Users = () => {
                                 <td className='px-3 py-6'>{row?.email}</td>
                                 <td className='px-3 py-6'>{row?.username}</td>
                                 <td className='px-3 py-6'>
-                                    {row?.roles?.length > 0
-                                        ? row?.roles?.map(r => (
-                                              <Badge label={r?.label} key={r?.value} classes='!text-sm' />
-                                          ))
-                                        : 'not assigned'}
+                                    {row?.roles?.length > 0 ? (
+                                        <div className='flex flex-wrap gap-1'>
+                                            {row?.roles?.map(r => (
+                                                <Badge label={r?.label} key={r?.value} classes='!text-sm' />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        'not assigned'
+                                    )}
                                 </td>
                                 <td className='px-3 py-6 font-bold'>{row?.company ? row?.company?.name : '-'}</td>
                                 <td className='px-3 py-6 float-right'>
