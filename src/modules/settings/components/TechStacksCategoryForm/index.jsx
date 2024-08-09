@@ -44,7 +44,7 @@ const TechStacksCategoryForm = ({ show, setShow, mutate, trendAnalytics, techSta
                         handleChange={obj => setTags(obj)}
                         selectorValue={tags}
                         isMulti
-                        placeholder='Select  Tech Stacks'
+                        placeholder='Select Tech Stacks'
                     />
                     <div className='flex flex-wrap gap-3 items-center mt-2'>
                         {tags?.length > 0 &&
