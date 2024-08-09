@@ -51,7 +51,7 @@ const Team = () => {
                     <MemberVerticals member={row} edit={handleClick} />
                 </td>
                 <td className='px-3 py-4'>
-                    {can('edit_member_team') && row?.regions?.length > 0 && (
+                    {can('edit_member_team') && row?.regions?.length > 0 && row?.allow_assignment && (
                         <Tooltip text='Assign verticals'>
                             <span onClick={() => handleClick(row)}>{CreateIcon}</span>
                         </Tooltip>
