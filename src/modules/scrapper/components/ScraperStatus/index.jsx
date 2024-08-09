@@ -5,8 +5,8 @@ import { EmptyTable, Loading, Badge, Button } from '@components'
 
 import { fetchScraperStatus } from '@modules/scrapper/api'
 
+import { formatDate } from '@utils/helpers'
 import { SCRAPER_STATUS_HEADS } from '@constants/scrapper'
-import { formatDate } from '@/utils/helpers'
 
 import { ResetFilterIcon } from '@icons'
 
