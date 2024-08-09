@@ -16,6 +16,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Careerjet', value: 'careerjet' },
     { label: 'Daily Remote', value: 'dailyremote' },
     { label: 'Recruit', value: 'recruit' },
+    { label: 'YCombinator', value: 'ycombinator' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -60,6 +61,7 @@ export const JOB_SOURCES = {
     careerjet: 'Careerjet',
     talent: 'Talent',
     recruit: 'Recruit',
+    ycombinator: 'YCombinator',
     simplyhired: 'Simply Hired',
     rubynow: 'Ruby Now',
     other: 'Other',

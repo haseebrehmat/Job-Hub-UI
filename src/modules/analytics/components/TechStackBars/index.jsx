@@ -8,14 +8,15 @@ import { JOB_TYPE_COLORS, JOB_TYPES } from '@constants/analytics'
 
 import { SearchClearIcon, DownloadIcon2 } from '@icons'
 
-const TechStackBars = ({ data = [], type = 'total', set = null }) => {
+const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) => {
     const barRef = useRef('')
     const memoizedData = useMemo(() => data.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
 
-    return (
+    return memoizedData.length > 0 ? (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
-                Tech Stacks<span className='text-sm'> - Charts</span>
+                {options?.title ?? ''}
+                <span className='text-sm'> - Charts</span>
             </p>
             <span
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
@@ -31,7 +32,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => {
                     </span>
                 </div>
             )}
-            <ResponsiveContainer width='100%' height={750} ref={barRef} id='tech-stack-bars'>
+            <ResponsiveContainer width='100%' height={750} ref={barRef} id={options?.id}>
                 <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
                     <CartesianGrid strokeDasharray='3 3' />
                     <XAxis
@@ -58,7 +59,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => {
                                     <LabelList
                                         dataKey={row}
                                         position='top'
-                                        fontSize={13}
+                                        fontSize={options?.fs ?? 13}
                                         fontWeight='bold'
                                         fill={JOB_TYPE_COLORS[index]}
                                     />
@@ -68,7 +69,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null }) => {
                 </BarChart>
             </ResponsiveContainer>
         </div>
-    )
+    ) : null
 }
 
 export default memo(TechStackBars)

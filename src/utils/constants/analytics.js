@@ -56,4 +56,5 @@ export const GRAPHS_DIVS_IDS = [
     'tech-stack-pies',
     'tech-stack-bars',
     'jobs-trends-chart',
+    'tech-stack-category-trends-bars',
 ]
