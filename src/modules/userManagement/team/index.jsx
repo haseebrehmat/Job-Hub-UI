@@ -1,16 +1,16 @@
 import { memo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Button, Loading, EmptyTable, Tooltip } from '@components'
+import { Loading, EmptyTable, Tooltip } from '@components'
 
 import { fetchTeamMembers } from '@modules/userManagement/api'
-import { PseudosMemberForm, MemberVerticals, MemberRegions } from '@modules/userManagement/components'
+import { PseudosMemberForm, MemberVerticals, MemberRegions, TeamVerticals } from '@modules/userManagement/components'
 
 import { can } from '@utils/helpers'
 import { teamMemberHeads } from '@constants/userManagement'
 
-import { BackToIcon, CreateIcon } from '@icons'
+import { CreateIcon } from '@icons'
 
 const Team = () => {
     const { id } = useParams()
@@ -62,31 +62,10 @@ const Team = () => {
     ) : (
         <EmptyTable cols={6} msg='No members found yet!' />
     )
+
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex border shadow text-[#006366] py-8 px-6 mb-4 justify-between'>
-                <div className='flex flex-col'>
-                    <p className='text-xl'>Assigned Verticals</p>
-                    <div className='mt-4'>
-                        {data?.team?.verticals?.length > 0 &&
-                            data?.team?.verticals?.map(tag => (
-                                <span key={tag.id}>
-                                    <span className='inline-block my-2 px-2.5 py-1.5 text-sm bg-gray-200 rounded-full items-center mx-1'>
-                                        <span className='font-semibold'>{`${tag?.pseudo?.name} | ${tag?.name} | `}</span>
-                                        {tag?.regions?.length > 0 ? (
-                                            tag?.regions?.map(r => r?.label).join(', ')
-                                        ) : (
-                                            <span className='text-red-600'>Please assign region</span>
-                                        )}
-                                    </span>
-                                </span>
-                            ))}
-                    </div>
-                </div>
-                <Link to='/teams' className='float-right'>
-                    <Button label='Back to teams' icon={BackToIcon} fit />
-                </Link>
-            </div>
+            <TeamVerticals verticals={data?.team?.verticals} />
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
