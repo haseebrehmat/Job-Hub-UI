@@ -102,15 +102,16 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
         setSelectedOptions(selectorValue)
     }, [selectorValue])
 
-    const extendedOptions = options
-        ? [
-              {
-                  label: 'Select All',
-                  value: '__SELECT_ALL__',
-              },
-              ...options,
-          ]
-        : []
+    const extendedOptions =
+        options?.length > 0
+            ? [
+                  {
+                      label: 'Select All',
+                      value: '__SELECT_ALL__',
+                  },
+                  ...options,
+              ]
+            : []
 
     return (
         <div className='dropdown-container'>
