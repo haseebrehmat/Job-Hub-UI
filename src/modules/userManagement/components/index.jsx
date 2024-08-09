@@ -14,6 +14,7 @@ import MemberForm from '@modules/userManagement/components/MemberForm'
 import UserRolesDropdown from '@modules/userManagement/components/UserRolesDropdown'
 import SelectedVerticals from '@modules/userManagement/components/SelectedVerticals'
 import MemberVerticals from '@modules/userManagement/components/MemberVerticals'
+import MemberRegions from '@modules/userManagement/components/MemberRegions'
 
 export {
     CompanyForm,
@@ -32,4 +33,5 @@ export {
     UserRolesDropdown,
     SelectedVerticals,
     MemberVerticals,
+    MemberRegions,
 }
