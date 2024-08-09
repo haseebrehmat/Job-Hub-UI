@@ -4,14 +4,15 @@ import { useMutate } from '@/hooks'
 import { Button, Drawer, CustomSelector } from '@components'
 
 import { assignVertical } from '@modules/userManagement/api'
+import { UserRolesDropdown } from '@modules/userManagement/components'
 
 import { parseVerticals } from '@utils/helpers'
-import UserRolesDropdown from '../UserRolesDropdown'
 
 const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId, role = null }) => {
     const [verticals, setVerticals] = useState(
         role ? parseVerticals(user?.roles?.find(r => r?.value === role?.id)?.verticals, false, true) : []
     )
+
     const memoizedOptions = useMemo(() => {
         if (vert?.length < 0) return []
         const userRegions = user?.regions?.map(region => region.value)
@@ -21,6 +22,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId, role = n
             true
         )
     }, [vert])
+
     const { values, handleSubmit, trigger, setFieldValue } = useMutate(
         'api/profile/user_vertical_assignment/',
         assignVertical,
@@ -35,6 +37,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId, role = n
         null,
         () => mutate()
     )
+
     const removeVertical = id => setVerticals(verticals.filter(item => item.value !== id))
 
     return (
