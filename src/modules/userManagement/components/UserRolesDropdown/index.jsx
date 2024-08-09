@@ -2,10 +2,13 @@ import { memo, useMemo } from 'react'
 import useSWR from 'swr'
 
 import { CustomSelector } from '@components'
-import { fetchUserRoles } from '../../api'
+import { fetchUserRoles } from '@modules/userManagement/api'
 
 const UserRolesDropdown = ({ value = null, set = null, options = {} }) => {
-    const { data, isLoading, error } = useSWR(`/api/auth/roles/?user_id=${options?.userId}`, fetchUserRoles)
+    const { data, isLoading, error } = useSWR(
+        `/api/auth/roles/?user_id=${options?.userId}&team_id=${options?.teamId}`,
+        fetchUserRoles
+    )
 
     const renderUserRoles = useMemo(() =>
         isLoading ? (
@@ -16,7 +19,7 @@ const UserRolesDropdown = ({ value = null, set = null, options = {} }) => {
             <CustomSelector
                 options={data?.roles}
                 selectorValue={value}
-                handleChange={e => set('role', e)}
+                handleChange={e => set('role_id', e)}
                 placeholder='Select Role'
             />
         )

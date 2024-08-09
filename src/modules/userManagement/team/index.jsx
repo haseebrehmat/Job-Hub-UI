@@ -10,11 +10,12 @@ import { fetchTeamMembers } from '@modules/userManagement/api'
 import { can } from '@utils/helpers'
 import { teamMemberHeads } from '@constants/userManagement'
 
-import { EditIcon, BackToIcon } from '@icons'
+import { EditIcon, BackToIcon, CreateIcon } from '@icons'
 
 const Team = () => {
     const { id } = useParams()
     const [user, setUser] = useState()
+    const [role, setRole] = useState(null)
     const [show, setShow] = useState(false)
 
     const { data, error, isLoading, mutate } = useSWR(
@@ -22,8 +23,9 @@ const Team = () => {
         fetchTeamMembers
     )
 
-    const handleClick = row => {
+    const handleClick = (row, userRole = null) => {
         setUser(row)
+        setRole(userRole)
         setShow(!show)
     }
     if (isLoading) return <Loading />
@@ -55,20 +57,48 @@ const Team = () => {
                     </span>
                 </td>
                 <td className='px-3 py-4'>
-                    <span className='flex items-center flex-wrap'>
-                        {row?.verticals?.length > 0
-                            ? row?.verticals?.map(member => (
-                                  <div className='mx-1 my-2' key={member?.id}>
-                                      <Badge label={`${member?.pseudo?.name} | ${member?.name}`} />
-                                  </div>
-                              ))
+                    <span className='flex items-center flex-wrap gap-2'>
+                        {row?.roles?.length > 0
+                            ? row?.roles?.map(
+                                  item =>
+                                      item?.value &&
+                                      item?.verticals?.length > 0 && (
+                                          <div
+                                              className='border border-[#53a1a1] rounded-full flex items-center'
+                                              key={item?.value}
+                                          >
+                                              <span className='capitalize ml-1.5 font-semibold'>
+                                                  {item?.label ?? 'No Role'}:
+                                              </span>
+                                              <span className='flex items-center flex-wrap'>
+                                                  {item?.verticals?.length > 0
+                                                      ? item?.verticals?.map(member => (
+                                                            <div className='mx-1 my-2' key={member?.id}>
+                                                                <Badge label={`${member?.pseudo} | ${member?.name}`} />
+                                                            </div>
+                                                        ))
+                                                      : '-'}
+                                              </span>
+                                              <Tooltip text='Update verticals'>
+                                                  <span
+                                                      className='mr-1 p-1 bg-[#4ab9a7] rounded-2xl text-white'
+                                                      onClick={() =>
+                                                          handleClick(row, { id: item?.value, name: item?.label })
+                                                      }
+                                                  >
+                                                      {EditIcon}
+                                                  </span>
+                                              </Tooltip>
+                                          </div>
+                                      )
+                              )
                             : '-'}
                     </span>
                 </td>
                 <td className='px-3 py-4'>
                     {can('edit_member_team') && row?.regions?.length > 0 && (
                         <Tooltip text='Assign verticals'>
-                            <span onClick={() => handleClick(row, '')}>{EditIcon}</span>
+                            <span onClick={() => handleClick(row)}>{CreateIcon}</span>
                         </Tooltip>
                     )}
                 </td>
@@ -122,6 +152,7 @@ const Team = () => {
                     user={user}
                     vert={data?.team?.verticals?.filter(row => row?.regions?.length > 0)}
                     teamId={id}
+                    role={role}
                 />
             )}
         </div>

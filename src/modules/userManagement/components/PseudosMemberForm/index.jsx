@@ -8,7 +8,10 @@ import { assignVertical } from '@modules/userManagement/api'
 import { parseVerticals } from '@utils/helpers'
 import UserRolesDropdown from '../UserRolesDropdown'
 
-const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
+const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId, role = null }) => {
+    const [verticals, setVerticals] = useState(
+        role ? parseVerticals(user?.roles?.find(r => r?.value === role?.id)?.verticals, false, true) : []
+    )
     const memoizedOptions = useMemo(() => {
         if (vert?.length < 0) return []
         const userRegions = user?.regions?.map(region => region.value)
@@ -18,16 +21,17 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
             true
         )
     }, [vert])
-    const [verticals, setVerticals] = useState(
-        user?.verticals?.length > 0 ? parseVerticals(user?.verticals, false, true) : []
-    )
-
     const { values, handleSubmit, trigger, setFieldValue } = useMutate(
         'api/profile/user_vertical_assignment/',
         assignVertical,
-        { user_id: user.id, team_id: teamId, role: user?.role },
+        { user_id: user.id, team_id: teamId, role_id: role?.id || null },
         null,
-        async vals => trigger({ ...vals, verticals: verticals.map(obj => obj.value), role_id: vals?.role?.value }),
+        async vals =>
+            trigger({
+                ...vals,
+                verticals: verticals.map(obj => obj.value),
+                role_id: role?.id ?? vals?.role_id?.value,
+            }),
         null,
         () => mutate()
     )
@@ -37,9 +41,20 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
         <Drawer show={show} setShow={setShow} w='320px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>Vertical Assignment</p>
+                    <p className='font-medium flex flex-col'>
+                        <span className='text-xl'>Vertical Assignment</span>
+                        <span className='text-sm tracking-widest'>{user?.username}</span>
+                    </p>
                     <hr className='mb-2' />
-                    <UserRolesDropdown set={setFieldValue} value={values.role} options={{ userId: user?.id }} />
+                    {role ? (
+                        <span className='text-xl font-semibold italic'>{role?.name}</span>
+                    ) : (
+                        <UserRolesDropdown
+                            set={setFieldValue}
+                            value={values.role_id}
+                            options={{ userId: user?.id, teamId }}
+                        />
+                    )}
                     <span className='text-xs font-semibold'>Verticals</span>
                     <CustomSelector
                         options={memoizedOptions}
@@ -54,11 +69,11 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId }) => {
                     </div>
                     {verticals?.length > 0 && (
                         <div>
-                            <h1 className='my-2 font-medium'>Selcted Verticals</h1>
+                            <h1 className='my-2 font-medium'>Selected Verticals</h1>
                             {verticals?.map(tag => (
                                 <span
                                     key={tag.value}
-                                    className='inline-block my-2 px-2.5 py-1.5 text-sm font-semibold bg-gray-200 rounded-full items-center mx-1'
+                                    className='inline-block my-2 px-2.5 py-1.5 text-sm font-semibold bg-green-100 rounded-full items-center mx-1'
                                 >
                                     <span>{tag.label}</span>
                                     <button
