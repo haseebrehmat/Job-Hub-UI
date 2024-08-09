@@ -39,7 +39,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId, role = n
     )
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='400px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium flex flex-col'>
@@ -65,7 +65,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId, role = n
                         placeholder='Select verticals'
                     />
                     <div className='pt-4 space-y-2'>
-                        <Button label='Assign' type='submit' fill />
+                        {values.role_id && <Button label='Assign' type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
                     <SelectedVerticals verticals={verticals} set={setVerticals} />
