@@ -13,6 +13,7 @@ import PseudosMemberForm from '@/modules/userManagement/components/PseudosMember
 import MemberForm from '@modules/userManagement/components/MemberForm'
 import UserRolesDropdown from '@modules/userManagement/components/UserRolesDropdown'
 import SelectedVerticals from '@modules/userManagement/components/SelectedVerticals'
+import MemberVerticals from '@modules/userManagement/components/MemberVerticals'
 
 export {
     CompanyForm,
@@ -30,4 +31,5 @@ export {
     PseudosMemberForm,
     UserRolesDropdown,
     SelectedVerticals,
+    MemberVerticals,
 }
