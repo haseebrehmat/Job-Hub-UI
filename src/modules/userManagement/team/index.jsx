@@ -2,10 +2,10 @@ import { memo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Button, Loading, EmptyTable, Badge, Tooltip } from '@components'
+import { Button, Loading, EmptyTable, Tooltip } from '@components'
 
 import { fetchTeamMembers } from '@modules/userManagement/api'
-import { PseudosMemberForm, MemberVerticals } from '@modules/userManagement/components'
+import { PseudosMemberForm, MemberVerticals, MemberRegions } from '@modules/userManagement/components'
 
 import { can } from '@utils/helpers'
 import { teamMemberHeads } from '@constants/userManagement'
@@ -45,18 +45,7 @@ const Team = () => {
                     </span>
                 </td>
                 <td className='px-3 py-4'>
-                    <span className='flex items-center flex-wrap'>
-                        {row?.regions?.length > 0
-                            ? row?.regions?.map(region => (
-                                  <Badge
-                                      key={region?.value}
-                                      label={region?.label}
-                                      type='success'
-                                      classes='!py-0.5 !px-1.5 mx-1 my-2 text-xs border border-green-500'
-                                  />
-                              ))
-                            : '-'}
-                    </span>
+                    <MemberRegions regions={row?.regions} />
                 </td>
                 <td className='px-3 py-4'>
                     <MemberVerticals member={row} edit={handleClick} />
