@@ -26,6 +26,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Career Builder', value: 'careerbuilder' },
     { label: 'Google Careers', value: 'googlecareers' },
     { label: 'Ruby Now', value: 'rubynow' },
+    { label: 'Working Nomads', value: 'workingnomads' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -35,6 +36,7 @@ export const JOB_SOURCE_OPTIONS_UNDERSCORE = [
     { label: 'Career Builder', value: 'career_builder' },
     { label: 'Google Careers', value: 'google_careers' },
     { label: 'Ruby Now', value: 'ruby_now' },
+    { label: 'Working Nomads', value: 'working_nomads' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -66,6 +68,7 @@ export const JOB_SOURCES = {
     rubynow: 'Ruby Now',
     other: 'Other',
     all: 'All',
+    workingnomads: 'Working Nomads',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
@@ -73,6 +76,7 @@ export const JOB_SOURCES = {
     google_careers: 'Google Careers',
     dailyremote: 'DailyRemote',
     ruby_now: 'Ruby Now',
+    working_nomads: 'Working Nomads',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
