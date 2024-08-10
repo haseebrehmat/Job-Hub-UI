@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import useSWRMutation from 'swr/mutation'
+import { useNavigate } from 'react-router-dom'
 
 import { Tooltip, Loading } from '@components'
 
@@ -8,11 +9,16 @@ import { switchRole } from '@modules/layout/api'
 import { userRoles, activeRole } from '@utils/helpers'
 
 const RolesSidebar = ({ set = null }) => {
+    const redirect = useNavigate()
+
     const { isMutating, trigger } = useSWRMutation('api/auth/roles/', switchRole, {
         shouldRetryOnError: true,
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
-        onSuccess: () => set(false),
+        onSuccess: () => {
+            set(false)
+            redirect('/dashboard')
+        },
     })
 
     if (isMutating) return <Loading />
