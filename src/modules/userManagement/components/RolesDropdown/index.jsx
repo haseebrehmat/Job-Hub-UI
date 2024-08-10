@@ -20,7 +20,7 @@ const RolesDropdown = ({ value: selected, error = null, setFieldValue, onChange 
                 selectorValue={options?.multi ? selected : parseSelectedRole(selected, data?.roles)}
                 handleChange={onChange || (e => setFieldValue('roles', e.value))}
                 placeholder='Select Roles'
-                isMulti
+                isMulti={options?.multi}
             />
         )
     )
