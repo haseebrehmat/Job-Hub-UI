@@ -17,6 +17,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Jooble', value: 'jooble' },
     { label: 'Careerjet', value: 'careerjet' },
     { label: 'Daily Remote', value: 'dailyremote' },
+    { label: 'Remote Ok', value: 'remoteok' },
     { label: 'Recruit', value: 'recruit' },
     { label: 'YCombinator', value: 'ycombinator' },
     { label: 'Dynamite', value: 'dynamite' },
@@ -31,6 +32,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Ruby Now', value: 'rubynow' },
     { label: 'Working Nomads', value: 'workingnomads' },
     { label: 'Arc Dev', value: 'arcdev' },
+    { label: 'Remote Ok', value: 'remoteok' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -42,6 +44,7 @@ export const JOB_SOURCE_OPTIONS_UNDERSCORE = [
     { label: 'Ruby Now', value: 'ruby_now' },
     { label: 'Working Nomads', value: 'working_nomads' },
     { label: 'Arc Dev', value: 'arc_dev' },
+    { label: 'Remote Ok', value: 'remote_ok' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -74,6 +77,7 @@ export const JOB_SOURCES = {
     simplyhired: 'Simply Hired',
     rubynow: 'Ruby Now',
     other: 'Other',
+    remoteok: 'Remote Ok',
     all: 'All',
     workingnomads: 'Working Nomads',
     arcdev: 'Arc Dev',
@@ -87,6 +91,7 @@ export const JOB_SOURCES = {
     ruby_now: 'Ruby Now',
     working_nomads: 'Working Nomads',
     arc_dev: 'Arc Dev',
+    remote_ok: 'Remote Ok',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
