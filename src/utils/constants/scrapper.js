@@ -8,6 +8,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Adzuna', value: 'adzuna' },
     { label: 'Dice', value: 'dice' },
     { label: 'Himalayas', value: 'himalayas' },
+    { label: 'Workopolis', value: 'workopolis' },
     { label: 'Indeed', value: 'indeed' },
     { label: 'Workopolis', value: 'workopolis' },
     { label: 'Glassdoor', value: 'glassdoor' },
