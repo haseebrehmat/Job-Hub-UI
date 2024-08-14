@@ -1,20 +1,21 @@
 import { memo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Button, Loading, EmptyTable, Badge, Tooltip } from '@components'
+import { Loading, EmptyTable, Tooltip } from '@components'
 
-import { PseudosMemberForm } from '@modules/userManagement/components'
 import { fetchTeamMembers } from '@modules/userManagement/api'
+import { PseudosMemberForm, MemberVerticals, MemberRegions, TeamVerticals } from '@modules/userManagement/components'
 
 import { can } from '@utils/helpers'
 import { teamMemberHeads } from '@constants/userManagement'
 
-import { EditIcon, BackToIcon } from '@icons'
+import { CreateIcon } from '@icons'
 
 const Team = () => {
     const { id } = useParams()
     const [user, setUser] = useState()
+    const [role, setRole] = useState(null)
     const [show, setShow] = useState(false)
 
     const { data, error, isLoading, mutate } = useSWR(
@@ -22,11 +23,14 @@ const Team = () => {
         fetchTeamMembers
     )
 
-    const handleClick = row => {
+    const handleClick = (row, userRole = null) => {
         setUser(row)
+        setRole(userRole)
         setShow(!show)
     }
+
     if (isLoading) return <Loading />
+
     const renderTeams = error ? (
         <EmptyTable cols={6} msg='Failed to load team members..' />
     ) : data?.team?.members?.length > 0 ? (
@@ -41,34 +45,15 @@ const Team = () => {
                     </span>
                 </td>
                 <td className='px-3 py-4'>
-                    <span className='flex items-center flex-wrap'>
-                        {row?.regions?.length > 0
-                            ? row?.regions?.map(region => (
-                                  <Badge
-                                      key={region?.value}
-                                      label={region?.label}
-                                      type='success'
-                                      classes='!py-0.5 !px-1.5 mx-1 my-2 text-xs border border-green-500'
-                                  />
-                              ))
-                            : '-'}
-                    </span>
+                    <MemberRegions regions={row?.regions} />
                 </td>
                 <td className='px-3 py-4'>
-                    <span className='flex items-center flex-wrap'>
-                        {row?.verticals?.length > 0
-                            ? row?.verticals?.map(member => (
-                                  <div className='mx-1 my-2' key={member?.id}>
-                                      <Badge label={`${member?.pseudo?.name} | ${member?.name}`} />
-                                  </div>
-                              ))
-                            : '-'}
-                    </span>
+                    <MemberVerticals member={row} edit={handleClick} />
                 </td>
                 <td className='px-3 py-4'>
-                    {can('edit_member_team') && row?.regions?.length > 0 && (
+                    {can('edit_member_team') && row?.regions?.length > 0 && row?.allow_assignment && (
                         <Tooltip text='Assign verticals'>
-                            <span onClick={() => handleClick(row, '')}>{EditIcon}</span>
+                            <span onClick={() => handleClick(row)}>{CreateIcon}</span>
                         </Tooltip>
                     )}
                 </td>
@@ -77,31 +62,10 @@ const Team = () => {
     ) : (
         <EmptyTable cols={6} msg='No members found yet!' />
     )
+
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex border shadow text-[#006366] py-8 px-6 mb-4 justify-between'>
-                <div className='flex flex-col'>
-                    <p className='text-xl'>Assigned Verticals</p>
-                    <div className='mt-4'>
-                        {data?.team?.verticals?.length > 0 &&
-                            data?.team?.verticals?.map(tag => (
-                                <span key={tag.id}>
-                                    <span className='inline-block my-2 px-2.5 py-1.5 text-sm bg-gray-200 rounded-full items-center mx-1'>
-                                        <span className='font-semibold'>{`${tag?.pseudo?.name} | ${tag?.name} | `}</span>
-                                        {tag?.regions?.length > 0 ? (
-                                            tag?.regions?.map(r => r?.label).join(', ')
-                                        ) : (
-                                            <span className='text-red-600'>Please assign region</span>
-                                        )}
-                                    </span>
-                                </span>
-                            ))}
-                    </div>
-                </div>
-                <Link to='/teams' className='float-right'>
-                    <Button label='Back to teams' icon={BackToIcon} fit />
-                </Link>
-            </div>
+            <TeamVerticals verticals={data?.team?.verticals} />
             <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
@@ -122,6 +86,7 @@ const Team = () => {
                     user={user}
                     vert={data?.team?.verticals?.filter(row => row?.regions?.length > 0)}
                     teamId={id}
+                    role={role}
                 />
             )}
         </div>

@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 
-import { Loading, Searchbox, EmptyTable, Button, Paginated } from '@components'
+import { Loading, Searchbox, EmptyTable, Button, Paginated, Badge } from '@components'
 
 import { UserForm, UsersActions } from '@modules/userManagement/components'
 import { fetchUsers } from '@modules/userManagement/api'
@@ -16,9 +16,10 @@ const Users = () => {
     const [user, setUser] = useState()
     const [page, setPage] = useState(1)
     const [show, setShow] = useState(false)
-
-    const { data, error, isLoading, mutate } = useSWR(`/api/auth/user/?page=${page}&search=${query}`, fetchUsers)
-
+    const { data, error, isLoading, mutate } = useSWR(
+        `/api/auth/user/?page=${page}&search=${query}&limit=20`,
+        fetchUsers
+    )
     const handleClick = values => {
         setUser(values)
         setShow(!show)
@@ -55,7 +56,17 @@ const Users = () => {
                                 <td className='px-3 py-6'>{idx + 1}</td>
                                 <td className='px-3 py-6'>{row?.email}</td>
                                 <td className='px-3 py-6'>{row?.username}</td>
-                                <td className='px-3 py-6'>{row?.roles?.name || 'not assigned'}</td>
+                                <td className='px-3 py-6'>
+                                    {row?.roles?.length > 0 ? (
+                                        <div className='flex flex-wrap gap-1'>
+                                            {row?.roles?.map(r => (
+                                                <Badge label={r?.label} key={r?.value} classes='!text-sm' />
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        'not assigned'
+                                    )}
+                                </td>
                                 <td className='px-3 py-6 font-bold'>{row?.company ? row?.company?.name : '-'}</td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_user', 'delete_user']) && (
@@ -69,9 +80,9 @@ const Users = () => {
                     )}
                 </tbody>
             </table>
-            {data?.users?.length > 24 && (
-                <div className='w-full'>
-                    <Paginated pages={data?.pages ?? Math.ceil(data.total / 25)} setPage={setPage} page={page} />
+            {data?.pages > 1 && (
+                <div className='w-full flex justify-center'>
+                    <Paginated pages={data?.pages} setPage={setPage} page={page} />
                 </div>
             )}
             {can('edit_user') && show && <UserForm show={show} setShow={setShow} mutate={mutate} user={user} />}

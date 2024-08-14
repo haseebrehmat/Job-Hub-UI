@@ -73,3 +73,5 @@ export const fetchRoleWiseUsers = url => http.get(url).then(({ data }) => ({ use
 export const fetchDropdownUsers = url => http.get(url).then(({ data }) => ({ users: data, status: 'success' }))
 
 export const fetchPseudos = url => http.get(url).then(({ data }) => ({ pseudos: data, status: 'success' }))
+
+export const fetchUserRoles = url => http.get(url).then(({ data }) => data)

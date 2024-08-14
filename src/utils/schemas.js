@@ -44,7 +44,7 @@ export const roleSchema = Yup.object().shape({
 export const userSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
     company: Yup.string().required('Please select company'),
-    roles: Yup.string().required('Role is required'),
+    roles: Yup.mixed().required('Role is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
 })
 
