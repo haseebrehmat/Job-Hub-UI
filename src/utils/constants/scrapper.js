@@ -7,6 +7,7 @@ export const INTERVAL_TYPE_OPTIONS = [
 export const JOB_SOURCES_SINGLES = [
     { label: 'Adzuna', value: 'adzuna' },
     { label: 'Dice', value: 'dice' },
+    { label: 'Himalayas', value: 'himalayas' },
     { label: 'Indeed', value: 'indeed' },
     { label: 'Workopolis', value: 'workopolis' },
     { label: 'Glassdoor', value: 'glassdoor' },
@@ -58,6 +59,7 @@ export const JOB_SOURCES = {
     careerbuilder: 'Career Builder',
     adzuna: 'Adzuna',
     dice: 'Dice',
+    himalayas: 'Himalayas',
     indeed: 'Indeed',
     workopolis: 'Workopolis',
     ziprecruiter: 'Zip Recruiter',
