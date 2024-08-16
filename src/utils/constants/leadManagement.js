@@ -100,6 +100,7 @@ export const EXPOSED_CANDIDATE_INITIAL_STATE = {
 export const EXPOSED_TEAMS_INITIAL_STATE = {
     query: '',
     show: false,
+    team: {},
     ids: [],
     selectedCompanies: [],
 }

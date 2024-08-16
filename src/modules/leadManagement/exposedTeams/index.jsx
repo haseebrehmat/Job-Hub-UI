@@ -33,7 +33,7 @@ const ExposedTeams = () => {
             <div className='flex items-center py-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
-                    {can('create_region') && (
+                    {can('expose_to') && (
                         <Button label='Create Team' fit icon={CreateIcon} onClick={() => handleClick()} />
                     )}
                 </div>
@@ -91,7 +91,9 @@ const ExposedTeams = () => {
                     )}
                 </tbody>
             </table>
-            {vals.show && <TeamForm show={vals.show} setShow={dispatch} candidates={data?.candidates} />}
+            {vals.show && (
+                <TeamForm show={vals.show} setShow={dispatch} candidates={data?.candidates} team={vals.team} />
+            )}
         </div>
     )
 }

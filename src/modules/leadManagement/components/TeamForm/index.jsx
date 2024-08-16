@@ -12,7 +12,7 @@ const TeamForm = ({ show, setShow, team, mutate, candidates }) => {
     const { values, handleSubmit, resetForm, trigger, handleChange } = useMutate(
         `api/candidate_management/candidate_teams/${team?.id ? `/${team?.id}/` : '/'}`,
         saveTeam,
-        { name: team?.name || '' },
+        { name: '' },
         null,
         async formValues =>
             trigger({
@@ -37,7 +37,7 @@ const TeamForm = ({ show, setShow, team, mutate, candidates }) => {
                     <p className='font-medium text-xl'>{team?.id ? 'Edit' : 'Create'} Tech Stacks Categories</p>
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Name</span>
-                    <Input name='name' value={values.name} onChange={handleChange} ph='Enter Team name' />
+                    <Input name='teamName' value={values.name} onChange={handleChange} ph='Enter Team name' />
                     <span className='text-xs font-semibold'>Candidates</span>
                     <CustomSelector
                         options={parseCandidates(candidates)}
@@ -70,7 +70,7 @@ const TeamForm = ({ show, setShow, team, mutate, candidates }) => {
                     </div>
                     <div className='pt-4 space-y-2'>
                         <Button label={team?.id ? 'Update' : 'Submit'} type='submit' fill />
-                        <Button label='Cancel' onClick={() => setShow(false)} />
+                        <Button label='Cancel' onClick={() => setShow({ show: false })} />
                     </div>
                 </div>
             </form>
