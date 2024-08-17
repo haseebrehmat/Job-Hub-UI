@@ -28,7 +28,7 @@ const LeadNotes = () => {
     const { handleSubmit, trigger } = useMutate(
         `/api/lead_managament/lead_activity_notes${note.id ? `/${note.id}/` : '/'}`,
         saveNote,
-        {},
+        null,
         null,
         async () => trigger({ id: note.id, notes: note.id ? note.edit : note.msg, lead: id }),
         null,
