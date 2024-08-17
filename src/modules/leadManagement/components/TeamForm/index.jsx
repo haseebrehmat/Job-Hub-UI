@@ -1,31 +1,30 @@
 import { memo, useState } from 'react'
-import useMutate from 'swr'
+import { useMutate } from '@/hooks'
 
 import CustomSelector from '@components/CustomSelector'
 import { Button, Drawer, Badge, Input } from '@components'
 
 import { saveTeam } from '@/modules/leadManagement/api'
-import { parseCandidates } from '@utils/helpers'
+import { parseExposedCandidates, parseTeamCandidates } from '@utils/helpers'
 
 const TeamForm = ({ show, setShow, team, mutate, candidates }) => {
-    const [tags, setTags] = useState([])
-    const { values, handleSubmit, resetForm, trigger, handleChange } = useMutate(
-        `api/candidate_management/candidate_teams/${team?.id ? `/${team?.id}/` : '/'}`,
+    const [tags, setTags] = useState(team?.team_candidates ? parseTeamCandidates(team?.team_candidates) : [])
+    const { values, handleChange, resetForm, trigger, handleSubmit } = useMutate(
+        `api/candidate_management/candidate_teams${team?.id ? `/${team?.id}/` : '/'}`,
         saveTeam,
-        { name: '' },
+        { name: team?.name || '' },
         null,
         async formValues =>
             trigger({
                 ...formValues,
                 id: team?.id,
                 exposed_candidates: tags.map(item => item.value),
-                company: '25893ac6-e757-4688-97af-5107bca7484d',
             }),
         null,
         () => {
             mutate()
             if (!team?.id) resetForm()
-            setShow(false)
+            setShow({ show: false })
         }
     )
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
@@ -34,13 +33,13 @@ const TeamForm = ({ show, setShow, team, mutate, candidates }) => {
         <Drawer show={show} setShow={setShow} w='420px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>{team?.id ? 'Edit' : 'Create'} Tech Stacks Categories</p>
+                    <p className='font-medium text-xl'>{team?.id ? 'Edit' : 'Create'} Team</p>
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Name</span>
-                    <Input name='teamName' value={values.name} onChange={handleChange} ph='Enter Team name' />
+                    <Input name='name' value={values.name} onChange={handleChange} ph='Enter Team name' />
                     <span className='text-xs font-semibold'>Candidates</span>
                     <CustomSelector
-                        options={parseCandidates(candidates)}
+                        options={parseExposedCandidates(candidates)}
                         handleChange={obj => setTags(obj)}
                         selectorValue={tags}
                         isMulti

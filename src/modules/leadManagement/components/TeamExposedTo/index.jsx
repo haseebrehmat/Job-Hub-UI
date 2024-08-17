@@ -7,10 +7,8 @@ import { GENERIC_SKILL_DELETION } from '@constants/allowDeletion'
 
 import { RemoveExposedToIcon } from '@icons'
 
-const TeamExposedTo = ({ companies, mutate = null }) => {
+const TeamExposedTo = ({ companies, mutate = null, team_id }) => {
     const [show, setShow] = useState(false)
-    const [id, setId] = useState(null)
-
     return (
         <td className='px-3 py-6 flex items-center flex-wrap space-x-1.5 gap-y-1.5'>
             {companies?.length > 0
@@ -24,7 +22,7 @@ const TeamExposedTo = ({ companies, mutate = null }) => {
                                       <DeleteDialog
                                           show={show}
                                           setShow={setShow}
-                                          url={`/api/candidate_management/candidate_exposed/${id}/`}
+                                          url={`/api/candidate_management/team_exposed/${team_id}/?company_id=${company?.id}`}
                                           refetch={mutate}
                                           perm={GENERIC_SKILL_DELETION}
                                       >
@@ -33,7 +31,6 @@ const TeamExposedTo = ({ companies, mutate = null }) => {
                                                   type='button'
                                                   onClick={() => {
                                                       setShow(true)
-                                                      setId(company?.exposed_candidate_id)
                                                   }}
                                                   className='ml-1 hover:text-red-500'
                                               >

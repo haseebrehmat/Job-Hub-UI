@@ -3,7 +3,13 @@ import useSWR from 'swr'
 
 import { Loading, Searchbox, EmptyTable, Button } from '@components'
 
-import { TeamInfo, ExposedForm, TeamExposedTo, TeamForm } from '@modules/leadManagement/components'
+import {
+    TeamInfo,
+    ExposedTeamForm,
+    TeamExposedTo,
+    TeamForm,
+    ExposedTeamsActions,
+} from '@modules/leadManagement/components'
 import { fetchTeamsCandidatesAndCompanies } from '@modules/leadManagement/api'
 
 import { can } from '@utils/helpers'
@@ -25,7 +31,7 @@ const ExposedTeams = () => {
     const handleChangeAll = ({ target: { checked } }) =>
         checked ? dispatch({ ids: data?.teams?.map(({ team }) => team?.id) ?? [] }) : dispatch({ ids: [] })
 
-    const handleClick = () => dispatch({ show: true })
+    const handleClick = team_data => dispatch({ show: true, team: team_data })
 
     if (isLoading) return <Loading />
     return (
@@ -34,11 +40,11 @@ const ExposedTeams = () => {
                 <div className='flex space-x-4 items-center'>
                     <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
                     {can('expose_to') && (
-                        <Button label='Create Team' fit icon={CreateIcon} onClick={() => handleClick()} />
+                        <Button label='Create Team' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                     )}
                 </div>
                 {vals.ids.length > 0 && (
-                    <ExposedForm
+                    <ExposedTeamForm
                         candidates={vals.ids}
                         companies={data?.companies}
                         selectedCompanies={vals.selectedCompanies}
@@ -83,7 +89,14 @@ const ExposedTeams = () => {
                                     </td>
                                 )}
                                 <TeamInfo info={row} exposed />
-                                <TeamExposedTo companies={row?.exposed_to_companies} mutate={mutate} />
+                                <TeamExposedTo
+                                    companies={row?.exposed_to_companies}
+                                    mutate={mutate}
+                                    team_id={row?.id}
+                                />
+                                <td className='px-3 py-4'>
+                                    <ExposedTeamsActions row={row} mutate={mutate} edit={handleClick} />
+                                </td>
                             </tr>
                         ))
                     ) : (
@@ -92,7 +105,13 @@ const ExposedTeams = () => {
                 </tbody>
             </table>
             {vals.show && (
-                <TeamForm show={vals.show} setShow={dispatch} candidates={data?.candidates} team={vals.team} />
+                <TeamForm
+                    show={vals.show}
+                    setShow={dispatch}
+                    candidates={data?.candidates}
+                    team={vals.team}
+                    mutate={mutate}
+                />
             )}
         </div>
     )
