@@ -39,6 +39,7 @@ import LeadActions from '@modules/leadManagement/components/LeadActions'
 import LeadFilterDropdowns from '@modules/leadManagement/components/LeadFilterDropdowns'
 import LeadNoteSearch from '@modules/leadManagement/components/LeadNoteSearch'
 import NewNote from '@modules/leadManagement/components/NewNote'
+import LeadInfo from '@modules/leadManagement/components/LeadInfo'
 
 export {
     CandidateActionsModel,
@@ -82,4 +83,5 @@ export {
     LeadFilterDropdowns,
     LeadNoteSearch,
     NewNote,
+    LeadInfo,
 }
