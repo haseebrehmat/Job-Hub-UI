@@ -19,11 +19,13 @@ export const LEADS_INITIAL_VALS = {
 
 export const NOTE_INITIAL_STATE = {
     id: null,
+    query: '',
     msg: '',
     edit: '',
     show: false,
     status: '',
     phase: '',
+    file: null,
 }
 
 export const CANDIDATE_INITIAL_STATE = {
