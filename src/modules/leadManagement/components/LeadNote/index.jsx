@@ -1,7 +1,11 @@
 import { memo } from 'react'
 
+import { Tooltip } from '@components'
+
 import { formatDate } from '@utils/helpers'
 import { avatarPlaceholder } from '@constants/profile'
+
+import { DownloadIcon2 } from '@icons'
 
 const LeadNote = ({ note, actions = null, editForm = null, options = {} }) => (
     <div className='flex gap-x-2.5 pb-2 border-b mb-2' key={note.id}>
@@ -25,6 +29,13 @@ const LeadNote = ({ note, actions = null, editForm = null, options = {} }) => (
                 <span className='text-black'>{note.message}</span>
             )}
         </div>
+        {note?.file && (
+            <div className='tracking-wider cursor-pointer'>
+                <Tooltip text='Attached file: Screenshot.png'>
+                    <span className='text-xs'>{DownloadIcon2}</span>
+                </Tooltip>
+            </div>
+        )}
     </div>
 )
 
