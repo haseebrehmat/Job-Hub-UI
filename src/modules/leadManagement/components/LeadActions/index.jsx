@@ -5,7 +5,7 @@ import { Button, Tooltip } from '@components'
 
 import { can } from '@utils/helpers'
 
-import { SeePassIcon, AssignCandidateIcon } from '@icons'
+import { SeePassIcon, AssignCandidateIcon, LeadNoteIcon } from '@icons'
 
 const LeadActions = ({ lead, dispatch = null }) => (
     <div className='flex items-center justify-end gap-1'>
@@ -28,7 +28,7 @@ const LeadActions = ({ lead, dispatch = null }) => (
         {true && (
             <Tooltip text='See Notes'>
                 <Link to={`/lead-notes/${lead?.id}`} state={{ status: lead?.status?.id, phase: lead?.phase ?? '' }}>
-                    {AssignCandidateIcon}
+                    {LeadNoteIcon}
                 </Link>
             </Tooltip>
         )}
