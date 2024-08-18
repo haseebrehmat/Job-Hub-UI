@@ -32,22 +32,27 @@ const NewNote = ({ dispatch = null, options = {} }) => {
                         user={options?.user}
                     />
                     <div className='flex flex-col items-baseline md:flex-row gap-3 mt-2'>
-                        <span className='ml-14 border-2 rounded-2xl px-1 py-0.5' onClick={() => setShowEmo(!showEmo)}>
-                            {EMOJIS[0]}
-                        </span>
-                        {showEmo && (
-                            <div className='flex flex-wrap items-center gap-3 border-2 rounded-3xl w-80 px-2 py-1'>
-                                {EMOJIS.map(emoji => (
-                                    <span
-                                        onClick={() => dispatch({ msg: `${options?.note?.msg} ${emoji}` })}
-                                        className='cursor-pointer'
-                                        key={emoji}
-                                    >
-                                        {emoji}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
+                        <div className='relative inline-block'>
+                            <span
+                                className='ml-14 border-2 rounded-2xl px-1 py-1.5 cursor-pointer'
+                                onClick={() => setShowEmo(!showEmo)}
+                            >
+                                {EMOJIS[0]}
+                            </span>
+                            {showEmo && (
+                                <div className='absolute top-9 left-0 z-10 flex flex-wrap items-center gap-3 border rounded-3xl w-72 p-3 bg-white shadow-xl ml-12 border-slate-300'>
+                                    {EMOJIS.map(emoji => (
+                                        <span
+                                            onClick={() => dispatch({ msg: `${options?.note?.msg} ${emoji}` })}
+                                            className='cursor-pointer'
+                                            key={emoji}
+                                        >
+                                            {emoji}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                         <label className='block'>
                             <span className='sr-only'>Attach file</span>
                             <input
