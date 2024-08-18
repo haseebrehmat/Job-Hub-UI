@@ -8,7 +8,7 @@ import { useMutate } from '@/hooks'
 import { Loading } from '@components'
 
 import { fetchNotes, saveNote } from '@modules/leadManagement/api'
-import { NoteCreateForm, NoteEditForm, NoteActions } from '@modules/leadManagement/components'
+import { NoteCreateForm, NoteEditForm, NoteActions, LeadNoteSearch } from '@modules/leadManagement/components'
 
 import { decodeJwt, formatDate } from '@utils/helpers'
 import { MAX_FILE_SIZE, avatarPlaceholder } from '@constants/profile'
@@ -54,6 +54,7 @@ const LeadNotes = () => {
 
     return (
         <div className='px-4'>
+            <LeadNoteSearch dispatch={setNote} />
             <div className='border pt-6 text-[#1E6570] mt-8 relative border-cyan-200 rounded-lg'>
                 <p className='-mt-10 absolute px-3 mx-3 border bg-[#EDFDFB] text-lg tracking-widest border-cyan-200'>
                     New<span className='text-sm'> Note</span>

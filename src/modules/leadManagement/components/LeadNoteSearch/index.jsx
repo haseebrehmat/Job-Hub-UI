@@ -13,56 +13,54 @@ const LeadNoteSearch = ({ dispatch = null }) => {
 
     const [filter, setFilter] = useReducer((prev, next) => ({ ...prev, ...next }), NOTE_FILTERS_INITIAL)
 
-    const clearFilters = () => dispatch(NOTE_FILTERS_INITIAL) && setFilter(NOTE_FILTERS_INITIAL)
+    const clearFilters = () => {
+        dispatch(NOTE_FILTERS_INITIAL)
+        setFilter(NOTE_FILTERS_INITIAL)
+    }
+
     const applyFilters = () => dispatch({ status: filter.status, phase: filter.phase, query: filter.query })
 
     return (
         <div className='border pt-6 text-[#1E6570] mt-4 relative border-cyan-200 rounded-lg'>
             <p className='-mt-10 absolute px-3 mx-3 border bg-[#EDFDFB] tracking-widest border-cyan-200'>Filters</p>
             <div className='px-2 md:px-4'>
-                <div className='flex items-center pb-4'>
-                    <div className='flex gap-2.5 items-center w-full'>
-                        <div className='w-1/5'>
-                            <Input
-                                value={filter.query}
-                                onChange={e => setFilter({ query: e.target.value })}
-                                ph='Enter keywords'
-                            />
-                        </div>
+                <div className='md:flex items-center justify-between pb-4'>
+                    <div className='grid md:grid-flow-col gap-2.5 w-[90%]'>
+                        <Input
+                            value={filter.query}
+                            onChange={e => setFilter({ query: e.target.value })}
+                            ph='Enter keywords'
+                        />
                         {isLoading ? (
                             <span>Loading...</span>
                         ) : error ? (
                             <span>Error to Load statuses</span>
                         ) : (
                             <>
-                                <div className='w-1/4'>
-                                    <CustomSelector
-                                        options={parseStatuses(data)}
-                                        handleChange={({ value }) => setFilter({ status: value, phase: '' })}
-                                        selectorValue={parseSelectedStatus(filter.status, data)}
-                                        placeholder='Select Status'
-                                    />
-                                </div>
+                                <CustomSelector
+                                    options={parseStatuses(data)}
+                                    handleChange={({ value }) => setFilter({ status: value, phase: '' })}
+                                    selectorValue={parseSelectedStatus(filter.status, data)}
+                                    placeholder='Select Status'
+                                />
                                 {filter.status && (
-                                    <div className='w-1/4'>
-                                        <CustomSelector
-                                            options={parseStatusPhases(filter.status, data)}
-                                            handleChange={({ value }) => setFilter({ phase: value })}
-                                            selectorValue={parseSelectedStatusPhase(filter.phase, filter.status, data)}
-                                            placeholder='Select Phase'
-                                        />
-                                    </div>
+                                    <CustomSelector
+                                        options={parseStatusPhases(filter.status, data)}
+                                        handleChange={({ value }) => setFilter({ phase: value })}
+                                        selectorValue={parseSelectedStatusPhase(filter.phase, filter.status, data)}
+                                        placeholder='Select Phase'
+                                    />
                                 )}
                             </>
                         )}
                     </div>
                     {dispatch && (
-                        <>
+                        <div className='mt-2 md:mt-0'>
                             {(isset(filter.status) || isset(filter.phase) || isset(filter.query)) && (
                                 <Button label='Apply' fit classes='!py-1 px-3' onClick={applyFilters} />
                             )}
                             <Button label='Clear' fit classes='!py-1 ml-1.5' onClick={clearFilters} />
-                        </>
+                        </div>
                     )}
                 </div>
             </div>
