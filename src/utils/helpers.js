@@ -492,3 +492,8 @@ export const parseProjects = projects =>
     projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))
 
 export const parseTechStacks = techStacks => techStacks.map(tech => ({ value: tech, label: tech }))
+export const parseExposedCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.name, value: candidate.id }))
+
+export const parseTeamCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.candidate, value: candidate.id }))

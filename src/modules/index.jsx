@@ -39,6 +39,7 @@ import Regions from '@modules/settings/regions'
 import MyProfile from '@modules/leadManagement/candidateProfile'
 import Permissions from '@modules/settings/permissions'
 import TechStacksCategories from '@modules/settings/techStacksCategories'
+import ExposedTeams from '@modules/leadManagement/exposedTeams'
 
 export {
     TeamAppliedJobs,
@@ -83,4 +84,5 @@ export {
     Permissions,
     LeadsTable,
     TechStacksCategories,
+    ExposedTeams,
 }
