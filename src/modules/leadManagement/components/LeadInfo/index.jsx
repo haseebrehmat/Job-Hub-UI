@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import useSWR from 'swr'
+import { Link } from 'react-router-dom'
 
 import { AppliedDetail, JobDetail } from '@modules/leadManagement/components'
 import { fetchLead } from '@modules/leadManagement/api'
@@ -7,6 +8,7 @@ import { fetchLead } from '@modules/leadManagement/api'
 import { formatDate2 } from '@utils/helpers'
 
 import { BreadIcon } from '@icons'
+import { BackToIcon } from '@/assets/icons'
 
 const LeadInfo = ({ id }) => {
     const { data, isLoading, error } = useSWR(`/api/lead_managament/leads/${id}/`, fetchLead)
@@ -33,6 +35,9 @@ const LeadInfo = ({ id }) => {
                 </div>
                 <JobDetail job={data?.applied_job_status?.job} expanded />
                 <AppliedDetail applied={data?.applied_job_status} expanded />
+                <Link to='/leads' className='!py-1 px-3 flex gap-2 items-center'>
+                    {BackToIcon} Back To Leads
+                </Link>
             </div>
         </div>
     )
