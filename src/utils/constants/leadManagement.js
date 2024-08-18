@@ -121,3 +121,9 @@ export const LEAD_HEADS = [
     'Updated At',
     '',
 ]
+
+export const NOTE_FILTERS_INITIAL = {
+    query: '',
+    status: '',
+    phase: '',
+}

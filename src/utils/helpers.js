@@ -492,3 +492,16 @@ export const parseProjects = projects =>
     projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))
 
 export const parseTechStacks = techStacks => techStacks.map(tech => ({ value: tech, label: tech }))
+
+export const isset = value => {
+    if (value === null || value === undefined) {
+        return false
+    }
+    if (typeof value === 'string' || Array.isArray(value)) {
+        return value.length > 0
+    }
+    if (typeof value === 'object') {
+        return Object.keys(value).length > 0
+    }
+    return true
+}
