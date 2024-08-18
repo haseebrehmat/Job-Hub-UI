@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 
 import { NoteCreateForm } from '@modules/leadManagement/components'
@@ -7,6 +7,8 @@ import { MAX_FILE_SIZE } from '@constants/profile'
 import { EMOJIS } from '@constants/leadManagement'
 
 const NewNote = ({ dispatch = null, options = {} }) => {
+    const [showEmo, setShowEmo] = useState(false)
+
     const fileUpload = e => {
         const file = e.target.files[0]
         if (file.size > MAX_FILE_SIZE) {
@@ -29,18 +31,23 @@ const NewNote = ({ dispatch = null, options = {} }) => {
                         setNote={dispatch}
                         user={options?.user}
                     />
-                    <div className='flex flex-col md:flex-row gap-3 mt-2'>
-                        <div className='flex flex-wrap items-center gap-3 border rounded-3xl w-fit px-2 py-1 border-cyan-500 ml-14'>
-                            {EMOJIS.map(emoji => (
-                                <span
-                                    onClick={() => dispatch({ msg: `${options?.note?.msg} ${emoji}` })}
-                                    className='cursor-pointer'
-                                    key={emoji}
-                                >
-                                    {emoji}
-                                </span>
-                            ))}
-                        </div>
+                    <div className='flex flex-col items-baseline md:flex-row gap-3 mt-2'>
+                        <span className='ml-14 border-2 rounded-2xl px-1 py-0.5' onClick={() => setShowEmo(!showEmo)}>
+                            {EMOJIS[0]}
+                        </span>
+                        {showEmo && (
+                            <div className='flex flex-wrap items-center gap-3 border-2 rounded-3xl w-80 px-2 py-1'>
+                                {EMOJIS.map(emoji => (
+                                    <span
+                                        onClick={() => dispatch({ msg: `${options?.note?.msg} ${emoji}` })}
+                                        className='cursor-pointer'
+                                        key={emoji}
+                                    >
+                                        {emoji}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
                         <label className='block'>
                             <span className='sr-only'>Attach file</span>
                             <input
