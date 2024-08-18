@@ -1,26 +1,18 @@
 import { memo, useReducer } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import useSWR from 'swr'
+import { toast } from 'react-hot-toast'
 
 import { useMutate } from '@/hooks'
 
-import { Loading, CustomSelector, Button, Input } from '@components'
+import { Loading } from '@components'
 
 import { fetchNotes, saveNote } from '@modules/leadManagement/api'
 import { NoteCreateForm, NoteEditForm, NoteActions } from '@modules/leadManagement/components'
 
-import {
-    decodeJwt,
-    formatDate,
-    parseSelectedStatus,
-    parseStatuses,
-    parseStatusPhases,
-    parseSelectedStatusPhase,
-} from '@utils/helpers'
+import { decodeJwt, formatDate } from '@utils/helpers'
 import { MAX_FILE_SIZE, avatarPlaceholder } from '@constants/profile'
 import { NOTE_INITIAL_STATE } from '@constants/leadManagement'
-import { fetchStatusPhases } from '@/modules/appliedJobs/api'
-import { toast } from 'react-hot-toast'
 
 const emojis = ['\u{1F604}', '\u{1F970}', '\u{1F602}', '\u{1F60D}', '\u{1F44D}', '\u{2764}', '\u{1F44C}', '\u{274C}']
 
@@ -38,12 +30,6 @@ const LeadNotes = () => {
         fetchNotes
     )
 
-    const {
-        data: status,
-        isLoading: statusLoading,
-        error,
-    } = useSWR('/api/lead_managament/company_status_phases/', fetchStatusPhases)
-
     const { handleSubmit, trigger } = useMutate(
         `/api/lead_managament/lead_activity_notes${note.id ? `/${note.id}/` : '/'}`,
         saveNote,
@@ -53,8 +39,6 @@ const LeadNotes = () => {
         null,
         () => mutate() && setNote({ id: null, msg: '', edit: '' })
     )
-
-    const clearFilters = () => setNote({ status: '', phase: '' })
 
     const fileUpload = e => {
         const file = e.target.files[0]
@@ -70,53 +54,6 @@ const LeadNotes = () => {
 
     return (
         <div className='px-4'>
-            <div className='border pt-6 text-[#1E6570] mt-4 relative border-cyan-200 rounded-lg'>
-                <p className='-mt-10 absolute px-3 mx-3 border bg-[#EDFDFB] tracking-widest border-cyan-200'>Filters</p>
-                <div className='px-2 md:px-4'>
-                    <div className='flex items-center pb-4'>
-                        <div className='flex gap-2.5 items-center w-full'>
-                            <div className='w-1/5'>
-                                <Input
-                                    value={note.query}
-                                    onChange={e => setNote({ query: e.target.value })}
-                                    ph='Enter keywords'
-                                />
-                            </div>
-                            {statusLoading ? (
-                                <span>Loading...</span>
-                            ) : error ? (
-                                <span>Error to Load statuses</span>
-                            ) : (
-                                <>
-                                    <div className='w-1/4'>
-                                        <CustomSelector
-                                            options={parseStatuses(status)}
-                                            handleChange={({ value }) => setNote({ status: value, phase: '' })}
-                                            selectorValue={parseSelectedStatus(note.status, status)}
-                                            placeholder='Select Status'
-                                        />
-                                    </div>
-                                    {note.status && (
-                                        <div className='w-1/4'>
-                                            <CustomSelector
-                                                options={parseStatusPhases(note.status, status)}
-                                                handleChange={({ value }) => setNote({ phase: value })}
-                                                selectorValue={parseSelectedStatusPhase(
-                                                    note.phase,
-                                                    note.status,
-                                                    status
-                                                )}
-                                                placeholder='Select Phase'
-                                            />
-                                        </div>
-                                    )}
-                                </>
-                            )}
-                        </div>
-                        <Button label='Clear' fit classes='!py-1 ml-1.5' onClick={clearFilters} />
-                    </div>
-                </div>
-            </div>
             <div className='border pt-6 text-[#1E6570] mt-8 relative border-cyan-200 rounded-lg'>
                 <p className='-mt-10 absolute px-3 mx-3 border bg-[#EDFDFB] text-lg tracking-widest border-cyan-200'>
                     New<span className='text-sm'> Note</span>
