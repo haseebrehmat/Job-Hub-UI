@@ -30,7 +30,7 @@ const NewNote = ({ dispatch = null, options = {} }) => {
                         user={options?.user}
                     />
                     <div className='flex flex-col md:flex-row gap-3 mt-2'>
-                        <div className='flex items-center gap-3 border rounded-3xl w-fit px-2 border-cyan-500 ml-14'>
+                        <div className='flex flex-wrap items-center gap-3 border rounded-3xl w-fit px-2 py-1 border-cyan-500 ml-14'>
                             {EMOJIS.map(emoji => (
                                 <span
                                     onClick={() => dispatch({ msg: `${options?.note?.msg} ${emoji}` })}
@@ -47,7 +47,7 @@ const NewNote = ({ dispatch = null, options = {} }) => {
                                 type='file'
                                 accept='.jpg, .jpeg, .png, .pdf, .doc, .docx, .xls, .xlsx, .zip'
                                 onChange={fileUpload}
-                                className='block w-full text-sm text-slate-500 file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:text-white file:font-semibold file:bg-[#329988] hover:file:bg-[#4ab9a7]'
+                                className='block w-full text-sm text-slate-500 file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:text-white file:font-semibold file:bg-[#329988] hover:file:bg-[#4ab9a7]'
                             />
                         </label>
                     </div>
