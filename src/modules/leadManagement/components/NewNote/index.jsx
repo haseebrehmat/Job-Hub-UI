@@ -29,7 +29,7 @@ const NewNote = ({ dispatch = null, options = {} }) => {
                         setNote={dispatch}
                         user={options?.user}
                     />
-                    <div className='flex gap-3 mt-2'>
+                    <div className='flex flex-col md:flex-row gap-3 mt-2'>
                         <div className='flex items-center gap-3 border rounded-3xl w-fit px-2 border-cyan-500 ml-14'>
                             {EMOJIS.map(emoji => (
                                 <span
