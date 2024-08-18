@@ -127,3 +127,14 @@ export const NOTE_FILTERS_INITIAL = {
     status: '',
     phase: '',
 }
+
+export const EMOJIS = [
+    '\u{1F604}',
+    '\u{1F970}',
+    '\u{1F602}',
+    '\u{1F60D}',
+    '\u{1F44D}',
+    '\u{2764}',
+    '\u{1F44C}',
+    '\u{274C}',
+]

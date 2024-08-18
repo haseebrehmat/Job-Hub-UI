@@ -1,20 +1,17 @@
 import { memo, useReducer } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import useSWR from 'swr'
-import { toast } from 'react-hot-toast'
 
 import { useMutate } from '@/hooks'
 
 import { Loading } from '@components'
 
 import { fetchNotes, saveNote } from '@modules/leadManagement/api'
-import { NoteCreateForm, NoteEditForm, NoteActions, LeadNoteSearch } from '@modules/leadManagement/components'
+import { NoteEditForm, NoteActions, LeadNoteSearch, NewNote } from '@modules/leadManagement/components'
 
 import { decodeJwt, formatDate } from '@utils/helpers'
-import { MAX_FILE_SIZE, avatarPlaceholder } from '@constants/profile'
+import { avatarPlaceholder } from '@constants/profile'
 import { NOTE_INITIAL_STATE } from '@constants/leadManagement'
-
-const emojis = ['\u{1F604}', '\u{1F970}', '\u{1F602}', '\u{1F60D}', '\u{1F44D}', '\u{2764}', '\u{1F44C}', '\u{274C}']
 
 const LeadNotes = () => {
     const user = decodeJwt()
@@ -37,54 +34,14 @@ const LeadNotes = () => {
         null,
         async formVals => trigger({ ...formVals, id: note.id, notes: note.id ? note.edit : note.msg, file: note.file }),
         null,
-        () => mutate() && setNote({ id: null, msg: '', edit: '' })
+        () => mutate() && setNote({ id: null, msg: '', edit: '', file: null })
     )
 
-    const fileUpload = e => {
-        const file = e.target.files[0]
-        if (file.size > MAX_FILE_SIZE) {
-            toast.error(`File size is too large. Max size: ${Math.ceil(MAX_FILE_SIZE / (1024 * 1024))} MBs.`)
-            e.target.value = null
-        } else {
-            setNote({ file })
-        }
-    }
-
     if (isLoading) return <Loading />
-
     return (
         <div className='px-4'>
             <LeadNoteSearch dispatch={setNote} />
-            <div className='border pt-6 text-[#1E6570] mt-8 relative border-cyan-200 rounded-lg'>
-                <p className='-mt-10 absolute px-3 mx-3 border bg-[#EDFDFB] text-lg tracking-widest border-cyan-200'>
-                    New<span className='text-sm'> Note</span>
-                </p>
-                <div className='px-2 pb-5 md:px-4'>
-                    <NoteCreateForm handleSubmit={handleSubmit} note={note} setNote={setNote} user={user} />
-                    <div className='flex gap-3 mt-2'>
-                        <div className='flex items-center gap-3 border rounded-3xl w-fit px-2 border-cyan-500 ml-14'>
-                            {emojis.map(emoji => (
-                                <span
-                                    onClick={() => setNote({ msg: note.msg + emoji })}
-                                    className='cursor-pointer'
-                                    key={emoji}
-                                >
-                                    {emoji}
-                                </span>
-                            ))}
-                        </div>
-                        <label className='block'>
-                            <span className='sr-only'>Attach file</span>
-                            <input
-                                type='file'
-                                accept='.jpg, .jpeg, .png, .pdf, .doc, .docx, .xls, .xlsx, .zip'
-                                onChange={fileUpload}
-                                className='block w-full text-sm text-slate-500 file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:text-white file:font-semibold file:bg-[#329988] hover:file:bg-[#4ab9a7]'
-                            />
-                        </label>
-                    </div>
-                </div>
-            </div>
+            <NewNote dispatch={setNote} options={{ id, note, user, submitHandler: handleSubmit }} />
             <div className='border pt-8 text-[#1E6570] mt-8 relative border-cyan-200 rounded-lg'>
                 <p className='-mt-12 absolute px-3 mx-3 border bg-[#EDFDFB] text-lg tracking-widest border-cyan-200'>
                     Recent<span className='text-sm'> Notes</span>
