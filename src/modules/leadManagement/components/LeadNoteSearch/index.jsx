@@ -24,7 +24,7 @@ const LeadNoteSearch = ({ dispatch = null }) => {
         <div className='border pt-6 text-[#1E6570] mt-4 relative border-cyan-200 rounded-lg'>
             <p className='-mt-10 absolute px-3 mx-3 border bg-[#EDFDFB] tracking-widest border-cyan-200'>Filters</p>
             <div className='px-2 md:px-4'>
-                <div className='md:flex items-center justify-between pb-4'>
+                <div className='md:flex md:gap-2 justify-between pb-4'>
                     <div className='grid md:grid-flow-col gap-2.5 w-[90%]'>
                         <Input
                             value={filter.query}
@@ -55,7 +55,7 @@ const LeadNoteSearch = ({ dispatch = null }) => {
                         )}
                     </div>
                     {dispatch && (
-                        <div className='mt-2 md:mt-0'>
+                        <div className='mt-2 md:mt-0 flex items-center'>
                             {(isset(filter.status) || isset(filter.phase) || isset(filter.query)) && (
                                 <Button label='Apply' fit classes='!py-1 px-3' onClick={applyFilters} />
                             )}
