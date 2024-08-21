@@ -10,6 +10,7 @@ import { DownloadIcon2 } from '@icons'
 
 const JobTypeCounts = ({ data = [], set = null }) => {
     const statRef = useRef('')
+    const watermark = useRef('')
 
     return (
         <div className='border px-2 pt-10 pb-4 mt-10 relative w-1/2'>
@@ -18,7 +19,10 @@ const JobTypeCounts = ({ data = [], set = null }) => {
             </p>
             <span
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border text-[#1E6570] bg-[#EDFDFB] right-2 cursor-pointer text-sm'
-                onClick={() => htmlToPng(statRef?.current)}
+                onClick={() => {
+                    watermark?.current?.classList.remove('hidden')
+                    htmlToPng(statRef?.current).then(() => watermark?.current?.classList.add('hidden'))
+                }}
             >
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
@@ -48,6 +52,9 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                             </div>
                         </div>
                     ))}
+                    <span className='text-gray-500 col-span-3 text-end px-2 hidden' ref={watermark}>
+                        Powered by Octagon
+                    </span>
                 </div>
             ) : (
                 <span className='italic ml-2'>No statistics found yet</span>

@@ -10,6 +10,7 @@ import { DownloadIcon2 } from '@icons'
 
 const JobTypePies = ({ data }) => {
     const chartRef = useRef('')
+    const watermark = useRef('')
 
     const renderCustomizedLabel = ({ percent, payload }) => `${payload.name} (${(percent * 100).toFixed(2)}%)`
     // `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(2)}%)`
@@ -21,29 +22,37 @@ const JobTypePies = ({ data }) => {
             </p>
             <span
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
-                onClick={() => htmlToPng(chartRef?.current?.current)}
+                onClick={() => {
+                    watermark?.current?.classList.remove('hidden')
+                    htmlToPng(chartRef?.current).then(() => watermark?.current?.classList.add('hidden'))
+                }}
             >
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
-            <ResponsiveContainer width='100%' height={400} ref={chartRef} id='job-type-pies'>
-                <PieChart className='mx-auto'>
-                    <Pie
-                        data={data?.filter(({ value }) => value > 0)}
-                        label={renderCustomizedLabel}
-                        outerRadius={130}
-                        dataKey='value'
-                        animationBegin={0}
-                        animationDuration={300}
-                    >
-                        {data
-                            ?.filter(({ value }) => value > 0)
-                            .map((row, index) => (
-                                <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS2[row.key]} />
-                            ))}
-                    </Pie>
-                    <Tooltip />
-                </PieChart>
-            </ResponsiveContainer>
+            <div ref={chartRef} className='flex flex-col'>
+                <ResponsiveContainer width='100%' height={400} id='job-type-pies'>
+                    <PieChart className='mx-auto'>
+                        <Pie
+                            data={data?.filter(({ value }) => value > 0)}
+                            label={renderCustomizedLabel}
+                            outerRadius={130}
+                            dataKey='value'
+                            animationBegin={0}
+                            animationDuration={300}
+                        >
+                            {data
+                                ?.filter(({ value }) => value > 0)
+                                .map((row, index) => (
+                                    <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS2[row.key]} />
+                                ))}
+                        </Pie>
+                        <Tooltip />
+                    </PieChart>
+                </ResponsiveContainer>
+                <span className='text-gray-500 text-end px-2 hidden' ref={watermark}>
+                    Powered by Octagon
+                </span>
+            </div>
         </div>
     )
 }
