@@ -1,29 +1,30 @@
 import { memo, useState } from 'react'
-
 import { useMutate } from '@/hooks'
 
-import { Button, Drawer, Input, Badge, CustomSelector } from '@components'
+import CustomSelector from '@components/CustomSelector'
+import { Button, Drawer, Badge, Input } from '@components'
 
-import { saveTechStackCategory } from '@modules/settings/api'
+import { saveTeam } from '@/modules/leadManagement/api'
+import { parseExposedCandidates, parseTeamCandidates } from '@utils/helpers'
 
-import { parseTechStacks } from '@utils/helpers'
-
-const TechStacksCategoryForm = ({ show, setShow, mutate, trendAnalytics, techStacksOptions }) => {
-    const [tags, setTags] = useState(
-        trendAnalytics?.tech_stacks ? parseTechStacks(trendAnalytics?.tech_stacks.split(',')) : []
-    )
-    const { values, handleSubmit, resetForm, trigger, handleChange } = useMutate(
-        `api/job_portal/trends_analytics${trendAnalytics?.id ? `/${trendAnalytics?.id}/` : '/'}`,
-        saveTechStackCategory,
-        { category: trendAnalytics?.category || '' },
+const TeamForm = ({ show, setShow, team, mutate, candidates }) => {
+    const [tags, setTags] = useState(team?.team_candidates ? parseTeamCandidates(team?.team_candidates) : [])
+    const { values, handleChange, resetForm, trigger, handleSubmit } = useMutate(
+        `api/candidate_management/candidate_teams${team?.id ? `/${team?.id}/` : '/'}`,
+        saveTeam,
+        { name: team?.name || '' },
         null,
         async formValues =>
-            trigger({ ...formValues, id: trendAnalytics?.id, tech_stacks: tags.map(item => item.value).join() }),
+            trigger({
+                ...formValues,
+                id: team?.id,
+                exposed_candidates: tags.map(item => item.value),
+            }),
         null,
         () => {
             mutate()
-            if (!trendAnalytics?.id) resetForm()
-            setShow(false)
+            if (!team?.id) resetForm()
+            setShow({ show: false })
         }
     )
     const handleTagRemove = tagToRemove => setTags(tags.filter(tag => tag !== tagToRemove))
@@ -32,19 +33,17 @@ const TechStacksCategoryForm = ({ show, setShow, mutate, trendAnalytics, techSta
         <Drawer show={show} setShow={setShow} w='420px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>
-                        {trendAnalytics?.id ? 'Edit' : 'Create'} Tech Stacks Categories
-                    </p>
+                    <p className='font-medium text-xl'>{team?.id ? 'Edit' : 'Create'} Team</p>
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Name</span>
-                    <Input name='category' value={values.category} onChange={handleChange} ph='Enter Category name' />
-                    <span className='text-xs font-semibold'>Tech Stacks</span>
+                    <Input name='name' value={values.name} onChange={handleChange} ph='Enter Team name' />
+                    <span className='text-xs font-semibold'>Candidates</span>
                     <CustomSelector
-                        options={parseTechStacks(techStacksOptions)}
+                        options={parseExposedCandidates(candidates)}
                         handleChange={obj => setTags(obj)}
                         selectorValue={tags}
                         isMulti
-                        placeholder='Select Tech Stacks'
+                        placeholder='Select Candidates'
                     />
                     <div className='flex flex-wrap gap-3 items-center mt-2'>
                         {tags?.length > 0 &&
@@ -69,8 +68,8 @@ const TechStacksCategoryForm = ({ show, setShow, mutate, trendAnalytics, techSta
                             ))}
                     </div>
                     <div className='pt-4 space-y-2'>
-                        <Button label={trendAnalytics?.id ? 'Update' : 'Submit'} type='submit' fill />
-                        <Button label='Cancel' onClick={() => setShow(false)} />
+                        <Button label={team?.id ? 'Update' : 'Submit'} type='submit' fill />
+                        <Button label='Cancel' onClick={() => setShow({ show: false })} />
                     </div>
                 </div>
             </form>
@@ -78,4 +77,4 @@ const TechStacksCategoryForm = ({ show, setShow, mutate, trendAnalytics, techSta
     )
 }
 
-export default memo(TechStacksCategoryForm)
+export default memo(TeamForm)

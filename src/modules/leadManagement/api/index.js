@@ -120,8 +120,22 @@ export const saveCandidate = (url, { arg: candidate }) => {
         .then(({ data }) => toast.success(data.detail || 'Candidate is created successfully'))
 }
 
+export const saveTeam = (url, { arg: team }) => {
+    if (team?.id) {
+        return rawHttp
+            .put(url, { ...team })
+            .then(({ data }) => toast.success(data.detail || 'Team updated successfully'))
+    }
+    return rawHttp.post(url, team).then(({ data }) => toast.success(data.detail || 'Team is created successfully'))
+}
+
 export const fetchCandidatesAndCompanies = url =>
     http.get(url).then(({ data }) => ({ candidates: data?.candidates, companies: data?.companies }))
+
+export const fetchTeamsCandidatesAndCompanies = url =>
+    http
+        .get(url)
+        .then(({ data }) => ({ teams: data?.teams, candidates: data?.exposed_candidates, companies: data?.companies }))
 
 export const assignCandidate = (url, { arg: candidate }) =>
     rawHttp

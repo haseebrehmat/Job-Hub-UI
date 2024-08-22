@@ -719,6 +719,12 @@ export const rawpermissions = [
                 level: 2,
             },
             {
+                codename: 'edit_exposed_candidate',
+                name: 'Edit Exposed Candidates',
+                child: ['remove_exposed_to', 'expose_to'],
+                level: 2,
+            },
+            {
                 codename: 'expose_to',
                 name: 'Expose To (Company)',
                 parent: ['view_exposed_candidate'],

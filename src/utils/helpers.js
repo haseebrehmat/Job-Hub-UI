@@ -505,3 +505,8 @@ export const isset = value => {
     }
     return true
 }
+export const parseExposedCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.name, value: candidate.id }))
+
+export const parseTeamCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.candidate, value: candidate.id }))

@@ -41,6 +41,11 @@ import LeadNoteSearch from '@modules/leadManagement/components/LeadNoteSearch'
 import NewNote from '@modules/leadManagement/components/NewNote'
 import LeadInfo from '@modules/leadManagement/components/LeadInfo'
 import LeadNote from '@modules/leadManagement/components/LeadNote'
+import TeamInfo from '@modules/leadManagement/components/TeamInfo'
+import TeamExposedTo from '@modules/leadManagement/components/TeamExposedTo'
+import TeamForm from '@modules/leadManagement/components/TeamForm'
+import ExposedTeamsActions from '@modules/leadManagement/components/ExposedTeamsActions'
+import ExposedTeamForm from '@modules/leadManagement/components/ExposedTeamForm'
 
 export {
     CandidateActionsModel,
@@ -86,4 +91,9 @@ export {
     NewNote,
     LeadInfo,
     LeadNote,
+    TeamInfo,
+    TeamExposedTo,
+    TeamForm,
+    ExposedTeamsActions,
+    ExposedTeamForm,
 }

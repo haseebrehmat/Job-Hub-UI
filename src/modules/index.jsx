@@ -40,6 +40,7 @@ import MyProfile from '@modules/leadManagement/candidateProfile'
 import Permissions from '@modules/settings/permissions'
 import TechStacksCategories from '@modules/settings/techStacksCategories'
 import LeadNotes from '@/modules/leadManagement/leadNotes'
+import ExposedTeams from '@modules/leadManagement/exposedTeams'
 
 export {
     TeamAppliedJobs,
@@ -85,4 +86,5 @@ export {
     LeadsTable,
     TechStacksCategories,
     LeadNotes,
+    ExposedTeams,
 }

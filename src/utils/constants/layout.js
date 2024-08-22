@@ -218,6 +218,12 @@ export const menuItems = [
                 svg: ExposedCandidateIcon,
                 perms: ['view_exposed_candidate', 'remove_exposed_to', 'expose_to'],
             },
+            {
+                label: 'Exposed Teams',
+                link: '/exposed-teams',
+                svg: ExposedCandidateIcon,
+                perms: ['view_exposed_candidate', 'remove_exposed_to', 'expose_to'],
+            },
         ],
     },
     {
