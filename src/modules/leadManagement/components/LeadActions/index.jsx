@@ -27,7 +27,7 @@ const LeadActions = ({ lead, dispatch = null }) => (
         )}
         {true && (
             <Tooltip text='See Notes'>
-                <Link to={`/lead-notes/${lead?.id}`} state={{ status: lead?.status?.id, phase: lead?.phase ?? '' }}>
+                <Link to={`/lead-notes/${lead?.id}`} state={{ status: lead?.status?.id, phase: lead?.phase?.id ?? '' }}>
                     {LeadNoteIcon}
                 </Link>
             </Tooltip>

@@ -68,9 +68,21 @@ export const fetchLead = url => http.get(url).then(({ data }) => data)
 
 export const saveNote = (url, { arg: note }) => {
     if (note?.id) {
-        return rawHttp.put(url, note).then(({ data }) => toast.success(data.detail || 'Note is updated successfully'))
+        return rawHttp
+            .put(url, note, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then(({ data }) => toast.success(data.detail || 'Note is updated successfully'))
     }
-    return rawHttp.post(url, note).then(({ data }) => toast.success(data.detail || 'Note is created successfully'))
+    return rawHttp
+        .post(url, note, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(({ data }) => toast.success(data.detail || 'Note is created successfully'))
 }
 
 export const fetchNotes = url => http.get(url).then(({ data }) => data)

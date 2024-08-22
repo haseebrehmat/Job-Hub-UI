@@ -43,7 +43,7 @@ const LeadNotes = () => {
         async formVals =>
             trigger({ ...formVals, id: note.id, notes: note.id ? note.edit : note.msg, attachments: note.attachments }),
         null,
-        () => mutate() && setNote({ id: null, msg: '', edit: '', file: null })
+        () => mutate() && setNote({ id: null, msg: '', edit: '', attachments: null })
     )
 
     if (isLoading) return <Loading />
