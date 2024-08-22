@@ -1,10 +1,14 @@
 import { memo, useMemo, useState } from 'react'
+import { toast } from 'react-hot-toast'
 
-import { Textarea, Button } from '@components'
+import { Textarea, Button, Tooltip } from '@components'
+
 import { EMOJIS } from '@constants/leadManagement'
+import { MAX_FILE_SIZE } from '@constants/profile'
 
 const NoteEditForm = ({ note, handleSubmit, setNote }) => {
     const [showEmo, setShowEmo] = useState(false)
+    const [upload, setUpload] = useState(false)
     const handleEditChange = e => setNote({ edit: e.target.value })
 
     const memoized = useMemo(
@@ -21,6 +25,17 @@ const NoteEditForm = ({ note, handleSubmit, setNote }) => {
         ),
         [note]
     )
+
+    const updateAttachment = e => {
+        const file = e.target.files[0]
+        if (file.size > MAX_FILE_SIZE) {
+            toast.error(`File size is too large. Max size: ${Math.ceil(MAX_FILE_SIZE / (1024 * 1024))} MBs.`)
+            e.target.value = null
+        } else {
+            setNote({ attachments: file })
+        }
+    }
+
     return (
         <>
             {memoized}
@@ -40,6 +55,39 @@ const NoteEditForm = ({ note, handleSubmit, setNote }) => {
                             </span>
                         ))}
                     </div>
+                )}
+                {upload ? (
+                    <label className='inline-flex ml-2'>
+                        <span className='sr-only'>Attach file</span>
+                        <input
+                            type='file'
+                            accept='.jpg, .jpeg, .png, .pdf, .doc, .docx, .xls, .xlsx, .zip'
+                            onChange={updateAttachment}
+                            className='block w-full text-sm text-slate-500 file:mr-4 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:text-white file:font-semibold file:bg-[#329988] hover:file:bg-[#4ab9a7]'
+                        />
+                        <Button
+                            label='Cancel'
+                            classes='!py-0.5 bg-slate-200 border-0 !text-gray-500 hover:bg-slate-200 hover:border-0 hover:!text-gray-500'
+                            fit
+                            fill
+                            onClick={() => setUpload(false)}
+                        />
+                    </label>
+                ) : (
+                    <span className='inline-flex ml-2'>
+                        <div className='flex items-center'>
+                            <span className='text-sm text-slate-500 italic'>{note?.editAttachments?.filename}</span>
+                            <Tooltip text='By uploading new file, previous file will be deleted'>
+                                <Button
+                                    label='Attach new File'
+                                    classes='!py-0.5 ml-2'
+                                    fit
+                                    fill
+                                    onClick={() => setUpload(true)}
+                                />
+                            </Tooltip>
+                        </div>
+                    </span>
                 )}
             </div>
         </>

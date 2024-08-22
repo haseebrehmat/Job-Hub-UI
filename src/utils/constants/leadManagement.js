@@ -27,6 +27,7 @@ export const NOTE_INITIAL_STATE = {
     phase: '',
     attachments: null,
     search: '',
+    editAttachements: {},
 }
 
 export const CANDIDATE_INITIAL_STATE = {
