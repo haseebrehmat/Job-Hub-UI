@@ -25,7 +25,7 @@ export const NOTE_INITIAL_STATE = {
     show: false,
     status: '',
     phase: '',
-    file: null,
+    attachments: null,
 }
 
 export const CANDIDATE_INITIAL_STATE = {

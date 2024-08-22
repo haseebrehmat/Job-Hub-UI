@@ -15,7 +15,7 @@ const NewNote = ({ dispatch = null, options = {} }) => {
             toast.error(`File size is too large. Max size: ${Math.ceil(MAX_FILE_SIZE / (1024 * 1024))} MBs.`)
             e.target.value = null
         } else {
-            dispatch({ file })
+            dispatch({ attachments: file })
         }
     }
     return (
