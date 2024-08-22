@@ -17,7 +17,6 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Jooble', value: 'jooble' },
     { label: 'Careerjet', value: 'careerjet' },
     { label: 'Daily Remote', value: 'dailyremote' },
-    { label: 'Remote Ok', value: 'remoteok' },
     { label: 'Recruit', value: 'recruit' },
     { label: 'YCombinator', value: 'ycombinator' },
     { label: 'Dynamite', value: 'dynamite' },
@@ -35,6 +34,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Working Nomads', value: 'workingnomads' },
     { label: 'Arc Dev', value: 'arcdev' },
     { label: 'Remote Ok', value: 'remoteok' },
+    { label: 'Job Gether', value: 'jobgether' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -47,6 +47,7 @@ export const JOB_SOURCE_OPTIONS_UNDERSCORE = [
     { label: 'Working Nomads', value: 'working_nomads' },
     { label: 'Arc Dev', value: 'arc_dev' },
     { label: 'Remote Ok', value: 'remote_ok' },
+    { label: 'Job Gether', value: 'job_gether' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -86,6 +87,7 @@ export const JOB_SOURCES = {
     dynamite: 'Dynamite',
     startwire: 'Startwire',
     usjora: 'US Jora',
+    jobgether: 'Job Gether',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
@@ -96,6 +98,7 @@ export const JOB_SOURCES = {
     working_nomads: 'Working Nomads',
     arc_dev: 'Arc Dev',
     remote_ok: 'Remote Ok',
+    job_gether: 'Job Gether',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
