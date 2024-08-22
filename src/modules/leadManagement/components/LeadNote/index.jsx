@@ -29,10 +29,12 @@ const LeadNote = ({ note, actions = null, editForm = null, options = {} }) => (
                 <span className='text-black'>{note.message}</span>
             )}
         </div>
-        {note?.file && (
+        {note?.attachments && (
             <div className='tracking-wider cursor-pointer'>
-                <Tooltip text='Attached file: Screenshot.png'>
-                    <span className='text-xs'>{DownloadIcon2}</span>
+                <Tooltip text={note?.attachments?.filename ? note?.attachments?.filename : 'Attached File'}>
+                    <a href={note?.attachments?.url} target='_blank' rel='noopener noreferrer' download>
+                        <span className='text-xs'>{DownloadIcon2}</span>
+                    </a>
                 </Tooltip>
             </div>
         )}
