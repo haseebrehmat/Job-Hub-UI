@@ -18,7 +18,7 @@ const LeadNoteSearch = ({ dispatch = null }) => {
         setFilter(NOTE_FILTERS_INITIAL)
     }
 
-    const applyFilters = () => dispatch({ status: filter.status, phase: filter.phase, query: filter.query })
+    const applyFilters = () => dispatch({ status: filter.status, phase: filter.phase, search: filter.search })
 
     return (
         <div className='border pt-6 text-[#1E6570] mt-4 relative border-cyan-200 rounded-lg'>
@@ -27,8 +27,8 @@ const LeadNoteSearch = ({ dispatch = null }) => {
                 <div className='md:flex md:gap-2 justify-between pb-4'>
                     <div className='grid md:grid-flow-col gap-2.5 w-[90%]'>
                         <Input
-                            value={filter.query}
-                            onChange={e => setFilter({ query: e.target.value })}
+                            value={filter.search}
+                            onChange={e => setFilter({ search: e.target.value })}
                             ph='Enter keywords'
                         />
                         {isLoading ? (

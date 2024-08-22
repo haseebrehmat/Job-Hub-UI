@@ -26,6 +26,7 @@ export const NOTE_INITIAL_STATE = {
     status: '',
     phase: '',
     attachments: null,
+    search: '',
 }
 
 export const CANDIDATE_INITIAL_STATE = {
@@ -123,7 +124,7 @@ export const LEAD_HEADS = [
 ]
 
 export const NOTE_FILTERS_INITIAL = {
-    query: '',
+    search: '',
     status: '',
     phase: '',
 }

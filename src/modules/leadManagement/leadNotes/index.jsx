@@ -7,13 +7,19 @@ import { useMutate } from '@/hooks'
 import { Loading, Button } from '@components'
 
 import { fetchNotes, saveNote } from '@modules/leadManagement/api'
-import { NoteEditForm, NoteActions, LeadNoteSearch, NewNote, LeadInfo } from '@modules/leadManagement/components'
+import {
+    NoteEditForm,
+    NoteActions,
+    LeadNoteSearch,
+    NewNote,
+    LeadInfo,
+    LeadNote,
+} from '@modules/leadManagement/components'
 
 import { decodeJwt } from '@utils/helpers'
 import { NOTE_INITIAL_STATE } from '@constants/leadManagement'
 
 import { LoadMoreIcon } from '@icons'
-import LeadNote from '../components/LeadNote'
 
 const LeadNotes = () => {
     const user = decodeJwt()
@@ -25,7 +31,7 @@ const LeadNotes = () => {
     const { data, isLoading, mutate } = useSWR(
         `/api/lead_managament/lead_activity_notes/?lead=${id}&status=${state.status || note.status}&phase=${
             state.phase || note.phase
-        }`,
+        }&query=${note.search}`,
         fetchNotes
     )
 
