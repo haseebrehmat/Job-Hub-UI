@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { can } from '@utils/helpers'
@@ -7,16 +7,23 @@ import { SeePassIcon, AssignCandidateIcon, ActionsIcons, HistoryIcon } from '@ic
 
 const LeadActions = ({ lead, dispatch = null }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const dropdownRef = useRef(null)
+
     const toggleDropdown = () => setIsOpen(!isOpen)
     const closeDropdown = () => setIsOpen(false)
 
+    if (isOpen)
+        window.addEventListener('click', event => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) closeDropdown()
+        })
+
     return (
-        <div className='relative inline-block'>
-            <button onClick={toggleDropdown} onBlur={closeDropdown} className={`${isOpen ? 'animate-bounce' : ''}`}>
+        <div className='relative inline-block' ref={dropdownRef}>
+            <button onClick={toggleDropdown} className={`${isOpen ? 'animate-bounce' : ''}`}>
                 {ActionsIcons}
             </button>
             {isOpen && (
-                <div className='absolute right-0 w-max z-40 bg-white border border-gray-300 rounded-md shadow-xl flex flex-col pt-2.5 pb-2 gap-y-2'>
+                <div className='absolute right-0 w-max z-10 bg-white border border-gray-300 rounded-md shadow-xl flex flex-col pt-2.5 pb-2 gap-y-2'>
                     {can('view_lead_details') && (
                         <button
                             onClick={() => {
@@ -41,8 +48,7 @@ const LeadActions = ({ lead, dispatch = null }) => {
                     )}
                     {can('assign_candidate') && (
                         <Link
-                            to={`/assign-candidate/${lead?.id}`}
-                            state={{ candidate: lead?.candidate?.id }}
+                            to={`/lead-history/${lead?.id}`}
                             className='bg-transparent border-0 hover:bg-slate-100 hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
                         >
                             <span className='tracking-wide'>Show edit history</span>
