@@ -21,6 +21,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Recruit', value: 'recruit' },
     { label: 'YCombinator', value: 'ycombinator' },
     { label: 'Dynamite', value: 'dynamite' },
+    { label: 'Startwire', value: 'startwire' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -82,6 +83,7 @@ export const JOB_SOURCES = {
     workingnomads: 'Working Nomads',
     arcdev: 'Arc Dev',
     dynamite: 'Dynamite',
+    startwire: 'Startwire',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
