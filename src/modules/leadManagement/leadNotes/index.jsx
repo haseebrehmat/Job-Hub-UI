@@ -31,7 +31,7 @@ const LeadNotes = () => {
     const { data, isLoading, mutate } = useSWR(
         `/api/lead_managament/lead_activity_notes/?lead=${id}&status=${state.status || note.status}&phase=${
             state.phase || note.phase
-        }&query=${note.search}`,
+        }&search=${note.search}`,
         fetchNotes
     )
 
