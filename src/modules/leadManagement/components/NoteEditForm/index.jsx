@@ -77,9 +77,15 @@ const NoteEditForm = ({ note, handleSubmit, setNote }) => {
                     <span className='inline-flex ml-2'>
                         <div className='flex items-center'>
                             <span className='text-sm text-slate-500 italic'>{note?.editAttachments?.filename}</span>
-                            <Tooltip text='By uploading new file, previous file will be deleted'>
+                            <Tooltip
+                                text={`${
+                                    note?.editAttachments?.filename
+                                        ? 'By uploading new file, previous file will be deleted'
+                                        : 'Upload new file'
+                                }`}
+                            >
                                 <Button
-                                    label='Attach new File'
+                                    label={`${note?.editAttachments?.filename ? 'Attach new File' : 'Attach File'}`}
                                     classes='!py-0.5 ml-2'
                                     fit
                                     fill
