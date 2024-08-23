@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { can } from '@utils/helpers'
 
-import { SeePassIcon, AssignCandidateIcon, ActionsIcons } from '@icons'
+import { SeePassIcon, AssignCandidateIcon, ActionsIcons, HistoryIcon } from '@icons'
 
 const LeadActions = ({ lead, dispatch = null }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -16,7 +16,7 @@ const LeadActions = ({ lead, dispatch = null }) => {
                 {ActionsIcons}
             </button>
             {isOpen && (
-                <div className='absolute right-0 w-max z-40 bg-white border border-gray-300 rounded-md shadow-xl flex flex-col px-1 pt-2.5 pb-2 gap-y-2'>
+                <div className='absolute right-0 w-max z-40 bg-white border border-gray-300 rounded-md shadow-xl flex flex-col pt-2.5 pb-2 gap-y-2'>
                     {can('view_lead_details') && (
                         <button
                             onClick={() => {
@@ -25,7 +25,7 @@ const LeadActions = ({ lead, dispatch = null }) => {
                             }}
                             className='bg-transparent border-0 hover:bg-slate-100 hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
                         >
-                            <span>View Lead Details</span>
+                            <span className='tracking-wide'>View lead details</span>
                             <span>{SeePassIcon}</span>
                         </button>
                     )}
@@ -35,8 +35,18 @@ const LeadActions = ({ lead, dispatch = null }) => {
                             state={{ candidate: lead?.candidate?.id }}
                             className='bg-transparent border-0 hover:bg-slate-100 hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
                         >
-                            <span>Assign Candidate</span>
+                            <span className='tracking-wide'>Assign candidate</span>
                             <span>{AssignCandidateIcon}</span>
+                        </Link>
+                    )}
+                    {can('assign_candidate') && (
+                        <Link
+                            to={`/assign-candidate/${lead?.id}`}
+                            state={{ candidate: lead?.candidate?.id }}
+                            className='bg-transparent border-0 hover:bg-slate-100 hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
+                        >
+                            <span className='tracking-wide'>Show edit history</span>
+                            <span>{HistoryIcon}</span>
                         </Link>
                     )}
                 </div>
