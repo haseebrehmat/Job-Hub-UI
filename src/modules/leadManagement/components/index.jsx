@@ -42,6 +42,7 @@ import TeamExposedTo from '@modules/leadManagement/components/TeamExposedTo'
 import TeamForm from '@modules/leadManagement/components/TeamForm'
 import ExposedTeamsActions from '@modules/leadManagement/components/ExposedTeamsActions'
 import ExposedTeamForm from '@modules/leadManagement/components/ExposedTeamForm'
+import LeadChanges from '@modules/leadManagement/components/LeadChanges'
 
 export {
     CandidateActionsModel,
@@ -88,4 +89,5 @@ export {
     TeamForm,
     ExposedTeamsActions,
     ExposedTeamForm,
+    LeadChanges,
 }
