@@ -46,10 +46,10 @@ const LeadActions = ({ lead, dispatch = null }) => {
                             <span>{AssignCandidateIcon}</span>
                         </Link>
                     )}
-                    {can('assign_candidate') && (
+                    {can('view_lead_history') && (
                         <Link
                             to={`/edit-history/${lead?.id}`}
-                            state={{ module: 'leads' }}
+                            state={{ module: 'Lead', backTo: 'Leads', backToUrl: '/leads' }}
                             className='bg-transparent border-0 hover:bg-slate-100 hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
                         >
                             <span className='tracking-wide'>Show edit history</span>
