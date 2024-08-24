@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import { useLocation, useParams, Link } from 'react-router-dom'
 import useSWR from 'swr'
 
@@ -19,6 +19,14 @@ const EditHistory = () => {
         `/api/lead_managament/leads/?id=${rowId}&module=${state?.module}`,
         fetchHistory
     )
+    const memoizedBackTo = useMemo(
+        () => (
+            <Link to={state?.backToUrl || '/profile'} className='text-[#048C8C] flex items-center gap-2 md:pt-3'>
+                {BackToIcon} Back to {state?.backTo || 'Profile'}
+            </Link>
+        ),
+        [state]
+    )
 
     if (isLoading) return <Loading />
     return (
@@ -27,12 +35,7 @@ const EditHistory = () => {
                 <>
                     <div className='flex justify-between items-center'>
                         <Input ph='Search the history' classes='mb-2 !w-full' />
-                        <Link
-                            to={state?.backToUrl || '/profile'}
-                            className='text-[#048C8C] flex items-center gap-2 md:pt-3'
-                        >
-                            {BackToIcon} Back to {state?.backTo || 'Profile'}
-                        </Link>
+                        {memoizedBackTo}
                     </div>
                     <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
                         <thead className='text-xs uppercase border border-[#048C8C]'>
@@ -77,12 +80,7 @@ const EditHistory = () => {
                 </>
             ) : (
                 <>
-                    <Link
-                        to={state?.backToUrl || '/profile'}
-                        className='text-[#048C8C] flex items-center gap-2 md:pt-3'
-                    >
-                        {BackToIcon} Back to {state?.backTo || 'Profile'}
-                    </Link>
+                    {memoizedBackTo}
                     <div className='flex items-center justify-center min-h-[54vh]'>
                         <p className='text-2xl text-neutral-400 border border-neutral-400 px-2 py-12 -skew-x-12'>
                             {HISTORY_TYPES[state?.module]?.msg || 'You are Unauthorized'}
