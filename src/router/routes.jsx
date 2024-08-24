@@ -29,6 +29,7 @@ import App from '@/App'
 import { leadsRoutes } from '@router/leadsRoutes'
 import { analyticsRoutes } from '@router/analyticsRoutes'
 import { settingsRoutes } from '@router/settingsRoutes'
+import { editHistoryRoutes } from '@router/editHistoryRoutes'
 
 import { getToken, decodeJwt } from '@utils/helpers'
 
@@ -184,6 +185,7 @@ export const routes = [
     ...leadsRoutes,
     ...analyticsRoutes,
     ...settingsRoutes,
+    ...editHistoryRoutes,
 ]
 
 export const authRoutes = [

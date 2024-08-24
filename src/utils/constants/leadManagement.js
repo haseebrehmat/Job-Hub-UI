@@ -129,5 +129,3 @@ export const LEAD_HEADS = [
     'Updated At',
     '',
 ]
-
-export const LEAD_HISTORY_HEADS = ['Sr.', 'Date', 'User', { lg: 'Changes ', sm: '(From - To)' }]

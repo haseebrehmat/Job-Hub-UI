@@ -10,7 +10,6 @@ import {
     AssignCandidate,
     MyProfile,
     ExposedTeams,
-    LeadEditHistory,
 } from '@modules'
 
 export const leadsRoutes = [
@@ -83,12 +82,5 @@ export const leadsRoutes = [
         protect: true,
         title: 'My Profile',
         permission: 'view_candidate_profile',
-    },
-    {
-        path: '/lead-history/:id',
-        component: <LeadEditHistory />,
-        protect: true,
-        title: 'Lead Edit History',
-        permission: 'view_lead',
     },
 ]

@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react'
 
-const LeadChanges = ({ data = [] }) => {
+const ChangesLog = ({ data = [] }) => {
     const memoizedChanges = useMemo(
         () => (
             <div className='w-full mx-auto pl-3'>
@@ -26,4 +26,4 @@ const LeadChanges = ({ data = [] }) => {
     return data?.length > 0 ? memoizedChanges : []
 }
 
-export default memo(LeadChanges)
+export default memo(ChangesLog)
