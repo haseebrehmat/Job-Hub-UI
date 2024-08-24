@@ -17,7 +17,7 @@ const LeadActions = ({ lead, dispatch = null }) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) closeDropdown()
         })
 
-    return (
+    return can('view_lead_details') || can('assign_candidate') || can('view_lead_history') ? (
         <div className='relative inline-block' ref={dropdownRef}>
             <button onClick={toggleDropdown} className={`${isOpen ? 'animate-bounce' : ''}`}>
                 {ActionsIcons}
@@ -59,6 +59,6 @@ const LeadActions = ({ lead, dispatch = null }) => {
                 </div>
             )}
         </div>
-    )
+    ) : null
 }
 export default memo(LeadActions)
