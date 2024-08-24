@@ -19,6 +19,7 @@ import {
     MdCancel,
     MdDoNotDisturbOn,
     MdBlock,
+    MdOutlineNoteAlt,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -61,6 +62,7 @@ import {
     AiOutlineHistory,
     AiOutlinePlus,
     AiOutlinePartition,
+    AiOutlineArrowDown,
 } from 'react-icons/ai'
 import { ImSearch, ImCross } from 'react-icons/im'
 import { CgSidebarOpen, CgListTree, CgUnblock } from 'react-icons/cg'
@@ -216,3 +218,5 @@ export const PermissionsIcon = <GoShield style={{ fontSize: 16 }} />
 export const SalaryIcon = <RiMoneyEuroCircleLine style={{ fontSize: 20 }} />
 export const RestrictLogin = <TbKeyOff style={{ fontSize: 20 }} />
 export const AllowLogin = <TbKey style={{ fontSize: 20 }} />
+export const LeadNoteIcon = <MdOutlineNoteAlt style={{ fontSize: 20 }} />
+export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />

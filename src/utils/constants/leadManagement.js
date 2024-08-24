@@ -19,11 +19,15 @@ export const LEADS_INITIAL_VALS = {
 
 export const NOTE_INITIAL_STATE = {
     id: null,
+    query: '',
     msg: '',
     edit: '',
     show: false,
     status: '',
     phase: '',
+    attachments: null,
+    search: '',
+    editAttachements: {},
 }
 
 export const CANDIDATE_INITIAL_STATE = {
@@ -128,4 +132,35 @@ export const LEAD_HEADS = [
     'Created At',
     'Updated At',
     '',
+]
+
+export const NOTE_FILTERS_INITIAL = {
+    search: '',
+    status: '',
+    phase: '',
+}
+
+export const EMOJIS = [
+    '\u{1F604}', // 😀
+    '\u{1F970}', // 🥰
+    '\u{1F602}', // 😂
+    '\u{1F60D}', // 😍
+    '\u{1F44D}', // 👍
+    '\u{2764}', // ❤️
+    '\u{1F44C}', // 👌
+    '\u{274C}', // ❌
+    '\u{1F44F}', // 👏
+    '\u{1F389}', // 🎉
+    '\u{1F49C}', // 💜
+    '\u{1F31F}', // 🌟
+    '\u{1F4AA}', // 💪
+    '\u{1F64C}', // 🙌
+    '\u{1F381}', // 🎁
+    '\u{1F4F1}', // 📱
+    '\u{1F44E}', // 👎
+    '\u{1F4F2}', // 📲
+    '\u{1F64F}', // 🙏
+    '\u{1F48C}', // 💌
+    '\u{1F575}', // 🕵️‍♂️
+    '\u{1F4BB}', // 💻
 ]
