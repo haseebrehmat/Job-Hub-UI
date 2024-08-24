@@ -35,7 +35,7 @@ const Team = () => {
         <EmptyTable cols={6} msg='Failed to load team members..' />
     ) : data?.team?.members?.length > 0 ? (
         data?.team?.members?.map((row, idx) => (
-            <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
+            <tr className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row?.id}>
                 <td className='px-3 py-6'>{idx + 1}</td>
                 <td className='px-3 py-6 capitalize'>{row?.username ?? '-'}</td>
                 <td className='px-3'>
