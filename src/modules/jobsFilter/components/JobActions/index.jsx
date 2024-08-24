@@ -45,7 +45,7 @@ const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => 
                     <Link
                         to={`/edit-history/${id}`}
                         state={{ module: 'JobDetail', backTo: 'Job Portal', backToUrl: '/jobs-portal' }}
-                        className='_icon-btn'
+                        className='_icon-btn mt-2 ml-1'
                     >
                         {HistoryIcon}
                     </Link>
