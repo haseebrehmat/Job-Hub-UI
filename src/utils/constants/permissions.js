@@ -260,6 +260,12 @@ export const rawpermissions = [
                 level: 2,
             },
             {
+                codename: 'view_job_history',
+                name: 'View Job History',
+                parent: ['view_job_portal', 'view_manual_job'],
+                level: 2,
+            },
+            {
                 codename: 'view_cover_letter',
                 name: 'View Cover Letter',
                 parent: ['view_cover_letter'],
