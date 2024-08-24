@@ -1,11 +1,12 @@
 import { memo, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button, DeleteDialog, Tooltip } from '@components'
 
 import { JOB_DELETION } from '@constants/allowDeletion'
 import { can } from '@utils/helpers'
 
-import { TrashIcon, EditIcon, Checkedbox, unCheckedbox } from '@icons'
+import { TrashIcon, EditIcon, Checkedbox, unCheckedbox, HistoryIcon } from '@icons'
 
 const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => {
     const [show, setShow] = useState(false)
@@ -40,6 +41,15 @@ const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => 
                         </Tooltip>
                     </DeleteDialog>
                 )}
+                <Tooltip text='View job history'>
+                    <Link
+                        to={`/edit-history/${id}`}
+                        state={{ module: 'JobDetail', backTo: 'Job Portal', backToUrl: '/jobs-portal' }}
+                        className='_icon-btn'
+                    >
+                        {HistoryIcon}
+                    </Link>
+                </Tooltip>
             </div>
         </span>
     )
