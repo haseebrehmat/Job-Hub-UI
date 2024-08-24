@@ -41,15 +41,17 @@ const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => 
                         </Tooltip>
                     </DeleteDialog>
                 )}
-                <Tooltip text='View job history'>
-                    <Link
-                        to={`/edit-history/${id}`}
-                        state={{ module: 'JobDetail', backTo: 'Job Portal', backToUrl: '/jobs-portal' }}
-                        className='_icon-btn mt-2 ml-1'
-                    >
-                        {HistoryIcon}
-                    </Link>
-                </Tooltip>
+                {can('view_job_history') && (
+                    <Tooltip text='View job history'>
+                        <Link
+                            to={`/edit-history/${id}`}
+                            state={{ module: 'JobDetail', backTo: 'Job Portal', backToUrl: '/jobs-portal' }}
+                            className='_icon-btn mt-2 ml-1'
+                        >
+                            {HistoryIcon}
+                        </Link>
+                    </Tooltip>
+                )}
             </div>
         </span>
     )
