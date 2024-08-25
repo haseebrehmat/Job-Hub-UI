@@ -64,7 +64,7 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
                     <span className='text-xs font-semibold'>Name*</span>
                     <Input name='name' value={values.name} onChange={handleChange} ph='Enter team name' />
                     {errors.name && <small className='ml-1 text-xs text-red-600'>{errors.name}</small>}
-                    <RolesDropdown value={role} onChange={val => setRole(val.value)} />
+                    <RolesDropdown value={role} onChange={val => setRole(val)} />
                     <RoleUsersDropdown
                         value={values.reporting_to}
                         error={errors.reporting_to}

@@ -90,7 +90,7 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
         }
         const selectedValues = data.map(option => option.value)
         if (selectedValues.includes('__SELECT_ALL__')) {
-            const filteredOpts = options?.filter(opt => opt.isDisabled === false)
+            const filteredOpts = options?.filter(opt => opt.isDisabled !== true)
             setSelectedOptions(filteredOpts)
             handleChange(filteredOpts)
         } else {
