@@ -55,8 +55,8 @@ const EditHistory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data?.length > 0 && !error ? (
-                                data?.map((row, idx) => (
+                            {data?.results?.length > 0 && !error ? (
+                                data?.results?.map((row, idx) => (
                                     <tr
                                         className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-slate-100'
                                         key={row.id}
