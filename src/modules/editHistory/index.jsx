@@ -1,11 +1,11 @@
-import { memo, useMemo } from 'react'
+import { memo, useMemo, useState } from 'react'
 import { useLocation, useParams, Link } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { Input, EmptyTable, Loading } from '@components'
 
 import { fetchHistory } from '@modules/editHistory/api'
-import { ChangesLog } from '@modules/editHistory/components'
+import { ChangesLog, HistoryPagination } from '@modules/editHistory/components'
 
 import { can, formatDate, timeSince } from '@utils/helpers'
 import { EDIT_HISTORY_HEADS, HISTORY_TYPES } from '@constants/editHistory'
@@ -15,8 +15,9 @@ import { BackToIcon } from '@icons'
 const EditHistory = () => {
     const { rowId } = useParams()
     const { state } = useLocation()
+    const [page, setPage] = useState(1)
     const { data, isLoading, error } = useSWR(
-        `/api/lead_managament/leads/?id=${rowId}&module=${state?.module}`,
+        `/api/job_portal/detect_changes/?instance_id=${rowId}&module=${state?.module}&page=${page}`,
         fetchHistory
     )
     const memoizedBackTo = useMemo(
@@ -27,7 +28,6 @@ const EditHistory = () => {
         ),
         [state]
     )
-
     if (isLoading) return <Loading />
     return (
         <div className='flex flex-col gap-2 px-4'>
@@ -44,7 +44,7 @@ const EditHistory = () => {
                                     <th scope='col' className='px-3 py-4' key={heading}>
                                         {heading?.lg ? (
                                             <>
-                                                {heading?.lg}{' '}
+                                                {heading?.lg}
                                                 <span className='!text-xs !font-normal'>{heading?.sm}</span>
                                             </>
                                         ) : (
@@ -64,11 +64,13 @@ const EditHistory = () => {
                                         <td className='px-3 py-4 w-10'>{idx + 1}</td>
                                         <td className='w-1/6 p-3'>
                                             {timeSince(row?.date)}
-                                            <span className='block text-[13px] ml-1'>{formatDate(row?.date)}</span>
+                                            <span className='block text-[13px] ml-1'>
+                                                {formatDate(row?.created_at)}
+                                            </span>
                                         </td>
                                         <td className='p-3'>{row?.user?.username}</td>
                                         <td className='w-8/12 p-2'>
-                                            <ChangesLog />
+                                            <ChangesLog data={row?.changes} />
                                         </td>
                                     </tr>
                                 ))
@@ -77,6 +79,7 @@ const EditHistory = () => {
                             )}
                         </tbody>
                     </table>
+                    <HistoryPagination data={data} page={page} set={setPage} />
                 </>
             ) : (
                 <>
