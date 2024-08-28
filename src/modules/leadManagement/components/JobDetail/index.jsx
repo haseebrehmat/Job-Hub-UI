@@ -2,12 +2,12 @@ import { memo } from 'react'
 
 import { formatDate } from '@utils/helpers'
 
-const JobDetail = ({ job = null }) =>
+const JobDetail = ({ job = null, expanded = false }) =>
     job ? (
         <div className='border p-2'>
-            <p className='text-lg'>Job Details</p>
+            <p className={`${expanded ? 'text-2xl' : 'text-lg'}`}>Job Details</p>
             <hr />
-            <div className='grid grid-cols-2 gap-x-4 gap-y-2 pt-2.5'>
+            <div className={`grid ${expanded ? 'grid-cols-1' : 'grid-cols-2'} gap-x-4 gap-y-2 pt-2.5`}>
                 <div className='flex justify-between flex-wrap'>
                     <span className='text-gray-600 text-sm'>Title</span>
                     <span className='capitalize'>{job?.job_title ?? 'N/A'}</span>

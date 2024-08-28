@@ -24,7 +24,7 @@ const ManualJobs = () => {
 
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto mb-14 px-5'>
+        <div className='max-w-full mb-14 px-5'>
             <div className='flex items-center py-3 justify-end'>
                 {can(['create_manual_job']) && (
                     <Button label='Create a Job' fit icon={CreateIcon} onClick={() => setJob({ createShow: true })} />
@@ -70,6 +70,7 @@ const ManualJobs = () => {
                                         id={row?.id}
                                         mutate={mutate}
                                         expired={row?.expired_at}
+                                        edited={row?.edited}
                                         edit={() => handleClick(row)}
                                     />
                                 </td>

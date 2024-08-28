@@ -29,6 +29,19 @@ export const saveRegion = (url, { arg: region }) => {
     return rawHttp.post(url, region).then(({ data }) => toast.success(data.detail))
 }
 
+export const saveTechStackCategory = (url, { arg: category }) => {
+    if (category?.id) {
+        return rawHttp
+            .put(url, category)
+            .then(({ data }) => toast.success(data.detail || 'TechStack Category updated successfully'))
+    }
+    return rawHttp
+        .post(url, category)
+        .then(({ data }) => toast.success(data.detail || 'New Category created successfully'))
+}
+
 export const fetchAllRegions = url => http.get(url).then(({ data }) => data)
 
 export const fetchPermissions = url => http.get(url).then(({ data }) => data)
+
+export const fetchTechStacksCategory = url => http.get(url).then(({ data }) => data)

@@ -1,29 +1,35 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import useSWR from 'swr'
 
-import { SelectBox } from '@components'
+import { CustomSelector } from '@components'
 import { fetchRoles } from '@modules/userManagement/api'
 
-import { parseRoles, parseSelectedRole } from '@utils/helpers'
+import { parseRoles } from '@utils/helpers'
 
-const RolesDropdown = ({ value: selected, error = null, setFieldValue, onChange = null }) => {
+const RolesDropdown = ({ value: selected, error = null, setFieldValue, onChange = null, options = {} }) => {
     const { data, isLoading, error: fetchError } = useSWR('/api/auth/role/', fetchRoles)
 
-    return isLoading ? (
-        <small className='ml-1 p-3 text-xs text-gray-400'>Roles Loading...</small>
-    ) : fetchError ? (
-        <div>Failed to load roles</div>
-    ) : (
-        <>
-            <span className='text-xs font-semibold'>Role*</span>
-            <SelectBox
+    const renderRoles = useMemo(() =>
+        isLoading ? (
+            <div>Loading roles....</div>
+        ) : fetchError ? (
+            <div className='text-red-500 text-xs'>Failed to fetch roles</div>
+        ) : (
+            <CustomSelector
                 options={parseRoles(data?.roles)}
-                selected={parseSelectedRole(selected, data?.roles)}
-                handleChange={onChange || (({ value }) => setFieldValue('roles', value))}
-                classes='text-gray-500 text-sm'
+                selectorValue={selected}
+                handleChange={onChange || (e => setFieldValue('roles', e.value))}
+                placeholder='Select Roles'
+                isMulti={options?.multi}
             />
-            {error && <small className='ml-1 text-xs text-red-600'>{error}</small>}
-        </>
+        )
+    )
+    return (
+        <div className='z-20'>
+            <span className='text-xs font-semibold text-[#048c8c]'>Roles*</span>
+            {renderRoles}
+            {error && <small className='__error'>{error}</small>}
+        </div>
     )
 }
 

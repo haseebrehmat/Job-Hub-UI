@@ -27,7 +27,7 @@ const Paginated = ({ pages: pageCount, setPage, page }) => {
                 previousLabel={PagePrev}
                 forcePage={page - 1}
                 renderOnZeroPageCount={null}
-                containerClassName='flex justify-start my-2 gap-2'
+                containerClassName='flex items-center justify-start my-2 gap-2'
                 pageLinkClassName='border px-2 py-1 rounded-lg border-[#10868a]'
                 previousClassName='border px-2 py-1 rounded-lg text-white bg-[#10868a] border-[#10868a]'
                 nextClassName='border px-2 py-1 rounded-lg text-white bg-[#10868a] border-[#10868a]'

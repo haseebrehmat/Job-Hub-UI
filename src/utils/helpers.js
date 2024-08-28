@@ -26,6 +26,10 @@ export const isSuper = () => decodeJwt()?.is_superuser
 
 export const Id = () => decodeJwt()?.user_id
 
+export const activeRole = () => ({ role: decodeJwt()?.role, id: decodeJwt()?.role_id })
+
+export const userRoles = () => (decodeJwt()?.roles?.length > 1 ? decodeJwt()?.roles : [])
+
 export const getMsg = error => error?.response?.data?.detail || 'Server error'
 
 export const getBaseUrl = nodeEnv => {
@@ -394,7 +398,7 @@ export const parseStatusPhases = (id, statuses) =>
 export const parseSelectedStatusPhase = (pid, sid, statuses) => {
     if (pid && sid) {
         const status = statuses.find(row => row?.id === sid)?.phases?.find(row => row.id === pid)
-        return { value: status?.id, label: status?.name }
+        return status ? { value: status?.id, label: status?.name } : null
     }
     return null
 }
@@ -429,18 +433,21 @@ export const getYearsOptions = () => {
     return years
 }
 
-export const htmlToPng = htmlRef => {
-    toPng(htmlRef, { cacheBust: false, backgroundColor: 'white' })
-        .then(dataUrl => {
-            const link = document.createElement('a')
-            link.download = 'export.png'
-            link.href = dataUrl
-            link.click()
-        })
-        .catch(err => {
-            console.log('Error ==>', err)
-        })
-}
+export const htmlToPng = (htmlRef, options = null) =>
+    new Promise((resolve, reject) => {
+        toPng(htmlRef, { cacheBust: false, backgroundColor: options?.bgColor || 'white' })
+            .then(dataUrl => {
+                const link = document.createElement('a')
+                link.download = `${options?.name || 'export'}.png`
+                link.href = dataUrl
+                link.click()
+                resolve(dataUrl)
+            })
+            .catch(err => {
+                console.log('Error ==>', err)
+                reject(err)
+            })
+    })
 
 export const getSelectedVals = options =>
     options?.length > 0 ? options?.map(m => m.value).join(',') : options?.value || ''
@@ -483,3 +490,23 @@ export const findSkill = (skill, skills) => {
 
 export const parseProjects = projects =>
     projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))
+
+export const parseTechStacks = techStacks => techStacks.map(tech => ({ value: tech, label: tech }))
+
+export const isset = value => {
+    if (value === null || value === undefined) {
+        return false
+    }
+    if (typeof value === 'string' || Array.isArray(value)) {
+        return value.length > 0
+    }
+    if (typeof value === 'object') {
+        return Object.keys(value).length > 0
+    }
+    return true
+}
+export const parseExposedCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.name, value: candidate.id }))
+
+export const parseTeamCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.candidate, value: candidate.id }))

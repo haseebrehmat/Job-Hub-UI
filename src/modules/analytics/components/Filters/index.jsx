@@ -2,7 +2,7 @@ import { memo, useReducer } from 'react'
 
 import { Button, Input } from '@components'
 
-import { FilterOptions, FilterTypes } from '@modules/analytics/components'
+import { ExportAll, FilterOptions, FilterTypes } from '@modules/analytics/components'
 
 import { formatDate2 } from '@utils/helpers'
 import { today } from '@constants/dashboard'
@@ -33,7 +33,7 @@ const Filters = ({ values, set, data = null }) => {
             tab: vals.tab,
         })
     const clearFilters = () => {
-        set({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '', filter: false })
+        set({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '', filter: false, bar: 'total' })
         update({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '' })
     }
 
@@ -49,6 +49,7 @@ const Filters = ({ values, set, data = null }) => {
                     </div>
                 </div>
                 <div className='flex gap-3'>
+                    <ExportAll />
                     <Input
                         ph='Enter Keywords'
                         onChange={e => update({ query: e.target.value })}

@@ -30,6 +30,7 @@ import {
     RegionIcon,
     AppliedJobsIcon,
     PermissionsIcon,
+    TechSTack,
 } from '@icons'
 
 export const menuItems = [
@@ -168,6 +169,8 @@ export const menuItems = [
             'create_designation',
             'edit_designation',
             'delete_designation',
+            'view_lead_details',
+            'assign_candidate',
         ],
         subItems: [
             {
@@ -212,6 +215,12 @@ export const menuItems = [
             {
                 label: 'Exposed Candidates',
                 link: '/exposed-candidates',
+                svg: ExposedCandidateIcon,
+                perms: ['view_exposed_candidate', 'remove_exposed_to', 'expose_to'],
+            },
+            {
+                label: 'Exposed Teams',
+                link: '/exposed-teams',
                 svg: ExposedCandidateIcon,
                 perms: ['view_exposed_candidate', 'remove_exposed_to', 'expose_to'],
             },
@@ -349,6 +358,17 @@ export const menuItems = [
                 link: '/permissions',
                 svg: PermissionsIcon,
                 perms: ['view_permission', 'create_permission', 'edit_permission', 'delete_permission'],
+            },
+            {
+                label: 'Tech Stacks Categories',
+                link: '/tech-stacks-categories',
+                svg: TechSTack,
+                perms: [
+                    'view_tech_stacks_categories',
+                    'create_tech_stacks_categories',
+                    'edit_tech_stacks_categories',
+                    'delete_tech_stacks_categories',
+                ],
             },
         ],
     },

@@ -6,12 +6,12 @@ import { formatDate } from '@utils/helpers'
 
 import { DownloadIcon, DownloadIcon2 } from '@icons'
 
-const AppliedDetail = ({ applied = null }) =>
+const AppliedDetail = ({ applied = null, expanded = false }) =>
     applied ? (
         <div className='border p-2'>
-            <p className='text-lg'>Applied Details</p>
+            <p className={`${expanded ? 'text-2xl' : 'text-lg'}`}>Applied Details</p>
             <hr />
-            <div className='grid grid-cols-2 gap-x-4 gap-y-2 pt-2.5'>
+            <div className={`grid ${expanded ? 'grid-cols-1' : 'grid-cols-2'} gap-x-4 gap-y-2 pt-2.5`}>
                 <div className='flex justify-between flex-wrap'>
                     <span className='text-gray-600 text-sm'>Team</span>
                     <span className='capitalize'>{applied?.team?.name ?? '-'}</span>

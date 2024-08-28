@@ -1,4 +1,5 @@
 import { memo, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button, DeleteDialog, Tooltip, Modal } from '@components'
 
@@ -7,9 +8,9 @@ import { toggleMarkAsExpired } from '@modules/jobsUploader/api'
 import { can } from '@utils/helpers'
 import { JOB_DELETION } from '@constants/allowDeletion'
 
-import { TrashIcon, EditIcon, Checkedbox, unCheckedbox } from '@icons'
+import { TrashIcon, EditIcon, Checkedbox, unCheckedbox, HistoryIcon } from '@icons'
 
-const ManualJobActions = memo(({ id, expired = false, edit = null, mutate, editAndDel = true }) => {
+const ManualJobActions = memo(({ id, expired = false, edit = null, edited = false, mutate, editAndDel = true }) => {
     const [show, setShow] = useState(false)
     const [confirm, setConfirm] = useState(false)
 
@@ -25,28 +26,41 @@ const ManualJobActions = memo(({ id, expired = false, edit = null, mutate, editA
                         <button onClick={() => setConfirm(true)}>{Checkedbox}</button>
                     </Tooltip>
                 ))}
-            {editAndDel && (
-                <div className='flex ml-1'>
-                    {can('edit_job') && (
-                        <Tooltip text='Edit job'>
-                            <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
-                        </Tooltip>
-                    )}
-                    {can('delete_job') && (
-                        <DeleteDialog
-                            show={show}
-                            setShow={setShow}
-                            url={`api/job_portal/job_modification/${id}/`}
-                            refetch={mutate}
-                            perm={JOB_DELETION}
-                        >
-                            <Tooltip text='Delete job'>
-                                <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
+            <div className='flex ml-1'>
+                {editAndDel && (
+                    <>
+                        {can('edit_job') && (
+                            <Tooltip text='Edit job'>
+                                <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
                             </Tooltip>
-                        </DeleteDialog>
-                    )}
-                </div>
-            )}
+                        )}
+                        {can('delete_job') && (
+                            <DeleteDialog
+                                show={show}
+                                setShow={setShow}
+                                url={`api/job_portal/job_modification/${id}/`}
+                                refetch={mutate}
+                                perm={JOB_DELETION}
+                            >
+                                <Tooltip text='Delete job'>
+                                    <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
+                                </Tooltip>
+                            </DeleteDialog>
+                        )}
+                    </>
+                )}
+                {can('view_job_history') && edited && (
+                    <Tooltip text='View job history'>
+                        <Link
+                            to={`/edit-history/${id}`}
+                            state={{ module: 'JobDetail', backTo: 'Manual Jobs', backToUrl: '/jobs-uploader' }}
+                            className='_icon-btn mt-2 ml-1'
+                        >
+                            {HistoryIcon}
+                        </Link>
+                    </Tooltip>
+                )}
+            </div>
             <Modal
                 classes='!w-1/3'
                 show={confirm}

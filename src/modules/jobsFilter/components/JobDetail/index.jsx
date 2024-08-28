@@ -136,7 +136,7 @@ const JobDetail = () => {
                         <div className='flex flex-col space-y-4 p-6 text-gray-600'>
                             <div className='flex flex-row text-md'>
                                 <p className='flex items-center text-gray-900'>
-                                    <div dangerouslySetInnerHTML={{ __html: data?.job_details?.job_description }} />
+                                    <div dangerouslySetInnerHTML={{ __html: data?.job_details?.job_description_tags   }} />
                                 </p>
                             </div>
                         </div>

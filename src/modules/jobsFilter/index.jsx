@@ -230,7 +230,7 @@ const JobsFilter = memo(() => {
                         { type: 'Filtered', count: filterState?.stats?.filtered_job },
                         { type: 'Recruiters', count: filterState?.stats?.recruiter_job },
                         { type: 'Non Recruiters', count: filterState?.stats?.non_recruiter_job },
-                        { type: 'Today Uploaded Jobs', count: filterState?.stats?.today_uploaded_job },
+                        { type: "Today's Jobs", count: filterState?.stats?.today_uploaded_job },
                     ]}
                     total={filterState?.stats?.total_job}
                 />
@@ -459,6 +459,7 @@ const JobsFilter = memo(() => {
                                         <JobActions
                                             id={item?.id}
                                             blocked={item?.block}
+                                            edited={item?.edited}
                                             edit={() => setJob({ data: item, show: true })}
                                             add={() => {
                                                 setCurrentCompany([item?.company_name, 'add/'])

@@ -90,8 +90,9 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
         }
         const selectedValues = data.map(option => option.value)
         if (selectedValues.includes('__SELECT_ALL__')) {
-            setSelectedOptions(options)
-            handleChange(options)
+            const filteredOpts = options?.filter(opt => opt.isDisabled !== true)
+            setSelectedOptions(filteredOpts)
+            handleChange(filteredOpts)
         } else {
             setSelectedOptions(data)
             handleChange(data)
@@ -102,15 +103,16 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
         setSelectedOptions(selectorValue)
     }, [selectorValue])
 
-    const extendedOptions = options
-        ? [
-              {
-                  label: 'Select All',
-                  value: '__SELECT_ALL__',
-              },
-              ...options,
-          ]
-        : []
+    const extendedOptions =
+        options?.length > 0
+            ? [
+                  {
+                      label: 'Select All',
+                      value: '__SELECT_ALL__',
+                  },
+                  ...options,
+              ]
+            : []
 
     return (
         <div className='dropdown-container'>

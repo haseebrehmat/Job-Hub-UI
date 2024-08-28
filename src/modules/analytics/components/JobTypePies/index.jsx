@@ -25,8 +25,8 @@ const JobTypePies = ({ data }) => {
             >
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
-            <ResponsiveContainer width='100%' height={400} ref={chartRef}>
-                <PieChart>
+            <ResponsiveContainer width='100%' height={400} ref={chartRef} id='job-type-pies'>
+                <PieChart className='mx-auto'>
                     <Pie
                         data={data?.filter(({ value }) => value > 0)}
                         label={renderCustomizedLabel}

@@ -22,11 +22,17 @@ const UserForm = ({ show, setShow, mutate, user }) => {
             email: user?.email,
             id: user?.id,
             company: user?.company?.id || loggedUser?.company,
-            roles: user?.roles?.id,
+            roles: user?.roles || null,
             password: '',
         },
         user?.id ? userSchema : userCreateSchema,
-        async formValues => trigger({ ...formValues, id: user?.id, regions: regions.map(r => r.value).join(',') }),
+        async formValues =>
+            trigger({
+                ...formValues,
+                id: user?.id,
+                regions: regions.map(r => r.value).join(','),
+                roles: formValues?.roles?.map(r => r.value).join(','),
+            }),
         null,
         () => {
             mutate()
@@ -49,7 +55,12 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                     <span className='text-xs font-semibold'>Username*</span>
                     <Input name='username' value={values.username} onChange={handleChange} ph='Enter username' />
                     {errors.username && <small className='ml-1 text-xs text-red-600'>{errors.username}</small>}
-                    <RolesDropdown value={values.roles} error={errors.roles} setFieldValue={setFieldValue} />
+                    <RolesDropdown
+                        value={values.roles}
+                        error={errors.roles}
+                        onChange={obj => setFieldValue('roles', obj)}
+                        options={{ multi: !isSuper() }}
+                    />
                     {allowCompanyEdit ? (
                         <CompaniesDropdown
                             value={values.company}
