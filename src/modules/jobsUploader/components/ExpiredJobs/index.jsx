@@ -1,15 +1,20 @@
+import { useState, memo } from 'react'
 import useSWR from 'swr'
 
-import { Loading, EmptyTable } from '@components'
+import { Loading, EmptyTable, Pagination } from '@components'
 
-import { fetchManualJobs as fetchExpiredJobs } from '@modules/jobsUploader/api'
+import { fetchExpiredJobs } from '@modules/jobsUploader/api'
 import { ManualJobActions as ExpiredJobActions } from '@modules/jobsUploader/components'
 
 import { formatDate } from '@utils/helpers'
 import { MANUAL_JOBS_HEADS as EXPIRED_JOBS_HEADS } from '@constants/jobUploader'
 
 const ExpiredJobs = () => {
-    const { data, error, isLoading, mutate } = useSWR('api/job_portal/manual_jobs/?expired=true', fetchExpiredJobs)
+    const [page, setPage] = useState(1)
+
+    const { data, error, isLoading, mutate } = useSWR(`api/job_portal/expired_jobs/?page=${page}`, fetchExpiredJobs)
+
+    const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     if (isLoading) return <Loading />
     return (
@@ -26,7 +31,7 @@ const ExpiredJobs = () => {
                 </thead>
                 <tbody>
                     {data?.jobs?.length > 0 && !error ? (
-                        data.jobs.map(row => (
+                        data?.jobs?.map(row => (
                             <tr
                                 className='bg-white border-b border-[#006366] border-opacity-30 hover:bg-slate-100'
                                 key={row?.id}
@@ -64,8 +69,13 @@ const ExpiredJobs = () => {
                     )}
                 </tbody>
             </table>
+            {data?.pages > 1 && (
+                <div className='w-full px-2 py-4 text-end'>
+                    <Pagination handleClick={handleClick} next={!data?.next} prev={!data?.prev} />
+                </div>
+            )}
         </div>
     )
 }
 
-export default ExpiredJobs
+export default memo(ExpiredJobs)
