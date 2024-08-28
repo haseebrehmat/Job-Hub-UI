@@ -9,6 +9,7 @@ import {
     ExposedCandidates,
     AssignCandidate,
     MyProfile,
+    LeadNotes,
     ExposedTeams,
 } from '@modules'
 
@@ -82,5 +83,12 @@ export const leadsRoutes = [
         protect: true,
         title: 'My Profile',
         permission: 'view_candidate_profile',
+    },
+    {
+        path: '/lead-notes/:id',
+        component: <LeadNotes />,
+        protect: true,
+        title: 'Lead Notes',
+        permission: 'view_lead',
     },
 ]

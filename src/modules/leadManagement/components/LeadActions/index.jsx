@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { can } from '@utils/helpers'
 
-import { SeePassIcon, AssignCandidateIcon, ActionsIcons, HistoryIcon } from '@icons'
+import { SeePassIcon, AssignCandidateIcon, ActionsIcons, HistoryIcon, LeadNoteIcon } from '@icons'
 
 const LeadActions = ({ lead, dispatch = null }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -44,6 +44,16 @@ const LeadActions = ({ lead, dispatch = null }) => {
                         >
                             <span className='tracking-wide'>Assign candidate</span>
                             <span>{AssignCandidateIcon}</span>
+                        </Link>
+                    )}
+                    {true && (
+                        <Link
+                            to={`/lead-notes/${lead?.id}`}
+                            state={{ status: lead?.status?.id, phase: lead?.phase?.id ?? '' }}
+                            className='bg-transparent border-0 hover:bg-slate-100 hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
+                        >
+                            <span className='tracking-wide'>See notes</span>
+                            <span>{LeadNoteIcon}</span>
                         </Link>
                     )}
                     {can('view_lead_history') && (

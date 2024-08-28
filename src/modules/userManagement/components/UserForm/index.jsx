@@ -59,7 +59,7 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                         value={values.roles}
                         error={errors.roles}
                         onChange={obj => setFieldValue('roles', obj)}
-                        options={{ multi: true }}
+                        options={{ multi: !isSuper() }}
                     />
                     {allowCompanyEdit ? (
                         <CompaniesDropdown

@@ -26,7 +26,7 @@ const PseudosMemberForm = ({ show, setShow, mutate, user, vert, teamId, role = n
     const { values, handleSubmit, trigger, setFieldValue } = useMutate(
         'api/profile/user_vertical_assignment/',
         assignVertical,
-        { user_id: user.id, team_id: teamId, role_id: role?.id || null },
+        { user_id: user?.id, team_id: teamId, role_id: role?.id || null },
         null,
         async vals =>
             trigger({

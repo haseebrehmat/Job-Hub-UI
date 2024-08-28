@@ -59,7 +59,7 @@ const LeadsTable = () => {
                                         {row?.applied_job?.vertical_name || '-'}
                                     </td>
                                     <td className='px-3 py-4 capitalize font-semibold italic'>
-                                        {row?.candidate?.name || 'unassigned'}
+                                        {row?.candidate?.name || '-'}
                                     </td>
                                     <td className='px-3 py-4'>
                                         <Badge label={row?.applied_job?.tech_stack || '-'} />

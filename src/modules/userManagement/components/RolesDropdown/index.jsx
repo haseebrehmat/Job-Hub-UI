@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { CustomSelector } from '@components'
 import { fetchRoles } from '@modules/userManagement/api'
 
-import { parseRoles, parseSelectedRole } from '@utils/helpers'
+import { parseRoles } from '@utils/helpers'
 
 const RolesDropdown = ({ value: selected, error = null, setFieldValue, onChange = null, options = {} }) => {
     const { data, isLoading, error: fetchError } = useSWR('/api/auth/role/', fetchRoles)
@@ -17,7 +17,7 @@ const RolesDropdown = ({ value: selected, error = null, setFieldValue, onChange 
         ) : (
             <CustomSelector
                 options={parseRoles(data?.roles)}
-                selectorValue={options?.multi ? selected : parseSelectedRole(selected, data?.roles)}
+                selectorValue={selected}
                 handleChange={onChange || (e => setFieldValue('roles', e.value))}
                 placeholder='Select Roles'
                 isMulti={options?.multi}
