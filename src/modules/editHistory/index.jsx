@@ -5,21 +5,25 @@ import useSWR from 'swr'
 import { Input, EmptyTable, Loading } from '@components'
 
 import { fetchHistory } from '@modules/editHistory/api'
-import { ChangesLog, HistoryPagination } from '@modules/editHistory/components'
+import { ChangesLog, HistoryHeads, HistoryPagination, Unauthorized } from '@modules/editHistory/components'
 
 import { can, formatDate, timeSince } from '@utils/helpers'
-import { EDIT_HISTORY_HEADS, HISTORY_TYPES } from '@constants/editHistory'
+import { HISTORY_TYPES } from '@constants/editHistory'
 
 import { BackToIcon } from '@icons'
 
 const EditHistory = () => {
     const { rowId } = useParams()
     const { state } = useLocation()
+
     const [page, setPage] = useState(1)
+    const [query, setQuery] = useState('')
+
     const { data, isLoading, error } = useSWR(
-        `/api/job_portal/detect_changes/?instance_id=${rowId}&module=${state?.module}&page=${page}`,
+        `/api/job_portal/detect_changes/?instance_id=${rowId}&module=${state?.module}&page=${page}&query=${query}`,
         fetchHistory
     )
+
     const memoizedBackTo = useMemo(
         () => (
             <Link to={state?.backToUrl || '/profile'} className='text-[#048C8C] flex items-center gap-2 md:pt-3'>
@@ -28,32 +32,23 @@ const EditHistory = () => {
         ),
         [state]
     )
+
     if (isLoading) return <Loading />
     return (
         <div className='flex flex-col gap-2 px-4'>
             {can(HISTORY_TYPES[state?.module]?.perms) ? (
                 <>
                     <div className='flex justify-between items-center'>
-                        <Input ph='Search the history' classes='mb-2 !w-full' />
+                        <Input
+                            ph='Search the history'
+                            classes='mb-2 !w-full'
+                            value={query}
+                            onChange={e => setQuery(e.target.value)}
+                        />
                         {memoizedBackTo}
                     </div>
                     <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
-                        <thead className='text-xs uppercase border border-[#048C8C]'>
-                            <tr>
-                                {EDIT_HISTORY_HEADS.map(heading => (
-                                    <th scope='col' className='px-3 py-4' key={heading}>
-                                        {heading?.lg ? (
-                                            <>
-                                                {heading?.lg}
-                                                <span className='!text-xs !font-normal'>{heading?.sm}</span>
-                                            </>
-                                        ) : (
-                                            heading
-                                        )}
-                                    </th>
-                                ))}
-                            </tr>
-                        </thead>
+                        <HistoryHeads />
                         <tbody>
                             {data?.results?.length > 0 && !error ? (
                                 data?.results?.map((row, idx) => (
@@ -84,11 +79,7 @@ const EditHistory = () => {
             ) : (
                 <>
                     {memoizedBackTo}
-                    <div className='flex items-center justify-center min-h-[54vh]'>
-                        <p className='text-2xl text-neutral-400 border border-neutral-400 px-2 py-12 -skew-x-12'>
-                            {HISTORY_TYPES[state?.module]?.msg || 'You are Unauthorized'}
-                        </p>
-                    </div>
+                    <Unauthorized module={state?.module} />
                 </>
             )}
         </div>
