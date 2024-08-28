@@ -7,20 +7,32 @@ import { htmlToPng } from '@utils/helpers'
 import { JOB_TYPE_COLORS, JOB_TYPES } from '@constants/analytics'
 
 import { SearchClearIcon, DownloadIcon2 } from '@icons'
+import logo from '@images/signin-logo.svg'
 
 const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) => {
     const barRef = useRef('')
+    const watermark = useRef('')
+    const exportButton = useRef('')
+    const postProcessing = () => {
+        watermark?.current?.classList.add('hidden')
+        exportButton?.current?.classList.remove('hidden')
+    }
     const memoizedData = useMemo(() => data.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
 
     return memoizedData.length > 0 ? (
-        <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
+        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative' ref={barRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 {options?.title ?? ''}
                 <span className='text-sm'> - Charts</span>
             </p>
             <span
+                ref={exportButton}
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
-                onClick={() => htmlToPng(barRef?.current?.current)}
+                onClick={() => {
+                    watermark?.current?.classList.remove('hidden')
+                    exportButton?.current?.classList.add('hidden')
+                    htmlToPng(barRef?.current).then(() => postProcessing())
+                }}
             >
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
@@ -32,42 +44,48 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
                     </span>
                 </div>
             )}
-            <ResponsiveContainer width='100%' height={750} ref={barRef} id={options?.id}>
-                <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
-                    <CartesianGrid strokeDasharray='3 3' />
-                    <XAxis
-                        dataKey='name'
-                        label={{ position: 'insideBottomRight' }}
-                        angle={-40}
-                        stroke='#037571'
-                        interval={0}
-                        textAnchor='end'
-                        allowDuplicatedCategory={false}
-                        padding={{ left: 30 }}
-                        fontSize={17 - Math.round(memoizedData.length / 15)}
-                    />
-                    <YAxis
-                        label={{ angle: -90, position: 'insideLeft' }}
-                        stroke='#037571'
-                        type='number'
-                        domain={[0, 'auto']}
-                    />
-                    {Object.keys(JOB_TYPES).map(
-                        (row, index) =>
-                            type === row && (
-                                <Bar dataKey={row} stackId='a' fill={JOB_TYPE_COLORS[index]} key={index}>
-                                    <LabelList
-                                        dataKey={row}
-                                        position='top'
-                                        fontSize={options?.fs ?? 13}
-                                        fontWeight='bold'
-                                        fill={JOB_TYPE_COLORS[index]}
-                                    />
-                                </Bar>
-                            )
-                    )}
-                </BarChart>
-            </ResponsiveContainer>
+            <div>
+                <ResponsiveContainer width='100%' height={750} id={options?.id}>
+                    <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
+                        <CartesianGrid strokeDasharray='3 3' />
+                        <XAxis
+                            dataKey='name'
+                            label={{ position: 'insideBottomRight' }}
+                            angle={-40}
+                            stroke='#037571'
+                            interval={0}
+                            textAnchor='end'
+                            allowDuplicatedCategory={false}
+                            padding={{ left: 30 }}
+                            fontSize={17 - Math.round(memoizedData.length / 15)}
+                        />
+                        <YAxis
+                            label={{ angle: -90, position: 'insideLeft' }}
+                            stroke='#037571'
+                            type='number'
+                            domain={[0, 'auto']}
+                        />
+                        {Object.keys(JOB_TYPES).map(
+                            (row, index) =>
+                                type === row && (
+                                    <Bar dataKey={row} stackId='a' fill={JOB_TYPE_COLORS[index]} key={index}>
+                                        <LabelList
+                                            dataKey={row}
+                                            position='top'
+                                            fontSize={options?.fs ?? 13}
+                                            fontWeight='bold'
+                                            fill={JOB_TYPE_COLORS[index]}
+                                        />
+                                    </Bar>
+                                )
+                        )}
+                    </BarChart>
+                </ResponsiveContainer>
+                <div className='flex items-end justify-end mr-4 py-4 hidden' ref={watermark}>
+                    <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
+                    <img src={logo} alt='' width='120' height='120' />
+                </div>
+            </div>
         </div>
     ) : null
 }
