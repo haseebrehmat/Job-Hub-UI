@@ -20,7 +20,7 @@ const EditHistory = () => {
     const [query, setQuery] = useState('')
 
     const { data, isLoading, error } = useSWR(
-        `/api/job_portal/detect_changes/?instance_id=${rowId}&module=${state?.module}&page=${page}&query=${query}`,
+        `/api/job_portal/detect_changes/?instance_id=${rowId}&module=${state?.module}&page=${page}&search=${query}`,
         fetchHistory
     )
 
