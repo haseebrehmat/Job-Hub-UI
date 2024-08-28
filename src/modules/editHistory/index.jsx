@@ -58,7 +58,7 @@ const EditHistory = () => {
                                     >
                                         <td className='px-3 py-4 w-10'>{idx + 1}</td>
                                         <td className='w-1/6 p-3'>
-                                            {timeSince(row?.date)}
+                                            {timeSince(row?.created_at)}
                                             <span className='block text-[13px] ml-1'>
                                                 {formatDate(row?.created_at)}
                                             </span>
