@@ -1,4 +1,5 @@
 import { memo, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { Button, DeleteDialog, Tooltip, Modal } from '@components'
 
@@ -7,9 +8,9 @@ import { toggleMarkAsExpired } from '@modules/jobsUploader/api'
 import { can } from '@utils/helpers'
 import { JOB_DELETION } from '@constants/allowDeletion'
 
-import { TrashIcon, EditIcon, Checkedbox, unCheckedbox } from '@icons'
+import { TrashIcon, EditIcon, Checkedbox, unCheckedbox, HistoryIcon } from '@icons'
 
-const JobActions = memo(({ id, expired = false, edit, mutate }) => {
+const JobActions = memo(({ id, expired = false, edited = false, edit, mutate }) => {
     const [show, setShow] = useState(false)
     const [confirm, setConfirm] = useState(false)
 
@@ -42,6 +43,17 @@ const JobActions = memo(({ id, expired = false, edit, mutate }) => {
                             <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
                         </Tooltip>
                     </DeleteDialog>
+                )}
+                {can('view_job_history') && edited && (
+                    <Tooltip text='View job history'>
+                        <Link
+                            to={`/edit-history/${id}`}
+                            state={{ module: 'JobDetail', backTo: 'Manual Jobs', backToUrl: '/jobs-uploader' }}
+                            className='_icon-btn mt-2 ml-1'
+                        >
+                            {HistoryIcon}
+                        </Link>
+                    </Tooltip>
                 )}
             </div>
             <Modal

@@ -8,7 +8,7 @@ import RolesSidebar from '@modules/layout/rolesSidebar'
 
 const layout = memo(({ children, title }) => {
     const location = useLocation()
-    if (location.state) {
+    if (location?.state?.title) {
         title = location.state.title
     }
     const [toggle, setToggle] = useState(true)

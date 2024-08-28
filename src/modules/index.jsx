@@ -41,6 +41,7 @@ import Permissions from '@modules/settings/permissions'
 import TechStacksCategories from '@modules/settings/techStacksCategories'
 import LeadNotes from '@/modules/leadManagement/leadNotes'
 import ExposedTeams from '@modules/leadManagement/exposedTeams'
+import EditHistory from '@modules/editHistory'
 
 export {
     TeamAppliedJobs,
@@ -87,4 +88,5 @@ export {
     TechStacksCategories,
     LeadNotes,
     ExposedTeams,
+    EditHistory,
 }

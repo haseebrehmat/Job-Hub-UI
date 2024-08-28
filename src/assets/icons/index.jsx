@@ -19,6 +19,7 @@ import {
     MdCancel,
     MdDoNotDisturbOn,
     MdBlock,
+    MdOutlineHistory,
     MdOutlineNoteAlt,
 } from 'react-icons/md'
 import {
@@ -218,5 +219,6 @@ export const PermissionsIcon = <GoShield style={{ fontSize: 16 }} />
 export const SalaryIcon = <RiMoneyEuroCircleLine style={{ fontSize: 20 }} />
 export const RestrictLogin = <TbKeyOff style={{ fontSize: 20 }} />
 export const AllowLogin = <TbKey style={{ fontSize: 20 }} />
+export const HistoryIcon = <MdOutlineHistory style={{ fontSize: 20 }} />
 export const LeadNoteIcon = <MdOutlineNoteAlt style={{ fontSize: 20 }} />
 export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />
