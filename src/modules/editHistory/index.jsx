@@ -2,7 +2,7 @@ import { memo, useMemo, useState } from 'react'
 import { useLocation, useParams, Link } from 'react-router-dom'
 import useSWR from 'swr'
 
-import { Input, EmptyTable, Loading } from '@components'
+import { Searchbox, EmptyTable, Loading } from '@components'
 
 import { fetchHistory } from '@modules/editHistory/api'
 import { ChangesLog, HistoryHeads, HistoryPagination, Unauthorized } from '@modules/editHistory/components'
@@ -39,12 +39,9 @@ const EditHistory = () => {
             {can(HISTORY_TYPES[state?.module]?.perms) ? (
                 <>
                     <div className='flex justify-between items-center'>
-                        <Input
-                            ph='Search the history'
-                            classes='mb-2 !w-full'
-                            value={query}
-                            onChange={e => setQuery(e.target.value)}
-                        />
+                        <div className='flex items-center gap-2'>
+                            <Searchbox ph='Search the history' classes='mb-2' query={query} setQuery={setQuery} />
+                        </div>
                         {memoizedBackTo}
                     </div>
                     <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
