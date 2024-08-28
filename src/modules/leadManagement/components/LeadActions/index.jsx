@@ -56,7 +56,7 @@ const LeadActions = ({ lead, dispatch = null }) => {
                             <span>{LeadNoteIcon}</span>
                         </Link>
                     )}
-                    {can('view_lead_history') && (
+                    {can('view_lead_history') && lead?.edited && (
                         <Link
                             to={`/edit-history/${lead?.id}`}
                             state={{ module: 'Lead', backTo: 'Leads', backToUrl: '/leads' }}

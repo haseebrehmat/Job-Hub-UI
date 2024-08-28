@@ -10,7 +10,7 @@ import { JOB_DELETION } from '@constants/allowDeletion'
 
 import { TrashIcon, EditIcon, Checkedbox, unCheckedbox, HistoryIcon } from '@icons'
 
-const JobActions = memo(({ id, expired = false, edit, mutate }) => {
+const JobActions = memo(({ id, expired = false, edited = false, edit, mutate }) => {
     const [show, setShow] = useState(false)
     const [confirm, setConfirm] = useState(false)
 
@@ -44,7 +44,7 @@ const JobActions = memo(({ id, expired = false, edit, mutate }) => {
                         </Tooltip>
                     </DeleteDialog>
                 )}
-                {can('view_job_history') && (
+                {can('view_job_history') && edited && (
                     <Tooltip text='View job history'>
                         <Link
                             to={`/edit-history/${id}`}

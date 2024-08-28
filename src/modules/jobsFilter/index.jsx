@@ -459,6 +459,7 @@ const JobsFilter = memo(() => {
                                         <JobActions
                                             id={item?.id}
                                             blocked={item?.block}
+                                            edited={item?.edited}
                                             edit={() => setJob({ data: item, show: true })}
                                             add={() => {
                                                 setCurrentCompany([item?.company_name, 'add/'])

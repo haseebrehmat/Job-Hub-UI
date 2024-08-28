@@ -8,7 +8,7 @@ import { can } from '@utils/helpers'
 
 import { TrashIcon, EditIcon, Checkedbox, unCheckedbox, HistoryIcon } from '@icons'
 
-const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => {
+const JobActions = memo(({ id, blocked = false, edited = false, edit, mutate, add, remove }) => {
     const [show, setShow] = useState(false)
 
     return (
@@ -41,7 +41,7 @@ const JobActions = memo(({ id, blocked = false, edit, mutate, add, remove }) => 
                         </Tooltip>
                     </DeleteDialog>
                 )}
-                {can('view_job_history') && (
+                {can('view_job_history') && edited && (
                     <Tooltip text='View job history'>
                         <Link
                             to={`/edit-history/${id}`}
