@@ -2,16 +2,17 @@ import { memo, useState, useRef, useEffect } from 'react'
 import useSWRMutation from 'swr/mutation'
 import useSWRImmutable from 'swr/immutable'
 
-import { Button } from '@components'
+import { Button, Input } from '@components'
 
 import { syncNow, getScrapperCycleStatus, toggleScrapperCycleStatus } from '@modules/scrapper/api'
 
-import { JOB_SOURCE_OPTIONS } from '@constants/scrapper'
+import { JOB_SOURCES_INITIAL_VALS } from '@constants/scrapper'
 
 import { RunScrapperIcon, PauseIcon } from '@icons'
 
 const SyncNow = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [sources, setSources] = useState(JOB_SOURCES_INITIAL_VALS)
     const divRef = useRef(null)
 
     const { data, isLoading, mutate } = useSWRImmutable('api/job_scraper/sync_scheduler/', getScrapperCycleStatus)
@@ -45,6 +46,7 @@ const SyncNow = () => {
     const handleClickOutside = event => {
         if (divRef.current && !divRef.current.contains(event.target)) {
             setIsOpen(false)
+            setSources(JOB_SOURCES_INITIAL_VALS)
         }
     }
 
@@ -56,6 +58,10 @@ const SyncNow = () => {
     })
 
     const handleTriggerforScrapper = () => trigger2()
+    const filterSources = e =>
+        setSources(
+            JOB_SOURCES_INITIAL_VALS.filter(job => job?.label.toLowerCase().includes(e.target?.value.toLowerCase()))
+        )
 
     return (
         <div className='relative inline-block text-left' ref={divRef}>
@@ -64,7 +70,10 @@ const SyncNow = () => {
                     label={isMutating1 ? 'Running........' : 'Run Scrapper Now'}
                     fit
                     icon={RunScrapperIcon}
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => {
+                        setIsOpen(!isOpen)
+                        setSources(JOB_SOURCES_INITIAL_VALS)
+                    }}
                     disabled={isMutating1}
                     classes='mx-2'
                 />
@@ -82,20 +91,14 @@ const SyncNow = () => {
             </div>
             {isOpen && (
                 <div
-                    className='origin-top-right absolute right-0 mt-2 w-max rounded-md shadow-lg bg-white ring-1 ring-cyan-600  focus:outline-none text-[#048C8C]'
+                    className='origin-top-right absolute right-0 mt-2 w-max rounded-md shadow-lg bg-white ring-1 ring-cyan-600  focus:outline-none text-[#048C8C] max-h-96 overflow-y-scroll'
                     tabIndex={-1}
                 >
-                    <div className='py-1'>
-                        <button
-                            className='block w-full text-start px-4 py-2 text-sm hover:bg-gray-100'
-                            onClick={() => runSingleScraper('all')}
-                            disabled={isMutating1}
-                        >
-                            All
-                        </button>
-                        {JOB_SOURCE_OPTIONS.filter(job => job.value !== 'other').map(({ label, value }) => (
+                    <div className='p-1 flex flex-col'>
+                        <Input ph='searh by typing..' classes='!h-8' onChange={filterSources} />
+                        {sources.map(({ label, value }) => (
                             <button
-                                className='block w-full text-start px-4 py-2 text-sm hover:bg-gray-100'
+                                className='text-start px-2 py-2 text-sm hover:bg-gray-100'
                                 onClick={() => runSingleScraper(value)}
                                 disabled={isMutating1}
                                 key={value}
