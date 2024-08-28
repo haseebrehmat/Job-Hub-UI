@@ -209,6 +209,7 @@ export const rawpermissions = [
             {
                 codename: 'view_user_applied_job',
                 name: 'View My Applied Jobs',
+                child: ['create_lead'],
                 level: [2],
             },
             {
@@ -224,15 +225,15 @@ export const rawpermissions = [
                 level: [2],
             },
             {
-                codename: 'create_manual_job',
-                name: 'Create Manual Job',
-                parent: ['view_job_uploader'],
+                codename: 'view_manual_job',
+                name: 'View Manual Jobs',
+                child: ['edit_manual_job', 'delete_manual_job', 'view_manual_job_history', 'create_manual_job'],
                 level: [2],
             },
             {
-                codename: 'view_manual_job',
-                name: 'View Manual Job',
-                parent: ['view_job_uploader'],
+                codename: 'create_manual_job',
+                name: 'Create Manual Job',
+                parent: ['view_manual_job'],
                 level: [2],
             },
             {
@@ -262,19 +263,37 @@ export const rawpermissions = [
             {
                 codename: 'edit_job',
                 name: 'Edit Job',
-                parent: ['view_job_portal', 'view_manual_job'],
+                parent: ['view_job_portal'],
                 level: [2],
             },
             {
                 codename: 'delete_job',
                 name: 'Delete Job',
-                parent: ['view_job_portal', 'view_manual_job'],
+                parent: ['view_job_portal'],
+                level: [2],
+            },
+            {
+                codename: 'edit_manual_job',
+                name: 'Edit Manual Job',
+                parent: ['view_manual_job'],
+                level: [2],
+            },
+            {
+                codename: 'delete_manual_job',
+                name: 'Delete Manual Job',
+                parent: ['view_manual_job'],
                 level: [2],
             },
             {
                 codename: 'view_job_history',
                 name: 'View Job History',
-                parent: ['view_job_portal', 'view_manual_job'],
+                parent: ['view_job_portal'],
+                level: [2],
+            },
+            {
+                codename: 'view_manual_job_history',
+                name: 'View Manual Job History',
+                parent: ['view_manual_job'],
                 level: [2],
             },
             {
@@ -359,7 +378,7 @@ export const rawpermissions = [
             {
                 codename: 'create_lead',
                 name: 'Convert to Lead',
-                parent: ['view_applied_job'],
+                parent: ['view_applied_job', 'view_user_applied_job'],
                 level: [2],
             },
         ],
