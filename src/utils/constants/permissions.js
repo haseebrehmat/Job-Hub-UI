@@ -239,13 +239,13 @@ export const rawpermissions = [
                 codename: 'view_expired_job',
                 name: 'View Expired Jobs',
                 parent: ['view_job_uploader'],
-                level: 2,
+                level: [2],
             },
             {
                 codename: 'mark_as_expired',
                 name: 'Mark as expired / active',
                 parent: ['view_job_portal', 'view_manual_job', 'view_expired_job'],
-                level: 2,
+                level: [2],
             },
             {
                 codename: 'view_job_portal',
