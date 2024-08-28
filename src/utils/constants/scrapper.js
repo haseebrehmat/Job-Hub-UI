@@ -22,6 +22,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Dynamite', value: 'dynamite' },
     { label: 'Startwire', value: 'startwire' },
     { label: 'US Jora', value: 'usjora' },
+    { label: 'Startup', value: 'startup' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -88,12 +89,13 @@ export const JOB_SOURCES = {
     startwire: 'Startwire',
     usjora: 'US Jora',
     jobgether: 'Job Gether',
+    startup: 'Startup',
+    dailyremote: 'DailyRemote',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
     simply_hired: 'Simply Hired',
     google_careers: 'Google Careers',
-    dailyremote: 'DailyRemote',
     ruby_now: 'Ruby Now',
     working_nomads: 'Working Nomads',
     arc_dev: 'Arc Dev',
