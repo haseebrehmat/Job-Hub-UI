@@ -666,6 +666,12 @@ export const rawpermissions = [
                 parent: ['view_lead'],
                 level: 2,
             },
+            {
+                codename: 'view_lead_notes',
+                name: 'View Lead Notes',
+                parent: ['view_lead'],
+                level: 2,
+            },
         ],
     },
     {

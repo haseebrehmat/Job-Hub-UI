@@ -46,7 +46,7 @@ const LeadActions = ({ lead, dispatch = null }) => {
                             <span>{AssignCandidateIcon}</span>
                         </Link>
                     )}
-                    {true && (
+                    {can('view_lead_notes') && (
                         <Link
                             to={`/lead-notes/${lead?.id}`}
                             state={{ status: lead?.status?.id, phase: lead?.phase?.id ?? '' }}
