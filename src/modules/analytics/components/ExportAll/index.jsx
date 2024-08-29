@@ -21,8 +21,8 @@ const ExportAll = () => {
                     exportDiv.appendChild(div?.cloneNode(true))
                 }
             })
-            const waterMark = document.getElementById('watermark')
-            exportDiv.appendChild(waterMark)
+            const waterMark = document.getElementById('waterMark')
+            exportDiv.appendChild(waterMark?.cloneNode(true))
             await htmlToPng(exportDiv, { name: 'single_export' })
             setExporting(false)
             toast.success(`Graphs are exported successfully.`)
@@ -44,7 +44,7 @@ const ExportAll = () => {
                 disabled={exporting}
             />
             <div className='hidden'>
-                <div id='watermark' className='flex items-end mt-4 justify-end mr-4 py-2'>
+                <div id='waterMark' className='flex items-end mt-4 justify-end mr-4 py-2'>
                     <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                     <img src={logo} alt='' width='120' height='120' />
                 </div>
