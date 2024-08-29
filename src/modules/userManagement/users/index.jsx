@@ -29,7 +29,7 @@ const Users = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-6'>
-                <Searchbox query={query} setQuery={setQuery} />
+                <Searchbox query={query} setQuery={setQuery} reset={setPage} />
                 {can('create_user') && (
                     <Button
                         label='Create User'
