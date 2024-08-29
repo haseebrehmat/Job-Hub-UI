@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
 import { Tooltip } from '@components'
 
-import { formatNum, htmlToPng } from '@utils/helpers'
+import { htmlToPng } from '@utils/helpers'
 import { JOB_TYPE_COLORS2 } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
