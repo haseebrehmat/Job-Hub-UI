@@ -42,6 +42,7 @@ const PermissionForm = ({ show, setShow, mutate, permission }) => {
             mutate()
             if (!permission[0]?.id) {
                 resetForm()
+                setShow(false)
                 setFields([])
             }
         }

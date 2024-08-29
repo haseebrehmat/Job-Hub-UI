@@ -797,7 +797,7 @@ export const permissions = rawpermissions.map(row => ({
     }),
 }))
 
-export const MODULE_NAMES_OPTIONS = [
+export const    MODULE_NAMES_OPTIONS = [
     { label: 'Candidates', value: 'Candidates' },
     { label: 'Dashboard', value: 'Dashboard' },
     { label: 'Comapany Management', value: 'Comapany Management' },
