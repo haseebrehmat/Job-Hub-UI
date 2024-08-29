@@ -7,16 +7,9 @@ import { formatNum, transformPascal, htmlToPng } from '@utils/helpers'
 import { JOB_TYPES, JOB_TYPE_COLORS2 } from '@constants/analytics'
 
 import { BreadIcon, DownloadIcon2 } from '@icons'
-import logo from '@images/signin-logo.svg'
 
 const TechStackPies = ({ data = {}, stack = null }) => {
     const chartRef = useRef('')
-    const watermark = useRef('')
-    const exportButton = useRef('')
-    const postProcessing = () => {
-        watermark?.current?.classList.add('hidden')
-        exportButton?.current?.classList.remove('hidden')
-    }
 
     const memoizedData = useMemo(
         () =>
@@ -34,22 +27,17 @@ const TechStackPies = ({ data = {}, stack = null }) => {
             .join('')} (${(percent * 100).toFixed(2)}%)`
 
     return (
-        <div className='border px-200000 pt-10 pb-10 text-[#1E6570] mt-10 relative w-1/2' ref={chartRef}>
+        <div className='border px-200000 pt-10 text-[#1E6570] mt-10 relative w-1/2'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stack<span className='text-sm'> - Charts</span>
             </p>
             <span
-                ref={exportButton}
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
-                onClick={() => {
-                    watermark?.current?.classList.remove('hidden')
-                    exportButton?.current?.classList.add('hidden')
-                    htmlToPng(chartRef?.current).then(() => postProcessing())
-                }}
+                onClick={() => htmlToPng(chartRef?.current)}
             >
                 <CustomTooltip text='Export to png'>{DownloadIcon2}Export</CustomTooltip>
             </span>
-            <div id='tech-stack-pies'>
+            <div ref={chartRef} id='tech-stack-pies'>
                 <ResponsiveContainer width='100%' height={400}>
                     <PieChart>
                         <Pie
@@ -88,10 +76,6 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                                 <span className='text-sm'>{transformPascal(JOB_TYPES[key])}</span>
                             </div>
                         ))}
-                </div>
-                <div className='flex items-end justify-end mr-4 py-4 hidden' ref={watermark}>
-                    <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
-                    <img src={logo} alt='' width='120' height='120' />
                 </div>
             </div>
         </div>
