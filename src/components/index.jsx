@@ -26,6 +26,7 @@ import SliderInput from '@components/SliderInput'
 import Resumes from '@components/Resumes'
 import Modal from '@components/Modal'
 import Board from '@components/Board'
+import ErrorBoundary from '@components/ErrorBoundary'
 
 export {
     Badge,
@@ -56,4 +57,5 @@ export {
     Resumes,
     Modal,
     Board,
+    ErrorBoundary,
 }
