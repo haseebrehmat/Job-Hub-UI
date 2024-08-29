@@ -63,8 +63,10 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                         ))}
                     </div>
                     <div className='flex items-end mt-4 justify-end mr-4 py-2 hidden' ref={watermark}>
-                        <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
-                        <img src={logo} alt='' width='120' height='120' />
+                        <div id='watermark' className=''>
+                            <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
+                            <img src={logo} alt='' width='120' height='120' />
+                        </div>
                     </div>
                 </div>
             ) : (
