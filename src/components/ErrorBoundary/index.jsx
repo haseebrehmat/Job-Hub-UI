@@ -26,7 +26,7 @@ const ErrorBoundary = () => {
                 {env === 'prod' ? (
                     <div className='bg-red-100 text-red-700 px-4 py-3 rounded max-w-sm'>Something went wrong!</div>
                 ) : (
-                    <div className='bg-red-100 text-red-700 px-4 py-3 rounded'>
+                    <div className='bg-red-100 text-red-700 px-4 py-3 rounded max-w-sm'>
                         {error.message || 'Something went wrong!'}
                     </div>
                 )}
