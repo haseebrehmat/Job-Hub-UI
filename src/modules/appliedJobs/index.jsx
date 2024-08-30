@@ -14,8 +14,13 @@ const AppliedJobs = memo(({ userId = '' }) => {
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
 
-    const { data, error, isLoading } = useSWR([page, query, userId, vals], () =>
-        fetchAppliedJobs(page, query, userId, vals)
+    const { data, error, isLoading } = useSWR(
+        [page, query, userId, vals],
+        () => fetchAppliedJobs(page, query, userId, vals),
+        {
+            revalidateOnReconnect: false,
+            shouldRetryOnError: false,
+        }
     )
 
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
