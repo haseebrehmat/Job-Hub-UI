@@ -1,15 +1,23 @@
 import { memo, useEffect, useState } from 'react'
+import useSWR from 'swr'
+
+import { Loading } from '@components'
 
 import { transformPascal } from '@utils/helpers'
 
-import { permissions as data } from '@utils/constants/permissions'
+import { fetchPermissions } from '@modules/settings/api'
+
+// import { permissions as data } from '@utils/constants/permissions'
 
 const Permissions = ({ permissions, setPermissions }) => {
+    const { data, isLoading } = useSWR(`/api/auth/permission/`, fetchPermissions)
     const [permss, setPermss] = useState(
         data
-            .flatMap(p => p.permissions)
-            .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
-            .reduce((acc, cur) => ({ ...acc, ...cur }))
+            ? data
+                  ?.flatMap(p => p.permissions)
+                  .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
+                  .reduce((acc, cur) => ({ ...acc, ...cur }))
+            : []
     )
     const handleChange = e => {
         const {
@@ -32,6 +40,7 @@ const Permissions = ({ permissions, setPermissions }) => {
         const allowedPermissions = Object.keys(permss).filter(k => permss[k])
         if (allowedPermissions.length > 0) setPermissions(allowedPermissions)
     }, [permss])
+    if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto'>
             <p className='pb-2 font-semibold'>Assign Permissions</p>
@@ -57,7 +66,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                                                 id={`checkbox-${idx}`}
                                                 type='checkbox'
                                                 name='permissions'
-                                                data-perms={perm.permissions.map(({ codename }) => codename)}
+                                                data-perms={perm?.permissions.map(({ codename }) => codename)}
                                                 onChange={handleModule}
                                                 className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
                                             />

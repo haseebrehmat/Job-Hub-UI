@@ -1,4 +1,4 @@
-import { memo, useReducer } from 'react'
+import { memo, useReducer, useState } from 'react'
 import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
@@ -17,7 +17,6 @@ const Permissions = () => {
         `/api/auth/permission/?search=${vals.query}&page=${vals.page}`,
         fetchPermissions
     )
-
     const handleClick = row => dispatch({ show: !vals.show, permission: row })
 
     if (isLoading) return <Loading />
@@ -31,22 +30,40 @@ const Permissions = () => {
                     )}
                 </div>
             </div>
-            <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
+            <div className='grid gap-1'>
                 {data?.length > 0 && !error ? (
-                    data?.map((row, idx) => (
-                        <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
-                            <h2 className='text-lg'>{row?.name ?? 'Not Specified'}</h2>
-                            {can('edit_permission') && can('delete_permission') && (
-                                <PermissionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
-                            )}
-                            <div className='flex text-sm justify-between gap-2'>
-                                <span className='text-gray-600 italic'>{row?.codename}</span>
-                                <span>{row?.module}</span>
+                    data?.map((module, idx) => (
+                        <div className='bg-white border-b-[1px] border-zinc-400 py-3 relative' key={idx}>
+                            <span className='text-[#048C8C] text-lg font-bold uppercase'>{module?.module}</span>
+                            <div className='grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2'>
+                                {module?.permissions?.length > 0 && !error ? (
+                                    module?.permissions?.map((row, id) => (
+                                        <div
+                                            className='bg-white border border-[#048C8C] rounded-md p-4 relative'
+                                            key={id}
+                                        >
+                                            <h2 className='text-base'>{row?.name ?? 'Not Specified'}</h2>
+                                            {can('edit_permission') && can('delete_permission') && (
+                                                <PermissionActions
+                                                    id={row?.id}
+                                                    mutate={mutate}
+                                                    edit={() => handleClick(row)}
+                                                />
+                                            )}
+                                            <div className='flex text-sm justify-between gap-2 text-gray-600 italic'>
+                                                <span className=''>{row?.codename}</span>
+                                                <span>level : {row?.level}</span>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <span className='m-auto p-5 text-gray-500'>No permissions found yet!</span>
+                                )}
                             </div>
                         </div>
                     ))
                 ) : (
-                    <span className='m-auto p-5 text-gray-500'>No permissions found yet!</span>
+                    <span className='m-auto p-5 text-gray-500'>No module found yet!</span>
                 )}
             </div>
             {data?.pages > 1 && (
