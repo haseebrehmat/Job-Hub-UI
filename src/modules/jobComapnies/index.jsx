@@ -23,7 +23,7 @@ const JobCompanies = () => {
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center pt-6 pb-3 justify-between'>
                 <span className='flex items-center space-x-2'>
-                    <Searchbox query={query} setQuery={setQuery} />
+                    <Searchbox query={query} setQuery={setQuery} reset={setPage} />
                 </span>
                 <JobCompanyCounts counts={data?.counts} />
             </div>
