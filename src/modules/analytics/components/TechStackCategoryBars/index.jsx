@@ -2,31 +2,12 @@ import { forwardRef, memo } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, LabelList } from 'recharts'
 
 import { Tooltip as MyTooltip } from '@components'
+import { TechStackCategoryTooltip } from '@modules/analytics/components'
 
 import { htmlToPng } from '@utils/helpers'
 import { JOB_TYPES, JOB_TYPE_COLORS2 } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
-
-const CustomTooltip = ({ active, payload: bar }) => {
-    if (active && bar && bar.length) {
-        return (
-            <div className='flex flex-col border border-slate-300 bg-[#edfffb] text-[#2d455c] p-2 rounded-lg shadow-lg italic'>
-                {Object.keys(JOB_TYPES)
-                    .filter(row => row !== 'total')
-                    .map((row, index) => (
-                        <small key={index} className='flex items-center justify-between gap-4'>
-                            <span>{`${JOB_TYPES[row]}`}</span>
-                            <strong>
-                                {(((bar[0]?.payload?.[row] ?? 0) / (bar[0]?.payload?.total ?? 0)) * 100).toFixed(2)} %
-                            </strong>
-                        </small>
-                    ))}
-            </div>
-        )
-    }
-    return null
-}
 
 const TechStackCategoryBars = forwardRef(({ data = [] }, ref) =>
     data?.length > 0 ? (
@@ -74,7 +55,7 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) =>
                             type='number'
                             domain={[0, 'auto']}
                         />
-                        <Tooltip content={<CustomTooltip />} />
+                        <Tooltip content={<TechStackCategoryTooltip />} />
                         {Object.keys(JOB_TYPES).map((row, idx) => (
                             <Bar dataKey={row} fill={JOB_TYPE_COLORS2[row]} stackId='a' key={idx}>
                                 {row === 'total' && (
