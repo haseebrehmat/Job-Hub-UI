@@ -13,7 +13,7 @@ import {
 } from '@modules/jobsFilter/components'
 
 import { manualJobSchema } from '@utils/schemas'
-import { formatDate5, formatTime } from '@utils/helpers'
+import { can, formatDate5, formatTime } from '@utils/helpers'
 import { EDIT_JOB_INPUTS } from '@constants/jobPortal'
 
 const EditJobForm = ({ job, set, mutate = null }) => {
@@ -98,13 +98,15 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                         <small className='__error'>{errors.job_source_url}</small>
                                     )}
                                 </div>
-                                <div className='mt-1.5'>
-                                    <Checkbox
-                                        label={values.expired ? 'Unmark job as active' : 'Mark job as expired'}
-                                        checked={values.expired}
-                                        onChange={e => setFieldValue('expired', e.target.checked)}
-                                    />
-                                </div>
+                                {can('mark_as_expired') && (
+                                    <div className='mt-1.5'>
+                                        <Checkbox
+                                            label={values.expired ? 'Unmark job as active' : 'Mark job as expired'}
+                                            checked={values.expired}
+                                            onChange={e => setFieldValue('expired', e.target.checked)}
+                                        />
+                                    </div>
+                                )}
                             </div>
                             <div className='w-1/2'>
                                 <span className='font-semibold text-[#048c8c]'>Job Description*</span>

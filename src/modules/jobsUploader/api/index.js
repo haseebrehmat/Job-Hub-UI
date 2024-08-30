@@ -34,3 +34,11 @@ export const toggleMarkAsExpired = id =>
     http
         .get(`api/job_portal/job_expired_at/${id}/`)
         .then(({ data }) => toast.success(data.detail || 'Job is updated successfully'))
+
+export const fetchExpiredJobs = url =>
+    http.get(url).then(({ data }) => ({
+        jobs: data?.data,
+        next: data?.links?.next,
+        prev: data?.links?.previous,
+        pages: data?.links?.num_pages,
+    }))
