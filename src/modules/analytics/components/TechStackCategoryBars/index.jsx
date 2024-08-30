@@ -21,7 +21,7 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) =>
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div ref={ref} className='pt-4'>
+            <div ref={ref} className='pt-4' id='tech-stack-category-trends-bars'>
                 <div className='w-full flex justify-end gap-6 px-3'>
                     {Object.keys(JOB_TYPES)
                         .reverse()
