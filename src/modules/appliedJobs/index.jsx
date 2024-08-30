@@ -33,6 +33,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     query={query}
                     setQuery={setQuery}
                     setPage={setPage}
+                    reset={pg => dispatch({ page: pg })}
                     toggle={() => dispatch({ filter: !vals.filter })}
                     filter={vals.filter}
                     last12HoursJobsCount={data?.last_12_hours_count ?? 0}
