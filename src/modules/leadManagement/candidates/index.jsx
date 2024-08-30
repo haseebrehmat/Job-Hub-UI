@@ -23,7 +23,11 @@ const Candidates = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center space-x-4 py-4'>
-                <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
+                <Searchbox
+                    query={vals.query}
+                    setQuery={query => dispatch({ query })}
+                    reset={page => dispatch({ page })}
+                />
                 {can('create_candidate') && (
                     <Button label='Create Candidate' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                 )}
