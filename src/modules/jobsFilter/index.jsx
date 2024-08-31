@@ -1,18 +1,23 @@
-import React, { useState, memo, useEffect, useReducer } from 'react'
+import { useState, memo, useEffect, useReducer } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Selector from './components/Selector'
-import CustomSelector from '../../components/CustomSelector'
-import { Paginated, CustomDilog, EmptyTable, TextEditor, Loading } from '@components'
-import { Checkedbox } from '@icons'
-import { JOB_HEADS } from '@constants/jobPortal'
-import { baseURL } from '@utils/http'
 import { toast } from 'react-hot-toast'
-import { can, formatDate, checkToken, dataForCsv, formatStringInPascal } from '@/utils/helpers'
-import { Filters, Badge, Checkbox } from '@/components'
-import { fetchJobs, downloadJobsData, updateJobStatus, updateRecruiterStatus } from './api'
-import JobPortalSearchBox from './components/JobPortalSearchBox'
-import { EditJobForm, GenerateCSV, JobActions, JobPortalAnalytics } from '@modules/jobsFilter/components'
+
 import { useJobPortalFiltersStore } from '@/stores'
+
+import { Paginated, CustomDilog, EmptyTable, Loading, CustomSelector, Filters, Checkbox } from '@components'
+
+import { fetchJobs, downloadJobsData, updateRecruiterStatus } from '@modules/jobsFilter/api'
+import {
+    EditJobForm,
+    JobActions,
+    JobPortalAnalytics,
+    JobPortalSearchBox,
+    Selector,
+} from '@modules/jobsFilter/components'
+
+import { can, formatDate, checkToken, formatStringInPascal } from '@utils/helpers'
+import { baseURL } from '@utils/http'
+import { JOB_HEADS } from '@constants/jobPortal'
 
 const JobsFilter = memo(() => {
     const gsm = useJobPortalFiltersStore(state => state)
@@ -22,7 +27,6 @@ const JobsFilter = memo(() => {
     const [currentCompany, setCurrentCompany] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
-    // const [jobIdForLastCV, setJobIdForLastCV] = useState('')
 
     const [job, setJob] = useReducer((prev, next) => ({ ...prev, ...next }), { show: false, data: {} })
 
@@ -184,20 +188,6 @@ const JobsFilter = memo(() => {
         fetchJobsData(jobDetailsUrl)
     }, [jobsFilterParams])
 
-    // const applyJob = async id => {
-    //     const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, '1', data[id].id)
-    //     if (status === 'success') {
-    //         const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: '1' } : item))
-    //         setData(temp_data)
-    //         toast.success(detail)
-    //     } else {
-    //         toast.error(detail)
-    //         setTimeout(() => {
-    //             location.reload()
-    //         }, 2000)
-    //     }
-    // }
-
     const changeRecruiter = async (company, func) => {
         const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
         if (status === 'success') {
@@ -221,10 +211,10 @@ const JobsFilter = memo(() => {
         'success'
     )
 
-    const handleJobDetails = job => {
-        navigate(`/job-details/${job.id}`, {
+    const handleJobDetails = jobDetail => {
+        navigate(`/job-details/${jobDetail.id}`, {
             state: {
-                data: job,
+                data: jobDetail,
                 title: 'Job Details',
             },
         })
@@ -428,20 +418,6 @@ const JobsFilter = memo(() => {
                                                     : 'no vertical'}
                                             </small>
                                         )}
-                                        {/* {can('apply_job') ? (
-                                            item?.job_status === '0' ? (
-                                                <button
-                                                    className='block rounded px-2 py-1 my-2 bg-[#10868a] text-white'
-                                                    onClick={() => applyJob(key)}
-                                                >
-                                                    Apply
-                                                </button>
-                                            ) : (
-                                                <button className='block rounded px-2 py-1 my-3 text-gray-400 bg-[#ffffff] '>
-                                                    {filterState?.jobStatusChoice[item?.job_status]}
-                                                </button>
-                                            )
-                                            ) : null} */}
                                     </td>
                                     {CustomModal}
                                     <td className='p-5'>
@@ -461,24 +437,6 @@ const JobsFilter = memo(() => {
                                             mutate={() => fetchJobsData(jobDetailsUrl)}
                                         />
                                     </td>
-                                    {/* <td className='p-5'>
-                                        <button
-                                            className={`block rounded px-2 py-1 my-2 ${
-                                                jobIdForLastCV === item?.id ? 'bg-[#083031]' : 'bg-[#10868a]'
-                                            } text-white focus:bg-[#076366]`}
-                                            onClick={() => {
-                                                setJobIdForLastCV(item.id)
-                                                generateLetter({
-                                                    name: 'test user',
-                                                    company: item?.company_name,
-                                                    experience: '2 years',
-                                                    job_des: item?.job_description,
-                                                })
-                                            }}
-                                        >
-                                            Generate
-                                        </button>
-                                    </td> */}
                                 </tr>
                             ))
                         ) : (

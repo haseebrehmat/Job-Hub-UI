@@ -13,6 +13,8 @@ import TechStacksDropdown from '@modules/jobsFilter/components/TechStacksDropdow
 import JobTypesDropdown from '@modules/jobsFilter/components/JobTypesDropdown'
 import JobSourcesDropdown from '@modules/jobsFilter/components/JobSourcesDropdown'
 import EditFormButtons from '@modules/jobsFilter/components/EditFormButtons'
+import JobPortalSearchBox from '@modules/jobsFilter/components/JobPortalSearchBox'
+import Selector from '@modules/jobsFilter/components/Selector'
 
 export {
     TableNavigate,
@@ -30,4 +32,6 @@ export {
     JobTypesDropdown,
     JobSourcesDropdown,
     EditFormButtons,
+    JobPortalSearchBox,
+    Selector,
 }
