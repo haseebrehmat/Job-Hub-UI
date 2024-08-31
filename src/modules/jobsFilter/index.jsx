@@ -22,7 +22,7 @@ const JobsFilter = memo(() => {
     const [currentCompany, setCurrentCompany] = useState([])
     const [pagesCount, setPagesCount] = useState([])
     const jobDetailsUrl = `${apiUrl}job_details/`
-    const [jobIdForLastCV, setJobIdForLastCV] = useState('')
+    // const [jobIdForLastCV, setJobIdForLastCV] = useState('')
 
     const [job, setJob] = useReducer((prev, next) => ({ ...prev, ...next }), { show: false, data: {} })
 
@@ -174,6 +174,7 @@ const JobsFilter = memo(() => {
     }
 
     const resetFilters = () => {
+        gsm?.reset()
         setData([])
         setFilterState(defaultFilterState)
         setJobsFilterParams(defaulJobsFiltersParams)
@@ -183,19 +184,19 @@ const JobsFilter = memo(() => {
         fetchJobsData(jobDetailsUrl)
     }, [jobsFilterParams])
 
-    const applyJob = async id => {
-        const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, '1', data[id].id)
-        if (status === 'success') {
-            const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: '1' } : item))
-            setData(temp_data)
-            toast.success(detail)
-        } else {
-            toast.error(detail)
-            setTimeout(() => {
-                location.reload()
-            }, 2000)
-        }
-    }
+    // const applyJob = async id => {
+    //     const { status, detail } = await updateJobStatus(`${apiUrl}job_status/`, '1', data[id].id)
+    //     if (status === 'success') {
+    //         const temp_data = data?.map((item, key) => (key === id ? { ...item, job_status: '1' } : item))
+    //         setData(temp_data)
+    //         toast.success(detail)
+    //     } else {
+    //         toast.error(detail)
+    //         setTimeout(() => {
+    //             location.reload()
+    //         }, 2000)
+    //     }
+    // }
 
     const changeRecruiter = async (company, func) => {
         const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
