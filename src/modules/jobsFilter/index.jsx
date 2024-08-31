@@ -69,7 +69,37 @@ const JobsFilter = memo(() => {
 
     const [jobsFilterParams, setJobsFilterParams] = useState(defaulJobsFiltersParams)
     const error = true
+
+    const getJobsParamsFromFilters = () => {
+        const {
+            jobSourceSelector,
+            jobTypeSelector,
+            ordering,
+            jobVisibilitySelector,
+            dates,
+            techStackSelector,
+            blocked,
+        } = gsm
+        const { from_date, to_date } = dates
+        const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
+        const selected_job_sources = jobSourceSelector.map(obj => obj.value).join(',')
+        return {
+            ...jobsFilterParams,
+            tech_keywords,
+            job_source: selected_job_sources,
+            ordering,
+            page: 1,
+            job_visibility: jobVisibilitySelector,
+            from_date,
+            to_date,
+            job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
+            search: filterState?.jobTitle,
+            blocked,
+        }
+    }
+
     const generateParamsString = (params_list = jobsFilterParams) => {
+        params_list = getJobsParamsFromFilters()
         const params = new URLSearchParams()
         let params_count = 0
 
@@ -135,34 +165,6 @@ const JobsFilter = memo(() => {
         } else {
             toast.error(detail)
             setFilterState({ ...filterState, isLoading: false })
-        }
-    }
-
-    const getJobsParamsFromFilters = () => {
-        const {
-            jobSourceSelector,
-            jobTypeSelector,
-            ordering,
-            jobVisibilitySelector,
-            dates,
-            techStackSelector,
-            blocked,
-        } = gsm
-        const { from_date, to_date } = dates
-        const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
-        const selected_job_sources = jobSourceSelector.map(obj => obj.value).join(',')
-        return {
-            ...jobsFilterParams,
-            tech_keywords,
-            job_source: selected_job_sources,
-            ordering,
-            page: 1,
-            job_visibility: jobVisibilitySelector,
-            from_date,
-            to_date,
-            job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
-            search: filterState?.jobTitle,
-            blocked,
         }
     }
 
