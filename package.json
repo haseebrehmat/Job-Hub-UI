@@ -38,7 +38,8 @@
     "react-spinners": "^0.13.8",
     "recharts": "^2.6.2",
     "swr": "^2.0.3",
-    "yup": "^1.0.0"
+    "yup": "^1.0.0",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^3.1.0",
