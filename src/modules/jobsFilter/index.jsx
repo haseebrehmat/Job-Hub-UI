@@ -12,8 +12,11 @@ import { Filters, Badge, Checkbox } from '@/components'
 import { fetchJobs, downloadJobsData, updateJobStatus, updateRecruiterStatus } from './api'
 import JobPortalSearchBox from './components/JobPortalSearchBox'
 import { EditJobForm, GenerateCSV, JobActions, JobPortalAnalytics } from '@modules/jobsFilter/components'
+import { useJobPortalFiltersStore } from '@/stores'
 
 const JobsFilter = memo(() => {
+    const gsm = useJobPortalFiltersStore(state => state)
+
     const apiUrl = `${baseURL}api/job_portal/`
     const [data, setData] = useState([])
     const [currentCompany, setCurrentCompany] = useState([])
@@ -77,10 +80,6 @@ const JobsFilter = memo(() => {
         return params_count > 0 ? params.toString() : ''
     }
 
-    const handleTechStackSelector = techStackSelectorData => {
-        setFilterState({ ...filterState, techStackSelector: techStackSelectorData })
-    }
-
     const updateSelectorCount = (selector, new_count_list) =>
         selector
             .map(({ value }) => {
@@ -140,8 +139,15 @@ const JobsFilter = memo(() => {
     }
 
     const getJobsParamsFromFilters = () => {
-        const { jobSourceSelector, jobTypeSelector, ordering, jobVisibilitySelector, dates, techStackSelector, blocked } =
-            filterState
+        const {
+            jobSourceSelector,
+            jobTypeSelector,
+            ordering,
+            jobVisibilitySelector,
+            dates,
+            techStackSelector,
+            blocked,
+        } = gsm
         const { from_date, to_date } = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
         const selected_job_sources = jobSourceSelector.map(obj => obj.value).join(',')
@@ -238,15 +244,13 @@ const JobsFilter = memo(() => {
             <div className='px-8 border bg-slate-100 rounded-3xl py-2'>
                 <div className='flex items-center py-2 justify-between mt-2'>
                     <JobPortalSearchBox
-                        value={filterState?.jobTitle}
+                        value={gsm?.jobTitle}
                         handleEnter={e => {
                             if (e.key === 'Enter') {
                                 updateParams()
                             }
                         }}
-                        setQuery={title => {
-                            setFilterState({ ...filterState, jobTitle: title })
-                        }}
+                        setQuery={title => gsm?.setJobTitle(title)}
                     />
                     <button
                         className='bg-[#10868a] hover:bg-[#209fa3] text-[#ffffff]  py-2 px-3 rounded inline-flex items-center'
@@ -267,13 +271,8 @@ const JobsFilter = memo(() => {
                                 className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
                                 type='date'
                                 max={new Date().toISOString().slice(0, 10)}
-                                value={filterState?.dates?.from_date}
-                                onChange={event =>
-                                    setFilterState({
-                                        ...filterState,
-                                        dates: { ...filterState?.dates, from_date: event.target.value },
-                                    })
-                                }
+                                value={gsm?.dates?.from_date}
+                                onChange={event => gsm?.setDates(event.target.value, 'from_date')}
                             />
                         </div>
                         <div className='my-2'>
@@ -282,13 +281,8 @@ const JobsFilter = memo(() => {
                                 className='block px-2.5 pb-2.5 pt-2.5 w-full text-sm text-gray-500 bg-transparent rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer null'
                                 type='date'
                                 max={new Date().toISOString().slice(0, 10)}
-                                value={filterState?.dates?.to_date}
-                                onChange={event =>
-                                    setFilterState({
-                                        ...filterState,
-                                        dates: { ...filterState?.dates, to_date: event.target.value },
-                                    })
-                                }
+                                value={gsm?.dates?.to_date}
+                                onChange={event => gsm?.setDates(event.target.value, 'to_date')}
                             />
                         </div>
                     </div>
@@ -296,10 +290,8 @@ const JobsFilter = memo(() => {
                         Listings
                         <Selector
                             data={filterState?.jobTypeData}
-                            selectorValue={filterState?.jobTypeSelector}
-                            handleSelectChange={e =>
-                                setFilterState({ ...filterState, jobTypeSelector: e.target.value })
-                            }
+                            selectorValue={gsm?.jobTypeSelector}
+                            handleSelectChange={e => gsm?.setJobType(e.target.value)}
                         />
                     </div>
                     <div className='my-2'>
@@ -307,8 +299,8 @@ const JobsFilter = memo(() => {
                         <CustomSelector
                             className='mx-auto'
                             options={formatOptions(filterState?.jobSourceData)}
-                            handleChange={value => setFilterState({ ...filterState, jobSourceSelector: value })}
-                            selectorValue={filterState?.jobSourceSelector}
+                            handleChange={value => gsm?.setJobSources(value)}
+                            selectorValue={gsm?.jobSourceSelector}
                             isMulti
                             placeholder='Select Job Source'
                         />
@@ -316,13 +308,8 @@ const JobsFilter = memo(() => {
                     <div className='my-2'>
                         Order By
                         <select
-                            value={filterState?.ordering}
-                            onChange={e =>
-                                setFilterState({
-                                    ...filterState,
-                                    ordering: e.target.value,
-                                })
-                            }
+                            value={gsm?.ordering}
+                            onChange={e => gsm?.setOrdering(e.target.value)}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
                             <option value='-job_posted_date'>Posted Date</option>
@@ -331,12 +318,11 @@ const JobsFilter = memo(() => {
                             <option value='company_name'>Company</option>
                         </select>
                     </div>
-
                     <div className='my-2'>
                         Job Visibility
                         <select
-                            value={filterState?.jobVisibilitySelector}
-                            onChange={e => setFilterState({ ...filterState, jobVisibilitySelector: e.target.value })}
+                            value={gsm?.jobVisibilitySelector}
+                            onChange={e => gsm?.setJobVisibility(e.target.value)}
                             className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
                         >
                             <option value='all'>All</option>
@@ -349,8 +335,8 @@ const JobsFilter = memo(() => {
                         <CustomSelector
                             className='mx-auto'
                             options={formatOptions(filterState?.techStackData)}
-                            handleChange={handleTechStackSelector}
-                            selectorValue={filterState?.techStackSelector}
+                            handleChange={value => gsm?.setTechs(value)}
+                            selectorValue={gsm?.techStackSelector}
                             isMulti
                             placeholder='Select Tech Stack'
                         />
@@ -360,8 +346,8 @@ const JobsFilter = memo(() => {
                     <div>
                         <Checkbox
                             label='Show Only Blocked Companies Jobs'
-                            checked={filterState?.blocked}
-                            onChange={e => setFilterState({ ...filterState, blocked: e.target.checked })}
+                            checked={gsm?.blocked}
+                            onChange={() => gsm?.toggleBlocked()}
                         />
                     </div>
                     <div>
