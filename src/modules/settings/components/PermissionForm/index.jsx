@@ -2,16 +2,17 @@ import { memo, useState } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { Button, CustomSelector, Modal, Tooltip, Input } from '@components'
+import { Button, Modal, Tooltip, Input } from '@components'
 
+import { ModuleInput } from '@modules/settings/components'
 import { savePermission } from '@modules/settings/api'
 
-import { parseModule } from '@utils/helpers'
-import { MODULE_NAMES_OPTIONS } from '@constants/permissions'
+// import { parseModule, parseModules } from '@utils/helpers'
+// import { MODULE_NAMES_OPTIONS } from '@constants/permissions'
 
 import { ValidateFalseIcon } from '@icons'
 
-const PermissionForm = ({ show, setShow, mutate, permission }) => {
+const PermissionForm = ({ show, setShow, mutate, permission, modules, permissionModule }) => {
     const [fields, setFields] = useState(
         permission[0]?.id ? permission : [{ module: '', codename: '', name: '', level: '', id: '' }]
     )
@@ -49,7 +50,7 @@ const PermissionForm = ({ show, setShow, mutate, permission }) => {
     )
     return (
         <Modal
-            classes='!w-1/2'
+            classes='!w-1/ '
             show={show}
             setShow={setShow}
             content={
@@ -65,17 +66,16 @@ const PermissionForm = ({ show, setShow, mutate, permission }) => {
                                 </Tooltip>
                             )}
                         </div>
-                        <div className='flex flex-col gap-3'>
+                        <div className='flex flex-col gap-2'>
                             {fields?.map((field, index) => (
-                                <div>
-                                    <div key={index} className='grid grid-cols-4 gap-2 items-center w-full'>
-                                        <CustomSelector
-                                            options={MODULE_NAMES_OPTIONS}
-                                            selectorValue={parseModule(field?.module)}
-                                            handleChange={({ value }) => handleFieldChange(index, value, 'module')}
-                                            placeholder='Select Module'
-                                        />
-
+                                <div key={index} className='grid grid-cols-2 items-center w-full'>
+                                    <ModuleInput
+                                        modules={modules}
+                                        index={index}
+                                        handleFieldChange={handleFieldChange}
+                                        selectedModule={permissionModule}
+                                    />
+                                    <div className='grid grid-cols-3 gap-2 items-center w-full'>
                                         <div className='flex-grow'>
                                             <Input
                                                 ph={`Enter Codename ${index + 1}`}

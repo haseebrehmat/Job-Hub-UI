@@ -45,4 +45,5 @@ export const PERMISSIONS_INITIAL_VALUES = {
     page: 1,
     show: false,
     Permission: '',
+    permissionModule: '',
 }

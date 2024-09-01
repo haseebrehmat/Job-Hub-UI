@@ -13,7 +13,7 @@ const Permissions = ({ permissions, setPermissions }) => {
     const { data, isLoading } = useSWR(`/api/auth/permission/`, fetchPermissions)
     const [permss, setPermss] = useState(
         data
-            ? data
+            ? data?.permissions
                   ?.flatMap(p => p.permissions)
                   .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
                   .reduce((acc, cur) => ({ ...acc, ...cur }))
@@ -56,8 +56,8 @@ const Permissions = ({ permissions, setPermissions }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.length > 0 ? (
-                        data?.map((perm, idx) =>
+                    {data?.permissions?.length > 0 ? (
+                        data?.permissions?.map((perm, idx) =>
                             perm?.permissions?.length > 0 ? (
                                 <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
                                     <td className='px-2 py-2'>

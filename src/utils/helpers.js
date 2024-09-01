@@ -475,7 +475,6 @@ export const getWidthClass = index => {
 }
 
 export const findRegion = (region, regions) => {
-    console.log(regions)
     region = region.toLowerCase()
     const R = regions.map(reg => reg.name)
     return R.includes(region)
@@ -519,3 +518,5 @@ export const parseModule = module => {
     }
     return null
 }
+
+export const parseModules = modules => modules?.map(module => ({ value: module, label: module }))

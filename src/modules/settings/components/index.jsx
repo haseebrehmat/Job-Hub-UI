@@ -7,6 +7,7 @@ import PermissionForm from '@modules/settings/components/PermissionForm'
 import PermissionActions from '@modules/settings/components/PermissionActions'
 import TechStacksCategoryForm from '@modules/settings/components/TechStacksCategoryForm'
 import TechStackCategoryActions from '@modules/settings/components/TechStackCategoryActions'
+import ModuleInput from '@modules/settings/components/ModulesInput'
 
 export {
     IntegrationForm,
@@ -18,4 +19,5 @@ export {
     PermissionActions,
     TechStacksCategoryForm,
     TechStackCategoryActions,
+    ModuleInput,
 }

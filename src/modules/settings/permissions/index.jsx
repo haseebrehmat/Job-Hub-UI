@@ -1,4 +1,4 @@
-import { memo, useReducer, useState } from 'react'
+import { memo, useReducer } from 'react'
 import useSWR from 'swr'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
@@ -17,7 +17,7 @@ const Permissions = () => {
         `/api/auth/permission/?search=${vals.query}&page=${vals.page}`,
         fetchPermissions
     )
-    const handleClick = row => dispatch({ show: !vals.show, permission: row })
+    const handleClick = (row, module) => dispatch({ show: !vals.show, permission: row, permissionModule: module })
 
     if (isLoading) return <Loading />
     return (
@@ -31,8 +31,8 @@ const Permissions = () => {
                 </div>
             </div>
             <div className='grid gap-1'>
-                {data?.length > 0 && !error ? (
-                    data?.map((module, idx) => (
+                {data?.permissions?.length > 0 && !error ? (
+                    data?.permissions?.map((module, idx) => (
                         <div className='bg-white border-b-[1px] border-zinc-400 py-3 relative' key={idx}>
                             <span className='text-[#048C8C] text-lg font-bold uppercase'>{module?.module}</span>
                             <div className='grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-2'>
@@ -47,7 +47,7 @@ const Permissions = () => {
                                                 <PermissionActions
                                                     id={row?.id}
                                                     mutate={mutate}
-                                                    edit={() => handleClick(row)}
+                                                    edit={() => handleClick(row, module?.module)}
                                                 />
                                             )}
                                             <div className='flex text-sm justify-between gap-2 text-gray-600 italic'>
@@ -77,6 +77,8 @@ const Permissions = () => {
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
                     permission={[vals?.permission]}
+                    modules={data?.modules}
+                    permissionModule={vals?.permissionModule}
                 />
             )}
         </div>
