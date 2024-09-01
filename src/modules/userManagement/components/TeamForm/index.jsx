@@ -6,7 +6,7 @@ import { useMutate } from '@/hooks'
 
 import { Button, Drawer, Input, CustomSelector } from '@components'
 
-import { RolesDropdown, RoleUsersDropdown } from '@modules/userManagement/components'
+import { RolesDropdown, ReportingToDropdown } from '@modules/userManagement/components'
 import { saveTeam, fetchRoleWiseUsers, fetchDropdownUsers } from '@modules/userManagement/api'
 
 import { teamSchema } from '@utils/schemas'
@@ -47,7 +47,7 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
                     <Input name='name' value={values.name} onChange={handleChange} ph='Enter team name' />
                     {errors.name && <small className='ml-1 text-xs text-red-600'>{errors.name}</small>}
                     <RolesDropdown value={role} onChange={val => setRole(val)} />
-                    <RoleUsersDropdown
+                    <ReportingToDropdown
                         value={values.reporting_to}
                         error={errors.reporting_to}
                         setFieldValue={setFieldValue}
