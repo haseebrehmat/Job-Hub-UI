@@ -92,4 +92,5 @@ export const FILTERS_DEFAULT_VALUES = {
     jobTitle: '',
     ordering: '-job_posted_date',
     blocked: false,
+    page: 1,
 }

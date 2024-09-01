@@ -16,5 +16,6 @@ export const useJobPortalFiltersStore = create(set => ({
     setTechs: value => set(state => ({ ...state, techStackSelector: removeFilterCounts(value) })),
     toggleBlocked: () => set(state => ({ ...state, blocked: !state.blocked })),
     setJobTitle: value => set(state => ({ ...state, jobTitle: value })),
+    setPage: value => set(state => ({ ...state, page: value })),
     reset: () => set(FILTERS_DEFAULT_VALUES),
 }))

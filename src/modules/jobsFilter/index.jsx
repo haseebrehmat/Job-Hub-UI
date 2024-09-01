@@ -58,20 +58,6 @@ const JobsFilter = memo(() => {
     const [filterState, setFilterState] = useState(defaultFilterState)
 
     const navigate = useNavigate()
-    const defaulJobsFiltersParams = {
-        job_source: '',
-        tech_keywords: '',
-        from_date: '',
-        to_date: '',
-        job_type: '',
-        ordering: '-job_posted_date',
-        search: '',
-        page: 1,
-        job_visibility: 'all',
-        blocked: false,
-    }
-
-    const [jobsFilterParams, setJobsFilterParams] = useState(defaulJobsFiltersParams)
     const error = true
 
     const getJobsParamsFromFilters = () => {
@@ -84,16 +70,16 @@ const JobsFilter = memo(() => {
             techStackSelector,
             blocked,
             jobTitle,
+            page,
         } = gsm
         const { from_date, to_date } = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
         const selected_job_sources = jobSourceSelector.map(obj => obj.value).join(',')
         return {
-            ...jobsFilterParams,
             tech_keywords,
             job_source: selected_job_sources,
             ordering,
-            page: 1,
+            page,
             job_visibility: jobVisibilitySelector,
             from_date,
             to_date,
@@ -103,8 +89,9 @@ const JobsFilter = memo(() => {
         }
     }
 
-    const generateParamsString = (params_list = jobsFilterParams) => {
-        params_list = getJobsParamsFromFilters()
+    const generateParamsString = () => {
+        const params_list = getJobsParamsFromFilters()
+        console.log(params_list)
         const params = new URLSearchParams()
         let params_count = 0
 
@@ -175,19 +162,18 @@ const JobsFilter = memo(() => {
 
     const updateParams = () => {
         setFilterState({ ...filterState, isLoading: true })
-        setJobsFilterParams(getJobsParamsFromFilters())
+        gsm?.setPage(1)
     }
 
     const resetFilters = () => {
         gsm?.reset()
         setData([])
         setFilterState(defaultFilterState)
-        setJobsFilterParams(defaulJobsFiltersParams)
     }
 
     useEffect(() => {
         fetchJobsData(jobDetailsUrl)
-    }, [jobsFilterParams])
+    }, [gsm?.page])
 
     const changeRecruiter = async (company, func) => {
         const { status, detail } = await updateRecruiterStatus(`${apiUrl}company/blacklist/${func}`, company)
@@ -400,7 +386,7 @@ const JobsFilter = memo(() => {
                                     <td className='p-2'>{item?.job_type}</td>
                                     <td className='p-2'>{formatDate(item?.job_posted_date)}</td>
                                     <td>
-                                        {can('apply_job') && item?.total_vertical > 0 && !jobsFilterParams.blocked ? (
+                                        {can('apply_job') && item?.total_vertical > 0 && !gsm?.blocked ? (
                                             <Link
                                                 to={`/apply-for-job/${item?.id}`}
                                                 className='rounded bg-[#10868a] text-white text-sm inline-flex w-fit p-1'
@@ -413,7 +399,7 @@ const JobsFilter = memo(() => {
                                         ) : (
                                             <small className='text-xs text-gray-500 border px-1.5 border-gray-500 rounded-lg'>
                                                 {item?.total_vertical > 0
-                                                    ? jobsFilterParams.blocked
+                                                    ? gsm?.blocked
                                                         ? 'blocked'
                                                         : 'unauthorized'
                                                     : 'no vertical'}
@@ -445,13 +431,7 @@ const JobsFilter = memo(() => {
                         )}
                     </tbody>
                 </table>
-                <Paginated
-                    page={jobsFilterParams?.page}
-                    setPage={pageNumber => {
-                        setJobsFilterParams({ ...jobsFilterParams, page: pageNumber })
-                    }}
-                    pages={pagesCount}
-                />
+                <Paginated page={gsm?.page} setPage={pageNumber => gsm?.setPage(pageNumber)} pages={pagesCount} />
             </div>
             {job.show && <EditJobForm job={job} set={setJob} mutate={() => fetchJobsData(jobDetailsUrl)} />}
         </div>
