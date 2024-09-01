@@ -91,7 +91,6 @@ const JobsFilter = memo(() => {
 
     const generateParamsString = () => {
         const params_list = getJobsParamsFromFilters()
-        console.log(params_list)
         const params = new URLSearchParams()
         let params_count = 0
 
