@@ -14,8 +14,13 @@ const AppliedJobs = memo(({ userId = '' }) => {
     const [page, setPage] = useState(1)
     const [query, setQuery] = useState()
 
-    const { data, error, isLoading } = useSWR([page, query, userId, vals], () =>
-        fetchAppliedJobs(page, query, userId, vals)
+    const { data, error, isLoading } = useSWR(
+        [page, query, userId, vals],
+        () => fetchAppliedJobs(page, query, userId, vals),
+        {
+            revalidateOnReconnect: false,
+            shouldRetryOnError: false,
+        }
     )
 
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
@@ -28,6 +33,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     query={query}
                     setQuery={setQuery}
                     setPage={setPage}
+                    reset={pg => dispatch({ page: pg })}
                     toggle={() => dispatch({ filter: !vals.filter })}
                     filter={vals.filter}
                     last12HoursJobsCount={data?.last_12_hours_count ?? 0}

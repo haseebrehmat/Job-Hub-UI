@@ -129,3 +129,8 @@ export const JOB_TYPES_OPTIONS_SMALLCASE = [
     { label: 'Contract Onsite', value: 'contract onsite' },
     { label: 'Contract Remote', value: 'contract remote' },
 ]
+
+export const JOB_SOURCES_INITIAL_VALS = [
+    { label: 'All', value: 'all' },
+    ...JOB_SOURCE_OPTIONS.filter(job => job.value !== 'other'),
+]

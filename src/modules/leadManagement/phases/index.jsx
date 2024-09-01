@@ -29,7 +29,11 @@ const Phases = () => {
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center py-6 justify-between'>
                 <div className='flex space-x-4 items-center'>
-                    <Searchbox query={vals.query} setQuery={value => dispatch({ query: value })} />
+                    <Searchbox
+                        query={vals.query}
+                        setQuery={value => dispatch({ query: value })}
+                        reset={page => dispatch({ page })}
+                    />
                     {can('create_phase') && (
                         <Button label='Create Phase' fit icon={CreateIcon} onClick={() => handleClick(null)} />
                     )}

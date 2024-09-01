@@ -1,4 +1,4 @@
-import { memo, useReducer } from 'react'
+import { memo, useReducer, useRef } from 'react'
 import useSWR from 'swr'
 
 import { Loading } from '@components'
@@ -17,8 +17,10 @@ import { fetchAnalytics } from '@modules/analytics/api'
 import { trendsData } from '@modules/analytics/api/data'
 
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
+import TechStackCategoryBars from './components/TechStackCategoryBars'
 
 const Analytics = () => {
+    const [ref1] = [useRef('')]
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), ANALYTIC_INITIAL_VALUES)
 
     const { data, isLoading } = useSWR(
@@ -49,13 +51,8 @@ const Analytics = () => {
                 <TechStackCounts data={data?.tech_stack_data} set={dispatch} stack={vals.stack} />
                 <TechStackPies data={data?.tech_stack_data?.find(row => row.name === vals.stack)} stack={vals.stack} />
             </div>
-            <TechStackBars
-                data={data?.trend_analytics}
-                type={vals.bar}
-                set={dispatch}
-                options={{ title: 'Tech Stack Trend Categories', fs: 18, id: 'tech-stack-category-trends-bars' }}
-            />
             <Trends data={trendsData} />
+            <TechStackCategoryBars data={data?.trend_analytics} ref={ref1} />
             <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
         </div>
     )
