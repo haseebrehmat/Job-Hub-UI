@@ -10,10 +10,10 @@ import { RolesDropdown, ReportingToDropdown } from '@modules/userManagement/comp
 import { saveTeam, fetchRoleWiseUsers, fetchDropdownUsers } from '@modules/userManagement/api'
 
 import { teamSchema } from '@utils/schemas'
-import { getMsg, parseMembers } from '@utils/helpers'
+import { getMsg, parseMembers, parseUserRole } from '@utils/helpers'
 
 const TeamForm = ({ show, setShow, mutate, team }) => {
-    const [role, setRole] = useState(team?.reporting_to?.roles?.id)
+    const [role, setRole] = useState(parseUserRole(team?.reporting_to?.roles))
     const { values, errors, handleSubmit, handleChange, resetForm, trigger, setFieldValue } = useMutate(
         `/api/auth/team${team?.id ? `/${team?.id}/` : '/'}`,
         saveTeam,
@@ -34,7 +34,10 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
             }
         }
     )
-    const { data, isLoading: uLoading } = useSWR(`/api/auth/role_users/${role}/`, role ? fetchRoleWiseUsers : null)
+    const { data, isLoading: uLoading } = useSWR(
+        `/api/auth/role_users/${role?.value}/`,
+        role ? fetchRoleWiseUsers : null
+    )
     const { data: fetched, isLoading } = useSWR('/api/auth/user/?type=dropdown', fetchDropdownUsers)
 
     return (
