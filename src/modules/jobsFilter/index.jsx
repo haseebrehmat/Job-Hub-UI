@@ -83,6 +83,7 @@ const JobsFilter = memo(() => {
             dates,
             techStackSelector,
             blocked,
+            jobTitle,
         } = gsm
         const { from_date, to_date } = dates
         const tech_keywords = techStackSelector.map(obj => obj.value).join(',')
@@ -97,7 +98,7 @@ const JobsFilter = memo(() => {
             from_date,
             to_date,
             job_type: jobTypeSelector !== 'all' ? jobTypeSelector : '',
-            search: filterState?.jobTitle,
+            search: jobTitle,
             blocked,
         }
     }

@@ -82,3 +82,14 @@ export const EDIT_JOB_INPUTS = [
         required: false,
     },
 ]
+
+export const FILTERS_DEFAULT_VALUES = {
+    dates: { from_date: '', to_date: '' },
+    techStackSelector: [],
+    jobSourceSelector: [],
+    jobVisibilitySelector: 'all',
+    jobTypeSelector: 'all',
+    jobTitle: '',
+    ordering: '-job_posted_date',
+    blocked: false,
+}
