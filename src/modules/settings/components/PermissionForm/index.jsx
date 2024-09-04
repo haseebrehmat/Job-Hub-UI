@@ -13,9 +13,8 @@ import { ValidateFalseIcon } from '@icons'
 
 const PermissionForm = ({ show, setShow, mutate, permission, modules, permissionModule }) => {
     const [fields, setFields] = useState(
-        permission[0]?.id ? permission : [{ module: '', codename: '', name: '', level: '', id: '' }]
+        permission?.id ? [permission] : [{ module: '', codename: '', name: '', level: '', id: '' }]
     )
-    const submitButtonShow = fields.length > 0
 
     const handleFieldChange = (index, value, key) => {
         const newFields = [...fields]
@@ -29,27 +28,22 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
     const removeField = index => setFields(fields.filter((_, i) => i !== index))
 
     const { handleSubmit, resetForm, trigger } = useMutate(
-        `/api/auth/permission${permission[0]?.id ? `/${permission[0]?.id}/` : '/'}`,
+        `/api/auth/permission${permission?.id ? `/${permission?.id}/` : '/'}`,
         savePermission,
-        {
-            module: permission[0]?.module || '',
-            codename: permission[0]?.codename || '',
-            name: permission[0]?.name || '',
-            level: permission[0]?.level || '',
-            id: permission[0]?.id || '',
-        },
+        {},
         null,
         async () => trigger({ permissions: fields }),
         null,
         () => {
             mutate()
-            if (!permission[0]?.id) {
+            if (!permission?.id) {
                 resetForm()
                 setShow(false)
                 setFields([])
             }
         }
     )
+
     return (
         <Modal
             classes='!w-1/2'
@@ -59,17 +53,14 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
                 <form onSubmit={handleSubmit} className='w-full hide_scrollbar overflow-x-auto'>
                     <div className='grid grid-flow-row gap-2'>
                         <p className='text-xl text-[#048C8C] font-semibold'>
-                            {permission[0]?.id ? 'Edit' : 'Create'} Permissions
+                            {permission?.id ? 'Edit' : 'Create'} Permissions
                         </p>
                         <hr className='mb-1 w-full' />
                         <div className='flex justify-between items-center'>
-                            {permission[0]?.id ? (
-                                ''
-                            ) : (
+                            {permission?.id ? null : (
                                 <span className='text-sm text-[#048C8C]'>Multiple Permission</span>
                             )}
-
-                            {fields.length < 5 && !permission[0]?.id && (
+                            {fields.length < 5 && !permission?.id && (
                                 <Tooltip text='Add Link'>
                                     <Button onClick={addField} icon='+ Add' fit classes='!px-1 !py-0.5' />
                                 </Tooltip>
@@ -80,7 +71,7 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
                                 <div
                                     key={index}
                                     className={`grid ${
-                                        permission[0]?.id ? 'grid-cols-1' : 'grid-cols-2'
+                                        permission?.id ? 'grid-cols-1' : 'grid-cols-2'
                                     } gap-4 items-center w-full`}
                                 >
                                     <ModuleInput
@@ -107,12 +98,12 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
                                         <div className='flex-grow'>
                                             <Input
                                                 value={field?.level}
-                                                onChange={e => handleFieldChange(index, e.target.value, 'levels')}
-                                                label='level'
+                                                onChange={e => handleFieldChange(index, e.target.value, 'level')}
+                                                label='levels'
                                             />
                                         </div>
                                     </div>
-                                    {permission[0]?.id && (
+                                    {permission?.id && (
                                         <div className='mt-6'>
                                             <span className='text-md text-[#048C8C] font-semibold'>
                                                 Assign Parents and Children
@@ -135,7 +126,7 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
                                             </div>
                                         </div>
                                     )}
-                                    {!permission[0]?.id && (
+                                    {!permission?.id && (
                                         <Tooltip text='Re-move Link'>
                                             <Button
                                                 classes='border-0 !text-lg !w-6 !h-6 flex justify-end'
@@ -149,8 +140,8 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
                         </div>
                     </div>
                     <div className='pt-4 space-x-4 text-right'>
-                        {submitButtonShow && (
-                            <Button label={permission[0]?.id ? 'Update' : 'Submit'} type='submit' fill fit />
+                        {fields.length > 0 && (
+                            <Button label={permission?.id ? 'Update' : 'Submit'} type='submit' fill fit />
                         )}
                         <Button label='Cancel' onClick={() => setShow(false)} fit />
                     </div>

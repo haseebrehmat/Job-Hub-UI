@@ -51,7 +51,7 @@ const Permissions = () => {
                                                 />
                                             )}
                                             <div className='flex text-sm justify-between gap-2 text-gray-600 italic'>
-                                                <span className=''>{row?.codename}</span>
+                                                <span>{row?.codename}</span>
                                                 <span>level : {row?.level}</span>
                                             </div>
                                         </div>
@@ -71,12 +71,12 @@ const Permissions = () => {
                     <Paginated pages={data?.pages} setPage={page => dispatch({ page })} page={vals.page} />
                 </div>
             )}
-            {true && vals.show && (
+            {can(['create_permission', 'edit_permission']) && vals.show && (
                 <PermissionForm
                     show={vals.show}
                     setShow={show => dispatch({ show })}
                     mutate={mutate}
-                    permission={[vals?.permission]}
+                    permission={vals?.permission}
                     modules={data?.modules}
                     permissionModule={vals?.permissionModule}
                 />
