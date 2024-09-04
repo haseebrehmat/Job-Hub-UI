@@ -24,7 +24,7 @@ const ModuleInput = ({ modules, selectedModule, handleFieldChange, index }) => {
     return (
         <div className=''>
             <div className='flex  gap-3'>
-                <div className='w-[55%]'>
+                <div className='w-[350px]'>
                     <CustomSelector
                         options={parseModules(modules)}
                         selectorValue={parseModule(inputValue)}
@@ -33,7 +33,7 @@ const ModuleInput = ({ modules, selectedModule, handleFieldChange, index }) => {
                     />
                 </div>
                 <div>
-                    <Input value={inputValue} onChange={handleChange} ph='Add new module.' />
+                    <Input value={inputValue} onChange={handleChange} label='module' />
                     {errors.length > 0 && <small className='__error'>{errors}</small>}
                 </div>
             </div>

@@ -47,7 +47,7 @@ const Permissions = () => {
                                                 <PermissionActions
                                                     id={row?.id}
                                                     mutate={mutate}
-                                                    edit={() => handleClick(row, module?.module)}
+                                                    edit={() => handleClick(row, module)}
                                                 />
                                             )}
                                             <div className='flex text-sm justify-between gap-2 text-gray-600 italic'>

@@ -520,3 +520,6 @@ export const parseModule = module => {
 }
 
 export const parseModules = modules => modules?.map(module => ({ value: module, label: module }))
+
+export const parsePermissions = permissions =>
+    permissions?.map(permission => ({ value: permission.codename, label: permission.name }))

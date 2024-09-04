@@ -2,12 +2,12 @@ import { memo, useState } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Modal, Tooltip, Input } from '@components'
+import { Button, Modal, Tooltip, Input, CustomSelector } from '@components'
 
 import { ModuleInput } from '@modules/settings/components'
 import { savePermission } from '@modules/settings/api'
 
-// import { parseModule, parseModules } from '@utils/helpers'
+import { parsePermissions, parseModules } from '@utils/helpers'
 // import { MODULE_NAMES_OPTIONS } from '@constants/permissions'
 
 import { ValidateFalseIcon } from '@icons'
@@ -20,6 +20,9 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
 
     const handleFieldChange = (index, value, key) => {
         const newFields = [...fields]
+        if (key === 'child' || key === 'parent') {
+            value = value.map(val => val.value)
+        }
         newFields[index][key] = value
         setFields(newFields)
     }
@@ -50,16 +53,23 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
     )
     return (
         <Modal
-            classes='!w-1/ '
+            classes='!w-1/2 '
             show={show}
             setShow={setShow}
             content={
                 <form onSubmit={handleSubmit} className='w-full hide_scrollbar overflow-x-auto'>
                     <div className='grid grid-flow-row gap-2'>
-                        <p className='font-medium text-xl'>{permission[0]?.id ? 'Edit' : 'Create'} Permissions</p>
+                        <p className='text-xl text-[#048C8C] font-semibold'>
+                            {permission[0]?.id ? 'Edit' : 'Create'} Permissions
+                        </p>
                         <hr className='mb-1 w-full' />
                         <div className='flex justify-between items-center'>
-                            <span className='text-sm text-[#048C8C]'>Multiple Permission</span>
+                            {permission[0]?.id ? (
+                                ''
+                            ) : (
+                                <span className='text-sm text-[#048C8C]'>Multiple Permission</span>
+                            )}
+
                             {fields.length < 5 && !permission[0]?.id && (
                                 <Tooltip text='Add Link'>
                                     <Button onClick={addField} icon='+ Add' fit classes='!px-1 !py-0.5' />
@@ -68,36 +78,64 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
                         </div>
                         <div className='flex flex-col gap-2'>
                             {fields?.map((field, index) => (
-                                <div key={index} className='grid grid-cols-2 items-center w-full'>
+                                <div
+                                    key={index}
+                                    className={`grid ${
+                                        permission[0]?.id ? 'grid-cols-1' : 'grid-cols-2'
+                                    } gap-4 items-center w-full`}
+                                >
                                     <ModuleInput
                                         modules={modules}
                                         index={index}
                                         handleFieldChange={handleFieldChange}
-                                        selectedModule={permissionModule}
+                                        selectedModule={permissionModule?.module}
                                     />
-                                    <div className='grid grid-cols-3 gap-2 items-center w-full'>
+                                    <div className='grid grid-cols-3 gap-2 items-center'>
                                         <div className='flex-grow'>
                                             <Input
-                                                ph={`Enter Codename ${index + 1}`}
                                                 value={field?.codename}
                                                 onChange={e => handleFieldChange(index, e.target.value, 'codename')}
+                                                label='codename'
                                             />
                                         </div>
                                         <div className='flex-grow'>
                                             <Input
-                                                ph={`Enter Name ${index + 1}`}
                                                 value={field?.name}
                                                 onChange={e => handleFieldChange(index, e.target.value, 'name')}
+                                                label='name'
                                             />
                                         </div>
                                         <div className='flex-grow'>
                                             <Input
-                                                ph='Enter level'
                                                 value={field?.level}
-                                                onChange={e => handleFieldChange(index, e.target.value, 'level')}
+                                                onChange={e => handleFieldChange(index, e.target.value, 'levels')}
+                                                label='level'
                                             />
                                         </div>
                                     </div>
+                                    {permission[0]?.id && (
+                                        <div className='mt-6'>
+                                            <span className='text-md text-[#048C8C] font-semibold'>
+                                                Assign Parents and Children
+                                            </span>
+                                            <div className='flex gap-4'>
+                                                <CustomSelector
+                                                    options={parsePermissions(permissionModule?.permissions)}
+                                                    selectorValue={parseModules(field?.child)}
+                                                    handleChange={e => handleFieldChange(index, e, 'child')}
+                                                    isMulti
+                                                    placeholder='Select Children'
+                                                />
+                                                <CustomSelector
+                                                    options={parsePermissions(permissionModule?.permissions)}
+                                                    selectorValue={parseModules(field?.parent)}
+                                                    handleChange={e => handleFieldChange(index, e, 'parent')}
+                                                    isMulti
+                                                    placeholder='Select Parents'
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
                                     {!permission[0]?.id && (
                                         <Tooltip text='Re-move Link'>
                                             <Button
