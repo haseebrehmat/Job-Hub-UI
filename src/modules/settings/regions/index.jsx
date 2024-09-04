@@ -36,7 +36,7 @@ const Regions = () => {
                     data?.regions?.map((row, idx) => (
                         <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
                             <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
-                            {false && can('edit_region') && can('delete_region') && (
+                            {can('edit_region') && can('delete_region') && (
                                 <RegionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
                         </div>
