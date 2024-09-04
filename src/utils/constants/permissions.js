@@ -796,11 +796,3 @@ export const permissions = rawpermissions.map(row => ({
         return p.level?.includes(2)
     }),
 }))
-
-export const MODULE_NAMES_OPTIONS = [
-    { label: 'Candidates', value: 'Candidates' },
-    { label: 'Dashboard', value: 'Dashboard' },
-    { label: 'Comapany Management', value: 'Comapany Management' },
-    { label: 'Status', value: 'Status' },
-    { label: 'Role Management', value: 'Role Management' },
-]

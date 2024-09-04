@@ -512,14 +512,10 @@ export const parseTeamCandidates = candidates =>
 
 export const removeFilterCounts = selected =>
     selected?.map(obj => ({ ...obj, label: obj.label?.replace(/\s*\(\d+\)\s*/, '') })) || []
-export const parseModule = module => {
-    if (module) {
-        return { value: module, label: module }
-    }
-    return null
-}
+
+export const parseModule = module => (module ? { value: module, label: module } : null)
 
 export const parseModules = modules => modules?.map(module => ({ value: module, label: module }))
 
 export const parsePermissions = permissions =>
-    permissions?.map(permission => ({ value: permission.codename, label: permission.name }))
+    permissions?.map(permission => ({ value: permission?.codename, label: permission?.name }))

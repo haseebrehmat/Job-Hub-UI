@@ -3,11 +3,9 @@ import useSWR from 'swr'
 
 import { Loading } from '@components'
 
-import { transformPascal } from '@utils/helpers'
-
 import { fetchPermissions } from '@modules/settings/api'
 
-// import { permissions as data } from '@utils/constants/permissions'
+import { transformPascal } from '@utils/helpers'
 
 const Permissions = ({ permissions, setPermissions }) => {
     const { data, isLoading } = useSWR(`/api/auth/permission/`, fetchPermissions)

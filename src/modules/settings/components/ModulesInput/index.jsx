@@ -2,19 +2,17 @@ import { useEffect, useState } from 'react'
 
 import { Input, CustomSelector } from '@components'
 
-import { parseModules, parseModule } from '@/utils/helpers'
+import { parseModules, parseModule } from '@utils/helpers'
 
 const ModuleInput = ({ modules, selectedModule, handleFieldChange, index }) => {
     const [inputValue, setInputValue] = useState(selectedModule || '')
-    const [errors, setErrors] = useState('')
+
     const handleClick = (value, key) => {
         setInputValue(value.label)
         handleFieldChange(index, inputValue, key)
     }
-    const handleChange = e => {
-        setErrors('')
-        setInputValue(e.target.value)
-    }
+    const handleChange = e => setInputValue(e.target.value)
+
     useEffect(() => {
         if (inputValue?.length > 0) {
             handleFieldChange(index, inputValue, 'module')
@@ -22,20 +20,17 @@ const ModuleInput = ({ modules, selectedModule, handleFieldChange, index }) => {
     }, [inputValue])
 
     return (
-        <div className=''>
-            <div className='flex  gap-3'>
-                <div className='w-[350px]'>
-                    <CustomSelector
-                        options={parseModules(modules)}
-                        selectorValue={parseModule(inputValue)}
-                        handleChange={module => handleClick(module, 'module')}
-                        placeholder='Select Module'
-                    />
-                </div>
-                <div>
-                    <Input value={inputValue} onChange={handleChange} label='module' />
-                    {errors.length > 0 && <small className='__error'>{errors}</small>}
-                </div>
+        <div className='flex gap-2 items-center'>
+            <div className='w-[350px]'>
+                <CustomSelector
+                    options={parseModules(modules)}
+                    selectorValue={parseModule(inputValue)}
+                    handleChange={module => handleClick(module, 'module')}
+                    placeholder='Select Module'
+                />
+            </div>
+            <div>
+                <Input value={inputValue} onChange={handleChange} label='module' />
             </div>
         </div>
     )

@@ -72,7 +72,7 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
                                     key={index}
                                     className={`grid ${
                                         permission?.id ? 'grid-cols-1' : 'grid-cols-2'
-                                    } gap-4 items-center w-full`}
+                                    } gap-2 items-center w-full`}
                                 >
                                     <ModuleInput
                                         modules={modules}
