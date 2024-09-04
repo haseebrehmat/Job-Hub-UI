@@ -52,7 +52,7 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
     )
     return (
         <Modal
-            classes='!w-1/2yar'
+            classes='!w-1/2'
             show={show}
             setShow={setShow}
             content={
