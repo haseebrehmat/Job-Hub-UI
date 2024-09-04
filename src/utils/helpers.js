@@ -510,3 +510,6 @@ export const parseExposedCandidates = candidates =>
 
 export const parseTeamCandidates = candidates =>
     candidates?.map(candidate => ({ label: candidate.candidate, value: candidate.id }))
+
+export const removeFilterCounts = selected =>
+    selected?.map(obj => ({ ...obj, label: obj.label?.replace(/\s*\(\d+\)\s*/, '') })) || []
