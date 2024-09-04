@@ -4,13 +4,13 @@ import useSWR from 'swr'
 
 import { Loading, EmptyTable, Button, Badge, Searchbox, Tooltip } from '@components'
 
-import { TeamForm, PseudosTeamForm } from '@modules/userManagement/components'
+import { TeamForm, PseudosTeamForm, TeamActions } from '@modules/userManagement/components'
 import { fetchTeams } from '@modules/userManagement/api'
 
 import { can } from '@utils/helpers'
 import { teamHeads } from '@constants/userManagement'
 
-import { CreateIcon, VerticalsAddIcon, EditIcon } from '@icons'
+import { CreateIcon } from '@icons'
 
 const Teams = () => {
     const [team, setTeam] = useState()
@@ -61,20 +61,12 @@ const Teams = () => {
                     </span>
                 </td>
                 <td className='px-3 py-6 flex gap-3'>
-                    {can('edit_team') && (
-                        <Tooltip text='Assign Pesudos'>
-                            <span onClick={() => handleClick(row, '')} className='cursor-pointer'>
-                                {VerticalsAddIcon}
-                            </span>
-                        </Tooltip>
-                    )}
-                    {can('edit_team') && (
-                        <Tooltip text='Edit Team'>
-                            <span onClick={() => handleClick(row, 'edit')} className='cursor-pointer'>
-                                {EditIcon}
-                            </span>
-                        </Tooltip>
-                    )}
+                    <TeamActions
+                        id={row?.id}
+                        edit={() => handleClick(row, 'edit')}
+                        assign={() => handleClick(row, '')}
+                        mutate={mutate}
+                    />
                 </td>
             </tr>
         ))

@@ -16,6 +16,8 @@ import SelectedVerticals from '@modules/userManagement/components/SelectedVertic
 import MemberVerticals from '@modules/userManagement/components/MemberVerticals'
 import MemberRegions from '@modules/userManagement/components/MemberRegions'
 import TeamVerticals from '@modules/userManagement/components/TeamVerticals'
+import TeamActions from '@modules/userManagement/components/TeamActions'
+import ReportingToDropdown from '@modules/userManagement/components/ReportingToDropdown'
 
 export {
     CompanyForm,
@@ -36,4 +38,6 @@ export {
     MemberVerticals,
     MemberRegions,
     TeamVerticals,
+    TeamActions,
+    ReportingToDropdown,
 }
