@@ -1,6 +1,6 @@
-export const USER_DELETION = false
-export const PSEUDO_DELETION = false
-export const VERTICAL_DELETION = false
+export const USER_DELETION = true
+export const PSEUDO_DELETION = true
+export const VERTICAL_DELETION = true
 export const VERTICAL_SKILL_DELETION = true
 export const VERTICAL_EXPERIENCE_DELETION = true
 export const VERTICAL_EDUCATION_DELETION = true
@@ -21,3 +21,4 @@ export const REGION_DELETION = true
 export const JOB_DELETION = true
 export const TECH_STACK_CATEGORY_DELETION = true
 export const EXPOSED_TEAM_DELETION = true
+export const TEAM_DELETION = true

@@ -24,6 +24,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'US Jora', value: 'usjora' },
     { label: 'Startup', value: 'startup' },
     { label: 'Receptix', value: 'receptix' },
+    { label: 'Builtin', value: 'builtin' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -93,6 +94,7 @@ export const JOB_SOURCES = {
     startup: 'Startup',
     dailyremote: 'DailyRemote',
     receptix: 'Receptix',
+    builtin: 'Builtin',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',

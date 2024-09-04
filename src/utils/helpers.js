@@ -519,3 +519,5 @@ export const parseModules = modules => modules?.map(module => ({ value: module, 
 
 export const parsePermissions = permissions =>
     permissions?.map(permission => ({ value: permission?.codename, label: permission?.name }))
+
+export const parseUserRole = role => (role ? { value: role?.id, label: role?.name } : null)
