@@ -2,7 +2,7 @@ import { memo, useState } from 'react'
 
 import { Button, DeleteDialog, Tooltip } from '@components'
 
-import { REGION_DELETION } from '@constants/allowDeletion'
+import { PERMISSION_DELETION } from '@constants/allowDeletion'
 import { can } from '@utils/helpers'
 
 import { TrashIcon, EditIcon } from '@icons'
@@ -23,9 +23,9 @@ const PermissionActions = ({ id, edit, mutate }) => {
                     setShow={setShow}
                     url={`api/auth/permission/${id}/`}
                     refetch={mutate}
-                    perm={REGION_DELETION}
+                    perm={PERMISSION_DELETION}
                 >
-                    <Tooltip text='Delete region'>
+                    <Tooltip text='Delete Permission'>
                         <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
                     </Tooltip>
                 </DeleteDialog>
