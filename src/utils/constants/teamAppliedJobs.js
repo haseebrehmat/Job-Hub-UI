@@ -31,3 +31,9 @@ export const TEAM_APPLIED_JOBS_INITIAL_VALS = {
     types: [],
     bd: { value: 'all', label: 'All Team Members' },
 }
+
+export const TEAM_APPLIED_JOBS_STAT_TABS = {
+    source: true,
+    type: false,
+    hourly: false,
+}
