@@ -8,7 +8,6 @@ import { ModuleInput } from '@modules/settings/components'
 import { savePermission } from '@modules/settings/api'
 
 import { parsePermissions, parseModules } from '@utils/helpers'
-// import { MODULE_NAMES_OPTIONS } from '@constants/permissions'
 
 import { ValidateFalseIcon } from '@icons'
 
@@ -53,7 +52,7 @@ const PermissionForm = ({ show, setShow, mutate, permission, modules, permission
     )
     return (
         <Modal
-            classes='!w-1/2 '
+            classes='!w-1/2yar'
             show={show}
             setShow={setShow}
             content={
