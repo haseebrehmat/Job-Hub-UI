@@ -23,6 +23,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Startwire', value: 'startwire' },
     { label: 'US Jora', value: 'usjora' },
     { label: 'Startup', value: 'startup' },
+    { label: 'Receptix', value: 'receptix' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -91,6 +92,7 @@ export const JOB_SOURCES = {
     jobgether: 'Job Gether',
     startup: 'Startup',
     dailyremote: 'DailyRemote',
+    receptix: 'Receptix',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
