@@ -20,6 +20,7 @@ export const getToken = () => JSON.parse(localStorage.getItem('token'))
 
 export const removeToken = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('refresh-token')
     localStorage.removeItem('visited-jobs')
 }
 
