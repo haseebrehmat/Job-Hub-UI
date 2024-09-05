@@ -42,6 +42,17 @@ export const saveTechStackCategory = (url, { arg: category }) => {
 
 export const fetchAllRegions = url => http.get(url).then(({ data }) => data)
 
-export const fetchPermissions = url => http.get(url).then(({ data }) => data)
+export const fetchPermissions = url =>
+    http.get(url).then(({ data }) => ({ permissions: data?.data, modules: data?.modules }))
 
 export const fetchTechStacksCategory = url => http.get(url).then(({ data }) => data)
+export const fetchRoles = url => http.get(url).then(({ data }) => data)
+
+export const savePermission = async (url, { arg: permissions }) => {
+    if (permissions.permissions[0]?.id) {
+        const { data } = await rawHttp.put(url, permissions.permissions[0])
+        return toast.success(data.detail || 'Permission updated successfully')
+    }
+    const { data: data_1 } = await rawHttp.post(url, permissions)
+    return toast.success(data_1.detail || 'Permission created successfully')
+}

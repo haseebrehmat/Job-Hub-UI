@@ -40,3 +40,10 @@ export const TECH_STACKS_CATEGORIES_INITIAL_STATE = {
     show: false,
     trend_analytics: null,
 }
+export const PERMISSIONS_INITIAL_VALUES = {
+    query: '',
+    page: 1,
+    show: false,
+    Permission: '',
+    permissionModule: '',
+}

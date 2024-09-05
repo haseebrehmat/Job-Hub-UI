@@ -475,7 +475,6 @@ export const getWidthClass = index => {
 }
 
 export const findRegion = (region, regions) => {
-    console.log(regions)
     region = region.toLowerCase()
     const R = regions.map(reg => reg.name)
     return R.includes(region)
@@ -513,5 +512,12 @@ export const parseTeamCandidates = candidates =>
 
 export const removeFilterCounts = selected =>
     selected?.map(obj => ({ ...obj, label: obj.label?.replace(/\s*\(\d+\)\s*/, '') })) || []
+
+export const parseModule = module => (module ? { value: module, label: module } : null)
+
+export const parseModules = modules => modules?.map(module => ({ value: module, label: module }))
+
+export const parsePermissions = permissions =>
+    permissions?.map(permission => ({ value: permission?.codename, label: permission?.name }))
 
 export const parseUserRole = role => (role ? { value: role?.id, label: role?.name } : null)

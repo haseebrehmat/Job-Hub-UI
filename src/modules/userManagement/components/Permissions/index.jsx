@@ -1,15 +1,21 @@
 import { memo, useEffect, useState } from 'react'
+import useSWR from 'swr'
+
+import { Loading } from '@components'
+
+import { fetchPermissions } from '@modules/settings/api'
 
 import { transformPascal } from '@utils/helpers'
 
-import { permissions as data } from '@utils/constants/permissions'
-
 const Permissions = ({ permissions, setPermissions }) => {
+    const { data, isLoading } = useSWR(`/api/auth/permission/`, fetchPermissions)
     const [permss, setPermss] = useState(
         data
-            .flatMap(p => p.permissions)
-            .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
-            .reduce((acc, cur) => ({ ...acc, ...cur }))
+            ? data?.permissions
+                  ?.flatMap(p => p.permissions)
+                  .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
+                  .reduce((acc, cur) => ({ ...acc, ...cur }))
+            : []
     )
     const handleChange = e => {
         const {
@@ -32,6 +38,7 @@ const Permissions = ({ permissions, setPermissions }) => {
         const allowedPermissions = Object.keys(permss).filter(k => permss[k])
         if (allowedPermissions.length > 0) setPermissions(allowedPermissions)
     }, [permss])
+    if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto'>
             <p className='pb-2 font-semibold'>Assign Permissions</p>
@@ -47,8 +54,8 @@ const Permissions = ({ permissions, setPermissions }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.length > 0 ? (
-                        data?.map((perm, idx) =>
+                    {data?.permissions?.length > 0 ? (
+                        data?.permissions?.map((perm, idx) =>
                             perm?.permissions?.length > 0 ? (
                                 <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
                                     <td className='px-2 py-2'>
@@ -57,7 +64,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                                                 id={`checkbox-${idx}`}
                                                 type='checkbox'
                                                 name='permissions'
-                                                data-perms={perm.permissions.map(({ codename }) => codename)}
+                                                data-perms={perm?.permissions.map(({ codename }) => codename)}
                                                 onChange={handleModule}
                                                 className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
                                             />
