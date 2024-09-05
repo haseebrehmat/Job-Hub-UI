@@ -1,14 +1,14 @@
-import { memo, useReducer } from 'react'
+import { memo, useReducer, use } from 'react'
 
 import { Button, CustomSelector } from '@components'
 
 import { FilterDates } from '@modules/teamAppliedJobs/components'
 
-import { parseMembers } from '@utils/helpers'
-import { JOB_SOURCE_OPTIONS_UNDERSCORE, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
+import { parseMembers, parseVals } from '@utils/helpers'
+import { JOB_TYPES_OPTIONS } from '@constants/scrapper'
 import { TEAM_APPLIED_JOBS_INITIAL_VALS as initFilters } from '@constants/teamAppliedJobs'
 
-const Filters = ({ filtered = null, dispatch = null, data = null }) => {
+const Filters = ({ filtered = null, dispatch = null, data = null, dropdowns }) => {
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         start: filtered.start,
         end: filtered.end,
@@ -17,18 +17,23 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
         types: filtered.types,
         bd: filtered.bd,
     })
-    const applyFilters = () =>
+    const applyFilters = flag => {
+        if (flag) {
+            update({ download: true })
+        }
         dispatch({
             start: vals.start,
             end: vals.end,
             stacks: vals.stacks,
             sources: vals.sources,
             types: vals.types,
+            download: vals.download,
             bd: vals.bd,
         })
+    }
     const clearFilters = () => {
         dispatch({ ...initFilters })
-        update({ start: '', end: '', stacks: [], sources: [], types: [], bd: initFilters.bd })
+        update({ start: '', end: '', stacks: [], sources: [], types: [], download: false, bd: initFilters.bd })
     }
 
     return (
@@ -46,7 +51,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
             <div>
                 <span className='text-xs font-semibold'>Job Sources</span>
                 <CustomSelector
-                    options={JOB_SOURCE_OPTIONS}
+                    options={parseVals(dropdowns?.data?.job_sources)}
                     handleChange={obj => update({ sources: obj })}
                     selectorValue={vals.sources}
                     isMulti
@@ -66,7 +71,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
             <div>
                 <span className='text-xs font-semibold'>Tech Stacks</span>
                 <CustomSelector
-                    options={JOB_SOURCE_OPTIONS_UNDERSCORE}
+                    options={parseVals(dropdowns?.data?.tech_keywords)}
                     handleChange={obj => update({ stacks: obj })}
                     selectorValue={vals.stacks}
                     isMulti
@@ -74,7 +79,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
                 />
             </div>
             <div className='flex items-center gap-2'>
-                <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
+                <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters(false)} />
                 {(filtered.start ||
                     filtered.end ||
                     filtered.bd?.value !== 'all' ||
@@ -82,6 +87,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
                     filtered.sources.length > 0 ||
                     filtered.types.length > 0) && <Button fit onClick={clearFilters} label='Clear' />}
             </div>
+            {/* <Button label='Download' classes='!px-8 !py-2' fit onClick={applyFilters(true)} /> */}
         </div>
     )
 }

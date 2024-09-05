@@ -39,3 +39,6 @@ export const fetchTeamAppliedJobsPerHour = url =>
     http
         .get(url)
         .then(({ data }) => ({ results: data?.data, dates: data?.dates, min: data?.min_count, max: data?.max_count }))
+export const downloadFilteredJobs = url => http.get(url).then(({ data }) => ({ status: 'success' }))
+
+export const fetchDropdownVals = url => http.get(url).then(({ data }) => ({ data, status: 'success' }))

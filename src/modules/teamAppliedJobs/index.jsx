@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { Loading, Tooltip, Button } from '@components'
 
-import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
+import { fetchTeamAppliedJobs, fetchDropdownVals } from '@modules/teamAppliedJobs/api'
 import { JobSourceAnalytics, Filters, EmptyTable, TableNavigate } from '@modules/teamAppliedJobs/components'
 
 import { formatDate, timeSince } from '@utils/helpers'
@@ -17,12 +17,13 @@ const TeamAppliedJobs = memo(() => {
     const { data, error, isLoading } = useSWR([page, vals.bd?.value], () =>
         fetchTeamAppliedJobs(page, vals.bd?.value === 'all' ? '' : vals.bd?.value)
     )
+    const { data: dropdownvals } = useSWR(`http://5.1.0.22:8000/api/job_portal/applied_job_filters/`, fetchDropdownVals)
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14 px-2'>
+        <div className='max-w-full shadow-md sm:rounded-lg mb-14 px-2'>
             <JobSourceAnalytics
                 job_sources={data.job_source_analytics}
                 job_types={data.job_type_analytics}
@@ -41,7 +42,7 @@ const TeamAppliedJobs = memo(() => {
                     fill={vals.filter}
                 />
             </div>
-            {vals.filter && <Filters filtered={vals} dispatch={dispatch} data={data} />}
+            {vals.filter && <Filters filtered={vals} dispatch={dispatch} data={data} dropdowns={dropdownvals} />}
             <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
                 <thead className='text-sm text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>

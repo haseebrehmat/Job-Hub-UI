@@ -570,3 +570,4 @@ export const chunkNumber = (number, chunkSize = 1) => {
     }
     return chunks
 }
+export const parseVals = values => values?.map(val => ({ label: val, value: val }))

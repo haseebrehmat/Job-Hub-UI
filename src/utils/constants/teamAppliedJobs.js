@@ -29,6 +29,7 @@ export const TEAM_APPLIED_JOBS_INITIAL_VALS = {
     stacks: [],
     sources: [],
     types: [],
+    downlaod: false,
     bd: { value: 'all', label: 'All Team Members' },
 }
 
