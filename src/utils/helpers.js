@@ -18,7 +18,10 @@ export const saveRefreshToken = token => localStorage.setItem('refresh-token', J
 
 export const getToken = () => JSON.parse(localStorage.getItem('token'))
 
-export const removeToken = () => localStorage.removeItem('token')
+export const removeToken = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('visited-jobs')
+}
 
 export const decodeJwt = () => (getToken() ? jwt_decode(getToken()) : { user: null })
 
@@ -521,3 +524,13 @@ export const parsePermissions = permissions =>
     permissions?.map(permission => ({ value: permission?.codename, label: permission?.name }))
 
 export const parseUserRole = role => (role ? { value: role?.id, label: role?.name } : null)
+
+export const getVisitedJobs = () => JSON.parse(localStorage.getItem('visited-jobs')) ?? []
+
+export const saveVisitedJob = jobId => {
+    const storedArray = getVisitedJobs()
+    storedArray.push(jobId)
+    const uniqueStoredArray = [...new Set(storedArray)]
+    localStorage.setItem('visited-jobs', JSON.stringify(uniqueStoredArray))
+    return uniqueStoredArray
+}
