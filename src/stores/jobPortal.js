@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import { removeFilterCounts } from '@utils/helpers'
+import { getVisitedJobs, removeFilterCounts, saveVisitedJob } from '@utils/helpers'
 import { FILTERS_DEFAULT_VALUES } from '@constants/jobPortal'
 
 export const useJobPortalFiltersStore = create(set => ({
@@ -18,4 +18,13 @@ export const useJobPortalFiltersStore = create(set => ({
     setJobTitle: value => set(state => ({ ...state, jobTitle: value })),
     setPage: value => set(state => ({ ...state, page: value })),
     reset: () => set(FILTERS_DEFAULT_VALUES),
+}))
+
+export const useVisitedJobsStore = create((set, get) => ({
+    visitedJobs: getVisitedJobs(),
+    setVisitedJobs: value => {
+        const newArray = saveVisitedJob(value)
+        set(state => ({ ...state, visitedJobs: newArray }))
+    },
+    inVisitedJobs: value => get()?.visitedJobs?.includes(value),
 }))
