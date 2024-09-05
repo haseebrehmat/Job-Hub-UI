@@ -36,6 +36,7 @@ import {
     BsFillPlayFill,
     BsCardList,
     BsCheckCircleFill,
+    BsArrowRight,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -224,3 +225,4 @@ export const ExpiredJobsIcon = <FaBan style={{ fontSize: 20 }} />
 export const HistoryIcon = <MdOutlineHistory style={{ fontSize: 20 }} />
 export const LeadNoteIcon = <MdOutlineNoteAlt style={{ fontSize: 20 }} />
 export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />
+export const UptoIcon = <BsArrowRight style={{ fontSize: 14 }} />

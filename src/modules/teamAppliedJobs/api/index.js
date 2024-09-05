@@ -34,3 +34,6 @@ export const fetchTeamAppliedJobs = (page, applied_by = '') =>
             })
         )
         .catch(error => ({ status: 'error', message: getMsg(error) }))
+
+export const fetchTeamAppliedJobsPerHour = url =>
+    http.get(url).then(({ data }) => ({ results: data?.data, dates: data?.dates }))

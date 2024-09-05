@@ -27,6 +27,7 @@ const TeamAppliedJobs = memo(() => {
                 job_sources={data.job_source_analytics}
                 job_types={data.job_type_analytics}
                 total={data.total}
+                members={data?.team_members}
             />
             <div className='flex items-center justify-between p-3'>
                 <p className='pl-2 text-[#006366] font-bold text-lg'>

@@ -30,7 +30,7 @@ export const activeRole = () => ({ role: decodeJwt()?.role, id: decodeJwt()?.rol
 
 export const userRoles = () => (decodeJwt()?.roles?.length > 1 ? decodeJwt()?.roles : [])
 
-export const getMsg = error => error?.response?.data?.detail || 'Server error'
+export const getMsg = error => error?.response?.data?.detail || 'Network error'
 
 export const getBaseUrl = nodeEnv => {
     switch (nodeEnv) {

@@ -28,6 +28,12 @@ const ErrorBoundary = () => {
                 ) : (
                     <div className='bg-red-100 text-red-700 px-4 py-3 rounded max-w-sm'>
                         {error.message || 'Something went wrong!'}
+                        <span
+                            className='!text-[#048C8C] underline cursor-pointer mx-2 text-sm underline-offset-2'
+                            onClick={() => window.location.reload()}
+                        >
+                            reload
+                        </span>
                     </div>
                 )}
                 {location?.pathname === '/' ? (
