@@ -2,7 +2,7 @@ import { useState, memo, useEffect, useReducer } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
-import { useJobPortalFiltersStore } from '@/stores'
+import { useJobPortalFiltersStore, useVisitedJobsStore } from '@/stores'
 
 import { Paginated, CustomDilog, EmptyTable, Loading, CustomSelector, Filters, Checkbox } from '@components'
 
@@ -21,6 +21,7 @@ import { JOB_HEADS } from '@constants/jobPortal'
 
 const JobsFilter = memo(() => {
     const gsm = useJobPortalFiltersStore(state => state)
+    const [setVisitedJobs, inVisitedJobs] = useVisitedJobsStore(state => [state.setVisitedJobs, state.inVisitedJobs])
 
     const apiUrl = `${baseURL}api/job_portal/`
     const [data, setData] = useState([])
@@ -334,8 +335,7 @@ const JobsFilter = memo(() => {
                     </div>
                 </div>
             </div>
-
-            <div className=''>
+            <div>
                 <table className='table-auto w-full table text-lg text-left mt-4 border text-[#048C8C]'>
                     <thead className='text-md uppercase bg-[#edfdfb] border'>
                         <tr>
@@ -371,12 +371,17 @@ const JobsFilter = memo(() => {
                                             item?.company_name.length > 0 &&
                                             formatStringInPascal(item.company_name)}
                                     </td>
-                                    <td className='p-2 capitalize'>
+                                    <td
+                                        className={`p-2 capitalize ${
+                                            inVisitedJobs(item?.id) && 'bg-slate-400 text-white'
+                                        }`}
+                                    >
                                         <a
                                             className='underline focus:text-black focus:text-lg'
                                             target='_blank'
                                             rel='noreferrer'
                                             href={item?.job_source_url}
+                                            onClick={() => setVisitedJobs(item?.id)}
                                         >
                                             {item?.job_source}
                                         </a>
