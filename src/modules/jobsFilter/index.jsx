@@ -371,13 +371,11 @@ const JobsFilter = memo(() => {
                                             item?.company_name.length > 0 &&
                                             formatStringInPascal(item.company_name)}
                                     </td>
-                                    <td
-                                        className={`p-2 capitalize ${
-                                            inVisitedJobs(item?.id) && 'bg-slate-400 text-white'
-                                        }`}
-                                    >
+                                    <td className='capitalize'>
                                         <a
-                                            className='underline focus:text-black focus:text-lg'
+                                            className={`underline focus:font-bold focus:italic p-2 ${
+                                                inVisitedJobs(item?.id) && 'bg-[#4ab9a7] text-white rounded'
+                                            }`}
                                             target='_blank'
                                             rel='noreferrer'
                                             href={item?.job_source_url}
