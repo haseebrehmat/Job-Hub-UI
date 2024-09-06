@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import useSWR from 'swr'
 
 import { Button, Loading } from '@components'
@@ -9,17 +9,22 @@ import { fetchGroupLinks } from '@modules/scrapper/api'
 import { can, formatStringInPascal } from '@utils/helpers'
 
 import { CreateIcon, UptoIcon } from '@icons'
+import { useGroupLinksStore } from '@/stores'
+import GroupLinksDetails from '../GroupLinksDetails'
 
 const GroupLinks = () => {
-    const [link, setLink] = useState()
-    const [show, setShow] = useState(false)
+    const [link, setLink, showDetails, toggleDetails, showForm, toggleForm] = useGroupLinksStore(state => [
+        state?.link,
+        state?.setLink,
+        state?.show?.details,
+        state?.toggle?.details,
+        state?.show?.form,
+        state?.toggle?.form,
+    ])
 
     const { data, isLoading, error, mutate } = useSWR('/api/job_scraper/group_scheduler_link/', fetchGroupLinks)
 
-    const handleClick = (values = null) => {
-        setLink(values)
-        setShow(true)
-    }
+    const handleClick = (values = null) => setLink(values)
 
     if (isLoading) return <Loading />
 
@@ -41,7 +46,10 @@ const GroupLinks = () => {
                             <div className='flex flex-col mt-2 ml-2 text-sm'>
                                 <div className='mb-2 flex justify-between'>
                                     <span className='tracking-wider italic'>Links Summary</span>
-                                    <span className='underline underline-offset-4 inline-flex gap-2 items-center text-xs'>
+                                    <span
+                                        className='underline underline-offset-4 inline-flex gap-2 items-center text-xs cursor-pointer'
+                                        onClick={() => toggleDetails()}
+                                    >
                                         View Details {UptoIcon}
                                     </span>
                                 </div>
@@ -88,8 +96,9 @@ const GroupLinks = () => {
                     <span className='ml-2 text-gray-500'>No group links / urls found yet!</span>
                 )}
             </div>
-            {can(['edit_job_source_link', 'delete_job_source_link']) && show && (
-                <GroupLinksForm show={show} setShow={setShow} mutate={mutate} link={link} />
+            {showDetails && <GroupLinksDetails />}
+            {can(['edit_job_source_link', 'delete_job_source_link']) && showForm && (
+                <GroupLinksForm show={showForm} setShow={toggleForm} mutate={mutate} link={link} />
             )}
         </div>
     )
