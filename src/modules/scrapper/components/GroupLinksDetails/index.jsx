@@ -1,23 +1,16 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 
 import { Drawer, Button } from '@components'
 
 import { useGroupLinksStore } from '@/stores'
 
 const GroupLinksDetails = () => {
-    const [show, setShow] = useGroupLinksStore(state => [state?.show?.details, state?.toggle?.details])
-    const [tabs, setTabs] = useState({
-        stop: true,
-        completed: false,
-        running: false,
-        failed: false,
-    })
-
-    const handleClick = key => {
-        Object.keys(tabs).forEach(k => (tabs[k] = false))
-        tabs[key] = true
-        setTabs({ ...tabs })
-    }
+    const [show, tabs, setShow, switchTab] = useGroupLinksStore(state => [
+        state?.show?.details,
+        state?.tabs,
+        state?.toggle?.details,
+        state?.switchTab,
+    ])
 
     return (
         <Drawer show={show} setShow={setShow} w='50%'>
@@ -27,25 +20,25 @@ const GroupLinksDetails = () => {
                         label='Stopped'
                         fill={tabs.stop}
                         classes={`rounded-none ${!tabs.stop && 'border-cyan-200'}`}
-                        onClick={() => handleClick('stop')}
+                        onClick={() => switchTab('stop')}
                     />
                     <Button
                         label='Running'
                         fill={tabs.running}
                         classes={`rounded-none ${!tabs.running && 'border-cyan-200'}`}
-                        onClick={() => handleClick('running')}
+                        onClick={() => switchTab('running')}
                     />
                     <Button
                         label='Completed'
                         fill={tabs.completed}
                         classes={`rounded-none ${!tabs.completed && 'border-cyan-200'}`}
-                        onClick={() => handleClick('completed')}
+                        onClick={() => switchTab('completed')}
                     />
                     <Button
                         label='Failed'
                         fill={tabs.failed}
                         classes={`rounded-none ${!tabs.failed && 'border-cyan-200'}`}
-                        onClick={() => handleClick('failed')}
+                        onClick={() => switchTab('failed')}
                     />
                 </div>
                 {tabs.stop && <div className='p-3'>Stopped Scrapers here</div>}
