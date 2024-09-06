@@ -161,14 +161,15 @@ const JobsFilter = memo(() => {
     }
 
     const updateParams = () => {
-        setFilterState({ ...filterState, isLoading: true })
         gsm?.setPage(1)
+        fetchJobsData(jobDetailsUrl)
     }
 
     const resetFilters = () => {
         gsm?.reset()
         setData([])
         setFilterState(defaultFilterState)
+        fetchJobsData(jobDetailsUrl)
     }
 
     useEffect(() => {
