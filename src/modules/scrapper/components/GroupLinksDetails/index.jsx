@@ -9,7 +9,8 @@ import { GroupLinkRow } from '@modules/scrapper/components'
 import { formatStringInPascal } from '@utils/helpers'
 
 const GroupLinksDetails = () => {
-    const [show, tabs, setShow, switchTab] = useGroupLinksStore(state => [
+    const [name, show, tabs, setShow, switchTab] = useGroupLinksStore(state => [
+        state?.link?.group_scraper?.name,
         state?.show?.details,
         state?.tabs,
         state?.toggle?.details,
@@ -19,6 +20,7 @@ const GroupLinksDetails = () => {
     return (
         <Drawer show={show} setShow={setShow} w='50%'>
             <div className='flex flex-col mb-4'>
+                <span className='text-3xl uppercase mx-auto pb-3'>{name ?? 'Group A'}</span>
                 <div className='flex flex-col mb-2 space-y-2 md:gap-5 sm:flex-row sm:space-y-0'>
                     {Object.keys(tabs)?.map((tab, idx) => (
                         <Button
