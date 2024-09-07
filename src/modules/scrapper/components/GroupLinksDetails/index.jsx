@@ -2,11 +2,13 @@ import { memo } from 'react'
 
 import { useGroupLinksStore } from '@/stores'
 
-import { Drawer, Button } from '@components'
+import { Drawer, Button, Tooltip } from '@components'
 
-import { GroupLinkRow } from '@modules/scrapper/components'
+import { GroupLinkRow, RunningGroupLink } from '@modules/scrapper/components'
 
 import { formatStringInPascal } from '@utils/helpers'
+
+import { ResetFilterIcon } from '@icons'
 
 const GroupLinksDetails = () => {
     const [name, show, tabs, setShow, switchTab] = useGroupLinksStore(state => [
@@ -47,6 +49,17 @@ const GroupLinksDetails = () => {
                                 </div>
                             )
                     )}
+                {tabs.running && (
+                    <div className='flex flex-col p-3'>
+                        <div className='flex items-center justify-between'>
+                            <span className='font-semibold'>Current Group Scraper Link</span>
+                            <span className='cursor-pointer pr-3' onClick={() => console.log('reftech')}>
+                                <Tooltip text='Refetch running scraper'>{ResetFilterIcon}</Tooltip>
+                            </span>
+                        </div>
+                        <RunningGroupLink />
+                    </div>
+                )}
             </div>
         </Drawer>
     )
