@@ -6,6 +6,7 @@ import { useJobPortalV2Store } from '@/stores'
 import { Loading } from '@components'
 
 import { fetchJobs } from '@modules/jobPortal-v2/api'
+import { JobCard } from '@modules/jobPortal-v2/components'
 
 const JobPortalV2 = () => {
     const [page, query, filters] = useJobPortalV2Store(state => [state.page, state.query, state.filters])
@@ -16,15 +17,23 @@ const JobPortalV2 = () => {
         revalidateOnFocus: false,
     })
 
-    console.log(data)
-
     if (isLoading) return <Loading />
     return error ? (
         <span>Error to load Jobs</span>
     ) : (
-        <div className='grid grid-cols-1 md:grid-cols-2 h-screen'>
-            <div className='w-1/3'>Filters</div>
-            <div className='w-2/3'>Jobs</div>
+        <div className='flex flex-col md:flex-row gap-4 py-4 px-5 h-full'>
+            <div className='w-1/5 bg-slate-200 rounded-xl'>
+                <div className='flex items-center justify-center h-full'>Filters</div>
+            </div>
+            <div className='w-4/5 p-2'>
+                <div className='grid grid-cols-1 gap-5'>
+                    {data?.jobs?.length > 0 ? (
+                        data?.jobs?.map(row => <JobCard job={row} key={row?.id} />)
+                    ) : (
+                        <div>No Jobs Found</div>
+                    )}
+                </div>
+            </div>
         </div>
     )
 }

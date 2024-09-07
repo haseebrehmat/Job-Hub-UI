@@ -13,5 +13,5 @@ export const fetchJobs = (page = 1, query = '', filters = {}) => {
         }&to_date=${filters?.to}&job_type=${filters?.types?.map(type => type.value)}&blocked=${filters?.blocked}`
     }
 
-    return http.get(url).then(({ data }) => data)
+    return http.get(url).then(({ data }) => ({ jobs: data?.data }))
 }

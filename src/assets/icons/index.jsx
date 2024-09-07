@@ -50,7 +50,7 @@ import {
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
 import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey } from 'react-icons/tb'
-import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
+import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle, FiGlobe } from 'react-icons/fi'
 import {
     AiOutlineSearch,
     AiOutlineEye,
@@ -88,6 +88,7 @@ import {
     BiTrendingUp,
     BiMap,
     BiBriefcaseAlt2,
+    BiCheckDouble,
 } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
@@ -226,3 +227,5 @@ export const HistoryIcon = <MdOutlineHistory style={{ fontSize: 20 }} />
 export const LeadNoteIcon = <MdOutlineNoteAlt style={{ fontSize: 20 }} />
 export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />
 export const UptoIcon = <BsArrowRight style={{ fontSize: 14 }} />
+export const SiteIcon = <FiGlobe style={{ fontSize: 16 }} />
+export const DoubleCheckIcon = <BiCheckDouble style={{ fontSize: 18 }} />
