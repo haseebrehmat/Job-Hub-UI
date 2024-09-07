@@ -42,6 +42,7 @@ import TechStacksCategories from '@modules/settings/techStacksCategories'
 import LeadNotes from '@/modules/leadManagement/leadNotes'
 import ExposedTeams from '@modules/leadManagement/exposedTeams'
 import EditHistory from '@modules/editHistory'
+import JobPortalV2 from '@modules/jobPortal-v2'
 
 export {
     TeamAppliedJobs,
@@ -89,4 +90,5 @@ export {
     LeadNotes,
     ExposedTeams,
     EditHistory,
+    JobPortalV2,
 }

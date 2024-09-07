@@ -30,6 +30,7 @@ import { leadsRoutes } from '@router/leadsRoutes'
 import { analyticsRoutes } from '@router/analyticsRoutes'
 import { settingsRoutes } from '@router/settingsRoutes'
 import { editHistoryRoutes } from '@router/editHistoryRoutes'
+import { jobPortalV2Routes } from '@router/jobPortalV2Routes'
 
 import { getToken, decodeJwt } from '@utils/helpers'
 
@@ -186,6 +187,7 @@ export const routes = [
     ...analyticsRoutes,
     ...settingsRoutes,
     ...editHistoryRoutes,
+    ...jobPortalV2Routes,
 ]
 
 export const authRoutes = [
