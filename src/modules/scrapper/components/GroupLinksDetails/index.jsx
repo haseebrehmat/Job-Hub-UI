@@ -4,6 +4,24 @@ import { Drawer, Button } from '@components'
 
 import { useGroupLinksStore } from '@/stores'
 
+import { UptoIcon } from '@icons'
+
+const LinkRow = () => (
+    <div className='mt-2 flex justify-between items-center p-3 bg-slate-100 border border-[#338d8c] border-opacity-40 rounded-lg hover:bg-cyan-50'>
+        <span>Monster</span>
+        <span>Contract On Site</span>
+        <a
+            href='google.com'
+            target='_blank'
+            rel='noreferrer'
+            className='flex w-fit items-center gap-1.5 border border-[#4ab9a7] rounded-full px-2'
+        >
+            <span className='animate-ping'>{UptoIcon}</span>
+            <span>Visit link</span>
+        </a>
+    </div>
+)
+
 const GroupLinksDetails = () => {
     const [show, tabs, setShow, switchTab] = useGroupLinksStore(state => [
         state?.show?.details,
@@ -41,10 +59,46 @@ const GroupLinksDetails = () => {
                         onClick={() => switchTab('failed')}
                     />
                 </div>
-                {tabs.stop && <div className='p-3'>Stopped Scrapers here</div>}
-                {tabs.running && <div className='p-3'>Running Scrapers here</div>}
-                {tabs.failed && <div className='p-3'>Failed Scrapers here</div>}
-                {tabs.completed && <div className='p-3'>Completed Scrapers here</div>}
+                {tabs.stop && (
+                    <div className='p-3'>
+                        <span className='font-semibold'>Stopped Group Links</span>
+                        <div className='flex flex-col gap-2'>
+                            {Array.from({ length: 25 }).map(() => (
+                                <LinkRow />
+                            ))}
+                        </div>
+                    </div>
+                )}
+                {tabs.running && (
+                    <div className='p-3'>
+                        <span className='font-semibold'>Running Group Links</span>
+                        <div className='flex flex-col gap-2'>
+                            {Array.from({ length: 1 }).map(() => (
+                                <LinkRow />
+                            ))}
+                        </div>
+                    </div>
+                )}
+                {tabs.failed && (
+                    <div className='p-3'>
+                        <span className='font-semibold'>Failed Group Links</span>
+                        <div className='flex flex-col gap-2'>
+                            {Array.from({ length: 4 }).map(() => (
+                                <LinkRow />
+                            ))}
+                        </div>
+                    </div>
+                )}
+                {tabs.completed && (
+                    <div className='p-3'>
+                        <span className='font-semibold'>Completed Group Links</span>
+                        <div className='flex flex-col gap-2'>
+                            {Array.from({ length: 10 }).map(() => (
+                                <LinkRow />
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </Drawer>
     )
