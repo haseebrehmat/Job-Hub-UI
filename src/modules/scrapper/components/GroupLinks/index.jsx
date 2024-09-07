@@ -5,19 +5,24 @@ import { useGroupLinksStore } from '@/stores'
 
 import { Button, Loading } from '@components'
 
-import { GroupLinkActions, GroupLinksForm, RunningGroupLink, GroupLinksDetails } from '@modules/scrapper/components'
+import {
+    GroupLinkActions,
+    GroupLinksForm,
+    RunningGroupLink,
+    GroupLinksDetails,
+    GroupLinksSummary,
+} from '@modules/scrapper/components'
 import { fetchGroupLinks } from '@modules/scrapper/api'
 
 import { can, formatStringInPascal } from '@utils/helpers'
 
-import { CreateIcon, UptoIcon } from '@icons'
+import { CreateIcon, ResetIcon } from '@icons'
 
 const GroupLinks = () => {
-    const [link, setLink, showDetails, toggleDetails, showForm, toggleForm] = useGroupLinksStore(state => [
+    const [link, setLink, showDetails, showForm, toggleForm] = useGroupLinksStore(state => [
         state?.link,
         state?.setLink,
         state?.show?.details,
-        state?.toggle?.details,
         state?.show?.form,
         state?.toggle?.form,
     ])
@@ -30,10 +35,11 @@ const GroupLinks = () => {
 
     return (
         <div className='max-w-full overflow-x-auto mb-14'>
-            <div className='flex items-center space-x-4 pb-4'>
+            <div className='flex items-center space-x-4 pb-4 justify-between'>
                 {can('create_job_source_link') && (
                     <Button label='Create Group Links' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
+                <Button label='Refresh' fit icon={ResetIcon} onClick={() => mutate()} />
             </div>
             <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
                 {data?.grouplinks?.length > 0 && !error ? (
@@ -44,37 +50,7 @@ const GroupLinks = () => {
                                 <GroupLinkActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
                             )}
                             <div className='flex flex-col mt-2 ml-2 text-sm'>
-                                <div className='mb-2 flex justify-between'>
-                                    <span className='tracking-wider italic'>Links Summary</span>
-                                    <span
-                                        className='underline underline-offset-4 inline-flex gap-2 items-center text-xs cursor-pointer'
-                                        onClick={() => toggleDetails()}
-                                    >
-                                        View Details {UptoIcon}
-                                    </span>
-                                </div>
-                                <div className='flex flex-wrap gap-x-3 gap-y-3.5 mt-3'>
-                                    <div className='flex items-center gap-6 px-2.5 py-1 rounded-full cursor-pointer border border-blue-400 text-blue-400'>
-                                        <span>Total</span>
-                                        <span className='font-mono'>10</span>
-                                    </div>
-                                    <div className='flex items-center gap-6 px-2.5 py-1 rounded-full cursor-pointer border border-orange-400 text-orange-400'>
-                                        <span>Stopped</span>
-                                        <span className='font-mono'>10</span>
-                                    </div>
-                                    <div className='flex items-center gap-6 px-2.5 py-1 rounded-full cursor-pointer border border-[#338d8c] text-[#338d8c]'>
-                                        <span>Running</span>
-                                        <span className='font-mono'>1</span>
-                                    </div>
-                                    <div className='flex items-center gap-6 px-2.5 py-1 rounded-full cursor-pointer border border-red-400 text-red-400'>
-                                        <span>Failed</span>
-                                        <span className='font-mono'>10</span>
-                                    </div>
-                                    <div className='flex items-center gap-6 px-2.5 py-1 rounded-full cursor-pointer border border-purple-400 text-purple-400'>
-                                        <span>Completed</span>
-                                        <span className='font-mono'>23</span>
-                                    </div>
-                                </div>
+                                <GroupLinksSummary />
                                 <RunningGroupLink />
                             </div>
                         </div>

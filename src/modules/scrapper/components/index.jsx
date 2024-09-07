@@ -17,6 +17,7 @@ import GroupsDropDown from '@modules/scrapper/components/GroupsDropDown'
 import GroupLinkActions from '@modules/scrapper/components/GroupLinkActions'
 import GroupLinksDetails from '@modules/scrapper/components/GroupLinksDetails'
 import GroupLinkRow from '@modules/scrapper/components/GroupLinkRow'
+import GroupLinksSummary from '@modules/scrapper/components/GroupLinksSummary'
 import RunningGroupLink from '@modules/scrapper/components/RunningGroupLink'
 
 export {
@@ -40,4 +41,5 @@ export {
     GroupLinkRow,
     RunningGroupLink,
     GroupLinksDetails,
+    GroupLinksSummary,
 }
