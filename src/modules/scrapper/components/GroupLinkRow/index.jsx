@@ -1,11 +1,14 @@
 import { memo } from 'react'
 
+import { Badge } from '@components'
+
 import { UptoIcon, EditIcon, TrashIcon } from '@icons'
 
-const GroupLinkRow = ({ row = null, actions = false }) => (
+const GroupLinkRow = ({ row = null, actions = false, status = false }) => (
     <div className='mt-2 flex justify-between items-center p-3 bg-slate-100 border border-[#338d8c] border-opacity-40 rounded-lg hover:bg-cyan-50'>
         <span>{row?.source ?? 'N/A'}</span>
         <span>{row?.type ?? 'N/A'}</span>
+        {status && <span>{row?.status ? <Badge text={row?.status} /> : '--'}</span>}
         <span className='flex items-center gap-2'>
             <a
                 href={row?.link ?? '#'}

@@ -41,7 +41,7 @@ const GroupLinksDetails = () => {
                                     <span className='font-semibold'>{formatStringInPascal(tab)} Group Links</span>
                                     <div className='flex flex-col gap-2'>
                                         {Array.from({ length: 45 }).map(() => (
-                                            <GroupLinkRow actions={tab === 'total'} />
+                                            <GroupLinkRow status={tab === 'total'} />
                                         ))}
                                     </div>
                                 </div>
