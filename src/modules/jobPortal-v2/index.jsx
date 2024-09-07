@@ -21,12 +21,12 @@ const JobPortalV2 = () => {
     return error ? (
         <span>Error to load Jobs</span>
     ) : (
-        <div className='flex flex-col md:flex-row gap-4 py-4 px-5 h-full'>
+        <div className='flex flex-col md:flex-row gap-2 px-2.5 h-full'>
             <div className='w-1/5 bg-slate-200 rounded-xl'>
                 <div className='flex items-center justify-center h-full'>Filters</div>
             </div>
-            <div className='w-4/5 p-2'>
-                <div className='grid grid-cols-1 gap-5'>
+            <div className='w-4/5'>
+                <div className='grid grid-cols-1 gap-2.5'>
                     {data?.jobs?.length > 0 ? (
                         data?.jobs?.map(row => <JobCard job={row} key={row?.id} />)
                     ) : (
