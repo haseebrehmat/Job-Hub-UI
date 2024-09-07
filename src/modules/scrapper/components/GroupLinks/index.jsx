@@ -1,16 +1,16 @@
 import { memo } from 'react'
 import useSWR from 'swr'
 
+import { useGroupLinksStore } from '@/stores'
+
 import { Button, Loading } from '@components'
 
-import { GroupLinkActions, GroupLinksForm } from '@modules/scrapper/components'
+import { GroupLinkActions, GroupLinksForm, RunningGroupLink, GroupLinksDetails } from '@modules/scrapper/components'
 import { fetchGroupLinks } from '@modules/scrapper/api'
 
 import { can, formatStringInPascal } from '@utils/helpers'
 
 import { CreateIcon, UptoIcon } from '@icons'
-import { useGroupLinksStore } from '@/stores'
-import GroupLinksDetails from '../GroupLinksDetails'
 
 const GroupLinks = () => {
     const [link, setLink, showDetails, toggleDetails, showForm, toggleForm] = useGroupLinksStore(state => [
@@ -75,20 +75,7 @@ const GroupLinks = () => {
                                         <span className='font-mono'>23</span>
                                     </div>
                                 </div>
-                                <div className='mt-4 flex justify-between items-center p-3 bg-slate-100 border border-[#338d8c] border-opacity-50 rounded-lg'>
-                                    <span className='font-semibold'>Running Link:</span>
-                                    <span>Monster</span>
-                                    <span>Contract On Site</span>
-                                    <a
-                                        href='google.com'
-                                        target='_blank'
-                                        rel='noreferrer'
-                                        className='flex items-center gap-1.5 border border-[#4ab9a7] rounded-full px-2'
-                                    >
-                                        <span className='animate-ping'>{UptoIcon}</span>
-                                        <span>Visit link</span>
-                                    </a>
-                                </div>
+                                <RunningGroupLink />
                             </div>
                         </div>
                     ))
