@@ -19,7 +19,7 @@ const GroupLinksDetails = () => {
     return (
         <Drawer show={show} setShow={setShow} w='50%'>
             <div className='flex flex-col mb-4'>
-                <div className='flex flex-col mb-4 space-y-2 md:gap-5 sm:flex-row sm:space-y-0'>
+                <div className='flex flex-col mb-2 space-y-2 md:gap-5 sm:flex-row sm:space-y-0'>
                     {Object.keys(tabs)?.map((tab, idx) => (
                         <Button
                             key={idx}
@@ -30,56 +30,21 @@ const GroupLinksDetails = () => {
                         />
                     ))}
                 </div>
-                {tabs.total && (
-                    <div className='p-3'>
-                        <span className='font-semibold'>Total Group Links</span>
-                        <div className='flex flex-col gap-2'>
-                            {Array.from({ length: 45 }).map(() => (
-                                <GroupLinkRow />
-                            ))}
-                        </div>
-                    </div>
-                )}
-                {tabs.remaining && (
-                    <div className='p-3'>
-                        <span className='font-semibold'>Remaining Group Links</span>
-                        <div className='flex flex-col gap-2'>
-                            {Array.from({ length: 25 }).map(() => (
-                                <GroupLinkRow />
-                            ))}
-                        </div>
-                    </div>
-                )}
-                {tabs.running && (
-                    <div className='p-3'>
-                        <span className='font-semibold'>Running Group Links</span>
-                        <div className='flex flex-col gap-2'>
-                            {Array.from({ length: 1 }).map(() => (
-                                <GroupLinkRow />
-                            ))}
-                        </div>
-                    </div>
-                )}
-                {tabs.failed && (
-                    <div className='p-3'>
-                        <span className='font-semibold'>Failed Group Links</span>
-                        <div className='flex flex-col gap-2'>
-                            {Array.from({ length: 4 }).map(() => (
-                                <GroupLinkRow />
-                            ))}
-                        </div>
-                    </div>
-                )}
-                {tabs.completed && (
-                    <div className='p-3'>
-                        <span className='font-semibold'>Completed Group Links</span>
-                        <div className='flex flex-col gap-2'>
-                            {Array.from({ length: 10 }).map(() => (
-                                <GroupLinkRow />
-                            ))}
-                        </div>
-                    </div>
-                )}
+                {Object.keys(tabs)
+                    ?.filter(tab => tab !== 'running')
+                    ?.map(
+                        (tab, idx) =>
+                            tabs[tab] && (
+                                <div className='p-3' key={idx}>
+                                    <span className='font-semibold'>{formatStringInPascal(tab)} Group Links</span>
+                                    <div className='flex flex-col gap-2'>
+                                        {Array.from({ length: 45 }).map(() => (
+                                            <GroupLinkRow actions={tab === 'total'} />
+                                        ))}
+                                    </div>
+                                </div>
+                            )
+                    )}
             </div>
         </Drawer>
     )
