@@ -1,5 +1,7 @@
 import { memo } from 'react'
 
+import { useVisitedJobsStore } from '@/stores'
+
 import { Button } from '@components'
 
 import { JobCardHead } from '@modules/jobPortal-v2/components'
@@ -8,12 +10,15 @@ import { formatDate, timeSince } from '@utils/helpers'
 
 import { UptoIcon, SiteIcon, UserAppliedJobIcon, CompanyIcon, DateTimeIcon, SalaryIcon, TechSTack } from '@icons'
 
-const JobCard = ({ job = null }) =>
-    job ? (
+const JobCard = ({ job = null }) => {
+    const [setVisitedJobs] = useVisitedJobsStore(state => [state.setVisitedJobs])
+
+    return job ? (
         <div
             className={`rounded-lg border  border-slate-300 ${
                 job?.block ? 'bg-[#d9d5d5] bg-opacity-40 shadow-sm' : 'bg-slate-50'
             }  overflow-hidden hover:bg-white hover:border-[#338d8c] p-3 hover:-skew-x-1 hover:shadow-lg`}
+            onClick={() => setVisitedJobs(job?.id)}
         >
             <JobCardHead job={job} />
             <div className='pl-1.5'>
@@ -30,12 +35,15 @@ const JobCard = ({ job = null }) =>
                         fit
                         classes='!rounded-full !py-0.5 !pr-2.5 !gap-0.5 !text-neutral-600 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
                     />
-                    <Button
-                        label={job?.job_source}
-                        icon={SiteIcon}
-                        fit
-                        classes='!rounded-full !py-0.5 !pr-2.5 !gap-0.5 !text-neutral-600 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
-                    />
+                    <a
+                        className='!rounded-full !py-0.5 !px-2.5 !gap-2 !text-neutral-600 tracking-wider !text-xs border !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize inline-flex items-center'
+                        target='_blank'
+                        rel='noreferrer'
+                        href={job?.job_source_url}
+                        onClick={() => setVisitedJobs(job?.id)}
+                    >
+                        {SiteIcon} {job?.job_source}
+                    </a>
                     <Button
                         label={job?.job_type}
                         icon={UserAppliedJobIcon}
@@ -84,5 +92,6 @@ const JobCard = ({ job = null }) =>
             </div>
         </div>
     ) : null
+}
 
 export default memo(JobCard)
