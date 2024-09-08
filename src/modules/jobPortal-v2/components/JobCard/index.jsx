@@ -62,8 +62,8 @@ const JobCard = ({ job = null }) =>
                         {timeSince(job?.job_posted_date)}
                     </span>
                     {job?.total_vertical >= 0 ? (
-                        <>
-                            <span className='text-sm'>
+                        <div className='flex items-center gap-2'>
+                            <span className='text-sm border rounded px-2 p-0.5 text-[#338d8c] border-[#55bf84] font-mono'>
                                 {job?.total_vertical} / <strong>{job?.remaining_vertical}</strong>
                             </span>
                             <div className='flex items-center gap-2 px-2 py-1 border text-[#338d8c] border-[#4ab9a7] rounded-full hover:border-2'>
@@ -74,7 +74,7 @@ const JobCard = ({ job = null }) =>
                                 />
                                 <span>{UptoIcon}</span>
                             </div>
-                        </>
+                        </div>
                     ) : (
                         <small className='text-xs text-slate-500 border py-0.5 px-1.5 border-slate-500 rounded-full'>
                             No vertical assigned
