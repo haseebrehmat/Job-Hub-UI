@@ -14,6 +14,8 @@ export const useJobPortalV2Store = create(set => ({
         blocked: false,
     },
     focused: null,
+    job: null,
+    mutator: null,
 
     next: () => set(state => ({ ...state, page: state.page + 1 })),
     prev: () => set(state => ({ ...state, page: state.page - 1 })),
@@ -42,4 +44,6 @@ export const useJobPortalV2Store = create(set => ({
             }
         }
     },
+    setJob: job => set(state => ({ ...state, job })),
+    setMutator: func => set(state => ({ ...state, mutator: func })),
 }))

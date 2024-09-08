@@ -7,15 +7,16 @@ import { fetchJobs } from '@modules/jobPortal-v2/api'
 import { JobCard, PortalLayout } from '@modules/jobPortal-v2/components'
 
 const JobsListing = () => {
-    const [page, query, filters, focused, handleKeyDown] = useJobPortalV2Store(state => [
-        state.page,
-        state.query,
-        state.filters,
-        state.focused,
-        state.setFocused,
+    const [page, query, filters, focused, handleKeyDown, setMutator] = useJobPortalV2Store(state => [
+        state?.page,
+        state?.query,
+        state?.filters,
+        state?.focused,
+        state?.setFocused,
+        state?.setMutator,
     ])
 
-    const { data, error, isLoading } = useSWR([page, query, filters], () => fetchJobs(page, query, filters), {
+    const { data, error, isLoading, mutate } = useSWR([page, query, filters], () => fetchJobs(page, query, filters), {
         revalidateOnReconnect: false,
         shouldRetryOnError: false,
         revalidateOnFocus: false,
@@ -23,6 +24,8 @@ const JobsListing = () => {
 
     useEffect(() => {
         window.addEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))
+        if (!isLoading && !error) setMutator(mutate)
+
         return () => {
             window.removeEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))
         }

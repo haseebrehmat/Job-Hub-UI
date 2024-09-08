@@ -1,10 +1,10 @@
 import { memo } from 'react'
 
-import { Button } from '@components'
-
 import { isset } from '@utils/helpers'
 
-import { ActionsIcons, RegionIcon, DoubleCheckIcon } from '@icons'
+import { JobActions } from '@modules/jobPortal-v2/components'
+
+import { RegionIcon, DoubleCheckIcon } from '@icons'
 
 const JobCardHead = ({ job = null }) =>
     job && (
@@ -28,7 +28,7 @@ const JobCardHead = ({ job = null }) =>
             </div>
             <div className='flex items-end text-[#338d8c] p-2 lg:p-0'>
                 <span className='inline-flex gap-1 items-center text-sm'>{DoubleCheckIcon} Visited</span>
-                <Button icon={ActionsIcons} fit classes='!border-0 !p-0' />
+                <JobActions job={job} />
             </div>
         </div>
     )
