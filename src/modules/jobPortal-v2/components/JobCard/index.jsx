@@ -2,20 +2,11 @@ import { memo } from 'react'
 
 import { Button } from '@components'
 
-import { formatDate, isset, timeSince } from '@utils/helpers'
+import { JobCardHead } from '@modules/jobPortal-v2/components'
 
-import {
-    ActionsIcons,
-    UptoIcon,
-    RegionIcon,
-    SiteIcon,
-    UserAppliedJobIcon,
-    CompanyIcon,
-    DateTimeIcon,
-    SalaryIcon,
-    TechSTack,
-    DoubleCheckIcon,
-} from '@icons'
+import { formatDate, timeSince } from '@utils/helpers'
+
+import { UptoIcon, SiteIcon, UserAppliedJobIcon, CompanyIcon, DateTimeIcon, SalaryIcon, TechSTack } from '@icons'
 
 const JobCard = ({ job = null }) =>
     job ? (
@@ -24,29 +15,7 @@ const JobCard = ({ job = null }) =>
                 job?.block ? 'bg-[#d9d5d5] bg-opacity-40 shadow-sm' : 'bg-slate-50'
             }  overflow-hidden hover:bg-white hover:border-[#338d8c] p-3 hover:-skew-x-1 hover:shadow-lg`}
         >
-            <div className='flex flex-col lg:flex-row items-start justify-between'>
-                <div className='flex gap-3 items-start'>
-                    <span className='bg-[#338d8c] h-14 w-14 rounded-lg text-white uppercase flex items-center justify-center text-xl'>
-                        {job?.job_title?.substring(0, 1)}
-                    </span>
-                    <div className='flex flex-col text-gray-600 gap-y-0.5'>
-                        <span className='text-lg capitalize font-semibold flex-wrap'>{job?.job_title}</span>
-                        <span className='text-sm capitalize italic inline-flex items-center gap-1'>
-                            {isset(job?.address) ? (
-                                <>
-                                    {RegionIcon} {job?.address}
-                                </>
-                            ) : (
-                                'No Location'
-                            )}
-                        </span>
-                    </div>
-                </div>
-                <div className='flex items-end text-[#338d8c] p-2 lg:p-0'>
-                    <span className='inline-flex gap-1 items-center text-sm'>{DoubleCheckIcon} Visited</span>
-                    <Button icon={ActionsIcons} fit classes='!border-0 !p-0' />
-                </div>
-            </div>
+            <JobCardHead job={job} />
             <div className='pl-1.5'>
                 <div className='flex gap-3 flex-wrap pt-3.5'>
                     <Button
@@ -93,17 +62,19 @@ const JobCard = ({ job = null }) =>
                         {timeSince(job?.job_posted_date)}
                     </span>
                     {job?.total_vertical >= 0 ? (
-                        <div className='flex items-center gap-2 px-2 py-1 border text-[#338d8c] border-[#4ab9a7] rounded-full hover:border-2'>
+                        <>
                             <span className='text-sm'>
                                 {job?.total_vertical} / <strong>{job?.remaining_vertical}</strong>
                             </span>
-                            <Button
-                                label='Apply Now'
-                                fit
-                                classes='!rounded-full !border-0 !p-0 hover:!bg-white hover:!text-[#338d8c]'
-                            />
-                            <span>{UptoIcon}</span>
-                        </div>
+                            <div className='flex items-center gap-2 px-2 py-1 border text-[#338d8c] border-[#4ab9a7] rounded-full hover:border-2'>
+                                <Button
+                                    label='Apply Now'
+                                    fit
+                                    classes='!rounded-full !border-0 !p-0 hover:!bg-white hover:!text-[#338d8c]'
+                                />
+                                <span>{UptoIcon}</span>
+                            </div>
+                        </>
                     ) : (
                         <small className='text-xs text-slate-500 border py-0.5 px-1.5 border-slate-500 rounded-full'>
                             No vertical assigned
