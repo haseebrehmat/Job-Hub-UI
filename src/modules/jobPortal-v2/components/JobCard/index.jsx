@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import { Button } from '@components'
 
-import { formatDate, timeSince } from '@utils/helpers'
+import { formatDate, isset, timeSince } from '@utils/helpers'
 
 import {
     ActionsIcons,
@@ -32,7 +32,13 @@ const JobCard = ({ job = null }) =>
                     <div className='flex flex-col text-gray-600 gap-y-0.5'>
                         <span className='text-lg capitalize font-semibold flex-wrap'>{job?.job_title}</span>
                         <span className='text-sm capitalize italic inline-flex items-center gap-1'>
-                            {RegionIcon} {job?.address}
+                            {isset(job?.address) ? (
+                                <>
+                                    {RegionIcon} {job?.address}
+                                </>
+                            ) : (
+                                'No Location'
+                            )}
                         </span>
                     </div>
                 </div>
