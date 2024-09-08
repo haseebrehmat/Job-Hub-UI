@@ -6,6 +6,8 @@ import { useJobPortalV2Store } from '@/stores'
 import { fetchJobs } from '@modules/jobPortal-v2/api'
 import { JobCard, PortalLayout } from '@modules/jobPortal-v2/components'
 
+import { isset } from '@utils/helpers'
+
 const JobsListing = () => {
     const [page, query, filters, focused, handleKeyDown, setMutator] = useJobPortalV2Store(state => [
         state?.page,
@@ -23,7 +25,9 @@ const JobsListing = () => {
     })
 
     useEffect(() => {
-        window.addEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))
+        if (isset(handleKeyDown)) {
+            window.addEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))
+        }
         if (!isLoading && !error) setMutator(mutate)
 
         return () => {
