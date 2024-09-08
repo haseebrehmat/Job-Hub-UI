@@ -51,14 +51,16 @@ const JobPortalV2 = () => {
                             onChange={event => update?.to(event.target.value)}
                         />
                     </div>
-                    {/* <div className='w-full text-[#4f9d9b]'>
+                    <div className='w-full text-[#4f9d9b]'>
                         Listings
-                        <Selector
-                            data={data?.jobTypes}
+                        <CustomSelector
+                            options={formatOptions(data?.jobTypes)}
+                            handleChange={value => update?.types(value)}
                             selectorValue={filters?.types}
-                            handleSelectChange={e => update?.types(e.target.value)}
+                            isMulti
+                            placeholder='Select Job Types'
                         />
-                    </div> */}
+                    </div>
                     <div className='w-full text-[#4f9d9b]'>
                         Job Source
                         <CustomSelector
