@@ -39,6 +39,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Arc Dev', value: 'arcdev' },
     { label: 'Remote Ok', value: 'remoteok' },
     { label: 'Job Gether', value: 'jobgether' },
+    { label: 'The Muse', value: 'themuse' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -52,6 +53,7 @@ export const JOB_SOURCE_OPTIONS_UNDERSCORE = [
     { label: 'Arc Dev', value: 'arc_dev' },
     { label: 'Remote Ok', value: 'remote_ok' },
     { label: 'Job Gether', value: 'job_gether' },
+    { label: 'The Muse', value: 'the_muse' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -97,6 +99,7 @@ export const JOB_SOURCES = {
     receptix: 'Receptix',
     builtin: 'Builtin',
     workable: 'Workable',
+    themuse: 'The Muse',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
@@ -107,6 +110,7 @@ export const JOB_SOURCES = {
     arc_dev: 'Arc Dev',
     remote_ok: 'Remote Ok',
     job_gether: 'Job Gether',
+    the_muse: 'The Muse',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
