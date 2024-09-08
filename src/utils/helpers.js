@@ -535,3 +535,6 @@ export const saveVisitedJob = jobId => {
     localStorage.setItem('visited-jobs', JSON.stringify(uniqueStoredArray))
     return uniqueStoredArray
 }
+
+export const formatOptions = options_arr =>
+    options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))

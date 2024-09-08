@@ -27,5 +27,9 @@ export const fetchJobFilters = (query = '', filters = {}) => {
         }&to_date=${filters?.to}&job_type=${filters?.types?.map(type => type.value)}&blocked=${filters?.blocked}`
     }
 
-    return http.get(url).then(({ data }) => ({ filters: data }))
+    return http.get(url).then(({ data }) => ({
+        techStacks: data?.tech_keywords_count_list,
+        jobSources: data?.job_source_count_list,
+        jobTypes: data?.total_job_type,
+    }))
 }

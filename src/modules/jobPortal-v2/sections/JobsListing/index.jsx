@@ -10,7 +10,7 @@ const JobsListing = () => {
     const [page, query, filters, focused, handleKeyDown, setMutator] = useJobPortalV2Store(state => [
         state?.page,
         state?.query,
-        state?.filters,
+        state?.params,
         state?.focused,
         state?.setFocused,
         state?.setMutator,
