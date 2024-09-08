@@ -69,7 +69,7 @@ const JobCard = ({ job = null }) => {
                     <span className='text-slate-500 font-semibold -skew-x-3 pl-2'>
                         {timeSince(job?.job_posted_date)}
                     </span>
-                    {job?.total_vertical >= 0 ? (
+                    {job?.total_vertical > 0 ? (
                         <div className='flex items-center gap-2'>
                             <span className='text-sm border rounded px-2 p-0.5 text-[#338d8c] border-[#55bf84] font-mono'>
                                 {job?.total_vertical} / <strong>{job?.remaining_vertical}</strong>
