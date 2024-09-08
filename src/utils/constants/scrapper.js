@@ -27,6 +27,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Receptix', value: 'receptix' },
     { label: 'Builtin', value: 'builtin' },
     { label: 'Workable', value: 'workable' },
+    { label: 'Clearance', value: 'clearance' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -102,6 +103,7 @@ export const JOB_SOURCES = {
     builtin: 'Builtin',
     workable: 'Workable',
     themuse: 'The Muse',
+    clearance: 'Clearance',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
