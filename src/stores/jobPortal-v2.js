@@ -13,6 +13,7 @@ export const useJobPortalV2Store = create(set => ({
         types: [],
         blocked: false,
     },
+    focused: null,
 
     next: () => set(state => ({ ...state, page: state.page + 1 })),
     prev: () => set(state => ({ ...state, page: state.page - 1 })),
@@ -26,5 +27,19 @@ export const useJobPortalV2Store = create(set => ({
         sources: value => set(state => ({ ...state, filters: { ...state.filters, sources: value } })),
         types: value => set(state => ({ ...state, filters: { ...state.filters, types: value } })),
         blocked: value => set(state => ({ ...state, filters: { ...state.filters, blocked: value } })),
+    },
+    setFoucused: (key, arrayLength) => {
+        if (arrayLength > 0) {
+            switch (key) {
+                case 'ArrowUp':
+                    set(state => ({ ...state, focused: state.focused === null ? 0 : state.focused - 1 }))
+                    break
+                case 'ArrowDown':
+                    set(state => ({ ...state, focused: state.focused === arrayLength - 1 ? null : state.focused + 1 }))
+                    break
+                default:
+                    break
+            }
+        }
     },
 }))

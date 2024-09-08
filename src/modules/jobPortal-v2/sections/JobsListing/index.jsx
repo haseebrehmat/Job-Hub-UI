@@ -1,15 +1,19 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 import useSWR from 'swr'
 
 import { useJobPortalV2Store } from '@/stores'
 
-import { Loading } from '@components'
-
 import { fetchJobs } from '@modules/jobPortal-v2/api'
-import { JobCard } from '@modules/jobPortal-v2/components'
+import { JobCard, PortalLayout } from '@modules/jobPortal-v2/components'
 
 const JobsListing = () => {
-    const [page, query, filters] = useJobPortalV2Store(state => [state.page, state.query, state.filters])
+    const [page, query, filters, focused, handleKeyDown] = useJobPortalV2Store(state => [
+        state.page,
+        state.query,
+        state.filters,
+        state.focused,
+        state.setFocused,
+    ])
 
     const { data, error, isLoading } = useSWR([page, query, filters], () => fetchJobs(page, query, filters), {
         revalidateOnReconnect: false,
@@ -17,18 +21,24 @@ const JobsListing = () => {
         revalidateOnFocus: false,
     })
 
-    if (isLoading) return <Loading />
-    return error ? (
-        <span>Error to load Jobs</span>
-    ) : (
+    useEffect(() => {
+        window.addEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))
+        return () => {
+            window.removeEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))
+        }
+    }, [data])
+
+    return (
         <div className='w-4/5'>
-            <div className='grid grid-cols-1 gap-2.5'>
-                {data?.jobs?.length > 0 ? (
-                    data?.jobs?.map(row => <JobCard job={row} key={row?.id} />)
-                ) : (
-                    <div>No Jobs Found</div>
-                )}
-            </div>
+            <PortalLayout loading={isLoading} error={error} module='Jobs'>
+                <div className='grid grid-cols-1 gap-2.5'>
+                    {data?.jobs?.length > 0 ? (
+                        data?.jobs?.map((row, index) => <JobCard job={row} key={row?.id} active={focused === index} />)
+                    ) : (
+                        <div>No Jobs Found</div>
+                    )}
+                </div>
+            </PortalLayout>
         </div>
     )
 }
