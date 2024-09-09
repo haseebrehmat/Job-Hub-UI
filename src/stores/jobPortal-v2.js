@@ -19,6 +19,10 @@ export const useJobPortalV2Store = create(set => ({
     focused: null,
     job: null,
     mutator: null,
+    expand: {
+        sources: false,
+        types: false,
+    },
 
     next: () => set(state => ({ ...state, page: state.page + 1 })),
     prev: () => set(state => ({ ...state, page: state.page - 1 })),
@@ -29,8 +33,24 @@ export const useJobPortalV2Store = create(set => ({
         order: value => set(state => ({ ...state, filters: { ...state.filters, order: value } })),
         visible: value => set(state => ({ ...state, filters: { ...state.filters, visible: value } })),
         techs: value => set(state => ({ ...state, filters: { ...state.filters, techs: value } })),
-        sources: value => set(state => ({ ...state, filters: { ...state.filters, sources: value } })),
-        types: value => set(state => ({ ...state, filters: { ...state.filters, types: value } })),
+        sources: (value, add) =>
+            set(state => ({
+                ...state,
+                filters: {
+                    ...state.filters,
+                    sources: add
+                        ? [...state.filters.sources, value]
+                        : state.filters.sources.filter(val => val !== value),
+                },
+            })),
+        types: (value, add) =>
+            set(state => ({
+                ...state,
+                filters: {
+                    ...state.filters,
+                    types: add ? [...state.filters.types, value] : state.filters.types.filter(val => val !== value),
+                },
+            })),
         blocked: value => set(state => ({ ...state, filters: { ...state.filters, blocked: value } })),
     },
     resetFilters: () => set(state => ({ ...state, filters: FILTERS_DEFAULT_VALUES, params: FILTERS_DEFAULT_VALUES })),
@@ -51,4 +71,8 @@ export const useJobPortalV2Store = create(set => ({
     },
     setJob: job => set(state => ({ ...state, job })),
     setMutator: func => set(state => ({ ...state, mutator: func })),
+    toggleExpand: {
+        sources: () => set(state => ({ ...state, expand: { ...state.expand, sources: !state.expand.sources } })),
+        types: () => set(state => ({ ...state, expand: { ...state.expand, types: !state.expand.types } })),
+    },
 }))
