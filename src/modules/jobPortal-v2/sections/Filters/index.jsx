@@ -126,31 +126,6 @@ const JobPortalV2 = () => {
                             </button>
                         )}
                     </div>
-                    {/* <div className='w-full'>
-                        Order By
-                        <select
-                            value={filters?.order}
-                            onChange={e => update?.order(e.target.value)}
-                            className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
-                        >
-                            <option value='-job_posted_date'>Posted Date</option>
-                            <option value='job_title'>Job Title</option>
-                            <option value='job_type'>Job Type</option>
-                            <option value='company_name'>Company</option>
-                        </select>
-                    </div>
-                    <div className='w-full'>
-                        Job Visibility
-                        <select
-                            value={filters?.visible}
-                            onChange={e => update?.visible(e.target.value)}
-                            className='bg-gray-50 text-gray-900 text-sm focus:[#048C8C]-500 focus:border-[#048C8C]-500 block w-full p-2.5 rounded-lg border border-cyan-600 appearance-none focus:outline-none focus:ring-0 focus:border-[#048C8C] peer'
-                        >
-                            <option value='all'>All</option>
-                            <option value='recruiter'>Recruiter</option>
-                            <option value='non-recruiter'>Non-Recruiter</option>
-                        </select>
-                    </div> */}
                     <div className='inline-flex items-centerb] gap-2 bg-gray-50 p-2 rounded-lg text-sm w-full'>
                         <input
                             type='checkbox'
