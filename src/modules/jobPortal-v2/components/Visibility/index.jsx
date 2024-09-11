@@ -5,15 +5,15 @@ import { useJobPortalV2Store } from '@/stores'
 
 import { Button } from '@components'
 
-import { ORDER_BY_OPTIONS } from '@constants/jobPortalV2'
+import { VISIBILITY_OPTIONS } from '@constants/jobPortalV2'
 
-import { OrderingIcon } from '@icons'
+import { JobVisibilityIcon } from '@icons'
 
-const OrderBy = () => {
+const Visibility = () => {
     const dropdownRef = useRef(null)
     const [showOptions, setShowOptions] = useState(false)
 
-    const [order, setOrder] = useJobPortalV2Store(state => [state?.filters?.order, state?.setFilters?.order])
+    const [visible, setVisible] = useJobPortalV2Store(state => [state?.filters?.visible, state?.setFilters?.visible])
 
     if (showOptions)
         window.addEventListener('click', event => {
@@ -23,29 +23,29 @@ const OrderBy = () => {
     return (
         <div className='relative' ref={dropdownRef}>
             <Button
-                icon={OrderingIcon}
+                icon={JobVisibilityIcon}
                 fit
                 fill={showOptions}
-                classes='order-by !m-0 !flex !items-center text-xs bg-white'
+                classes='visibility !m-0 !flex !items-center text-xs bg-white'
                 onClick={() => setShowOptions(!showOptions)}
             />
             <Tooltip
-                anchorSelect='.order-by'
+                anchorSelect='.visibility'
                 className='tracking-widest'
                 place='left'
-                content={ORDER_BY_OPTIONS[order]}
+                content={VISIBILITY_OPTIONS[visible]}
             />
             {showOptions && (
-                <div className='absolute right-0 w-max z-50 bg-white rounded border border-[#55bf84] shadow-md flex flex-col mt-2'>
-                    {Object.keys(ORDER_BY_OPTIONS).map(key => (
+                <div className='absolute right-0 w-max z-20 bg-white rounded border border-[#55bf84] shadow-md flex flex-col mt-2'>
+                    {Object.keys(VISIBILITY_OPTIONS).map(key => (
                         <button
                             key={key}
-                            onClick={() => setOrder(key)}
+                            onClick={() => setVisible(key)}
                             className={`border-0 text-left w-full hover:underline py-2 px-3 ${
-                                key === order ? 'bg-[#4f9d9b] text-white' : null
+                                key === visible ? 'bg-[#4f9d9b] text-white' : null
                             }`}
                         >
-                            {ORDER_BY_OPTIONS[key]}
+                            {VISIBILITY_OPTIONS[key]}
                         </button>
                     ))}
                 </div>
@@ -54,4 +54,4 @@ const OrderBy = () => {
     )
 }
 
-export default memo(OrderBy)
+export default memo(Visibility)

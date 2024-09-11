@@ -104,7 +104,7 @@ import {
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
-import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
+import { VscVmRunning, VscSourceControl, VscSettings, VscEye } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
 import { TfiLayoutListThumb } from 'react-icons/tfi'
@@ -231,3 +231,4 @@ export const UptoIcon = <BsArrowRight style={{ fontSize: 14 }} />
 export const SiteIcon = <FiGlobe style={{ fontSize: 16 }} />
 export const DoubleCheckIcon = <BiCheckDouble style={{ fontSize: 18 }} />
 export const OrderingIcon = <BiSortUp style={{ fontSize: 18 }} />
+export const JobVisibilityIcon = <VscEye style={{ fontSize: 16 }} />

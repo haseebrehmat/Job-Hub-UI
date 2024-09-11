@@ -4,3 +4,9 @@ export const ORDER_BY_OPTIONS = {
     company: 'Companies',
     job_type: 'Job Type',
 }
+
+export const VISIBILITY_OPTIONS = {
+    all: 'All',
+    recruiter: 'Recruiter',
+    'non-recruiter': 'Non-Recruiter',
+}
