@@ -3,20 +3,18 @@ import useSWR from 'swr'
 
 import { useJobPortalV2Store } from '@/stores'
 
-import { CustomSelector, Filters } from '@components'
+import { CustomSelector } from '@components'
 
 import { fetchJobFilters } from '@modules/jobPortal-v2/api'
 import { PortalLayout } from '@modules/jobPortal-v2/components'
 
 const JobPortalV2 = () => {
-    const [query, filters, expand, appliedFilters, update, apply, reset, toggle] = useJobPortalV2Store(state => [
+    const [query, filters, expand, appliedFilters, update, toggle] = useJobPortalV2Store(state => [
         state?.paramQuery,
         state?.filters,
         state?.expand,
         state?.params,
         state?.setFilters,
-        state?.setParams,
-        state?.resetFilters,
         state?.toggleExpand,
     ])
 
@@ -108,7 +106,7 @@ const JobPortalV2 = () => {
                                                 value={type?.name}
                                                 checked={filters?.sources?.includes(type?.name)}
                                                 onChange={e => update?.sources(e.target.value, e.target.checked)}
-                                                className='w-[1.1rem] h-[1.1rem] rounded accent-cyan-600 outline-none'
+                                                className='w-[1.1rem] h-[1.1rem] rounded accent-cyan-600 outline-none cursor-pointer'
                                             />
                                             {type?.name}
                                         </div>
@@ -126,17 +124,14 @@ const JobPortalV2 = () => {
                             </button>
                         )}
                     </div>
-                    <div className='inline-flex items-centerb] gap-2 bg-gray-50 p-2 rounded-lg text-sm w-full'>
+                    <div className='inline-flex items-center gap-2 bg-gray-50 p-2 rounded-lg text-sm w-full border-2'>
                         <input
                             type='checkbox'
                             checked={filters?.blocked}
                             onChange={e => update?.blocked(e.target.checked)}
-                            className='!w-5 !h-5 rounded accent-cyan-600'
+                            className='!w-5 !h-5 rounded accent-cyan-600 cursor-pointer outline-none'
                         />
                         Show Only Blocked Companies Jobs
-                    </div>
-                    <div className='w-full'>
-                        <Filters apply={() => apply()} clear={() => reset()} />
                     </div>
                 </div>
             </PortalLayout>
