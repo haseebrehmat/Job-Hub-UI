@@ -89,6 +89,7 @@ import {
     BiMap,
     BiBriefcaseAlt2,
     BiCheckDouble,
+    BiSortUp,
 } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
@@ -229,3 +230,4 @@ export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />
 export const UptoIcon = <BsArrowRight style={{ fontSize: 14 }} />
 export const SiteIcon = <FiGlobe style={{ fontSize: 16 }} />
 export const DoubleCheckIcon = <BiCheckDouble style={{ fontSize: 18 }} />
+export const OrderingIcon = <BiSortUp style={{ fontSize: 18 }} />
