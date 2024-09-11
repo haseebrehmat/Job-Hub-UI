@@ -4,11 +4,11 @@ import { useVisitedJobsStore } from '@/stores'
 
 import { Button } from '@components'
 
-import { JobCardHead } from '@modules/jobPortal-v2/components'
+import { JobCardHead, TechKeywords } from '@modules/jobPortal-v2/components'
 
 import { formatDate, timeSince } from '@utils/helpers'
 
-import { UptoIcon, SiteIcon, UserAppliedJobIcon, CompanyIcon, DateTimeIcon, SalaryIcon, TechSTack } from '@icons'
+import { UptoIcon, SiteIcon, UserAppliedJobIcon, CompanyIcon, DateTimeIcon, SalaryIcon } from '@icons'
 
 const JobCard = ({ job = null }) => {
     const [setVisitedJobs] = useVisitedJobsStore(state => [state.setVisitedJobs])
@@ -57,12 +57,7 @@ const JobCard = ({ job = null }) => {
                             classes='!rounded-full !py-0.5 !pr-2.5 !gap-0.5 !text-neutral-600 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
                         />
                     )}
-                    <Button
-                        label={`Stacks: ${Array.from({ length: 5 }, () => ` ${job?.tech_keywords}`)}`}
-                        icon={TechSTack}
-                        fit
-                        classes='!rounded-full !py-0.5 !pr-2.5 !gap-0.5 !text-neutral-600 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
-                    />
+                    <TechKeywords keywords={job?.tech_keywords} />
                 </div>
                 <div className='flex items-center justify-between mt-2 mr-1.5'>
                     <span className='text-slate-500 font-semibold -skew-x-3 pl-2'>
