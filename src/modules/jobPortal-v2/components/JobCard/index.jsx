@@ -18,7 +18,6 @@ const JobCard = ({ job = null }) => {
             className={`rounded-lg border  border-slate-300 ${
                 job?.block ? 'bg-[#d9d5d5] bg-opacity-40 shadow-sm' : 'bg-slate-50'
             }  overflow-hidden hover:bg-white hover:border-[#338d8c] p-3 hover:-skew-x-1 hover:shadow-lg`}
-            onClick={() => setVisitedJobs(job?.id)}
         >
             <JobCardHead job={job} />
             <div className='pl-1.5'>
