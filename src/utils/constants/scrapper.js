@@ -28,7 +28,6 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Builtin', value: 'builtin' },
     { label: 'Workable', value: 'workable' },
     { label: 'Clearance', value: 'clearance' },
-    { label: 'Smart Recruiter', value: 'smartrecruiter' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -43,6 +42,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Remote Ok', value: 'remoteok' },
     { label: 'Job Gether', value: 'jobgether' },
     { label: 'The Muse', value: 'themuse' },
+    { label: 'Smart Recruiter', value: 'smartrecruiter' },
     ...JOB_SOURCES_SINGLES,
 ]
 
