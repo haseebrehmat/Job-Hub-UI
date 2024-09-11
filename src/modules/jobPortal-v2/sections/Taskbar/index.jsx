@@ -56,7 +56,11 @@ const Taskbar = () => {
                     classes='download-csv !py-[5px] !px-1.5 !m-0 !flex !items-center'
                     onClick={() => trigger()}
                 />
-                <Tooltip anchorSelect='.download-csv' content={isMutating ? 'Downloading...' : 'Download Csv'} />
+                <Tooltip
+                    anchorSelect='.download-csv'
+                    style={{ backgroundColor: '#338d8c', fontSize: '15px', letterSpacing: '2px' }}
+                    content={isMutating ? 'Downloading...' : 'Download Csv'}
+                />
                 <Button
                     icon={view === 'list' ? ListViewIcon : GridViewIcon}
                     fit
