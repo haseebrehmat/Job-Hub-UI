@@ -37,6 +37,7 @@ import {
     BsCardList,
     BsCheckCircleFill,
     BsArrowRight,
+    BsGrid,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -49,7 +50,7 @@ import {
 } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey } from 'react-icons/tb'
+import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey, TbListDetails } from 'react-icons/tb'
 import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle, FiGlobe } from 'react-icons/fi'
 import {
     AiOutlineSearch,
@@ -232,3 +233,5 @@ export const SiteIcon = <FiGlobe style={{ fontSize: 16 }} />
 export const DoubleCheckIcon = <BiCheckDouble style={{ fontSize: 18 }} />
 export const OrderingIcon = <BiSortUp style={{ fontSize: 18 }} />
 export const JobVisibilityIcon = <VscEye style={{ fontSize: 16 }} />
+export const GridViewIcon = <BsGrid style={{ fontSize: 16 }} />
+export const ListViewIcon = <TbListDetails style={{ fontSize: 16 }} />

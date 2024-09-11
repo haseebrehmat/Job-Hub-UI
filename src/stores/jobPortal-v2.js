@@ -15,6 +15,7 @@ export const useJobPortalV2Store = create(set => ({
         sources: false,
         types: false,
     },
+    view: 'list',
 
     next: () => set(state => ({ ...state, page: state.page + 1 })),
     prev: () => set(state => ({ ...state, page: state.page - 1 })),
@@ -74,4 +75,5 @@ export const useJobPortalV2Store = create(set => ({
         sources: () => set(state => ({ ...state, expand: { ...state.expand, sources: !state.expand.sources } })),
         types: () => set(state => ({ ...state, expand: { ...state.expand, types: !state.expand.types } })),
     },
+    toggleView: () => set(state => ({ ...state, view: state.view === 'list' ? 'grid' : 'list' })),
 }))

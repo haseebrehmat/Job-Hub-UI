@@ -96,7 +96,7 @@ const JobPortalV2 = () => {
                         )}
                     </div>
                     <div className='w-full'>
-                        Job Source
+                        Job Sources
                         <hr className='mb-3 bg-slate-300 h-0.5' />
                         {data?.jobSources?.length > 0 && (
                             <div className='grid pl-2 space-y-3'>

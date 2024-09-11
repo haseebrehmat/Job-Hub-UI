@@ -1,18 +1,21 @@
 import { memo } from 'react'
+import { Tooltip } from 'react-tooltip'
 
-import { Input } from '@components'
+import { Input, Button } from '@components'
 
 import { useJobPortalV2Store } from '@/stores'
 
 import { OrderBy, Visibility } from '@modules/jobPortal-v2/components'
 
-import { SearchIcon } from '@icons'
+import { SearchIcon, GridViewIcon, ListViewIcon } from '@icons'
 
 const Taskbar = () => {
-    const [query, setQuery, applySearch] = useJobPortalV2Store(state => [
+    const [query, view, setQuery, applySearch, toggleView] = useJobPortalV2Store(state => [
         state?.query,
+        state?.view,
         state?.setQuery,
         state?.setParams,
+        state?.toggleView,
     ])
 
     return (
@@ -28,9 +31,17 @@ const Taskbar = () => {
                     <div className='absolute inset-y-0 right-0 flex items-center pr-3 text-xl'>{SearchIcon}</div>
                 </div>
             </div>
-            <div className='flex gap-3 w-fit'>
+            <div className='flex gap-2 w-fit'>
                 <OrderBy />
                 <Visibility />
+                <Button
+                    icon={view === 'list' ? ListViewIcon : GridViewIcon}
+                    fit
+                    fill={view === 'grid'}
+                    classes='toggle-view !py-[9px] !m-0 !flex !items-center'
+                    onClick={() => toggleView()}
+                />
+                <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
             </div>
         </div>
     )

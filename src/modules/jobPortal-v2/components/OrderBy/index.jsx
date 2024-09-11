@@ -26,7 +26,7 @@ const OrderBy = () => {
                 icon={OrderingIcon}
                 fit
                 fill={showOptions}
-                classes='order-by !m-0 !flex !items-center text-xs bg-white'
+                classes='order-by !m-0 !flex !items-center text-xs'
                 onClick={() => setShowOptions(!showOptions)}
             />
             <Tooltip

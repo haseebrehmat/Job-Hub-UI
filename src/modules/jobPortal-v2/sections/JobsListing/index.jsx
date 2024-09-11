@@ -9,11 +9,12 @@ import { JobCard, PortalLayout } from '@modules/jobPortal-v2/components'
 import { isset } from '@utils/helpers'
 
 const JobsListing = () => {
-    const [page, query, filters, focused, handleKeyDown, setMutator] = useJobPortalV2Store(state => [
+    const [page, query, filters, focused, view, handleKeyDown, setMutator] = useJobPortalV2Store(state => [
         state?.page,
         state?.paramQuery,
         state?.params,
         state?.focused,
+        state?.view,
         state?.setFocused,
         state?.setMutator,
     ])
@@ -37,7 +38,7 @@ const JobsListing = () => {
 
     return (
         <PortalLayout loading={isLoading} error={error} module='Jobs'>
-            <div className='grid grid-cols-1 gap-2.5'>
+            <div className={`grid ${view === 'grid' ? 'grid-cols-2' : 'grid-cols-1'} gap-2.5`}>
                 {data?.jobs?.length > 0 ? (
                     data?.jobs?.map((row, index) => <JobCard job={row} key={row?.id} active={focused === index} />)
                 ) : (

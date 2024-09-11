@@ -26,13 +26,12 @@ const Visibility = () => {
                 icon={JobVisibilityIcon}
                 fit
                 fill={showOptions}
-                classes='visibility !py-[9px] !m-0 !flex !items-center text-xs bg-white'
+                classes='visibility !py-[9px] !m-0 !flex !items-center text-xs'
                 onClick={() => setShowOptions(!showOptions)}
             />
             <Tooltip
                 anchorSelect='.visibility'
-                className='tracking-widest'
-                place='left'
+                className='tracking-widest !fixed'
                 content={VISIBILITY_OPTIONS[visible]}
             />
             {showOptions && (
