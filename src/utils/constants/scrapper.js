@@ -42,6 +42,7 @@ export const JOB_SOURCE_OPTIONS = [
     { label: 'Remote Ok', value: 'remoteok' },
     { label: 'Job Gether', value: 'jobgether' },
     { label: 'The Muse', value: 'themuse' },
+    { label: 'Smart Recruiter', value: 'smartrecruiter' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -104,6 +105,7 @@ export const JOB_SOURCES = {
     workable: 'Workable',
     themuse: 'The Muse',
     clearance: 'Clearance',
+    smartrecruiter: 'Smart Recruiter',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
