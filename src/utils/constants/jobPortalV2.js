@@ -10,3 +10,14 @@ export const VISIBILITY_OPTIONS = {
     recruiter: 'Recruiter',
     'non-recruiter': 'Non-Recruiter',
 }
+
+export const FILTERS_DEFAULT_VALUES = {
+    from: '',
+    to: '',
+    order: '-job_posted_date',
+    visible: 'all',
+    techs: [],
+    sources: [],
+    types: [],
+    blocked: false,
+}

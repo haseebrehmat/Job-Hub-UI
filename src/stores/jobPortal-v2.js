@@ -1,21 +1,13 @@
 import { create } from 'zustand'
 
-const FILTERS_DEFAULT_VALUES = {
-    from: '',
-    to: '',
-    order: '-job_posted_date',
-    visible: 'all',
-    techs: [],
-    sources: [],
-    types: [],
-    blocked: false,
-}
+import { FILTERS_DEFAULT_VALUES } from '@constants/jobPortalV2'
 
 export const useJobPortalV2Store = create(set => ({
     page: 1,
     query: '',
     filters: FILTERS_DEFAULT_VALUES,
     params: FILTERS_DEFAULT_VALUES,
+    paramQuery: '',
     focused: null,
     job: null,
     mutator: null,
@@ -53,8 +45,15 @@ export const useJobPortalV2Store = create(set => ({
             })),
         blocked: value => set(state => ({ ...state, filters: { ...state.filters, blocked: value } })),
     },
-    resetFilters: () => set(state => ({ ...state, filters: FILTERS_DEFAULT_VALUES, params: FILTERS_DEFAULT_VALUES })),
-    setParams: () => set(state => ({ ...state, params: state?.filters })),
+    resetFilters: () =>
+        set(state => ({
+            ...state,
+            filters: FILTERS_DEFAULT_VALUES,
+            params: FILTERS_DEFAULT_VALUES,
+            query: '',
+            paramQuery: '',
+        })),
+    setParams: () => set(state => ({ ...state, params: state?.filters, paramQuery: state?.query })),
     setFoucused: (key, arrayLength) => {
         if (arrayLength > 0) {
             switch (key) {

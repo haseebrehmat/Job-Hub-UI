@@ -26,7 +26,7 @@ const Visibility = () => {
                 icon={JobVisibilityIcon}
                 fit
                 fill={showOptions}
-                classes='visibility !m-0 !flex !items-center text-xs bg-white'
+                classes='visibility !py-[9px] !m-0 !flex !items-center text-xs bg-white'
                 onClick={() => setShowOptions(!showOptions)}
             />
             <Tooltip

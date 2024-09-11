@@ -11,7 +11,7 @@ import { isset } from '@utils/helpers'
 const JobsListing = () => {
     const [page, query, filters, focused, handleKeyDown, setMutator] = useJobPortalV2Store(state => [
         state?.page,
-        state?.query,
+        state?.paramQuery,
         state?.params,
         state?.focused,
         state?.setFocused,
