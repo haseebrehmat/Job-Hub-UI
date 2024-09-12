@@ -4,7 +4,6 @@ import useSWRMutation from 'swr/mutation'
 import { Button } from '@components'
 
 import { downloadFilteredJobs } from '@modules/teamAppliedJobs/api'
-import { SearchIcon, SearchClearIcon } from '@icons'
 
 const DownloadFilteredJobs = memo((end_date, job_type, applied_by, job_source, start_date, tech_stacks) => {
     const { trigger } = useSWRMutation(

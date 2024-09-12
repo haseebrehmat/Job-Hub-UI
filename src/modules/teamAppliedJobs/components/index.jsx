@@ -6,6 +6,7 @@ import FilterDates from '@modules/teamAppliedJobs/components/FilterDates'
 import Filters from '@modules/teamAppliedJobs/components/Filters'
 import HourlyChart from '@modules/teamAppliedJobs/components/HourlyChart'
 import DownloadFilteredJobs from '@modules/teamAppliedJobs/components/DownloadButton'
+import MyDownloads from '@modules/teamAppliedJobs/components/MyDownloads'
 
 export {
     EmptyTable,
@@ -16,4 +17,5 @@ export {
     Filters,
     HourlyChart,
     DownloadFilteredJobs,
+    MyDownloads,
 }

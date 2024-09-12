@@ -237,8 +237,8 @@ export const removeOrAddElementsFromArray = (array, elements) => {
 }
 
 export const parseMembers = (members, leadId = null, all = false) => {
-    const parsedMembers = members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
-    if (all) parsedMembers.unshift({ value: 'all', label: 'All Team Members' })
+    const parsedMembers = members?.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
+    // if (all) parsedMembers?.unshift({ value: 'all', label: 'All Team Members' })
     return parsedMembers
 }
 
@@ -571,3 +571,6 @@ export const chunkNumber = (number, chunkSize = 1) => {
     return chunks
 }
 export const parseVals = values => values?.map(val => ({ label: val, value: val }))
+
+export const parseLinks = values => values?.map(val => val?.value)
+

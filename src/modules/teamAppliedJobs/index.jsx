@@ -15,9 +15,10 @@ const TeamAppliedJobs = memo(() => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), TEAM_APPLIED_JOBS_INITIAL_VALS)
     const [page, setPage] = useState(1)
     const { data, error, isLoading } = useSWR([page, vals.bd?.value], () =>
-        fetchTeamAppliedJobs(page, vals.bd?.value === 'all' ? '' : vals.bd?.value)
+        fetchTeamAppliedJobs(page, vals.download, vals.bd?.value === 'all' ? '' : vals.bd?.value)
     )
-    const { data: dropdownvals } = useSWR(`http://5.1.0.22:8000/api/job_portal/applied_job_filters/`, fetchDropdownVals)
+
+    const { data: dropdownvals } = useSWR(`api/job_portal/applied_job_filters/`, fetchDropdownVals)
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     return isLoading || error ? (

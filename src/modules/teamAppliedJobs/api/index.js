@@ -1,10 +1,11 @@
 import { http } from '@utils/http'
 import { getMsg } from '@utils/helpers'
+import { toast } from 'react-hot-toast'
 
-export const fetchTeamAppliedJobs = (page, applied_by = '') =>
+export const fetchTeamAppliedJobs = (page, download, applied_by = '') =>
     http
         .get(
-            `api/job_portal/team_applied_job_details/?applied_by=${applied_by}&ordering=-applied_date&page=${page}&page_size=12`,
+            `api/job_portal/team_applied_job_details/?applied_by=${applied_by}&ordering=-applied_date&page=${page}&page_size=12&download=${download}`,
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
@@ -39,6 +40,8 @@ export const fetchTeamAppliedJobsPerHour = url =>
     http
         .get(url)
         .then(({ data }) => ({ results: data?.data, dates: data?.dates, min: data?.min_count, max: data?.max_count }))
-export const downloadFilteredJobs = url => http.get(url).then(({ data }) => ({ status: 'success' }))
+export const downloadFilteredJobs = url =>
+    http.get(url).then(({ data }) => toast.success(data || 'Your request has been submitted successflly '))
 
 export const fetchDropdownVals = url => http.get(url).then(({ data }) => ({ data, status: 'success' }))
+export const fetchLogs = url => http.get(url).then(({ data }) => ({ results: data.results, status: 'success' }))

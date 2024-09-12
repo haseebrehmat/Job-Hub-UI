@@ -1,12 +1,21 @@
-import { memo, useReducer } from 'react'
+import { memo, useReducer, useState } from 'react'
+import useSWRMutation from 'swr/mutation'
 
 import { Button, CustomSelector } from '@components'
 
+import { downloadFilteredJobs } from '@modules/teamAppliedJobs/api'
+
 import { FilterDates } from '@modules/appliedJobs/components'
+import { MyDownloads } from '@modules/teamAppliedJobs/components'
 
-import { JOB_SOURCE_OPTIONS_UNDERSCORE, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
+import { JOB_TYPES_OPTIONS } from '@constants/scrapper'
 
-const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
+import { parseLinks, parseVals, Id } from '@utils/helpers'
+
+import { DownloadIcon, LogsIcon } from '@icons'
+
+const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns }) => {
+    const [flag, setFlag] = useState(false)
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         from: filtered.from,
         to: filtered.to,
@@ -26,6 +35,14 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
             verticals: vals.verticals,
             agents: vals.agents,
         })
+    const { trigger, isLoading } = useSWRMutation(
+        `/api/job_portal/team_applied_job_details/?download=true&end_date=${vals.to}&job_type=${parseLinks(
+            vals.types
+        ).join()}&applied_by=${Id()}&job_source=${parseLinks(vals.sources).join()}&start_date=${
+            vals.from
+        }&tech_stacks=${parseLinks(vals.stacks).join()}`,
+        downloadFilteredJobs
+    )
     const clearFilters = () => {
         dispatch({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agents: [], filter: false })
         update({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agents: [] })
@@ -37,7 +54,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
             <div>
                 <span className='text-xs font-semibold'>Tech Stacks</span>
                 <CustomSelector
-                    options={JOB_SOURCE_OPTIONS_UNDERSCORE}
+                    options={parseVals(dropdowns?.data?.tech_keywords)}
                     handleChange={obj => update({ stacks: obj })}
                     selectorValue={vals.stacks}
                     isMulti
@@ -47,7 +64,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
             <div>
                 <span className='text-xs font-semibold'>Job Sources</span>
                 <CustomSelector
-                    options={JOB_SOURCE_OPTIONS}
+                    options={parseVals(dropdowns?.data?.job_sources)}
                     handleChange={obj => update({ sources: obj })}
                     selectorValue={vals.sources}
                     isMulti
@@ -62,16 +79,6 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
                     selectorValue={vals.types}
                     isMulti
                     placeholder='Select Types'
-                />
-            </div>
-            <div>
-                <span className='text-xs font-semibold'>Verticals</span>
-                <CustomSelector
-                    options={JOB_TYPES_OPTIONS}
-                    handleChange={obj => update({ verticals: obj })}
-                    selectorValue={vals.verticals}
-                    isMulti
-                    placeholder='Select Verticals'
                 />
             </div>
             {agent && (
@@ -95,6 +102,17 @@ const Filters = ({ filtered = null, dispatch = null, agent = false }) => {
                     filtered.types.length > 0 ||
                     (agent && filtered.agent)) && <Button fit onClick={clearFilters} label='Clear' />}
             </div>
+            <div>{}</div>
+            <div className='flex gap-2'>
+                <Button
+                    icon={DownloadIcon}
+                    label={isLoading ? 'Downloading....' : 'Download'}
+                    classes='!px-8 !py-2'
+                    onClick={trigger}
+                />
+                <Button icon={LogsIcon} label='logs' classes='!px-8 !py-2' onClick={() => setFlag(!flag)} />
+            </div>
+            {flag && <MyDownloads show={flag} setShow={setFlag} />}
         </div>
     )
 }
