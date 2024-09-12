@@ -12,7 +12,7 @@ import ScrappingGroup from '@modules/scrapper/components/ScrappingGroup'
 import GroupForm from '@modules/scrapper/components/GroupForm'
 import GroupSettingActions from '@modules/scrapper/components/GroupSettingActions'
 import GroupLinks from '@modules/scrapper/components/GroupLinks'
-import GroupLinksForm from '@modules/scrapper/components/GroupLinksForm'
+import GroupLinksCreateForm from '@/modules/scrapper/components/GroupLinksCreateForm'
 import GroupsDropDown from '@modules/scrapper/components/GroupsDropDown'
 import GroupLinkActions from '@modules/scrapper/components/GroupLinkActions'
 import GroupLinksDetails from '@modules/scrapper/components/GroupLinksDetails'
@@ -36,7 +36,7 @@ export {
     GroupForm,
     GroupSettingActions,
     GroupLinks,
-    GroupLinksForm,
+    GroupLinksCreateForm,
     GroupsDropDown,
     GroupLinkActions,
     GroupLinkRow,

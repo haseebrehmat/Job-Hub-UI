@@ -1,6 +1,6 @@
 import { memo, useState } from 'react'
 
-import { Badge } from '@components'
+import { Badge, DeleteDialog } from '@components'
 
 import { GroupLinkEditForm } from '@modules/scrapper/components'
 
@@ -11,6 +11,7 @@ import { UptoIcon, EditIcon, TrashIcon } from '@icons'
 
 const GroupLinkRow = ({ row = null, actions = false, status = false, mutate }) => {
     const [switchForm, setSwitchForm] = useState(false)
+    const [show, setShow] = useState(false)
 
     return (
         <div className='mt-2 flex justify-between items-center p-3 bg-slate-100 border border-[#338d8c] border-opacity-40 rounded-lg hover:bg-cyan-50'>
@@ -33,17 +34,31 @@ const GroupLinkRow = ({ row = null, actions = false, status = false, mutate }) =
                         </a>
                         {actions && can(['edit_job_source_link', 'delete_job_source_link']) && (
                             <>
-                                <span
-                                    className='flex w-fit justify-center items-center gap-1.5 border border-[#4ab9a7] rounded-full px-2 cursor-pointer'
-                                    onClick={() => setSwitchForm(true)}
-                                >
-                                    <span>{EditIcon}</span>
-                                    <span>Edit</span>
-                                </span>
-                                <span className='flex w-fit justify-center items-center gap-1.5 border border-[#4ab9a7] rounded-full px-2'>
-                                    <span>{TrashIcon}</span>
-                                    <span>Delete</span>
-                                </span>
+                                {can('edit_job_source_link') && (
+                                    <span
+                                        className='flex w-fit justify-center items-center gap-1.5 border border-[#4ab9a7] rounded-full px-2 cursor-pointer'
+                                        onClick={() => setSwitchForm(true)}
+                                    >
+                                        <span>{EditIcon}</span>
+                                        <span>Edit</span>
+                                    </span>
+                                )}
+                                {can('delete_job_source_link') && (
+                                    <DeleteDialog
+                                        show={show}
+                                        setShow={setShow}
+                                        url={`api/job_scraper/group_scheduler_link/${row?.id}/`}
+                                        refetch={mutate}
+                                    >
+                                        <span
+                                            className='flex w-fit justify-center items-center gap-1.5 border border-[#4ab9a7] rounded-full px-2 cursor-pointer'
+                                            onClick={() => setShow(true)}
+                                        >
+                                            <span>{TrashIcon}</span>
+                                            <span>Delete</span>
+                                        </span>
+                                    </DeleteDialog>
+                                )}
                             </>
                         )}
                     </span>

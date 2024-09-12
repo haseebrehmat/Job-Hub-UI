@@ -7,7 +7,7 @@ import { Button, Loading } from '@components'
 
 import {
     GroupLinkActions,
-    GroupLinksForm,
+    GroupLinksCreateForm,
     RunningGroupLink,
     GroupLinksDetails,
     GroupLinksSummary,
@@ -46,9 +46,7 @@ const GroupLinks = () => {
                     Object.keys(data?.grouplinks).map((row, idx) => (
                         <div className='bg-white rounded-md p-4 border relative text-[#338d8c]' key={idx}>
                             <h2 className='text-2xl'>{formatStringInPascal(row)}</h2>
-                            {can(['edit_job_source_link', 'delete_job_source_link']) && (
-                                <GroupLinkActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
-                            )}
+                            {false && <GroupLinkActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />}
                             <div className='flex flex-col mt-2 ml-2 text-sm'>
                                 <GroupLinksSummary summary={data?.grouplinks?.[row]} name={row} />
                                 <RunningGroupLink link={data?.grouplinks?.[row]?.running_query?.[0]} />
@@ -60,8 +58,8 @@ const GroupLinks = () => {
                 )}
             </div>
             {showDetails && <GroupLinksDetails />}
-            {can(['edit_job_source_link', 'delete_job_source_link']) && showForm && (
-                <GroupLinksForm show={showForm} setShow={toggleForm} mutate={mutate} link={link} />
+            {can('edit_job_source_link') && showForm && (
+                <GroupLinksCreateForm show={showForm} setShow={toggleForm} mutate={mutate} link={link} />
             )}
         </div>
     )
