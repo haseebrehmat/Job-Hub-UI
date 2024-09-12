@@ -24,7 +24,7 @@ const RunningGroupLink = ({ link = null }) => (
                 </a>
             </>
         ) : (
-            <span className='ml-2 text-gray-500'>No group scarper link is running yet!</span>
+            <span className='ml-2 text-gray-500'>No group scraper link is running yet!</span>
         )}
     </div>
 )

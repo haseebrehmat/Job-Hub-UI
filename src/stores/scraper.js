@@ -5,6 +5,7 @@ import { GROUP_LINKS_TABS } from '@constants/scrapper'
 export const useGroupLinksStore = create(set => ({
     link: null,
     links: [],
+    status: 'total',
     show: { form: false, details: false },
     tabs: GROUP_LINKS_TABS,
     setLink: link => set(state => ({ ...state, link, show: { form: true, details: false } })),
@@ -14,7 +15,8 @@ export const useGroupLinksStore = create(set => ({
         details: value =>
             set(state => ({
                 ...state,
-                show: { ...state.show, details: value ?? !state.show.details },
+                show: { ...state.show, details: !state.show.details },
+                link: { name: value?.name, id: value?.id },
                 tabs: GROUP_LINKS_TABS,
             })),
     },
@@ -23,6 +25,6 @@ export const useGroupLinksStore = create(set => ({
             const updatedTabs = { ...state.tabs }
             Object.keys(updatedTabs).forEach(k => (updatedTabs[k] = false))
             updatedTabs[key] = true
-            return { ...state, tabs: updatedTabs }
+            return { ...state, tabs: updatedTabs, status: key }
         }),
 }))

@@ -14,7 +14,7 @@ import {
 } from '@modules/scrapper/components'
 import { fetchGroupLinks } from '@modules/scrapper/api'
 
-import { can, formatStringInPascal } from '@utils/helpers'
+import { can, formatStringInPascal, isset } from '@utils/helpers'
 
 import { CreateIcon, ResetIcon } from '@icons'
 
@@ -42,16 +42,16 @@ const GroupLinks = () => {
                 <Button label='Refresh' fit icon={ResetIcon} onClick={() => mutate()} />
             </div>
             <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
-                {data?.grouplinks?.length > 0 && !error ? (
-                    data?.grouplinks.map((row, idx) => (
+                {isset(data?.grouplinks) && !error ? (
+                    Object.keys(data?.grouplinks).map((row, idx) => (
                         <div className='bg-white rounded-md p-4 border relative text-[#338d8c]' key={idx}>
-                            <h2 className='text-2xl'>{formatStringInPascal(row?.group_scraper?.name)}</h2>
+                            <h2 className='text-2xl'>{formatStringInPascal(row)}</h2>
                             {can(['edit_job_source_link', 'delete_job_source_link']) && (
                                 <GroupLinkActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
                             )}
                             <div className='flex flex-col mt-2 ml-2 text-sm'>
-                                <GroupLinksSummary />
-                                <RunningGroupLink />
+                                <GroupLinksSummary summary={data?.grouplinks?.[row]} name={row} />
+                                <RunningGroupLink link={data?.grouplinks?.[row]?.running_query?.[0]} />
                             </div>
                         </div>
                     ))
