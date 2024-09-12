@@ -61,6 +61,7 @@ const GroupLinksDetails = () => {
                                                         key={index}
                                                         actions={tab === 'total'}
                                                         status={tab === 'total'}
+                                                        mutate={mutate}
                                                     />
                                                 ))
                                             ) : (

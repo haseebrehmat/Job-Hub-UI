@@ -19,6 +19,7 @@ import GroupLinksDetails from '@modules/scrapper/components/GroupLinksDetails'
 import GroupLinkRow from '@modules/scrapper/components/GroupLinkRow'
 import GroupLinksSummary from '@modules/scrapper/components/GroupLinksSummary'
 import RunningGroupLink from '@modules/scrapper/components/RunningGroupLink'
+import GroupLinkEditForm from '@modules/scrapper/components/GroupLinkEditForm'
 
 export {
     CronjobSetting,
@@ -42,4 +43,5 @@ export {
     RunningGroupLink,
     GroupLinksDetails,
     GroupLinksSummary,
+    GroupLinkEditForm,
 }
