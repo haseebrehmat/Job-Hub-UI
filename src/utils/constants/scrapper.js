@@ -28,6 +28,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Builtin', value: 'builtin' },
     { label: 'Workable', value: 'workable' },
     { label: 'Clearance', value: 'clearance' },
+    { label: 'GetWork', value: 'getwork' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -106,6 +107,7 @@ export const JOB_SOURCES = {
     themuse: 'The Muse',
     clearance: 'Clearance',
     smartrecruiter: 'Smart Recruiter',
+    getwork: 'GetWork',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
