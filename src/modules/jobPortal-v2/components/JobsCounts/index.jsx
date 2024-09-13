@@ -19,7 +19,7 @@ const JobsCounts = () => {
     return (
         <div className='grid grid-flow-col'>
             {Object.keys(JOBS_COUNTS_TYPES)?.map((d, index) => (
-                <div className='flex flex-col gap-y-0.5' key={index}>
+                <div className='flex flex-col gap-y-2' key={index}>
                     <AnimatedNumber
                         component='p'
                         initialValue={0}
@@ -34,7 +34,7 @@ const JobsCounts = () => {
                         duration={1000}
                         formatValue={n => formatNum(n)}
                     />
-                    <p>{JOBS_COUNTS_TYPES?.[d]}</p>
+                    <p className='tracking-wider'>{JOBS_COUNTS_TYPES?.[d]}</p>
                 </div>
             ))}
         </div>

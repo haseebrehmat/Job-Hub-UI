@@ -19,33 +19,31 @@ const Taskbar = () => {
     const { isMutating } = useSWRMutation(url, downloadJobsData, SWR_REVALIDATE)
 
     return (
-        <div className='grid space-y-2'>
-            <div className='flex items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-2.5 text-[#048C8C]'>
-                <div className='flex gap-2 w-fit flex-wrap'>
-                    <Button
-                        icon={DownloadIcon}
-                        fit
-                        disabled={isMutating}
-                        classes='download-csv !py-[5px] !px-1.5 !m-0 !flex !items-center'
-                        // onClick={() => trigger()}
-                    />
-                    <Tooltip
-                        anchorSelect='.download-csv'
-                        style={{ backgroundColor: '#338d8c', fontSize: '15px', letterSpacing: '2px' }}
-                        content={isMutating ? 'Downloading...' : 'Download Csv'}
-                    />
-                    <Button
-                        icon={view === 'list' ? ListViewIcon : GridViewIcon}
-                        fit
-                        fill={view === 'grid'}
-                        classes='toggle-view !py-[9px] !m-0 !flex !items-center'
-                        onClick={() => toggleView()}
-                    />
-                    <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
-                </div>
-            </div>
-            <div className='bg-slate-100 border border-slate-300 rounded-xl py-2 px-4 text-[#048C8C]'>
+        <div className='flex items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-3 text-[#048C8C]'>
+            <div className='flex-grow'>
                 <JobsCounts />
+            </div>
+            <div className='flex gap-2 w-fit'>
+                <Button
+                    icon={DownloadIcon}
+                    fit
+                    disabled={isMutating}
+                    classes='download-csv !py-[5px] !px-1.5 !m-0 !flex !items-center'
+                    // onClick={() => trigger()}
+                />
+                <Tooltip
+                    anchorSelect='.download-csv'
+                    style={{ backgroundColor: '#338d8c', fontSize: '15px', letterSpacing: '2px' }}
+                    content={isMutating ? 'Downloading...' : 'Download Csv'}
+                />
+                <Button
+                    icon={view === 'list' ? ListViewIcon : GridViewIcon}
+                    fit
+                    fill={view === 'grid'}
+                    classes='toggle-view !py-[9px] !m-0 !flex !items-center'
+                    onClick={() => toggleView()}
+                />
+                <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
             </div>
         </div>
     )
