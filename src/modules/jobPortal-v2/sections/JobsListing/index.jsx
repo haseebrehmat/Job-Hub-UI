@@ -1,5 +1,5 @@
 import { memo, useEffect } from 'react'
-import useSWR, { mutate as mutator } from 'swr'
+import useSWR from 'swr'
 
 import { useJobPortalV2Store } from '@/stores'
 
@@ -7,33 +7,28 @@ import { fetchJobs } from '@modules/jobPortal-v2/api'
 import { JobCard, PortalLayout } from '@modules/jobPortal-v2/components'
 
 import { isset } from '@utils/helpers'
+import { SWR_REVALIDATE } from '@constants/global'
 
 const JobsListing = () => {
-    const [page, query, filters, focused, view, handleKeyDown, setMutator, setPagination] = useJobPortalV2Store(
-        state => [
-            state?.page,
-            state?.paramQuery,
-            state?.params,
-            state?.focused,
-            state?.view,
-            state?.setFocused,
-            state?.setMutator,
-            state?.setPagination,
-        ]
-    )
+    const [url, focused, view, handleKeyDown, setMutator, setPagination] = useJobPortalV2Store(state => [
+        state?.url?.jobs,
+        state?.focused,
+        state?.view,
+        state?.setFocused,
+        state?.setMutator,
+        state?.setPagination,
+    ])
 
-    const { data, error, isLoading, mutate } = useSWR([page, query, filters], () => fetchJobs(page, query, filters), {
-        revalidateOnReconnect: false,
-        shouldRetryOnError: false,
-        revalidateOnFocus: false,
-        onSuccess: fetchedData => setPagination(fetchedData?.next, fetchedData?.previous, mutator),
-    })
+    const { data, error, isLoading, mutate } = useSWR(url, fetchJobs, SWR_REVALIDATE)
 
     useEffect(() => {
         if (isset(handleKeyDown)) {
             window.addEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))
         }
-        if (!isLoading && !error) setMutator(mutate)
+        if (!isLoading && !error) {
+            setMutator(mutate)
+            if (isset(data?.next) || isset(data?.previous)) setPagination(data?.next, data?.previous)
+        }
 
         return () => {
             window.removeEventListener('keydown', e => handleKeyDown(e.key, data?.jobs?.length))

@@ -10,9 +10,7 @@ import { isset } from '@utils/helpers'
 import { PaginateNext, PaginatePrev } from '@icons'
 
 const NextAndPrev = () => {
-    const [pagination] = useJobPortalV2Store(state => [state?.pagination])
-
-    console.log(pagination)
+    const [pagination, next, previous] = useJobPortalV2Store(state => [state?.pagination, state?.next, state?.previous])
 
     return (
         <div className='flex items-center gap-1 w-fit'>
@@ -23,7 +21,7 @@ const NextAndPrev = () => {
                 classes={`page-previous !py-[8px] !m-0 !flex !items-center ${
                     isset(pagination?.previous) ? '' : 'bg-gray-300 cursor-not-allowed'
                 }`}
-                onClick={() => pagination?.mutator(pagination?.previous)}
+                onClick={() => previous()}
             />
             <Tooltip anchorSelect='.page-previous' content='Previous' />
             <Button
@@ -33,7 +31,7 @@ const NextAndPrev = () => {
                 classes={`page-next !py-[8px] !m-0 !flex !items-center ${
                     isset(pagination?.next) ? '' : 'bg-gray-300 cursor-not-allowed'
                 }`}
-                onClick={() => pagination?.mutator(pagination?.next)}
+                onClick={() => next()}
             />
             <Tooltip anchorSelect='.page-next' content='Next' />
         </div>

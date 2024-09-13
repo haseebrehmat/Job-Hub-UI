@@ -12,21 +12,17 @@ import { NextAndPrev, OrderBy, Visibility } from '@modules/jobPortal-v2/componen
 import { SearchIcon, GridViewIcon, ListViewIcon, DownloadIcon } from '@icons'
 
 const Taskbar = () => {
-    const [query, paramQuery, view, filters, setQuery, applySearch, toggleView, apply, reset] = useJobPortalV2Store(
-        state => [
-            state?.query,
-            state?.paramQuery,
-            state?.view,
-            state?.params,
-            state?.setQuery,
-            state?.setParams,
-            state?.toggleView,
-            state?.setParams,
-            state?.resetFilters,
-        ]
-    )
+    const [url, query, view, setQuery, toggleView, apply, reset] = useJobPortalV2Store(state => [
+        state?.url?.jobs,
+        state?.query,
+        state?.view,
+        state?.setQuery,
+        state?.toggleView,
+        state?.applyFilters,
+        state?.resetFilters,
+    ])
 
-    const { trigger, isMutating } = useSWRMutation([paramQuery, filters], () => downloadJobsData(paramQuery, filters), {
+    const { trigger, isMutating } = useSWRMutation(url, downloadJobsData, {
         revalidateOnReconnect: false,
         shouldRetryOnError: false,
         revalidateOnFocus: false,
@@ -40,7 +36,7 @@ const Taskbar = () => {
                         ph='Search by typing keywords...'
                         value={query}
                         onChange={e => setQuery(e?.target?.value)}
-                        onKeyDown={e => (e.key === 'Enter' ? applySearch() : null)}
+                        onKeyDown={e => (e.key === 'Enter' ? apply() : null)}
                     />
                     <div className='absolute inset-y-0 right-0 flex items-center pr-3 text-xl'>{SearchIcon}</div>
                 </div>

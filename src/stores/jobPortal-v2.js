@@ -2,24 +2,36 @@ import { create } from 'zustand'
 
 import { FILTERS_DEFAULT_VALUES } from '@constants/jobPortalV2'
 
+const JOB_PORTAL_INITIAL_URLS = { jobs: 'api/job_portal/jobs/', filters: 'api/job_portal/job_filters/' }
+
+const getFilterAppliedURL = (query, filters) =>
+    `?search=${query}&tech_keywords=${filters?.techs
+        ?.map(tech => tech.label)
+        ?.join(',')}&job_source=${filters?.sources?.join(',')}&ordering=${
+        filters?.order ?? '-job_posted_date'
+    }&job_visibility=${filters?.visible ?? 'all'}&from_date=${filters?.from}&to_date=${
+        filters?.to
+    }&job_type=${filters?.types?.join(',')}&blocked=${filters?.blocked}`
+
 export const useJobPortalV2Store = create(set => ({
-    page: 1,
+    url: JOB_PORTAL_INITIAL_URLS,
     query: '',
     filters: FILTERS_DEFAULT_VALUES,
-    params: FILTERS_DEFAULT_VALUES,
-    paramQuery: '',
     focused: null,
     job: null,
     mutator: null,
-    expand: {
-        sources: false,
-        types: false,
-    },
+    expand: { sources: false, types: false },
     view: 'list',
-    pagination: { next: null, previous: null, mutator: null },
+    pagination: { next: null, previous: null },
 
-    next: () => set(state => ({ ...state, page: state.page + 1 })),
-    prev: () => set(state => ({ ...state, page: state.page - 1 })),
+    applyFilters: () =>
+        set(state => ({
+            ...state,
+            url: {
+                filters: `${JOB_PORTAL_INITIAL_URLS?.filters}${getFilterAppliedURL(state?.query, state?.filters)}`,
+                jobs: `${JOB_PORTAL_INITIAL_URLS?.jobs}${getFilterAppliedURL(state?.query, state?.filters)}`,
+            },
+        })),
     setQuery: value => set(state => ({ ...state, query: value })),
     setFilters: {
         from: value => set(state => ({ ...state, filters: { ...state.filters, from: value } })),
@@ -51,11 +63,9 @@ export const useJobPortalV2Store = create(set => ({
         set(state => ({
             ...state,
             filters: FILTERS_DEFAULT_VALUES,
-            params: FILTERS_DEFAULT_VALUES,
             query: '',
-            paramQuery: '',
+            url: JOB_PORTAL_INITIAL_URLS,
         })),
-    setParams: () => set(state => ({ ...state, params: state?.filters, paramQuery: state?.query })),
     setFoucused: (key, arrayLength) => {
         if (arrayLength > 0) {
             switch (key) {
@@ -77,5 +87,7 @@ export const useJobPortalV2Store = create(set => ({
         types: () => set(state => ({ ...state, expand: { ...state.expand, types: !state.expand.types } })),
     },
     toggleView: () => set(state => ({ ...state, view: state.view === 'list' ? 'grid' : 'list' })),
-    setPagination: (next, previous, mutator) => set(state => ({ ...state, pagination: { next, previous, mutator } })),
+    setPagination: (next, previous) => set(state => ({ ...state, pagination: { next, previous } })),
+    next: () => set(state => ({ ...state, url: { ...state?.url, jobs: state?.pagination?.next } })),
+    previous: () => set(state => ({ ...state, url: { ...state?.url, jobs: state?.pagination?.previous } })),
 }))

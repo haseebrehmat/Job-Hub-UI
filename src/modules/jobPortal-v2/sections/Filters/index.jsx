@@ -9,16 +9,15 @@ import { fetchJobFilters } from '@modules/jobPortal-v2/api'
 import { PortalLayout } from '@modules/jobPortal-v2/components'
 
 const JobPortalV2 = () => {
-    const [query, filters, expand, appliedFilters, update, toggle] = useJobPortalV2Store(state => [
-        state?.paramQuery,
+    const [url, filters, expand, update, toggle] = useJobPortalV2Store(state => [
+        state?.url?.filters,
         state?.filters,
         state?.expand,
-        state?.params,
         state?.setFilters,
         state?.toggleExpand,
     ])
 
-    const { data, error, isLoading } = useSWR([query, appliedFilters], () => fetchJobFilters(query, appliedFilters), {
+    const { data, error, isLoading } = useSWR(url, fetchJobFilters, {
         revalidateOnReconnect: false,
         shouldRetryOnError: false,
         revalidateOnFocus: false,
