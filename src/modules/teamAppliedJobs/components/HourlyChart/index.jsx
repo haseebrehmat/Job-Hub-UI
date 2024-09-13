@@ -24,19 +24,21 @@ const HourlyChart = ({ members = null }) => {
         <span className='text-4xl flex justify-center pt-10 text-[#048C8C] animate-pulse'>Loading ...</span>
     ) : (
         <div className='flex flex-col'>
-            <div className='flex px-4 pb-2 items-end justify-between'>
-                <span className='text-[#048C8C] font-semibold italic tracking-wider'>
-                    {selectedMember?.label ?? 'No BD Selected'}
-                </span>
-                <span className='min-w-[14rem]'>
-                    <CustomSelector
-                        options={parseMembers(members, null, true)}
-                        handleChange={obj => setSelectedMember(obj)}
-                        selectorValue={selectedMember}
-                        placeholder='Select Member'
-                    />
-                </span>
-            </div>
+            {members && (
+                <div className='flex px-4 pb-2 items-end justify-between'>
+                    <span className='text-[#048C8C] font-semibold italic tracking-wider'>
+                        {selectedMember?.label ?? 'No BD Selected'}
+                    </span>
+                    <span className='min-w-[14rem]'>
+                        <CustomSelector
+                            options={parseMembers(members, null, true)}
+                            handleChange={obj => setSelectedMember(obj)}
+                            selectorValue={selectedMember}
+                            placeholder='Select Member'
+                        />
+                    </span>
+                </div>
+            )}
             <ResponsiveContainer width='98%' height={400} className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto'>
                 <LineChart data={data?.results} margin={{ top: 40, bottom: 50, right: 30, left: 20 }}>
                     <CartesianGrid strokeDasharray='3 3' />
@@ -49,7 +51,7 @@ const HourlyChart = ({ members = null }) => {
                         allowDuplicatedCategory={false}
                         fontSize={15}
                     />
-                    <YAxis stroke='#037571' type='number' fontSize={14} />
+                    <YAxis stroke='#037571' type='number' fontSize={14} domain={[data?.min, data?.max]} />
                     <Tooltip />
                     <Line
                         dataKey='jobs'
