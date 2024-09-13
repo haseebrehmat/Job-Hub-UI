@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { useJobPortalV2Store } from '@/stores'
 
 import { fetchJobs } from '@modules/jobPortal-v2/api'
-import { JobCard, PortalLayout } from '@modules/jobPortal-v2/components'
+import { JobCard, PortalLayout, NextAndPrev } from '@modules/jobPortal-v2/components'
 
 import { isset } from '@utils/helpers'
 import { SWR_REVALIDATE } from '@constants/global'
@@ -27,7 +27,7 @@ const JobsListing = () => {
         }
         if (!isLoading && !error) {
             setMutator(mutate)
-            if (isset(data?.next) || isset(data?.previous)) setPagination(data?.next, data?.previous)
+            if (isset(data?.next) || isset(data?.prev)) setPagination(data?.next, data?.prev)
         }
 
         return () => {
@@ -44,6 +44,7 @@ const JobsListing = () => {
                     <div>No Jobs Found</div>
                 )}
             </div>
+            <NextAndPrev />
         </PortalLayout>
     )
 }

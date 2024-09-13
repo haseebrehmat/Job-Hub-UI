@@ -7,7 +7,7 @@ import { Input, Button, Filters } from '@components'
 import { useJobPortalV2Store } from '@/stores'
 
 import { downloadJobsData } from '@modules/jobPortal-v2/api'
-import { NextAndPrev, OrderBy, Visibility } from '@modules/jobPortal-v2/components'
+import { OrderBy, Visibility } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
@@ -63,7 +63,6 @@ const Taskbar = () => {
                     onClick={() => toggleView()}
                 />
                 <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
-                <NextAndPrev />
             </div>
         </div>
     )

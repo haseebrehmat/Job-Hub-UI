@@ -13,12 +13,12 @@ const NextAndPrev = () => {
     const [pagination, next, previous] = useJobPortalV2Store(state => [state?.pagination, state?.next, state?.previous])
 
     return (
-        <div className='flex items-center gap-1 w-fit'>
+        <div className='flex items-center gap-2 pb-4'>
             <Button
                 icon={PaginatePrev}
                 fit
                 disabled={!isset(pagination?.previous)}
-                classes={`page-previous !py-[8px] !m-0 !flex !items-center ${
+                classes={`page-previous !p-[10px] !m-0 !flex !items-center ${
                     isset(pagination?.previous) ? '' : 'bg-gray-300 cursor-not-allowed'
                 }`}
                 onClick={() => previous()}
@@ -28,7 +28,7 @@ const NextAndPrev = () => {
                 icon={PaginateNext}
                 fit
                 disabled={!isset(pagination?.next)}
-                classes={`page-next !py-[8px] !m-0 !flex !items-center ${
+                classes={`page-next !p-[10px] !m-0 !flex !items-center ${
                     isset(pagination?.next) ? '' : 'bg-gray-300 cursor-not-allowed'
                 }`}
                 onClick={() => next()}
