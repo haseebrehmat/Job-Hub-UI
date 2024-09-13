@@ -8,6 +8,8 @@ import { CustomSelector } from '@components'
 import { fetchJobFilters } from '@modules/jobPortal-v2/api'
 import { PortalLayout } from '@modules/jobPortal-v2/components'
 
+import { SWR_REVALIDATE } from '@constants/global'
+
 const JobPortalV2 = () => {
     const [url, filters, expand, update, toggle] = useJobPortalV2Store(state => [
         state?.url?.filters,
@@ -17,11 +19,7 @@ const JobPortalV2 = () => {
         state?.toggleExpand,
     ])
 
-    const { data, error, isLoading } = useSWR(url, fetchJobFilters, {
-        revalidateOnReconnect: false,
-        shouldRetryOnError: false,
-        revalidateOnFocus: false,
-    })
+    const { data, error, isLoading } = useSWR(url, fetchJobFilters, SWR_REVALIDATE)
 
     const sources = !expand?.sources ? data?.jobSources?.slice(0, 5) : data?.jobSources
     const types = !expand?.types ? data?.jobTypes?.slice(0, 5) : data?.jobTypes

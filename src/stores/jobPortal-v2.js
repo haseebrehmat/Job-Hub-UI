@@ -1,17 +1,7 @@
 import { create } from 'zustand'
 
-import { FILTERS_DEFAULT_VALUES } from '@constants/jobPortalV2'
-
-const JOB_PORTAL_INITIAL_URLS = { jobs: 'api/job_portal/jobs/', filters: 'api/job_portal/job_filters/' }
-
-const getFilterAppliedURL = (query, filters) =>
-    `?search=${query}&tech_keywords=${filters?.techs
-        ?.map(tech => tech.label)
-        ?.join(',')}&job_source=${filters?.sources?.join(',')}&ordering=${
-        filters?.order ?? '-job_posted_date'
-    }&job_visibility=${filters?.visible ?? 'all'}&from_date=${filters?.from}&to_date=${
-        filters?.to
-    }&job_type=${filters?.types?.join(',')}&blocked=${filters?.blocked}`
+import { getFilterAppliedURL } from '@utils/helpers'
+import { FILTERS_DEFAULT_VALUES, JOB_PORTAL_INITIAL_URLS } from '@constants/jobPortalV2'
 
 export const useJobPortalV2Store = create(set => ({
     url: JOB_PORTAL_INITIAL_URLS,

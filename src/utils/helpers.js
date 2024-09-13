@@ -538,3 +538,12 @@ export const saveVisitedJob = jobId => {
 
 export const formatOptions = options_arr =>
     options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
+
+export const getFilterAppliedURL = (query, filters) =>
+    `?search=${query}&tech_keywords=${filters?.techs
+        ?.map(tech => tech.label)
+        ?.join(',')}&job_source=${filters?.sources?.join(',')}&ordering=${
+        filters?.order ?? '-job_posted_date'
+    }&job_visibility=${filters?.visible ?? 'all'}&from_date=${filters?.from}&to_date=${
+        filters?.to
+    }&job_type=${filters?.types?.join(',')}&blocked=${filters?.blocked}`

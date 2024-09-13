@@ -21,3 +21,5 @@ export const FILTERS_DEFAULT_VALUES = {
     types: [],
     blocked: false,
 }
+
+export const JOB_PORTAL_INITIAL_URLS = { jobs: 'api/job_portal/jobs/', filters: 'api/job_portal/job_filters/' }

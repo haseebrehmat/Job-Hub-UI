@@ -9,6 +9,8 @@ import { useJobPortalV2Store } from '@/stores'
 import { downloadJobsData } from '@modules/jobPortal-v2/api'
 import { NextAndPrev, OrderBy, Visibility } from '@modules/jobPortal-v2/components'
 
+import { SWR_REVALIDATE } from '@constants/global'
+
 import { SearchIcon, GridViewIcon, ListViewIcon, DownloadIcon } from '@icons'
 
 const Taskbar = () => {
@@ -22,11 +24,7 @@ const Taskbar = () => {
         state?.resetFilters,
     ])
 
-    const { trigger, isMutating } = useSWRMutation(url, downloadJobsData, {
-        revalidateOnReconnect: false,
-        shouldRetryOnError: false,
-        revalidateOnFocus: false,
-    })
+    const { trigger, isMutating } = useSWRMutation(url, downloadJobsData, SWR_REVALIDATE)
 
     return (
         <div className='flex items-center justify-between gap-2 bg-slate-100 border border-slate-300 rounded-xl p-2.5 text-[#048C8C] text-sm'>
