@@ -7,7 +7,7 @@ import { Input, Button, Filters } from '@components'
 import { useJobPortalV2Store } from '@/stores'
 
 import { downloadJobsData } from '@modules/jobPortal-v2/api'
-import { OrderBy, Visibility } from '@modules/jobPortal-v2/components'
+import { NextAndPrev, OrderBy, Visibility } from '@modules/jobPortal-v2/components'
 
 import { SearchIcon, GridViewIcon, ListViewIcon, DownloadIcon } from '@icons'
 
@@ -46,7 +46,7 @@ const Taskbar = () => {
                 </div>
                 <Filters apply={() => apply()} clear={() => reset()} />
             </div>
-            <div className='flex gap-2 w-fit'>
+            <div className='flex gap-2 w-fit flex-wrap'>
                 <OrderBy />
                 <Visibility />
                 <Button
@@ -69,6 +69,7 @@ const Taskbar = () => {
                     onClick={() => toggleView()}
                 />
                 <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
+                <NextAndPrev />
             </div>
         </div>
     )

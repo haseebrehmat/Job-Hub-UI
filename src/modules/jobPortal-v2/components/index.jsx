@@ -7,6 +7,7 @@ import Visibility from '@modules/jobPortal-v2/components/Visibility'
 import TechKeywords from '@modules/jobPortal-v2/components/TechKeywords'
 import JobCardFooter from '@modules/jobPortal-v2/components/JobCardFooter'
 import JobSourceAndType from '@modules/jobPortal-v2/components/JobSourceAndType'
+import NextAndPrev from '@modules/jobPortal-v2/components/NextAndPrev'
 
 export {
     PortalLayout,
@@ -18,4 +19,5 @@ export {
     TechKeywords,
     JobCardFooter,
     JobSourceAndType,
+    NextAndPrev,
 }

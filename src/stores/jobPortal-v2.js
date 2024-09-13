@@ -16,6 +16,7 @@ export const useJobPortalV2Store = create(set => ({
         types: false,
     },
     view: 'list',
+    pagination: { next: null, previous: null, mutator: null },
 
     next: () => set(state => ({ ...state, page: state.page + 1 })),
     prev: () => set(state => ({ ...state, page: state.page - 1 })),
@@ -76,4 +77,5 @@ export const useJobPortalV2Store = create(set => ({
         types: () => set(state => ({ ...state, expand: { ...state.expand, types: !state.expand.types } })),
     },
     toggleView: () => set(state => ({ ...state, view: state.view === 'list' ? 'grid' : 'list' })),
+    setPagination: (next, previous, mutator) => set(state => ({ ...state, pagination: { next, previous, mutator } })),
 }))

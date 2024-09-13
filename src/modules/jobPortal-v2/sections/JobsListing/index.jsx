@@ -1,5 +1,5 @@
 import { memo, useEffect } from 'react'
-import useSWR from 'swr'
+import useSWR, { mutate as mutator } from 'swr'
 
 import { useJobPortalV2Store } from '@/stores'
 
@@ -9,20 +9,24 @@ import { JobCard, PortalLayout } from '@modules/jobPortal-v2/components'
 import { isset } from '@utils/helpers'
 
 const JobsListing = () => {
-    const [page, query, filters, focused, view, handleKeyDown, setMutator] = useJobPortalV2Store(state => [
-        state?.page,
-        state?.paramQuery,
-        state?.params,
-        state?.focused,
-        state?.view,
-        state?.setFocused,
-        state?.setMutator,
-    ])
+    const [page, query, filters, focused, view, handleKeyDown, setMutator, setPagination] = useJobPortalV2Store(
+        state => [
+            state?.page,
+            state?.paramQuery,
+            state?.params,
+            state?.focused,
+            state?.view,
+            state?.setFocused,
+            state?.setMutator,
+            state?.setPagination,
+        ]
+    )
 
     const { data, error, isLoading, mutate } = useSWR([page, query, filters], () => fetchJobs(page, query, filters), {
         revalidateOnReconnect: false,
         shouldRetryOnError: false,
         revalidateOnFocus: false,
+        onSuccess: fetchedData => setPagination(fetchedData?.next, fetchedData?.previous, mutator),
     })
 
     useEffect(() => {
