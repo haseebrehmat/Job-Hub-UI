@@ -28,7 +28,7 @@ const JobPortalV2 = () => {
     const types = !expand?.types ? data?.jobTypes?.slice(0, 5) : data?.jobTypes
 
     return (
-        <div className='w-1/5 bg-slate-100 border border-slate-300 rounded-xl min-h-screen h-fit'>
+        <div className='w-1/5 bg-slate-100 border border-slate-300 rounded-xl min-h-screen'>
             <PortalLayout loading={isLoading} error={error} module='Filters'>
                 <div className='flex flex-col items-center justify-center px-3 py-5 gap-4 text-[#338d8c]'>
                     <div className='w-full'>
