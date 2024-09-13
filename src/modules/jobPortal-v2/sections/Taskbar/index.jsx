@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { Tooltip } from 'react-tooltip'
 import useSWRMutation from 'swr/mutation'
 
-import { Input, Button, Filters } from '@components'
+import { Button } from '@components'
 
 import { useJobPortalV2Store } from '@/stores'
 
@@ -11,36 +11,16 @@ import { OrderBy, Visibility, JobsCounts } from '@modules/jobPortal-v2/component
 
 import { SWR_REVALIDATE } from '@constants/global'
 
-import { SearchIcon, GridViewIcon, ListViewIcon, DownloadIcon } from '@icons'
+import { GridViewIcon, ListViewIcon, DownloadIcon } from '@icons'
 
 const Taskbar = () => {
-    const [url, query, view, setQuery, toggleView, apply, reset] = useJobPortalV2Store(state => [
-        state?.url?.jobs,
-        state?.query,
-        state?.view,
-        state?.setQuery,
-        state?.toggleView,
-        state?.applyFilters,
-        state?.resetFilters,
-    ])
+    const [url, view, toggleView] = useJobPortalV2Store(state => [state?.url?.jobs, state?.view, state?.toggleView])
 
     const { isMutating } = useSWRMutation(url, downloadJobsData, SWR_REVALIDATE)
 
     return (
         <div className='grid space-y-2'>
             <div className='flex items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-2.5 text-[#048C8C]'>
-                <div className='flex gap-3 w-3/5'>
-                    <div className='relative hidden md:block flex-1 bg-white'>
-                        <Input
-                            ph='Search by typing keywords...'
-                            value={query}
-                            onChange={e => setQuery(e?.target?.value)}
-                            onKeyDown={e => (e.key === 'Enter' ? apply() : null)}
-                        />
-                        <div className='absolute inset-y-0 right-0 flex items-center pr-3 text-xl'>{SearchIcon}</div>
-                    </div>
-                    <Filters apply={() => apply()} clear={() => reset()} />
-                </div>
                 <div className='flex gap-2 w-fit flex-wrap'>
                     <OrderBy />
                     <Visibility />

@@ -3,20 +3,26 @@ import useSWR from 'swr'
 
 import { useJobPortalV2Store } from '@/stores'
 
-import { CustomSelector } from '@components'
+import { CustomSelector, Filters, Input } from '@components'
 
 import { fetchJobFilters } from '@modules/jobPortal-v2/api'
 import { PortalLayout } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
+import { SearchIcon } from '@icons'
+
 const JobPortalV2 = () => {
-    const [url, filters, expand, update, toggle] = useJobPortalV2Store(state => [
+    const [url, filters, expand, query, setQuery, update, toggle, apply, reset] = useJobPortalV2Store(state => [
         state?.url?.filters,
         state?.filters,
         state?.expand,
+        state?.query,
+        state?.setQuery,
         state?.setFilters,
         state?.toggleExpand,
+        state?.applyFilters,
+        state?.resetFilters,
     ])
 
     const { data, error, isLoading } = useSWR(url, fetchJobFilters, SWR_REVALIDATE)
@@ -28,6 +34,15 @@ const JobPortalV2 = () => {
         <div className='w-1/5 bg-slate-100 border border-slate-300 rounded-xl min-h-screen'>
             <PortalLayout loading={isLoading} error={error} module='Filters'>
                 <div className='flex flex-col items-center justify-center px-3 py-5 gap-4 text-[#338d8c]'>
+                    <div className='relative bg-white w-full'>
+                        <Input
+                            ph='Search by typing keywords...'
+                            value={query}
+                            onChange={e => setQuery(e?.target?.value)}
+                            onKeyDown={e => (e.key === 'Enter' ? apply() : null)}
+                        />
+                        <div className='absolute inset-y-0 right-0 flex items-center pr-2 text-xl'>{SearchIcon}</div>
+                    </div>
                     <div className='w-full'>
                         From - To
                         <hr className='mb-3 bg-slate-300 h-0.5' />
@@ -129,6 +144,9 @@ const JobPortalV2 = () => {
                             className='!w-5 !h-5 rounded accent-cyan-600 cursor-pointer outline-none'
                         />
                         Show Only Blocked Companies Jobs
+                    </div>
+                    <div className='w-full'>
+                        <Filters apply={() => apply()} clear={() => reset()} />
                     </div>
                 </div>
             </PortalLayout>
