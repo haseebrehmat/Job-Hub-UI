@@ -5,6 +5,8 @@ import { useJobPortalV2Store } from '@/stores'
 
 import { DeleteDialog, Button } from '@components'
 
+import { can } from '@utils/helpers'
+
 import { ActionsIcons } from '@icons'
 
 const JobActions = ({ job = null }) => {
@@ -18,7 +20,7 @@ const JobActions = ({ job = null }) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) set({ menu: false })
         })
 
-    return job ? (
+    return can(['edit_job', 'delete_job', 'view_job_history']) && job ? (
         <div className='relative' ref={dropdownRef}>
             <Button
                 icon={ActionsIcons}
@@ -28,7 +30,7 @@ const JobActions = ({ job = null }) => {
             />
             {show?.menu && (
                 <div className='absolute right-0 w-max z-50 bg-white border border-[#55bf84] shadow-md flex flex-col mt-1 pt-2.5 pb-2 gap-y-2 text-sm'>
-                    {true && (
+                    {can('edit_job') && (
                         <button
                             onClick={() => setJob(job)}
                             className='bg-transparent border-0 hover:bg-[#edfffb] hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
@@ -36,7 +38,7 @@ const JobActions = ({ job = null }) => {
                             Edit Job
                         </button>
                     )}
-                    {true && (
+                    {can('delete_job') && (
                         <DeleteDialog
                             show={show?.dialog}
                             setShow={val => set({ dialog: val })}
@@ -51,7 +53,7 @@ const JobActions = ({ job = null }) => {
                             </button>
                         </DeleteDialog>
                     )}
-                    {true && !job?.edited && (
+                    {can('view_job_history') && !job?.edited && (
                         <Link
                             to={`/edit-history/${job?.id}`}
                             state={{ module: 'JobDetail', backTo: 'Job Portal', backToUrl: '/jobs-portal' }}
