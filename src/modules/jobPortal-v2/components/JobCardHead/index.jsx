@@ -33,7 +33,9 @@ const JobCardHead = ({ job = null }) => {
                 </div>
                 <div className='flex items-end text-[#338d8c] p-2 lg:p-0'>
                     {inVisitedJobs(job?.id) ? (
-                        <span className='inline-flex gap-1 items-center text-sm'>{DoubleCheckIcon} Visited</span>
+                        <span className='inline-flex gap-1 items-center text-sm tracking-widest text-white bg-[#338d8c] rounded pl-1 pr-1.5'>
+                            {DoubleCheckIcon} Visited
+                        </span>
                     ) : null}
                     <JobActions job={job} />
                 </div>
