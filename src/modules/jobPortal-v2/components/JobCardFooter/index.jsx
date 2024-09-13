@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { useJobPortalV2Store } from '@/stores'
 
-import { timeSince, can } from '@utils/helpers'
+import { timeSince, can, formatDate } from '@utils/helpers'
 
 import { UptoIcon } from '@icons'
 
@@ -12,7 +12,10 @@ const JobCardFooter = ({ job = null }) => {
 
     return job ? (
         <div className='flex items-center justify-between mt-2 mr-1.5'>
-            <span className='text-slate-500 font-semibold -skew-x-3 pl-2'>{timeSince(job?.job_posted_date)}</span>
+            <span className='text-slate-500 font-semibold -skew-x-3 pl-2 inline-flex items-center'>
+                {timeSince(job?.job_posted_date)}
+                <span className='text-sm pl-2 font-normal'>({formatDate(job?.job_posted_date)})</span>
+            </span>
             {can('apply_job') &&
                 (job?.total_vertical > 0 && !blocked ? (
                     <div className='flex items-center gap-2'>

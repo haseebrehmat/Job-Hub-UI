@@ -4,10 +4,6 @@ import { Button } from '@components'
 
 import { JobCardFooter, JobCardHead, JobSourceAndType, TechKeywords } from '@modules/jobPortal-v2/components'
 
-import { formatDate } from '@utils/helpers'
-
-import { CompanyIcon, DateTimeIcon, SalaryIcon } from '@icons'
-
 const JobCard = ({ job = null }) =>
     job ? (
         <div
@@ -18,25 +14,19 @@ const JobCard = ({ job = null }) =>
             <JobCardHead job={job} />
             <div className='pl-1.5'>
                 <div className='flex gap-3 flex-wrap pt-3.5'>
-                    <Button
-                        label={job?.company_name}
-                        icon={CompanyIcon}
-                        fit
-                        classes='!rounded-full !py-0.5 !pr-2.5 !gap-0.5 !text-neutral-600 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !uppercase'
-                    />
-                    <Button
-                        label={formatDate(job?.job_posted_date)}
-                        icon={DateTimeIcon}
-                        fit
-                        classes='!rounded-full !py-0.5 !pr-2.5 !gap-0.5 !text-neutral-600 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
-                    />
+                    {job?.company_name && (
+                        <Button
+                            label={`Company: ${job?.company_name}`}
+                            fit
+                            classes='!py-1 !px-5 !text-neutral-800 tracking-wider !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] capitalize'
+                        />
+                    )}
                     <JobSourceAndType job={job} />
                     {job?.salary_max && (
                         <Button
                             label={`Max Salary: ${job?.salary_max} / ${job?.salary_format}`}
-                            icon={SalaryIcon}
                             fit
-                            classes='!rounded-full !py-0.5 !pr-2.5 !gap-0.5 !text-neutral-600 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
+                            classes='!py-1 !px-5 !text-neutral-800 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
                         />
                     )}
                     <TechKeywords keywords={job?.tech_keywords} />

@@ -16,7 +16,7 @@ const JobCardHead = ({ job = null }) => {
             <div className='flex flex-col lg:flex-row items-start justify-between'>
                 <div className='flex gap-3 items-start'>
                     <span className='bg-[#338d8c] h-14 w-14 rounded-lg text-white uppercase flex items-center justify-center text-xl'>
-                        {job?.job_title?.substring(0, 1)}
+                        {job?.job_source?.substring(0, 1)}
                     </span>
                     <div className='flex flex-col text-gray-600 gap-y-0.5'>
                         <span className='text-lg capitalize font-semibold flex-wrap'>{job?.job_title}</span>
