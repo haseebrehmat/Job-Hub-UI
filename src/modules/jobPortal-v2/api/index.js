@@ -14,6 +14,7 @@ export const fetchJobFilters = url =>
 
 export const downloadJobsData = async url => {
     url += '&download=true'
+    debugger
     const { data } = await http.get(url)
     return toast.success(data || 'Export in progress, You will be notify through email', { icon: '🎉', duration: 2000 })
 }

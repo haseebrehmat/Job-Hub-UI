@@ -24,7 +24,7 @@ const Taskbar = () => {
         state?.resetFilters,
     ])
 
-    const { trigger, isMutating } = useSWRMutation(url, downloadJobsData, SWR_REVALIDATE)
+    const { isMutating } = useSWRMutation(url, downloadJobsData, SWR_REVALIDATE)
 
     return (
         <div className='flex items-center justify-between gap-2 bg-slate-100 border border-slate-300 rounded-xl p-2.5 text-[#048C8C] text-sm'>
@@ -48,7 +48,7 @@ const Taskbar = () => {
                     fit
                     disabled={isMutating}
                     classes='download-csv !py-[5px] !px-1.5 !m-0 !flex !items-center'
-                    onClick={() => trigger()}
+                    // onClick={() => trigger()}
                 />
                 <Tooltip
                     anchorSelect='.download-csv'
