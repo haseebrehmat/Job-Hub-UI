@@ -1,5 +1,4 @@
 import { memo, useState, useRef } from 'react'
-import { Tooltip } from 'react-tooltip'
 
 import { useJobPortalV2Store } from '@/stores'
 
@@ -23,19 +22,15 @@ const Visibility = () => {
     return (
         <div className='relative' ref={dropdownRef}>
             <Button
+                label='Job Visibility'
                 icon={JobVisibilityIcon}
                 fit
                 fill={showOptions}
-                classes='visibility !py-[9px] !m-0 !flex !items-center text-xs'
+                classes='visibility !py-1.5 pl-5 pr-6 !m-0 !flex !items-center'
                 onClick={() => setShowOptions(!showOptions)}
             />
-            <Tooltip
-                anchorSelect='.visibility'
-                className='tracking-widest !fixed'
-                content={VISIBILITY_OPTIONS[visible]}
-            />
             {showOptions && (
-                <div className='absolute right-0 w-max z-20 bg-white rounded border border-[#55bf84] shadow-md flex flex-col mt-2'>
+                <div className='absolute right-0 w-max z-20 bg-white rounded border border-[#55bf84] shadow-md flex flex-col mt-2 text-sm'>
                     {Object.keys(VISIBILITY_OPTIONS).map(key => (
                         <button
                             key={key}

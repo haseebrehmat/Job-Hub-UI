@@ -1,5 +1,4 @@
 import { memo, useState, useRef } from 'react'
-import { Tooltip } from 'react-tooltip'
 
 import { useJobPortalV2Store } from '@/stores'
 
@@ -23,20 +22,15 @@ const OrderBy = () => {
     return (
         <div className='relative' ref={dropdownRef}>
             <Button
+                label='Order By'
                 icon={OrderingIcon}
                 fit
                 fill={showOptions}
-                classes='order-by !m-0 !flex !items-center text-xs'
+                classes='order-by !m-0 !py-1.5 pl-5 pr-6 !flex !items-center'
                 onClick={() => setShowOptions(!showOptions)}
             />
-            <Tooltip
-                anchorSelect='.order-by'
-                className='tracking-widest'
-                place='left'
-                content={ORDER_BY_OPTIONS[order]}
-            />
             {showOptions && (
-                <div className='absolute right-0 w-max z-50 bg-white rounded border border-[#55bf84] shadow-md flex flex-col mt-2'>
+                <div className='absolute right-0 w-max z-50 bg-white rounded border border-[#55bf84] shadow-md flex flex-col mt-2 text-sm'>
                     {Object.keys(ORDER_BY_OPTIONS).map(key => (
                         <button
                             key={key}

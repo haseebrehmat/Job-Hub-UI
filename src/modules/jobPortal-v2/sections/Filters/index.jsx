@@ -6,7 +6,7 @@ import { useJobPortalV2Store } from '@/stores'
 import { CustomSelector, Filters, Input } from '@components'
 
 import { fetchJobFilters } from '@modules/jobPortal-v2/api'
-import { PortalLayout } from '@modules/jobPortal-v2/components'
+import { PortalLayout, OrderBy, Visibility } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
@@ -42,6 +42,10 @@ const JobPortalV2 = () => {
                             onKeyDown={e => (e.key === 'Enter' ? apply() : null)}
                         />
                         <div className='absolute inset-y-0 right-0 flex items-center pr-2 text-xl'>{SearchIcon}</div>
+                    </div>
+                    <div className='w-full flex items-center gap-2 justify-evenly'>
+                        <OrderBy />
+                        <Visibility />
                     </div>
                     <div className='w-full'>
                         From - To
