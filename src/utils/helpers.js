@@ -573,4 +573,3 @@ export const chunkNumber = (number, chunkSize = 1) => {
 export const parseVals = values => values?.map(val => ({ label: val, value: val }))
 
 export const parseLinks = values => values?.map(val => val?.value)
-

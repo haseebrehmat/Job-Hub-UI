@@ -52,7 +52,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null, dropdowns }) =
             <div>
                 <span className='text-xs font-semibold'>Team Member</span>
                 <CustomSelector
-                    options={parseMembers(data?.team_members, null)}
+                    options={parseMembers(data?.data?.team_members, null)}
                     handleChange={obj => update({ bd: obj })}
                     selectorValue={vals.bd}
                     placeholder='Select Team Member'
@@ -90,7 +90,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null, dropdowns }) =
                 />
             </div>
             <div className='flex items-center gap-2'>
-                <Button label='Apply' classes='!px-8 !py-2' fit onClick={() => applyFilters} />
+                <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
                 {(filtered.start ||
                     filtered.end ||
                     flag ||

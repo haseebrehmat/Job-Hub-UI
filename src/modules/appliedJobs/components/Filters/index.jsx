@@ -10,7 +10,7 @@ import { MyDownloads } from '@modules/teamAppliedJobs/components'
 
 import { JOB_TYPES_OPTIONS } from '@constants/scrapper'
 
-import { parseLinks, parseVals, Id } from '@utils/helpers'
+import { parseLinks, parseVals } from '@utils/helpers'
 
 import { DownloadIcon, LogsIcon } from '@icons'
 
@@ -25,7 +25,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
         verticals: filtered.verticals,
         agents: filtered.agents,
     })
-    const applyFilters = () =>
+    const applyFilters = () => {
         dispatch({
             from: vals.from,
             to: vals.to,
@@ -35,12 +35,13 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
             verticals: vals.verticals,
             agents: vals.agents,
         })
+    }
     const { trigger, isLoading } = useSWRMutation(
         `/api/job_portal/team_applied_job_details/?download=true&end_date=${vals.to}&job_type=${parseLinks(
             vals.types
-        ).join()}&applied_by=${Id()}&job_source=${parseLinks(vals.sources).join()}&start_date=${
-            vals.from
-        }&tech_stacks=${parseLinks(vals.stacks).join()}`,
+        ).join()}&job_source=${parseLinks(vals.sources).join()}&start_date=${vals.from}&tech_stacks=${parseLinks(
+            vals.stacks
+        ).join()}`,
         downloadFilteredJobs
     )
     const clearFilters = () => {
@@ -81,7 +82,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
                     placeholder='Select Types'
                 />
             </div>
-            {agent && (
+            {/* {agent && (
                 <div>
                     <span className='text-xs font-semibold'>Agents (BD)</span>
                     <CustomSelector
@@ -92,7 +93,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
                         placeholder='Select Agent (BD)'
                     />
                 </div>
-            )}
+            )} */}
             <div className='flex items-center gap-2'>
                 <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
                 {(filtered.from ||
