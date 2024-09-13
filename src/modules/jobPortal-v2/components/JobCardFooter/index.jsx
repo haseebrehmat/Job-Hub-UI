@@ -1,8 +1,7 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
 
 import { useJobPortalV2Store } from '@/stores'
-
-import { Button } from '@components'
 
 import { timeSince, can } from '@utils/helpers'
 
@@ -18,14 +17,12 @@ const JobCardFooter = ({ job = null }) => {
                 (job?.total_vertical > 0 && !blocked ? (
                     <div className='flex items-center gap-2'>
                         <span className='text-sm border rounded px-2 p-0.5 text-[#338d8c] border-[#55bf84] font-mono'>
-                            {job?.total_vertical} / <strong>{job?.remaining_vertical}</strong>
+                            {job?.remaining_vertical} / <strong>{job?.total_vertical}</strong>
                         </span>
                         <div className='flex items-center gap-2 px-2 py-1 border text-[#338d8c] border-[#4ab9a7] rounded-full hover:border-opacity-50'>
-                            <Button
-                                label='Apply Now'
-                                fit
-                                classes='!rounded-full !border-0 !p-0 hover:!bg-white hover:!text-[#338d8c]'
-                            />
+                            <Link to={`/apply-for-job/${job?.id}`} className='text-sm w-fit !rounded-full !border-0'>
+                                Apply Now
+                            </Link>
                             <span>{UptoIcon}</span>
                         </div>
                     </div>
