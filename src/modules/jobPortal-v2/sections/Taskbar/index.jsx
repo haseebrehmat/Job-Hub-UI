@@ -7,7 +7,7 @@ import { Input, Button, Filters } from '@components'
 import { useJobPortalV2Store } from '@/stores'
 
 import { downloadJobsData } from '@modules/jobPortal-v2/api'
-import { OrderBy, Visibility } from '@modules/jobPortal-v2/components'
+import { OrderBy, Visibility, JobsCounts } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
@@ -27,42 +27,47 @@ const Taskbar = () => {
     const { isMutating } = useSWRMutation(url, downloadJobsData, SWR_REVALIDATE)
 
     return (
-        <div className='flex items-center justify-between gap-2 bg-slate-100 border border-slate-300 rounded-xl p-2.5 text-[#048C8C] text-sm'>
-            <div className='flex gap-3 w-3/5'>
-                <div className='relative hidden md:block flex-1 bg-white'>
-                    <Input
-                        ph='Search by typing keywords...'
-                        value={query}
-                        onChange={e => setQuery(e?.target?.value)}
-                        onKeyDown={e => (e.key === 'Enter' ? apply() : null)}
-                    />
-                    <div className='absolute inset-y-0 right-0 flex items-center pr-3 text-xl'>{SearchIcon}</div>
+        <div className='grid space-y-2'>
+            <div className='flex items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-2.5 text-[#048C8C]'>
+                <div className='flex gap-3 w-3/5'>
+                    <div className='relative hidden md:block flex-1 bg-white'>
+                        <Input
+                            ph='Search by typing keywords...'
+                            value={query}
+                            onChange={e => setQuery(e?.target?.value)}
+                            onKeyDown={e => (e.key === 'Enter' ? apply() : null)}
+                        />
+                        <div className='absolute inset-y-0 right-0 flex items-center pr-3 text-xl'>{SearchIcon}</div>
+                    </div>
+                    <Filters apply={() => apply()} clear={() => reset()} />
                 </div>
-                <Filters apply={() => apply()} clear={() => reset()} />
+                <div className='flex gap-2 w-fit flex-wrap'>
+                    <OrderBy />
+                    <Visibility />
+                    <Button
+                        icon={DownloadIcon}
+                        fit
+                        disabled={isMutating}
+                        classes='download-csv !py-[5px] !px-1.5 !m-0 !flex !items-center'
+                        // onClick={() => trigger()}
+                    />
+                    <Tooltip
+                        anchorSelect='.download-csv'
+                        style={{ backgroundColor: '#338d8c', fontSize: '15px', letterSpacing: '2px' }}
+                        content={isMutating ? 'Downloading...' : 'Download Csv'}
+                    />
+                    <Button
+                        icon={view === 'list' ? ListViewIcon : GridViewIcon}
+                        fit
+                        fill={view === 'grid'}
+                        classes='toggle-view !py-[9px] !m-0 !flex !items-center'
+                        onClick={() => toggleView()}
+                    />
+                    <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
+                </div>
             </div>
-            <div className='flex gap-2 w-fit flex-wrap'>
-                <OrderBy />
-                <Visibility />
-                <Button
-                    icon={DownloadIcon}
-                    fit
-                    disabled={isMutating}
-                    classes='download-csv !py-[5px] !px-1.5 !m-0 !flex !items-center'
-                    // onClick={() => trigger()}
-                />
-                <Tooltip
-                    anchorSelect='.download-csv'
-                    style={{ backgroundColor: '#338d8c', fontSize: '15px', letterSpacing: '2px' }}
-                    content={isMutating ? 'Downloading...' : 'Download Csv'}
-                />
-                <Button
-                    icon={view === 'list' ? ListViewIcon : GridViewIcon}
-                    fit
-                    fill={view === 'grid'}
-                    classes='toggle-view !py-[9px] !m-0 !flex !items-center'
-                    onClick={() => toggleView()}
-                />
-                <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
+            <div className='bg-slate-100 border border-slate-300 rounded-xl py-2 px-4 text-[#048C8C]'>
+                <JobsCounts />
             </div>
         </div>
     )
