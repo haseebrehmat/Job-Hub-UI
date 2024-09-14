@@ -1,6 +1,6 @@
 import { memo, useState } from 'react'
 
-import { Button, DeleteDialog } from '@components'
+import { Button, DeleteDialog, Tooltip } from '@components'
 
 import { GROUP_LINK_DELETION } from '@constants/allowDeletion'
 
@@ -12,7 +12,12 @@ const GroupLinkActions = memo(({ id, edit, mutate }) => {
     const [show, setShow] = useState(false)
 
     return (
-        <div className='flex items-center'>
+        <div className='absolute top-0 right-0 mr-5 flex'>
+            {can('edit_job_source_link') && (
+                <Tooltip text='Edit experience'>
+                    <Button classes='_icon-btn' icon={EditIcon} onClick={() => edit()} />
+                </Tooltip>
+            )}
             {can('delete_job_source_link') && (
                 <DeleteDialog
                     show={show}
@@ -21,11 +26,10 @@ const GroupLinkActions = memo(({ id, edit, mutate }) => {
                     refetch={mutate}
                     perm={GROUP_LINK_DELETION}
                 >
-                    <Button classes='bg-transparent border-0 px-0' icon={TrashIcon} onClick={() => setShow(true)} />
+                    <Tooltip text='Delete experience'>
+                        <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />
+                    </Tooltip>
                 </DeleteDialog>
-            )}
-            {can('edit_job_source_link') && (
-                <Button classes='bg-transparent border-0 !px-0' icon={EditIcon} onClick={() => edit()} />
             )}
         </div>
     )

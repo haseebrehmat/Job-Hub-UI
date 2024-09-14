@@ -1,83 +1,65 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import useSWR from 'swr'
 
-import { Button, EmptyTable, Loading, Badge, Tooltip } from '@components'
+import { useGroupLinksStore } from '@/stores'
 
-import { GroupLinkActions, GroupLinksForm } from '@modules/scrapper/components'
+import { Button, Loading } from '@components'
+
+import {
+    GroupLinkActions,
+    GroupLinksCreateForm,
+    RunningGroupLink,
+    GroupLinksDetails,
+    GroupLinksSummary,
+} from '@modules/scrapper/components'
 import { fetchGroupLinks } from '@modules/scrapper/api'
 
-import { can, formatStringInPascal } from '@utils/helpers'
-import { GROUP_SOURCE_LINK_HEADS } from '@constants/scrapper'
+import { can, formatStringInPascal, isset } from '@utils/helpers'
 
-import { CreateIcon } from '@icons'
+import { CreateIcon, ResetIcon } from '@icons'
 
 const GroupLinks = () => {
-    const [link, setLink] = useState()
-    const [show, setShow] = useState(false)
+    const [link, setLink, showDetails, showForm, toggleForm] = useGroupLinksStore(state => [
+        state?.link,
+        state?.setLink,
+        state?.show?.details,
+        state?.show?.form,
+        state?.toggle?.form,
+    ])
 
     const { data, isLoading, error, mutate } = useSWR('/api/job_scraper/group_scheduler_link/', fetchGroupLinks)
 
-    const handleClick = (values = null) => {
-        setLink(values)
-        setShow(true)
-    }
+    const handleClick = (values = null) => setLink(values)
 
     if (isLoading) return <Loading />
 
     return (
         <div className='max-w-full overflow-x-auto mb-14'>
-            <div className='flex items-center space-x-4 pb-6'>
+            <div className='flex items-center space-x-4 pb-4 justify-between'>
                 {can('create_job_source_link') && (
                     <Button label='Create Group Links' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
+                <Button label='Refresh' fit icon={ResetIcon} onClick={() => mutate()} />
             </div>
-            <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
-                <thead className='text-xs uppercase border border-[#048C8C]'>
-                    <tr>
-                        {GROUP_SOURCE_LINK_HEADS.map(heading => (
-                            <th scope='col' className='px-3 py-4' key={heading}>
-                                {heading}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody className='bg-white'>
-                    {data?.grouplinks?.length > 0 && !error ? (
-                        data?.grouplinks?.map((row, idx) => (
-                            <tr className='border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
-                                <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{formatStringInPascal(row?.group_scraper?.name)}</td>
-                                <td className='px-3 py-6'>
-                                    {row?.queries?.length > 0 &&
-                                        row?.queries.map((q, index) => (
-                                            <span className='font-mono m-1 inline-block' key={index}>
-                                                <a href={q.link} target='_blank' rel='noreferrer'>
-                                                    <Tooltip text={q.link}>
-                                                        <Badge
-                                                            label={`Link ${index + 1} | ${q.job_type} | ${
-                                                                q.job_source
-                                                            } `}
-                                                            type='success'
-                                                        />
-                                                    </Tooltip>
-                                                </a>
-                                            </span>
-                                        ))}
-                                </td>
-                                <td className='px-3 py-6 float-right'>
-                                    {can(['edit_job_source_link', 'delete_job_source_link']) && (
-                                        <GroupLinkActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
-                                    )}
-                                </td>
-                            </tr>
-                        ))
-                    ) : (
-                        <EmptyTable cols={6} msg='No group links / urls found yet!' />
-                    )}
-                </tbody>
-            </table>
-            {can(['edit_job_source_link', 'delete_job_source_link']) && show && (
-                <GroupLinksForm show={show} setShow={setShow} mutate={mutate} link={link} />
+            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+                {isset(data?.grouplinks) && !error ? (
+                    Object.keys(data?.grouplinks).map((row, idx) => (
+                        <div className='bg-white rounded-md p-4 border relative text-[#338d8c]' key={idx}>
+                            <h2 className='text-2xl'>{formatStringInPascal(row)}</h2>
+                            {false && <GroupLinkActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />}
+                            <div className='flex flex-col mt-2 ml-2 text-sm'>
+                                <GroupLinksSummary summary={data?.grouplinks?.[row]} name={row} />
+                                <RunningGroupLink link={data?.grouplinks?.[row]?.running_query?.[0]} />
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <span className='ml-2 text-gray-500'>No group links / urls found yet!</span>
+                )}
+            </div>
+            {showDetails && <GroupLinksDetails />}
+            {can('edit_job_source_link') && showForm && (
+                <GroupLinksCreateForm show={showForm} setShow={toggleForm} mutate={mutate} link={link} />
             )}
         </div>
     )

@@ -28,6 +28,8 @@ export const saveGroupSetting = (url, { arg: setting }) => {
 export const fetchJobSourceLinks = url => http.get(url).then(({ data }) => ({ links: data?.detail, status: 'success' }))
 export const fetchGroupLinks = url => http.get(url).then(({ data }) => ({ grouplinks: data, status: 'success' }))
 
+export const fetchGroupLinksDetails = url => http.get(url).then(({ data }) => data)
+
 export const fetchGroupDetails = url => http.get(url).then(({ data }) => ({ groups: data, status: 'success' }))
 
 export const saveJobSourceLink = (url, { arg: link }) => {
@@ -60,3 +62,6 @@ export const toggleScrapperCycleStatus = url => {
             toast.success(`${data.data[0] === 'Sync stopped' ? 'Scrapper Cycle Stopped' : 'Scrapper Cycle Started'} `)
         )
 }
+
+export const updateGroupLink = (url, { arg: link }) =>
+    rawHttp.put(url, link).then(({ data }) => toast.success(data.detail || 'Group Scraper Link updated successfully'))

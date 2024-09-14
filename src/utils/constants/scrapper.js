@@ -152,3 +152,5 @@ export const JOB_SOURCES_INITIAL_VALS = [
     { label: 'All', value: 'all' },
     ...JOB_SOURCE_OPTIONS.filter(job => job.value !== 'other'),
 ]
+
+export const GROUP_LINKS_TABS = { total: true, running: false, remaining: false, completed: false, failed: false }

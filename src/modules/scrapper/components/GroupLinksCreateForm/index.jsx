@@ -12,7 +12,7 @@ import { JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
 
 import { ValidateFalseIcon } from '@icons'
 
-const GroupLinksForm = ({ show, setShow, mutate, link }) => {
+const GroupLinksCreateForm = ({ show, setShow, mutate, link }) => {
     const [fields, setFields] = useState(link?.queries ?? [{ link: '', job_type: '', job_source: '' }])
     const submitButtonShow =
         fields.length > 0 && fields.every(field => field.link.length > 0 && field.job_type.length > 0)
@@ -26,7 +26,7 @@ const GroupLinksForm = ({ show, setShow, mutate, link }) => {
     const removeField = index => setFields(fields.filter((_, i) => i !== index))
 
     const { values, errors, handleSubmit, resetForm, trigger, setFieldValue } = useMutate(
-        `/api/job_scraper/group_scheduler_link${link?.id ? `/${link?.id}/` : '/'}`,
+        `/api/job_scraper/group_scheduler_link/`,
         saveGroupLink,
         { id: link?.id, group_scraper: link?.group_scraper || '' },
         null,
@@ -44,7 +44,7 @@ const GroupLinksForm = ({ show, setShow, mutate, link }) => {
         <Drawer show={show} setShow={setShow} w='400px'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>{link?.id ? 'Edit' : 'Create'} Group Link / URL</p>
+                    <p className='font-medium text-xl'>Create Group Link / URL</p>
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Scrapper Group*</span>
                     {'edit_job_source_link' && (
@@ -95,7 +95,7 @@ const GroupLinksForm = ({ show, setShow, mutate, link }) => {
                         </div>
                     ))}
                     <div className='pt-4 space-y-2'>
-                        {submitButtonShow && <Button label={link?.id ? 'Update' : 'Submit'} type='submit' fill />}
+                        {submitButtonShow && <Button label='Save' type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
                 </div>
@@ -104,4 +104,4 @@ const GroupLinksForm = ({ show, setShow, mutate, link }) => {
     )
 }
 
-export default memo(GroupLinksForm)
+export default memo(GroupLinksCreateForm)

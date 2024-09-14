@@ -12,10 +12,14 @@ import ScrappingGroup from '@modules/scrapper/components/ScrappingGroup'
 import GroupForm from '@modules/scrapper/components/GroupForm'
 import GroupSettingActions from '@modules/scrapper/components/GroupSettingActions'
 import GroupLinks from '@modules/scrapper/components/GroupLinks'
-import GroupLinksForm from '@modules/scrapper/components/GroupLinksForm'
+import GroupLinksCreateForm from '@/modules/scrapper/components/GroupLinksCreateForm'
 import GroupsDropDown from '@modules/scrapper/components/GroupsDropDown'
 import GroupLinkActions from '@modules/scrapper/components/GroupLinkActions'
-import ScraperAnalytics from '@modules/scrapper/components/GroupLinkActions'
+import GroupLinksDetails from '@modules/scrapper/components/GroupLinksDetails'
+import GroupLinkRow from '@modules/scrapper/components/GroupLinkRow'
+import GroupLinksSummary from '@modules/scrapper/components/GroupLinksSummary'
+import RunningGroupLink from '@modules/scrapper/components/RunningGroupLink'
+import GroupLinkEditForm from '@modules/scrapper/components/GroupLinkEditForm'
 
 export {
     CronjobSetting,
@@ -32,7 +36,12 @@ export {
     GroupForm,
     GroupSettingActions,
     GroupLinks,
-    GroupLinksForm,
+    GroupLinksCreateForm,
     GroupsDropDown,
     GroupLinkActions,
+    GroupLinkRow,
+    RunningGroupLink,
+    GroupLinksDetails,
+    GroupLinksSummary,
+    GroupLinkEditForm,
 }

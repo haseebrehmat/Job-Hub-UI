@@ -13,7 +13,7 @@ import { UptoIcon } from '@icons'
 const HourlyChart = ({ members = null }) => {
     const [selectedMember, setSelectedMember] = useState({ value: 'all', label: 'All Team Members' })
 
-    const { data, isLoading } = useSWR(
+    const { data, isLoading, error } = useSWR(
         `api/job_portal/team_applied_jobs_memberwise_analytics/?member=${
             selectedMember?.value === 'all' ? '' : selectedMember?.value
         }`,
@@ -22,6 +22,8 @@ const HourlyChart = ({ members = null }) => {
 
     return isLoading ? (
         <span className='text-4xl flex justify-center pt-10 text-[#048C8C] animate-pulse'>Loading ...</span>
+    ) : error ? (
+        <span className='text-xl flex justify-center pt-10 text-red-400'>Error to load</span>
     ) : (
         <div className='flex flex-col'>
             {members && (
