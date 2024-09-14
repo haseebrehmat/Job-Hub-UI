@@ -8,13 +8,14 @@ import TechKeywords from '@modules/jobPortal-v2/components/TechKeywords'
 import JobCardFooter from '@modules/jobPortal-v2/components/JobCardFooter'
 import JobSourceAndType from '@modules/jobPortal-v2/components/JobSourceAndType'
 import NextAndPrev from '@modules/jobPortal-v2/components/NextAndPrev'
-import JobsCounts from '@modules/jobPortal-v2/components/JobsCounts'
+import JobsStats from '@modules/jobPortal-v2/components/JobsStats'
 import TechStackDropdown from '@modules/jobPortal-v2/components/TechStackDropdown'
 import JobTypeChecks from '@modules/jobPortal-v2/components/JobTypeChecks'
 import JobSourceChecks from '@modules/jobPortal-v2/components/JobSourceChecks'
 import FromAndTo from '@modules/jobPortal-v2/components/FromAndTo'
 import Search from '@modules/jobPortal-v2/components/Search'
 import BlockedCheck from '@modules/jobPortal-v2/components/BlockedCheck'
+import ExplicitApply from '@modules/jobPortal-v2/components/ExplicitApply'
 
 export {
     PortalLayout,
@@ -27,11 +28,12 @@ export {
     JobCardFooter,
     JobSourceAndType,
     NextAndPrev,
-    JobsCounts,
+    JobsStats,
     TechStackDropdown,
     JobTypeChecks,
     JobSourceChecks,
     FromAndTo,
     Search,
     BlockedCheck,
+    ExplicitApply,
 }

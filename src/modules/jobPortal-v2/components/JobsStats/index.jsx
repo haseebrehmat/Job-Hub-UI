@@ -4,26 +4,19 @@ import AnimatedNumber from 'react-animated-number'
 import { useJobPortalV2Store } from '@/stores'
 
 import { formatNum } from '@utils/helpers'
+import { JOBS_STATS_TYPES } from '@constants/jobPortalV2'
 
-const JobsCounts = () => {
-    const [counts] = useJobPortalV2Store(state => [state?.counts])
-
-    const JOBS_COUNTS_TYPES = {
-        total: 'Total Jobs',
-        filtered: 'Filtered',
-        recruiter: 'Recruiters',
-        non_recruiter: 'Non Recruiters',
-        today_uploaded: 'Today`s Jobs',
-    }
+const JobsStats = () => {
+    const [stats] = useJobPortalV2Store(state => [state?.stats])
 
     return (
         <div className='grid grid-flow-col'>
-            {Object.keys(JOBS_COUNTS_TYPES)?.map((d, index) => (
+            {Object.keys(JOBS_STATS_TYPES)?.map((type, index) => (
                 <div className='flex flex-col gap-y-2' key={index}>
                     <AnimatedNumber
                         component='p'
                         initialValue={0}
-                        value={Number(counts?.[d] || 1000)}
+                        value={Number(stats?.[type] || 0)}
                         stepPrecision={0}
                         style={{
                             transition: '0.8s ease-out',
@@ -34,11 +27,11 @@ const JobsCounts = () => {
                         duration={1000}
                         formatValue={n => formatNum(n)}
                     />
-                    <p className='tracking-wider'>{JOBS_COUNTS_TYPES?.[d]}</p>
+                    <p className='tracking-wider'>{JOBS_STATS_TYPES?.[type]}</p>
                 </div>
             ))}
         </div>
     )
 }
 
-export default memo(JobsCounts)
+export default memo(JobsStats)

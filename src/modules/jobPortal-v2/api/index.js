@@ -10,6 +10,13 @@ export const fetchJobFilters = url =>
         techStacks: data?.tech_keywords_count_list,
         jobSources: data?.job_source_count_list,
         jobTypes: data?.total_job_type,
+        stats: {
+            total: data?.total_jobs || 0,
+            recruited: data?.recruiter_jobs || 0,
+            nonRecruited: data?.non_recruiter_jobs || 0,
+            filtered: data?.filtered_jobs || 0,
+            todayUploaded: data?.today_uploaded_jobs || 0,
+        },
     }))
 
 export const downloadJobsData = async url => {

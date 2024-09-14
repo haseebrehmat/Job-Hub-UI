@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 import { getFilterAppliedURL } from '@utils/helpers'
-import { FILTERS_DEFAULT_VALUES, JOB_PORTAL_INITIAL_URLS } from '@constants/jobPortalV2'
+import { FILTERS_DEFAULT_VALUES, JOBS_STATS_INITIAL_VALUES, JOB_PORTAL_INITIAL_URLS } from '@constants/jobPortalV2'
 
 export const useJobPortalV2Store = create(set => ({
     url: JOB_PORTAL_INITIAL_URLS,
@@ -13,6 +13,7 @@ export const useJobPortalV2Store = create(set => ({
     expand: { sources: false, types: false },
     view: 'list',
     pagination: { next: null, previous: null },
+    stats: JOBS_STATS_INITIAL_VALUES,
 
     applyFilters: () =>
         set(state => ({
@@ -80,4 +81,15 @@ export const useJobPortalV2Store = create(set => ({
     setPagination: (next, previous) => set(state => ({ ...state, pagination: { next, previous } })),
     next: () => set(state => ({ ...state, url: { ...state?.url, jobs: state?.pagination?.next } })),
     previous: () => set(state => ({ ...state, url: { ...state?.url, jobs: state?.pagination?.previous } })),
+    setStats: stats =>
+        set(state => ({
+            ...state,
+            stats: {
+                total: stats?.total || 0,
+                recruited: stats?.recruited || 0,
+                nonRecruited: stats?.nonRecruited || 0,
+                filtered: stats?.filtered || 0,
+                todayUploaded: stats?.todayUploaded || 0,
+            },
+        })),
 }))

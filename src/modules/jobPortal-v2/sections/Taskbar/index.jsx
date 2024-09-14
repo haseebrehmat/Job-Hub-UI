@@ -7,7 +7,7 @@ import { Button } from '@components'
 import { useJobPortalV2Store } from '@/stores'
 
 import { downloadJobsData } from '@modules/jobPortal-v2/api'
-import { JobsCounts } from '@modules/jobPortal-v2/components'
+import { JobsStats } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
@@ -21,7 +21,7 @@ const Taskbar = () => {
     return (
         <div className='flex items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-3 text-[#048C8C]'>
             <div className='flex-grow'>
-                <JobsCounts />
+                <JobsStats />
             </div>
             <div className='flex gap-2 w-fit'>
                 <Button
