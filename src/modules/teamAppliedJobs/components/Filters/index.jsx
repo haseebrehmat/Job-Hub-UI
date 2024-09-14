@@ -36,9 +36,9 @@ const Filters = ({ filtered = null, dispatch = null, data = null, dropdowns }) =
     const { trigger, isLoading } = useSWRMutation(
         `/api/job_portal/team_applied_job_details/?download=true&end_date=${vals.end}&job_type=${parseLinks(
             vals.types
-        ).join()}&applied_by=${vals?.bd?.value}&job_source=${parseLinks(vals.sources).join()}&start_date=${
-            vals.start
-        }&tech_stacks=${parseLinks(vals.stacks).join()}`,
+        ).join()}&applied_by=${vals?.bd?.value ? vals?.bd?.value : ''}&job_source=${parseLinks(
+            vals.sources
+        ).join()}&start_date=${vals.start}&tech_stacks=${parseLinks(vals.stacks).join()}`,
         downloadFilteredJobs
     )
     const clearFilters = () => {
@@ -52,7 +52,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null, dropdowns }) =
             <div>
                 <span className='text-xs font-semibold'>Team Member</span>
                 <CustomSelector
-                    options={parseMembers(data?.data?.team_members, null)}
+                    options={parseMembers(data?.team_members, null)}
                     handleChange={obj => update({ bd: obj })}
                     selectorValue={vals.bd}
                     placeholder='Select Team Member'

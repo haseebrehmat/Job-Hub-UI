@@ -12,6 +12,7 @@ export const fetchTeamAppliedJobs = url =>
         job_type_analytics: data?.job_type_analytics,
         filtered_jobs: data?.filtered_jobs,
         last_12_hours_count: data?.last_12_hours_count,
+        team_members: data?.team_members,
         status: 'success',
     }))
 

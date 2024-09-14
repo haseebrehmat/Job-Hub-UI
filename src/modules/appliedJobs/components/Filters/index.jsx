@@ -37,7 +37,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
         })
     }
     const { trigger, isLoading } = useSWRMutation(
-        `/api/job_portal/team_applied_job_details/?download=true&end_date=${vals.to}&job_type=${parseLinks(
+        `api/job_portal/applied_jobs/?download=true&end_date=${vals.to}&job_type=${parseLinks(
             vals.types
         ).join()}&job_source=${parseLinks(vals.sources).join()}&start_date=${vals.from}&tech_stacks=${parseLinks(
             vals.stacks

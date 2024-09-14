@@ -16,7 +16,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
     const [query, setQuery] = useState()
 
     const { data, error, isLoading } = useSWR(
-        `api/job_portal/applied_job_details/?end_date=${vals.to}&page=${page}&job_type=${parseLinks(
+        `api/job_portal/applied_jobs/?end_date=${vals.to}&page=${page}&job_type=${parseLinks(
             vals.types
         ).join()}&job_source=${parseLinks(vals.sources).join()}&start_date=${vals.from}&tech_stacks=${parseLinks(
             vals.stacks
