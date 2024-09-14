@@ -31,6 +31,7 @@ import {
     AppliedJobsIcon,
     PermissionsIcon,
     TechSTack,
+    JobPortalV2Icon,
 } from '@icons'
 
 export const menuItems = [
@@ -92,6 +93,13 @@ export const menuItems = [
                 link: '/jobs-portal',
                 svg: Jobs,
                 perms: ['view_job_portal'],
+            },
+            {
+                label: 'Job Portal 2.0',
+                link: '/jobs-portal/v2',
+                svg: JobPortalV2Icon,
+                perms: ['view_job_portal'],
+                new: true,
             },
             {
                 label: 'Cover Letter',

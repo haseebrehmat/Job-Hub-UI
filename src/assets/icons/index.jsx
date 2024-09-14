@@ -38,6 +38,7 @@ import {
     BsCheckCircleFill,
     BsArrowRight,
     BsGrid,
+    BsStars,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -235,3 +236,4 @@ export const OrderingIcon = <BiSortUp style={{ fontSize: 18 }} />
 export const JobVisibilityIcon = <VscEye style={{ fontSize: 16 }} />
 export const GridViewIcon = <BsGrid style={{ fontSize: 16 }} />
 export const ListViewIcon = <TbListDetails style={{ fontSize: 16 }} />
+export const JobPortalV2Icon = <BsStars style={{ fontSize: 24 }} />
