@@ -11,23 +11,23 @@ const JobCard = ({ job = null }) =>
         >
             <JobCardHead job={job} />
             <div className='pl-1.5'>
-                <div className='grid grid-cols-[minmax(0,1fr),minmax(0,1fr)] gap-y-2 gap-x-4 pt-3.5'>
+                <div className='grid grid-cols-[minmax(0,1fr),minmax(0,1fr)] gap-y-3 gap-x-4 pt-3.5'>
                     {job?.company_name && (
-                        <span className='flex items-center gap-2 border border-neutral-400 px-2 py-1 rounded-md text-[14px]'>
+                        <span className='flex items-center gap-2 border border-neutral-400 px-2 py-1 rounded-md text-[14px] h-fit'>
                             <span className='text-neutral-500'>Company:</span>
                             <span className='text-neutral-700 capitalize tracking-wider'>{job?.company_name}</span>
                         </span>
                     )}
                     <JobSourceAndType job={job} />
                     {job?.salary_max && (
-                        <span className='flex items-center gap-2border border-neutral-400 px-2 py-1 rounded-md text-[14px]'>
+                        <span className='flex items-center gap-2border border-neutral-400 px-2 py-1 rounded-md text-[14px] h-fit'>
                             <span className='text-neutral-500'>Max Salary:</span>
                             <span className='text-neutral-700 capitalize font-mono'>
                                 {job?.salary_max} / {job?.salary_format}
                             </span>
                         </span>
                     )}
-                    <TechKeywords keywords={job?.tech_keywords} />
+                    <TechKeywords keywords={job?.tech_stacks} />
                 </div>
                 <JobCardFooter job={job} />
             </div>

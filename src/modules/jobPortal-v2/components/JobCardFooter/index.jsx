@@ -13,9 +13,10 @@ const JobCardFooter = ({ job = null }) => {
 
     return job ? (
         <div className='flex items-center justify-between mt-3 mr-1.5'>
-            <span className='text-slate-500 font-semibold -skew-x-3 pl-2 inline-flex items-center'>
+            <span className='text-slate-500 font-semibold -skew-x-3 pl-2 inline-flex items-center gap-1'>
+                <span className='text-sm'>Posted</span>
                 {timeSince(job?.job_posted_date)}
-                <span className='text-sm pl-2 font-normal'>({formatDate(job?.job_posted_date)})</span>
+                <span className='text-sm font-normal'>({formatDate(job?.job_posted_date)})</span>
             </span>
             <div className='flex items-center gap-4 flex-wrap'>
                 <a
