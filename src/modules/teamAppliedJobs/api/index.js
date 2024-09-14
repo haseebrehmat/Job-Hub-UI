@@ -2,7 +2,18 @@ import { http } from '@utils/http'
 
 import { toast } from 'react-hot-toast'
 
-export const fetchTeamAppliedJobs = url => http.get(url).then(({ data }) => ({ data, status: 'success' }))
+export const fetchTeamAppliedJobs = url =>
+    http.get(url).then(({ data }) => ({
+        jobs: data?.data,
+        total: data?.links?.num_pages,
+        next: data?.links?.next,
+        prev: data?.links?.previous,
+        job_source_analytics: data?.job_source_analytics,
+        job_type_analytics: data?.job_type_analytics,
+        filtered_jobs: data?.filtered_jobs,
+        last_12_hours_count: data?.last_12_hours_count,
+        status: 'success',
+    }))
 
 export const fetchTeamAppliedJobsPerHour = url =>
     http

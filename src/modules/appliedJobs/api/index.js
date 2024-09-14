@@ -1,7 +1,13 @@
 import { http, rawHttp } from '@utils/http'
 import { toast } from 'react-hot-toast'
 
-export const fetchAppliedJobs = url => http.get(url).then(({ data }) => data)
+export const fetchAppliedJobs = url =>
+    http.get(url).then(({ data }) => ({
+        jobs: data?.data,
+        total: data?.links?.num_pages,
+        next: data?.links?.next,
+        prev: data?.links?.previous,
+    }))
 
 export const fetchStatusPhases = url => http.get(url).then(({ data }) => data)
 

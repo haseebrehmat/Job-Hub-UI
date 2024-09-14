@@ -15,7 +15,7 @@ const TeamAppliedJobs = memo(() => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), TEAM_APPLIED_JOBS_INITIAL_VALS)
     const [page, setPage] = useState(1)
     const { data, error, isLoading } = useSWR(
-        `/api/job_portal/team_applied_job_details/?end_date=${vals.end}&job_type=${parseLinks(
+        `/api/job_portal/team_applied_job_details/?page=${page}&end_date=${vals.end}&job_type=${parseLinks(
             vals.types
         ).join()}&applied_by=${vals?.bd?.value ? vals?.bd?.value : ''}&job_source=${encodeURIComponent(
             parseLinks(vals.sources)
@@ -30,13 +30,13 @@ const TeamAppliedJobs = memo(() => {
     ) : (
         <div className='max-w-full shadow-md sm:rounded-lg mb-14 px-2'>
             <JobSourceAnalytics
-                job_sources={data?.data?.job_source_analytics}
-                job_types={data?.data?.job_type_analytics}
-                total={data?.data?.filtered_jobs}
+                job_sources={data?.job_source_analytics}
+                job_types={data?.job_type_analytics}
+                total={data?.filtered_jobs}
             />
             <div className='flex items-center justify-between p-3'>
                 <p className='pl-2 text-[#006366] font-bold text-lg'>
-                    Applied Jobs: {data.last_12_hours_count} (Last 12 hours)
+                    Applied Jobs: {data?.last_12_hours_count} (Last 12 hours)
                 </p>
                 <Button
                     icon={CandidateFilterIcon}
@@ -58,8 +58,8 @@ const TeamAppliedJobs = memo(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.data?.data?.length > 0 ? (
-                        data?.data?.data?.map((job, index) => (
+                    {data?.jobs?.length > 0 ? (
+                        data?.jobs?.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
                                     <span className='font-bold'>{timeSince(job?.applied_date)}</span>

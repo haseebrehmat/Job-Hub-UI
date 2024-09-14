@@ -16,14 +16,13 @@ const AppliedJobs = memo(({ userId = '' }) => {
     const [query, setQuery] = useState()
 
     const { data, error, isLoading } = useSWR(
-        `api/job_portal/applied_job_details/?end_date=${vals.to}&job_type=${parseLinks(
+        `api/job_portal/applied_job_details/?end_date=${vals.to}&page=${page}&job_type=${parseLinks(
             vals.types
         ).join()}&job_source=${parseLinks(vals.sources).join()}&start_date=${vals.from}&tech_stacks=${parseLinks(
             vals.stacks
         ).join()}`,
         fetchAppliedJobs
     )
-    console.log(data)
     const { data: dropdownvals } = useSWR(`api/job_portal/applied_job_filters/`, fetchDropdownVals)
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
@@ -54,8 +53,8 @@ const AppliedJobs = memo(({ userId = '' }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data?.data?.length > 0 && !error ? (
-                            data?.data?.map((job, index) => (
+                        {data?.jobs?.length > 0 && !error ? (
+                            data?.jobs?.map((job, index) => (
                                 <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                     <td className='px-3 py-4'>
                                         <span className='font-bold'>{timeSince(job?.applied_date)}</span>
