@@ -13,6 +13,7 @@ import {
     TechStackDropdown,
     JobTypeChecks,
     JobSourceChecks,
+    FromAndTo,
 } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
@@ -49,26 +50,7 @@ const JobPortalV2 = () => {
                         <OrderBy />
                         <Visibility />
                     </div>
-                    <div className='w-full'>
-                        From - To
-                        <hr className='mb-3 bg-slate-300 h-0.5' />
-                        <div className='flex items-center gap-1'>
-                            <input
-                                className='w-full p-2 text-sm text-gray-500 bg-transparent rounded-lg appearance-none focus:outline-none focus:ring-0 peer !bg-gray-50'
-                                type='date'
-                                max={new Date().toISOString().slice(0, 10)}
-                                value={filters?.from}
-                                onChange={event => update?.from(event.target.value)}
-                            />
-                            <input
-                                className='p-2 w-full text-sm text-gray-500 bg-transparent rounded-lg appearance-none focus:outline-none focus:ring-0 peer !bg-gray-50'
-                                type='date'
-                                max={new Date().toISOString().slice(0, 10)}
-                                value={filters?.to}
-                                onChange={event => update?.to(event.target.value)}
-                            />
-                        </div>
-                    </div>
+                    <FromAndTo />
                     <TechStackDropdown options={data?.techStacks} />
                     <JobTypeChecks jobTypes={data?.jobTypes} />
                     <JobSourceChecks jobSources={data?.jobSources} />
