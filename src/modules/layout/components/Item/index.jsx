@@ -1,8 +1,10 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
+import { Tooltip } from 'react-tooltip'
 import { Link, useLocation } from 'react-router-dom'
 
+import { can } from '@utils/helpers'
+
 import { OpenSubMenuIcon } from '@icons'
-import { can } from '@/utils/helpers'
 
 const Item = ({ item, setSubMenu, show, subMenu }) => {
     const handleSubMenu = key => setSubMenu({ ...subMenu, [key]: !subMenu[key] })
@@ -19,11 +21,26 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                 onMouseEnter={() => handleHover(item.key)}
             >
                 <Link key={item.label} to={item.link} className='flex items-center text-md p-2 w-full'>
-                    <span className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'>{item.svg}</span>
+                    <span
+                        className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'
+                        id={item?.label?.replace(/ /g, '_')}
+                    >
+                        {item.svg}
+                    </span>
                     {show ? <span className='ml-3 hidden lg:block'>{item.label}</span> : ''}
                 </Link>
                 {show && item?.subItems && <span className='hidden lg:block mr-2'>{OpenSubMenuIcon}</span>}
             </div>
+            {!show && (
+                <Tooltip
+                    anchorSelect={`#${item?.label?.replace(/ /g, '_')}`}
+                    content={item.label}
+                    place='left'
+                    delayShow={0}
+                    offset={25}
+                    className='z-50 tracking-wider !text-lg !bg-[#048c8c] hidden lg:block'
+                />
+            )}
             {item?.subItems && (
                 <div className='hidden lg:block'>
                     {subMenu[item.key] &&
@@ -36,7 +53,10 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                                         location.pathname === subItem.link ? 'border-2' : 'border-0'
                                     } text-[#003C40] rounded hover:text-[#003C40] border-solid hover:border-2 hover:border-solid hover:border-[#048C8C] cursor-pointer`}
                                 >
-                                    <span className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'>
+                                    <span
+                                        className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'
+                                        id={subItem?.label?.replace(/ /g, '_')}
+                                    >
                                         {subItem.svg}
                                     </span>
                                     {show ? (
@@ -50,6 +70,16 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                                         </span>
                                     ) : (
                                         ''
+                                    )}
+                                    {!show && (
+                                        <Tooltip
+                                            anchorSelect={`#${subItem?.label?.replace(/ /g, '_')}`}
+                                            content={subItem.label}
+                                            place='left'
+                                            delayShow={0}
+                                            offset={10}
+                                            className='ml-3 z-50 tracking-wider !text-lg !bg-[#048c8c] hidden lg:block'
+                                        />
                                     )}
                                 </Link>
                             ) : null
