@@ -1,14 +1,15 @@
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useJobPortalV2Store } from '@/stores'
+import { useJobPortalV2Store, useVisitedJobsStore } from '@/stores'
 
 import { timeSince, can, formatDate } from '@utils/helpers'
 
 import { UptoIcon, PaginateNext } from '@icons'
 
 const JobCardFooter = ({ job = null }) => {
-    const [blocked, setVisitedJobs] = useJobPortalV2Store(state => [state?.blocked, state?.setVisitedJobs])
+    const [blocked] = useJobPortalV2Store(state => [state?.blocked])
+    const [setVisitedJobs] = useVisitedJobsStore(state => [state.setVisitedJobs])
 
     return job ? (
         <div className='flex items-center justify-between mt-3 mr-1.5'>
