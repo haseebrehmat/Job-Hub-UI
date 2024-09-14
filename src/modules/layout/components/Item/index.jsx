@@ -15,8 +15,8 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
         <>
             <div
                 className={`flex items-center justify-between text-[#003C40] border-[#048C8C] rounded ${
-                    location.pathname === item.link ? 'border-2' : 'border-0'
-                }  hover:text-[#003C40] border-solid hover:border-2 hover:border-solid hover:border-[#048C8C] cursor-pointer`}
+                    location.pathname === item.link ? 'border-opacity-100' : 'border-opacity-0'
+                }  hover:text-[#003C40] border-2 hover:border-[#048C8C] cursor-pointer`}
                 onClick={() => handleSubMenu(item.key)}
                 onMouseEnter={() => handleHover(item.key)}
             >
@@ -50,8 +50,8 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                                     key={subItem.label}
                                     to={subItem.link}
                                     className={`flex items-center text-sm p-2 ml-2 border-[#048C8C] my-1 ${
-                                        location.pathname === subItem.link ? 'border-2' : 'border-0'
-                                    } text-[#003C40] rounded hover:text-[#003C40] border-solid hover:border-2 hover:border-solid hover:border-[#048C8C] cursor-pointer`}
+                                        location.pathname === subItem.link ? 'border-opacity-100' : 'border-opacity-0'
+                                    } text-[#003C40] rounded hover:text-[#003C40] border-2 hover:border-[#048C8C] cursor-pointer`}
                                 >
                                     <span
                                         className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'
