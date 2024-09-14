@@ -1,7 +1,5 @@
 import { memo } from 'react'
 
-import { Button } from '@components'
-
 import { JobCardFooter, JobCardHead, JobSourceAndType, TechKeywords } from '@modules/jobPortal-v2/components'
 
 const JobCard = ({ job = null }) =>
@@ -13,21 +11,21 @@ const JobCard = ({ job = null }) =>
         >
             <JobCardHead job={job} />
             <div className='pl-1.5'>
-                <div className='flex gap-3 flex-wrap pt-3.5'>
+                <div className='grid grid-cols-[minmax(0,1fr),minmax(0,1fr)] gap-y-4 gap-x-8 pt-3.5'>
                     {job?.company_name && (
-                        <Button
-                            label={`Company: ${job?.company_name}`}
-                            fit
-                            classes='!py-1 !px-5 !text-neutral-800 tracking-wider !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] capitalize'
-                        />
+                        <span className='flex items-center gap-2 border-b border-neutral-500 pr-2 text-[14px]'>
+                            <span className='text-neutral-500'>Company:</span>
+                            <span className='text-neutral-700 capitalize tracking-wider'>{job?.company_name}</span>
+                        </span>
                     )}
                     <JobSourceAndType job={job} />
                     {job?.salary_max && (
-                        <Button
-                            label={`Max Salary: ${job?.salary_max} / ${job?.salary_format}`}
-                            fit
-                            classes='!py-1 !px-5 !text-neutral-800 tracking-wider !text-xs !border-neutral-500 !border-opacity-70 hover:!bg-white hover:!text-[#338d8c] hover:!border-[#338d8c] !capitalize'
-                        />
+                        <span className='flex items-center gap-2 border-b border-neutral-500 pr-2 text-[14px]'>
+                            <span className='text-neutral-500'>Max Salary:</span>
+                            <span className='text-neutral-700 capitalize font-mono'>
+                                {job?.salary_max} / {job?.salary_format}
+                            </span>
+                        </span>
                     )}
                     <TechKeywords keywords={job?.tech_keywords} />
                 </div>
