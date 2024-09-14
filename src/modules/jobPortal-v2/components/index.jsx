@@ -9,6 +9,7 @@ import JobCardFooter from '@modules/jobPortal-v2/components/JobCardFooter'
 import JobSourceAndType from '@modules/jobPortal-v2/components/JobSourceAndType'
 import NextAndPrev from '@modules/jobPortal-v2/components/NextAndPrev'
 import JobsCounts from '@modules/jobPortal-v2/components/JobsCounts'
+import TechStackDropdown from '@modules/jobPortal-v2/components/TechStackDropdown'
 
 export {
     PortalLayout,
@@ -22,4 +23,5 @@ export {
     JobSourceAndType,
     NextAndPrev,
     JobsCounts,
+    TechStackDropdown,
 }

@@ -3,10 +3,10 @@ import useSWR from 'swr'
 
 import { useJobPortalV2Store } from '@/stores'
 
-import { CustomSelector, Filters, Input } from '@components'
+import { Filters, Input } from '@components'
 
 import { fetchJobFilters } from '@modules/jobPortal-v2/api'
-import { PortalLayout, OrderBy, Visibility } from '@modules/jobPortal-v2/components'
+import { PortalLayout, OrderBy, Visibility, TechStackDropdown } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
@@ -67,17 +67,7 @@ const JobPortalV2 = () => {
                             />
                         </div>
                     </div>
-                    <div className='w-full'>
-                        Tech Stack
-                        <hr className='mb-3 bg-slate-300 h-0.5' />
-                        <CustomSelector
-                            options={data?.techStacks?.map(({ name, value }) => ({ label: name, value }))}
-                            handleChange={value => update?.techs(value)}
-                            selectorValue={filters?.techs}
-                            isMulti
-                            placeholder='Select Tech Stacks'
-                        />
-                    </div>
+                    <TechStackDropdown options={data?.techStacks} />
                     <div className='w-full'>
                         Job Listing Types
                         <hr className='mb-3 bg-slate-300 h-0.5' />
