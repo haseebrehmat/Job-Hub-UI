@@ -40,11 +40,11 @@ const JobPortalV2 = () => {
             <PortalLayout loading={isLoading} error={error} module='Filters'>
                 <div className='flex flex-col items-center justify-center px-3 py-5 gap-4 text-[#338d8c]'>
                     <Search />
+                    <ExplicitApply />
                     <div className='w-full flex flex-wrap items-center gap-2 justify-between'>
                         <OrderBy />
                         <Visibility />
                     </div>
-                    <ExplicitApply />
                     <FromAndTo />
                     <TechStackDropdown options={data?.techStacks} />
                     <JobTypeChecks jobTypes={data?.jobTypes} />
