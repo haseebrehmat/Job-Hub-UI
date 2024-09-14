@@ -11,6 +11,7 @@ import NextAndPrev from '@modules/jobPortal-v2/components/NextAndPrev'
 import JobsCounts from '@modules/jobPortal-v2/components/JobsCounts'
 import TechStackDropdown from '@modules/jobPortal-v2/components/TechStackDropdown'
 import JobTypeChecks from '@modules/jobPortal-v2/components/JobTypeChecks'
+import JobSourceChecks from '@modules/jobPortal-v2/components/JobSourceChecks'
 
 export {
     PortalLayout,
@@ -26,4 +27,5 @@ export {
     JobsCounts,
     TechStackDropdown,
     JobTypeChecks,
+    JobSourceChecks,
 }
