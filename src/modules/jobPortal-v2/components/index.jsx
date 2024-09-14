@@ -13,6 +13,8 @@ import TechStackDropdown from '@modules/jobPortal-v2/components/TechStackDropdow
 import JobTypeChecks from '@modules/jobPortal-v2/components/JobTypeChecks'
 import JobSourceChecks from '@modules/jobPortal-v2/components/JobSourceChecks'
 import FromAndTo from '@modules/jobPortal-v2/components/FromAndTo'
+import Search from '@modules/jobPortal-v2/components/Search'
+import BlockedCheck from '@modules/jobPortal-v2/components/BlockedCheck'
 
 export {
     PortalLayout,
@@ -30,4 +32,6 @@ export {
     JobTypeChecks,
     JobSourceChecks,
     FromAndTo,
+    Search,
+    BlockedCheck,
 }

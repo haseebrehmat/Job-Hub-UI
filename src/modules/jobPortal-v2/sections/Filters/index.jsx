@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 import { useJobPortalV2Store } from '@/stores'
 
-import { Filters, Input } from '@components'
+import { Filters } from '@components'
 
 import { fetchJobFilters } from '@modules/jobPortal-v2/api'
 import {
@@ -14,19 +14,15 @@ import {
     JobTypeChecks,
     JobSourceChecks,
     FromAndTo,
+    Search,
+    BlockedCheck,
 } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
-import { SearchIcon } from '@icons'
-
 const JobPortalV2 = () => {
-    const [url, filters, query, setQuery, update, apply, reset] = useJobPortalV2Store(state => [
+    const [url, apply, reset] = useJobPortalV2Store(state => [
         state?.url?.filters,
-        state?.filters,
-        state?.query,
-        state?.setQuery,
-        state?.setFilters,
         state?.applyFilters,
         state?.resetFilters,
     ])
@@ -37,15 +33,7 @@ const JobPortalV2 = () => {
         <div className='w-1/5 bg-slate-100 border border-slate-300 rounded-xl min-h-screen'>
             <PortalLayout loading={isLoading} error={error} module='Filters'>
                 <div className='flex flex-col items-center justify-center px-3 py-5 gap-4 text-[#338d8c]'>
-                    <div className='relative bg-white w-full'>
-                        <Input
-                            ph='Search by typing keywords...'
-                            value={query}
-                            onChange={e => setQuery(e?.target?.value)}
-                            onKeyDown={e => (e.key === 'Enter' ? apply() : null)}
-                        />
-                        <div className='absolute inset-y-0 right-0 flex items-center pr-2 text-xl'>{SearchIcon}</div>
-                    </div>
+                    <Search />
                     <div className='w-full flex items-center gap-2 justify-evenly'>
                         <OrderBy />
                         <Visibility />
@@ -54,15 +42,7 @@ const JobPortalV2 = () => {
                     <TechStackDropdown options={data?.techStacks} />
                     <JobTypeChecks jobTypes={data?.jobTypes} />
                     <JobSourceChecks jobSources={data?.jobSources} />
-                    <div className='inline-flex items-center gap-2 bg-gray-50 p-2 rounded-lg text-sm w-full border-2'>
-                        <input
-                            type='checkbox'
-                            checked={filters?.blocked}
-                            onChange={e => update?.blocked(e.target.checked)}
-                            className='!w-5 !h-5 rounded accent-cyan-600 cursor-pointer outline-none'
-                        />
-                        Show Only Blocked Companies Jobs
-                    </div>
+                    <BlockedCheck />
                     <div className='w-full'>
                         <Filters apply={() => apply()} clear={() => reset()} />
                     </div>
