@@ -19,14 +19,6 @@ const JobCard = ({ job = null }) =>
                         </span>
                     )}
                     <JobSourceAndType job={job} />
-                    {job?.salary_max && (
-                        <span className='flex items-center gap-2border border-neutral-400 px-2 py-1 rounded-md text-[14px] h-fit'>
-                            <span className='text-neutral-500'>Max Salary:</span>
-                            <span className='text-neutral-700 capitalize font-mono'>
-                                {job?.salary_max} / {job?.salary_format}
-                            </span>
-                        </span>
-                    )}
                     <TechKeywords keywords={job?.tech_stacks} />
                 </div>
                 <JobCardFooter job={job} />
