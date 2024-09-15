@@ -18,6 +18,8 @@ export const useJobPortalFiltersStore = create(set => ({
     setJobTitle: value => set(state => ({ ...state, jobTitle: value })),
     setPage: value => set(state => ({ ...state, page: value })),
     reset: () => set(FILTERS_DEFAULT_VALUES),
+    setId: value => set(state => ({ ...state, id: value, show: !state.show })),
+    setShow: value => set(state => ({ ...state, show: value })),
 }))
 
 export const useVisitedJobsStore = create((set, get) => ({
