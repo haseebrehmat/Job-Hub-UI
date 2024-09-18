@@ -39,7 +39,18 @@ const Item = ({ item, setSubMenu, show, subMenu }) => {
                                     <span className='shadow-xl border border-[#b2f0f0] rounded-xl bg-white p-2'>
                                         {subItem.svg}
                                     </span>
-                                    {show ? <span className='ml-3 hidden lg:block'>{subItem.label}</span> : ''}
+                                    {show ? (
+                                        <span className='ml-3 hidden lg:inline-flex lg:items-center'>
+                                            {subItem.label}
+                                            {subItem?.new && (
+                                                <strong className='text-xs ml-2 bg-[#048C8C] rounded text-white px-1.5'>
+                                                    new
+                                                </strong>
+                                            )}
+                                        </span>
+                                    ) : (
+                                        ''
+                                    )}
                                 </Link>
                             ) : null
                         )}

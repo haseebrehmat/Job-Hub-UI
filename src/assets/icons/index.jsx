@@ -37,6 +37,8 @@ import {
     BsCardList,
     BsCheckCircleFill,
     BsArrowRight,
+    BsGrid,
+    BsStars,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -49,8 +51,8 @@ import {
 } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey } from 'react-icons/tb'
-import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
+import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey, TbListDetails } from 'react-icons/tb'
+import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle, FiGlobe } from 'react-icons/fi'
 import {
     AiOutlineSearch,
     AiOutlineEye,
@@ -88,6 +90,8 @@ import {
     BiTrendingUp,
     BiMap,
     BiBriefcaseAlt2,
+    BiCheckDouble,
+    BiSortUp,
 } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
@@ -102,7 +106,7 @@ import {
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
-import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
+import { VscVmRunning, VscSourceControl, VscSettings, VscEye } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
 import { TfiLayoutListThumb } from 'react-icons/tfi'
@@ -226,3 +230,10 @@ export const HistoryIcon = <MdOutlineHistory style={{ fontSize: 20 }} />
 export const LeadNoteIcon = <MdOutlineNoteAlt style={{ fontSize: 20 }} />
 export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />
 export const UptoIcon = <BsArrowRight style={{ fontSize: 14 }} />
+export const SiteIcon = <FiGlobe style={{ fontSize: 16 }} />
+export const DoubleCheckIcon = <BiCheckDouble style={{ fontSize: 18 }} />
+export const OrderingIcon = <BiSortUp style={{ fontSize: 18 }} />
+export const JobVisibilityIcon = <VscEye style={{ fontSize: 16 }} />
+export const GridViewIcon = <BsGrid style={{ fontSize: 16 }} />
+export const ListViewIcon = <TbListDetails style={{ fontSize: 16 }} />
+export const JobPortalV2Icon = <BsStars style={{ fontSize: 24 }} />
