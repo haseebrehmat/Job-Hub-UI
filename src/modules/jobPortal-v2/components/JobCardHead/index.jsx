@@ -1,7 +1,6 @@
 import { memo } from 'react'
-import { Link } from 'react-router-dom'
 
-import { useVisitedJobsStore } from '@/stores'
+import { useJobPortalV2Store, useVisitedJobsStore } from '@/stores'
 
 import { isset } from '@utils/helpers'
 
@@ -11,6 +10,7 @@ import { RegionIcon, DoubleCheckIcon } from '@icons'
 
 const JobCardHead = ({ job = null }) => {
     const [inVisitedJobs] = useVisitedJobsStore(state => [state.inVisitedJobs])
+    const [setId] = useJobPortalV2Store(state => [state?.setId])
 
     return (
         job && (
@@ -20,16 +20,12 @@ const JobCardHead = ({ job = null }) => {
                         {job?.job_source?.substring(0, 1)}
                     </span>
                     <div className='flex flex-col text-gray-600 gap-y-0.5'>
-                        <Link
-                            className='text-lg capitalize font-semibold flex-wrap'
-                            to={`/job-details/${job?.id}`}
-                            state={{
-                                data: job,
-                                title: 'Job Details',
-                            }}
+                        <p
+                            className='text-lg capitalize font-semibold flex-wrap cursor-pointer hover:underline hover:underline-offset-4'
+                            onClick={() => setId(job?.id)}
                         >
                             {job?.job_title}
-                        </Link>
+                        </p>
                         <span className='text-sm capitalize italic inline-flex items-center gap-1'>
                             {isset(job?.address) ? (
                                 <>

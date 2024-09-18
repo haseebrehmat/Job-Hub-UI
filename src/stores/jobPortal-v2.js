@@ -14,6 +14,8 @@ export const useJobPortalV2Store = create(set => ({
     view: 'list',
     pagination: { next: null, previous: null },
     stats: JOBS_STATS_INITIAL_VALUES,
+    show: false,
+    id: null,
 
     applyFilters: () =>
         set(state => ({
@@ -92,4 +94,6 @@ export const useJobPortalV2Store = create(set => ({
                 todayUploaded: stats?.todayUploaded || 0,
             },
         })),
+    setId: value => set(state => ({ ...state, id: value, show: !state.show })),
+    setShow: value => set(state => ({ ...state, show: value })),
 }))

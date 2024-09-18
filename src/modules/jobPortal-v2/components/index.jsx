@@ -16,6 +16,7 @@ import FromAndTo from '@modules/jobPortal-v2/components/FromAndTo'
 import Search from '@modules/jobPortal-v2/components/Search'
 import BlockedCheck from '@modules/jobPortal-v2/components/BlockedCheck'
 import ExplicitApply from '@modules/jobPortal-v2/components/ExplicitApply'
+import JobDetailsView from '@modules/jobPortal-v2/components/JobDetailsView'
 
 export {
     PortalLayout,
@@ -36,4 +37,5 @@ export {
     Search,
     BlockedCheck,
     ExplicitApply,
+    JobDetailsView,
 }

@@ -8,7 +8,7 @@ const TechKeywords = ({ keywords }) =>
             <span className='text-neutral-500'>Tech Stacks:</span>
             <span className='text-neutral-700 capitalize tracking-wider inline-flex flex-wrap gap-2 text-xs'>
                 {keywords?.map((stack, index) => (
-                    <Badge label={stack} type='success' classes='!text-xs' index={index} />
+                    <Badge label={stack} type='success' classes='!text-xs' key={index} />
                 ))}
             </span>
         </span>
