@@ -17,6 +17,8 @@ import Search from '@modules/jobPortal-v2/components/Search'
 import BlockedCheck from '@modules/jobPortal-v2/components/BlockedCheck'
 import ExplicitApply from '@modules/jobPortal-v2/components/ExplicitApply'
 import JobDetailsView from '@modules/jobPortal-v2/components/JobDetailsView'
+import AboutJob from '@modules/jobPortal-v2/components/AboutJob'
+import AppliedVerticals from '@modules/jobPortal-v2/components/AppliedVerticals'
 
 export {
     PortalLayout,
@@ -38,4 +40,6 @@ export {
     BlockedCheck,
     ExplicitApply,
     JobDetailsView,
+    AboutJob,
+    AppliedVerticals,
 }
