@@ -51,6 +51,18 @@ const ScraperStatus = () => {
                                         <Badge label='not running' />
                                     )}
                                 </td>
+                                <td className='px-3 py-4'>
+                                    {row.uploading ? (
+                                        <div className='flex items-center text-sm gap-2 border w-fit px-3 py-0.5 rounded-full bg-[#359393] text-white'>
+                                            <div className='animate-spin w-3 h-3'>
+                                                <div className='w-full h-full bg-gray-100' />
+                                            </div>
+                                            <span>uploading..</span>
+                                        </div>
+                                    ) : (
+                                        <Badge label='not uploading' />
+                                    )}
+                                </td>
                                 <td className='px-3 py-4'>{formatDate(row?.start_time)}</td>
                                 <td className='px-3 py-4'>{formatDate(row?.end_time)}</td>
                             </tr>
