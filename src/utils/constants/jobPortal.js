@@ -93,4 +93,6 @@ export const FILTERS_DEFAULT_VALUES = {
     ordering: '-job_posted_date',
     blocked: false,
     page: 1,
+    show: false,
+    id: null,
 }

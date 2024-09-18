@@ -25,3 +25,5 @@ export const downloadJobsData = async url => {
     const { data } = await http.get(url)
     return toast.success(data || 'Export in progress, You will be notify through email', { icon: '🎉', duration: 2000 })
 }
+
+export const fetchJobDetails = url => http.get(url).then(({ data }) => data)

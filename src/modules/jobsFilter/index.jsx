@@ -13,6 +13,7 @@ import {
     JobPortalAnalytics,
     JobPortalSearchBox,
     Selector,
+    JobShow,
 } from '@modules/jobsFilter/components'
 
 import { can, formatDate, checkToken, formatStringInPascal } from '@utils/helpers'
@@ -200,12 +201,13 @@ const JobsFilter = memo(() => {
     )
 
     const handleJobDetails = jobDetail => {
-        navigate(`/job-details/${jobDetail.id}`, {
-            state: {
-                data: jobDetail,
-                title: 'Job Details',
-            },
-        })
+        gsm?.setId(jobDetail?.id)
+        // navigate(`/job-details/${jobDetail.id}`, {
+        //     state: {
+        //         data: jobDetail,
+        //         title: 'Job Details',
+        //     },
+        // })
     }
 
     if (filterState?.isLoading) return <Loading />
@@ -437,6 +439,7 @@ const JobsFilter = memo(() => {
                 <Paginated page={gsm?.page} setPage={pageNumber => gsm?.setPage(pageNumber)} pages={pagesCount} />
             </div>
             {job.show && <EditJobForm job={job} set={setJob} mutate={() => fetchJobsData(jobDetailsUrl)} />}
+            {gsm?.show && <JobShow />}
         </div>
     )
 })

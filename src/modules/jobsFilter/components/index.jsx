@@ -15,6 +15,7 @@ import JobSourcesDropdown from '@modules/jobsFilter/components/JobSourcesDropdow
 import EditFormButtons from '@modules/jobsFilter/components/EditFormButtons'
 import JobPortalSearchBox from '@modules/jobsFilter/components/JobPortalSearchBox'
 import Selector from '@modules/jobsFilter/components/Selector'
+import JobShow from '@modules/jobsFilter/components/JobShow'
 
 export {
     TableNavigate,
@@ -34,4 +35,5 @@ export {
     EditFormButtons,
     JobPortalSearchBox,
     Selector,
+    JobShow,
 }
