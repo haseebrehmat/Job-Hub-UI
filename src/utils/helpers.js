@@ -35,14 +35,15 @@ export const activeRole = () => ({ role: decodeJwt()?.role, id: decodeJwt()?.rol
 export const userRoles = () => (decodeJwt()?.roles?.length > 1 ? decodeJwt()?.roles : [])
 
 export const getMsg = error =>
-    error?.response?.status === 404
-        ? `Page Not Found! API is not defined on server side.`
-        : error?.response?.data?.detail || error.response?.data
+    error?.response?.data?.detail ||
+    (error?.response?.status === 404
+        ? '404 Error: Resource not available.'
+        : error.response?.data
         ? 'Something went wrong on the server side.'
         : error?.response?.statusText ||
           (navigator?.onLine ? 'Server is down' : error?.message) ||
           error?.message ||
-          'Network Error'
+          'Network Error')
 
 export const getBaseUrl = nodeEnv => {
     switch (nodeEnv) {
