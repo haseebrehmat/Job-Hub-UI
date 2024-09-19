@@ -29,6 +29,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Workable', value: 'workable' },
     { label: 'Clearance', value: 'clearance' },
     { label: 'GetWork', value: 'getwork' },
+    { label: 'Ruby On Remote', value: 'ruby_on_remote' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -108,6 +109,7 @@ export const JOB_SOURCES = {
     clearance: 'Clearance',
     smartrecruiter: 'Smart Recruiter',
     getwork: 'GetWork',
+    ruby_on_remote: 'Ruby On Remote',
     // WITH UNDERSCORE
     career_builder: 'Career Builder',
     zip_recruiter: 'Zip Recruiter',
