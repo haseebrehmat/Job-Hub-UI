@@ -1,5 +1,6 @@
-import html2pdf from 'html2pdf.js'
 import { memo, useState, useRef, useEffect } from 'react'
+import toast from 'react-hot-toast'
+import { jsPDF as JsPDF } from 'jspdf'
 
 import { Button } from '@components'
 
@@ -17,8 +18,7 @@ import {
 } from '@modules/settings/templates'
 
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
-
-import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
+import { htmlToPng } from '@utils/helpers'
 
 import { DownloadIcon } from '@icons'
 
@@ -36,16 +36,38 @@ const Resumes = ({ data, hide, names, set = null }) => {
         useRef(null),
     ]
     const [tab, setTab] = useState(0)
-    const setBlob = reference =>
-        set
-            ? html2pdf()
-                  .set(RESUME_PDF_OPTIONS)
-                  .from(reference?.current?.innerHTML)
-                  .output('blob')
-                  .then(blob => set(blob))
-            : null
+    const convertTemplate = async (ref, conversion = 'pdf') => {
+        await htmlToPng(ref, { name: 'download' }, false)
+            .then(dataUrl => {
+                const img = new Image()
+                img.src = dataUrl
+                img.onload = () => {
+                    const pdfWidth = 8.5
+                    const pdfHeight = (img.height * pdfWidth) / img.width
+                    const pdf = new JsPDF({
+                        unit: 'in',
+                        floatPrecision: 'smart',
+                        format: [pdfWidth, pdfHeight],
+                    })
+                    pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+                    if (conversion === 'pdf') {
+                        pdf.save('export.pdf')
+                    } else if (conversion === 'blob') {
+                        const bloob = pdf.output('blob')
+                        set(bloob)
+                    } else {
+                        toast.error('Conversion type is inappropriate')
+                    }
+                }
+            })
+            .catch(err => {
+                toast.error(err)
+            })
+    }
 
-    const downloadPdf = () => html2pdf().set(RESUME_PDF_OPTIONS).from(refs[tab].current?.innerHTML).outputPdf().save()
+    const setBlob = reference => (set ? convertTemplate(reference?.current) : null)
+    const downloadPdf = () => convertTemplate(refs[tab].current)
+
     useEffect(() => {
         setBlob(refs[tab])
     }, [tab])
@@ -71,9 +93,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                             (component, index) =>
                                 tab === index && (
                                     <div key={index}>
-                                        <div className='' ref={refs[index]}>
-                                            {component}
-                                        </div>
+                                        <div ref={refs[index]}>{component}</div>
                                     </div>
                                 )
                         )}
@@ -88,7 +108,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                     </div>
                     <div className='h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-auto gap-y-56'>
                         {getTemplates(devProfile, hide, names).map((component, index) => (
-                            <div className='h-6 transform scale-[20%] w-[20%]'>
+                            <div className='h-6 transform scale-[20%] w-[20%]' key={index}>
                                 <div
                                     className={`${
                                         index === tab ? 'border-zinc-800 border-r-2' : 'bg-white '
@@ -103,6 +123,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                     </div>
                 </div>
             </div>
+            <div id='test-canvas' />
         </div>
     )
 }

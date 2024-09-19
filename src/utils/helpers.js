@@ -446,14 +446,16 @@ export const getYearsOptions = () => {
     return years
 }
 
-export const htmlToPng = (htmlRef, options = null) =>
+export const htmlToPng = (htmlRef, options = null, download = true) =>
     new Promise((resolve, reject) => {
         toPng(htmlRef, { cacheBust: false, backgroundColor: options?.bgColor || 'white' })
             .then(dataUrl => {
-                const link = document.createElement('a')
-                link.download = `${options?.name || 'export'}.png`
-                link.href = dataUrl
-                link.click()
+                if (download) {
+                    const link = document.createElement('a')
+                    link.download = `${options?.name || 'export'}.png`
+                    link.href = dataUrl
+                    link.click()
+                }
                 resolve(dataUrl)
             })
             .catch(err => {
