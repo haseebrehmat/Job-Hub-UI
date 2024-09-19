@@ -18,7 +18,7 @@ import {
 } from '@modules/settings/templates'
 
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
-import { htmlToPng } from '@utils/helpers'
+import { htmlToPng, chunkNumber } from '@utils/helpers'
 
 import { DownloadIcon } from '@icons'
 
@@ -36,6 +36,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         useRef(null),
     ]
     const [tab, setTab] = useState(0)
+
     const convertTemplate = async (ref, conversion = 'pdf') => {
         await htmlToPng(ref, { name: 'download' }, false)
             .then(dataUrl => {
@@ -48,8 +49,26 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         unit: 'in',
                         floatPrecision: 'smart',
                         format: [pdfWidth, pdfHeight],
+                        userUnit: 'in',
                     })
-                    pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+                    const chunks = chunkNumber(img.height, 1000)
+                    if (chunks?.length > 1) {
+                        chunks.forEach((row, index) => {
+                            const canvas = document.createElement('canvas')
+                            canvas.width = img.width
+                            canvas.height = row.max
+                            const context1 = canvas.getContext('2d')
+                            context1.drawImage(img, 0, row.min, img.width, row.max, 0, 0, img.width, row.max)
+                            const canvasImageURl = canvas.toDataURL('PNG', 1)
+                            pdf.addImage(canvasImageURl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+                            if (chunks.length > index + 1) {
+                                pdf.addPage([pdfWidth, pdfHeight])
+                            }
+                            canvas.remove()
+                        })
+                    } else {
+                        pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+                    }
                     if (conversion === 'pdf') {
                         pdf.save('export.pdf')
                     } else if (conversion === 'blob') {
@@ -123,7 +142,6 @@ const Resumes = ({ data, hide, names, set = null }) => {
                     </div>
                 </div>
             </div>
-            <div id='test-canvas' />
         </div>
     )
 }

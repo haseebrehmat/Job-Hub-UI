@@ -558,3 +558,15 @@ export const getFilterAppliedURL = (query, filters) =>
     }&job_visibility=${filters?.visible ?? 'all'}&from_date=${filters?.from}&to_date=${
         filters?.to
     }&job_type=${filters?.types?.join(',')}&blocked=${filters?.blocked}`
+
+export const chunkNumber = (number, chunkSize = 1) => {
+    if (chunkSize >= number) {
+        return [{ min: 0, max: number }]
+    }
+    const chunks = []
+    for (let min = 1, max; min <= number; min = max + 1) {
+        max = Math.min(min + chunkSize - 1, number)
+        chunks.push({ min, max })
+    }
+    return chunks
+}
