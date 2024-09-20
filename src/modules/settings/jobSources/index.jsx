@@ -5,7 +5,7 @@ import { useDynamicJobSourcesStore } from '@/stores'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { RegionActions, JobSourceForm } from '@modules/settings/components'
+import { JobSourceActions, JobSourceForm } from '@modules/settings/components'
 import { fetchRegions } from '@modules/settings/api'
 
 import { can } from '@utils/helpers'
@@ -51,7 +51,9 @@ const JobSources = () => {
                         >
                             <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
                             <h2 className='text-sm pl-1'>{row?.region ?? 'Not Specified'}</h2>
-                            {can(['edit_region', 'delete_region']) && <RegionActions edit={() => setSource(row)} />}
+                            {can(['edit_region', 'delete_region']) && (
+                                <JobSourceActions edit={() => setSource(row)} id={row?.id} />
+                            )}
                         </div>
                     ))
                 ) : (

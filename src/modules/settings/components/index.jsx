@@ -9,6 +9,7 @@ import TechStacksCategoryForm from '@modules/settings/components/TechStacksCateg
 import TechStackCategoryActions from '@modules/settings/components/TechStackCategoryActions'
 import ModuleInput from '@modules/settings/components/ModulesInput'
 import JobSourceForm from '@modules/settings/components/JobSourceForm'
+import JobSourceActions from '@modules/settings/components/JobSourceActions'
 
 export {
     IntegrationForm,
@@ -22,4 +23,5 @@ export {
     TechStackCategoryActions,
     ModuleInput,
     JobSourceForm,
+    JobSourceActions,
 }
