@@ -8,7 +8,7 @@ import { Button, Drawer, Input } from '@components'
 
 import { saveRegion } from '@modules/settings/api'
 
-import { regionSchema } from '@utils/schemas'
+import { jopbSourceSchema } from '@utils/schemas'
 
 const RegionForm = () => {
     const [source, show, setShow, mutate] = useDynamicJobSourcesStore(state => [
@@ -22,7 +22,7 @@ const RegionForm = () => {
         `/api/candidate_management/regions${source?.id ? `/${source?.id}/` : '/'}`,
         saveRegion,
         { name: source?.region || '' },
-        regionSchema,
+        jopbSourceSchema,
         async formValues => trigger({ ...formValues, id: source?.id }),
         null,
         () => {

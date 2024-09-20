@@ -308,3 +308,10 @@ export const groupSchema = Yup.object().shape({
 export const regionSchema = Yup.object().shape({
     name: Yup.string().required('Region name is required'),
 })
+
+export const jopbSourceSchema = Yup.object().shape({
+    name: Yup.string().required('Job Source name is required'),
+    key: Yup.string()
+        .required('Job Source key is required')
+        .matches(/^[\w_]+$/, 'Job Source must only contain alphabets and underscores'),
+})
