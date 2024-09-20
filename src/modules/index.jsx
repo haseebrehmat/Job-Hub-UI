@@ -43,6 +43,7 @@ import LeadNotes from '@/modules/leadManagement/leadNotes'
 import ExposedTeams from '@modules/leadManagement/exposedTeams'
 import EditHistory from '@modules/editHistory'
 import JobPortalV2 from '@modules/jobPortal-v2'
+import JobSources from '@modules/settings/jobSources'
 
 export {
     TeamAppliedJobs,
@@ -91,4 +92,5 @@ export {
     ExposedTeams,
     EditHistory,
     JobPortalV2,
+    JobSources,
 }
