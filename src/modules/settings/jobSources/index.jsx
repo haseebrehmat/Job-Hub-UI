@@ -1,34 +1,45 @@
-import { memo, useReducer } from 'react'
+import { memo } from 'react'
 import useSWR from 'swr'
+
+import { useDynamicJobSourcesStore } from '@/stores'
 
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
-import { RegionActions, RegionForm } from '@modules/settings/components'
+import { RegionActions, JobSourceForm } from '@modules/settings/components'
 import { fetchRegions } from '@modules/settings/api'
 
 import { can } from '@utils/helpers'
-import { REGIONS_INITIAL_VALUES } from '@constants/settings'
 
 import { CreateIcon } from '@icons'
 
 const JobSources = () => {
-    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), REGIONS_INITIAL_VALUES)
-    const { data, error, isLoading, mutate } = useSWR(
-        `/api/candidate_management/regions/?search=${vals.query}&page=${vals.page}`,
-        fetchRegions
-    )
+    const [show, page, query, setSource, setPage, setQuery, setMutator] = useDynamicJobSourcesStore(state => [
+        state?.show,
+        state?.page,
+        state?.query,
+        state?.setSource,
+        state?.setPage,
+        state?.setQuery,
+        state?.setMutator,
+    ])
 
-    const handleClick = values => dispatch({ region: values, show: !vals.show })
+    const { data, error, isLoading, mutate } = useSWR(
+        `/api/candidate_management/regions/?search=${query}&page=${page}`,
+        fetchRegions,
+        {
+            onSuccess: () => setMutator(mutate),
+        }
+    )
 
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center pt-3 pb-6 justify-between'>
                 <div className='flex space-x-3 items-center'>
-                    <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
+                    <Searchbox query={query} setQuery={input => setQuery(input)} />
                 </div>
                 {can('create_region') && (
-                    <Button label='Add Job Source' fit icon={CreateIcon} onClick={() => handleClick(null)} />
+                    <Button label='Add Job Source' fit icon={CreateIcon} onClick={() => setSource(null)} />
                 )}
             </div>
             <div className='grid grid-cols-2 gap-3 md:grid-cols-5'>
@@ -40,9 +51,7 @@ const JobSources = () => {
                         >
                             <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
                             <h2 className='text-sm pl-1'>{row?.region ?? 'Not Specified'}</h2>
-                            {can('edit_region') && can('delete_region') && (
-                                <RegionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
-                            )}
+                            {can(['edit_region', 'delete_region']) && <RegionActions edit={() => setSource(row)} />}
                         </div>
                     ))
                 ) : (
@@ -51,17 +60,10 @@ const JobSources = () => {
             </div>
             {data?.pages > 1 && (
                 <div className='w-full'>
-                    <Paginated pages={data?.pages} setPage={page => dispatch({ page })} page={vals.page} />
+                    <Paginated pages={data?.pages} setPage={pagee => setPage(pagee)} page={page} />
                 </div>
             )}
-            {can('create_region') && vals.show && (
-                <RegionForm
-                    show={vals.show}
-                    setShow={show => dispatch({ show })}
-                    mutate={mutate}
-                    region={vals.region}
-                />
-            )}
+            {can('create_region') && show && <JobSourceForm />}
         </div>
     )
 }
