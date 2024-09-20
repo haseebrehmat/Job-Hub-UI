@@ -7,12 +7,14 @@ import { fetchProfile } from '@modules/profile/api'
 
 import { getSectionNames, getSectionStatus } from '@utils/helpers'
 import { DEFAULT_SECTIONS } from '@constants/pseudos'
+import { SWR_REVALIDATE } from '@constants/global'
 
 const ResumeSelect = ({ vertical, setResume }) => {
     const [hide, setHide] = useState(getSectionStatus(DEFAULT_SECTIONS))
     const [names, setNames] = useState(getSectionNames(DEFAULT_SECTIONS))
 
     const { data, isLoading } = useSWR(`/api/profile/resume/${vertical}/`, fetchProfile, {
+        ...SWR_REVALIDATE,
         onSuccess: fetchedData => {
             if (
                 !(

@@ -43,12 +43,10 @@ const Resumes = ({ data, hide, names, set = null }) => {
                 const img = new Image()
                 img.src = dataUrl
                 img.onload = () => {
-                    const pdfWidth = 8.5
-                    const pdfHeight = (img.height * pdfWidth) / img.width
                     const pdf = new JsPDF({
                         unit: 'in',
                         floatPrecision: 'smart',
-                        format: [pdfWidth, pdfHeight],
+                        format: 'letter',
                         userUnit: 'in',
                     })
                     const chunks = chunkNumber(img.height, 1000)
@@ -60,14 +58,14 @@ const Resumes = ({ data, hide, names, set = null }) => {
                             const context1 = canvas.getContext('2d')
                             context1.drawImage(img, 0, row.min, img.width, row.max, 0, 0, img.width, row.max)
                             const canvasImageURl = canvas.toDataURL('PNG', 1)
-                            pdf.addImage(canvasImageURl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+                            pdf.addImage(canvasImageURl, 'PNG', 0, 0)
                             if (chunks.length > index + 1) {
-                                pdf.addPage([pdfWidth, pdfHeight])
+                                pdf.addPage()
                             }
                             canvas.remove()
                         })
                     } else {
-                        pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight)
+                        pdf.addImage(dataUrl, 'PNG', 0, 0)
                     }
                     if (conversion === 'pdf') {
                         pdf.save('export.pdf')
@@ -84,7 +82,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
             })
     }
 
-    const setBlob = reference => (set ? convertTemplate(reference?.current) : null)
+    const setBlob = reference => (set ? convertTemplate(reference?.current, 'blob') : null)
     const downloadPdf = () => convertTemplate(refs[tab].current)
 
     useEffect(() => {
@@ -107,12 +105,14 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <div className='w-fit'>
             <div className='flex flex-col-2 mx-auto'>
                 <div className='w-[75%]'>
-                    <div className='bg-white shadow-2xl border-2 rounded-lg h-screen overflow-y-auto'>
+                    <div className='h-screen overflow-y-auto hide_scrollbar'>
                         {getTemplates(data, hide, names).map(
                             (component, index) =>
                                 tab === index && (
-                                    <div key={index}>
-                                        <div ref={refs[index]}>{component}</div>
+                                    <div key={index} className='w-[51rem] bg-slate-50 shadow-2xl rounded-lg border-2'>
+                                        <div ref={refs[index]} className='w-[51rem]'>
+                                            {component}
+                                        </div>
                                     </div>
                                 )
                         )}
