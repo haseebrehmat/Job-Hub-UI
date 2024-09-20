@@ -47,3 +47,10 @@ export const PERMISSIONS_INITIAL_VALUES = {
     Permission: '',
     permissionModule: '',
 }
+
+export const DYNAMIC_JOB_SOURCES_INITIAL_VALUES = {
+    query: '',
+    page: 1,
+    show: false,
+    source: null,
+}
