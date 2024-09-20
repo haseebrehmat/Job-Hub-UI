@@ -34,7 +34,16 @@ export const activeRole = () => ({ role: decodeJwt()?.role, id: decodeJwt()?.rol
 
 export const userRoles = () => (decodeJwt()?.roles?.length > 1 ? decodeJwt()?.roles : [])
 
-export const getMsg = error => error?.response?.data?.detail || 'Network error'
+export const getMsg = error =>
+    error?.response?.data?.detail ||
+    (error?.response?.status === 404
+        ? '404 Error: Resource not available.'
+        : error.response?.data
+        ? 'Something went wrong on the server side.'
+        : error?.response?.statusText ||
+          (navigator?.onLine ? 'Server is down' : error?.message) ||
+          error?.message ||
+          'Network Error')
 
 export const getBaseUrl = nodeEnv => {
     switch (nodeEnv) {
