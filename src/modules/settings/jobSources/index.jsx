@@ -24,25 +24,29 @@ const JobSources = () => {
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
             <div className='flex items-center pt-3 pb-6 justify-between'>
-                <div className='flex space-x-4 items-center'>
+                <div className='flex space-x-3 items-center'>
                     <Searchbox query={vals.query} setQuery={query => dispatch({ query })} />
-                    {can('create_region') && (
-                        <Button label='Create Region' fit icon={CreateIcon} onClick={() => handleClick(null)} />
-                    )}
                 </div>
+                {can('create_region') && (
+                    <Button label='Add Job Source' fit icon={CreateIcon} onClick={() => handleClick(null)} />
+                )}
             </div>
-            <div className='grid grid-cols-2 gap-2 md:grid-cols-5'>
+            <div className='grid grid-cols-2 gap-3 md:grid-cols-5'>
                 {data?.regions?.length > 0 && !error ? (
                     data?.regions?.map((row, idx) => (
-                        <div className='bg-white border border-[#048C8C] rounded-md p-4 relative' key={idx}>
+                        <div
+                            className='bg-white border border-[#048C8C] rounded-md p-4 relative hover:bg-slate-100'
+                            key={idx}
+                        >
                             <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
+                            <h2 className='text-sm pl-1'>{row?.region ?? 'Not Specified'}</h2>
                             {can('edit_region') && can('delete_region') && (
                                 <RegionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             )}
                         </div>
                     ))
                 ) : (
-                    <span className='m-auto p-5 text-gray-500'>No regions found yet!</span>
+                    <span className='m-auto p-5 text-gray-500'>No job sources found yet!</span>
                 )}
             </div>
             {data?.pages > 1 && (
