@@ -24,33 +24,9 @@ export const devProfile = {
             { name: 'NextJs', level: 4 },
             { name: 'NodeJs', level: 4 },
             { name: 'NextJs', level: 4 },
-            { name: 'React', level: 5 }, // level out of 5
-            { name: 'Tailwind CSS', level: 4 },
-            { name: 'JavaScript', level: 4 },
-            { name: 'Typescript', level: 4 },
-            { name: 'HTML', level: 5 },
-            { name: 'CSS', level: 4 },
-            { name: 'NodeJs', level: 4 },
-            { name: 'NextJs', level: 4 },
-            { name: 'NodeJs', level: 4 },
-            { name: 'NextJs', level: 4 },
         ],
     },
     experience: [
-        {
-            company: 'ABC Company',
-            title: 'Software Developer',
-            from: '2019',
-            to: 'present',
-            description: 'Developed and maintained React-based web applications',
-        },
-        {
-            company: 'XYZ University',
-            title: 'Bachelor of Science in Computer Science',
-            from: '2015',
-            to: '2019',
-            description: 'Implemented UI designs using Tailwind CSS',
-        },
         {
             company: 'ABC Company',
             title: 'Software Developer',
@@ -80,13 +56,6 @@ export const devProfile = {
             from: '2013',
             to: '2015',
             grade: 'A+ Grade',
-        },
-        {
-            institute: 'XYZ University',
-            degree: 'Bachelor of Science in Computer Science',
-            from: '2015',
-            to: '2019',
-            grade: '3.5/4 CGPA',
         },
     ],
     links: {
