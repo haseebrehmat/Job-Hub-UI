@@ -33,7 +33,7 @@ const Searchbox = ({ name = 'search', ph = 'Search', query, setQuery, clear = nu
 
     return (
         <>
-            <div className='relative hidden md:block'>
+            <div className='relative'>
                 <div
                     className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'
                     onClick={handleClick}
