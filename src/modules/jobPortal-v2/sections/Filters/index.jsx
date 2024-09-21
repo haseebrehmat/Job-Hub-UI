@@ -36,12 +36,12 @@ const JobPortalV2 = () => {
     })
 
     return (
-        <div className='w-1/5 bg-slate-100 border border-slate-300 rounded-xl h-[89vh] overflow-y-scroll'>
+        <div className='bg-slate-100 border border-slate-300 rounded-xl h-[89vh] overflow-y-scroll'>
             <PortalLayout loading={isLoading} error={error} module='Filters'>
                 <div className='flex flex-col items-center justify-center px-3 py-5 gap-4 text-[#338d8c]'>
                     <Search />
                     <ExplicitApply />
-                    <div className='w-full flex flex-wrap items-center gap-2 justify-between'>
+                    <div className='w-full flex flex-col gap-2'>
                         <OrderBy />
                         <Visibility />
                     </div>
