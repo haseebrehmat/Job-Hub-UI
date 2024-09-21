@@ -72,6 +72,6 @@ export const settingsRoutes = [
         component: <JobSources />,
         protect: true,
         title: 'Job Sources (scrapers)',
-        permission: 'all',
+        permission: 'view_job_source',
     },
 ]

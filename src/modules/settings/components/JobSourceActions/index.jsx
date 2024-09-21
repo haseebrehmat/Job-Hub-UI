@@ -17,13 +17,13 @@ const JobSourceActions = memo(({ edit = null, id }) => {
 
     return (
         <div className='absolute top-0 right-0 pl-2 mr-1 flex'>
-            {isset(edit) && can('edit_region') && (
+            {isset(edit) && can('edit_job_source') && (
                 <>
                     <Button classes={`_icon-btn edit-${id}`} icon={EditIcon} onClick={() => edit()} />
                     <Tooltip anchorSelect={`.edit-${id}`} content='Edit Job Source' />
                 </>
             )}
-            {isset(id) && can('delete_region') && (
+            {isset(id) && can('delete_job_source') && (
                 <DeleteDialog
                     show={show}
                     setShow={setShow}

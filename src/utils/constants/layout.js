@@ -288,7 +288,7 @@ export const menuItems = [
                 label: 'Job Sources',
                 link: '/job-sources',
                 svg: JobSourcesIcon,
-                perms: ['view_dashboard'],
+                perms: ['view_job_source'],
                 new: true,
             },
         ],

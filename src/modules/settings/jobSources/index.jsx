@@ -38,7 +38,7 @@ const JobSources = () => {
                 <div className='flex space-x-3 items-center'>
                     <Searchbox query={query} setQuery={input => setQuery(input)} />
                 </div>
-                {can('create_region') && (
+                {can('create_job_source') && (
                     <Button label='Add Job Source' fit icon={CreateIcon} onClick={() => setSource(null)} />
                 )}
             </div>
@@ -51,7 +51,7 @@ const JobSources = () => {
                         >
                             <h2 className='text-lg'>{row?.region ?? 'Not Specified'}</h2>
                             <h2 className='text-sm pl-1'>{row?.region ?? 'Not Specified'}</h2>
-                            {can(['edit_region', 'delete_region']) && (
+                            {can(['edit_job_source', 'delete_job_source']) && (
                                 <JobSourceActions edit={() => setSource(row)} id={row?.id} />
                             )}
                         </div>
@@ -65,7 +65,7 @@ const JobSources = () => {
                     <Paginated pages={data?.pages} setPage={pagee => setPage(pagee)} page={page} />
                 </div>
             )}
-            {can('create_region') && show && <JobSourceForm />}
+            {can('create_job_source') && show && <JobSourceForm />}
         </div>
     )
 }
