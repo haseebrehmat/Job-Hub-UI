@@ -26,7 +26,7 @@ const JobSources = () => {
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5 hide_scrollbar'>
-            <div className='flex items-center pt-3 pb-6 justify-between'>
+            <div className='flex flex-col gap-2 items-center pt-3 pb-6 justify-between md:flex-row md:gap-0'>
                 <Input ph='Search Job Source' value={query} onChange={e => setQuery(e.target.value)} />
                 {can('create_job_source') && (
                     <Button label='Add Job Source' fit icon={CreateIcon} onClick={() => setSource(null)} />
