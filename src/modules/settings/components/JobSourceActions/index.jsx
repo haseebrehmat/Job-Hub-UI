@@ -1,8 +1,6 @@
 import { memo, useState } from 'react'
 import { Tooltip } from 'react-tooltip'
 
-import { useDynamicJobSourcesStore } from '@/stores'
-
 import { Button, DeleteDialog } from '@components'
 
 import { DYNAMIC_JOB_SOURCE_DELETION } from '@constants/allowDeletion'
@@ -10,9 +8,7 @@ import { can, isset } from '@utils/helpers'
 
 import { TrashIcon, EditIcon } from '@icons'
 
-const JobSourceActions = memo(({ edit = null, id }) => {
-    const [mutate] = useDynamicJobSourcesStore(state => [state?.mutator])
-
+const JobSourceActions = memo(({ edit = null, id, refetch }) => {
     const [show, setShow] = useState(false)
 
     return (
@@ -27,8 +23,8 @@ const JobSourceActions = memo(({ edit = null, id }) => {
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/candidate_management/regions/${id}/`}
-                    refetch={mutate}
+                    url={`api/job_scraper/job_source/${id}/`}
+                    refetch={refetch}
                     perm={DYNAMIC_JOB_SOURCE_DELETION}
                 >
                     <Button classes={`_icon-btn del-${id}`} icon={TrashIcon} onClick={() => setShow(true)} />

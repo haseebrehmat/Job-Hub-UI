@@ -6,27 +6,22 @@ import { useDynamicJobSourcesStore } from '@/stores'
 
 import { Button, Drawer, Input } from '@components'
 
-import { saveRegion } from '@modules/settings/api'
+import { saveJobSource } from '@modules/settings/api'
 
 import { jopbSourceSchema } from '@utils/schemas'
 
-const RegionForm = () => {
-    const [source, show, setShow, mutate] = useDynamicJobSourcesStore(state => [
-        state?.source,
-        state?.show,
-        state?.setShow,
-        state?.mutator,
-    ])
+const JobSourceForm = ({ refetch = null }) => {
+    const [source, show, setShow] = useDynamicJobSourcesStore(state => [state?.source, state?.show, state?.setShow])
 
     const { values, errors, handleSubmit, resetForm, trigger, handleChange } = useMutate(
-        `/api/candidate_management/regions${source?.id ? `/${source?.id}/` : '/'}`,
-        saveRegion,
-        { name: source?.region || '' },
+        `/api/job_scraper/job_source${source?.id ? `/${source?.id}/` : '/'}`,
+        saveJobSource,
+        { name: source?.name || '', key: source?.key || '' },
         jopbSourceSchema,
         async formValues => trigger({ ...formValues, id: source?.id }),
         null,
         () => {
-            if (mutate) mutate()
+            if (refetch) refetch()
             if (!source?.id) resetForm()
         }
     )
@@ -55,4 +50,4 @@ const RegionForm = () => {
     )
 }
 
-export default memo(RegionForm)
+export default memo(JobSourceForm)
