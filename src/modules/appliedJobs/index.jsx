@@ -18,7 +18,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
     const { data, error, isLoading } = useSWR(
         `api/job_portal/applied_jobs/?end_date=${vals.to}&page=${page}&job_type=${parseLinks(
             vals.types
-        ).join()}&job_source=${parseLinks(vals.sources).join()}&start_date=${vals.from}&tech_stacks=${parseLinks(
+        ).join()}&job_source=${parseLinks(vals.sources).join()}&start_date=${vals.from}&tech_keywords=${parseLinks(
             vals.stacks
         ).join()}`,
         fetchAppliedJobs
