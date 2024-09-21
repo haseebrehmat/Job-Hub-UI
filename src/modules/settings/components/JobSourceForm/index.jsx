@@ -8,7 +8,7 @@ import { Button, Drawer, Input } from '@components'
 
 import { saveJobSource } from '@modules/settings/api'
 
-import { jopbSourceSchema } from '@utils/schemas'
+import { jobSourceSchema } from '@utils/schemas'
 
 const JobSourceForm = ({ refetch = null }) => {
     const [source, show, setShow] = useDynamicJobSourcesStore(state => [state?.source, state?.show, state?.setShow])
@@ -17,7 +17,7 @@ const JobSourceForm = ({ refetch = null }) => {
         `/api/job_scraper/job_source${source?.id ? `/${source?.id}/` : '/'}`,
         saveJobSource,
         { name: source?.name || '', key: source?.key || '' },
-        jopbSourceSchema,
+        jobSourceSchema,
         async formValues => trigger({ ...formValues, id: source?.id }),
         null,
         () => {
