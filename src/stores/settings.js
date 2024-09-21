@@ -8,8 +8,6 @@ export const useDynamicJobSourcesStore = create(set => ({
 
     // ------------------- Setters ------------------- //
     setSource: source => set(state => ({ ...state, source, show: !state?.show })),
-    setPage: page => set(state => ({ ...state, page })),
     setQuery: query => set(state => ({ ...state, query })),
     setShow: show => set(state => ({ ...state, show })),
-    setMutator: func => set(state => ({ ...state, mutate: func })),
 }))

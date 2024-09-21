@@ -48,10 +48,4 @@ export const PERMISSIONS_INITIAL_VALUES = {
     permissionModule: '',
 }
 
-export const DYNAMIC_JOB_SOURCES_INITIAL_VALUES = {
-    query: '',
-    page: 1,
-    show: false,
-    source: null,
-    mutator: null,
-}
+export const DYNAMIC_JOB_SOURCES_INITIAL_VALUES = { query: '', show: false, source: null }
