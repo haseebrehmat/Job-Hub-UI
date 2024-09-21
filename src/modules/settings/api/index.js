@@ -56,3 +56,9 @@ export const savePermission = async (url, { arg: permissions }) => {
     const { data: data_1 } = await rawHttp.post(url, permissions)
     return toast.success(data_1.detail || 'Permission created successfully')
 }
+
+export const fetchJobSources = url =>
+    http.get(url).then(({ data }) => ({
+        sources: data?.results,
+        pages: data?.num_pages,
+    }))

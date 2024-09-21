@@ -6,7 +6,7 @@ import { useDynamicJobSourcesStore } from '@/stores'
 import { Loading, Button, Searchbox, Paginated } from '@components'
 
 import { JobSourceActions, JobSourceForm } from '@modules/settings/components'
-import { fetchRegions } from '@modules/settings/api'
+import { fetchJobSources } from '@modules/settings/api'
 
 import { can } from '@utils/helpers'
 
@@ -25,7 +25,7 @@ const JobSources = () => {
 
     const { data, error, isLoading, mutate } = useSWR(
         `/api/candidate_management/regions/?search=${query}&page=${page}`,
-        fetchRegions,
+        fetchJobSources,
         {
             onSuccess: () => setMutator(mutate),
         }
@@ -43,8 +43,8 @@ const JobSources = () => {
                 )}
             </div>
             <div className='grid grid-cols-2 gap-3 md:grid-cols-5'>
-                {data?.regions?.length > 0 && !error ? (
-                    data?.regions?.map((row, idx) => (
+                {data?.sources?.length > 0 && !error ? (
+                    data?.sources?.map((row, idx) => (
                         <div
                             className='bg-white border border-[#048C8C] rounded-md p-4 relative hover:bg-slate-100'
                             key={idx}
