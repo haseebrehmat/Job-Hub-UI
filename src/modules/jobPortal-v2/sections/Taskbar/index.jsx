@@ -20,7 +20,7 @@ const Taskbar = () => {
 
     return (
         <div className='flex flex-col md:flex-row items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-4 md:p-3 text-[#048C8C]'>
-            <div className='flex-grow'>
+            <div className='flex-grow md:pr-2'>
                 <JobsStats />
             </div>
             <div className='flex gap-2 w-fit'>
