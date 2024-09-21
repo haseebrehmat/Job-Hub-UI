@@ -25,17 +25,16 @@ const SideBar = ({ toggle, setToggle }) => {
                         <img src={smallLogo} alt='' width='25' height='25' />
                     )}
                 </span>
-
                 <span className='block lg:hidden'>
                     <img src={smallLogo} alt='' width='25' height='25' />
                 </span>
             </div>
-            <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
+            <hr className='my-4 border border-[#048C8C] border-opacity-60' />
             {menuItems?.length > 0 &&
                 menuItems?.map(item => (
                     <Item item={item} subMenu={subMenu} setSubMenu={setSubMenu} show={toggle} key={item.label} />
                 ))}
-            <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
+            <hr className='my-4 border border-[#048C8C] border-opacity-60' />
             <div className='flex flex-col justify-end h-[100%]'>
                 <div className='h-100 flex flex-col justify-end items-center'>
                     <span className='cursor-pointer p-2 flex mb-1' onClick={() => setToggle(!toggle)}>

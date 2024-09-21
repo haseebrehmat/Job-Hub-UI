@@ -6,6 +6,7 @@ import {
     MdClear,
     MdOutlineVerifiedUser,
     MdOutlineKeyboardArrowDown,
+    MdOutlineKeyboardArrowLeft,
     MdWorkOutline,
     MdArrowBackIos,
     MdArrowForwardIos,
@@ -237,3 +238,4 @@ export const JobVisibilityIcon = <VscEye style={{ fontSize: 16 }} />
 export const GridViewIcon = <BsGrid style={{ fontSize: 16 }} />
 export const ListViewIcon = <TbListDetails style={{ fontSize: 16 }} />
 export const JobPortalV2Icon = <BsStars style={{ fontSize: 24 }} />
+export const ClosedSubMenuIcon = <MdOutlineKeyboardArrowLeft style={{ fontSize: '22px' }} />
