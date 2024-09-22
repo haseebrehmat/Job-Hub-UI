@@ -19,6 +19,8 @@ import ExplicitApply from '@modules/jobPortal-v2/components/ExplicitApply'
 import JobDetailsView from '@modules/jobPortal-v2/components/JobDetailsView'
 import AboutJob from '@modules/jobPortal-v2/components/AboutJob'
 import AppliedVerticals from '@modules/jobPortal-v2/components/AppliedVerticals'
+import JobEditForm from '@modules/jobPortal-v2/components/JobEditForm'
+import TechsDropdown from '@modules/jobPortal-v2/components/JobEditForm/TechsDropdown'
 
 export {
     PortalLayout,
@@ -42,4 +44,6 @@ export {
     JobDetailsView,
     AboutJob,
     AppliedVerticals,
+    JobEditForm,
+    TechsDropdown,
 }

@@ -32,7 +32,10 @@ const JobActions = ({ job = null }) => {
                 <div className='absolute md:right-0 w-max z-50 bg-white border border-[#55bf84] shadow-md flex flex-col mt-1 pt-2.5 pb-2 gap-y-2 text-sm'>
                     {can('edit_job') && (
                         <button
-                            onClick={() => setJob(job)}
+                            onClick={() => {
+                                setJob(job)
+                                set({ menu: false })
+                            }}
                             className='bg-transparent border-0 hover:bg-[#edfffb] hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
                         >
                             Edit Job

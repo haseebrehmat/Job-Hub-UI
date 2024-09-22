@@ -15,6 +15,7 @@ export const useJobPortalV2Store = create(set => ({
     pagination: { next: null, previous: null },
     stats: JOBS_STATS_INITIAL_VALUES,
     show: false,
+    edit: false,
     id: null,
 
     applyFilters: () =>
@@ -73,7 +74,7 @@ export const useJobPortalV2Store = create(set => ({
             }
         }
     },
-    setJob: job => set(state => ({ ...state, job })),
+    setJob: job => set(state => ({ ...state, job, edit: true })),
     setMutator: func => set(state => ({ ...state, mutator: func })),
     toggleExpand: {
         sources: () => set(state => ({ ...state, expand: { ...state.expand, sources: !state.expand.sources } })),
@@ -97,4 +98,5 @@ export const useJobPortalV2Store = create(set => ({
         })),
     setId: value => set(state => ({ ...state, id: value, show: !state.show })),
     setShow: value => set(state => ({ ...state, show: value })),
+    setEdit: value => set(state => ({ ...state, edit: value })),
 }))

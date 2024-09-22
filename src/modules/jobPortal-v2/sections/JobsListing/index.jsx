@@ -4,21 +4,23 @@ import useSWR from 'swr'
 import { useJobPortalV2Store } from '@/stores'
 
 import { fetchJobs } from '@modules/jobPortal-v2/api'
-import { JobCard, PortalLayout, NextAndPrev, JobDetailsView } from '@modules/jobPortal-v2/components'
+import { JobCard, PortalLayout, NextAndPrev, JobDetailsView, JobEditForm } from '@modules/jobPortal-v2/components'
 
 import { isset } from '@utils/helpers'
 import { SWR_REVALIDATE } from '@constants/global'
 
 const JobsListing = () => {
-    const [url, focused, view, showDetails, handleKeyDown, setMutator, setPagination] = useJobPortalV2Store(state => [
-        state?.url?.jobs,
-        state?.focused,
-        state?.view,
-        state?.show,
-        state?.setFocused,
-        state?.setMutator,
-        state?.setPagination,
-    ])
+    const [url, focused, view, showDetails, showEditForm, handleKeyDown, setMutator, setPagination] =
+        useJobPortalV2Store(state => [
+            state?.url?.jobs,
+            state?.focused,
+            state?.view,
+            state?.show,
+            state?.edit,
+            state?.setFocused,
+            state?.setMutator,
+            state?.setPagination,
+        ])
 
     const { data, error, isLoading, mutate } = useSWR(url, fetchJobs, SWR_REVALIDATE)
 
@@ -48,6 +50,7 @@ const JobsListing = () => {
                 </div>
                 <NextAndPrev />
                 {showDetails && <JobDetailsView />}
+                {showEditForm && <JobEditForm />}
             </PortalLayout>
         </div>
     )
