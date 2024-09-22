@@ -61,8 +61,8 @@ const JobEditForm = () => {
                     <p className='font-medium text-xl'>Edit Job</p>
                     <hr className='my-2' />
                     <form onSubmit={handleSubmit} className='text-[#048c8c]'>
-                        <div className='flex gap-5 items-start'>
-                            <div className='grid grid-cols-2 gap-2 w-1/2'>
+                        <div className='flex flex-col md:flex-row gap-2 md:gap-5 items-start'>
+                            <div className='md:grid md:grid-cols-2 space-y-1.5 md:gap-2 md:space-y-0 md:w-1/2'>
                                 {EDIT_JOB_INPUTS.map(row => (
                                     <div key={row.name}>
                                         <span className='text-xs font-semibold text-[#048c8c]'>
@@ -114,7 +114,7 @@ const JobEditForm = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className='w-1/2'>
+                            <div className='w-full md:w-1/2'>
                                 <span className='font-semibold text-[#048c8c]'>Job Description*</span>
                                 <TextEditor
                                     init={job?.job_description_tags}
