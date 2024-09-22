@@ -574,4 +574,4 @@ export const parseVals = values => values?.map(val => ({ label: val, value: val 
 
 export const parseLinks = values => values?.map(val => val?.value)
 
-export const parseSelectedTechs = values => (values ? values?.map(value => ({ value, label: value })) : null)
+export const parseSelectedTechs = values => (values ? values?.map(value => ({ value, label: value })) : [])

@@ -11,7 +11,7 @@ import { TechsDropdown } from '@modules/jobPortal-v2/components'
 import { JobSourcesDropdown, JobTypesDropdown } from '@modules/jobsFilter/components'
 
 import { manualJobSchema } from '@utils/schemas'
-import { can, formatDate5, formatTime } from '@utils/helpers'
+import { can, formatDate5, formatTime, parseSelectedTechs } from '@utils/helpers'
 import { EDIT_JOB_INPUTS } from '@constants/jobPortal'
 
 const JobEditForm = () => {
@@ -35,7 +35,7 @@ const JobEditForm = () => {
             time: formatTime(job?.job_posted_date),
             job_source_url: job?.job_source_url,
             job_description_tags: job?.job_description_tags,
-            tech_stacks: job?.tech_stacks,
+            tech_keywords: parseSelectedTechs(job?.tech_stacks),
             salary_max: job?.salary_max,
             salary_min: job?.salary_min,
             salary_format: job?.salary_format,
@@ -43,7 +43,8 @@ const JobEditForm = () => {
             expired: job?.expired_at,
         },
         manualJobSchema,
-        async formValues => trigger({ ...formValues }),
+        async formValues =>
+            trigger({ ...formValues, tech_keywords: formValues?.tech_keywords?.map(tech => tech.value)?.join(',') }),
         null,
         () => {
             mutate()
@@ -86,8 +87,8 @@ const JobEditForm = () => {
                                 />
                                 <JobTypesDropdown value={values.job_type} error={errors.job_type} set={setFieldValue} />
                                 <TechsDropdown
-                                    value={values.tech_stacks}
-                                    error={errors.tech_stacks}
+                                    selected={values.tech_keywords}
+                                    error={errors.tech_keywords}
                                     set={setFieldValue}
                                 />
                                 <div className='col-span-2'>

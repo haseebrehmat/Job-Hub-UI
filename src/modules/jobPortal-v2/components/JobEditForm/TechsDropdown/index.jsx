@@ -5,10 +5,10 @@ import { CustomSelector } from '@components'
 
 import { fetchTechStacks } from '@modules/jobsUploader/api'
 
-import { parseTechKeywords, parseSelectedTechs } from '@utils/helpers'
+import { parseTechKeywords } from '@utils/helpers'
 import { SWR_REVALIDATE } from '@constants/global'
 
-const TechsDropdown = ({ value, error, set }) => {
+const TechsDropdown = ({ selected, error, set }) => {
     const {
         data,
         isLoading,
@@ -23,8 +23,8 @@ const TechsDropdown = ({ value, error, set }) => {
         ) : (
             <CustomSelector
                 options={parseTechKeywords(data.techStacks)}
-                selectorValue={parseSelectedTechs(value)}
-                handleChange={e => set('tech_stacks', e.value)}
+                selectorValue={selected}
+                handleChange={obj => set('tech_keywords', obj)}
                 placeholder='Select tech stacks'
                 isMulti
             />

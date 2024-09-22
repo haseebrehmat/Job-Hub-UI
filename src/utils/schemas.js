@@ -138,7 +138,7 @@ export const manualJobSchema = Yup.object().shape({
     job_source_url: Yup.string().url('Please enter a valid URL').required('Job URL is required'),
     job_posted_date: Yup.string().required('Job Posted Date is required'),
     time: Yup.string().required('Time is required'),
-    tech_stacks: Yup.mixed().required('Please select at least one tech stack'),
+    tech_keywords: Yup.mixed().required('Please select at least one tech stack'),
     job_description_tags: Yup.string().required('Job description is required'),
 })
 
