@@ -30,7 +30,7 @@ const JobsListing = () => {
         }
         if (!isLoading && !error) {
             setMutator(mutate)
-            if (isset(data?.next) || isset(data?.prev)) setPagination(data?.next, data?.prev)
+            setPagination(data?.next, data?.prev)
         }
 
         return () => {
