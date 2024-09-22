@@ -29,7 +29,7 @@ const JobActions = ({ job = null }) => {
                 onClick={() => set({ menu: !show?.menu })}
             />
             {show?.menu && (
-                <div className='absolute right-0 w-max z-50 bg-white border border-[#55bf84] shadow-md flex flex-col mt-1 pt-2.5 pb-2 gap-y-2 text-sm'>
+                <div className='absolute md:right-0 w-max z-50 bg-white border border-[#55bf84] shadow-md flex flex-col mt-1 pt-2.5 pb-2 gap-y-2 text-sm'>
                     {can('edit_job') && (
                         <button
                             onClick={() => setJob(job)}

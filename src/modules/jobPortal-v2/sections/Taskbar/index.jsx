@@ -11,16 +11,21 @@ import { JobsStats } from '@modules/jobPortal-v2/components'
 
 import { SWR_REVALIDATE } from '@constants/global'
 
-import { GridViewIcon, ListViewIcon, DownloadIcon } from '@icons'
+import { GridViewIcon, ListViewIcon, DownloadIcon, CandidateFilterIcon } from '@icons'
 
 const Taskbar = () => {
-    const [url, view, toggleView] = useJobPortalV2Store(state => [state?.url?.jobs, state?.view, state?.toggleView])
+    const [url, view, toggleView, toggleFilters] = useJobPortalV2Store(state => [
+        state?.url?.jobs,
+        state?.view,
+        state?.toggleView,
+        state?.toggleExpand?.filters,
+    ])
 
     const { isMutating } = useSWRMutation(url, downloadJobsData, SWR_REVALIDATE)
 
     return (
-        <div className='flex items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-3 text-[#048C8C]'>
-            <div className='flex-grow'>
+        <div className='flex flex-col md:flex-row items-center justify-between gap-2 text-sm bg-slate-100 border border-slate-300 rounded-xl p-4 md:p-3 text-[#048C8C]'>
+            <div className='flex-grow md:pr-2'>
                 <JobsStats />
             </div>
             <div className='flex gap-2 w-fit'>
@@ -40,10 +45,18 @@ const Taskbar = () => {
                     icon={view === 'list' ? ListViewIcon : GridViewIcon}
                     fit
                     fill={view === 'grid'}
-                    classes='toggle-view !py-[9px] !m-0 !flex !items-center'
+                    classes='toggle-view !py-[9px] !m-0 !items-center !hidden md:!flex'
                     onClick={() => toggleView()}
                 />
                 <Tooltip anchorSelect='.toggle-view' content='Toggle View' />
+                <Button
+                    icon={CandidateFilterIcon}
+                    fit
+                    fill={view === 'grid'}
+                    classes='toggle-filters !py-[9px] !m-0 !items-center !flex md:!hidden'
+                    onClick={() => toggleFilters()}
+                />
+                <Tooltip anchorSelect='.toggle-filters' content='Toggle Filters' />
             </div>
         </div>
     )

@@ -22,11 +22,11 @@ const OrderBy = () => {
     return (
         <div className='relative' ref={dropdownRef}>
             <Button
-                label='Order By'
+                label={`Order By : ${ORDER_BY_OPTIONS[order]}`}
                 icon={OrderingIcon}
                 fit
                 fill={showOptions}
-                classes='order-by !m-0 !py-1.5 pl-5 pr-6 !flex !items-center'
+                classes='order-by !m-0 !py-1.5 !gap-1 !items-center !flex-grow !w-full'
                 onClick={() => setShowOptions(!showOptions)}
             />
             {showOptions && (
@@ -34,8 +34,11 @@ const OrderBy = () => {
                     {Object.keys(ORDER_BY_OPTIONS).map(key => (
                         <button
                             key={key}
-                            onClick={() => setOrder(key)}
-                            className={`border-0 text-left w-full hover:underline py-2 px-3 ${
+                            onClick={() => {
+                                setOrder(key)
+                                setShowOptions(false)
+                            }}
+                            className={`border-0 text-left hover:underline py-2 px-3 ${
                                 key === order ? 'bg-[#4f9d9b] text-white' : null
                             }`}
                         >

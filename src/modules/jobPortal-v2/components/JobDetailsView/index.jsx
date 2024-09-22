@@ -20,18 +20,18 @@ const JobDetailsView = () => {
     return (
         show && (
             <Modal
-                classes='!w-[90%]'
+                classes='md:!w-[90%]'
                 show={show}
                 setShow={setShow}
                 content={
-                    <div className='pr-2 pt-2 w-full'>
+                    <div className='md:pr-2 pt-2 w-full'>
                         <div className='flex flex-col overflow-y-scroll'>
                             <div className='grid grid-cols-1 sm:grid-cols-4'>
                                 <div className='flex flex-col col-span-3'>
-                                    <div className='flex flex-col space-y-5 px-6 pb-2 pt-1'>
+                                    <div className='flex flex-col space-y-5 md:px-6 pb-2 pt-1'>
                                         <div className='flex flex-col gap-6 border border-gray-400 shadow p-4 rounded-lg'>
                                             <div className='flex flex-col gap-1'>
-                                                <div className='text-gray-700 text-2xl tracking-wider capitalize inline-flex justify-between'>
+                                                <div className='text-gray-700 md:text-2xl tracking-wider capitalize inline-flex flex-wrap justify-between'>
                                                     {data?.job_details?.job_title}
                                                     {inVisitedJobs(data?.job_details?.id) && (
                                                         <Badge
@@ -41,15 +41,15 @@ const JobDetailsView = () => {
                                                         />
                                                     )}
                                                 </div>
-                                                <p className='text-gray-700 tracking-wider capitalize inline-flex items-center gap-2'>
+                                                <p className='text-gray-700 tracking-wider capitalize inline-flex flex-wrap items-center gap-2'>
                                                     {RegionIcon} {data?.job_details?.address ?? 'No address'}
                                                 </p>
                                             </div>
-                                            <div className='flex gap-2 items-baseline'>
+                                            <div className='flex gap-2 items-baseline flex-wrap'>
                                                 <p className='mr-3 text-gray-500 font-semibold tracking-wider capitalize'>
                                                     Tech Stacks :
                                                 </p>
-                                                <div className='mr-1 text-sm tracking-widest space-x-3'>
+                                                <div className='mr-1 text-sm tracking-widest inline-flex flex-wrap gap-2'>
                                                     {data?.job_details?.tech_stacks?.map(tech => (
                                                         <Badge label={tech} classes='!px-4' type='success' key={tech} />
                                                     ))}
@@ -60,7 +60,7 @@ const JobDetailsView = () => {
                                             <p className='text-gray-500 text-lg font-semibold tracking-wider capitalize'>
                                                 Description
                                             </p>
-                                            <p className='text-gray-700 text-sm tracking-widest break-all'>
+                                            <div className='text-gray-700 text-sm tracking-widest break-all'>
                                                 {data?.job_details?.job_description_tags ? (
                                                     <div
                                                         // eslint-disable-next-line react/no-danger
@@ -71,7 +71,7 @@ const JobDetailsView = () => {
                                                 ) : (
                                                     <span>No job description found!!</span>
                                                 )}
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

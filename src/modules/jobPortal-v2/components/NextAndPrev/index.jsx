@@ -13,7 +13,7 @@ const NextAndPrev = () => {
     const [pagination, next, previous] = useJobPortalV2Store(state => [state?.pagination, state?.next, state?.previous])
 
     return (
-        <div className='flex items-center gap-2 pb-4'>
+        <div className='flex items-center gap-2 py-2'>
             <Button
                 icon={PaginatePrev}
                 fit

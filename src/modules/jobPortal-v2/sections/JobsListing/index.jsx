@@ -37,17 +37,19 @@ const JobsListing = () => {
     }, [data])
 
     return (
-        <PortalLayout loading={isLoading} error={error} module='Jobs'>
-            <div className={`grid ${view === 'grid' ? 'grid-cols-2 gap-4' : 'grid-cols-1 gap-2.5'}`}>
-                {data?.jobs?.length > 0 ? (
-                    data?.jobs?.map((row, index) => <JobCard job={row} key={row?.id} active={focused === index} />)
-                ) : (
-                    <div>No Jobs Found</div>
-                )}
-            </div>
-            <NextAndPrev />
-            {showDetails && <JobDetailsView />}
-        </PortalLayout>
+        <div className='h-[80vh] overflow-y-auto'>
+            <PortalLayout loading={isLoading} error={error} module='Jobs'>
+                <div className={`grid ${view === 'grid' ? 'grid-cols-1 gap-4 md:grid-cols-2' : 'grid-cols-1 gap-2.5'}`}>
+                    {data?.jobs?.length > 0 ? (
+                        data?.jobs?.map((row, index) => <JobCard job={row} key={row?.id} active={focused === index} />)
+                    ) : (
+                        <div>No Jobs Found</div>
+                    )}
+                </div>
+                <NextAndPrev />
+                {showDetails && <JobDetailsView />}
+            </PortalLayout>
+        </div>
     )
 }
 

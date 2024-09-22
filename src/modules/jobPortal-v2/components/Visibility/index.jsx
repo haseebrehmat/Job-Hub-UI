@@ -22,11 +22,11 @@ const Visibility = () => {
     return (
         <div className='relative' ref={dropdownRef}>
             <Button
-                label='Job Visibility'
+                label={`Job Visibility : ${VISIBILITY_OPTIONS[visible]}`}
                 icon={JobVisibilityIcon}
                 fit
                 fill={showOptions}
-                classes='visibility !py-1.5 pl-5 pr-6 !m-0 !flex !items-center'
+                classes='visibility !py-1.5 !gap-1 !m-0 !flex-grow !w-full !items-center'
                 onClick={() => setShowOptions(!showOptions)}
             />
             {showOptions && (
@@ -34,7 +34,10 @@ const Visibility = () => {
                     {Object.keys(VISIBILITY_OPTIONS).map(key => (
                         <button
                             key={key}
-                            onClick={() => setVisible(key)}
+                            onClick={() => {
+                                setVisible(key)
+                                setShowOptions(false)
+                            }}
                             className={`border-0 text-left w-full hover:underline py-2 px-3 ${
                                 key === visible ? 'bg-[#4f9d9b] text-white' : null
                             }`}

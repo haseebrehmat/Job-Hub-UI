@@ -10,7 +10,7 @@ const JobsStats = () => {
     const [stats] = useJobPortalV2Store(state => [state?.stats])
 
     return (
-        <div className='grid grid-flow-col'>
+        <div className='flex gap-x-6 gap-y-2 flex-wrap justify-between md:grid md:grid-flow-col md:gap-0'>
             {Object.keys(JOBS_STATS_TYPES)?.map((type, index) => (
                 <div className='flex flex-col gap-y-2' key={index}>
                     <AnimatedNumber
