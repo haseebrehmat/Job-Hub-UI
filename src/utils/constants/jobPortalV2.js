@@ -24,7 +24,10 @@ export const FILTERS_DEFAULT_VALUES = {
     blocked: false,
 }
 
-export const JOB_PORTAL_INITIAL_URLS = { jobs: 'api/job_portal/jobs/?limit=15', filters: 'api/job_portal/job_filters/' }
+export const JOB_PORTAL_INITIAL_URLS = {
+    jobs: 'api/job_portal/jobs/?limit=15&',
+    filters: 'api/job_portal/job_filters/?',
+}
 
 export const JOBS_STATS_INITIAL_VALUES = {
     total: 0,

@@ -47,7 +47,7 @@ const JobEditForm = () => {
                     <hr className='my-2' />
                     <form onSubmit={handleSubmit} className='text-[#048c8c]'>
                         <div className='flex flex-col md:flex-row gap-2 md:gap-5 items-start'>
-                            <div className='md:grid md:grid-cols-2 space-y-1.5 md:gap-2 md:space-y-0 md:w-1/2'>
+                            <div className='md:grid md:grid-cols-2 space-y-1.5 md:gap-2 md:space-y-0 w-full md:w-1/2'>
                                 <JobEditInputs values={values} errors={errors} handleChange={handleChange} />
                                 <JobSourcesDropdown
                                     value={values.job_source}

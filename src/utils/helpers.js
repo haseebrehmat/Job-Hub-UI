@@ -551,7 +551,7 @@ export const formatOptions = options_arr =>
     options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
 export const getFilterAppliedURL = (query, filters) =>
-    `?search=${query}&tech_keywords=${filters?.techs
+    `search=${query}&tech_keywords=${filters?.techs
         ?.map(tech => tech.label)
         ?.join(',')}&job_source=${filters?.sources?.join(',')}&ordering=${
         filters?.order ?? '-job_posted_date'

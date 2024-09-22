@@ -56,10 +56,10 @@ const JobActions = ({ job = null }) => {
                             </button>
                         </DeleteDialog>
                     )}
-                    {can('view_job_history') && !job?.edited && (
+                    {can('view_job_history') && job?.edited && (
                         <Link
                             to={`/edit-history/${job?.id}`}
-                            state={{ module: 'JobDetail', backTo: 'Job Portal', backToUrl: '/jobs-portal' }}
+                            state={{ module: 'JobDetail', backTo: 'Job Portal 2.0', backToUrl: '/jobs-portal/v2' }}
                             className='bg-transparent border-0 hover:bg-[#edfffb] hover:text-[#048C8C] !px-2 flex items-center justify-between gap-4'
                         >
                             Show History
