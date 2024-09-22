@@ -64,7 +64,7 @@ const ScraperStatus = () => {
                                     )}
                                 </td>
                                 <td className='px-3 py-4'>{formatDate(row?.start_time)}</td>
-                                <td className='px-3 py-4'>{formatDate(row?.end_time)}</td>
+                                <td className='px-3 py-4'>{row?.end_time ? formatDate(row?.end_time) : 'N/A'}</td>
                             </tr>
                         ))
                     ) : (
