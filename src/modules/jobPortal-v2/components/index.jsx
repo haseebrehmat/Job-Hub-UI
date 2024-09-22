@@ -21,6 +21,9 @@ import AboutJob from '@modules/jobPortal-v2/components/AboutJob'
 import AppliedVerticals from '@modules/jobPortal-v2/components/AppliedVerticals'
 import JobEditForm from '@modules/jobPortal-v2/components/JobEditForm'
 import TechsDropdown from '@modules/jobPortal-v2/components/JobEditForm/TechsDropdown'
+import JobEditInputs from '@modules/jobPortal-v2/components/JobEditForm/JobEditInputs'
+import JobSourceURL from '@modules/jobPortal-v2/components/JobEditForm/JobSourceURL'
+import Description from '@modules/jobPortal-v2/components/JobEditForm/Description'
 
 export {
     PortalLayout,
@@ -46,4 +49,7 @@ export {
     AppliedVerticals,
     JobEditForm,
     TechsDropdown,
+    JobEditInputs,
+    JobSourceURL,
+    Description,
 }
