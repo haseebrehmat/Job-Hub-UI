@@ -3,10 +3,10 @@ import useSWR from 'swr'
 
 import { Loading, Tooltip, Button } from '@components'
 
-import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
+import { fetchTeamAppliedJobs, fetchDropdownVals } from '@modules/teamAppliedJobs/api'
 import { JobSourceAnalytics, Filters, EmptyTable, TableNavigate } from '@modules/teamAppliedJobs/components'
 
-import { formatDate, timeSince } from '@utils/helpers'
+import { formatDate, timeSince, parseLinks } from '@utils/helpers'
 import { tableHeads, TEAM_APPLIED_JOBS_INITIAL_VALS } from '@constants/teamAppliedJobs'
 
 import { DownloadIcon, CandidateFilterIcon } from '@icons'
@@ -14,24 +14,29 @@ import { DownloadIcon, CandidateFilterIcon } from '@icons'
 const TeamAppliedJobs = memo(() => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), TEAM_APPLIED_JOBS_INITIAL_VALS)
     const [page, setPage] = useState(1)
-    const { data, error, isLoading } = useSWR([page, vals.bd?.value], () =>
-        fetchTeamAppliedJobs(page, vals.bd?.value === 'all' ? '' : vals.bd?.value)
+    const { data, error, isLoading } = useSWR(
+        `/api/job_portal/team_applied_job_details/?page=${page}&end_date=${vals.end}&job_type=${parseLinks(
+            vals.types
+        ).join()}&applied_by=${vals?.bd?.value ? vals?.bd?.value : ''}&job_source=${encodeURIComponent(
+            parseLinks(vals.sources)
+        )}&start_date=${vals.start}&tech_stacks=${encodeURIComponent(parseLinks(vals.stacks))}`,
+        fetchTeamAppliedJobs
     )
+    const { data: dropdownvals } = useSWR(`api/job_portal/applied_job_filters/`, fetchDropdownVals)
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14 px-2'>
+        <div className='max-w-full shadow-md sm:rounded-lg mb-14 px-2'>
             <JobSourceAnalytics
-                job_sources={data.job_source_analytics}
-                job_types={data.job_type_analytics}
-                total={data.total}
-                members={data?.team_members}
+                job_sources={data?.job_source_analytics}
+                job_types={data?.job_type_analytics}
+                total={data?.filtered_jobs}
             />
             <div className='flex items-center justify-between p-3'>
                 <p className='pl-2 text-[#006366] font-bold text-lg'>
-                    Applied Jobs: {data.last_12_hours_count} (Last 12 hours)
+                    Applied Jobs: {data?.last_12_hours_count} (Last 12 hours)
                 </p>
                 <Button
                     icon={CandidateFilterIcon}
@@ -41,7 +46,7 @@ const TeamAppliedJobs = memo(() => {
                     fill={vals.filter}
                 />
             </div>
-            {vals.filter && <Filters filtered={vals} dispatch={dispatch} data={data} />}
+            {vals.filter && <Filters filtered={vals} dispatch={dispatch} data={data} dropdowns={dropdownvals} />}
             <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
                 <thead className='text-sm text-gray-700 uppercase bg-[#edfdfb] border'>
                     <tr>
@@ -54,7 +59,7 @@ const TeamAppliedJobs = memo(() => {
                 </thead>
                 <tbody>
                     {data?.jobs?.length > 0 ? (
-                        data.jobs.map((job, index) => (
+                        data?.jobs?.map((job, index) => (
                             <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                 <td className='px-3 py-4'>
                                     <span className='font-bold'>{timeSince(job?.applied_date)}</span>

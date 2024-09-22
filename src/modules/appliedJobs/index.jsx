@@ -4,10 +4,11 @@ import useSWR from 'swr'
 import { Loading, Badge } from '@components'
 
 import { fetchAppliedJobs } from '@modules/appliedJobs/api'
+import { fetchDropdownVals } from '@modules/teamAppliedJobs/api'
 import { EmptyTable, Searchbox, TableNavigate, AppliedJobActions, Filters } from '@modules/appliedJobs/components'
 
 import { tableHeads, jobStatus, APPLIED_JOBS_FILTERS_INITIAL_VALS } from '@constants/appliedJobs'
-import { formatDate, timeSince } from '@utils/helpers'
+import { formatDate, timeSince, parseLinks } from '@utils/helpers'
 
 const AppliedJobs = memo(({ userId = '' }) => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), APPLIED_JOBS_FILTERS_INITIAL_VALS)
@@ -15,14 +16,14 @@ const AppliedJobs = memo(({ userId = '' }) => {
     const [query, setQuery] = useState()
 
     const { data, error, isLoading } = useSWR(
-        [page, query, userId, vals],
-        () => fetchAppliedJobs(page, query, userId, vals),
-        {
-            revalidateOnReconnect: false,
-            shouldRetryOnError: false,
-        }
+        `api/job_portal/applied_jobs/?end_date=${vals.to}&page=${page}&job_type=${parseLinks(
+            vals.types
+        ).join()}&job_source=${parseLinks(vals.sources).join()}&start_date=${vals.from}&tech_keywords=${parseLinks(
+            vals.stacks
+        ).join()}`,
+        fetchAppliedJobs
     )
-
+    const { data: dropdownvals } = useSWR(`api/job_portal/applied_job_filters/`, fetchDropdownVals)
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
 
     if (isLoading) return <Loading />
@@ -38,7 +39,9 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     filter={vals.filter}
                     last12HoursJobsCount={data?.last_12_hours_count ?? 0}
                 />
-                {vals.filter && <Filters filtered={vals} dispatch={dispatch} agent={userId === ''} />}
+                {vals.filter && (
+                    <Filters filtered={vals} dispatch={dispatch} agent={userId === ''} dropdowns={dropdownvals} />
+                )}
                 <table className='table-auto w-full text-sm text-left text-gray-500'>
                     <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
                         <tr>
@@ -51,7 +54,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     </thead>
                     <tbody>
                         {data?.jobs?.length > 0 && !error ? (
-                            data.jobs.map((job, index) => (
+                            data?.jobs?.map((job, index) => (
                                 <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
                                     <td className='px-3 py-4'>
                                         <span className='font-bold'>{timeSince(job?.applied_date)}</span>

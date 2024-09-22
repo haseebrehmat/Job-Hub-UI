@@ -11,6 +11,7 @@ export const tableHeads = [
     // 'Status',
 ]
 
+export const logsTableHeads = ['Created At', 'BD', 'Download Link']
 export const jobStatus = {
     0: 'To Apply',
     1: 'Applied',
@@ -29,7 +30,8 @@ export const TEAM_APPLIED_JOBS_INITIAL_VALS = {
     stacks: [],
     sources: [],
     types: [],
-    bd: { value: 'all', label: 'All Team Members' },
+    downlaod: false,
+    bd: '',
 }
 
 export const TEAM_APPLIED_JOBS_STAT_TABS = {

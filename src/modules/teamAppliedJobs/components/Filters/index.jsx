@@ -1,14 +1,20 @@
-import { memo, useReducer } from 'react'
+import { memo, useReducer, useState } from 'react'
+import useSWRMutation from 'swr/mutation'
 
 import { Button, CustomSelector } from '@components'
 
-import { FilterDates } from '@modules/teamAppliedJobs/components'
+import { downloadFilteredJobs } from '@modules/teamAppliedJobs/api'
 
-import { parseMembers } from '@utils/helpers'
-import { JOB_SOURCE_OPTIONS_UNDERSCORE, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
+import { FilterDates, MyDownloads } from '@modules/teamAppliedJobs/components'
+
+import { parseMembers, parseVals, parseLinks } from '@utils/helpers'
+import { JOB_TYPES_OPTIONS } from '@constants/scrapper'
 import { TEAM_APPLIED_JOBS_INITIAL_VALS as initFilters } from '@constants/teamAppliedJobs'
 
-const Filters = ({ filtered = null, dispatch = null, data = null }) => {
+import { DownloadIcon, LogsIcon } from '@icons'
+
+const Filters = ({ filtered = null, dispatch = null, data = null, dropdowns }) => {
+    const [flag, setFlag] = useState(false)
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         start: filtered.start,
         end: filtered.end,
@@ -17,7 +23,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
         types: filtered.types,
         bd: filtered.bd,
     })
-    const applyFilters = () =>
+    const applyFilters = () => {
         dispatch({
             start: vals.start,
             end: vals.end,
@@ -26,9 +32,19 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
             types: vals.types,
             bd: vals.bd,
         })
+    }
+    const { trigger, isLoading } = useSWRMutation(
+        `/api/job_portal/team_applied_job_details/?download=true&end_date=${vals.end}&job_type=${parseLinks(
+            vals.types
+        ).join()}&applied_by=${vals?.bd?.value ? vals?.bd?.value : ''}&job_source=${parseLinks(
+            vals.sources
+        ).join()}&start_date=${vals.start}&tech_stacks=${parseLinks(vals.stacks).join()}`,
+        downloadFilteredJobs
+    )
     const clearFilters = () => {
         dispatch({ ...initFilters })
-        update({ start: '', end: '', stacks: [], sources: [], types: [], bd: initFilters.bd })
+        update({ start: '', end: '', stacks: [], sources: [], types: [], download: false, bd: initFilters.bd })
+        setFlag(false)
     }
 
     return (
@@ -36,7 +52,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
             <div>
                 <span className='text-xs font-semibold'>Team Member</span>
                 <CustomSelector
-                    options={parseMembers(data?.team_members, null, true)}
+                    options={parseMembers(data?.team_members, null)}
                     handleChange={obj => update({ bd: obj })}
                     selectorValue={vals.bd}
                     placeholder='Select Team Member'
@@ -46,7 +62,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
             <div>
                 <span className='text-xs font-semibold'>Job Sources</span>
                 <CustomSelector
-                    options={JOB_SOURCE_OPTIONS}
+                    options={parseVals(dropdowns?.data?.job_sources)}
                     handleChange={obj => update({ sources: obj })}
                     selectorValue={vals.sources}
                     isMulti
@@ -66,7 +82,7 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
             <div>
                 <span className='text-xs font-semibold'>Tech Stacks</span>
                 <CustomSelector
-                    options={JOB_SOURCE_OPTIONS_UNDERSCORE}
+                    options={parseVals(dropdowns?.data?.tech_keywords)}
                     handleChange={obj => update({ stacks: obj })}
                     selectorValue={vals.stacks}
                     isMulti
@@ -77,11 +93,22 @@ const Filters = ({ filtered = null, dispatch = null, data = null }) => {
                 <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
                 {(filtered.start ||
                     filtered.end ||
+                    flag ||
                     filtered.bd?.value !== 'all' ||
                     filtered.stacks.length > 0 ||
                     filtered.sources.length > 0 ||
                     filtered.types.length > 0) && <Button fit onClick={clearFilters} label='Clear' />}
             </div>
+            <div className='flex gap-2'>
+                <Button
+                    icon={DownloadIcon}
+                    label={isLoading ? 'Downloading....' : 'Download'}
+                    classes='!px-8 !py-2'
+                    onClick={trigger}
+                />
+                <Button icon={LogsIcon} label='logs' classes='!px-8 !py-2' onClick={() => setFlag(!flag)} />
+            </div>
+            {flag && <MyDownloads show={flag} setShow={setFlag} />}
         </div>
     )
 }
