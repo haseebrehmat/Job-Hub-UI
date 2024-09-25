@@ -32,7 +32,7 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
     )
     const flag = values.company_name.length > 0 && values.designation.length > 0
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{experience?.id ? 'Edit' : 'Create'} Experience</p>
@@ -91,7 +91,7 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
                         ph='Enter description'
                     />
                     {errors.description && <small className='__error'>{errors.description}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={experience?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
