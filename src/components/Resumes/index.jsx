@@ -20,7 +20,7 @@ import {
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
 import { htmlToPng, chunkNumber } from '@utils/helpers'
 
-import { DownloadIcon } from '@icons'
+import { DownloadIcon, OpenSubMenuIcon } from '@icons'
 
 const Resumes = ({ data, hide, names, set = null }) => {
     const refs = [
@@ -124,10 +124,13 @@ const Resumes = ({ data, hide, names, set = null }) => {
                 </div>
                 <div className={`2xl:w-[30%] xl:w-[20%] border-2 rounded-lg ${showTemplate ? 'h-screen' : 'mb-4'}`}>
                     <div
-                        className='bg-[#048C8C] border-2 rounded-lg py-2 md:py-4 text-center text-white md:text-xl font-semibold'
+                        className='bg-[#048C8C] border-2 rounded-lg py-2 md:py-4 text-center text-white md:text-xl font-semibold flex items-center justify-center'
                         onClick={() => setShowTemplates(!showTemplate)}
                     >
-                        {showTemplate ? 'Hide Templates' : 'Show Templates'}
+                        Templates
+                        <span className={`${showTemplate ? 'hidden' : 'block'} animate-ping ml-2 md:hidden`}>
+                            {OpenSubMenuIcon}
+                        </span>
                     </div>
                     <div
                         className={`h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-scroll gap-y-56 ${

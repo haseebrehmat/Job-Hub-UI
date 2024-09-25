@@ -8,7 +8,7 @@ import { saveSections } from '@modules/pseudos/api'
 
 import { BASIC_INFO_SECTIONS } from '@constants/pseudos'
 
-import { HidePassIcon, SeePassIcon } from '@icons'
+import { HidePassIcon, SeePassIcon, OpenSubMenuIcon } from '@icons'
 
 const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
     const toggleSection = section => setHide({ ...hide, [section]: !hide[section] })
@@ -35,10 +35,13 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
         <form onSubmit={handleSubmit} className='w-full h-fit'>
             <div className='flex flex-col font-normal'>
                 <div
-                    className='bg-[#048C8C] border-2 rounded-lg py-2 md:py-4 text-center text-white md:text-xl font-semibold'
+                    className='bg-[#048C8C] border-2 rounded-lg py-2 md:py-4 text-center text-white md:text-xl font-semibold flex items-center justify-center gap-1'
                     onClick={() => setShowSections(!showSections)}
                 >
                     Sections
+                    <span className={`${showSections ? 'hidden' : 'block'} animate-ping ml-2 md:hidden`}>
+                        {OpenSubMenuIcon}
+                    </span>
                 </div>
                 <div className={`${showSections ? '' : 'hidden'} md:block text-center`}>
                     <div className='border p-2.5 my-1 mx-2 md:m-2 shadow-md rounded-md'>
