@@ -121,7 +121,7 @@
 }
 
 .slide-pane_from_bottom {
-    @apply mx-auto my-[4vh] h-fit max-h-[90vh] overflow-auto max-w-[97%] p-2 rounded-lg;
+    @apply mx-auto my-[4vh] h-fit max-h-[90vh] overflow-auto max-w-[97%] p-2 rounded-lg -translate-y-full;
 }
 
 .slide-pane_from_bottom > .slide-pane__header {
