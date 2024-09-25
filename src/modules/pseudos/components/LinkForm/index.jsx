@@ -26,7 +26,7 @@ const LinkForm = ({ show, setShow, mutate, link, id }) => {
     const flag = values.platform.length > 0 && values.url.length > 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{link?.id ? 'Edit' : 'Create'} Link</p>
@@ -42,7 +42,7 @@ const LinkForm = ({ show, setShow, mutate, link, id }) => {
                     <span className='text-xs font-semibold'>URL*</span>
                     <Input type='url' name='url' value={values.url} onChange={handleChange} ph='Enter url name' />
                     {errors.url && <small className='__error'>{errors.url}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={link?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
