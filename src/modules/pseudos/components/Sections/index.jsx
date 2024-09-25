@@ -31,17 +31,17 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
     )
 
     return (
-        <form onSubmit={handleSubmit} className='w-[100%]'>
+        <form onSubmit={handleSubmit} className='w-full h-fit'>
             <div className='flex flex-col font-normal'>
-                <div className='bg-[#048C8C] border-2 rounded-lg py-4 text-center text-white text-xl font-semibold'>
+                <div className='bg-[#048C8C] border-2 rounded-lg py-2 md:py-4 text-center text-white md:text-xl font-semibold'>
                     Sections
                 </div>
-                <div className='border p-2.5 m-2 shadow-md rounded-md'>
+                <div className='border p-2.5 my-1 mx-2 md:m-2 shadow-md rounded-md'>
                     <p>Basic Info</p>
                     <hr className='m-1' />
                     <div className='flex flex-col ml-1 text-sm'>
                         {BASIC_INFO_SECTIONS.map(item => (
-                            <div className='flex items-center justify-between my-1.5' key={item}>
+                            <div className='flex items-center justify-between my-1 md:my-1.5' key={item}>
                                 <Input name={item} value={names[item]} classes='__input_2' onChange={handleChange} />
                                 <span className='ml-3 cursor-pointer' onClick={() => toggleSection(item)}>
                                     {hide[item] ? SeePassIcon : HidePassIcon}
@@ -54,7 +54,7 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
                     item =>
                         !BASIC_INFO_SECTIONS?.includes(item) && (
                             <div
-                                className='border p-2.5 m-2 flex items-center justify-between shadow-md rounded-md'
+                                className='border p-2.5 my-1 mx-2 md:m-2 flex items-center justify-between shadow-md rounded-md'
                                 key={item}
                             >
                                 <Input name={item} value={names[item]} classes='__input_2' onChange={handleChange} />
@@ -64,7 +64,7 @@ const Sections = ({ hide, setHide, names, setNames, mutate, id }) => {
                             </div>
                         )
                 )}
-                <Button label='Update' fit classes='!px-6 !py-1 !mx-auto !mt-2' type='submit' />
+                <Button label='Update' fit classes='!px-6 !py-1 !mx-auto my-2 md:!mt-2' type='submit' />
             </div>
         </form>
     )

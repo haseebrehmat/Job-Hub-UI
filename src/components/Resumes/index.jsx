@@ -102,10 +102,10 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template8 data={profile} hide={gethide} names={name} />,
     ]
     return (
-        <div className='w-fit'>
-            <div className='flex flex-col-2 mx-auto'>
-                <div className='w-[75%]'>
-                    <div className='h-screen overflow-y-auto hide_scrollbar'>
+        <div className='md:w-fit'>
+            <div className='flex flex-col md:flex-col-2 md:flex-row mx-auto'>
+                <div className='md:w-[75%]'>
+                    <div className='md:h-screen overflow-y-auto hide_scrollbar'>
                         {getTemplates(data, hide, names).map(
                             (component, index) =>
                                 tab === index && (
