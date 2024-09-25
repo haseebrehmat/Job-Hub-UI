@@ -9,7 +9,7 @@ const JobPortalV2 = () => {
 
     return (
         <div className='flex flex-col md:flex-row gap-3 px-2.5 h-full'>
-            <div className='hidden md:block'>
+            <div className='hidden md:block md:w-1/5'>
                 <Filters />
             </div>
             <div className='block md:hidden'>

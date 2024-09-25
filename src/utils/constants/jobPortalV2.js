@@ -1,3 +1,5 @@
+import { formatDate5, formatTime, parseSelectedTechs } from '@utils/helpers'
+
 export const ORDER_BY_OPTIONS = {
     '-job_posted_date': 'Posted Date',
     job_title: 'Job Title',
@@ -22,7 +24,10 @@ export const FILTERS_DEFAULT_VALUES = {
     blocked: false,
 }
 
-export const JOB_PORTAL_INITIAL_URLS = { jobs: 'api/job_portal/jobs/?limit=15', filters: 'api/job_portal/job_filters/' }
+export const JOB_PORTAL_INITIAL_URLS = {
+    jobs: 'api/job_portal/jobs/?limit=15&',
+    filters: 'api/job_portal/job_filters/?',
+}
 
 export const JOBS_STATS_INITIAL_VALUES = {
     total: 0,
@@ -39,3 +44,21 @@ export const JOBS_STATS_TYPES = {
     nonRecruited: 'Non Recruiters',
     todayUploaded: 'Today`s Jobs',
 }
+
+export const JOB_EDIT_INITIAL_VALUES = job => ({
+    job_title: job?.job_title,
+    company_name: job?.company_name,
+    job_source: job?.job_source,
+    job_type: job?.job_type,
+    address: job?.address,
+    job_posted_date: formatDate5(job?.job_posted_date),
+    time: formatTime(job?.job_posted_date),
+    job_source_url: job?.job_source_url,
+    job_description_tags: job?.job_description_tags,
+    tech_keywords: parseSelectedTechs(job?.tech_stacks),
+    salary_max: job?.salary_max,
+    salary_min: job?.salary_min,
+    salary_format: job?.salary_format,
+    job_role: job?.job_role || '',
+    expired: job?.expired_at,
+})

@@ -152,6 +152,10 @@ body {
     position: relative;
 }
 
+.tox .tox-toolbar--scrolling {
+    flex-wrap: wrap !important;
+}
+
 /* :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;

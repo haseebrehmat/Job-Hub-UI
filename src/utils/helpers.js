@@ -551,7 +551,7 @@ export const formatOptions = options_arr =>
     options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
 export const getFilterAppliedURL = (query, filters) =>
-    `?search=${query}&tech_keywords=${filters?.techs
+    `search=${query}&tech_keywords=${filters?.techs
         ?.map(tech => tech.label)
         ?.join(',')}&job_source=${filters?.sources?.join(',')}&ordering=${
         filters?.order ?? '-job_posted_date'
@@ -573,3 +573,5 @@ export const chunkNumber = (number, chunkSize = 1) => {
 export const parseVals = values => values?.map(val => ({ label: val, value: val }))
 
 export const parseLinks = values => values?.map(val => val?.value)
+
+export const parseSelectedTechs = values => (values ? values?.map(value => ({ value, label: value })) : [])
