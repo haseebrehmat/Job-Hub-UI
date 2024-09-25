@@ -25,7 +25,7 @@ const LanguageForm = ({ show, setShow, mutate, language, id }) => {
     const flag = values.name.length > 0 && values.level > 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{language?.id ? 'Edit' : 'Create'} Language</p>
@@ -37,7 +37,7 @@ const LanguageForm = ({ show, setShow, mutate, language, id }) => {
                     <SliderInput name='level' max={5} value={values.level} onChange={handleChange} />
                     <span className='text-gray-800 text-center'>{PROFICIENCY_LEVELS[values.level]}</span>
                     {errors.level && <small className='__error'>{errors.level}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={language?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
