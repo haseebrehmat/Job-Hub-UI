@@ -5,8 +5,8 @@ const ChangesLog = ({ data = [] }) => {
         () => (
             <div className='w-full mx-auto pl-3'>
                 <ol className='border-l border-neutral-300'>
-                    {data?.map(row => (
-                        <li className='pt-2'>
+                    {data?.map((row, index) => (
+                        <li className='pt-2' key={index}>
                             <div className='flex items-baseline'>
                                 <div className='-ml-[6px] h-3 w-3 rounded-full bg-neutral-300' />
                                 <p className='ml-4 my-1 w-fit'>
