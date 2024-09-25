@@ -30,7 +30,7 @@ const ProjectForm = ({ show, setShow, mutate, project, id }) => {
     const flag = values.name.length > 0 && values.title.length > 0 && Object.keys(errors).length === 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{project?.id ? 'Edit' : 'Create'} Project</p>
@@ -57,7 +57,7 @@ const ProjectForm = ({ show, setShow, mutate, project, id }) => {
                         ph='Enter project description like about stack, technologies, etc'
                     />
                     {errors.description && <small className='__error'>{errors.description}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={project?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>

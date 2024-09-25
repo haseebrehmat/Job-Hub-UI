@@ -29,7 +29,7 @@ const Experiences = ({ id }) => {
             <div className='flex items-center space-x-4 py-4'>
                 <Button label='Add Experience' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
-            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+            <div className='grid gap-2 md:grid-cols-2'>
                 {flag ? (
                     data?.map((row, idx) => (
                         <div className='bg-white rounded-md p-2 md:p-4 border relative' key={idx}>
