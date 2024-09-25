@@ -130,7 +130,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         {showTemplate ? 'Hide Templates' : 'Show Templates'}
                     </div>
                     <div
-                        className={`h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-auto gap-y-56 ${
+                        className={`h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-scroll gap-y-56 ${
                             showTemplate ? '' : 'hidden'
                         }`}
                     >

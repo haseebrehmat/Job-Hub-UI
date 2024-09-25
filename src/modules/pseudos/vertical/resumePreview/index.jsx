@@ -34,7 +34,7 @@ const ResumePreview = ({ id }) => {
             <div className='flex flex-col gap-3 md:gap-0 md:flex-row md:items-start'>
                 {data ? (
                     <>
-                        <div className='md:w-[25%] border-2 rounded-lg md:h-screen mr-2 md:overflow-y-auto'>
+                        <div className='md:w-[25%] border-2 rounded-lg md:h-screen md:mr-2 md:overflow-y-auto'>
                             <Sections
                                 hide={hide}
                                 setHide={setHide}
@@ -50,7 +50,7 @@ const ResumePreview = ({ id }) => {
                     <span>Error to load resume previews</span>
                 )}
             </div>
-            <div className='bg-white px-4 mt-4 pt-4'>
+            <div className='bg-white px-4'>
                 <ActionButtons mutate={mutate} />
             </div>
         </div>
