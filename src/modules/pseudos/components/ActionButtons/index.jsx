@@ -8,10 +8,10 @@ const ActionButtons = ({ form = false, mutate, classes = null }) => {
     const navigate = useNavigate()
 
     return (
-        <div className={`flex items-center w-1/2 ${classes}`}>
-            {form && <Button label='Update' type='submit' fill classes='mr-2' />}
-            <Button label='Refetch' fill classes='mr-2' onClick={() => mutate()} />
-            <Button label='Back to pseudos' onClick={() => navigate('/pseudos')} />
+        <div className={`flex items-center md:justify-end gap-2 ${classes}`}>
+            {form && <Button label='Update' type='submit' fit fill classes='px-4 md:!px-8' />}
+            <Button label='Refetch' fill fit onClick={() => mutate()} classes='px-4 md:!px-8' />
+            <Button label='Back to pseudos' fit onClick={() => navigate('/pseudos')} classes='px-4 md:!px-6' />
         </div>
     )
 }
