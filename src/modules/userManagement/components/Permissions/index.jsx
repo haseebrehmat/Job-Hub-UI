@@ -40,9 +40,9 @@ const Permissions = ({ permissions, setPermissions }) => {
     }, [permss])
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto'>
+        <div>
             <p className='pb-2 font-semibold'>Assign Permissions</p>
-            <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
+            <table className='table-auto md:w-full text-sm text-left text-[#048C8C] __table-r'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
                         <th scope='col' className='px-2 py-4'>
@@ -58,7 +58,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                         data?.permissions?.map((perm, idx) =>
                             perm?.permissions?.length > 0 ? (
                                 <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
-                                    <td className='px-2 py-2'>
+                                    <td className='md:px-2 py-2'>
                                         <div className='flex items-center'>
                                             <input
                                                 id={`checkbox-${idx}`}
@@ -73,7 +73,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                                             </label>
                                         </div>
                                     </td>
-                                    <td className='px-2 py-2 grid grid-cols-2 gap-2'>
+                                    <td className='md:px-2 py-2 grid md:grid-cols-2 gap-2'>
                                         {perm?.permissions?.map(({ codename, name, parent, child }) => (
                                             <div className='flex items-center' key={codename}>
                                                 <input
@@ -89,7 +89,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                                                 />
                                                 <label
                                                     htmlFor={`checkbox-${codename}`}
-                                                    className='ml-2 text-sm  capitalize'
+                                                    className='ml-2 text-sm capitalize'
                                                 >
                                                     {name}
                                                 </label>

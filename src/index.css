@@ -86,6 +86,10 @@
     @apply w-5 h-5 accent-[#4f9d9b] cursor-pointer;
 }
 
+.__table-r {
+    @apply max-w-full overflow-x-scroll hide_scrollbar;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 0px;
