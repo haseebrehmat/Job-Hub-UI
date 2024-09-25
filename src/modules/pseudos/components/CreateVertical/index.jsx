@@ -24,7 +24,7 @@ const CreateVertical = ({ show, setShow, mutate, pseudoId }) => {
     const flag = values.name.length > 0 && values.email.length > 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='350px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Create Vertical</p>
@@ -50,7 +50,7 @@ const CreateVertical = ({ show, setShow, mutate, pseudoId }) => {
                         ph='Enter vertical description'
                     />
                     {errors.description && <small className='ml-1 text-xs text-red-600'>{errors.description}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label='Submit' type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
