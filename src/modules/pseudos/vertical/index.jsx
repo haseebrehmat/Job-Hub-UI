@@ -32,11 +32,11 @@ const Vertical = () => {
 
     return (
         <div className='p-2'>
-            <p className='pl-2 pr-6 mb-2 w-fit rounded-r-full bg-[#328d8c] text-2xl text-white'>
+            <p className='pl-2 pr-6 mb-2 w-fit rounded-r-full bg-[#328d8c] text-lg md:text-2xl text-white'>
                 {id} --- {name}
             </p>
             <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
-                <div className='flex flex-col mb-4 space-y-2 md:gap-2 md:flex-row md:space-y-1'>
+                <div className='flex flex-wrap mb-4 gap-2'>
                     {Object.entries(activeTab).map(([key, value]) => (
                         <Button
                             key={key}
