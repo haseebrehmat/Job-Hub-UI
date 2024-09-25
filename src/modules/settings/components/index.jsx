@@ -8,6 +8,8 @@ import PermissionActions from '@modules/settings/components/PermissionActions'
 import TechStacksCategoryForm from '@modules/settings/components/TechStacksCategoryForm'
 import TechStackCategoryActions from '@modules/settings/components/TechStackCategoryActions'
 import ModuleInput from '@modules/settings/components/ModulesInput'
+import JobSourceForm from '@modules/settings/components/JobSourceForm'
+import JobSourceActions from '@modules/settings/components/JobSourceActions'
 
 export {
     IntegrationForm,
@@ -20,4 +22,6 @@ export {
     TechStacksCategoryForm,
     TechStackCategoryActions,
     ModuleInput,
+    JobSourceForm,
+    JobSourceActions,
 }

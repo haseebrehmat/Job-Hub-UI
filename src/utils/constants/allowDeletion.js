@@ -23,3 +23,4 @@ export const TECH_STACK_CATEGORY_DELETION = true
 export const EXPOSED_TEAM_DELETION = true
 export const TEAM_DELETION = true
 export const PERMISSION_DELETION = true
+export const DYNAMIC_JOB_SOURCE_DELETION = true

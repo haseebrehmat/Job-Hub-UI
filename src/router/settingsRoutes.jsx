@@ -7,6 +7,7 @@ import {
     Regions,
     Permissions,
     TechStacksCategories,
+    JobSources,
 } from '@modules'
 
 export const settingsRoutes = [
@@ -65,5 +66,12 @@ export const settingsRoutes = [
         protect: true,
         title: 'Tech Stacks Categories',
         permission: 'view_tech_stacks_categories',
+    },
+    {
+        path: '/job-sources',
+        component: <JobSources />,
+        protect: true,
+        title: 'Job Sources (scrapers)',
+        permission: 'view_job_source',
     },
 ]

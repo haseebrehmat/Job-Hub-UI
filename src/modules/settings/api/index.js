@@ -56,3 +56,14 @@ export const savePermission = async (url, { arg: permissions }) => {
     const { data: data_1 } = await rawHttp.post(url, permissions)
     return toast.success(data_1.detail || 'Permission created successfully')
 }
+
+export const fetchJobSources = url => http.get(url).then(({ data }) => ({ sources: data }))
+
+export const saveJobSource = (url, { arg: source }) => {
+    if (source?.id) {
+        return rawHttp
+            .put(url, source)
+            .then(({ data }) => toast.success(data.detail || 'Job Source updated successfully'))
+    }
+    return rawHttp.post(url, source).then(({ data }) => toast.success(data.detail || 'Job Source added successfully'))
+}

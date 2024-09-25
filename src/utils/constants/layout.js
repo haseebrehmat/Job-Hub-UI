@@ -32,6 +32,7 @@ import {
     PermissionsIcon,
     TechSTack,
     JobPortalV2Icon,
+    JobSourcesIcon,
 } from '@icons'
 
 export const menuItems = [
@@ -282,6 +283,13 @@ export const menuItems = [
                 link: '/tech-stacks-categories',
                 svg: TechSTack,
                 perms: ['view_tech_stacks_categories'],
+            },
+            {
+                label: 'Job Sources',
+                link: '/job-sources',
+                svg: JobSourcesIcon,
+                perms: ['view_job_source'],
+                new: true,
             },
         ],
     },
