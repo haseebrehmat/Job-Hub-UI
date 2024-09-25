@@ -116,6 +116,26 @@
     z-index: 20;
 }
 
+.slide-pane_from_bottom {
+    @apply mx-auto my-[4vh] h-fit max-h-[90vh] overflow-auto max-w-[97%] p-2 rounded-lg;
+}
+
+.slide-pane_from_bottom > .slide-pane__header {
+    @apply !bg-transparent flex-row-reverse flex-[auto] h-fit;
+}
+
+.slide-pane_from_bottom > .slide-pane__header > .slide-pane__close {
+    @apply hidden;
+}
+
+.slide-pane_from_bottom > .slide-pane__header > .slide-pane__title-wrapper {
+    @apply mx-3 tracking-wide text-2xl text-[#048C8C];
+}
+
+.slide-pane_from_bottom > .slide-pane__header > .slide-pane__title-wrapper > .slide-pane__title {
+    @apply max-w-full;
+}
+
 body {
     max-height: 100vh !important;
     overflow: auto !important;
