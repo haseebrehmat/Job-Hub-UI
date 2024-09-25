@@ -13,7 +13,7 @@ const Drawer = ({ w = '250px', show, setShow, classes = null, dir = 'right', hea
         title={header}
         hideHeader={!isset(header)}
     >
-        <div className={`text-[#048C8C] p-3 h-fit ${classes}`}>{children}</div>
+        <div className={`text-[#048C8C] p-1.5 md:p-3 h-fit ${classes}`}>{children}</div>
     </SlidingPane>
 )
 
