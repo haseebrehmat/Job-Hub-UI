@@ -28,11 +28,11 @@ const LeadsTable = () => {
     return isLoading ? (
         <Loading />
     ) : !error ? (
-        <>
+        <div className=''>
             {vals.draggable && <LeadModal vals={vals} dispatch={dispatch} refetch={mutate} />}
             <div className='flex flex-col gap-3 px-4'>
                 <LeadSearchAndFilters filtered={vals} dispatch={dispatch} />
-                <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
+                <table className='table-auto w-full overflow-y-auto max-h-[500px] text-sm text-left text-[#048C8C]'>
                     <thead className='text-xs uppercase border border-[#048C8C]'>
                         <tr>
                             {LEAD_HEADS.map(heading => (
@@ -50,15 +50,15 @@ const LeadsTable = () => {
                                     key={row.id}
                                 >
                                     <td className='px-3 py-4 w-10'>{idx + 1}</td>
-                                    <td className='px-3 py-4 capitalize w-1/5'>{row?.applied_job?.title || '-'}</td>
-                                    <td className='px-3 py-4 capitalize w-1/6'>{row?.applied_job?.company || '-'}</td>
-                                    <td className='px-3 py-4 capitalize italic'>
+                                    <td className='px-3 py-4 sm:w-1/5'>{row?.applied_job?.title || '-'}</td>
+                                    <td className='px-3 py-4 sm:w-1/6'>{row?.applied_job?.company || '-'}</td>
+                                    <td className='px-3 py-4 capitalize italic sm:w-1/5'>
                                         {row?.applied_job?.applied_by?.name || '-'}
                                     </td>
-                                    <td className='px-3 py-4 capitalize font-semibold'>
+                                    <td className='px-3 py-4 capitalize font-semibold sm:w-1/6'>
                                         {row?.applied_job?.vertical_name || '-'}
                                     </td>
-                                    <td className='px-3 py-4 capitalize font-semibold italic'>
+                                    <td className='px-3 py-4 capitalize font-semibold italic sm:w-1/6'>
                                         {row?.candidate?.name || '-'}
                                     </td>
                                     <td className='px-3 py-4'>
@@ -91,7 +91,7 @@ const LeadsTable = () => {
                     />
                 )}
             </div>
-        </>
+        </div>
     ) : (
         <span className='m-10 italic'>Something gone wrong while fetching leads</span>
     )
