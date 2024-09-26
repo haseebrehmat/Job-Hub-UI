@@ -44,7 +44,7 @@ const TeamForm = ({ show, setShow, mutate, team }) => {
         <Drawer
             show={show}
             setShow={setShow}
-            w='320px'
+            w='450px'
             dir='bottom'
             header={
                 <div className='flex flex-wrap items-center justify-between py-2'>
