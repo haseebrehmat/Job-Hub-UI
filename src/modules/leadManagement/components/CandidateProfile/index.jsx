@@ -14,49 +14,69 @@ const CandidtaeProfile = ({ data, mutate }) => {
     return (
         <div className='h-fit'>
             <div className='rounded-lg overflow-hidden bg-white text-[#006366]'>
-                <div className='grid grid-cols-1 space-x-6'>
+                <div className='grid space-x-6'>
                     <div className='flex flex-col w-100'>
-                        <div className='flex flex-cols-2 p-6 rounded-t-2xl border'>
-                            <div className='flex-shrink-0 w-fit mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0 shadow-xl'>
+                        <div className='flex flex-cols-2 md:p-6 p-3 rounded-t-2xl border'>
+                            <div className='flex-shrink-0 w-24 md:w-fit mb-6 h-24 md:h-44 sm:mb-0 shadow-xl'>
                                 <img
                                     src={avatarPlaceholder}
                                     alt='avatar'
                                     className='object-cover object-center w-full h-full rounded dark:bg-gray-500'
                                 />
                             </div>
-                            <div className='px-4 py-2'>
-                                <div className='flex flex-row'>
+                            <div className='px-2 md:px-4 py-2'>
+                                <div className='flex flex-row flex-wrap'>
                                     <p className='flex items-center'>
-                                        <span className='font-semibold mr-3 text-lg uppercase'>name :</span>
+                                        <span className='font-semibold mr-2 md:mr-3 md:text-lg uppercase'>name :</span>
                                         <span className='text-gray-800 text-md'>{data?.candidates?.name}</span>
                                     </p>
                                 </div>
-                                <div className='flex flex-row'>
+                                <div className='flex flex-row flex-wrap'>
                                     <p className='flex items-center'>
-                                        <span className='font-semibold mr-3 text-lg uppercase'>Designation :</span>
+                                        <span className='font-semibold mr-2 md:mr-3 md:text-lg uppercase'>
+                                            Designation :
+                                        </span>
                                         <span className='text-gray-800 text-md'>
                                             {data?.candidates?.designation?.name}
                                         </span>
                                     </p>
                                 </div>
-                                <div className='flex flex-row'>
+                                <div className='flex flex-row flex-wrap'>
                                     <p className='flex items-center'>
-                                        <span className='font-semibold mr-3 text-lg uppercase'>Company :</span>
+                                        <span className='font-semibold mr-2 md:mr-3 md:text-lg uppercase'>
+                                            Company :
+                                        </span>
                                         <span className='text-gray-800 text-md'>{data?.candidates?.company?.name}</span>
                                     </p>
                                 </div>
-                                <div className='flex flex-row'>
+                                <div className='flex flex-row flex-wrap'>
                                     <p className='flex items-center'>
-                                        <span className='font-semibold mr-2 text-lg uppercase'>Experience :</span>
+                                        <span className='font-semibold mr-2 md:mr-3 md:text-lg uppercase'>
+                                            Experience :
+                                        </span>
                                         <span className='text-gray-800 text-md'>
                                             {data?.candidates?.experience} Years
                                         </span>
                                     </p>
                                 </div>
-                                <div className='flex flex-row'>
-                                    <p className=''>
-                                        <span className='font-semibold mr-2 text-lg uppercase'>Regions :</span>
+                                <div className='flex flex-row flex-wrap'>
+                                    <p>
+                                        <span className='font-semibold mr-1 md:mr-3 md:text-lg uppercase'>
+                                            Regions :
+                                        </span>
                                         <span className='text-gray-800 text-md space-x-2'>
+                                            {data?.candidates?.regions.map(region => (
+                                                <Badge
+                                                    label={
+                                                        <span className='inline-block items-center'>
+                                                            <span>{region.name}</span>
+                                                        </span>
+                                                    }
+                                                    type='success'
+                                                    classes='border border-green-300'
+                                                    key={region.id}
+                                                />
+                                            ))}
                                             {data?.candidates?.regions.map(region => (
                                                 <Badge
                                                     label={
@@ -75,8 +95,8 @@ const CandidtaeProfile = ({ data, mutate }) => {
                             </div>
                         </div>
                         <div className='flex flex-col w-full relative'>
-                            <div className='grid grid-cols-3 border divide-x bg-gray-100 rounded-b-2xl py-3'>
-                                <div className='text-xs flex flex-row items-center justify-center underline-offset-4 underline'>
+                            <div className='grid md:grid-cols-3 border divide-x bg-gray-100 rounded-b-2xl gap-3 md:gap-0 py-3'>
+                                <div className='md:text-xs flex flex-row items-center justify-center underline-offset-4 underline'>
                                     <span className='fill-teal-700 mr-3'>{svgs.gmail4}</span>
                                     {data?.candidates?.email}
                                 </div>
