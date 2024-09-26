@@ -34,10 +34,10 @@ const Analytics = () => {
     return isLoading ? (
         <Loading />
     ) : (
-        <div className='max-w-full mb-14 px-3 mt-6'>
+        <div className='md:mb-14 px-2 md:px-3 md:mt-6'>
             <Filters values={vals} set={dispatch} data={data} />
             <SubFilters options={data?.filters} set={dispatch} vals={vals} />
-            <div className='flex gap-2'>
+            <div className='flex flex-col md:flex-row gap-2'>
                 <JobTypeCounts data={data?.job_type_data} set={dispatch} />
                 <JobTypePies data={data?.job_type_data} />
             </div>
@@ -47,7 +47,7 @@ const Analytics = () => {
                 set={dispatch}
                 options={{ title: 'Tech Stacks', id: 'tech-stack-bars' }}
             />
-            <div className='flex gap-2'>
+            <div className='flex flex-col md:flex-row gap-2'>
                 <TechStackCounts data={data?.tech_stack_data} set={dispatch} stack={vals.stack} />
                 <TechStackPies data={data?.tech_stack_data?.find(row => row.name === vals.stack)} stack={vals.stack} />
             </div>

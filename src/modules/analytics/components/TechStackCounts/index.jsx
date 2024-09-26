@@ -17,7 +17,7 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
         exportButton?.current?.classList.remove('hidden')
     }
     return (
-        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative w-1/2' ref={statsRef}>
+        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={statsRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stacks<span className='text-sm'> - Counts</span>
             </p>
@@ -34,7 +34,7 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
             </span>
             {data?.length > 0 ? (
                 <div className='p-4'>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4' id='tech-stack-counts'>
+                    <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4' id='tech-stack-counts'>
                         {data?.map((d, index) => (
                             <div
                                 className={`border shadow-md pl-2 pr-3 py-2 ${

@@ -19,7 +19,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
     }
 
     return (
-        <div className='border px-2 pt-10 pb-10 mt-10 relative w-1/2' ref={statRef}>
+        <div className='border px-2 pt-10 pb-10 mt-10 relative md:w-1/2' ref={statRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-[#1E6570] text-lg tracking-widest'>
                 Job Types<span className='text-sm'> - Counts</span>
             </p>
@@ -41,7 +41,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                             <div
                                 className={`border shadow-md p-3 rounded-xl _gradient-${
                                     index + 7
-                                } w-full h-40 flex items-center cursor-pointer`}
+                                } w-full md:h-40 flex items-center cursor-pointer`}
                                 key={index}
                                 onClick={() => set({ bar: d.key })}
                             >

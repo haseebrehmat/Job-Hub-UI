@@ -34,7 +34,7 @@ const TechStackPies = ({ data = {}, stack = null }) => {
             .join('')} (${(percent * 100).toFixed(2)}%)`
 
     return (
-        <div className='border px-200000 pt-10 pb-10 text-[#1E6570] mt-10 relative w-1/2' ref={chartRef}>
+        <div className='border px-200000 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={chartRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stack<span className='text-sm'> - Charts</span>
             </p>
@@ -72,8 +72,8 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                         <Tooltip />
                     </PieChart>
                 </ResponsiveContainer>
-                <p className='text-center text-lg font-bold uppercase tracking-wider'>{stack ?? 'No stack'}</p>
-                <div className='grid grid-cols-2 p-4 mt-6'>
+                <p className='text-center md:text-lg font-bold uppercase tracking-wider'>{stack ?? 'No stack'}</p>
+                <div className='grid md:grid-cols-2 p-4 md:mt-6'>
                     {Object.keys(JOB_TYPES)
                         .filter(key => key !== 'total')
                         .map(key => (

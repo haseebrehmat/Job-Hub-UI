@@ -39,8 +39,8 @@ const Filters = ({ values, set, data = null }) => {
 
     return (
         <div className='text-[#1E6570]'>
-            <div className='flex items-center justify-between'>
-                <div className='flex md:gap-x-8 text-lg tracking-wider ml-3'>
+            <div className='flex flex-col md:flex-row items-center justify-between'>
+                <div className='flex gap-x-4 md:gap-x-8 text-lg tracking-wider md:ml-3'>
                     <div>
                         <small className='text-sm'>From:</small> {formatDate2(data?.start_date || today)}
                     </div>
@@ -48,7 +48,7 @@ const Filters = ({ values, set, data = null }) => {
                         <small className='text-sm'>To:</small> {formatDate2(data?.end_date || today)}
                     </div>
                 </div>
-                <div className='flex gap-3'>
+                <div className='flex flex-wrap gap-3'>
                     <ExportAll />
                     <Input
                         ph='Enter Keywords'
@@ -56,7 +56,7 @@ const Filters = ({ values, set, data = null }) => {
                         value={vals.query}
                         classes='lg:!w-56'
                     />
-                    <Button onClick={applyFilters} icon={AllowLeadIcon} classes='!px-1' />
+                    <Button onClick={applyFilters} icon={AllowLeadIcon} classes='!px-1' fit />
                     <Button
                         icon={CandidateFilterIcon}
                         label='Filters'
