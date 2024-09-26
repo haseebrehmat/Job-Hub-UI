@@ -43,6 +43,7 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
                     htmlToPng(chartRef?.current).then(() => postProcessing())
                 }}
@@ -89,7 +90,7 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                             </div>
                         ))}
                 </div>
-                <div className='flex items-end justify-end mr-4 py-4 hidden' ref={watermark}>
+                <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
                     <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                     <img src={logo} alt='' width='120' height='120' />
                 </div>
