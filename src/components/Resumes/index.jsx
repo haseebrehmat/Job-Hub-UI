@@ -106,7 +106,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <div className='md:w-fit'>
             <div className='flex flex-col-reverse md:flex-col-2 md:flex-row mx-auto'>
                 <div className='md:w-[75%]'>
-                    <div className='md:h-screen overflow-y-auto hide_scrollbar'>
+                    <div className='md:h-[90%] overflow-y-auto hide_scrollbar'>
                         {getTemplates(data, hide, names).map(
                             (component, index) =>
                                 tab === index && (
@@ -133,8 +133,8 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         </span>
                     </div>
                     <div
-                        className={`h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-scroll gap-y-56 ${
-                            showTemplate ? '' : 'hidden'
+                        className={`h-[90%] md:grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-scroll gap-y-56 ${
+                            showTemplate ? 'grid' : 'hidden'
                         }`}
                     >
                         {getTemplates(devProfile, hide, names).map((component, index) => (
