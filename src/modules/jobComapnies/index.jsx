@@ -20,13 +20,14 @@ const JobCompanies = () => {
     if (isLoading) return <Loading />
 
     return (
-        <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center pt-6 pb-3 justify-between'>
-                <span className='flex items-center space-x-2'>
+        <div className='max-w-full overflow-x-auto px-5'>
+            <div className='flex flex-col md:flex-row items-center pt-6 pb-3 justify-between'>
+                <span className='flex items-center space-x-2 mb-3 md:mb-0'>
                     <Searchbox query={query} setQuery={setQuery} reset={setPage} />
                 </span>
                 <JobCompanyCounts counts={data?.counts} />
             </div>
+
             <div className='grid grid-cols-2 gap-3 md:grid-cols-4'>
                 {data?.companies?.length > 0 && !error ? (
                     data?.companies?.map((row, idx) => (
@@ -45,7 +46,7 @@ const JobCompanies = () => {
                 )}
             </div>
             {data?.pages > 0 && (
-                <div className='w-full'>
+                <div className='w-full overflow-x-scroll'>
                     <Paginated pages={data?.pages} setPage={setPage} page={page} />
                 </div>
             )}
