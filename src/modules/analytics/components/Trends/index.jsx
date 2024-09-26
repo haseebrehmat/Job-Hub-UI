@@ -49,8 +49,8 @@ const StockMarketChart = ({ data = [] }) => {
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div>
-                <ResponsiveContainer width='100%' height={400} id='jobs-trends-chart'>
+            <div className='overflow-x-auto'>
+                <ResponsiveContainer minWidth={1590} height={400} id='jobs-trends-chart'>
                     <LineChart data={data} margin={{ right: 35, top: 20 }}>
                         <CartesianGrid strokeDasharray='12 12' />
                         <XAxis dataKey='date' />

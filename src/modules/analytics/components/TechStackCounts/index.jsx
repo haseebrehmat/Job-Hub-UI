@@ -34,8 +34,8 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
             {data?.length > 0 ? (
-                <div className='p-4'>
-                    <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4' id='tech-stack-counts'>
+                <div className='md:p-4'>
+                    <div className='grid grid-cols-2 lg:grid-cols-4 gap-4' id='tech-stack-counts'>
                         {data?.map((d, index) => (
                             <div
                                 className={`border shadow-md pl-2 pr-3 py-2 ${

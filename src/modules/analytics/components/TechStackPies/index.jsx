@@ -34,7 +34,7 @@ const TechStackPies = ({ data = {}, stack = null }) => {
             .join('')} (${(percent * 100).toFixed(2)}%)`
 
     return (
-        <div className='border px-200000 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={chartRef}>
+        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={chartRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stack<span className='text-sm'> - Charts</span>
             </p>
@@ -50,8 +50,8 @@ const TechStackPies = ({ data = {}, stack = null }) => {
             >
                 <CustomTooltip text='Export to png'>{DownloadIcon2}Export</CustomTooltip>
             </span>
-            <div id='tech-stack-pies'>
-                <ResponsiveContainer width='100%' height={400}>
+            <div id='tech-stack-pies' className='overflow-x-auto'>
+                <ResponsiveContainer minWidth={785} height={400}>
                     <PieChart>
                         <Pie
                             data={memoizedData}

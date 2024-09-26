@@ -45,8 +45,8 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
                     </span>
                 </div>
             )}
-            <div>
-                <ResponsiveContainer width='100%' height={750} id={options?.id}>
+            <div className='overflow-x-auto'>
+                <ResponsiveContainer minWidth={1590} height={750} id={options?.id}>
                     <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
                         <CartesianGrid strokeDasharray='3 3' />
                         <XAxis

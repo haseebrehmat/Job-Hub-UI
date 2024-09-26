@@ -37,8 +37,8 @@ const JobTypePies = ({ data }) => {
             >
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
-            <div className='flex flex-col'>
-                <ResponsiveContainer width='100%' height={400} id='job-type-pies'>
+            <div className='flex flex-col overflow-x-auto'>
+                <ResponsiveContainer minWidth={785} height={400} id='job-type-pies'>
                     <PieChart className='mx-auto'>
                         <Pie
                             data={data?.filter(({ value }) => value > 0)}

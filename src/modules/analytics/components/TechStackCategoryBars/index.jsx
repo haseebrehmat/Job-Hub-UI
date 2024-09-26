@@ -26,7 +26,7 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) => {
     return data?.length > 0 ? (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
-                Tech Stack Category<span className='text-sm'> - Charts</span>
+                Tech Stack Category<span className='text-sm hidden md:block'> - Charts</span>
             </p>
             <span
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
@@ -45,8 +45,8 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) => {
                             </div>
                         ))}
                 </div>
-                <div className='flex flex-col'>
-                    <ResponsiveContainer width='100%' height={900}>
+                <div className='flex flex-col overflow-x-auto'>
+                    <ResponsiveContainer minWidth={1590} height={900}>
                         <BarChart
                             data={data}
                             margin={{ top: 40, bottom: 150, right: 10, left: 10 }}
