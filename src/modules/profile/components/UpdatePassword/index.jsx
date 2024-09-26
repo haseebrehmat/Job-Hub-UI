@@ -54,7 +54,7 @@ const UpdatePassword = () => {
                 <PasswordType
                     label=''
                     name='confirmed_password'
-                    ph='Re-enter password to confirm'
+                    ph='Re-enter password'
                     value={values.confirmed_password}
                     error={errors.confirmed_password}
                     onChange={handleChange}
