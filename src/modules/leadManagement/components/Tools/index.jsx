@@ -11,7 +11,7 @@ const Tools = ({ data }) => (
             <div className='flex flex-col w-full px-3 md:px-8 bg-slate-100 border py-4 md:py-8 rounded-3xl md:-ml-8'>
                 {data?.candidates?.tools?.map((item, index) => (
                     <div key={index}>
-                        <div className='grid grid-flow-col md:mb-4 mb-2 justify-items-end bg-[#EDFDFB] shadow-xl p-4 rounded-xl items-center hover:transform hover:scale-[102%]'>
+                        <div className='grid grid-flow-col md:mb-4 mb-2 justify-items-end bg-[#EDFDFB] shadow-xl p-2 md:p-4 rounded-xl items-center hover:transform hover:scale-[102%]'>
                             <div className='flex flex-col justify-self-start'>
                                 <div className='text-md uppercase font-bold'>{item?.tool}</div>
                                 <div className='text-sm'>{item?.description}</div>

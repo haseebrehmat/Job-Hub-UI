@@ -90,10 +90,12 @@ const Projects = ({ data }) => {
                     </form>
                     {tags?.map((item, index) => (
                         <div key={index}>
-                            <div className='grid grid-flow-col md:mb-4 justify-items-end bg-[#EDFDFB] shadow-xl p-2.5 md:p-4 rounded-xl items-center hover:transform hover:scale-[102%]'>
-                                <div className='flex flex-col justify-self-start'>
+                            <div className='grid grid-flow-col md:mb-4 justify-items-end bg-[#EDFDFB] shadow-xl p-2.5 cursor-pointer md:p-4 rounded-xl items-center hover:transform hover:scale-[102%]'>
+                                <div className='flex flex-col justify-self-start group'>
                                     <div className='text-md uppercase font-bold'>{item?.name}</div>
-                                    <div className='text-sm'>{item?.description}</div>
+                                    <p className='text-sm line-clamp-2 group-hover:line-clamp-none'>
+                                        {item?.description}
+                                    </p>
                                     <div className='mt-2 space-x-1 flex flex-row'>
                                         {item?.tags?.length > 0 &&
                                             item?.tags?.map(tag => (

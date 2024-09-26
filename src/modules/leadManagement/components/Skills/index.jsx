@@ -16,9 +16,9 @@ const Skills = ({ data }) => (
                 {data?.candidates?.skills.map((item, index) => (
                     <div key={index}>
                         <div className='md:mb-8 mb-3 shadow-xl hover:translate hover:scale-[101%]'>
-                            <div className='flex flex-row justify-between mb-1'>
+                            <div className='flex justify-between mb-1'>
                                 <p className='text-sm uppercase'>{item.name}</p>
-                                <p className='text-sm uppercase'>{item.level}/5</p>
+                                <p className='text-sm'>{item.level} / 5</p>
                             </div>
                             <hr className='h-1 bg-gray-300 z-10' />
                             <hr className={`h-1 bg-teal-700 -mt-1 ${getWidthClass(item.level)}`} />
