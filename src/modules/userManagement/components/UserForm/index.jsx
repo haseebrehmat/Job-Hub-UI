@@ -44,11 +44,23 @@ const UserForm = ({ show, setShow, mutate, user }) => {
     )
     const allowCompanyEdit = isSuper() && !values.id
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer
+            show={show}
+            setShow={setShow}
+            w='450px'
+            dir='bottom'
+            header={
+                <div className='flex flex-wrap items-center justify-between py-2'>
+                    <span>{user?.id ? 'Edit' : 'Create'} User</span>
+                    <div className='grid grid-cols-2 gap-3'>
+                        <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
+                        <Button label='Cancel' onClick={() => setShow(false)} />
+                    </div>
+                </div>
+            }
+        >
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
-                    <p className='font-medium text-xl'>{user?.id ? 'Edit' : 'Create'} User</p>
-                    <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Email*</span>
                     <Input name='email' type='email' value={values.email} onChange={handleChange} ph='Enter email' />
                     {errors.email && <small className='ml-1 text-xs text-red-600'>{errors.email}</small>}
@@ -80,10 +92,6 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                         </>
                     )}
                     <Password value={values.password} error={errors.password} onChange={handleChange} id={user?.id} />
-                    <div className='pt-4 space-y-2'>
-                        <Button label={user?.id ? 'Update' : 'Submit'} type='submit' fill />
-                        <Button label='Cancel' onClick={() => setShow(false)} />
-                    </div>
                 </div>
             </form>
         </Drawer>
