@@ -77,18 +77,6 @@ const CandidtaeProfile = ({ data, mutate }) => {
                                                     key={region.id}
                                                 />
                                             ))}
-                                            {data?.candidates?.regions.map(region => (
-                                                <Badge
-                                                    label={
-                                                        <span className='inline-block items-center'>
-                                                            <span>{region.name}</span>
-                                                        </span>
-                                                    }
-                                                    type='success'
-                                                    classes='border border-green-300'
-                                                    key={region.id}
-                                                />
-                                            ))}
                                         </span>
                                     </p>
                                 </div>
