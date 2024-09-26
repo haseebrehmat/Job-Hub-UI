@@ -13,12 +13,12 @@ const MyProfile = () => {
     if (isLoading) return <Loading />
     return (
         <div>
-            <div className='grid space-y-3 md:grid-cols-2 md:px-6 md:space-y-0 px-2'>
-                <div className='grid h-fit space-y-3 md:space-y-8'>
+            <div className='grid space-y-3 lg:grid-cols-2 lg:px-6 lg:space-y-0 px-2'>
+                <div className='grid h-fit space-y-3 lg:space-y-8'>
                     <CandidateProfile data={data} mutate={mutate} />
                     <Projects data={data} />
                 </div>
-                <div className='grid h-fit space-y-3 md:space-y-8'>
+                <div className='grid h-fit space-y-3 lg:space-y-8'>
                     <Skills data={data} />
                     <Tools data={data} />
                 </div>
