@@ -55,10 +55,10 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                     <p className='font-medium text-xl'>Edit Job</p>
                     <hr className='my-2' />
                     <form onSubmit={handleSubmit} className='text-[#048c8c]'>
-                        <div className='flex gap-5 items-start'>
-                            <div className='grid grid-cols-2 gap-2 w-1/2'>
+                        <div className='flex flex-col md:flex-row gap-5 items-start'>
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-2 w-full md:w-1/2'>
                                 {EDIT_JOB_INPUTS.map(row => (
-                                    <div key={row.name}>
+                                    <div key={row.name} className='flex flex-col'>
                                         <span className='text-xs font-semibold text-[#048c8c]'>
                                             {row.label}
                                             {row.required ? '*' : ''}
@@ -73,19 +73,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                         {errors[row.name] && <small className='__error'>{errors[row.name]}</small>}
                                     </div>
                                 ))}
-                                <JobSourcesDropdown
-                                    value={values.job_source}
-                                    error={errors.job_source}
-                                    set={setFieldValue}
-                                    onChange={handleChange}
-                                />
-                                <JobTypesDropdown value={values.job_type} error={errors.job_type} set={setFieldValue} />
-                                <TechStacksDropdown
-                                    value={values.tech_keywords}
-                                    error={errors.tech_keywords}
-                                    set={setFieldValue}
-                                />
-                                <div className='col-span-2'>
+                                <div className='flex flex-col'>
                                     <span className='text-xs font-semibold text-[#048c8c]'>Job Source URL*</span>
                                     <Input
                                         name='job_source_url'
@@ -98,17 +86,35 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                         <small className='__error'>{errors.job_source_url}</small>
                                     )}
                                 </div>
-                                {can('mark_as_expired') && (
-                                    <div className='mt-1.5'>
-                                        <Checkbox
-                                            label={values.expired ? 'Unmark job as active' : 'Mark job as expired'}
-                                            checked={values.expired}
-                                            onChange={e => setFieldValue('expired', e.target.checked)}
-                                        />
-                                    </div>
-                                )}
+                                <div className='flex flex-col'>
+                                    <JobSourcesDropdown
+                                        value={values.job_source}
+                                        error={errors.job_source}
+                                        set={setFieldValue}
+                                        onChange={handleChange}
+                                    />
+                                    <JobTypesDropdown
+                                        value={values.job_type}
+                                        error={errors.job_type}
+                                        set={setFieldValue}
+                                    />
+                                    <TechStacksDropdown
+                                        value={values.tech_keywords}
+                                        error={errors.tech_keywords}
+                                        set={setFieldValue}
+                                    />
+                                    {can('mark_as_expired') && (
+                                        <div className='mt-1.5'>
+                                            <Checkbox
+                                                label={values.expired ? 'Unmark job as active' : 'Mark job as expired'}
+                                                checked={values.expired}
+                                                onChange={e => setFieldValue('expired', e.target.checked)}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                            <div className='w-1/2'>
+                            <div className='md:w-1/2 w-full'>
                                 <span className='font-semibold text-[#048c8c]'>Job Description*</span>
                                 <TextEditor
                                     init={job?.data?.job_description_tags}
@@ -120,6 +126,7 @@ const EditJobForm = ({ job, set, mutate = null }) => {
                                 )}
                             </div>
                         </div>
+
                         <EditFormButtons wait={wait} set={set} />
                     </form>
                 </div>

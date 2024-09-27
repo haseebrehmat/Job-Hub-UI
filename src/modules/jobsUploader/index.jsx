@@ -14,7 +14,7 @@ const JobsUploader = () => {
     return (
         <div className='flex flex-col border shadow	text-[#006366] py-8 '>
             <div className='flex flex-col mb-4'>
-                <div className='flex flex-row mb-4 md:gap-5 ml-6'>
+                <div className='flex flex-row mb-4 gap-3 md:gap-5 ml-6'>
                     {can('view_manual_job') && (
                         <Button
                             label='Post a Job'
