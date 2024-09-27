@@ -84,7 +84,6 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                             stroke='#037571'
                             interval={0}
                             textAnchor='end'
-                            allowDuplicatedCategory={false}
                             padding={{ left: 30 }}
                             style={{ textTransform: 'capitalize' }}
                             fontSize={17 - Math.round(data.length / 15)}
@@ -95,15 +94,23 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                             type='number'
                             domain={[0, 'auto']}
                         />
-                        <Tooltip />
+                        <Tooltip
+                            contentStyle={{
+                                textTransform: 'capitalize',
+                                borderRadius: 8,
+                                border: '1px solid #4ab9a7',
+                                fontSize: '13px',
+                                fontWeight: 'bold',
+                            }}
+                        />
                         <Bar dataKey='jan' fill='#C9B660' />
-                        {/* <Bar barSize={4} dataKey='feb' fill='#91C960' /> */}
-                        {/* <Bar barSize={4} dataKey='mar' fill='#FF5B33' /> */}
-                        {/* <Bar barSize={4} dataKey='apr' fill='#862c4d' /> */}
-                        {/* <Bar barSize={4} dataKey='may' fill='#62c9d3' /> */}
-                        {/* <Bar barSize={4} dataKey='jun' fill='#5967ff' /> */}
-                        {/* <Bar barSize={4} dataKey='jul' fill='#0a7e8c' /> */}
-                        {/* <Bar barSize={4} dataKey='aug' fill='#895734' /> */}
+                        <Bar dataKey='feb' fill='#91C960' />
+                        <Bar dataKey='mar' fill='#FF5B33' />
+                        <Bar dataKey='apr' fill='#862c4d' />
+                        <Bar dataKey='may' fill='#62c9d3' />
+                        <Bar dataKey='jun' fill='#5967ff' />
+                        <Bar dataKey='jul' fill='#0a7e8c' />
+                        <Bar dataKey='aug' fill='#895734' />
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>

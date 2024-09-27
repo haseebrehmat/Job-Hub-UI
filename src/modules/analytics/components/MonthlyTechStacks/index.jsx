@@ -79,7 +79,6 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
                             stroke='#037571'
                             interval={0}
                             textAnchor='end'
-                            allowDuplicatedCategory={false}
                             padding={{ left: 20 }}
                             fontSize={17 - Math.round(data.length / 15)}
                         />
@@ -89,7 +88,15 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
                             type='number'
                             domain={[0, 'auto']}
                         />
-                        <Tooltip />
+                        <Tooltip
+                            contentStyle={{
+                                textTransform: 'capitalize',
+                                borderRadius: 8,
+                                border: '1px solid #4ab9a7',
+                                fontSize: '13px',
+                                fontWeight: 'bold',
+                            }}
+                        />
                         <Bar barSize={4} dataKey='jan' fill='#C9B660' />
                         <Bar barSize={4} dataKey='feb' fill='#91C960' />
                         <Bar barSize={4} dataKey='mar' fill='#FF5B33' />
