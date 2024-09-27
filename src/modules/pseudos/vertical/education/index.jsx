@@ -25,14 +25,14 @@ const Education = ({ id }) => {
     const flag = data?.length > 0 && !error
 
     return (
-        <div className='max-w-full overflow-x-auto mb-2 px-1'>
+        <div className='mb-2 px-1'>
             <div className='flex items-center space-x-4 py-4'>
                 <Button label='Add Education History' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
-            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+            <div className='grid gap-2 md:grid-cols-2'>
                 {flag ? (
                     data?.map((row, idx) => (
-                        <div className='bg-white rounded-md p-4 border relative' key={idx}>
+                        <div className='bg-white rounded-md p-2 md:p-4 border relative' key={idx}>
                             <h2 className='text-lg italic'>{row?.institute ?? 'Not Specified'}</h2>
                             <EducationActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             <div className='flex flex-col mt-2'>
@@ -49,7 +49,7 @@ const Education = ({ id }) => {
                     <span className='ml-2 text-gray-500'>No education history found yet!</span>
                 )}
             </div>
-            <ActionButtons mutate={mutate} classes='mt-4 !w-1/3' />
+            <ActionButtons mutate={mutate} classes='mt-4' />
             {show && <EducationForm show={show} setShow={setShow} mutate={mutate} education={education} id={id} />}
         </div>
     )

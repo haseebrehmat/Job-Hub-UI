@@ -27,14 +27,16 @@ const Pseudos = () => {
 
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 py-6'>
-                <Searchbox query={query} setQuery={setQuery} />
+        <div className='md:mb-14 px-3 md:px-5'>
+            <div className='flex flex-col md:flex-row md:items-center gap-3 py-6'>
+                <div className='flex space-x-4'>
+                    <Searchbox query={query} setQuery={setQuery} />
+                </div>
                 {can('create_pseudo') && (
                     <Button label='Create Pseudo' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
             </div>
-            <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
+            <table className='table-auto w-full text-sm text-left text-[#048C8C] __table-r'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
                         {PSEUDO_HEADS.map(heading => (
@@ -48,9 +50,9 @@ const Pseudos = () => {
                     {data?.pseudos?.length > 0 && !error ? (
                         data?.pseudos?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
-                                <td className='px-3 py-6'>{idx + 1}</td>
-                                <td className='px-3 py-6'>{row?.name}</td>
-                                <td className='px-3 py-6'>
+                                <td className='px-1 md:px-3 py-6'>{idx + 1}</td>
+                                <td className='px-1 md:px-3 py-6'>{row?.name}</td>
+                                <td className='px-1 md:px-3 py-6 w-1/2 md:w-fit'>
                                     {row?.verticals.length > 0
                                         ? row?.verticals.map(v => (
                                               <div
@@ -73,7 +75,7 @@ const Pseudos = () => {
                                           ))
                                         : '-'}
                                 </td>
-                                <td className='px-3 py-6 float-right'>
+                                <td className='px-1 md:px-3 py-6 md:float-right'>
                                     {can(['edit_pseudo', 'delete_pseudo', 'create_vertical']) && (
                                         <PseudoActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
                                     )}

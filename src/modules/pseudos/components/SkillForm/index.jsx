@@ -1,9 +1,10 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
+import { Tooltip } from 'react-tooltip'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Drawer, CustomSelector, SliderInput, Tooltip } from '@components'
+import { Button, Drawer, CustomSelector, SliderInput } from '@components'
 
 import { GenericSkillForm } from '@modules/pseudos/components'
 import { saveSkill, fetchGenericSkills } from '@modules/pseudos/api'
@@ -29,7 +30,7 @@ const SkillForm = ({ show, setShow, mutate, skill, id }) => {
     )
     const flag = values.vertical_id > 0 && values.generic_skill_id > 0 && values.level > 0
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{skill?.id ? 'Edit' : 'Create'} Skill</p>
@@ -43,14 +44,14 @@ const SkillForm = ({ show, setShow, mutate, skill, id }) => {
                             <span className='text-xs font-semibold flex justify-between items-center'>
                                 Skill*
                                 {can('create_generic_skill') && (
-                                    <Tooltip text='Add skill'>
-                                        <Button
-                                            label='+'
-                                            classes='!px-1.5 !py-0.5'
-                                            onClick={() => setSkillCreate(true)}
-                                        />
-                                    </Tooltip>
+                                    <Button
+                                        label='+'
+                                        fit
+                                        classes='!px-1.5 !py-0.5 add-skill'
+                                        onClick={() => setSkillCreate(true)}
+                                    />
                                 )}
+                                <Tooltip anchorSelect='.add-skill' content='Add skill' />
                             </span>
                             <CustomSelector
                                 options={parseGenericSkills(data?.skills)}
@@ -65,7 +66,7 @@ const SkillForm = ({ show, setShow, mutate, skill, id }) => {
                     <SliderInput name='level' max={5} value={values.level} onChange={handleChange} />
                     {errors.level && <small className='__error'>{errors.level}</small>}
                     {errors.vertical_id && <small className='__error'>{errors.vertical_id}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={skill?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>

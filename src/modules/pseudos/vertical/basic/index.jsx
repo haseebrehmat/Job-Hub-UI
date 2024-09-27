@@ -43,7 +43,7 @@ const Basic = ({ id, set = null }) => {
     return (
         <div className='py-4 px-1'>
             <form onSubmit={handleSubmit}>
-                <div className='grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-3'>
+                <div className='grid gap-2 md:grid-cols-3 md:gap-3'>
                     {BASIC_INFO_INPUTS.map(input => (
                         <div key={input.name}>
                             <span className='text-xs font-semibold'>
@@ -62,8 +62,8 @@ const Basic = ({ id, set = null }) => {
                     ))}
                 </div>
                 <BasicInfoTextareas values={values} errors={errors} handleChange={handleChange} />
-                <div className='flex gap-4 items-baseline mb-2'>
-                    <div className='flex flex-col flex-wrap'>
+                <div className='flex flex-col md:flex-row md:gap-4 items-baseline mb-2'>
+                    <div className='flex flex-col w-full md:w-auto md:flex-wrap'>
                         <RegionsDropdown value={data?.regions} set={setRegions} />
                         {data?.regions?.length > 0 && (
                             <small className='-mt-5 text-[#048c8c] p-1 w-80 text-justify'>

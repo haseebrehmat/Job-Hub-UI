@@ -20,7 +20,7 @@ import {
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
 import { htmlToPng, chunkNumber } from '@utils/helpers'
 
-import { DownloadIcon } from '@icons'
+import { DownloadIcon, OpenSubMenuIcon } from '@icons'
 
 const Resumes = ({ data, hide, names, set = null }) => {
     const refs = [
@@ -36,6 +36,7 @@ const Resumes = ({ data, hide, names, set = null }) => {
         useRef(null),
     ]
     const [tab, setTab] = useState(0)
+    const [showTemplate, setShowTemplates] = useState(false)
 
     const convertTemplate = async (ref, conversion = 'pdf') => {
         await htmlToPng(ref, { name: 'download' }, false)
@@ -102,10 +103,10 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template8 data={profile} hide={gethide} names={name} />,
     ]
     return (
-        <div className='w-fit'>
-            <div className='flex flex-col-2 mx-auto'>
-                <div className='w-[75%]'>
-                    <div className='h-screen overflow-y-auto hide_scrollbar'>
+        <div className='md:w-fit'>
+            <div className='flex flex-col-reverse md:flex-col-2 md:flex-row mx-auto'>
+                <div className='md:w-[75%]'>
+                    <div className='md:h-[90%] overflow-y-auto hide_scrollbar'>
                         {getTemplates(data, hide, names).map(
                             (component, index) =>
                                 tab === index && (
@@ -121,11 +122,21 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         <Button label='Download' icon={DownloadIcon} fit fill onClick={downloadPdf} classes='!m-4' />
                     </div>
                 </div>
-                <div className='2xl:w-[30%] xl:w-[20%] border-2 rounded-lg h-screen'>
-                    <div className='bg-[#048C8C] border-2 rounded-lg py-4 text-center text-white text-xl font-semibold'>
+                <div className={`2xl:w-[30%] xl:w-[20%] border-2 rounded-lg ${showTemplate ? 'h-screen' : 'mb-4'}`}>
+                    <div
+                        className='bg-[#048C8C] border-2 rounded-lg py-2 md:py-4 text-center text-white md:text-xl font-semibold flex items-center justify-center'
+                        onClick={() => setShowTemplates(!showTemplate)}
+                    >
                         Templates
+                        <span className={`${showTemplate ? 'hidden' : 'block'} animate-ping ml-2 md:hidden`}>
+                            {OpenSubMenuIcon}
+                        </span>
                     </div>
-                    <div className='h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-auto gap-y-56'>
+                    <div
+                        className={`h-[90%] md:grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-scroll gap-y-56 ${
+                            showTemplate ? 'grid' : 'hidden'
+                        }`}
+                    >
                         {getTemplates(devProfile, hide, names).map((component, index) => (
                             <div className='h-6 transform scale-[20%] w-[20%]' key={index}>
                                 <div

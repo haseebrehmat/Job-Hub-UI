@@ -4,7 +4,7 @@ import { Textarea } from '@components'
 
 const BasicInfoTextareas = ({ values, errors, handleChange = null }) => (
     <>
-        <div className='grid grid-cols-2 gap-5 pt-3'>
+        <div className='grid md:grid-cols-2 md:gap-5 pt-3'>
             <div>
                 <span className='text-xs font-semibold'>Address</span>
                 <Textarea

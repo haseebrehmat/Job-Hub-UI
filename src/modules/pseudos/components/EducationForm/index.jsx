@@ -32,7 +32,7 @@ const EducationForm = ({ show, setShow, mutate, education, id }) => {
     const flag = values.institute.length > 0 && values.degree.length > 0 && values.grade.length > 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{education?.id ? 'Edit' : 'Create'} Education</p>
@@ -63,7 +63,7 @@ const EducationForm = ({ show, setShow, mutate, education, id }) => {
                         ph='3.00 / 4.00 or A+ Grade or 879 / 1100'
                     />
                     {errors.grade && <small className='__error'>{errors.grade}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={education?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>

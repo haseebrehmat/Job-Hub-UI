@@ -21,14 +21,14 @@ const Projects = ({ id }) => {
 
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto mb-2 px-1'>
+        <div className='mb-2 px-1'>
             <div className='flex items-center space-x-4 py-4'>
                 <Button label='Add Project' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
-            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+            <div className='grid gap-2 md:grid-cols-2'>
                 {data?.length > 0 && !error ? (
                     data?.map((row, idx) => (
-                        <div className='bg-white rounded-md p-4 border relative' key={idx}>
+                        <div className='bg-white rounded-md p-2 md:p-4 border relative' key={idx}>
                             <h2 className='text-lg'>{row?.title ?? 'Not Specified'}</h2>
                             <ProjectActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             <div className='flex flex-col mt-2'>
@@ -52,7 +52,7 @@ const Projects = ({ id }) => {
                     <span className='ml-2 text-gray-500'>No projects found yet!</span>
                 )}
             </div>
-            <ActionButtons mutate={mutate} classes='mt-4 !w-1/3' />
+            <ActionButtons mutate={mutate} classes='mt-4' />
             {show && <ProjectForm show={show} setShow={setShow} mutate={mutate} project={project} id={id} />}
         </div>
     )

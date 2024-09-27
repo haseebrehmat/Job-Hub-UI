@@ -21,14 +21,14 @@ const OtherSections = ({ id }) => {
 
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto mb-2 px-1'>
+        <div className='mb-2 px-1'>
             <div className='flex items-center space-x-4 py-4'>
                 <Button label='Add Other Section' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
-            <div className='grid grid-cols-1 space-y-2'>
+            <div className='grid space-y-2'>
                 {data?.length > 0 && !error ? (
                     data?.map((row, idx) => (
-                        <div className='bg-white rounded-md p-3 border border-cyan-600 relative' key={idx}>
+                        <div className='bg-white rounded-md p-2 md:p-3 border border-cyan-600 relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'No Name'}</h2>
                             <OtherSectionActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
                             <div className='ml-2 mt-1 text-gray-600 break-words'>{row?.value ?? 'Not detail'}</div>
@@ -38,7 +38,7 @@ const OtherSections = ({ id }) => {
                     <span className='ml-2 text-gray-500'>No other sections found yet!</span>
                 )}
             </div>
-            <ActionButtons mutate={mutate} classes='mt-4 !w-1/3' />
+            <ActionButtons mutate={mutate} classes='mt-4' />
             {show && (
                 <OtherSectionForm show={show} setShow={setShow} mutate={mutate} otherSection={otherSection} id={id} />
             )}
