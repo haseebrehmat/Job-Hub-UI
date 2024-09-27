@@ -10,29 +10,31 @@ import logo from '@images/signin-logo.svg'
 
 const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
     const watermark = useRef('')
+    const exportButton = useRef('')
 
-    const exportToPng = () => {
-        const watermarkClasses = watermark?.current?.classList
-        watermarkClasses.remove('hidden')
-        watermarkClasses.add('flex')
-        htmlToPng(ref?.current).then(() => {
-            watermarkClasses.remove('flex')
-            watermarkClasses.add('hidden')
-        })
+    const postProcessing = () => {
+        watermark?.current?.classList.add('hidden')
+        exportButton?.current?.classList.remove('hidden')
     }
 
     return data?.length > 0 ? (
-        <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
+        <div className='border px-2 pt-10 pb-20 text-[#1E6570] mt-10 relative' ref={ref}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Quarter Wise Tech Stack Category <span className='text-sm hidden md:inline-block'> - Charts</span>
             </p>
             <span
+                ref={exportButton}
                 className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
-                onClick={exportToPng}
+                onClick={() => {
+                    watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
+                    exportButton?.current?.classList.add('hidden')
+                    htmlToPng(ref?.current).then(() => postProcessing())
+                }}
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div ref={ref} className='pt-4' id='tech-stack-category-trends-bars'>
+            <div className='pt-4' id='tech-stack-category-trends-bars'>
                 <div className='w-full flex justify-end gap-6 px-4 flex-wrap'>
                     <div className='flex gap-2 items-center text-[#C9B660]'>
                         <span className='bg-[#C9B660] px-4 py-1.5' />
@@ -47,14 +49,9 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                         <span>Quarter 3</span>
                     </div>
                 </div>
-                <div className='flex flex-col overflow-x-auto'>
+                <div className='flex flex-col '>
                     <ResponsiveContainer minWidth={1590} height={900}>
-                        <BarChart
-                            data={data}
-                            margin={{ top: 40, bottom: 150, right: 5, left: 5 }}
-                            barCategoryGap={10}
-                            barSize={10}
-                        >
+                        <BarChart data={data} margin={{ top: 40, bottom: 100, right: 10, left: 10 }} barSize={10}>
                             <CartesianGrid strokeDasharray='3 3' />
                             <XAxis
                                 dataKey='name'
@@ -79,7 +76,7 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                             <Bar dataKey='q3' fill='#FF5B33' />
                         </BarChart>
                     </ResponsiveContainer>
-                    <div className='items-end justify-end mr-4 py-2 hidden' ref={watermark}>
+                    <div className='items-end justify-end mr-4 py-2 -mt-18 hidden' ref={watermark}>
                         <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                         <img src={logo} alt='' width='120' height='120' />
                     </div>
