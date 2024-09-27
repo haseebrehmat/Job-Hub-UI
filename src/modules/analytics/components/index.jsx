@@ -12,6 +12,7 @@ import ExportAll from '@modules/analytics/components/ExportAll'
 import TechStackCategoryTooltip from '@modules/analytics/components/TechStackCategoryTooltip'
 import TechStackCategoryBars from '@modules/analytics/components/TechStackCategoryBars'
 import QuarterWiseCategory from '@/modules/analytics/components/QuarterWiseCategory'
+import QuarterWiseTechStack from '@/modules/analytics/components/QuarterWiseTechStack'
 
 export {
     JobTypeCounts,
@@ -28,4 +29,5 @@ export {
     TechStackCategoryTooltip,
     QuarterWiseCategory,
     TechStackCategoryBars,
+    QuarterWiseTechStack,
 }
