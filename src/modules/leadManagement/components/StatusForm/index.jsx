@@ -24,7 +24,7 @@ const StatusForm = ({ show, setShow, mutate, status = null }) => {
     const flag = values.name.length > 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='700px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{status?.id ? 'Edit' : 'Create'} Status</p>

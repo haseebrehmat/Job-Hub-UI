@@ -1,7 +1,7 @@
-import { memo, useReducer } from 'react'
+import { memo, useReducer, useState } from 'react'
 import useSWR from 'swr'
 
-import { Input, Button, Searchbox } from '@components'
+import { Input, Button, Searchbox, Checkbox } from '@components'
 
 import { LeadFilterByStatus, LeadFilterDropdowns } from '@modules/leadManagement/components'
 import { fetchLeadFilters } from '@modules/leadManagement/api'
@@ -10,6 +10,7 @@ import { CandidateFilterIcon } from '@icons'
 
 const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
     const { data, error } = useSWR('/api/lead_managament/leads_filters/', fetchLeadFilters)
+    const [phasesVisibility, setPhasesVisibility] = useState(false)
 
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         from: filtered.from,
@@ -61,9 +62,18 @@ const LeadSearchAndFilters = ({ filtered = null, dispatch = null }) => {
                         fit
                         fill={filtered.filter}
                     />
+                    <Checkbox
+                        name='Phases'
+                        label='Phases'
+                        checked={phasesVisibility}
+                        onChange={e => {
+                            console.log(e.checked)
+                            setPhasesVisibility(e.target.checked)
+                        }}
+                    />
                 </div>
             </div>
-            <LeadFilterByStatus active={filtered.statusFilter} dispatch={dispatch} />
+            {!phasesVisibility && <LeadFilterByStatus active={filtered.statusFilter} dispatch={dispatch} />}
             {filtered.filter ? (
                 <div className='grid grid-cols-4 auto-cols-max items-end gap-x-4 gap-y-2 p-4 text-[#338d8c] bg-slate-50 border border-cyan-600 rounded-xl'>
                     <div>

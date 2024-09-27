@@ -15,7 +15,11 @@ const Badge = ({ label, type = 'default', classes = null }) => {
         default:
             typeClass = 'bg-blue-100 text-blue-800'
     }
-    return <span className={`${typeClass} text-sm font-medium px-2 py-1 rounded-full ${classes}`}>{label || '-'}</span>
+    return (
+        <span className={`${typeClass} inline-block text-center text-sm font-medium px-2 py-1 rounded-full ${classes}`}>
+            {label || '-'}
+        </span>
+    )
 }
 
 export default memo(Badge)
