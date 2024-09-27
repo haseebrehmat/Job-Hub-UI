@@ -8,7 +8,7 @@ import { htmlToPng } from '@utils/helpers'
 import { DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
 
-const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
+const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
     const watermark = useRef('')
     const exportButton = useRef('')
     const postProcessing = () => {
@@ -19,7 +19,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
     return data?.length > 0 ? (
         <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative' ref={ref}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
-                Quarter Wise Tech Stacks
+                Monthly Tech Stacks
                 <span className='text-sm'> - Charts</span>
             </p>
             <span
@@ -37,15 +37,35 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
             <div className='w-full flex justify-end gap-6 px-4 flex-wrap'>
                 <div className='flex gap-2 items-center text-[#C9B660]'>
                     <span className='bg-[#C9B660] px-4 py-1.5' />
-                    <span>Quarter 1</span>
+                    <span>January</span>
                 </div>
                 <div className='flex gap-2 items-center text-[#91C960]'>
                     <span className='bg-[#91C960] px-4 py-1.5' />
-                    <span>Quarter 2</span>
+                    <span>February</span>
                 </div>
                 <div className='flex gap-2 items-center text-[#FF5B33]'>
                     <span className='bg-[#FF5B33] px-4 py-1.5' />
-                    <span>Quarter 3</span>
+                    <span>March</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#862c4d]'>
+                    <span className='bg-[#862c4d] px-4 py-1.5' />
+                    <span>April</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#62c9d3]'>
+                    <span className='bg-[#62c9d3] px-4 py-1.5' />
+                    <span>May</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#5967ff]'>
+                    <span className='bg-[#5967ff] px-4 py-1.5' />
+                    <span>June</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#0a7e8c]'>
+                    <span className='bg-[#0a7e8c] px-4 py-1.5' />
+                    <span>July</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#895734]'>
+                    <span className='bg-[#895734] px-4 py-1.5' />
+                    <span>August</span>
                 </div>
             </div>
             <div className='overflow-x-auto'>
@@ -70,9 +90,14 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
                             domain={[0, 'auto']}
                         />
                         <Tooltip />
-                        <Bar dataKey='q1' fill='#C9B660' />
-                        <Bar dataKey='q2' fill='#91C960' />
-                        <Bar dataKey='q3' fill='#FF5B33' />
+                        <Bar barSize={4} dataKey='jan' fill='#C9B660' />
+                        <Bar barSize={4} dataKey='feb' fill='#91C960' />
+                        <Bar barSize={4} dataKey='mar' fill='#FF5B33' />
+                        <Bar barSize={4} dataKey='apr' fill='#862c4d' />
+                        <Bar barSize={4} dataKey='may' fill='#62c9d3' />
+                        <Bar barSize={4} dataKey='jun' fill='#5967ff' />
+                        <Bar barSize={4} dataKey='jul' fill='#0a7e8c' />
+                        <Bar barSize={4} dataKey='aug' fill='#895734' />
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
@@ -84,4 +109,4 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
     ) : null
 })
 
-export default memo(QuarterWiseTechStack)
+export default memo(MonthlyTechStacks)

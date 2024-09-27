@@ -205,17 +205,6 @@ export const rawStacksData = [
     },
 ]
 
-export const stacksData = rawStacksData.map(entry => ({
-    name: entry.name,
-    total: entry.total,
-    contract_on_site: parseInt(entry.total / 7),
-    contract_remote: parseInt(entry.total / 6),
-    full_time_on_site: parseInt(entry.total / 5),
-    full_time_remote: parseInt(entry.total / 4),
-    hybrid_on_site: parseInt(entry.total / 3),
-    hybrid_remote: parseInt(entry.total / 2),
-}))
-
 export const jobstypeData = [
     {
         name: 'Contract On Site',
@@ -310,3 +299,15 @@ export const quarterlyTrends = [
         tech_stacks: ['networking', 'go/golang', 'c/c++'],
     },
 ]
+
+export const monthlyTechs = rawStacksData.map(entry => ({
+    name: entry.name,
+    jan: parseInt(entry.q1 + 700),
+    feb: parseInt(entry.q1 + entry.q2),
+    mar: parseInt(entry.q1 + entry.q2 + entry.q3),
+    apr: parseInt(entry.q1 + 2223),
+    may: parseInt(entry.q2 + 290),
+    jun: parseInt(entry.q2 + 600 + entry.q1),
+    jul: parseInt(entry.q1 + 255 + entry.q2),
+    aug: parseInt(entry.q1 + 122),
+}))
