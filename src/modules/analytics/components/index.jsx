@@ -10,6 +10,8 @@ import Trends from '@modules/analytics/components/Trends'
 import SubFilters from '@modules/analytics/components/SubFilters'
 import ExportAll from '@modules/analytics/components/ExportAll'
 import TechStackCategoryTooltip from '@modules/analytics/components/TechStackCategoryTooltip'
+import TechStackCategoryBars from '@modules/analytics/components/TechStackCategoryBars'
+import QuarterWiseCategory from '@/modules/analytics/components/QuarterWiseCategory'
 
 export {
     JobTypeCounts,
@@ -24,4 +26,6 @@ export {
     SubFilters,
     ExportAll,
     TechStackCategoryTooltip,
+    QuarterWiseCategory,
+    TechStackCategoryBars,
 }

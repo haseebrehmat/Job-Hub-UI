@@ -12,15 +12,16 @@ import {
     TechStackBars,
     TechStackPies,
     Trends,
+    TechStackCategoryBars,
+    QuarterWiseCategory,
 } from '@modules/analytics/components'
 import { fetchAnalytics } from '@modules/analytics/api'
-import { trendsData } from '@modules/analytics/api/data'
+import { trendsData, rawStacksData } from '@modules/analytics/api/data'
 
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
-import TechStackCategoryBars from './components/TechStackCategoryBars'
 
 const Analytics = () => {
-    const [ref1] = [useRef('')]
+    const [ref1, ref2] = [useRef(''), useRef('')]
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), ANALYTIC_INITIAL_VALUES)
 
     const { data, isLoading } = useSWR(
@@ -53,6 +54,7 @@ const Analytics = () => {
             </div>
             <Trends data={trendsData} />
             <TechStackCategoryBars data={data?.trend_analytics} ref={ref1} />
+            <QuarterWiseCategory data={rawStacksData} ref={ref2} />
             <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
         </div>
     )
