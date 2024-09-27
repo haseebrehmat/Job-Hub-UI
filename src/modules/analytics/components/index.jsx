@@ -11,9 +11,10 @@ import SubFilters from '@modules/analytics/components/SubFilters'
 import ExportAll from '@modules/analytics/components/ExportAll'
 import TechStackCategoryTooltip from '@modules/analytics/components/TechStackCategoryTooltip'
 import TechStackCategoryBars from '@modules/analytics/components/TechStackCategoryBars'
-import QuarterWiseCategory from '@/modules/analytics/components/QuarterWiseCategory'
-import QuarterWiseTechStack from '@/modules/analytics/components/QuarterWiseTechStack'
-import MonthlyTechStacks from '@/modules/analytics/components/MonthyTechStacks'
+import QuarterWiseCategory from '@modules/analytics/components/QuarterWiseCategory'
+import QuarterWiseTechStack from '@modules/analytics/components/QuarterWiseTechStack'
+import MonthlyTechStacks from '@modules/analytics/components/MonthlyTechStacks'
+import MonthlyCategories from '@modules/analytics/components/MonthlyCategories'
 
 export {
     JobTypeCounts,
@@ -32,4 +33,5 @@ export {
     TechStackCategoryBars,
     QuarterWiseTechStack,
     MonthlyTechStacks,
+    MonthlyCategories,
 }

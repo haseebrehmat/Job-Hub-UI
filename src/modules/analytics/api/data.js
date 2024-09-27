@@ -311,3 +311,15 @@ export const monthlyTechs = rawStacksData.map(entry => ({
     jul: parseInt(entry.q1 + 255 + entry.q2),
     aug: parseInt(entry.q1 + 122),
 }))
+
+export const monthlyTrends = quarterlyTrends.map(entry => ({
+    name: entry.name,
+    jan: parseInt(entry.q1 + 700),
+    feb: parseInt(entry.q1 + entry.q2),
+    mar: parseInt(entry.q1 + entry.q2 + entry.q3),
+    apr: parseInt(entry.q1 + 2223),
+    may: parseInt(entry.q2 + 290),
+    jun: parseInt(entry.q2 + 600 + entry.q1),
+    jul: parseInt(entry.q1 + 255 + entry.q2),
+    aug: parseInt(entry.q1 + 122),
+}))
