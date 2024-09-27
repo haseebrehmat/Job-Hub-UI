@@ -2,16 +2,11 @@ import { memo, useReducer, useState } from 'react'
 import useSWRMutation from 'swr/mutation'
 
 import { Button, CustomSelector } from '@components'
-
 import { downloadFilteredJobs } from '@modules/teamAppliedJobs/api'
-
 import { FilterDates } from '@modules/appliedJobs/components'
 import { MyDownloads } from '@modules/teamAppliedJobs/components'
-
 import { JOB_TYPES_OPTIONS } from '@constants/scrapper'
-
 import { parseLinks, parseVals } from '@utils/helpers'
-
 import { DownloadIcon, LogsIcon } from '@icons'
 
 const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns }) => {
@@ -45,12 +40,29 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
         downloadFilteredJobs
     )
     const clearFilters = () => {
-        dispatch({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agents: [], filter: false })
-        update({ from: '', to: '', stacks: [], sources: [], types: [], verticals: [], agents: [] })
+        dispatch({
+            from: '',
+            to: '',
+            stacks: [],
+            sources: [],
+            types: [],
+            verticals: [],
+            agents: [],
+            filter: false,
+        })
+        update({
+            from: '',
+            to: '',
+            stacks: [],
+            sources: [],
+            types: [],
+            verticals: [],
+            agents: [],
+        })
     }
 
     return (
-        <div className='grid grid-cols-4 auto-cols-max items-end gap-x-3 gap-y-1 mx-2 mb-3 p-4 shadow-md text-[#338d8c] rounded-xl bg-slate-100 border'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-1 mx-2 mb-3 p-4 shadow-md text-[#338d8c] rounded-xl bg-slate-100 border'>
             <FilterDates vals={vals} update={update} />
             <div>
                 <span className='text-xs font-semibold'>Tech Stacks</span>
@@ -82,19 +94,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
                     placeholder='Select Types'
                 />
             </div>
-            {/* {agent && (
-                <div>
-                    <span className='text-xs font-semibold'>Agents (BD)</span>
-                    <CustomSelector
-                        options={JOB_TYPES_OPTIONS}
-                        handleChange={obj => update({ agents: obj })}
-                        selectorValue={vals.agents}
-                        isMulti
-                        placeholder='Select Agent (BD)'
-                    />
-                </div>
-            )} */}
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-2 mt-6'>
                 <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
                 {(filtered.from ||
                     filtered.to ||
@@ -103,8 +103,7 @@ const Filters = ({ filtered = null, dispatch = null, agent = false, dropdowns })
                     filtered.types.length > 0 ||
                     (agent && filtered.agent)) && <Button fit onClick={clearFilters} label='Clear' />}
             </div>
-            <div>{}</div>
-            <div className='flex gap-2'>
+            <div className='flex gap-2 items-center mt-6'>
                 <Button
                     icon={DownloadIcon}
                     label={isLoading ? 'Downloading....' : 'Download'}
