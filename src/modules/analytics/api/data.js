@@ -260,11 +260,53 @@ export const trendsData = [
 ]
 
 export const quarterlyTrends = [
-    { category: 'Full Stack', q1: 12000, q2: 12000, q3: 12000 },
-    { category: 'Niche', q1: 12000, q2: 12000, q3: 12000 },
-]
-
-export const monthlyTrends = [
-    { category: 'Full Stack', jan: 12000, feb: 12000, mar: 12000 },
-    { category: 'Niche', jan: 12000, feb: 12000, mar: 12000 },
+    {
+        q1: 3673,
+        q2: 118,
+        q3: 11692,
+        name: 'full stack development',
+        tech_stacks: ['mern', 'php', 'javascript', 'ruby on rails'],
+    },
+    {
+        q1: 2427,
+        q2: 60,
+        q3: 8479,
+        name: 'mobile development',
+        tech_stacks: ['android', 'ios', 'react native', 'flutter'],
+    },
+    {
+        q1: 5393,
+        q2: 201,
+        q3: 17628,
+        name: 'machine learning domain',
+        tech_stacks: ['data science/data scientist', 'python', 'data engineering/data engineer', 'ml engineer'],
+    },
+    {
+        q1: 14953,
+        q2: 474,
+        q3: 42828,
+        name: 'widely used old technologies',
+        tech_stacks: ['c#/dot net', 'java'],
+    },
+    {
+        q1: 12632,
+        q2: 217,
+        q3: 49654,
+        name: 'supporting technologies',
+        tech_stacks: ['database', 'devops', 'ui/ux', 'qa'],
+    },
+    {
+        q1: 3904,
+        q2: 116,
+        q3: 12436,
+        name: 'niche technologies',
+        tech_stacks: ['blockchain', 'salesforce', 'service now', 'dynamics'],
+    },
+    {
+        q1: 1913,
+        q2: 56,
+        q3: 6658,
+        name: 'legacy technologies',
+        tech_stacks: ['networking', 'go/golang', 'c/c++'],
+    },
 ]
