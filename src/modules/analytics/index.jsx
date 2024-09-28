@@ -19,7 +19,7 @@ import {
     MonthlyCategories,
 } from '@modules/analytics/components'
 import { fetchAnalytics } from '@modules/analytics/api'
-import { trendsData, quarterlyTrends, rawStacksData, monthlyTechs, monthlyTrends } from '@modules/analytics/api/data'
+import { trendsData, rawStacksData, monthlyTechs } from '@modules/analytics/api/data'
 
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
 
@@ -57,10 +57,10 @@ const Analytics = () => {
             </div>
             <Trends data={trendsData} />
             <TechStackCategoryBars data={data?.trend_analytics} ref={ref1} />
-            <QuarterWiseCategory data={quarterlyTrends} ref={ref2} />
+            <QuarterWiseCategory data={data?.quarterly_trends} ref={ref2} />
             <QuarterWiseTechStack data={rawStacksData} ref={ref3} />
             <MonthlyTechStacks data={monthlyTechs} ref={ref4} />
-            <MonthlyCategories data={monthlyTrends} ref={ref5} />
+            <MonthlyCategories data={data?.monthly_trends} ref={ref5} />
             <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
         </div>
     )

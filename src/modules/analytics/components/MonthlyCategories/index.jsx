@@ -67,6 +67,22 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                     <span className='bg-[#895734] px-4 py-1.5' />
                     <span>August</span>
                 </div>
+                <div className='flex gap-2 items-center text-[#890734]'>
+                    <span className='bg-[#890734] px-4 py-1.5' />
+                    <span>September</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#240046]'>
+                    <span className='bg-[#240046] px-4 py-1.5' />
+                    <span>October</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#3a506b]'>
+                    <span className='bg-[#3a506b] px-4 py-1.5' />
+                    <span>November</span>
+                </div>
+                <div className='flex gap-2 items-center text-[#006ba6]'>
+                    <span className='bg-[#006ba6] px-4 py-1.5' />
+                    <span>December</span>
+                </div>
             </div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
@@ -78,7 +94,7 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                     >
                         <CartesianGrid strokeDasharray='3 3' />
                         <XAxis
-                            dataKey='name'
+                            dataKey='category'
                             label={{ position: 'insideBottomRight' }}
                             angle={-20}
                             stroke='#037571'
@@ -103,14 +119,18 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                                 fontWeight: 'bold',
                             }}
                         />
-                        <Bar dataKey='jan' fill='#C9B660' />
-                        <Bar dataKey='feb' fill='#91C960' />
-                        <Bar dataKey='mar' fill='#FF5B33' />
-                        <Bar dataKey='apr' fill='#862c4d' />
+                        <Bar dataKey='january' fill='#C9B660' />
+                        <Bar dataKey='february' fill='#91C960' />
+                        <Bar dataKey='march' fill='#FF5B33' />
+                        <Bar dataKey='april' fill='#862c4d' />
                         <Bar dataKey='may' fill='#62c9d3' />
-                        <Bar dataKey='jun' fill='#5967ff' />
-                        <Bar dataKey='jul' fill='#0a7e8c' />
-                        <Bar dataKey='aug' fill='#895734' />
+                        <Bar dataKey='june' fill='#5967ff' />
+                        <Bar dataKey='july' fill='#0a7e8c' />
+                        <Bar dataKey='august' fill='#895734' />
+                        <Bar dataKey='september' fill='#890734' />
+                        <Bar dataKey='october' fill='#240046' />
+                        <Bar dataKey='november' fill='#3a506b' />
+                        <Bar dataKey='december' fill='#006ba6' />
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>

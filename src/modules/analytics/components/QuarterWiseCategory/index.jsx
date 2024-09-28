@@ -49,12 +49,12 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                         <span>Quarter 3</span>
                     </div>
                 </div>
-                <div className='flex flex-col '>
+                <div className='flex flex-col overflow-x-auto'>
                     <ResponsiveContainer minWidth={1590} height={900}>
                         <BarChart data={data} margin={{ top: 40, bottom: 100, right: 10, left: 10 }} barSize={10}>
                             <CartesianGrid strokeDasharray='3 3' />
                             <XAxis
-                                dataKey='name'
+                                dataKey='category'
                                 label={{ position: 'insideBottomRight' }}
                                 angle={-25}
                                 stroke='#037571'
