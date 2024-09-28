@@ -27,7 +27,7 @@ const GenericSkillForm = ({ show, setShow, mutate, skill = null, close = false }
     const flag = values.name.length > 0 && values.type.length > 0 && values.type in GENERIC_SKILL_TYPES
 
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{skill?.id ? 'Edit' : 'Create'} Generic Skill</p>
@@ -42,7 +42,7 @@ const GenericSkillForm = ({ show, setShow, mutate, skill = null, close = false }
                         selectorValue={parseSelectedGenericSkillType(values.type)}
                     />
                     {errors.type && <small className='__error'>{errors.type}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={skill?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
