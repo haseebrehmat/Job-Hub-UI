@@ -40,7 +40,7 @@ const ExportAll = () => {
                 label={exporting ? 'Exporting...' : 'Export ALL'}
                 loading={exporting}
                 onClick={handleClick}
-                classes='!pl-2 !pr-3 whitespace-nowrap !rounded-full hidden md:flex'
+                classes='!pl-2 !pr-3 whitespace-nowrap !rounded-full hidden 2xl:flex'
                 disabled={exporting}
                 fit
             />
