@@ -29,8 +29,8 @@ const LeadNotes = () => {
     const [note, setNote] = useReducer((prev, next) => ({ ...prev, ...next }), NOTE_INITIAL_STATE)
 
     const { data, isLoading, mutate } = useSWR(
-        `/api/lead_managament/lead_activity_notes/?lead=${id}&status=${state.status || note.status}&phase=${
-            state.phase || note.phase
+        `/api/lead_managament/lead_activity_notes/?lead=${id}&status=${state?.status || note.status}&phase=${
+            state?.phase || note.phase
         }&search=${note.search}`,
         fetchNotes
     )
