@@ -39,7 +39,7 @@ const Filters = ({ values, set, data = null }) => {
 
     return (
         <div className='text-[#1E6570]'>
-            <div className='flex flex-col md:flex-row items-center justify-between'>
+            <div className='flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0'>
                 <div className='flex gap-x-4 md:gap-x-8 text-lg tracking-wider md:ml-3'>
                     <div>
                         <small className='text-sm'>From:</small> {formatDate2(data?.start_date || today)}
