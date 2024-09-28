@@ -50,13 +50,13 @@ const Projects = ({ data }) => {
     if (isLoading) return <Loading />
     return (
         <div className='text-[#006366] '>
-            <div className='flex flex-row justify-center'>
-                <div className='border border-1 p-3 m-2 text-center h-fit bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%] z-10'>
+            <div className='flex flex-col md:flex-row md:justify-center'>
+                <div className='border border-1 p-2 md:p-3 md:m-2 text-center h-fit bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] md:hover:transform md:hover:scale-[110%] z-10'>
                     <div className='flex flex-col justify-center items-center'>
                         <p className='text-md font-semibold uppercase'>Projects</p>
                     </div>
                 </div>
-                <div className='flex flex-col w-full px-8 bg-slate-100 border py-8 rounded-3xl -ml-8'>
+                <div className='flex flex-col w-full px-4 md:px-8 bg-slate-100 border py-4 md:py-8 rounded-3xl md:-ml-8'>
                     <form onSubmit={handleSubmit}>
                         <div className='grid grid-flow-row gap-2 mb-1 w-full'>
                             <Input
@@ -74,7 +74,7 @@ const Projects = ({ data }) => {
                                 className='bg-slate-100'
                             />
                         </div>
-                        <div className='grid grid-flow-col gap-2 mb-6'>
+                        <div className='grid grid-flow-col gap-2 mb-3 md:mb-6'>
                             <Input
                                 value={inputs?.tags}
                                 onChange={handleChange}
@@ -90,10 +90,12 @@ const Projects = ({ data }) => {
                     </form>
                     {tags?.map((item, index) => (
                         <div key={index}>
-                            <div className='grid grid-flow-col mb-4 justify-items-end bg-[#EDFDFB] shadow-xl p-4 rounded-xl items-center hover:transform hover:scale-[102%]'>
-                                <div className='flex flex-col justify-self-start'>
+                            <div className='grid grid-flow-col md:mb-4 justify-items-end bg-[#EDFDFB] shadow-xl p-2.5 cursor-pointer md:p-4 rounded-xl items-center hover:transform hover:scale-[102%]'>
+                                <div className='flex flex-col justify-self-start group'>
                                     <div className='text-md uppercase font-bold'>{item?.name}</div>
-                                    <div className='text-sm'>{item?.description}</div>
+                                    <p className='text-sm line-clamp-2 group-hover:line-clamp-none'>
+                                        {item?.description}
+                                    </p>
                                     <div className='mt-2 space-x-1 flex flex-row'>
                                         {item?.tags?.length > 0 &&
                                             item?.tags?.map(tag => (
@@ -110,15 +112,13 @@ const Projects = ({ data }) => {
                                             ))}
                                     </div>
                                 </div>
-                                <div className=''>
-                                    <button
-                                        type='button'
-                                        onClick={() => handleTagRemove(item)}
-                                        className='ml-2 focus:outline-none hover:text-red-700'
-                                    >
-                                        <p className='text-xl mr-4 font-bold'>X</p>
-                                    </button>
-                                </div>
+                                <button
+                                    type='button'
+                                    onClick={() => handleTagRemove(item)}
+                                    className='ml-2 focus:outline-none hover:text-red-700'
+                                >
+                                    <p className='text-xl md:mr-4 font-bold'>X</p>
+                                </button>
                             </div>
                         </div>
                     ))}
