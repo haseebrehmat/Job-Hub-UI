@@ -71,6 +71,7 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                             <Bar dataKey='q1' fill='#C9B660' />
                             <Bar dataKey='q2' fill='#91C960' />
                             <Bar dataKey='q3' fill='#FF5B33' />
+                            <Bar dataKey='q4' fill='#4E6E58' />
                         </BarChart>
                     </ResponsiveContainer>
                     <div className='items-end justify-end mr-4 py-2 -mt-18 hidden' ref={watermark}>
