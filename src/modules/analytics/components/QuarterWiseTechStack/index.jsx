@@ -15,7 +15,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
     const exportButton = useRef('')
     const postProcessing = () => {
         watermark?.current?.classList.add('hidden')
-        exportButton?.current?.classList.remove('hidden')
+        exportButton?.current?.classList.add('2xl:flex')
     }
 
     return data?.length > 0 ? (
@@ -30,7 +30,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
                     watermark?.current?.classList.add('flex')
-                    exportButton?.current?.classList.add('hidden')
+                    exportButton?.current?.classList.remove('2xl:flex')
                     htmlToPng(ref?.current).then(() => postProcessing())
                 }}
             >
