@@ -60,20 +60,19 @@ const FilterOptions = ({ vals = null, update = null }) =>
             {vals.tab === 'quarterly' && (
                 <>
                     <div>
-                        <span className='text-xs pl-1'>Year</span>
-                        <div className='lg:!w-56'>
+                        <span className='text-xs pl-1'>Select Year</span>
+                        <div className='w-32 md:w-48 lg:!w-56'>
                             <CustomSelector
                                 options={getYearsOptions()}
                                 handleChange={({ value }) => update({ year: value })}
                                 selectorValue={{ value: vals.year, label: vals.year }}
-                                placeholder='Select Year'
                             />
                         </div>
                     </div>
                     {vals.year && (
                         <div>
                             <span className='text-xs pl-1'>Choose quarter</span>
-                            <div className='flex gap-8 my-2'>
+                            <div className='flex flex-wrap gap-2 md:gap-8 my-2'>
                                 {[...Array(4)].map((_, i) => (
                                     <Radio
                                         key={i}

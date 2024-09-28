@@ -74,11 +74,11 @@ const Filters = ({ values, set, data = null }) => {
                 </div>
             </div>
             {values.filter && (
-                <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
+                <div className='border px-2 pt-9 text-[#1E6570] mt-10 relative'>
                     <FilterTypes vals={vals} update={update} />
-                    <div className='flex items-end gap-4 pb-3 px-2'>
+                    <div className='flex flex-wrap items-end gap-2 md:gap-4 pb-3 px-2'>
                         <FilterOptions vals={vals} update={update} />
-                        <Button onClick={applyFilters} label='Apply' classes='!py-2.5 w-max' icon={DateTimeIcon} />
+                        <Button onClick={applyFilters} label='Apply' classes='md:!py-2.5 w-max' icon={DateTimeIcon} />
                     </div>
                 </div>
             )}
