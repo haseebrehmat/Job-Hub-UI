@@ -25,7 +25,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border text-[#1E6570] bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border text-[#1E6570] bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden md:flex'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
                     watermark?.current?.classList.add('flex')
