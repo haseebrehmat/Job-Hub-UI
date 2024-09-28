@@ -14,9 +14,10 @@ import { SWR_REVALIDATE } from '@constants/global'
 import { GridViewIcon, ListViewIcon, DownloadIcon, CandidateFilterIcon } from '@icons'
 
 const Taskbar = () => {
-    const [url, view, toggleView, toggleFilters] = useJobPortalV2Store(state => [
+    const [url, view, showFilters, toggleView, toggleFilters] = useJobPortalV2Store(state => [
         state?.url?.jobs,
         state?.view,
+        state?.expand?.filters,
         state?.toggleView,
         state?.toggleExpand?.filters,
     ])
@@ -52,7 +53,7 @@ const Taskbar = () => {
                 <Button
                     icon={CandidateFilterIcon}
                     fit
-                    fill={view === 'grid'}
+                    fill={showFilters}
                     classes='toggle-filters !py-[9px] !m-0 !items-center !flex md:!hidden'
                     onClick={() => toggleFilters()}
                 />
