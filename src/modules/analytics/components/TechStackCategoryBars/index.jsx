@@ -29,7 +29,7 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) => {
                 Tech Stack Category<span className='text-sm'> - Charts</span>
             </p>
             <span
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden md:flex'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={exportToPng}
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
