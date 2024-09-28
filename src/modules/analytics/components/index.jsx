@@ -16,6 +16,7 @@ import QuarterWiseTechStack from '@modules/analytics/components/QuarterWiseTechS
 import MonthlyTechStacks from '@modules/analytics/components/MonthlyTechStacks'
 import MonthlyCategories from '@modules/analytics/components/MonthlyCategories'
 import MonthsLegend from '@modules/analytics/components/MonthsLegend'
+import QuartersLegend from '@modules/analytics/components/QuartersLegend'
 
 export {
     JobTypeCounts,
@@ -36,4 +37,5 @@ export {
     MonthlyTechStacks,
     MonthlyCategories,
     MonthsLegend,
+    QuartersLegend,
 }
