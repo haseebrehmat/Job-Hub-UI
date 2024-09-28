@@ -5,6 +5,8 @@ import { Tooltip as MyTooltip } from '@components'
 
 import { htmlToPng } from '@utils/helpers'
 
+import { QuartersLegend } from '@modules/analytics/components'
+
 import { DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
 
@@ -34,20 +36,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div className='w-full flex justify-end gap-6 px-4 flex-wrap'>
-                <div className='flex gap-2 items-center text-[#C9B660]'>
-                    <span className='bg-[#C9B660] px-4 py-1.5' />
-                    <span>Quarter 1</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#91C960]'>
-                    <span className='bg-[#91C960] px-4 py-1.5' />
-                    <span>Quarter 2</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#FF5B33]'>
-                    <span className='bg-[#FF5B33] px-4 py-1.5' />
-                    <span>Quarter 3</span>
-                </div>
-            </div>
+            <QuartersLegend />
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
                     <BarChart height={300} data={data} margin={{ top: 15, bottom: 150, right: 5, left: 5 }}>

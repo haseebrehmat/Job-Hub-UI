@@ -3,6 +3,8 @@ import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Toolti
 
 import { Tooltip as MyTooltip } from '@components'
 
+import { MonthsLegend } from '@modules/analytics/components'
+
 import { htmlToPng } from '@utils/helpers'
 
 import { DownloadIcon2 } from '@icons'
@@ -34,40 +36,7 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div className='w-full flex justify-end gap-6 px-4 flex-wrap'>
-                <div className='flex gap-2 items-center text-[#C9B660]'>
-                    <span className='bg-[#C9B660] px-4 py-1.5' />
-                    <span>January</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#91C960]'>
-                    <span className='bg-[#91C960] px-4 py-1.5' />
-                    <span>February</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#FF5B33]'>
-                    <span className='bg-[#FF5B33] px-4 py-1.5' />
-                    <span>March</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#862c4d]'>
-                    <span className='bg-[#862c4d] px-4 py-1.5' />
-                    <span>April</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#62c9d3]'>
-                    <span className='bg-[#62c9d3] px-4 py-1.5' />
-                    <span>May</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#5967ff]'>
-                    <span className='bg-[#5967ff] px-4 py-1.5' />
-                    <span>June</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#0a7e8c]'>
-                    <span className='bg-[#0a7e8c] px-4 py-1.5' />
-                    <span>July</span>
-                </div>
-                <div className='flex gap-2 items-center text-[#895734]'>
-                    <span className='bg-[#895734] px-4 py-1.5' />
-                    <span>August</span>
-                </div>
-            </div>
+            <MonthsLegend />
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
                     <BarChart height={300} data={data} margin={{ top: 15, bottom: 150, right: 5, left: 5 }}>
@@ -97,14 +66,18 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
                                 fontWeight: 'bold',
                             }}
                         />
-                        <Bar barSize={4} dataKey='jan' fill='#C9B660' />
-                        <Bar barSize={4} dataKey='feb' fill='#91C960' />
-                        <Bar barSize={4} dataKey='mar' fill='#FF5B33' />
-                        <Bar barSize={4} dataKey='apr' fill='#862c4d' />
+                        <Bar barSize={4} dataKey='january' fill='#C9B660' />
+                        <Bar barSize={4} dataKey='february' fill='#91C960' />
+                        <Bar barSize={4} dataKey='march' fill='#FF5B33' />
+                        <Bar barSize={4} dataKey='april' fill='#862c4d' />
                         <Bar barSize={4} dataKey='may' fill='#62c9d3' />
-                        <Bar barSize={4} dataKey='jun' fill='#5967ff' />
-                        <Bar barSize={4} dataKey='jul' fill='#0a7e8c' />
-                        <Bar barSize={4} dataKey='aug' fill='#895734' />
+                        <Bar barSize={4} dataKey='june' fill='#5967ff' />
+                        <Bar barSize={4} dataKey='july' fill='#0a7e8c' />
+                        <Bar barSize={4} dataKey='august' fill='#895734' />
+                        <Bar barSize={4} dataKey='september' fill='#890734' />
+                        <Bar barSize={4} dataKey='october' fill='#240046' />
+                        <Bar barSize={4} dataKey='november' fill='#3a506b' />
+                        <Bar barSize={4} dataKey='december' fill='#006ba6' />
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
