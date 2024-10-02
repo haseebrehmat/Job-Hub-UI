@@ -85,7 +85,8 @@ export const saveNote = (url, { arg: note }) => {
         .then(({ data }) => toast.success(data.detail || 'Note is created successfully'))
 }
 
-export const fetchNotes = url => http.get(url).then(({ data }) => data)
+export const fetchNotes = url =>
+    http.get(url).then(({ data }) => ({ notes: data?.results, total: data?.count, pages: data?.num_pages }))
 
 export const fetchDesignations = url =>
     http.get(url).then(({ data }) => ({ designations: data?.results, total: data?.count, pages: data?.num_pages }))

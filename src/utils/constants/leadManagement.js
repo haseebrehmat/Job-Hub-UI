@@ -4,8 +4,6 @@ export const LEADS_INITIAL_VALS = {
     show: false,
     page: 1,
     draggable: null,
-    status: '',
-    phase: '',
     filter: false,
     query: '',
     from: '',
@@ -27,6 +25,7 @@ export const NOTE_INITIAL_STATE = {
     phase: '',
     attachments: null,
     search: '',
+    page: 1,
     editAttachements: {},
 }
 
