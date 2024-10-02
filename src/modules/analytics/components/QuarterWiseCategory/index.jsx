@@ -19,7 +19,7 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
         exportButton?.current?.classList.add('2xl:flex')
     }
 
-    return data?.length > 0 ? (
+    return data?.data?.length > 0 ? (
         <div className='border px-2 pt-10 pb-20 text-[#1E6570] mt-10 relative' ref={ref}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Quarter Wise Tech Stack Category <span className='text-sm hidden md:inline-block'> - Charts</span>
@@ -40,7 +40,7 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                 <QuartersLegend />
                 <div className='flex flex-col overflow-x-auto'>
                     <ResponsiveContainer minWidth={1590} height={900}>
-                        <BarChart data={data} margin={{ top: 40, bottom: 100, right: 10, left: 10 }} barSize={10}>
+                        <BarChart data={data?.data} margin={{ top: 40, bottom: 100, right: 10, left: 10 }} barSize={10}>
                             <CartesianGrid strokeDasharray='3 3' />
                             <XAxis
                                 dataKey='category'
@@ -57,7 +57,7 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                                 label={{ angle: -90, position: 'insideLeft' }}
                                 stroke='#037571'
                                 type='number'
-                                domain={[0, 'auto']}
+                                domain={[data?.min_value, data?.max_value]}
                             />
                             <Tooltip
                                 contentStyle={{
