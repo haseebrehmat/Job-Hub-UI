@@ -130,7 +130,7 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
                 backgroundColor='transparent'
                 className='single-select'
                 classNamePrefix='react-select'
-                menuPlacement='auto'
+                menuPlacement='bottom'
             />
         </div>
     )
