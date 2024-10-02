@@ -55,6 +55,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
                             label={{ angle: -90, position: 'insideLeft' }}
                             stroke='#037571'
                             type='number'
+                            tickCount={10}
                             domain={[data?.min_value, data?.max_value]}
                         />
                         <Tooltip
