@@ -75,7 +75,7 @@ const Teams = () => {
     )
     return (
         <div className='max-w-full overflow-x-auto mb-14 px-5'>
-            <div className='flex items-center space-x-4 pb-6'>
+            <div className='flex flex-col space-y-4 py-6 md:flex-row md:items-center md:space-x-4 md:space-y-0'>
                 <Searchbox query={query} setQuery={setQuery} />
                 {can('create_team') && (
                     <Button
@@ -86,18 +86,21 @@ const Teams = () => {
                     />
                 )}
             </div>
-            <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
-                <thead className='text-xs uppercase border border-[#048C8C]'>
-                    <tr>
-                        {teamHeads.map(heading => (
-                            <th scope='col' className='px-3 py-4' key={heading}>
-                                {heading}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>{renderTeams}</tbody>
-            </table>
+            <div className='__table-r hide_scrollbar'>
+                <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
+                    <thead className='text-xs uppercase border border-[#048C8C]'>
+                        <tr>
+                            {teamHeads.map(heading => (
+                                <th scope='col' className='px-3 py-4' key={heading}>
+                                    {heading}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>{renderTeams}</tbody>
+                </table>
+            </div>
+
             {showEditForm && can('edit_team') && (
                 <TeamForm show={showEditForm} setShow={setShowEditForm} mutate={mutate} team={team} />
             )}
