@@ -2,7 +2,7 @@ import { memo, useReducer } from 'react'
 
 import { Button, Input } from '@components'
 
-import { DateRange, ExportAll, FilterOptions, FilterTypes } from '@modules/analytics/components'
+import { DateRange, ExportAll, FilterOptions, FilterTypes, StacksDropdown } from '@modules/analytics/components'
 
 import { DEFAULT_FILTER_VALS } from '@constants/analytics'
 
@@ -18,6 +18,7 @@ const Filters = ({ values, set, data = null }) => {
         quarter: values?.quarter,
         query: values?.query,
         percent: values?.percent,
+        excluded: values?.excluded || [],
         tab: values?.tab || 'custom',
     })
     const applyFilters = () =>
@@ -31,10 +32,11 @@ const Filters = ({ values, set, data = null }) => {
             quarter: vals.quarter,
             tab: vals.tab,
             percent: vals.percent,
+            excluded: vals.excluded,
         })
     const clearFilters = () => {
-        set({ query: '', percent: '', filter: false, bar: 'total', ...DEFAULT_FILTER_VALS })
-        update({ query: '', percent: '', ...DEFAULT_FILTER_VALS })
+        set({ query: '', percent: '', filter: false, bar: 'total', exluded: [], ...DEFAULT_FILTER_VALS })
+        update({ query: '', percent: '', exluded: [], ...DEFAULT_FILTER_VALS })
     }
 
     return (
@@ -42,6 +44,7 @@ const Filters = ({ values, set, data = null }) => {
             <div className='flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0'>
                 <DateRange start={data?.start_date} end={data?.end_date} />
                 <div className='flex flex-wrap gap-3'>
+                    <StacksDropdown value={vals.exluded} update={update} />
                     <Input
                         ph='Percent'
                         type='number'
