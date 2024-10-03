@@ -6,6 +6,7 @@ import { ExportAll, FilterOptions, FilterTypes } from '@modules/analytics/compon
 
 import { formatDate2 } from '@utils/helpers'
 import { today } from '@constants/dashboard'
+import { DEFAULT_FILTER_VALS } from '@constants/analytics'
 
 import { DateTimeIcon, CandidateFilterIcon, AllowLeadIcon } from '@icons'
 
@@ -18,9 +19,9 @@ const Filters = ({ values, set, data = null }) => {
         week: values?.week,
         quarter: values?.quarter,
         query: values?.query,
+        percent: values?.percent,
         tab: values?.tab || 'custom',
     })
-
     const applyFilters = () =>
         set({
             from: vals.from,
@@ -31,10 +32,11 @@ const Filters = ({ values, set, data = null }) => {
             week: vals.week,
             quarter: vals.quarter,
             tab: vals.tab,
+            percent: vals.percent,
         })
     const clearFilters = () => {
-        set({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '', filter: false, bar: 'total' })
-        update({ from: '', to: '', query: '', week: '', quarter: '', month: '', year: '' })
+        set({ query: '', percent: '', filter: false, bar: 'total', ...DEFAULT_FILTER_VALS })
+        update({ query: '', percent: '', ...DEFAULT_FILTER_VALS })
     }
 
     return (
@@ -49,6 +51,13 @@ const Filters = ({ values, set, data = null }) => {
                     </div>
                 </div>
                 <div className='flex flex-wrap gap-3'>
+                    <Input
+                        ph='Percent'
+                        type='number'
+                        onChange={e => update({ percent: e.target.value })}
+                        value={vals.percent}
+                        classes='!w-28'
+                    />
                     <ExportAll />
                     <Input
                         ph='Enter Keywords'

@@ -22,7 +22,7 @@ import { fetchAnalytics } from '@modules/analytics/api'
 import { trendsData } from '@modules/analytics/api/data'
 
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
-import { SWR_REVALIDATE } from '@/utils/constants/global'
+import { SWR_REVALIDATE } from '@constants/global'
 
 const Analytics = () => {
     const [ref1, ref2, ref3, ref4, ref5] = [useRef(''), useRef(''), useRef(''), useRef(''), useRef('')]
