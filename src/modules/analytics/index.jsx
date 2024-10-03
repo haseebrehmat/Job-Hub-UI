@@ -29,7 +29,11 @@ const Analytics = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), ANALYTIC_INITIAL_VALUES)
 
     const { data, isLoading } = useSWR(
-        `/api/job_portal/generate_analytics/?start_date=${vals.from}&end_date=${vals.to}&week=${vals.week}&month=${vals.month}&year=${vals.year}&quarter=${vals.quarter}&search=${vals.query}`,
+        `/api/job_portal/generate_analytics/?start_date=${vals.from}&end_date=${vals.to}&week=${vals.week}&month=${
+            vals.month
+        }&year=${vals.year}&quarter=${vals.quarter}&search=${vals.query}&percent=${
+            vals.percent
+        }&excluded_techs=${vals.excluded?.map(e => e.value).join(',')}`,
         fetchAnalytics,
         SWR_REVALIDATE
     )

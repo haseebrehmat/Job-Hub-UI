@@ -1,4 +1,5 @@
 import { memo, useReducer } from 'react'
+import { Tooltip } from 'react-tooltip'
 
 import { Button, Input } from '@components'
 
@@ -44,7 +45,7 @@ const Filters = ({ values, set, data = null }) => {
             <div className='flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0'>
                 <DateRange start={data?.start_date} end={data?.end_date} />
                 <div className='flex flex-wrap gap-3'>
-                    <StacksDropdown value={vals.exluded} update={update} />
+                    <StacksDropdown value={vals.excluded} update={update} />
                     <Input
                         ph='Percent'
                         type='number'
@@ -52,14 +53,14 @@ const Filters = ({ values, set, data = null }) => {
                         value={vals.percent}
                         classes='!w-28'
                     />
-                    <ExportAll />
                     <Input
                         ph='Enter Keywords'
                         onChange={e => update({ query: e.target.value })}
                         value={vals.query}
                         classes='lg:!w-56'
                     />
-                    <Button onClick={applyFilters} icon={AllowLeadIcon} classes='!px-1' fit />
+                    <Button onClick={applyFilters} icon={AllowLeadIcon} classes='!px-1 apply-btn' fit />
+                    <Tooltip anchorSelect='.apply-btn' content='Search or Apply' />
                     <Button
                         icon={CandidateFilterIcon}
                         label='Filters'
@@ -74,6 +75,7 @@ const Filters = ({ values, set, data = null }) => {
                         values.month ||
                         values.week ||
                         values.quarter) && <Button onClick={clearFilters} label='Clear' />}
+                    <ExportAll />
                 </div>
             </div>
             {values.filter && (

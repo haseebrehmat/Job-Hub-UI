@@ -13,7 +13,7 @@ const StacksDropdown = ({ value, update }) => {
 
     const renderTechStacks = useMemo(() =>
         isLoading ? (
-            <div>Loading tech stacks....</div>
+            <div className='text-[#1E6570] p-3'>Loading tech stacks....</div>
         ) : (
             <CustomSelector
                 options={parseTechKeywords(data?.techStacks)}

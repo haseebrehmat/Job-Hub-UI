@@ -25,7 +25,7 @@ export const ANALYTIC_INITIAL_VALUES = {
     percent: '',
     bar: 'total',
     stack: 'others dev',
-    exluded: [],
+    excluded: [],
     ...DEFAULT_FILTER_VALS,
 }
 
