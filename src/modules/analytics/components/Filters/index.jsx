@@ -51,7 +51,13 @@ const Filters = ({ values, set, data = null }) => {
                         type='number'
                         onChange={e => update({ percent: e.target.value })}
                         value={vals.percent}
-                        classes='!w-28'
+                        classes='!w-28 add-percent'
+                    />
+                    <Tooltip
+                        anchorSelect='.add-percent'
+                        content='Enter percentage to compensate values'
+                        className='!text-sm tracking-wide'
+                        variant='info'
                     />
                     <Input
                         ph='Enter Keywords'
