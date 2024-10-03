@@ -22,6 +22,7 @@ import { fetchAnalytics } from '@modules/analytics/api'
 import { trendsData } from '@modules/analytics/api/data'
 
 import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
+import { SWR_REVALIDATE } from '@/utils/constants/global'
 
 const Analytics = () => {
     const [ref1, ref2, ref3, ref4, ref5] = [useRef(''), useRef(''), useRef(''), useRef(''), useRef('')]
@@ -30,10 +31,7 @@ const Analytics = () => {
     const { data, isLoading } = useSWR(
         `/api/job_portal/generate_analytics/?start_date=${vals.from}&end_date=${vals.to}&week=${vals.week}&month=${vals.month}&year=${vals.year}&quarter=${vals.quarter}&search=${vals.query}`,
         fetchAnalytics,
-        {
-            revalidateOnFocus: false,
-            revalidateIfStale: false,
-        }
+        SWR_REVALIDATE
     )
     return isLoading ? (
         <Loading />
