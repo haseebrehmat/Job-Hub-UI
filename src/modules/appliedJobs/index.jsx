@@ -29,7 +29,7 @@ const AppliedJobs = memo(({ userId = '' }) => {
     if (isLoading) return <Loading />
     return (
         <div>
-            <div className='max-w-full shadow-md sm:rounded-lg mb-14'>
+            <div className='max-w-full shadow-md sm:rounded-lg mb-14 px-2.5'>
                 <Searchbox
                     query={query}
                     setQuery={setQuery}
@@ -55,29 +55,29 @@ const AppliedJobs = memo(({ userId = '' }) => {
                     <tbody>
                         {data?.jobs?.length > 0 && !error ? (
                             data?.jobs?.map((job, index) => (
-                                <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
-                                    <td className='px-3 py-4'>
+                                <tr className='bg-white border-y border-slate-300 hover:bg-gray-100' key={index}>
+                                    <td className='p-3'>
                                         <span className='font-bold'>{timeSince(job?.applied_date)}</span>
                                         <div>{formatDate(job?.applied_date)}</div>
                                     </td>
-                                    <td className='px-3 py-4'>{job?.company_name}</td>
-                                    <td className='px-3 py-4 cursor-pointer underline'>
+                                    <td className='p-3'>{job?.company_name}</td>
+                                    <td className='p-3 cursor-pointer underline'>
                                         <a href={job?.job_source_url} target='_blank' rel='noopener noreferrer'>
                                             {job?.job_title}
                                         </a>
                                     </td>
-                                    <td className='px-3 py-4'>{job?.job_source}</td>
-                                    <td className='px-3 py-4'>
+                                    <td className='p-3'>{job?.job_source}</td>
+                                    <td className='p-3'>
                                         <Badge label={job?.tech_keywords} />
                                     </td>
-                                    <td className='px-3 py-4'>{job?.job_type}</td>
+                                    <td className='p-3'>{job?.job_type}</td>
                                     <td className='w-28 py-4'>
                                         <Badge label={jobStatus[job?.status]} type='success' />
                                     </td>
-                                    <td className='px-3 py-4 capitalize'>{userId ? 'ME' : job?.applied_by_name}</td>
-                                    <td className='px-3 py-4 font-extrabold'>{job?.pseudo?.name ?? 'N/A'}</td>
-                                    <td className='px-3 py-4 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
-                                    <td className='px-3 py-4'>
+                                    <td className='p-3 capitalize'>{userId ? 'ME' : job?.applied_by_name}</td>
+                                    <td className='p-3 font-extrabold'>{job?.pseudo?.name ?? 'N/A'}</td>
+                                    <td className='p-3 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
+                                    <td className='p-3'>
                                         <AppliedJobActions job={job} />
                                     </td>
                                 </tr>
