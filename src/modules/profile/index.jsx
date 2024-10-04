@@ -18,26 +18,27 @@ const Profile = () => {
         <div className='p-2'>
             <div className='p-4 border border-[#71dfd0] rounded-lg shadow-md'>
                 <div className='flex flex-col mb-4'>
-                    <div className='flex flex-row mb-4 md:gap-5'>
+                    <div className='flex flex-col md:flex-row md:gap-5'>
                         <Button
                             label='Avatar'
                             fit
                             icon={UserIcon}
-                            classes={`md:pr-8 md:pl-6 ${!activeTab.avatar && 'border-gray-200'}`}
+                            classes={`md:pr-4 md:pl-2 ${!activeTab.avatar && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ avatar: true, details: false, password: false })}
                         />
                         <Button
                             label='Details'
                             fit
                             icon={ActionsIcons}
-                            classes={`md:pr-8 md:pl-6 ${!activeTab.details && 'border-gray-200'}`}
+                            classes={`md:pr-4 md:pl-2 ${!activeTab.details && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ avatar: false, details: true, password: false })}
                         />
+
                         <Button
                             label='Update Password'
                             fit
                             icon={UpdatePasswordIcon}
-                            classes={`md:pr-8 md:pl-6 ${!activeTab.password && 'border-gray-200'}`}
+                            classes={`md:pr-4 md:pl-2 ${!activeTab.password && 'border-gray-200'}`}
                             onClick={() => setActiveTab({ avatar: false, details: false, password: true })}
                         />
                     </div>
