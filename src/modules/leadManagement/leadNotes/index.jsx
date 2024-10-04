@@ -26,8 +26,8 @@ const LeadNotes = () => {
 
     const [note, setNote] = useReducer((prev, next) => ({ ...prev, ...next }), {
         ...NOTE_INITIAL_STATE,
-        status: state?.status,
-        phase: state?.phase,
+        status: state?.status || '',
+        phase: state?.phase || '',
     })
 
     const { data, isLoading, mutate } = useSWR(
