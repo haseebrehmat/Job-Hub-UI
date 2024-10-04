@@ -21,23 +21,24 @@ const JobTypePies = ({ data }) => {
     // `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(2)}%)`
 
     return (
-        <div className='border px-200000 pt-10 pb-10 text-[#1E6570] mt-10 relative w-1/2' ref={chartRef}>
+        <div className='border md:px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={chartRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest ml-2'>
                 Job Types<span className='text-sm'> - Charts</span>
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
                     htmlToPng(chartRef?.current).then(() => postProcessing())
                 }}
             >
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
-            <div className='flex flex-col'>
-                <ResponsiveContainer width='100%' height={400} id='job-type-pies'>
+            <div className='flex flex-col overflow-x-auto'>
+                <ResponsiveContainer minWidth={785} height={400} id='job-type-pies'>
                     <PieChart className='mx-auto'>
                         <Pie
                             data={data?.filter(({ value }) => value > 0)}
@@ -56,7 +57,7 @@ const JobTypePies = ({ data }) => {
                         <Tooltip />
                     </PieChart>
                 </ResponsiveContainer>
-                <div className='flex items-end mt-4 justify-end mr-4 py-2 hidden' ref={watermark}>
+                <div className='items-end mt-4 justify-end mr-4 py-2 hidden' ref={watermark}>
                     <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                     <img src={logo} alt='' width='120' height='120' />
                 </div>

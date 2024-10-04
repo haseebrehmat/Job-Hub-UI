@@ -29,7 +29,7 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) => {
                 Tech Stack Category<span className='text-sm'> - Charts</span>
             </p>
             <span
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={exportToPng}
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
@@ -45,8 +45,8 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) => {
                             </div>
                         ))}
                 </div>
-                <div className='flex flex-col'>
-                    <ResponsiveContainer width='100%' height={900}>
+                <div className='flex flex-col overflow-x-auto'>
+                    <ResponsiveContainer minWidth={1590} height={900}>
                         <BarChart
                             data={data}
                             margin={{ top: 40, bottom: 150, right: 10, left: 10 }}

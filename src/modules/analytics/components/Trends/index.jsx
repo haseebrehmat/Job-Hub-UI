@@ -39,17 +39,18 @@ const StockMarketChart = ({ data = [] }) => {
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
                     htmlToPng(chartRef?.current).then(() => postProcessing())
                 }}
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div>
-                <ResponsiveContainer width='100%' height={400} id='jobs-trends-chart'>
+            <div className='overflow-x-auto'>
+                <ResponsiveContainer minWidth={1590} height={400} id='jobs-trends-chart'>
                     <LineChart data={data} margin={{ right: 35, top: 20 }}>
                         <CartesianGrid strokeDasharray='12 12' />
                         <XAxis dataKey='date' />
@@ -77,7 +78,7 @@ const StockMarketChart = ({ data = [] }) => {
                         </ReferenceLine>
                     </LineChart>
                 </ResponsiveContainer>
-                <div className='flex items-end justify-end mr-4 py-4 hidden' ref={watermark}>
+                <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
                     <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                     <img src={logo} alt='' width='120' height='120' />
                 </div>

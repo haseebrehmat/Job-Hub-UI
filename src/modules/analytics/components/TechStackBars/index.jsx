@@ -27,9 +27,10 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
                     htmlToPng(barRef?.current).then(() => postProcessing())
                 }}
@@ -44,8 +45,8 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
                     </span>
                 </div>
             )}
-            <div>
-                <ResponsiveContainer width='100%' height={750} id={options?.id}>
+            <div className='overflow-x-auto'>
+                <ResponsiveContainer minWidth={1590} height={750} id={options?.id}>
                     <BarChart height={300} data={memoizedData} margin={{ top: 15, bottom: 150, right: 10, left: 10 }}>
                         <CartesianGrid strokeDasharray='3 3' />
                         <XAxis
@@ -81,7 +82,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
                         )}
                     </BarChart>
                 </ResponsiveContainer>
-                <div className='flex items-end justify-end mr-4 py-4 hidden' ref={watermark}>
+                <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
                     <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                     <img src={logo} alt='' width='120' height='120' />
                 </div>

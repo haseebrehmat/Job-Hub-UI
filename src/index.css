@@ -98,12 +98,13 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #edfffb;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #048c8c;
+    background: #4ab9a7;
+    border-radius: 10px;
 }
 
 /* Handle on hover */

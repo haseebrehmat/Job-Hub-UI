@@ -34,23 +34,24 @@ const TechStackPies = ({ data = {}, stack = null }) => {
             .join('')} (${(percent * 100).toFixed(2)}%)`
 
     return (
-        <div className='border px-200000 pt-10 pb-10 text-[#1E6570] mt-10 relative w-1/2' ref={chartRef}>
+        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={chartRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stack<span className='text-sm'> - Charts</span>
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
                     htmlToPng(chartRef?.current).then(() => postProcessing())
                 }}
             >
                 <CustomTooltip text='Export to png'>{DownloadIcon2}Export</CustomTooltip>
             </span>
-            <div id='tech-stack-pies'>
-                <ResponsiveContainer width='100%' height={400}>
+            <div id='tech-stack-pies' className='overflow-x-auto'>
+                <ResponsiveContainer minWidth={785} height={400}>
                     <PieChart>
                         <Pie
                             data={memoizedData}
@@ -72,8 +73,8 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                         <Tooltip />
                     </PieChart>
                 </ResponsiveContainer>
-                <p className='text-center text-lg font-bold uppercase tracking-wider'>{stack ?? 'No stack'}</p>
-                <div className='grid grid-cols-2 p-4 mt-6'>
+                <p className='text-center md:text-lg font-bold uppercase tracking-wider'>{stack ?? 'No stack'}</p>
+                <div className='grid md:grid-cols-2 p-4 md:mt-6'>
                     {Object.keys(JOB_TYPES)
                         .filter(key => key !== 'total')
                         .map(key => (
@@ -89,7 +90,7 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                             </div>
                         ))}
                 </div>
-                <div className='flex items-end justify-end mr-4 py-4 hidden' ref={watermark}>
+                <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
                     <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                     <img src={logo} alt='' width='120' height='120' />
                 </div>

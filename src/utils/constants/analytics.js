@@ -22,8 +22,10 @@ export const DEFAULT_FILTER_VALS = {
 export const ANALYTIC_INITIAL_VALUES = {
     filter: false,
     query: '',
+    percent: '',
     bar: 'total',
     stack: 'others dev',
+    excluded: [],
     ...DEFAULT_FILTER_VALS,
 }
 

@@ -19,15 +19,16 @@ const JobTypeCounts = ({ data = [], set = null }) => {
     }
 
     return (
-        <div className='border px-2 pt-10 pb-10 mt-10 relative w-1/2' ref={statRef}>
+        <div className='border px-2 pt-10 pb-10 mt-10 relative md:w-1/2' ref={statRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-[#1E6570] text-lg tracking-widest'>
                 Job Types<span className='text-sm'> - Counts</span>
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border text-[#1E6570] bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border text-[#1E6570] bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
                     htmlToPng(statRef?.current).then(() => postProcessing())
                 }}
@@ -41,7 +42,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                             <div
                                 className={`border shadow-md p-3 rounded-xl _gradient-${
                                     index + 7
-                                } w-full h-40 flex items-center cursor-pointer`}
+                                } w-full md:h-40 flex items-center cursor-pointer`}
                                 key={index}
                                 onClick={() => set({ bar: d.key })}
                             >
@@ -62,7 +63,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                             </div>
                         ))}
                     </div>
-                    <div className='flex items-end mt-4 justify-end mr-4 py-2 hidden' ref={watermark}>
+                    <div className='items-end mt-4 justify-end mr-4 py-2 hidden' ref={watermark}>
                         <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                         <img src={logo} alt='' width='120' height='120' />
                     </div>

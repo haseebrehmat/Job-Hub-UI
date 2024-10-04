@@ -17,15 +17,16 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
         exportButton?.current?.classList.remove('hidden')
     }
     return (
-        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative w-1/2' ref={statsRef}>
+        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={statsRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stacks<span className='text-sm'> - Counts</span>
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
+                    watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
                     htmlToPng(statsRef?.current).then(() => postProcessing())
                 }}
@@ -33,8 +34,8 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
                 <Tooltip text='Export to png'>{DownloadIcon2}Export</Tooltip>
             </span>
             {data?.length > 0 ? (
-                <div className='p-4'>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4' id='tech-stack-counts'>
+                <div className='md:p-4'>
+                    <div className='grid grid-cols-2 lg:grid-cols-4 gap-4' id='tech-stack-counts'>
                         {data?.map((d, index) => (
                             <div
                                 className={`border shadow-md pl-2 pr-3 py-2 ${
@@ -52,7 +53,7 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
                             </div>
                         ))}
                     </div>
-                    <div className='flex items-end justify-end mr-4 py-4 hidden' ref={watermark}>
+                    <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
                         <span className='text-cyan-900 col-span-3  px-2 font-bold'>Powered by</span>
                         <img src={logo} alt='' width='120' height='120' />
                     </div>

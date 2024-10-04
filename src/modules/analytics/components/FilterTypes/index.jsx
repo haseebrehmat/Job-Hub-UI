@@ -6,8 +6,8 @@ import { DEFAULT_FILTER_VALS } from '@constants/analytics'
 
 const FilterTypes = ({ vals = null, update = null }) =>
     vals && (
-        <div className='-mt-16 absolute px-2 py-1 border bg-[#EDFDFB] text-lg tracking-widest'>
-            <div className='flex flex-row md:gap-8'>
+        <div className='-mt-14 absolute md:px-2 md:py-1 border bg-[#EDFDFB]'>
+            <div className='flex flex-row gap-1 md:gap-8'>
                 <Button
                     label='Quarterly'
                     fit
