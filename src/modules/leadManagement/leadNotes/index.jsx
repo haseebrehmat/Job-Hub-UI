@@ -1,10 +1,10 @@
-import { memo, useReducer } from 'react'
+import { memo, useReducer, useState } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 import useSWR from 'swr'
 
 import { useMutate } from '@/hooks'
 
-import { Loading, Button } from '@components'
+import { Loading, Paginated } from '@components'
 
 import { fetchNotes, saveNote } from '@modules/leadManagement/api'
 import {
@@ -19,19 +19,19 @@ import {
 import { decodeJwt } from '@utils/helpers'
 import { NOTE_INITIAL_STATE } from '@constants/leadManagement'
 
-import { LoadMoreIcon } from '@icons'
-
 const LeadNotes = () => {
     const user = decodeJwt()
     const { id } = useParams()
     const { state } = useLocation()
 
-    const [note, setNote] = useReducer((prev, next) => ({ ...prev, ...next }), NOTE_INITIAL_STATE)
+    const [note, setNote] = useReducer((prev, next) => ({ ...prev, ...next }), {
+        ...NOTE_INITIAL_STATE,
+        status: state?.status || '',
+        phase: state?.phase || '',
+    })
 
     const { data, isLoading, mutate } = useSWR(
-        `/api/lead_managament/lead_activity_notes/?lead=${id}&status=${state?.status || note.status}&phase=${
-            state?.phase || note.phase
-        }&search=${note.search}`,
+        `/api/lead_managament/lead_activity_notes/?lead=${id}&status=${note.status}&phase=${note.phase}&page=${note.page}&search=${note.search}`,
         fetchNotes
     )
 
@@ -57,9 +57,9 @@ const LeadNotes = () => {
                         Recent<span className='text-sm'> Notes</span>
                     </p>
                     <div className='px-2 pb-3 md:px-4'>
-                        {data?.length > 0 ? (
+                        {data?.notes?.length > 0 ? (
                             <div className='flex flex-col'>
-                                {data?.map(row => (
+                                {data?.notes?.map(row => (
                                     <LeadNote
                                         key={row.id}
                                         note={row}
@@ -72,10 +72,19 @@ const LeadNotes = () => {
                                         options={{ note, user }}
                                     />
                                 ))}
-                                <Button label='Load more' icon={LoadMoreIcon} classes='!w-fit border-0 !mx-auto' />
                             </div>
                         ) : (
                             <div className='text-sm text-gray-600 pl-14 pt-2 pb-2'>No notes added yet...</div>
+                        )}
+
+                        {data && data?.notes?.length > 0 && (
+                            <Paginated
+                                page={note.page}
+                                setPage={pageNumber => {
+                                    setNote({ page: pageNumber })
+                                }}
+                                pages={data?.pages}
+                            />
                         )}
                     </div>
                 </div>
