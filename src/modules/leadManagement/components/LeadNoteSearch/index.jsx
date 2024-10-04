@@ -18,7 +18,7 @@ const LeadNoteSearch = ({ dispatch = null }) => {
         setFilter(NOTE_FILTERS_INITIAL)
     }
 
-    const applyFilters = () => dispatch({ status: filter.status, phase: filter.phase, search: filter.search })
+    const applyFilters = () => dispatch({ status: filter.status, phase: filter.phase, search: filter.search, page: 1 })
 
     return (
         <div className='border pt-6 text-[#1E6570] mt-4 relative border-cyan-200 rounded-lg'>
