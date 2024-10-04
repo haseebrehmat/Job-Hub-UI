@@ -31,6 +31,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'GetWork', value: 'getwork' },
     { label: 'Ruby On Remote', value: 'ruby_on_remote' },
     { label: 'Hubstaff Talent', value: 'hubstafftalent' },
+    { label: 'Just Remote', value: 'justremote' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -123,6 +124,7 @@ export const JOB_SOURCES = {
     job_gether: 'Job Gether',
     the_muse: 'The Muse',
     hubstafftalent: 'Hubstaff Talent',
+    justremote: 'Just Remote',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
