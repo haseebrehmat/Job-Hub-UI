@@ -33,7 +33,7 @@ const Analytics = () => {
             vals.month
         }&year=${vals.year}&quarter=${vals.quarter}&search=${vals.query}&percent=${
             vals.percent
-        }&excluded_techs=${vals.excluded?.map(e => e.value).join(',')}`,
+        }&excluded_techs=${vals.excluded?.map(e => e.value)?.join(',')}`,
         fetchAnalytics,
         SWR_REVALIDATE
     )

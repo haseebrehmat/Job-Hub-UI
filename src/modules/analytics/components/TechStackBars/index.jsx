@@ -17,7 +17,7 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
         watermark?.current?.classList.add('hidden')
         exportButton?.current?.classList.remove('hidden')
     }
-    const memoizedData = useMemo(() => data.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
+    const memoizedData = useMemo(() => data?.map(row => ({ name: row.name, [type]: row[type] })), [data, type])
 
     return memoizedData.length > 0 ? (
         <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative' ref={barRef}>

@@ -50,7 +50,7 @@ const JobTypePies = ({ data }) => {
                         >
                             {data
                                 ?.filter(({ value }) => value > 0)
-                                .map((row, index) => (
+                                ?.map((row, index) => (
                                     <Cell key={`cell-job-type-${index}`} fill={JOB_TYPE_COLORS2[row.key]} />
                                 ))}
                         </Pie>
