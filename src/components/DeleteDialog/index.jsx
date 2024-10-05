@@ -1,8 +1,11 @@
 import { memo } from 'react'
+import toast from 'react-hot-toast'
 
 import { useDelete } from '@/hooks'
 
 import { Button } from '@components'
+
+import { getMsg } from '@utils/helpers'
 
 const DeleteDialog = ({
     children,
@@ -62,8 +65,10 @@ const DeleteDialog = ({
                                                 confirm().then(() => {
                                                     if (!err) {
                                                         refetch()
-                                                        setShow(false)
+                                                    } else {
+                                                        toast.error(getMsg(err))
                                                     }
+                                                    setShow(false)
                                                 })
                                             }}
                                         />
