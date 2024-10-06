@@ -34,7 +34,7 @@ const Taskbar = () => {
                     icon={DownloadIcon}
                     fit
                     disabled={isMutating}
-                    classes='download-csv !py-[5px] !px-1.5 !m-0 !flex !items-center'
+                    classes='download-csv !py-[5px] !px-1.5 !m-0 !hidden !items-center'
                     // onClick={() => trigger()}
                 />
                 <Tooltip
