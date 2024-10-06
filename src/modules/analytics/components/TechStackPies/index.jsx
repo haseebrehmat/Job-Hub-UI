@@ -62,7 +62,7 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                             animationBegin={0}
                             animationDuration={300}
                         >
-                            {memoizedData.map((row, index) => (
+                            {memoizedData?.map((row, index) => (
                                 <Cell
                                     key={`cell-job-type-${index}`}
                                     fill={JOB_TYPE_COLORS2[row.key]}
@@ -81,9 +81,9 @@ const TechStackPies = ({ data = {}, stack = null }) => {
                             <div className='flex items-center' key={key}>
                                 <span>
                                     {transformPascal(JOB_TYPES[key])
-                                        .split(' ')
-                                        .map(word => word.charAt(0).toUpperCase())
-                                        .join('')}
+                                        ?.split(' ')
+                                        ?.map(word => word.charAt(0).toUpperCase())
+                                        ?.join('')}
                                 </span>
                                 <span className='mx-2'>{BreadIcon}</span>
                                 <span className='text-sm'>{transformPascal(JOB_TYPES[key])}</span>

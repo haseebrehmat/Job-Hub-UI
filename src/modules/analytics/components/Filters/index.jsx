@@ -39,7 +39,6 @@ const Filters = ({ values, set, data = null }) => {
         set({ query: '', percent: '', filter: false, bar: 'total', exluded: [], ...DEFAULT_FILTER_VALS })
         update({ query: '', percent: '', exluded: [], ...DEFAULT_FILTER_VALS })
     }
-
     return (
         <div className='text-[#1E6570]'>
             <div className='flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0'>
@@ -49,9 +48,16 @@ const Filters = ({ values, set, data = null }) => {
                     <Input
                         ph='Percent'
                         type='number'
-                        onChange={e => update({ percent: e.target.value })}
+                        onChange={e =>
+                            e?.target?.value === '' ||
+                            (!isNaN(parseFloat(e?.target?.value)) && e?.target?.value >= 0 && e?.target?.value <= 100)
+                                ? update({ percent: e?.target?.value })
+                                : null
+                        }
                         value={vals.percent}
                         classes='!w-28 add-percent'
+                        min={0}
+                        max={100}
                     />
                     <Tooltip
                         anchorSelect='.add-percent'

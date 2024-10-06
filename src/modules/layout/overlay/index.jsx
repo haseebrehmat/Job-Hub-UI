@@ -5,7 +5,7 @@ import { Logo, Logout, SidebarItems, TermsOfService } from '@modules/layout/comp
 
 const Overlay = ({ show, setShow }) => (
     <Drawer show={show} dir='left' setShow={setShow} w='70%' classes='bg-[#EDFFFB] flex flex-col justify-between'>
-        <div>
+        <div className='h-[91vh] overflow-y-auto'>
             <Logo />
             <hr className='w-50 h-0.5 bg-[#048C8C] my-4 border-0 rounded' />
             <SidebarItems close={() => setShow(false)} />

@@ -5,7 +5,7 @@ import { CustomSelector } from '@components'
 
 import { fetchTechStacks } from '@modules/jobsUploader/api'
 
-import { parseTechKeywords } from '@utils/helpers'
+import { isset, parseTechKeywords } from '@utils/helpers'
 import { SWR_REVALIDATE } from '@constants/global'
 
 const StacksDropdown = ({ value, update }) => {
@@ -15,13 +15,15 @@ const StacksDropdown = ({ value, update }) => {
         isLoading ? (
             <div className='text-[#1E6570] p-3'>Loading tech stacks....</div>
         ) : (
-            <CustomSelector
-                options={parseTechKeywords(data?.techStacks)}
-                selectorValue={value}
-                handleChange={obj => update({ excluded: obj })}
-                placeholder='Select stacks to exlcude...'
-                isMulti
-            />
+            isset(data?.techStacks) && (
+                <CustomSelector
+                    options={parseTechKeywords(data?.techStacks)}
+                    selectorValue={value}
+                    handleChange={obj => update({ excluded: obj })}
+                    placeholder='Select stacks to exlcude...'
+                    isMulti
+                />
+            )
         )
     )
     return !error && <div>{renderTechStacks}</div>
