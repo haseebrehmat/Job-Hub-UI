@@ -32,6 +32,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Ruby On Remote', value: 'ruby_on_remote' },
     { label: 'Hubstaff Talent', value: 'hubstafftalent' },
     { label: 'Just Remote', value: 'justremote' },
+    { label: 'Remote CO', value: 'remoteco' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -61,6 +62,7 @@ export const JOB_SOURCE_OPTIONS_UNDERSCORE = [
     { label: 'Remote Ok', value: 'remote_ok' },
     { label: 'Job Gether', value: 'job_gether' },
     { label: 'The Muse', value: 'the_muse' },
+    { label: 'Remote CO', value: 'remote_co' },
     ...JOB_SOURCES_SINGLES,
 ]
 
@@ -125,6 +127,7 @@ export const JOB_SOURCES = {
     the_muse: 'The Muse',
     hubstafftalent: 'Hubstaff Talent',
     justremote: 'Just Remote',
+    remoteco: 'Remote CO',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
