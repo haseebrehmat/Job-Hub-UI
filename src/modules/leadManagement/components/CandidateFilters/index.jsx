@@ -1,9 +1,6 @@
 import { memo, useReducer } from 'react'
-
 import { Button, CustomSelector } from '@components'
-
 import { FilterDates } from '@modules/leadManagement/components'
-
 import { JOB_SOURCE_OPTIONS_UNDERSCORE, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
 
 const CandidateFilters = ({ filtered = null, dispatch = null }) => {
@@ -15,6 +12,7 @@ const CandidateFilters = ({ filtered = null, dispatch = null }) => {
         designation: filtered.designation,
         companies: filtered.companies,
     })
+
     const applyFilters = () =>
         dispatch({
             from: vals.from,
@@ -24,14 +22,31 @@ const CandidateFilters = ({ filtered = null, dispatch = null }) => {
             companies: vals.companies,
             designation: vals.designation,
         })
+
     const clearFilters = () => {
-        dispatch({ from: '', to: '', skills: [], regions: [], companies: [], designation: '', filter: false })
-        update({ from: '', to: '', skills: [], regions: [], companies: [], designation: '' })
+        dispatch({
+            from: '',
+            to: '',
+            skills: [],
+            regions: [],
+            companies: [],
+            designation: '',
+            filter: false,
+        })
+        update({
+            from: '',
+            to: '',
+            skills: [],
+            regions: [],
+            companies: [],
+            designation: '',
+        })
     }
 
     return (
-        <div className='grid grid-cols-4 auto-cols-max items-end gap-x-3 gap-y-1 mb-4 p-4 shadow-md text-[#338d8c] rounded-xl bg-slate-100 border'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-4 p-4 shadow-md text-[#338d8c] rounded-xl bg-slate-100 border mt-4 items-end'>
             <FilterDates vals={vals} update={update} />
+
             <div>
                 <span className='text-xs font-semibold'>Skills</span>
                 <CustomSelector
@@ -42,6 +57,7 @@ const CandidateFilters = ({ filtered = null, dispatch = null }) => {
                     placeholder='Select Skills'
                 />
             </div>
+
             <div>
                 <span className='text-xs font-semibold'>Designation</span>
                 <CustomSelector
@@ -51,6 +67,7 @@ const CandidateFilters = ({ filtered = null, dispatch = null }) => {
                     placeholder='Select Designation'
                 />
             </div>
+
             <div>
                 <span className='text-xs font-semibold'>Regions</span>
                 <CustomSelector
@@ -61,6 +78,7 @@ const CandidateFilters = ({ filtered = null, dispatch = null }) => {
                     placeholder='Select Regions'
                 />
             </div>
+
             <div>
                 <span className='text-xs font-semibold'>Companies</span>
                 <CustomSelector
@@ -71,14 +89,17 @@ const CandidateFilters = ({ filtered = null, dispatch = null }) => {
                     placeholder='Select Companies'
                 />
             </div>
-            <div className='flex items-center gap-2'>
-                <Button label='Apply' classes='!px-8 !py-2' fit onClick={applyFilters} />
+
+            <div className='flex flex-col sm:flex-row items-center justify-between sm:justify-end gap-2'>
+                <Button label='Apply' classes='!w-full sm:w-auto !px-8 !py-2' fit onClick={applyFilters} />
                 {(filtered.from ||
                     filtered.to ||
                     filtered.designation ||
                     filtered.skills.length > 0 ||
                     filtered.regions.length > 0 ||
-                    filtered.companies.length > 0) && <Button fit onClick={clearFilters} label='Clear' />}
+                    filtered.companies.length > 0) && (
+                    <Button fit onClick={clearFilters} label='Clear' classes='!w-full sm:w-auto mt-2 sm:mt-0' />
+                )}
             </div>
         </div>
     )

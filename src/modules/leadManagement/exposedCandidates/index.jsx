@@ -42,50 +42,52 @@ const ExposedCandidates = () => {
                     />
                 )}
             </div>
-            <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
-                <thead className='text-xs uppercase border border-[#048C8C]'>
-                    <tr>
-                        {can('expose_to') && (
-                            <th scope='col' className='px-3 py-4'>
-                                <input
-                                    type='checkbox'
-                                    className='__checkbox'
-                                    onChange={handleChangeAll}
-                                    checked={vals.ids.length === data?.candidates?.length}
-                                />
-                            </th>
+            <div className='overflow-x-auto w-full hide_scrollbar'>
+                <table className='w-full text-sm text-left text-[#048C8C]'>
+                    <thead className='text-xs uppercase border border-[#048C8C]'>
+                        <tr>
+                            {can('expose_to') && (
+                                <th scope='col' className='px-3 py-4'>
+                                    <input
+                                        type='checkbox'
+                                        className='__checkbox'
+                                        onChange={handleChangeAll}
+                                        checked={vals.ids.length === data?.candidates?.length}
+                                    />
+                                </th>
+                            )}
+                            {EXPOSED_CANDIDATE_HEADS.slice(1).map(heading => (
+                                <th scope='col' className='px-3 py-4' key={heading}>
+                                    {heading}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data?.candidates?.length > 0 && !error ? (
+                            data?.candidates?.map(row => (
+                                <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
+                                    {can('expose_to') && (
+                                        <td className='px-3 py-4'>
+                                            <input
+                                                type='checkbox'
+                                                value={row?.candidate?.id}
+                                                checked={vals.ids.includes(row?.candidate?.id)}
+                                                className='__checkbox'
+                                                onChange={handleChange}
+                                            />
+                                        </td>
+                                    )}
+                                    <CandidateInfo info={row} exposed />
+                                    <ExposedTo companies={row?.exposed_to} mutate={mutate} />
+                                </tr>
+                            ))
+                        ) : (
+                            <EmptyTable cols={6} msg='No candidates found yet!' />
                         )}
-                        {EXPOSED_CANDIDATE_HEADS.slice(1).map(heading => (
-                            <th scope='col' className='px-3 py-4' key={heading}>
-                                {heading}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data?.candidates?.length > 0 && !error ? (
-                        data?.candidates?.map(row => (
-                            <tr className='bg-white border-b border-[#006366] border-opacity-30' key={row.id}>
-                                {can('expose_to') && (
-                                    <td className='px-3 py-4'>
-                                        <input
-                                            type='checkbox'
-                                            value={row?.candidate?.id}
-                                            checked={vals.ids.includes(row?.candidate?.id)}
-                                            className='__checkbox'
-                                            onChange={handleChange}
-                                        />
-                                    </td>
-                                )}
-                                <CandidateInfo info={row} exposed />
-                                <ExposedTo companies={row?.exposed_to} mutate={mutate} />
-                            </tr>
-                        ))
-                    ) : (
-                        <EmptyTable cols={6} msg='No candidates found yet!' />
-                    )}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
