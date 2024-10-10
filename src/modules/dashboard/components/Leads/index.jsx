@@ -11,12 +11,12 @@ const Leads = ({ data }) => {
     const handleChange = value => setSelectedOption(value)
 
     return (
-        <div className='flex flex-col bg-white _shadow-1 rounded-xl overflow-x-auto w-screen md:w-full'>
+        <div className='flex flex-col bg-white _shadow-1 rounded-xl overflow-x-auto md:overflow-x-visible w-screen md:w-full'>
             <ResponsiveContainer
                 width='98%'
                 height={550}
                 minWidth={1000}
-                className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto -mt-8'
+                className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto md:-mt-8'
             >
                 <LineChart data={data} margin={{ top: 40, bottom: 100, right: 30, left: 30 }}>
                     <CartesianGrid stroke='#037571' strokeDasharray='3 3' />

@@ -1,13 +1,14 @@
 import { memo, useState } from 'react'
 import { useFormik } from 'formik'
 import SlidingPane from 'react-sliding-pane'
+import 'react-sliding-pane/dist/react-sliding-pane.css'
 
 import { Input, Button } from '@components'
 
 import { filtersSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
-import { NavbarSearchIcon, ResetIcon, FilterIcon } from '@icons'
-import 'react-sliding-pane/dist/react-sliding-pane.css'
+
+import { ResetIcon, FilterIcon } from '@icons'
 
 const Filters = ({ filters, setFilters }) => {
     const [show, setShow] = useState(false)
@@ -28,20 +29,10 @@ const Filters = ({ filters, setFilters }) => {
     }
 
     return (
-        <>
-            <div className='grid grid-cols-2 gap-3 max-w-fit'>
-                <div className='relative hidden md:block'>
-                    <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-                        {NavbarSearchIcon}
-                    </div>
-                    <form>
-                        <Input name='bd' ph='Search' />
-                    </form>
-                </div>
-                <div className='flex space-x-3'>
-                    <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
-                    <Button fit icon={ResetIcon} onClick={resetFilters} />
-                </div>
+        <div>
+            <div className='flex space-x-3'>
+                <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
+                <Button fit icon={ResetIcon} onClick={resetFilters} />
             </div>
             <SlidingPane isOpen={show} from='right' width='250px' onRequestClose={() => setShow(!show)} hideHeader>
                 <div className='text-[#048C8C] p-3 h-full'>
@@ -73,7 +64,7 @@ const Filters = ({ filters, setFilters }) => {
                     </form>
                 </div>
             </SlidingPane>
-        </>
+        </div>
     )
 }
 
