@@ -16,22 +16,24 @@ const JobTypePies = ({ data }) => {
     const postProcessing = () => {
         watermark?.current?.classList.add('hidden')
         exportButton?.current?.classList.remove('hidden')
+        chartRef?.current?.style.removeProperty('width')
     }
     const renderCustomizedLabel = ({ percent, payload }) => `${payload.name} (${(percent * 100).toFixed(2)}%)`
     // `${formatNum(payload.value)} ${payload.name} (${(percent * 100).toFixed(2)}%)`
 
     return (
-        <div className='border md:px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={chartRef}>
+        <div className='border md:px-2 h-full pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={chartRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest ml-2'>
                 Job Types<span className='text-sm'> - Charts</span>
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
                     watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
+                    chartRef?.current?.style.setProperty('width', '885px', 'important')
                     htmlToPng(chartRef?.current).then(() => postProcessing())
                 }}
             >

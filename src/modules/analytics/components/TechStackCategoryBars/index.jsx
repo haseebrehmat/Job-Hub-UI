@@ -17,19 +17,21 @@ const TechStackCategoryBars = forwardRef(({ data = [] }, ref) => {
         const watermarkClasses = watermark?.current?.classList
         watermarkClasses.remove('hidden')
         watermarkClasses.add('flex')
+        ref?.current?.style.setProperty('width', '1620px', 'important')
         htmlToPng(ref?.current).then(() => {
             watermarkClasses.remove('flex')
             watermarkClasses.add('hidden')
+            ref?.current?.style.removeProperty('width')
         })
     }
 
     return data?.length > 0 ? (
         <div className='border px-2 pt-10 text-[#1E6570] mt-10 relative'>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
-                Tech Stack Category<span className='text-sm'> - Charts</span>
+                Tech Stack Category<span className='text-sm hidden sm:inline-block'> - Charts</span>
             </p>
             <span
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
                 onClick={exportToPng}
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
