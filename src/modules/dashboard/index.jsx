@@ -50,7 +50,7 @@ const Dashboard = () => {
 
     return user?.permissions?.length > 0 ? (
         can(['view_dashboard', 'view_statistics']) ? (
-            <div className='flex flex-col w-full space-y-14'>
+            <div className='flex flex-col w-full space-y-10'>
                 {!error ? (
                     <>
                         <div className='flex justify-between'>

@@ -18,11 +18,11 @@ function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
 }
 
 const TechStacks = ({ data }) => (
-    <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
+    <div className='flex flex-col bg-white _shadow-1 rounded-xl overflow-x-auto w-screen md:w-full'>
         <ResponsiveContainer
             width='98%'
             height={700}
-            minWidth={800}
+            minWidth={1000}
             className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto -mt-8'
         >
             <RadarChart outerRadius={250} data={data}>
