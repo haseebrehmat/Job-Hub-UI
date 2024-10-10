@@ -44,7 +44,7 @@ const JobTypeCounts = ({ data = [], set = null }) => {
                             <div
                                 className={`border shadow-md p-3 rounded-xl _gradient-${
                                     index + 7
-                                } w-full md:h-40 flex items-center cursor-pointer`}
+                                } w-full h-28 lg:h-40 flex items-center cursor-pointer`}
                                 key={index}
                                 onClick={() => set({ bar: d.key })}
                             >
