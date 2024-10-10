@@ -15,19 +15,21 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
     const postProcessing = () => {
         watermark?.current?.classList.add('hidden')
         exportButton?.current?.classList.remove('hidden')
+        statsRef?.current?.style.removeProperty('width')
     }
     return (
-        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={statsRef}>
+        <div className='border h-full px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={statsRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stacks<span className='text-sm'> - Counts</span>
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
+                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
                     watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
+                    statsRef?.current?.style.setProperty('width', '785px', 'important')
                     htmlToPng(statsRef?.current).then(() => postProcessing())
                 }}
             >
