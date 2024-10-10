@@ -42,54 +42,56 @@ const AppliedJobs = memo(({ userId = '' }) => {
                 {vals.filter && (
                     <Filters filtered={vals} dispatch={dispatch} agent={userId === ''} dropdowns={dropdownvals} />
                 )}
-                <table className='table-auto w-full text-sm text-left text-gray-500'>
-                    <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
-                        <tr>
-                            {tableHeads.map(heading => (
-                                <th scope='col' className='px-3 py-4 text-[#006366]' key={heading}>
-                                    {heading}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data?.jobs?.length > 0 && !error ? (
-                            data?.jobs?.map((job, index) => (
-                                <tr className='bg-white border-y border-slate-300 hover:bg-gray-100' key={index}>
-                                    <td className='p-3'>
-                                        <span className='font-bold'>{timeSince(job?.applied_date)}</span>
-                                        <div>{formatDate(job?.applied_date)}</div>
-                                    </td>
-                                    <td className='p-3'>{job?.company_name}</td>
-                                    <td className='p-3 cursor-pointer underline'>
-                                        <a href={job?.job_source_url} target='_blank' rel='noopener noreferrer'>
-                                            {job?.job_title}
-                                        </a>
-                                    </td>
-                                    <td className='p-3'>{job?.job_source}</td>
-                                    <td className='p-3'>
-                                        <Badge label={job?.tech_keywords} />
-                                    </td>
-                                    <td className='p-3'>{job?.job_type}</td>
-                                    <td className='w-28 py-4'>
-                                        <Badge label={jobStatus[job?.status]} type='success' />
-                                    </td>
-                                    <td className='p-3 capitalize'>{userId ? 'ME' : job?.applied_by_name}</td>
-                                    <td className='p-3 font-extrabold'>{job?.pseudo?.name ?? 'N/A'}</td>
-                                    <td className='p-3 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
-                                    <td className='p-3'>
-                                        <AppliedJobActions job={job} />
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <EmptyTable />
-                        )}
-                    </tbody>
-                </table>
-                {data?.jobs?.length > 0 && !error && (
-                    <TableNavigate data={data} page={page} handleClick={handleClick} />
-                )}
+                <div className='overflow-x-auto w-full hide_scrollbar'>
+                    <table className='table-auto w-full text-sm text-left text-gray-500'>
+                        <thead className='text-xs text-gray-700 uppercase bg-[#edfdfb] border'>
+                            <tr>
+                                {tableHeads.map(heading => (
+                                    <th scope='col' className='px-3 py-4 text-[#006366]' key={heading}>
+                                        {heading}
+                                    </th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data?.jobs?.length > 0 && !error ? (
+                                data?.jobs?.map((job, index) => (
+                                    <tr className='bg-white border-y border-slate-300 hover:bg-gray-100' key={index}>
+                                        <td className='p-3'>
+                                            <span className='font-bold'>{timeSince(job?.applied_date)}</span>
+                                            <div>{formatDate(job?.applied_date)}</div>
+                                        </td>
+                                        <td className='p-3'>{job?.company_name}</td>
+                                        <td className='p-3 cursor-pointer underline'>
+                                            <a href={job?.job_source_url} target='_blank' rel='noopener noreferrer'>
+                                                {job?.job_title}
+                                            </a>
+                                        </td>
+                                        <td className='p-3'>{job?.job_source}</td>
+                                        <td className='p-3'>
+                                            <Badge label={job?.tech_keywords} />
+                                        </td>
+                                        <td className='p-3'>{job?.job_type}</td>
+                                        <td className='w-28 py-4'>
+                                            <Badge label={jobStatus[job?.status]} type='success' />
+                                        </td>
+                                        <td className='p-3 capitalize'>{userId ? 'ME' : job?.applied_by_name}</td>
+                                        <td className='p-3 font-extrabold'>{job?.pseudo?.name ?? 'N/A'}</td>
+                                        <td className='p-3 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
+                                        <td className='p-3'>
+                                            <AppliedJobActions job={job} />
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <EmptyTable />
+                            )}
+                        </tbody>
+                    </table>
+                    {data?.jobs?.length > 0 && !error && (
+                        <TableNavigate data={data} page={page} handleClick={handleClick} />
+                    )}
+                </div>
             </div>
         </div>
     )

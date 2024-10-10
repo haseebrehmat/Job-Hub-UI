@@ -49,7 +49,7 @@ const CandidateInfo = ({ info, exposed = false }) => {
                             : 'N/A'}
                     </span>
                 </td>
-                <td className='px-2 py-1'>
+                <td className='px-3 py-1'>
                     {exposed ? (
                         <Badge label={info?.candidate?.designation || 'N/A'} />
                     ) : info?.designation?.name ? (
