@@ -33,7 +33,7 @@ const JobTypePies = ({ data }) => {
                     watermark?.current?.classList.remove('hidden')
                     watermark?.current?.classList.add('flex')
                     exportButton?.current?.classList.add('hidden')
-                    chartRef?.current?.style.setProperty('width', '785px', 'important')
+                    chartRef?.current?.style.setProperty('width', '885px', 'important')
                     htmlToPng(chartRef?.current).then(() => postProcessing())
                 }}
             >
