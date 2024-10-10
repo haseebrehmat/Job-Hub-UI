@@ -16,27 +16,29 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
 
     const postProcessing = () => {
         watermark?.current?.classList.add('hidden')
-        exportButton?.current?.classList.add('2xl:flex')
+        exportButton?.current?.classList.remove('hidden')
+        ref?.current?.style.removeProperty('width')
     }
 
     return data?.data?.length > 0 ? (
         <div className='border px-2 pt-10 pb-20 text-[#1E6570] mt-10 relative' ref={ref}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
-                Quarter Wise Tech Stack Category <span className='text-sm hidden md:inline-block'> - Charts</span>
+                Quarter Wise Tech Stack Category <span className='text-sm hidden sm:inline-block'> - Charts</span>
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
+                className='-mt-4 sm:-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
                     watermark?.current?.classList.add('flex')
-                    exportButton?.current?.classList.remove('2xl:flex')
+                    exportButton?.current?.classList.add('hidden')
+                    ref?.current?.style.setProperty('width', '1620px', 'important')
                     htmlToPng(ref?.current).then(() => postProcessing())
                 }}
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div className='pt-4' id='tech-stack-category-trends-bars'>
+            <div className='pt-7 sm:pt-4' id='tech-stack-category-trends-bars'>
                 <QuartersLegend />
                 <div className='flex flex-col overflow-x-auto'>
                     <ResponsiveContainer minWidth={1590} height={900}>
