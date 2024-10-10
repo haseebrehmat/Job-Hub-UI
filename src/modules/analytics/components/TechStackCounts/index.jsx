@@ -18,7 +18,7 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
         statsRef?.current?.style.removeProperty('width')
     }
     return (
-        <div className='border h-full px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={statsRef}>
+        <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative md:w-1/2' ref={statsRef}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Tech Stacks<span className='text-sm'> - Counts</span>
             </p>
