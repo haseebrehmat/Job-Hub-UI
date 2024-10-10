@@ -53,7 +53,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
                             interval={0}
                             textAnchor='end'
                             padding={{ left: 20 }}
-                            fontSize={17 - Math.round(data.length / 15)}
+                            fontSize={17 - Math.round(data.data.length / 15)}
                         />
                         <YAxis
                             label={{ angle: -90, position: 'insideLeft' }}

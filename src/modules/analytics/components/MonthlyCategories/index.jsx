@@ -59,7 +59,7 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                             textAnchor='end'
                             padding={{ left: 30 }}
                             style={{ textTransform: 'capitalize' }}
-                            fontSize={17 - Math.round(data.length / 15)}
+                            fontSize={17 - Math.round(data.data.length / 15)}
                         />
                         <YAxis
                             label={{ angle: -90, position: 'insideLeft' }}
