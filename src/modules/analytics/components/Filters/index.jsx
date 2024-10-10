@@ -36,8 +36,8 @@ const Filters = ({ values, set, data = null }) => {
             excluded: vals.excluded,
         })
     const clearFilters = () => {
-        set({ query: '', percent: '', filter: false, bar: 'total', exluded: [], ...DEFAULT_FILTER_VALS })
-        update({ query: '', percent: '', exluded: [], ...DEFAULT_FILTER_VALS })
+        set({ query: '', percent: '', filter: false, bar: 'total', excluded: [], ...DEFAULT_FILTER_VALS })
+        update({ query: '', percent: '', excluded: [], ...DEFAULT_FILTER_VALS })
     }
     return (
         <div className='text-[#1E6570]'>
@@ -86,7 +86,9 @@ const Filters = ({ values, set, data = null }) => {
                         values.year ||
                         values.month ||
                         values.week ||
-                        values.quarter) && <Button onClick={clearFilters} label='Clear' />}
+                        values.quarter ||
+                        values.percent ||
+                        values?.excluded?.length > 0) && <Button onClick={clearFilters} label='Clear' fit />}
                     <ExportAll />
                 </div>
             </div>

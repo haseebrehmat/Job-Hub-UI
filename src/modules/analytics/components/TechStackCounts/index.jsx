@@ -37,7 +37,7 @@ const TechStackCounts = ({ data = [], set = null, stack = null }) => {
             </span>
             {data?.length > 0 ? (
                 <div className='md:p-4'>
-                    <div className='grid grid-cols-2 lg:grid-cols-4 gap-4' id='tech-stack-counts'>
+                    <div className='grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4' id='tech-stack-counts'>
                         {data?.map((d, index) => (
                             <div
                                 className={`border shadow-md pl-2 pr-3 py-2 ${

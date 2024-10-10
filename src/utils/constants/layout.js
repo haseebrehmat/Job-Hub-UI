@@ -89,12 +89,12 @@ export const menuItems = [
                 svg: TeamAppliedJobsIcon,
                 perms: ['view_team_applied_job'],
             },
-            {
-                label: 'Jobs Portal',
-                link: '/jobs-portal',
-                svg: Jobs,
-                perms: ['view_job_portal'],
-            },
+            // {
+            //     label: 'Jobs Portal',
+            //     link: '/jobs-portal',
+            //     svg: Jobs,
+            //     perms: ['view_job_portal'],
+            // },
             {
                 label: 'Job Portal 2.0',
                 link: '/jobs-portal/v2',

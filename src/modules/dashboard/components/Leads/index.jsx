@@ -11,12 +11,12 @@ const Leads = ({ data }) => {
     const handleChange = value => setSelectedOption(value)
 
     return (
-        <div className='flex flex-col bg-white _shadow-1 rounded-xl'>
+        <div className='flex flex-col bg-white _shadow-1 rounded-xl overflow-x-auto md:overflow-x-visible w-screen md:w-full'>
             <ResponsiveContainer
                 width='98%'
                 height={550}
-                minWidth={800}
-                className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto -mt-8'
+                minWidth={1000}
+                className='border rounded-lg _shadow-2 bg-[#EDFFFB] mx-auto md:-mt-8'
             >
                 <LineChart data={data} margin={{ top: 40, bottom: 100, right: 30, left: 30 }}>
                     <CartesianGrid stroke='#037571' strokeDasharray='3 3' />
@@ -99,13 +99,18 @@ const Leads = ({ data }) => {
                 </LineChart>
             </ResponsiveContainer>
             <div className='flex justify-between px-5 pt-5 pb-4'>
-                <div className='text-[#006366] w-5/6'>
+                <div className='text-[#006366] w-full sm:w-5/6'>
                     <span className='text-lg'>Leads</span>
                     <hr className='w-[80%] h-0.5 bg-[#048C8C] my-3 border-0 rounded' />
-                    <span>This chart shows total, prospects, warm, cold, hot, hired and rejected leads</span>
+                    <span>This chart shows total, prospects, warm, cold, hot, hired, and rejected leads</span>
                 </div>
-                <div className='text-[#006366] w-1/6'>
-                    <SelectBox options={options} selected={selectedOption} handleChange={handleChange} />
+                <div className='text-[#006366] w-full sm:w-1/6 sm:pl-2'>
+                    <SelectBox
+                        options={options}
+                        selected={selectedOption}
+                        handleChange={handleChange}
+                        className='text-lg'
+                    />
                 </div>
             </div>
         </div>
