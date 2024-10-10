@@ -15,7 +15,8 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
     const exportButton = useRef('')
     const postProcessing = () => {
         watermark?.current?.classList.add('hidden')
-        exportButton?.current?.classList.add('2xl:flex')
+        exportButton?.current?.classList.remove('hidden')
+        ref?.current?.style.removeProperty('width')
     }
 
     return data?.data?.length > 0 ? (
@@ -26,17 +27,20 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
             </p>
             <span
                 ref={exportButton}
-                className='-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm hidden 2xl:flex'
+                className='-mt-4 sm:-mt-14 rounded-full absolute py-1 pr-4 pl-3 border bg-[#EDFDFB] right-2 cursor-pointer text-sm'
                 onClick={() => {
                     watermark?.current?.classList.remove('hidden')
                     watermark?.current?.classList.add('flex')
-                    exportButton?.current?.classList.remove('2xl:flex')
+                    exportButton?.current?.classList.add('hidden')
+                    ref?.current?.style.setProperty('width', '1620px', 'important')
                     htmlToPng(ref?.current).then(() => postProcessing())
                 }}
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <MonthsLegend />
+            <div className='pt-7 sm:pt-0'>
+                <MonthsLegend />
+            </div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
                     <BarChart height={300} data={data?.data} margin={{ top: 15, bottom: 150, right: 5, left: 5 }}>
