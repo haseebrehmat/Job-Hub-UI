@@ -551,7 +551,7 @@ export const formatOptions = options_arr =>
     options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
 export const getFilterAppliedURL = (query, filters) =>
-    `search=${query}&tech_keywords=${encodeURIComponent(
+    `limit=${filters?.limit || 15}&search=${query}&tech_keywords=${encodeURIComponent(
         filters?.techs?.map(tech => tech.label)?.join(',')
     )}&job_source=${filters?.sources?.join(',')}&ordering=${filters?.order ?? '-job_posted_date'}&job_visibility=${
         filters?.visible ?? 'all'

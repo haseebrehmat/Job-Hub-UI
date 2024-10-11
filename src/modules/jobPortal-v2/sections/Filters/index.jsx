@@ -15,6 +15,7 @@ import {
     Search,
     BlockedCheck,
     ExplicitApply,
+    RecordsLimit,
 } from '@modules/jobPortal-v2/components'
 
 import { isset } from '@utils/helpers'
@@ -39,6 +40,7 @@ const JobPortalV2 = () => {
                     <div className='w-full flex flex-col gap-2'>
                         <OrderBy />
                         <Visibility />
+                        <RecordsLimit />
                     </div>
                     <FromAndTo />
                     <TechStackDropdown options={data?.techStacks} />

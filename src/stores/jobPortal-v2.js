@@ -52,6 +52,7 @@ export const useJobPortalV2Store = create(set => ({
                 },
             })),
         blocked: value => set(state => ({ ...state, filters: { ...state.filters, blocked: value } })),
+        limit: value => set(state => ({ ...state, filters: { ...state.filters, limit: value } })),
     },
     resetFilters: () =>
         set(state => ({
