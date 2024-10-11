@@ -31,7 +31,9 @@ const UserForm = ({ show, setShow, mutate, user }) => {
                 ...formValues,
                 id: user?.id,
                 regions: regions.map(r => r.value).join(','),
-                roles: formValues?.roles?.map(r => r.value).join(','),
+                roles: Array.isArray(formValues?.roles)
+                    ? formValues?.roles?.map(r => r?.value)?.join(',')
+                    : formValues?.roles?.value,
             }),
         null,
         () => {
