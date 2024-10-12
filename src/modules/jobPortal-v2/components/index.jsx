@@ -24,6 +24,7 @@ import TechsDropdown from '@modules/jobPortal-v2/components/JobEditForm/TechsDro
 import JobEditInputs from '@modules/jobPortal-v2/components/JobEditForm/JobEditInputs'
 import JobSourceURL from '@modules/jobPortal-v2/components/JobEditForm/JobSourceURL'
 import Description from '@modules/jobPortal-v2/components/JobEditForm/Description'
+import RecordsLimit from '@modules/jobPortal-v2/components/RecordsLimit'
 
 export {
     PortalLayout,
@@ -52,4 +53,5 @@ export {
     JobEditInputs,
     JobSourceURL,
     Description,
+    RecordsLimit,
 }

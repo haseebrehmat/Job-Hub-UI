@@ -41,6 +41,7 @@ import {
     BsGrid,
     BsStars,
     BsLinkedin,
+    BsSortNumericUpAlt,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -241,3 +242,4 @@ export const ListViewIcon = <TbListDetails style={{ fontSize: 16 }} />
 export const JobPortalV2Icon = <BsStars style={{ fontSize: 24 }} />
 export const ClosedSubMenuIcon = <MdOutlineKeyboardArrowLeft style={{ fontSize: '22px' }} />
 export const JobSourcesIcon = <BsLinkedin style={{ fontSize: 16 }} />
+export const RecordsLimitIcon = <BsSortNumericUpAlt style={{ fontSize: 16 }} />

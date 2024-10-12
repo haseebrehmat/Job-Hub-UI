@@ -22,10 +22,11 @@ export const FILTERS_DEFAULT_VALUES = {
     sources: [],
     types: [],
     blocked: false,
+    limit: 15,
 }
 
 export const JOB_PORTAL_INITIAL_URLS = {
-    jobs: 'api/job_portal/jobs/?limit=15&',
+    jobs: 'api/job_portal/jobs/?',
     filters: 'api/job_portal/job_filters/?',
 }
 
@@ -62,3 +63,5 @@ export const JOB_EDIT_INITIAL_VALUES = job => ({
     job_role: job?.job_role || '',
     expired: job?.expired_at,
 })
+
+export const LIMIT_OPTIONS = [15, 50, 100, 150, 200, 250]
