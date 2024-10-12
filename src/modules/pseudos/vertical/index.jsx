@@ -14,6 +14,7 @@ import {
     CoverLetterTemplate,
     ResumePreview,
     Projects,
+    DeleteVertical,
 } from '@modules/pseudos/vertical/sections'
 
 import { VERTICAL_INITIAL_TABS, VERTICAL_SECTIONS } from '@constants/pseudos'
@@ -42,7 +43,9 @@ const Vertical = () => {
                             key={key}
                             label={VERTICAL_SECTIONS[key] ?? 'Other'}
                             fit
-                            classes={`rounded-none border-0 border-b-4 ${!value && 'border-gray-200 text-gray-500'}`}
+                            classes={`rounded-none border-0 border-b-4 ${
+                                key === 'delete' && 'border-red-200 text-red-600'
+                            } ${!value && 'border-gray-200 text-gray-500'}`}
                             onClick={() => handleClick(key)}
                         />
                     ))}
@@ -57,6 +60,7 @@ const Vertical = () => {
                 {activeTab.cover_letter_template && <CoverLetterTemplate id={id} />}
                 {activeTab.resume_preview && <ResumePreview id={id} />}
                 {activeTab.project && <Projects id={id} />}
+                {activeTab.delete && <DeleteVertical id={id} />}
             </div>
         </div>
     )
