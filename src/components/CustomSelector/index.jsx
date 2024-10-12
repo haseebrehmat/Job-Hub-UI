@@ -61,10 +61,11 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
             borderRadius: 5,
             marginLeft: 2.5,
             width: '98%',
-            color: '#048C8C',
+            color: state.isDisabled ? '#838080' : '#048C8C',
             borderColor: '#006366',
             boxShadow: state.isSelected ? '0 0 0 1px #0EB3AD' : '0 0 0 0.1px #006366',
             backgroundColor: state.isSelected ? '#EDFFFB' : 'white',
+            textDecoration: state.isDisabled ? 'line-through' : 'none',
             '::after': {
                 content: state.isSelected ? '"\u2713"' : '""',
                 float: 'right',
