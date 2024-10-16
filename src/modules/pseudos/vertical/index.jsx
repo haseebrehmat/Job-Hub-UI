@@ -60,7 +60,7 @@ const Vertical = () => {
                 {activeTab.cover_letter_template && <CoverLetterTemplate id={id} />}
                 {activeTab.resume_preview && <ResumePreview id={id} />}
                 {activeTab.project && <Projects id={id} />}
-                {activeTab.delete && <DeleteVertical id={id} />}
+                {activeTab.delete && <DeleteVertical id={id} name={name} />}
             </div>
         </div>
     )
