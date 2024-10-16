@@ -69,7 +69,7 @@ const CandidateForm = ({ show, setShow, mutate, candidate, allRegions }) => {
                                 value={values.email}
                                 onChange={handleChange}
                                 ph='Enter email'
-                                readonly={!!candidate?.id}
+                                // readonly={!!candidate?.id}
                             />
                             {errors.email && <small className='__error'>{errors.email}</small>}
                         </div>
