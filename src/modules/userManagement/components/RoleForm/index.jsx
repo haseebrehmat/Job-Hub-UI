@@ -23,6 +23,7 @@ const RoleForm = ({ show, setShow, mutate, role }) => {
         () => {
             mutate()
             if (!role?.id) resetForm()
+            setShow(false)
         }
     )
 
