@@ -1,15 +1,23 @@
 import { memo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { useDelete } from '@/hooks'
 
 import { Input, Button } from '@components'
 
 import { ActionButtons } from '@modules/pseudos/components'
 
 const Skills = ({ id, name }) => {
+    const redirect = useNavigate()
+
     const allowDeletionString = name?.toUpperCase()?.replaceAll(' ', '-') || 'DELETE'
     const [confirmInput, setConfirmInput] = useState('')
 
-    if (confirmInput === allowDeletionString) {
-        console.log(id)
+    const { wait, confirm } = useDelete(`/api/profile/vertical/${id}/`)
+
+    const handleDelete = async () => {
+        await confirm()
+        if (!wait) redirect('/pseudos')
     }
 
     return (
@@ -31,8 +39,9 @@ const Skills = ({ id, name }) => {
                         <Button
                             fit
                             classes='px-6 !rounded-full text-red-500 border-red-500 hover:bg-red-500'
-                            label='Confirm'
-                            onClick={() => alert('Oye na kr ustad')}
+                            label={wait ? 'Deleting...' : 'Confirm'}
+                            disabled={wait}
+                            onClick={handleDelete}
                         />
                         <Button
                             fit
