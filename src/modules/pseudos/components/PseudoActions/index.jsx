@@ -29,7 +29,7 @@ const PseudoActions = memo(({ id, edit, mutate }) => {
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/auth/user/${id}/`}
+                    url={`api/profile/pseudo/${id}/`}
                     refetch={mutate}
                     perm={PSEUDO_DELETION}
                 >
