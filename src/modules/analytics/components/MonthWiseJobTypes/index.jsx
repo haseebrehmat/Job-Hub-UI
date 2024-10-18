@@ -1,11 +1,10 @@
-import { forwardRef, memo, useRef } from 'react'
+import { forwardRef, memo, useMemo, useRef } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
 import { Tooltip as MyTooltip } from '@components'
 
-import { MonthsLegend } from '@modules/analytics/components'
-
 import { htmlToPng } from '@utils/helpers'
+import { JOB_TYPE_COLORS2 } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
@@ -18,8 +17,22 @@ const MonthWiseJobTypes = forwardRef(({ data = [] }, ref) => {
         exportButton?.current?.classList.remove('hidden')
         ref?.current?.style.removeProperty('width')
     }
-
-    return data?.data?.length > 0 ? (
+    const dataKeys = useMemo(() => data?.at(0)?.data?.map(({ key }) => key) || [], [data])
+    const memoizedData = useMemo(
+        () =>
+            data?.length > 0
+                ? data?.reduce((result, monthData) => {
+                      const monthObject = { month: monthData?.month }
+                      monthData?.data?.forEach(item => {
+                          monthObject[item?.key] = item?.value || 0
+                      })
+                      result.push(monthObject)
+                      return result
+                  }, [])
+                : [],
+        [data]
+    )
+    return memoizedData?.length > 0 ? (
         <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative' ref={ref}>
             <p className='-mt-16 absolute px-2 py-1.5 border bg-[#EDFDFB] text-lg tracking-widest'>
                 Monthly Job Types
@@ -38,20 +51,18 @@ const MonthWiseJobTypes = forwardRef(({ data = [] }, ref) => {
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div className='pt-7 sm:pt-0'>
-                <MonthsLegend />
-            </div>
+            <div className='pt-7 sm:pt-0'>Job Types Legend</div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
                     <BarChart
                         height={300}
-                        data={data?.data}
+                        data={memoizedData}
                         margin={{ top: 15, bottom: 150, right: 10, left: 10 }}
                         barSize={10}
                     >
                         <CartesianGrid strokeDasharray='3 3' />
                         <XAxis
-                            dataKey='category'
+                            dataKey='month'
                             label={{ position: 'insideBottomRight' }}
                             angle={-20}
                             stroke='#037571'
@@ -59,14 +70,14 @@ const MonthWiseJobTypes = forwardRef(({ data = [] }, ref) => {
                             textAnchor='end'
                             padding={{ left: 30 }}
                             style={{ textTransform: 'capitalize' }}
-                            fontSize={17 - Math.round(data.data.length / 15)}
+                            fontSize={17 - Math.round(memoizedData.length / 15)}
                         />
                         <YAxis
                             label={{ angle: -90, position: 'insideLeft' }}
                             stroke='#037571'
                             type='number'
                             tickCount={import.meta.env.VITE_MONTHLY_AND_QUARTERLY_YAXIS_TICKS ?? 10}
-                            domain={[data?.min_value, data?.max_value]}
+                            domain={[memoizedData?.min_value || 0, memoizedData?.max_value || 'auto']}
                         />
                         <Tooltip
                             contentStyle={{
@@ -77,18 +88,9 @@ const MonthWiseJobTypes = forwardRef(({ data = [] }, ref) => {
                                 fontWeight: 'bold',
                             }}
                         />
-                        <Bar dataKey='january' fill='#C9B660' />
-                        <Bar dataKey='february' fill='#91C960' />
-                        <Bar dataKey='march' fill='#FF5B33' />
-                        <Bar dataKey='april' fill='#862c4d' />
-                        <Bar dataKey='may' fill='#62c9d3' />
-                        <Bar dataKey='june' fill='#5967ff' />
-                        <Bar dataKey='july' fill='#0a7e8c' />
-                        <Bar dataKey='august' fill='#895734' />
-                        <Bar dataKey='september' fill='#890734' />
-                        <Bar dataKey='october' fill='#240046' />
-                        <Bar dataKey='november' fill='#3a506b' />
-                        <Bar dataKey='december' fill='#006ba6' />
+                        {dataKeys?.map(key => (
+                            <Bar dataKey={key} fill={JOB_TYPE_COLORS2[key] || '#000000'} key={key} />
+                        ))}
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
