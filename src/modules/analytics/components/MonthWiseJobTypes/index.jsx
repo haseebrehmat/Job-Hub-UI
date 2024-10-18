@@ -2,6 +2,7 @@ import { forwardRef, memo, useMemo, useRef } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
 import { Tooltip as MyTooltip } from '@components'
+import { JobTypesLegend } from '@modules/analytics/components'
 
 import { htmlToPng } from '@utils/helpers'
 import { JOB_TYPE_COLORS2 } from '@constants/analytics'
@@ -17,7 +18,7 @@ const MonthWiseJobTypes = forwardRef(({ data = [] }, ref) => {
         exportButton?.current?.classList.remove('hidden')
         ref?.current?.style.removeProperty('width')
     }
-    const dataKeys = useMemo(() => data?.at(0)?.data?.map(({ key }) => key) || [], [data])
+    const dataKeys = useMemo(() => data?.at(0)?.data?.map(({ key, name }) => ({ key, name })) || [], [data])
     const memoizedData = useMemo(
         () =>
             data?.length > 0
@@ -51,7 +52,9 @@ const MonthWiseJobTypes = forwardRef(({ data = [] }, ref) => {
             >
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
-            <div className='pt-7 sm:pt-0'>Job Types Legend</div>
+            <div className='pt-7 sm:pt-0'>
+                <JobTypesLegend dynamicTypes={dataKeys} />
+            </div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
                     <BarChart
@@ -88,7 +91,7 @@ const MonthWiseJobTypes = forwardRef(({ data = [] }, ref) => {
                                 fontWeight: 'bold',
                             }}
                         />
-                        {dataKeys?.map(key => (
+                        {dataKeys?.map(({ key }) => (
                             <Bar dataKey={key} fill={JOB_TYPE_COLORS2[key] || '#000000'} key={key} />
                         ))}
                     </BarChart>

@@ -20,6 +20,7 @@ import QuartersLegend from '@modules/analytics/components/QuartersLegend'
 import DateRange from '@modules/analytics/components/DateRange'
 import StacksDropdown from '@modules/analytics/components/StacksDropdown'
 import MonthWiseJobTypes from '@modules/analytics/components/MonthWiseJobTypes'
+import JobTypesLegend from '@modules/analytics/components/JobTypesLegend'
 
 export {
     JobTypeCounts,
@@ -44,4 +45,5 @@ export {
     DateRange,
     StacksDropdown,
     MonthWiseJobTypes,
+    JobTypesLegend,
 }
