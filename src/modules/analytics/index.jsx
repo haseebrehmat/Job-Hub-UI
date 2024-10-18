@@ -17,6 +17,7 @@ import {
     QuarterWiseTechStack,
     MonthlyTechStacks,
     MonthlyCategories,
+    MonthWiseJobTypes,
 } from '@modules/analytics/components'
 import { fetchAnalytics } from '@modules/analytics/api'
 import { trendsData } from '@modules/analytics/api/data'
@@ -25,7 +26,14 @@ import { ANALYTIC_INITIAL_VALUES } from '@constants/analytics'
 import { SWR_REVALIDATE } from '@constants/global'
 
 const Analytics = () => {
-    const [ref1, ref2, ref3, ref4, ref5] = [useRef(''), useRef(''), useRef(''), useRef(''), useRef('')]
+    const [ref1, ref2, ref3, ref4, ref5, ref6] = [
+        useRef(''),
+        useRef(''),
+        useRef(''),
+        useRef(''),
+        useRef(''),
+        useRef(''),
+    ]
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), ANALYTIC_INITIAL_VALUES)
 
     const { data, isLoading } = useSWR(
@@ -37,6 +45,7 @@ const Analytics = () => {
         fetchAnalytics,
         SWR_REVALIDATE
     )
+
     return isLoading ? (
         <Loading />
     ) : (
@@ -63,6 +72,7 @@ const Analytics = () => {
             <QuarterWiseTechStack data={data?.quarterly_tech_data} ref={ref3} />
             <MonthlyTechStacks data={data?.monthly_tech_data} ref={ref4} />
             <MonthlyCategories data={data?.monthly_trends} ref={ref5} />
+            <MonthWiseJobTypes data={data?.montly_job_types} ref={ref6} />
             <div className='flex flex-col gap-5 justify-center items-center p-3' id='export-div' />
         </div>
     )
