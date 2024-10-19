@@ -40,62 +40,12 @@ const Leads = ({ data, stats }) => {
                         domain={[0, 'auto']}
                     />
                     <Tooltip />
-                    {selectedOption.value === 'total' && (
-                        <Line
-                            dataKey='total'
-                            stroke='#048C8C'
-                            strokeWidth='2'
-                            dot={{ stroke: '#048C8C', strokeWidth: 4, r: 2 }}
-                        />
-                    )}
-                    {selectedOption.value === 'prospect' && (
-                        <Line
-                            dataKey='prospects'
-                            stroke='#ffd000'
-                            strokeWidth='2'
-                            dot={{ stroke: '#ffd000', strokeWidth: 4, r: 2 }}
-                        />
-                    )}
-                    {selectedOption.value === 'warm' && (
-                        <Line
-                            dataKey='warm'
-                            stroke='#fcee8c'
-                            strokeWidth='2'
-                            dot={{ stroke: '#fcee8c', strokeWidth: 4, r: 2 }}
-                        />
-                    )}
-                    {selectedOption.value === 'cold' && (
-                        <Line
-                            dataKey='cold'
-                            stroke='#77b2f4'
-                            strokeWidth='2'
-                            dot={{ stroke: '#77b2f4', strokeWidth: 4, r: 2 }}
-                        />
-                    )}
-                    {selectedOption.value === 'hot' && (
-                        <Line
-                            dataKey='hot'
-                            stroke='#ff2000'
-                            strokeWidth='2'
-                            dot={{ stroke: '#ff2000', strokeWidth: 4, r: 2 }}
-                        />
-                    )}
-                    {selectedOption.value === 'rejected' && (
-                        <Line
-                            dataKey='rejected'
-                            stroke='#b40008'
-                            strokeWidth='2'
-                            dot={{ stroke: '#b40008', strokeWidth: 4, r: 2 }}
-                        />
-                    )}
-                    {selectedOption.value === 'hired' && (
-                        <Line
-                            dataKey='hired'
-                            stroke='#32BA7C'
-                            strokeWidth='2'
-                            dot={{ stroke: '#32BA7C', strokeWidth: 4, r: 2 }}
-                        />
-                    )}
+                    <Line
+                        dataKey={selectedOption.value}
+                        stroke='#048C8C'
+                        strokeWidth='2'
+                        dot={{ stroke: '#048C8C', strokeWidth: 4, r: 2 }}
+                    />
                 </LineChart>
             </ResponsiveContainer>
             <div className='flex justify-between px-5 pt-5 pb-4'>
