@@ -3,9 +3,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 import { SelectBox } from '@components'
 
-import { options } from '@constants/dashboard'
+import { parseStats } from '@utils/helpers'
 
-const Leads = ({ data }) => {
+const Leads = ({ data, stats }) => {
     const [selectedOption, setSelectedOption] = useState({ value: 'total', label: 'Total' })
 
     const handleChange = value => setSelectedOption(value)
@@ -106,7 +106,7 @@ const Leads = ({ data }) => {
                 </div>
                 <div className='text-[#006366] w-full sm:w-1/6 sm:pl-2'>
                     <SelectBox
-                        options={options}
+                        options={parseStats(stats)}
                         selected={selectedOption}
                         handleChange={handleChange}
                         className='text-lg'

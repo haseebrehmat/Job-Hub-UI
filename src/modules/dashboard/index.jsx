@@ -58,9 +58,9 @@ const Dashboard = () => {
                             {memoizedCompaniesSelect}
                         </div>
                         {can('view_statistics') && data?.statistics && (
-                            <div className='block xl:hidden'>
+                            <div className=' xl:hidden'>
                                 <Statistics
-                                    classes='grid md:grid-cols-3 space-y-4 md:space-x-3'
+                                    classes='grid md:grid-cols-3 space-y-4 md:space-x-3 items-end'
                                     data={data?.statistics}
                                 />
                             </div>
@@ -68,7 +68,9 @@ const Dashboard = () => {
                         <div className='flex items-start justify-between'>
                             {can('view_dashboard') && (
                                 <div className='flex flex-col w-4/5 space-y-7 md:space-y-16'>
-                                    {data?.leads && data?.leads?.length > 0 && <Leads data={data?.leads} />}
+                                    {data?.leads && data?.leads?.length > 0 && (
+                                        <Leads data={data?.leads} stats={data?.statistics} />
+                                    )}
                                     {data?.tech_jobs?.length > 0 &&
                                         data?.tech_jobs?.length < TECH_STACKS_RANDOM_MAX && (
                                             <TechStacks data={data?.tech_jobs} />
@@ -76,7 +78,7 @@ const Dashboard = () => {
                                     {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
                                 </div>
                             )}
-                            <div className='w-1/5 pl-6 hidden xl:block'>
+                            <div className='pl-6 hidden xl:block'>
                                 {can('view_statistics') && data?.statistics && (
                                     <Statistics classes='flex-col space-y-8' data={data?.statistics} />
                                 )}
