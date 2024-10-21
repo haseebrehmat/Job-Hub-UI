@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, SelectBox } from '@components'
 
-import { Filters, Statistics, Leads, WarmLeads, TechStacks, LeadsAnalytics } from '@modules/dashboard/components'
+import { Filters, Leads, WarmLeads, TechStacks, LeadsAnalytics } from '@modules/dashboard/components'
 import { fetchDashboardData } from '@modules/dashboard/api'
 import { fetchCompanies } from '@modules/userManagement/api'
 
@@ -40,7 +40,7 @@ const Dashboard = () => {
                     options={parseComapnies(fetchedCompanies?.companies)}
                     selected={parseSelectedCompany(filters.company, fetchedCompanies?.companies)}
                     handleChange={({ value }) => setFilters({ ...filters, company: value })}
-                    classes='text-gray-500 text-sm mt-2 w-[90%] md:mt-0 md:w-1/4'
+                    classes='text-gray-500 text-sm mt-2 w-full'
                 />
             )),
         [companyLoading, companyError, fetchedCompanies?.companies, filters.company]
@@ -58,8 +58,10 @@ const Dashboard = () => {
                                 {can('view_statistics') && data?.statistics && (
                                     <LeadsAnalytics classes='flex-col space-y-8' data={data?.statistics} />
                                 )}
-                                <Filters filters={filters} setFilters={setFilters} />
-                                {memoizedCompaniesSelect}
+                                <div className='flex flex-row items-end float-right space-x-3 mr-4'>
+                                    <Filters filters={filters} setFilters={setFilters} />
+                                    {memoizedCompaniesSelect}
+                                </div>
                             </div>
                         </div>
                         {can('view_dashboard') && (
