@@ -60,7 +60,7 @@ const JobDetailsView = () => {
                                             <p className='text-gray-500 text-lg font-semibold tracking-wider capitalize'>
                                                 Description
                                             </p>
-                                            <div className='text-gray-700 text-sm tracking-widest break-all'>
+                                            <div className='text-gray-700 text-sm tracking-widest'>
                                                 {data?.job_details?.job_description_tags ? (
                                                     <div
                                                         // eslint-disable-next-line react/no-danger
