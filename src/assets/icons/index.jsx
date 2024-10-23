@@ -44,7 +44,6 @@ import {
     BsSortNumericUpAlt,
     BsToggleOn,
     BsToggleOff,
-    BsToggle2Off,
 } from 'react-icons/bs'
 import {
     HiUser,

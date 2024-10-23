@@ -11,7 +11,6 @@ import { parseIntervalType, getSelectedDays } from '@utils/helpers'
 import { groupSchema } from '@utils/schemas'
 import { INTERVAL_TYPE_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
 import { Enable, Disable } from '@icons'
-import { SiSonos } from 'react-icons/si'
 
 const GroupForm = ({ show, setShow, mutate, setting }) => {
     const [scrapperType, setScrapperType] = useState({ time: setting?.time_based, interval: setting?.interval_based })
