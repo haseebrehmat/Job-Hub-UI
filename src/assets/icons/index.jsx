@@ -42,6 +42,9 @@ import {
     BsStars,
     BsLinkedin,
     BsSortNumericUpAlt,
+    BsToggleOn,
+    BsToggleOff,
+    BsToggle2Off,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -243,3 +246,5 @@ export const JobPortalV2Icon = <BsStars style={{ fontSize: 24 }} />
 export const ClosedSubMenuIcon = <MdOutlineKeyboardArrowLeft style={{ fontSize: '22px' }} />
 export const JobSourcesIcon = <BsLinkedin style={{ fontSize: 16 }} />
 export const RecordsLimitIcon = <BsSortNumericUpAlt style={{ fontSize: 16 }} />
+export const Enable = <BsToggleOn style={{ fontSize: 28 }} />
+export const Disable = <BsToggleOff style={{ fontSize: 28 }} />
