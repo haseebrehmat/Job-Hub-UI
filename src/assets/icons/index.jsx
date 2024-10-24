@@ -73,7 +73,7 @@ import {
     AiOutlinePartition,
     AiOutlineArrowDown,
 } from 'react-icons/ai'
-import { ImSearch, ImCross } from 'react-icons/im'
+import { ImSearch, ImCross, ImNotification } from 'react-icons/im'
 import { CgSidebarOpen, CgListTree, CgUnblock } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
 import {
@@ -247,3 +247,4 @@ export const JobSourcesIcon = <BsLinkedin style={{ fontSize: 16 }} />
 export const RecordsLimitIcon = <BsSortNumericUpAlt style={{ fontSize: 16 }} />
 export const Enable = <BsToggleOn style={{ fontSize: 28 }} />
 export const Disable = <BsToggleOff style={{ fontSize: 28 }} />
+export const RestrictedKeywordsIcon = <ImNotification style={{ fontSize: '22px' }} />

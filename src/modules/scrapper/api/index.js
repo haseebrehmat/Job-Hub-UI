@@ -65,3 +65,16 @@ export const toggleScrapperCycleStatus = url => {
 
 export const updateGroupLink = (url, { arg: link }) =>
     rawHttp.put(url, link).then(({ data }) => toast.success(data.detail || 'Group Scraper Link updated successfully'))
+
+export const fetchRestrictedKeywords = url => http.get(url).then(({ data }) => data)
+
+export const saveRestrictedKeyword = (url, { arg: keyword }) => {
+    if (keyword?.id) {
+        return rawHttp
+            .put(url, keyword)
+            .then(({ data }) => toast.success(data.detail || 'Restricted Keyword updated successfully'))
+    }
+    return rawHttp
+        .post(url, keyword)
+        .then(({ data }) => toast.success(data.detail || 'Restricted Keyword created successfully'))
+}
