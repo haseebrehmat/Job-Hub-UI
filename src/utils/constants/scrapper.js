@@ -33,6 +33,7 @@ export const JOB_SOURCES_SINGLES = [
     { label: 'Hubstaff Talent', value: 'hubstafftalent' },
     { label: 'Just Remote', value: 'justremote' },
     { label: 'Remote CO', value: 'remoteco' },
+    { label: 'We Work Remotely', value: 'weworkremotely' },
     { label: 'Other', value: 'other' },
 ]
 
@@ -128,6 +129,7 @@ export const JOB_SOURCES = {
     hubstafftalent: 'Hubstaff Talent',
     justremote: 'Just Remote',
     remoteco: 'Remote CO',
+    weworkremotely: 'We Work Remotely',
 }
 
 export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']

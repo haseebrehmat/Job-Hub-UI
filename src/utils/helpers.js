@@ -578,3 +578,13 @@ export const parseVals = values => values?.map(val => ({ label: val, value: val 
 export const parseLinks = values => values?.map(val => val?.value)
 
 export const parseSelectedTechs = values => (values ? values?.map(value => ({ value, label: value })) : [])
+
+export const parseJobSources = values => (values ? values?.map(row => ({ value: row?.key, label: row?.name })) : [])
+
+export const parseSelectedJobSource = (key, sources) => {
+    if (key) {
+        const source = sources?.find(row => row?.key === key)
+        return source ? { value: source?.key, label: source?.name } : null
+    }
+    return null
+}
