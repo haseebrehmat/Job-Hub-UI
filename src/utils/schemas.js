@@ -318,3 +318,7 @@ export const jobSourceSchema = Yup.object().shape({
         .required('Job Source key is required')
         .matches(/^[\w_]+$/, 'Job Source must only contain alphabets and underscores'),
 })
+
+export const resctrictedKeywordSchema = Yup.object().shape({
+    tag: Yup.string().required('Please enter a keyword'),
+})

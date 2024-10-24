@@ -7,7 +7,7 @@ import { Loading, Button } from '@components'
 
 import { JobSourceActions } from '@modules/settings/components'
 import { RestrictedKeywordForm } from '@modules/scrapper/components'
-import { fetchJobSources } from '@modules/settings/api'
+import { fetchRestrictedKeywords } from '@modules/scrapper/api'
 
 import { can } from '@utils/helpers'
 import { SWR_REVALIDATE } from '@constants/global'
@@ -15,9 +15,13 @@ import { SWR_REVALIDATE } from '@constants/global'
 import { CreateIcon } from '@icons'
 
 const RestrictedKeywords = () => {
-    const [show, setKeyword] = useResctrictedKeywordsStore(state => [state?.show, state.setKeyword])
+    const [show, setKeyword] = useResctrictedKeywordsStore(state => [state?.show, state?.setKeyword])
 
-    const { data, error, isLoading, mutate } = useSWR(`/api/job_scraper/job_source/`, fetchJobSources, SWR_REVALIDATE)
+    const { data, error, isLoading, mutate } = useSWR(
+        `/api/job_scraper/restricted_keywords/`,
+        fetchRestrictedKeywords,
+        SWR_REVALIDATE
+    )
 
     if (isLoading) return <Loading />
     return (
@@ -28,20 +32,20 @@ const RestrictedKeywords = () => {
                 )}
             </div>
             <div className='grid grid-cols-2 gap-3 md:grid-cols-5'>
-                {data?.sources?.length > 0 && !error ? (
-                    data?.sources?.map((row, idx) => (
+                {data?.length > 0 && !error ? (
+                    data?.map((row, idx) => (
                         <div
-                            className='bg-white border border-[#048C8C] border-opacity-70 rounded-md p-4 relative hover:bg-slate-100'
+                            className='bg-white border border-[#048C8C] border-opacity-60 rounded-md p-4 relative hover:bg-slate-100'
                             key={idx}
                         >
-                            <h2 className='text-lg'>{row?.name ?? 'N/A'}</h2>
+                            <h3 className='italic'>{row?.tag ?? 'N/A'}</h3>
                             {can(['edit_job_source', 'delete_job_source']) && (
                                 <JobSourceActions edit={() => setKeyword(row)} id={row?.id} refetch={mutate} />
                             )}
                         </div>
                     ))
                 ) : (
-                    <span className='m-auto p-5 text-gray-500'>No job sources found yet!</span>
+                    <span className='text-center p-5 text-gray-500'>No Restricted Keywords found yet!</span>
                 )}
             </div>
             {can('create_job_source') && show && <RestrictedKeywordForm refetch={mutate} />}
