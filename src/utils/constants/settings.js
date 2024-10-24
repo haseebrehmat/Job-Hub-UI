@@ -14,7 +14,7 @@ export const integrationNames = [
     { value: 'Twillio API', label: 'Twillio API' },
 ]
 
-export const API_LOGS_HEADS = ['Sr.', 'Source', 'Created At', 'Total Jobs']
+export const API_LOGS_HEADS = ['Sr.', 'ENV', 'Source', 'Created At', 'Total Jobs', 'Status']
 
 export const TECH_STACKS_CATEGORIES_HEADS = ['id', 'category', 'Tech Stacks', 'actions']
 
