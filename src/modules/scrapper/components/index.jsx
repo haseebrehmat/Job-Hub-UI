@@ -22,6 +22,7 @@ import RunningGroupLink from '@modules/scrapper/components/RunningGroupLink'
 import GroupLinkEditForm from '@modules/scrapper/components/GroupLinkEditForm'
 import RestrictedKeywords from '@modules/scrapper/components/RestrictedKeywords'
 import RestrictedKeywordForm from '@modules/scrapper/components/RestrictedKeywordForm'
+import RestrictedKeywordActions from '@modules/scrapper/components/RestrictedKeywordActions'
 
 export {
     CronjobSetting,
@@ -48,4 +49,5 @@ export {
     GroupLinkEditForm,
     RestrictedKeywords,
     RestrictedKeywordForm,
+    RestrictedKeywordActions,
 }

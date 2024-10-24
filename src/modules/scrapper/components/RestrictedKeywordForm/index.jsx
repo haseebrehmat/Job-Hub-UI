@@ -13,6 +13,8 @@ import { resctrictedKeywordSchema } from '@utils/schemas'
 const RestrictedKeywordForm = ({ refetch = null }) => {
     const [keyword, show, setShow] = useResctrictedKeywordsStore(state => [state?.keyword, state?.show, state?.setShow])
 
+    console.log(keyword)
+
     const { values, errors, handleSubmit, resetForm, trigger, handleChange } = useMutate(
         `/api/job_scraper/restricted_keywords${keyword?.id ? `/${keyword?.id}/` : '/'}`,
         saveRestrictedKeyword,
@@ -22,7 +24,11 @@ const RestrictedKeywordForm = ({ refetch = null }) => {
         null,
         () => {
             if (refetch) refetch()
-            if (!keyword?.id) resetForm()
+            if (!keyword?.id) {
+                resetForm()
+            } else {
+                setShow(false)
+            }
         }
     )
 
@@ -37,9 +43,9 @@ const RestrictedKeywordForm = ({ refetch = null }) => {
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <span className='text-xs font-semibold'>Keyword*</span>
-                    <Input name='tag' value={values.rag} onChange={handleChange} ph='Enter Restricted Keyword' />
+                    <Input name='tag' value={values.tag} onChange={handleChange} ph='Enter Restricted Keyword' />
                     {errors.tag && <small className='__error'>{errors.tag}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {values.tag.length > 0 && (
                             <Button label={keyword?.id ? 'Update' : 'Submit'} type='submit' fill />
                         )}

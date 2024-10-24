@@ -5,8 +5,7 @@ import { useResctrictedKeywordsStore } from '@/stores'
 
 import { Loading, Button } from '@components'
 
-import { JobSourceActions } from '@modules/settings/components'
-import { RestrictedKeywordForm } from '@modules/scrapper/components'
+import { RestrictedKeywordForm, RestrictedKeywordActions } from '@modules/scrapper/components'
 import { fetchRestrictedKeywords } from '@modules/scrapper/api'
 
 import { can } from '@utils/helpers'
@@ -40,7 +39,7 @@ const RestrictedKeywords = () => {
                         >
                             <h3 className='italic'>{row?.tag ?? 'N/A'}</h3>
                             {can(['edit_job_source', 'delete_job_source']) && (
-                                <JobSourceActions edit={() => setKeyword(row)} id={row?.id} refetch={mutate} />
+                                <RestrictedKeywordActions edit={() => setKeyword(row)} id={row?.id} refetch={mutate} />
                             )}
                         </div>
                     ))
