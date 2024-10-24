@@ -143,9 +143,7 @@ export const manualJobSchema = Yup.object().shape({
 })
 
 export const jobSourceLinkSchema = Yup.object().shape({
-    job_source: Yup.mixed()
-        .oneOf(Object.keys(JOB_SOURCES), 'Invalid job source type')
-        .required('Please select job source'),
+    job_source: Yup.mixed().required('Please select job source'),
 })
 
 export const pseudoSchema = Yup.object().shape({

@@ -1,14 +1,17 @@
 import { memo, useState } from 'react'
 
+import useSWR from 'swr'
+
 import { useMutate } from '@/hooks'
 
 import { Button, CustomSelector, Drawer, Tooltip, Textarea } from '@components'
 
 import { saveJobSourceLink } from '@modules/scrapper/api'
+import { fetchJobSources } from '@modules/settings/api'
 
-import { parseJobType, parseJobSource } from '@utils/helpers'
+import { parseJobType, parseJobSources, parseSelectedJobSource } from '@utils/helpers'
 import { jobSourceLinkSchema } from '@utils/schemas'
-import { JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS } from '@constants/scrapper'
+import { JOB_TYPES_OPTIONS } from '@constants/scrapper'
 
 import { ValidateFalseIcon } from '@icons'
 
@@ -24,6 +27,8 @@ const JobSourceLinkForm = ({ show, setShow, mutate, link }) => {
     }
     const addField = () => setFields([...fields, { link: '', job_type: '' }])
     const removeField = index => setFields(fields.filter((_, i) => i !== index))
+
+    const { data, error, isLoading } = useSWR('api/job_scraper/job_source/', fetchJobSources)
 
     const { values, errors, handleSubmit, resetForm, trigger, setFieldValue } = useMutate(
         `/api/job_scraper/job_source_link${link?.id ? `/${link?.id}/` : '/'}`,
@@ -46,14 +51,24 @@ const JobSourceLinkForm = ({ show, setShow, mutate, link }) => {
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{link?.id ? 'Edit' : 'Create'} Job Source Link / URL</p>
                     <hr className='mb-2' />
-                    <span className='text-xs font-semibold'>Job Source*</span>
-                    <CustomSelector
-                        options={JOB_SOURCE_OPTIONS}
-                        selectorValue={parseJobSource(values.job_source)}
-                        handleChange={({ value }) => setFieldValue('job_source', value)}
-                        placeholder='Select job source'
-                    />
-                    {errors.job_source && <small className='ml-1 text-xs text-red-600'>{errors.job_source}</small>}
+                    {isLoading ? (
+                        <div className='text-sm text-gray-600'>Loading....</div>
+                    ) : error ? (
+                        <div className='text-xs text-red-600'>{error}</div>
+                    ) : (
+                        <>
+                            <span className='text-xs font-semibold'>Job Source*</span>
+                            <CustomSelector
+                                options={parseJobSources(data?.sources)}
+                                selectorValue={parseSelectedJobSource(values?.job_source, data?.sources)}
+                                handleChange={({ value }) => setFieldValue('job_source', value)}
+                                placeholder='Select Job Source'
+                            />
+                            {errors.job_source && (
+                                <small className='ml-1 text-xs text-red-600'>{errors.job_source}</small>
+                            )}
+                        </>
+                    )}
                     <div className='flex items-center justify-between my-2'>
                         <p>Links</p>
                         {fields.length < 30 && (
