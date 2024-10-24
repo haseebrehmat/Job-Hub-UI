@@ -52,7 +52,11 @@ const ApiLogs = () => {
                         data?.logs?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
                                 <td className='p-3 break-words'>{row?.id}</td>
-                                <td className='p-3 break-words'>{row?.source}</td>
+                                <td className='p-3 break-words'>
+                                    {row?.source === 'SalesEngineLogsNaming.PRODUCTION_TO_SALES_ENGINE'
+                                        ? 'Production --> Sales Engine'
+                                        : 'Staging --> Production'}
+                                </td>
                                 <td className='p-3 break-words capitalize'>
                                     {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
                                 </td>
