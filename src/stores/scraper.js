@@ -32,6 +32,6 @@ export const useGroupLinksStore = create(set => ({
 export const useResctrictedKeywordsStore = create(set => ({
     keyword: null,
     show: false,
-    setKeyword: keyword => set(state => ({ ...state, keyword })),
+    setKeyword: keyword => set(state => ({ ...state, keyword, show: true })),
     setShow: value => set(state => ({ ...state, show: value ?? !state.show })),
 }))
