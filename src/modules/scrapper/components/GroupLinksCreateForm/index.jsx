@@ -1,9 +1,10 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
+import { Tooltip } from 'react-tooltip'
 
 import { useMutate } from '@/hooks'
 
-import { Button, CustomSelector, Drawer, Tooltip, Textarea } from '@components'
+import { Button, CustomSelector, Drawer, Textarea } from '@components'
 
 import { GroupsDropDown } from '@modules/scrapper/components'
 
@@ -48,7 +49,7 @@ const GroupLinksCreateForm = ({ show, setShow, mutate, link }) => {
         }
     )
     return (
-        <Drawer show={show} setShow={setShow} w='700px' dir='bottom'>
+        <Drawer show={show} setShow={setShow} w='700px' dir='bottom' classes='!p-1'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>Create Group Link / URL</p>
@@ -61,9 +62,10 @@ const GroupLinksCreateForm = ({ show, setShow, mutate, link }) => {
                     <div className='flex items-center justify-between mb-1'>
                         <p>Links</p>
                         {fields.length < 1000 && (
-                            <Tooltip text='Add Link'>
-                                <Button onClick={addField} icon='+' classes='!px-0.5 !py-0' />
-                            </Tooltip>
+                            <>
+                                <Button onClick={addField} icon='+' classes='!px-0.5 !py-0 add-field !w-fit' />
+                                <Tooltip anchorSelect='.add-field' content='Add Link' />
+                            </>
                         )}
                     </div>
                     {fields.map((field, index) => (
@@ -94,13 +96,12 @@ const GroupLinksCreateForm = ({ show, setShow, mutate, link }) => {
                                     placeholder='Select Job Source'
                                 />
                             )}
-                            <Tooltip text='Re-move Link'>
-                                <Button
-                                    classes='border-0 !text-lg !w-6 !h-6'
-                                    icon={ValidateFalseIcon}
-                                    onClick={() => removeField(index)}
-                                />
-                            </Tooltip>
+                            <Button
+                                classes={`border-0 !text-lg !w-6 !h-6 remove-${index}-field`}
+                                icon={ValidateFalseIcon}
+                                onClick={() => removeField(index)}
+                            />
+                            <Tooltip anchorSelect={`.remove-${index}-field`} content={`Remove Link - ${index + 1}`} />
                         </div>
                     ))}
                     <div className='pt-2 flex items-center justify-end gap-2'>
