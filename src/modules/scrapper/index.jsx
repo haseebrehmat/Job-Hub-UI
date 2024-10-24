@@ -12,7 +12,7 @@ import {
     RestrictedKeywords,
 } from '@modules/scrapper/components'
 
-import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon } from '@icons'
+import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon, RestrictedKeywordsIcon } from '@icons'
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState({
@@ -87,7 +87,7 @@ const Profile = () => {
                             label='Restricted Keywords'
                             fit
                             fill={activeTab.restricted}
-                            icon={LogsIcon}
+                            icon={RestrictedKeywordsIcon}
                             classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.restricted && 'border-gray-200'}`}
                             onClick={() => handleClick('restricted')}
                         />
