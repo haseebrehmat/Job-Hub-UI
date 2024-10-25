@@ -1,6 +1,7 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
 import toast from 'react-hot-toast'
+import { Tooltip } from 'react-tooltip'
 
 import { Button, EmptyTable, Loading } from '@components'
 
@@ -10,7 +11,7 @@ import { fetchAccounts } from '@modules/scrapper/api'
 import { can } from '@utils/helpers'
 import { ACCOUNTS_HEADS } from '@constants/scrapper'
 
-import { CreateIcon } from '@icons'
+import { CreateIcon, CopyToClipboardIcon } from '@icons'
 
 const Accounts = () => {
     const [account, setAccount] = useState()
@@ -60,9 +61,13 @@ const Accounts = () => {
                                             *
                                         </span>
                                     ))}
-                                    <span className='ml-3' onClick={() => copyToClipboard(row?.password || 'N/A')}>
-                                        copy
+                                    <span
+                                        className={`ml-2 inline-flex cursor-pointer copy-pass-${row?.id}`}
+                                        onClick={() => copyToClipboard(row?.password || 'N/A')}
+                                    >
+                                        {CopyToClipboardIcon}
                                     </span>
+                                    <Tooltip anchorSelect={`.copy-pass-${row?.id}`} content='Copy Password' />
                                 </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_scrapper_account', 'delete_scrapper_account']) && (
