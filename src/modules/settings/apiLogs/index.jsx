@@ -10,7 +10,7 @@ import { formatDate2, getSelectedVals, convertToTitleCase } from '@utils/helpers
 import { API_LOGS_HEADS, API_LOGS_INITIAL_VALUES } from '@constants/settings'
 import { JOB_SOURCES } from '@constants/scrapper'
 
-import { CandidateFilterIcon } from '@icons'
+import { CandidateFilterIcon, ValidateTrueIcon, ValidateFalseIcon } from '@icons'
 
 const ApiLogs = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), API_LOGS_INITIAL_VALUES)
@@ -52,11 +52,19 @@ const ApiLogs = () => {
                         data?.logs?.map((row, idx) => (
                             <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
                                 <td className='p-3 break-words'>{row?.id}</td>
+                                <td className='p-3 break-words'>
+                                    {row?.source === 'SalesEngineLogsNaming.PRODUCTION_TO_SALES_ENGINE'
+                                        ? 'Production --> Sales Engine'
+                                        : 'Staging --> Production'}
+                                </td>
                                 <td className='p-3 break-words capitalize'>
                                     {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
                                 </td>
                                 <td className='p-3 break-words'>{formatDate2(row?.created_at)}</td>
                                 <td className='px-4 py-3 break-words font-bold text-lg'>{row?.jobs_count || 0}</td>
+                                <td className='p-3 text-2xl font-bold'>
+                                    {row?.upload_status ? ValidateTrueIcon : ValidateFalseIcon}
+                                </td>
                             </tr>
                         ))
                     ) : (
