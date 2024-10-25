@@ -5,7 +5,7 @@ import { Tooltip } from 'react-tooltip'
 
 import { Button, EmptyTable, Loading } from '@components'
 
-import { JobSourceLinkActions, AccountForm } from '@modules/scrapper/components'
+import { AccountActions, AccountForm } from '@modules/scrapper/components'
 import { fetchAccounts } from '@modules/scrapper/api'
 
 import { can } from '@utils/helpers'
@@ -71,11 +71,7 @@ const Accounts = () => {
                                 </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_scrapper_account', 'delete_scrapper_account']) && (
-                                        <JobSourceLinkActions
-                                            id={row?.id}
-                                            edit={() => handleClick(row)}
-                                            mutate={mutate}
-                                        />
+                                        <AccountActions id={row?.id} edit={() => handleClick(row)} mutate={mutate} />
                                     )}
                                 </td>
                             </tr>
