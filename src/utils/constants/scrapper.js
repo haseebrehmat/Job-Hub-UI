@@ -174,3 +174,9 @@ export const JOB_SOURCES_INITIAL_VALS = [
 ]
 
 export const GROUP_LINKS_TABS = { total: true, running: false, remaining: false, completed: false, failed: false }
+
+export const ACCOUNT_SOURCES = [
+    { value: 'linkedin', label: 'LinkedIn' },
+    { value: 'glassdoor', label: 'Glassdoor' },
+    { value: 'pia', label: 'Private Internet Access (VPN)' },
+]

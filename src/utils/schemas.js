@@ -5,7 +5,7 @@ import { isValidFileTypeForAvatar } from '@utils/helpers'
 
 import { today } from '@constants/dashboard'
 import { MAX_FILE_SIZE } from '@constants/profile'
-import { JOB_SOURCES } from '@constants/scrapper'
+import { ACCOUNT_SOURCES, JOB_SOURCES } from '@constants/scrapper'
 import { GENERIC_SKILL_TYPES, SOCIAL_PLATFORMS } from '@constants/pseudos'
 
 export const loginSchema = Yup.object({
@@ -309,8 +309,14 @@ export const groupSchema = Yup.object().shape({
 })
 
 export const accountSchema = Yup.object().shape({
-    email: Yup.string().email().required('email is required'),
-    password: Yup.string().required('password is required'),
+    email: Yup.string().min(5).max(500).required('Email or Username is required'),
+    password: Yup.string().max(200).min(5).required('password is required'),
+    source: Yup.mixed()
+        .oneOf(
+            ACCOUNT_SOURCES.map(row => row.value),
+            'Invalid account source'
+        )
+        .required('Please select account source'),
 })
 
 export const regionSchema = Yup.object().shape({
