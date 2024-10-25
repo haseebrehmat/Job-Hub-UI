@@ -36,7 +36,7 @@ const AccountForm = ({ show, setShow, mutate, account }) => {
                         type='text'
                         value={values.email}
                         onChange={e => setFieldValue('email', e.target.value)}
-                        placeholder='Enter Email'
+                        ph='Enter Email'
                     />
                     {errors.email && <small className='ml-1 text-xs text-red-600'>{errors.email}</small>}
                     <span className='text-xs font-semibold mb-1'>Password</span>
@@ -44,7 +44,7 @@ const AccountForm = ({ show, setShow, mutate, account }) => {
                         type='text'
                         value={values.password}
                         onChange={e => setFieldValue('password', e.target.value)}
-                        placeholder='Enter Password'
+                        ph='Enter Password'
                     />
                     {errors.password && <small className='ml-1 text-xs text-red-600'>{errors.password}</small>}
                     <div className='pt-4 space-y-2'>
