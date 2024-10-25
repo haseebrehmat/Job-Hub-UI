@@ -43,7 +43,7 @@ const Profile = () => {
         <div className='p-2'>
             <div className='p-4 rounded-lg shadow-md'>
                 <div className='flex flex-col mb-4'>
-                    <div className='flex flex-col mb-4 space-y-2 md:gap-5 sm:flex-row sm:space-y-0'>
+                    <div className='flex flex-wrap gap-2 md:gap-4'>
                         <Button
                             label='Cronjob Settings'
                             fit

@@ -26,7 +26,7 @@ const Accounts = () => {
 
     return (
         <div className='max-w-full overflow-x-auto mb-14'>
-            <div className='flex items-center space-x-4 pb-6'>
+            <div className='flex items-center justify-end pb-4'>
                 {can('create_scrapper_account') && (
                     <Button label='Create New Account' fit icon={CreateIcon} onClick={() => handleClick()} />
                 )}
