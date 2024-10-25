@@ -1,5 +1,6 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
+import toast from 'react-hot-toast'
 
 import { Button, EmptyTable, Loading } from '@components'
 
@@ -20,6 +21,12 @@ const Accounts = () => {
     const handleClick = (values = null) => {
         setAccount(values)
         setShow(true)
+    }
+    const copyToClipboard = text => {
+        navigator.clipboard
+            .writeText(text)
+            .then(() => toast.success(`Password Copied`))
+            .catch(err => toast.error('Copy failed:', err))
     }
 
     if (isLoading) return <Loading />
@@ -47,7 +54,16 @@ const Accounts = () => {
                             <tr className='border-b border-[#006366] border-opacity-30 hover:bg-gray-100' key={row.id}>
                                 <td className='px-3 py-6'>{row.id}</td>
                                 <td className='px-3 py-6'>{row.email}</td>
-                                <td className='px-3 py-6'>{row.password}</td>
+                                <td className='px-3 py-6'>
+                                    {Array.from({ length: row?.password?.length || 10 }, (_, i) => (
+                                        <span className='pl-0.5 text-lg' key={i}>
+                                            *
+                                        </span>
+                                    ))}
+                                    <span className='ml-3' onClick={() => copyToClipboard(row?.password || 'N/A')}>
+                                        copy
+                                    </span>
+                                </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_scrapper_account', 'delete_scrapper_account']) && (
                                         <JobSourceLinkActions
