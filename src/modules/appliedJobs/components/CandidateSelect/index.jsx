@@ -14,7 +14,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), CANDIDATE_SELECT_STATE)
 
     const { data, error, isLoading } = useSWR(
-        `/api/candidate_management/selected_candidate/?search=${vals.query}&skills=${vals.skills}&designations=${vals.designations}`,
+        `/api/candidate_management/selected_candidate/?search=${vals.query}&skills=${vals.skills}&designations=${vals.designations}&regions=${vals.regions}`,
         fetchSelectedCandidates
     )
 
@@ -39,7 +39,7 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
                         <Searchbox
                             query={vals.query}
                             setQuery={query => dispatch({ query })}
-                            clear={() => dispatch({ query: '', skills: '', designations: '' })}
+                            clear={() => dispatch({ query: '', skills: '', designations: '', regions: '' })}
                         />
                     </div>
                     <Button
@@ -67,13 +67,19 @@ const CandidateSelect = ({ selected = null, handleSelect = null }) => {
                                 <span className='capitalize'>{row?.name ?? 'N/A'}</span>
                             </div>
                             <span className='uppercase w-28'>
-                                <Badge label={row?.designation ?? 'N/A'} classes='text-xs' />
+                                <Badge label={row?.designation?.name ?? 'N/A'} classes='text-xs' />
                             </span>
                             <div className='flex flex-wrap gap-1 w-2/3'>
-                                {row?.skills?.map(s => (
-                                    <Badge label={s} classes='text-xs border border-green-300' type='success' key={s} />
+                                {row?.skills?.map((s, idx) => (
+                                    <Badge
+                                        label={s.name}
+                                        classes='text-xs border border-green-300'
+                                        type='success'
+                                        key={idx}
+                                    />
                                 ))}
                             </div>
+                            <small className='text-xs'>{row?.regions?.map(r => `${r.name}`)?.join(',')}</small>
                         </div>
                     ))}
                 </div>

@@ -6,9 +6,9 @@ import { Badge, Button, Loading } from '@components'
 
 import { fetchJob } from '@modules/jobsFilter/api'
 
-import { formatDate, Id } from '@utils/helpers'
+import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon, SalaryIcon } from '@icons'
 
-import { JobSource, TechSTack, UserAppliedJobIcon, CompanyIcon, DateTimeIcon } from '@icons'
+import { formatDate, Id } from '@utils/helpers'
 
 const JobDetail = () => {
     const { id } = useParams()
@@ -40,12 +40,39 @@ const JobDetail = () => {
                                     <span>{data?.job_details?.company_name}</span>
                                 </p>
                             </div>
-
                             <div className='flex flex-row text-sm'>
                                 <span className='mr-3'>{DateTimeIcon}</span>
                                 <p className='flex items-center  text-gray-900'>
                                     <span className='font-semibold mr-2 text-md uppercase'>Posted at :</span>
                                     <span>{formatDate(data?.job_details?.job_posted_date)}</span>
+                                </p>
+                            </div>
+                            <div className='flex flex-row text-sm'>
+                                <span className='mr-3'>{SalaryIcon}</span>
+                                <p className='flex items-center  text-gray-900'>
+                                    <span className='font-semibold mr-2 text-md uppercase'>Minimum Salary :</span>
+                                    <span>{data?.job_details?.salary_min || 'N/A'}</span>
+                                </p>
+                            </div>
+                            <div className='flex flex-row text-sm'>
+                                <span className='mr-3'>{SalaryIcon}</span>
+                                <p className='flex items-center  text-gray-900'>
+                                    <span className='font-semibold mr-2 text-md uppercase'>Maximum Salary :</span>
+                                    <span>{data?.job_details?.salary_max || 'N/A'}</span>
+                                </p>
+                            </div>
+                            <div className='flex flex-row text-sm'>
+                                <span className='mr-3'>{SalaryIcon}</span>
+                                <p className='flex items-center  text-gray-900'>
+                                    <span className='font-semibold mr-2 text-md uppercase'>Salary Format :</span>
+                                    <span>{data?.job_details?.salary_format || 'N/A'}</span>
+                                </p>
+                            </div>
+                            <div className='flex flex-row text-sm'>
+                                <span className='mr-3'>{SalaryIcon}</span>
+                                <p className='flex items-center  text-gray-900'>
+                                    <span className='font-semibold mr-2 text-md uppercase'>Salary Range :</span>
+                                    <span>{data?.job_details?.estimated_salary || 'N/A'}</span>
                                 </p>
                             </div>
                         </div>
@@ -109,7 +136,7 @@ const JobDetail = () => {
                         <div className='flex flex-col space-y-4 p-6 text-gray-600'>
                             <div className='flex flex-row text-md'>
                                 <p className='flex items-center text-gray-900'>
-                                    <div dangerouslySetInnerHTML={{ __html: data?.job_details?.job_description }} />
+                                    <div dangerouslySetInnerHTML={{ __html: data?.job_details?.job_description_tags   }} />
                                 </p>
                             </div>
                         </div>

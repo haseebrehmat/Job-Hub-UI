@@ -45,9 +45,9 @@ const Template4 = ({ data: dev, hide, names }) => (
         </div>
         {hide.skill && dev?.skills?.all?.length > 0 && (
             <div className='mb-10'>
-                <hr className='mb-2 border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.skill}</p>
-                <hr className='mb-6 border-black' />
+                <p className='text-lg text-center py-2 mb-4 border-y border-black text-blue-900 font-semibold uppercase'>
+                    {names.skill}
+                </p>
                 <div className='flex flex-col'>
                     <div>
                         {dev?.skills?.all.map(({ name }, index) => (
@@ -63,9 +63,9 @@ const Template4 = ({ data: dev, hide, names }) => (
         )}
         {hide.experience && dev?.experience?.length > 0 && (
             <div className='mb-10'>
-                <hr className='mb-2  border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.experience} </p>
-                <hr className='mb-6  border-black' />
+                <p className='text-lg text-center py-2 mb-4 border-y border-black text-blue-900 font-semibold uppercase'>
+                    {names.experience}
+                </p>
                 <div className='flex flex-col'>
                     <div className='space-y-5'>
                         {dev?.experience.map(({ company, title, from, to, description }, index) => (
@@ -94,9 +94,9 @@ const Template4 = ({ data: dev, hide, names }) => (
         )}
         {hide.project && dev?.projects?.length > 0 && (
             <div className='mb-10'>
-                <hr className='mb-2 border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.project}</p>
-                <hr className='mb-6 border-black' />
+                <p className='text-lg text-center py-2 mb-4 border-y border-black text-blue-900 font-semibold uppercase'>
+                    {names.project}
+                </p>
                 <div className='flex flex-col '>
                     <div className='space-y-5'>
                         {dev?.projects?.map(({ name, title, repo, description }, index) => (
@@ -114,9 +114,9 @@ const Template4 = ({ data: dev, hide, names }) => (
 
         {hide.education && dev?.education?.length > 0 && (
             <div className='mb-10'>
-                <hr className='mb-2 border-black' />
-                <p className='text-lg text-center mb-2 text-blue-900 font-semibold uppercase'>{names.education}</p>
-                <hr className='mb-6 border-black' />
+                <p className='text-lg text-center py-2 mb-4 border-y border-black text-blue-900 font-semibold uppercase'>
+                    {names.education}
+                </p>
                 <div className='flex flex-col'>
                     <div className='space-y-5'>
                         {dev?.education.map(({ degree, from, to, institute, grade }, index) => (

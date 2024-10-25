@@ -44,7 +44,7 @@ export const roleSchema = Yup.object().shape({
 export const userSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
     company: Yup.string().required('Please select company'),
-    roles: Yup.string().required('Role is required'),
+    roles: Yup.mixed().required('Role is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
 })
 
@@ -135,17 +135,15 @@ export const manualJobSchema = Yup.object().shape({
     job_source: Yup.string().required('Job Source is required'),
     job_type: Yup.string().required('Job Type is required'),
     address: Yup.string().required('Location is required'),
-    job_source_url: Yup.string().required('Job URL is required'),
+    job_source_url: Yup.string().url('Please enter a valid URL').required('Job URL is required'),
     job_posted_date: Yup.string().required('Job Posted Date is required'),
     time: Yup.string().required('Time is required'),
-    tech_keywords: Yup.string().required('Tech Stack is required'),
-    job_description: Yup.string().required('Job Ddescription is required'),
+    tech_keywords: Yup.mixed().required('Please select at least one tech stack'),
+    job_description_tags: Yup.string().required('Job description is required'),
 })
 
 export const jobSourceLinkSchema = Yup.object().shape({
-    job_source: Yup.mixed()
-        .oneOf(Object.keys(JOB_SOURCES), 'Invalid job source type')
-        .required('Please select job source'),
+    job_source: Yup.mixed().required('Please select job source'),
 })
 
 export const pseudoSchema = Yup.object().shape({
@@ -179,7 +177,14 @@ export const experienceSchema = Yup.object().shape({
     designation: Yup.string().required('Designation is required'),
     description: Yup.string().max(250, 'Description is too long'),
     start_date: Yup.date().max(today, 'Please choose future date'),
-    end_date: Yup.date().min(Yup.ref('start_date'), "End date can't be before Start date"),
+    currently: Yup.boolean(),
+    end_date: Yup.date().when('currently', {
+        is: currently => currently === false,
+        then: () =>
+            Yup.date()
+                .required('End date is required')
+                .min(Yup.ref('start_date'), "End date can't be before Start date"),
+    }),
 })
 
 export const educationSchema = Yup.object().shape({
@@ -211,10 +216,6 @@ export const verticalSchema = Yup.object().shape({
     team_id: Yup.string().required('Section name is required'),
 })
 
-export const verticalmemberSchema = Yup.object().shape({
-    user_id: Yup.string().required('Section name is required'),
-})
-
 export const projectSchema = Yup.object().shape({
     name: Yup.string().required('Project name is required'),
     title: Yup.string().required('Title of yours is required'),
@@ -237,12 +238,21 @@ export const companyStatusSchema = Yup.object().shape({
     status_list: Yup.array().required('Please choose status'),
 })
 
-export const convertToLeadSchema = Yup.object().shape({
+export const statusPhaseSchema = Yup.object().shape({
     status: Yup.mixed().required('Please choose status'),
     phase: Yup.mixed().required('Please choose phase'),
-    notes: Yup.string().max(250, 'Notes is too long'),
-    effect_date: Yup.date().min(today, 'Please choose future date'),
     due_date: Yup.date().min(Yup.ref('effect_date'), "Due date can't be before Start date"),
+})
+
+export const updatePhaseSchema = Yup.object().shape({
+    ...statusPhaseSchema.fields,
+    effect_date: Yup.date(),
+})
+
+export const convertToLeadSchema = Yup.object().shape({
+    ...statusPhaseSchema.fields,
+    effect_date: Yup.date().min(today, 'Please choose future date'),
+    notes: Yup.string().max(250, 'Notes is too long'),
     candidate: Yup.mixed().required('Please choose candidate'),
 })
 
@@ -263,7 +273,7 @@ export const candidateEditSchema = Yup.object().shape({
         .matches(/^[0-9+()\-\s]*$/, 'Invalid phone number')
         .required('Phone is required'),
     email: Yup.string().email('Email is not valid').required('Email is required'),
-    designation: Yup.string().required('Designation is required'),
+    designation: Yup.mixed().required('Designation is required'),
 })
 
 export const candidateCreateSchema = Yup.object().shape({
@@ -301,4 +311,19 @@ export const groupSchema = Yup.object().shape({
 export const accountSchema = Yup.object().shape({
     email: Yup.string().email().required('email is required'),
     password: Yup.string().required('password is required'),
+})
+
+export const regionSchema = Yup.object().shape({
+    name: Yup.string().required('Region name is required'),
+})
+
+export const jobSourceSchema = Yup.object().shape({
+    name: Yup.string().required('Job Source name is required'),
+    key: Yup.string()
+        .required('Job Source key is required')
+        .matches(/^[\w_]+$/, 'Job Source must only contain alphabets and underscores'),
+})
+
+export const resctrictedKeywordSchema = Yup.object().shape({
+    tag: Yup.string().required('Please enter a keyword'),
 })

@@ -6,6 +6,7 @@ import {
     MdClear,
     MdOutlineVerifiedUser,
     MdOutlineKeyboardArrowDown,
+    MdOutlineKeyboardArrowLeft,
     MdWorkOutline,
     MdArrowBackIos,
     MdArrowForwardIos,
@@ -18,6 +19,9 @@ import {
     MdLeaderboard,
     MdCancel,
     MdDoNotDisturbOn,
+    MdBlock,
+    MdOutlineHistory,
+    MdOutlineNoteAlt,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -33,6 +37,13 @@ import {
     BsFillPlayFill,
     BsCardList,
     BsCheckCircleFill,
+    BsArrowRight,
+    BsGrid,
+    BsStars,
+    BsLinkedin,
+    BsSortNumericUpAlt,
+    BsToggleOn,
+    BsToggleOff,
 } from 'react-icons/bs'
 import {
     HiUser,
@@ -45,8 +56,8 @@ import {
 } from 'react-icons/hi'
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh, TbCalendarTime, TbBadges } from 'react-icons/tb'
-import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle } from 'react-icons/fi'
+import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey, TbListDetails } from 'react-icons/tb'
+import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle, FiGlobe } from 'react-icons/fi'
 import {
     AiOutlineSearch,
     AiOutlineEye,
@@ -60,12 +71,33 @@ import {
     AiOutlineHistory,
     AiOutlinePlus,
     AiOutlinePartition,
+    AiOutlineArrowDown,
 } from 'react-icons/ai'
-import { ImSearch, ImCross } from 'react-icons/im'
-import { CgSidebarOpen, CgListTree } from 'react-icons/cg'
+import { ImSearch, ImCross, ImNotification } from 'react-icons/im'
+import { CgSidebarOpen, CgListTree, CgUnblock } from 'react-icons/cg'
 import { IoNewspaperSharp } from 'react-icons/io5'
-import { FaBriefcase, FaHotjar, FaUsers, FaRegTrashAlt, FaPowerOff, FaRegUserCircle, FaUserEdit } from 'react-icons/fa'
-import { BiPlusCircle, BiMessageDetail, BiPause, BiGitCompare, BiTrendingUp } from 'react-icons/bi'
+import {
+    FaBriefcase,
+    FaHotjar,
+    FaUsers,
+    FaRegTrashAlt,
+    FaPowerOff,
+    FaRegUserCircle,
+    FaUserEdit,
+    FaUsersCog,
+    FaBan,
+} from 'react-icons/fa'
+import {
+    BiPlusCircle,
+    BiMessageDetail,
+    BiPause,
+    BiGitCompare,
+    BiTrendingUp,
+    BiMap,
+    BiBriefcaseAlt2,
+    BiCheckDouble,
+    BiSortUp,
+} from 'react-icons/bi'
 import {
     RiUserSettingsLine,
     RiLock2Fill,
@@ -75,12 +107,15 @@ import {
     RiDownloadCloudLine,
     RiStarFill,
     RiShieldUserLine,
+    RiMoneyEuroCircleLine,
 } from 'react-icons/ri'
 import { GrDocumentUser } from 'react-icons/gr'
 import { Integrations, Filters, ResetFilters } from '@svgs'
-import { VscVmRunning, VscSourceControl, VscSettings } from 'react-icons/vsc'
+import { VscVmRunning, VscSourceControl, VscSettings, VscEye } from 'react-icons/vsc'
 import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
 import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
+import { TfiLayoutListThumb } from 'react-icons/tfi'
+import { GoShield } from 'react-icons/go'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
@@ -151,7 +186,7 @@ export const UploadJobIcon = <MdOutlineDriveFolderUpload style={{ fontSize: '22p
 export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
 export const RunningScrapperIcon = <VscVmRunning style={{ fontSize: '22px' }} />
-export const LoggerIcon = <BsCardList style={{ fontSize: '22px' }} />
+export const LoggerIcon = <BsCardList style={{ fontSize: '16px' }} />
 export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px' }} />
 export const ResumeIcon = <GrDocumentUser style={{ fontSize: 16 }} />
 export const JobSource = <VscSourceControl style={{ fontSize: '22px' }} />
@@ -162,7 +197,7 @@ export const PauseIcon = <BiPause style={{ fontSize: '22px' }} />
 export const CompanyIcon = <HiOutlineOfficeBuilding style={{ fontSize: '22px' }} />
 export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
 export const SelectedIcon = <FiCheckCircle style={{ fontSize: '22px' }} />
-export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 22 }} />
+export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 16 }} />
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
 export const StatusIcon = <BiGitCompare style={{ fontSize: 18 }} />
@@ -185,3 +220,31 @@ export const LeadAppliedByIcon = <RxFace style={{ fontSize: 18 }} />
 export const AllowLeadIcon = <BsCheckCircleFill style={{ fontSize: 22 }} />
 export const DenyLeadIcon = <MdDoNotDisturbOn style={{ fontSize: 22 }} />
 export const AnalyticsIcon = <BiTrendingUp style={{ fontSize: 22 }} />
+export const JobCompaniesIcon = <FaUsersCog style={{ fontSize: 22 }} />
+export const BlockJobCompanyIcon = <MdBlock style={{ fontSize: 18 }} />
+export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
+export const ApiLogsIcon = <TfiLayoutListThumb style={{ fontSize: 16 }} />
+export const RegionIcon = <BiMap style={{ fontSize: 16 }} />
+export const AppliedJobsIcon = <BiBriefcaseAlt2 style={{ fontSize: 22 }} />
+export const PermissionsIcon = <GoShield style={{ fontSize: 16 }} />
+export const SalaryIcon = <RiMoneyEuroCircleLine style={{ fontSize: 20 }} />
+export const RestrictLogin = <TbKeyOff style={{ fontSize: 20 }} />
+export const AllowLogin = <TbKey style={{ fontSize: 20 }} />
+export const ExpiredJobsIcon = <FaBan style={{ fontSize: 20 }} />
+export const HistoryIcon = <MdOutlineHistory style={{ fontSize: 20 }} />
+export const LeadNoteIcon = <MdOutlineNoteAlt style={{ fontSize: 20 }} />
+export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />
+export const UptoIcon = <BsArrowRight style={{ fontSize: 14 }} />
+export const SiteIcon = <FiGlobe style={{ fontSize: 16 }} />
+export const DoubleCheckIcon = <BiCheckDouble style={{ fontSize: 18 }} />
+export const OrderingIcon = <BiSortUp style={{ fontSize: 18 }} />
+export const JobVisibilityIcon = <VscEye style={{ fontSize: 16 }} />
+export const GridViewIcon = <BsGrid style={{ fontSize: 16 }} />
+export const ListViewIcon = <TbListDetails style={{ fontSize: 16 }} />
+export const JobPortalV2Icon = <BsStars style={{ fontSize: 24 }} />
+export const ClosedSubMenuIcon = <MdOutlineKeyboardArrowLeft style={{ fontSize: '22px' }} />
+export const JobSourcesIcon = <BsLinkedin style={{ fontSize: 16 }} />
+export const RecordsLimitIcon = <BsSortNumericUpAlt style={{ fontSize: 16 }} />
+export const Enable = <BsToggleOn style={{ fontSize: 28 }} />
+export const Disable = <BsToggleOff style={{ fontSize: 28 }} />
+export const RestrictedKeywordsIcon = <ImNotification style={{ fontSize: '22px' }} />

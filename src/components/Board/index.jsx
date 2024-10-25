@@ -30,8 +30,8 @@ const Board = ({ data, set = null, handleDrag = null }) => {
         handleDrag()
     }
     return (
-        <div className='max-w-full overflow-x-auto mb-14'>
-            <div className='flex px-2 overflow-y-auto h-screen hide_scrollbar'>
+        <div className='max-w-full overflow-auto mb-14'>
+            <div className='flex px-2 overflow-scroll h-screen'>
                 <DragDropContext onDragEnd={result => onDragEnd(result)}>
                     {Object.entries(columns).map(([columnId, column]) => (
                         <div className='flex flex-col' key={columnId}>

@@ -2,11 +2,15 @@ import {
     Status,
     CompanyStatus,
     Phases,
-    Leads,
+    // Leads,
+    LeadsTable,
     Candidates,
     Designations,
     ExposedCandidates,
     AssignCandidate,
+    MyProfile,
+    LeadNotes,
+    ExposedTeams,
 } from '@modules'
 
 export const leadsRoutes = [
@@ -33,7 +37,7 @@ export const leadsRoutes = [
     },
     {
         path: '/leads',
-        component: <Leads />,
+        component: <LeadsTable />,
         protect: true,
         title: 'My Leads',
         permission: 'view_lead',
@@ -60,10 +64,31 @@ export const leadsRoutes = [
         permission: 'view_exposed_candidate',
     },
     {
+        path: '/exposed-teams',
+        component: <ExposedTeams />,
+        protect: true,
+        title: 'Exposed Teams',
+        permission: 'view_exposed_candidate',
+    },
+    {
         path: '/assign-candidate/:id',
         component: <AssignCandidate />,
         protect: true,
         title: 'Assign / Re-Assign Candidate',
+        permission: 'view_lead',
+    },
+    {
+        path: '/my-profile',
+        component: <MyProfile />,
+        protect: true,
+        title: 'My Profile',
+        permission: 'view_candidate_profile',
+    },
+    {
+        path: '/lead-notes/:id',
+        component: <LeadNotes />,
+        protect: true,
+        title: 'Lead Notes',
         permission: 'view_lead',
     },
 ]

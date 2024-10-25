@@ -31,8 +31,8 @@ const UpdateAvatar = ({ data }) => {
             <h1 className='mb-2 text-lg font-medium'>Avatar upload</h1>
             <hr className='mb-5' />
             <div className='grid grid-flow-row gap-2'>
-                <div className='flex items-center space-x-6 mx-auto mt-4'>
-                    <a className='shrink-0' href={avatar} target='_blank' rel='noreferrer'>
+                <div className='flex flex-col items-center space-y-6 mx-auto mt-4 md:space-y-0 md:flex-row md:items-center'>
+                    <a className='shrink-0 mr-6' href={avatar} target='_blank' rel='noreferrer'>
                         <img
                             className='h-28 w-28 object-cover shadow-lg rounded-full border border-[#328d8c]'
                             alt='Avatar'
@@ -54,7 +54,7 @@ const UpdateAvatar = ({ data }) => {
                     </label>
                 </div>
                 {uploaded && (
-                    <div className='flex flex-col items-center mx-auto mt-4'>
+                    <div className='flex flex-col items-center space-y-4 mx-auto mt-4'>
                         <FilePreview file={uploaded} />
                         {errors.file && <small className='my-2 text-xs text-red-600'>{errors.file}</small>}
                         <div className='pt-4'>

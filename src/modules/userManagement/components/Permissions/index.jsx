@@ -1,15 +1,21 @@
 import { memo, useEffect, useState } from 'react'
+import useSWR from 'swr'
+
+import { Loading } from '@components'
+
+import { fetchPermissions } from '@modules/settings/api'
 
 import { transformPascal } from '@utils/helpers'
 
-import { permissions as data } from '@utils/constants/permissions'
-
 const Permissions = ({ permissions, setPermissions }) => {
+    const { data, isLoading } = useSWR(`/api/auth/permission/`, fetchPermissions)
     const [permss, setPermss] = useState(
         data
-            .flatMap(p => p.permissions)
-            .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
-            .reduce((acc, cur) => ({ ...acc, ...cur }))
+            ? data?.permissions
+                  ?.flatMap(p => p.permissions)
+                  .map(c => ({ [c.codename]: permissions.includes(c.codename) }))
+                  .reduce((acc, cur) => ({ ...acc, ...cur }))
+            : []
     )
     const handleChange = e => {
         const {
@@ -32,10 +38,11 @@ const Permissions = ({ permissions, setPermissions }) => {
         const allowedPermissions = Object.keys(permss).filter(k => permss[k])
         if (allowedPermissions.length > 0) setPermissions(allowedPermissions)
     }, [permss])
+    if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto'>
+        <div>
             <p className='pb-2 font-semibold'>Assign Permissions</p>
-            <table className='table-auto w-full text-sm text-left text-[#048C8C]'>
+            <table className='table-auto md:w-full text-sm text-left text-[#048C8C] __table-r'>
                 <thead className='text-xs uppercase border border-[#048C8C]'>
                     <tr>
                         <th scope='col' className='px-2 py-4'>
@@ -47,17 +54,17 @@ const Permissions = ({ permissions, setPermissions }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.length > 0 ? (
-                        data?.map((perm, idx) =>
+                    {data?.permissions?.length > 0 ? (
+                        data?.permissions?.map((perm, idx) =>
                             perm?.permissions?.length > 0 ? (
                                 <tr className='bg-white border-b border-[#006366] border-opacity-30' key={idx}>
-                                    <td className='px-2 py-2'>
+                                    <td className='md:px-2 py-2'>
                                         <div className='flex items-center'>
                                             <input
                                                 id={`checkbox-${idx}`}
                                                 type='checkbox'
                                                 name='permissions'
-                                                data-perms={perm.permissions.map(({ codename }) => codename)}
+                                                data-perms={perm?.permissions.map(({ codename }) => codename)}
                                                 onChange={handleModule}
                                                 className='w-6 h-4 rounded accent-cyan-600 focus:ring-0'
                                             />
@@ -66,7 +73,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                                             </label>
                                         </div>
                                     </td>
-                                    <td className='px-2 py-2 grid grid-cols-2 gap-2'>
+                                    <td className='md:px-2 py-2 grid md:grid-cols-2 gap-2'>
                                         {perm?.permissions?.map(({ codename, name, parent, child }) => (
                                             <div className='flex items-center' key={codename}>
                                                 <input
@@ -82,7 +89,7 @@ const Permissions = ({ permissions, setPermissions }) => {
                                                 />
                                                 <label
                                                     htmlFor={`checkbox-${codename}`}
-                                                    className='ml-2 text-sm  capitalize'
+                                                    className='ml-2 text-sm capitalize'
                                                 >
                                                     {name}
                                                 </label>

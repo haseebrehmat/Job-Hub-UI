@@ -2,8 +2,8 @@ import { memo } from 'react'
 
 const EmptyTable = memo(() => (
     <tr>
-        <td colSpan={10} className='text-center p-4'>
-            No Applied Jobs found yet!
+        <td colSpan={9} className='text-center p-4'>
+            No team Applied Jobs found yet!
         </td>
     </tr>
 ))

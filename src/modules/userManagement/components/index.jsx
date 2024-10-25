@@ -11,6 +11,13 @@ import UsersActions from '@modules/userManagement/components/UsersActions'
 import PseudosTeamForm from '@/modules/userManagement/components/PseudosTeamForm'
 import PseudosMemberForm from '@/modules/userManagement/components/PseudosMemberForm'
 import MemberForm from '@modules/userManagement/components/MemberForm'
+import UserRolesDropdown from '@modules/userManagement/components/UserRolesDropdown'
+import SelectedVerticals from '@modules/userManagement/components/SelectedVerticals'
+import MemberVerticals from '@modules/userManagement/components/MemberVerticals'
+import MemberRegions from '@modules/userManagement/components/MemberRegions'
+import TeamVerticals from '@modules/userManagement/components/TeamVerticals'
+import TeamActions from '@modules/userManagement/components/TeamActions'
+import ReportingToDropdown from '@modules/userManagement/components/ReportingToDropdown'
 
 export {
     CompanyForm,
@@ -26,4 +33,11 @@ export {
     MemberForm,
     PseudosTeamForm,
     PseudosMemberForm,
+    UserRolesDropdown,
+    SelectedVerticals,
+    MemberVerticals,
+    MemberRegions,
+    TeamVerticals,
+    TeamActions,
+    ReportingToDropdown,
 }

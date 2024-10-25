@@ -24,15 +24,15 @@ const Links = ({ id }) => {
 
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto mb-2 px-1'>
+        <div className='mb-2 px-1'>
             <div className='flex items-center space-x-4 py-4'>
                 <Button label='Add Link' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
-            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+            <div className='grid gap-2 md:grid-cols-2'>
                 {data?.length > 0 && !error ? (
                     data?.map((row, idx) => (
-                        <div className='bg-white flex flex-col rounded-md p-4 border relative'>
-                            <div className='flex gap-4' key={idx}>
+                        <div className='bg-white flex flex-col rounded-md p-2 md:p-4 border relative' key={idx}>
+                            <div className='flex gap-4'>
                                 <span>{LinksSvgs[row?.platform ?? 'other']}</span>
                                 <h2 className='text-lg capitalize'>{SOCIAL_PLATFORMS[row?.platform ?? 'other']}</h2>
                                 <LinkActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
@@ -48,7 +48,7 @@ const Links = ({ id }) => {
                     <span className='ml-2 text-gray-500'>No links added yet!</span>
                 )}
             </div>
-            <ActionButtons mutate={mutate} classes='mt-4 !w-1/3' />
+            <ActionButtons mutate={mutate} classes='mt-4' />
             {show && <LinkForm show={show} setShow={setShow} mutate={mutate} link={link} id={id} />}
         </div>
     )

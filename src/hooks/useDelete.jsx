@@ -1,7 +1,6 @@
 import useSWRMutation from 'swr/mutation'
 import { toast } from 'react-hot-toast'
 
-import { getMsg } from '@utils/helpers'
 import { http } from '@utils/http'
 
 const useDelete = url => {
@@ -10,8 +9,7 @@ const useDelete = url => {
         isMutating,
         error: mutateError,
     } = useSWRMutation(url, () => http.delete(url), {
-        onError: error => toast.error(getMsg(error)),
-        onSuccess: ({ data }) => toast.success(data.detail),
+        onSuccess: resp => (resp?.data ? toast.success(resp?.data?.detail) : null),
     })
 
     return {

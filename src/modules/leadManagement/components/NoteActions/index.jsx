@@ -8,7 +8,15 @@ const NoteActions = ({ row, note, setNote, mutate }) => {
             <span className='flex gap-x-2 font-semibold text-gray-500'>
                 <small
                     className='underline cursor-pointer'
-                    onClick={() => setNote({ id: row?.id, edit: row?.message, msg: '' })}
+                    onClick={() =>
+                        setNote({
+                            id: row?.id,
+                            edit: row?.message,
+                            msg: '',
+                            editAttachments: row?.attachments,
+                            attachments: null,
+                        })
+                    }
                 >
                     Edit
                 </small>

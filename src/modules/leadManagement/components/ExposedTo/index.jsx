@@ -13,7 +13,7 @@ const ExposedTo = ({ companies, mutate = null }) => {
 
     return (
         <td className='px-3 py-6 flex items-center flex-wrap space-x-1.5 gap-y-1.5'>
-            {companies.length > 0
+            {companies?.length > 0
                 ? companies.map(company => (
                       <Badge
                           key={company?.id}

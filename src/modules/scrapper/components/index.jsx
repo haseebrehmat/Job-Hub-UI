@@ -12,11 +12,19 @@ import ScrappingGroup from '@modules/scrapper/components/ScrappingGroup'
 import GroupForm from '@modules/scrapper/components/GroupForm'
 import GroupSettingActions from '@modules/scrapper/components/GroupSettingActions'
 import GroupLinks from '@modules/scrapper/components/GroupLinks'
-import GroupLinksForm from '@modules/scrapper/components/GroupLinksForm'
+import GroupLinksCreateForm from '@/modules/scrapper/components/GroupLinksCreateForm'
 import GroupsDropDown from '@modules/scrapper/components/GroupsDropDown'
 import GroupLinkActions from '@modules/scrapper/components/GroupLinkActions'
 import Accounts from '@modules/scrapper/components/Accounts'
 import AccountForm from '@modules/scrapper/components/AccountForm'
+import GroupLinksDetails from '@modules/scrapper/components/GroupLinksDetails'
+import GroupLinkRow from '@modules/scrapper/components/GroupLinkRow'
+import GroupLinksSummary from '@modules/scrapper/components/GroupLinksSummary'
+import RunningGroupLink from '@modules/scrapper/components/RunningGroupLink'
+import GroupLinkEditForm from '@modules/scrapper/components/GroupLinkEditForm'
+import RestrictedKeywords from '@modules/scrapper/components/RestrictedKeywords'
+import RestrictedKeywordForm from '@modules/scrapper/components/RestrictedKeywordForm'
+import RestrictedKeywordActions from '@modules/scrapper/components/RestrictedKeywordActions'
 
 export {
     CronjobSetting,
@@ -33,9 +41,17 @@ export {
     GroupForm,
     GroupSettingActions,
     GroupLinks,
-    GroupLinksForm,
+    GroupLinksCreateForm,
     GroupsDropDown,
     GroupLinkActions,
     Accounts,
     AccountForm,
+    GroupLinkRow,
+    RunningGroupLink,
+    GroupLinksDetails,
+    GroupLinksSummary,
+    GroupLinkEditForm,
+    RestrictedKeywords,
+    RestrictedKeywordForm,
+    RestrictedKeywordActions,
 }

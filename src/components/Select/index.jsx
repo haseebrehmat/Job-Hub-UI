@@ -19,7 +19,7 @@ const SelectBox = memo(({ options, selected = '', handleChange, classes = null }
         className={classes}
         options={options}
         styles={customStyles}
-        defaultValue={selected}
+        value={selected}
         // onChange={handleChange}
         onChange={value => handleChange(value)}
     />

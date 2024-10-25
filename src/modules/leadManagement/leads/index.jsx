@@ -5,9 +5,10 @@ import { useMutate } from '@/hooks'
 
 import { Board, Loading, Searchbox, Button, Paginated } from '@components'
 
-import { LeadCard, LeadModal, LeadFilters } from '@modules/leadManagement/components'
+import { LeadCard, LeadModal, LeadSearchAndFilters } from '@modules/leadManagement/components'
 import { fetchLeads, changeLeadStatus } from '@modules/leadManagement/api'
 
+import { getSelectedVals } from '@utils/helpers'
 import { LEADS_INITIAL_VALS } from '@constants/leadManagement'
 
 import { CandidateFilterIcon } from '@icons'
@@ -16,14 +17,17 @@ const Leads = () => {
     const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), LEADS_INITIAL_VALS)
 
     const { data, isLoading, error, mutate } = useSWR(
-        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${vals.to}&team=${
-            vals.team?.value ?? ''
-        }&members=${vals.members.map(m => m.value).join(',')}&stacks=${vals.stacks.map(s => s.value).join(',')}`,
+        `/api/lead_managament/leads/?search=${vals.query}&page=${vals.page}&from=${vals.from}&to=${
+            vals.to
+        }&team=${getSelectedVals(vals?.team)}&members=${getSelectedVals(vals.members)}&stacks=${getSelectedVals(
+            vals.stacks
+        )}&candidates=${getSelectedVals(vals.candidates)}`,
         fetchLeads,
         {
             revalidateIfStale: false,
             revalidateOnFocus: false,
             shouldRetryOnError: false,
+            revalidateOnMount: true,
         }
     )
 
@@ -51,7 +55,7 @@ const Leads = () => {
     )
     const clearFilters = () => {
         mutate({ url: `/api/lead_managament/leads/?search=&page=1` })
-        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '' })
+        dispatch({ filter: false, to: '', from: '', members: [], stacks: [], team: '', candidates: [] })
     }
 
     return isLoading ? (
@@ -60,26 +64,14 @@ const Leads = () => {
         <>
             {vals.draggable && <LeadModal vals={vals} dispatch={dispatch} refetch={mutate} />}
             <div className='flex flex-col gap-3'>
-                <div className='flex items-center justify-between px-4 gap-2 flex-wrap'>
-                    <div className='flex items-center gap-2'>
-                        <Searchbox query={vals.query} setQuery={query => dispatch({ query })} clear={clearFilters} />
-                        <Button
-                            icon={CandidateFilterIcon}
-                            label='Filters'
-                            onClick={() => dispatch({ filter: !vals.filter })}
-                            fit
-                            fill={vals.filter}
-                        />
-                    </div>
-                    {data?.pages > 1 && (
-                        <Paginated
-                            pages={data?.pages ?? Math.ceil(data.total / 25)}
-                            setPage={page => dispatch({ page })}
-                            page={vals.page}
-                        />
-                    )}
-                </div>
-                {vals.filter && <LeadFilters data={data} filtered={vals} dispatch={dispatch} />}
+                <LeadSearchAndFilters filtered={vals} dispatch={dispatch} />
+                {data?.pages > 1 && (
+                    <Paginated
+                        pages={data?.pages ?? Math.ceil(data.total / 25)}
+                        setPage={page => dispatch({ page })}
+                        page={vals.page}
+                    />
+                )}
                 {data?.leads?.length > 0 ? (
                     <Board data={convertToColumns(data?.leads)} set={dispatch} handleDrag={handleSubmit} />
                 ) : (

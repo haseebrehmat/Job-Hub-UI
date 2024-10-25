@@ -25,3 +25,5 @@ export const options = [
     { value: 'rejected', label: 'Rejected' },
     { value: 'hired', label: 'Hired' },
 ]
+
+export const TECH_STACKS_RANDOM_MAX = 200

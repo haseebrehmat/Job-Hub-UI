@@ -5,7 +5,7 @@ import { CustomSelector } from '@components'
 
 import { fetchDesignations } from '@modules/leadManagement/api'
 
-import { parseDesignations, parseSelectedDesignation } from '@utils/helpers'
+import { parseDesignations } from '@utils/helpers'
 
 const DesignationSelect = ({ value: selected, error = null, set }) => {
     const { data, isLoading, error: fetchError } = useSWR('/api/candidate_management/designation/', fetchDesignations)
@@ -19,8 +19,8 @@ const DesignationSelect = ({ value: selected, error = null, set }) => {
             <span className='text-xs font-semibold'>Designation*</span>
             <CustomSelector
                 options={parseDesignations(data?.designations)}
-                selectorValue={parseSelectedDesignation(selected, data?.designations)}
-                handleChange={({ value }) => set('designation', value)}
+                selectorValue={selected}
+                handleChange={value => set('designation', value)}
                 placeholder='Select Designation'
             />
             {error && <small className='__error'>{error}</small>}

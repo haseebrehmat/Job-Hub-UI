@@ -1,5 +1,6 @@
-import html2pdf from 'html2pdf.js'
 import { memo, useState, useRef, useEffect } from 'react'
+import toast from 'react-hot-toast'
+import { jsPDF as JsPDF } from 'jspdf'
 
 import { Button } from '@components'
 
@@ -17,10 +18,9 @@ import {
 } from '@modules/settings/templates'
 
 import { devProfile } from '@modules/settings/resumeBuilder/devProfile'
+import { htmlToPng, chunkNumber } from '@utils/helpers'
 
-import { RESUME_PDF_OPTIONS } from '@constants/jobPortal'
-
-import { DownloadIcon } from '@icons'
+import { DownloadIcon, OpenSubMenuIcon } from '@icons'
 
 const Resumes = ({ data, hide, names, set = null }) => {
     const refs = [
@@ -36,16 +36,56 @@ const Resumes = ({ data, hide, names, set = null }) => {
         useRef(null),
     ]
     const [tab, setTab] = useState(0)
-    const setBlob = reference =>
-        set
-            ? html2pdf()
-                  .set(RESUME_PDF_OPTIONS)
-                  .from(reference?.current?.innerHTML)
-                  .output('blob')
-                  .then(blob => set(blob))
-            : null
+    const [showTemplate, setShowTemplates] = useState(false)
 
-    const downloadPdf = () => html2pdf().set(RESUME_PDF_OPTIONS).from(refs[tab].current?.innerHTML).outputPdf().save()
+    const convertTemplate = async (ref, conversion = 'pdf') => {
+        await htmlToPng(ref, { name: 'download' }, false)
+            .then(dataUrl => {
+                const img = new Image()
+                img.src = dataUrl
+                img.onload = () => {
+                    const pdf = new JsPDF({
+                        unit: 'in',
+                        floatPrecision: 'smart',
+                        format: 'letter',
+                        userUnit: 'in',
+                    })
+                    const chunks = chunkNumber(img.height, 1000)
+                    if (chunks?.length > 1) {
+                        chunks.forEach((row, index) => {
+                            const canvas = document.createElement('canvas')
+                            canvas.width = img.width
+                            canvas.height = row.max
+                            const context1 = canvas.getContext('2d')
+                            context1.drawImage(img, 0, row.min, img.width, row.max, 0, 0, img.width, row.max)
+                            const canvasImageURl = canvas.toDataURL('PNG', 1)
+                            pdf.addImage(canvasImageURl, 'PNG', 0, 0)
+                            if (chunks.length > index + 1) {
+                                pdf.addPage()
+                            }
+                            canvas.remove()
+                        })
+                    } else {
+                        pdf.addImage(dataUrl, 'PNG', 0, 0)
+                    }
+                    if (conversion === 'pdf') {
+                        pdf.save('export.pdf')
+                    } else if (conversion === 'blob') {
+                        const bloob = pdf.output('blob')
+                        set(bloob)
+                    } else {
+                        toast.error('Conversion type is inappropriate')
+                    }
+                }
+            })
+            .catch(err => {
+                toast.error(err)
+            })
+    }
+
+    const setBlob = reference => (set ? convertTemplate(reference?.current, 'blob') : null)
+    const downloadPdf = () => convertTemplate(refs[tab].current)
+
     useEffect(() => {
         setBlob(refs[tab])
     }, [tab])
@@ -63,15 +103,15 @@ const Resumes = ({ data, hide, names, set = null }) => {
         <Template8 data={profile} hide={gethide} names={name} />,
     ]
     return (
-        <div className='w-fit'>
-            <div className='flex flex-col-2 mx-auto'>
-                <div className='w-[75%]'>
-                    <div className='bg-white shadow-2xl border-2 rounded-lg h-screen overflow-y-auto'>
+        <div className='md:w-fit'>
+            <div className='flex flex-col-reverse md:flex-col-2 md:flex-row mx-auto'>
+                <div className='md:w-[75%]'>
+                    <div className='md:h-[90%] overflow-y-auto hide_scrollbar'>
                         {getTemplates(data, hide, names).map(
                             (component, index) =>
                                 tab === index && (
-                                    <div key={index}>
-                                        <div className='' ref={refs[index]}>
+                                    <div key={index} className='w-[51rem] bg-slate-50 shadow-2xl rounded-lg border-2'>
+                                        <div ref={refs[index]} className='w-[51rem]'>
                                             {component}
                                         </div>
                                     </div>
@@ -82,13 +122,23 @@ const Resumes = ({ data, hide, names, set = null }) => {
                         <Button label='Download' icon={DownloadIcon} fit fill onClick={downloadPdf} classes='!m-4' />
                     </div>
                 </div>
-                <div className='2xl:w-[30%] xl:w-[20%] border-2 rounded-lg h-screen'>
-                    <div className='bg-[#048C8C] border-2 rounded-lg py-4 text-center text-white text-xl font-semibold'>
+                <div className={`2xl:w-[30%] xl:w-[20%] border-2 rounded-lg ${showTemplate ? 'h-screen' : 'mb-4'}`}>
+                    <div
+                        className='bg-[#048C8C] border-2 rounded-lg py-2 md:py-4 text-center text-white md:text-xl font-semibold flex items-center justify-center'
+                        onClick={() => setShowTemplates(!showTemplate)}
+                    >
                         Templates
+                        <span className={`${showTemplate ? 'hidden' : 'block'} animate-ping ml-2 md:hidden`}>
+                            {OpenSubMenuIcon}
+                        </span>
                     </div>
-                    <div className='h-[90%] grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-auto gap-y-56'>
+                    <div
+                        className={`h-[90%] md:grid 2xl:grid-cols-2 xl:grid-cols-1 3xl:grid-cols-3 hide_scrollbar overflow-y-scroll gap-y-56 ${
+                            showTemplate ? 'grid' : 'hidden'
+                        }`}
+                    >
                         {getTemplates(devProfile, hide, names).map((component, index) => (
-                            <div className='h-6 transform scale-[20%] w-[20%]'>
+                            <div className='h-6 transform scale-[20%] w-[20%]' key={index}>
                                 <div
                                     className={`${
                                         index === tab ? 'border-zinc-800 border-r-2' : 'bg-white '

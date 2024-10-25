@@ -11,6 +11,7 @@ export const VERTICAL_SECTIONS = {
     other: 'Other Sections',
     cover_letter_template: 'Cover Letter Template',
     resume_preview: 'Resume Preview',
+    delete: 'Delete Vertical',
 }
 
 export const VERTICAL_INITIAL_TABS = {
@@ -24,6 +25,7 @@ export const VERTICAL_INITIAL_TABS = {
     other: false,
     cover_letter_template: false,
     resume_preview: false,
+    delete: false,
 }
 
 export const BASIC_INFO_INPUTS = [

@@ -21,7 +21,7 @@ const PseudosTeamForm = ({ show, setShow, mutate, team }) => {
         'api/profile/team_vertical_assignment/',
         assignVertical,
         {
-            team_id: team.id,
+            team_id: team?.id,
             verticals: pseudos.vertical.map(obj => obj.value),
         },
         verticalSchema,

@@ -10,9 +10,17 @@ import {
     GroupLinks,
     Logs,
     Accounts,
+    RestrictedKeywords,
 } from '@modules/scrapper/components'
 
-import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon, UsersIcon } from '@icons'
+import {
+    JobSourceLinkIcon,
+    CronjobSettingIcon,
+    RunningScrapperIcon,
+    LogsIcon,
+    RestrictedKeywordsIcon,
+    UsersIcon,
+} from '@icons'
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState({
@@ -22,6 +30,7 @@ const Profile = () => {
         logs: false,
         grouplinks: false,
         accounts: false,
+        restricted: false,
     })
 
     const handleClick = key => {
@@ -80,7 +89,7 @@ const Profile = () => {
                             fit
                             fill={activeTab.logs}
                             icon={LogsIcon}
-                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.status && 'border-gray-200'}`}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.logs && 'border-gray-200'}`}
                             onClick={() => handleClick('logs')}
                         />
                         <Button
@@ -88,8 +97,16 @@ const Profile = () => {
                             fit
                             fill={activeTab.accounts}
                             icon={UsersIcon}
-                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.status && 'border-gray-200'}`}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.accounts && 'border-gray-200'}`}
                             onClick={() => handleClick('accounts')}
+                        />
+                        <Button
+                            label='Restricted Keywords'
+                            fit
+                            fill={activeTab.restricted}
+                            icon={RestrictedKeywordsIcon}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.restricted && 'border-gray-200'}`}
+                            onClick={() => handleClick('restricted')}
                         />
                     </div>
                     {activeTab.setting && (
@@ -125,6 +142,11 @@ const Profile = () => {
                     {activeTab.accounts && (
                         <div className='mt-5'>
                             <Accounts />
+                        </div>
+                    )}
+                    {activeTab.restricted && (
+                        <div className='mt-5'>
+                            <RestrictedKeywords />
                         </div>
                     )}
                 </div>

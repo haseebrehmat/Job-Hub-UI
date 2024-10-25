@@ -28,7 +28,7 @@ const OtherSectionForm = ({ show, setShow, mutate, otherSection, id }) => {
     const flag = values.name.length > 0 && values.value.length > 0
 
     return (
-        <Drawer show={show} setShow={setShow} w='500px'>
+        <Drawer show={show} setShow={setShow} w='500px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{otherSection?.id ? 'Edit' : 'Create'} Other Section</p>
@@ -45,7 +45,7 @@ const OtherSectionForm = ({ show, setShow, mutate, otherSection, id }) => {
                         rows={15}
                     />
                     {errors.value && <small className='__error'>{errors.value}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={otherSection?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>

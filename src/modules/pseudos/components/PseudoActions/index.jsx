@@ -29,9 +29,10 @@ const PseudoActions = memo(({ id, edit, mutate }) => {
                 <DeleteDialog
                     show={show}
                     setShow={setShow}
-                    url={`api/auth/user/${id}/`}
+                    url={`api/profile/pseudo/${id}/`}
                     refetch={mutate}
                     perm={PSEUDO_DELETION}
+                    text='Are you sure to delete this pseudo? Pseudo`s vertical will also be deleted. This action cannot be undone.'
                 >
                     <Tooltip text='Delete pseudo'>
                         <Button classes='_icon-btn' icon={TrashIcon} onClick={() => setShow(true)} />

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { Protected } from '@components'
+import { Protected, ErrorBoundary } from '@components'
 
 import { AppLayout } from '@modules'
 
@@ -15,6 +15,7 @@ const browserRoutes = routes.map(({ path, protect, component, title, permission 
     ) : (
         <AppLayout title={title}>{component}</AppLayout>
     ),
+    errorElement: <ErrorBoundary />,
 }))
 
 const router = createBrowserRouter([...browserRoutes, ...authRoutes])

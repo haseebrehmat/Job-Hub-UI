@@ -8,6 +8,7 @@ import OtherSections from '@modules/pseudos/vertical/otherSections'
 import CoverLetterTemplate from '@modules/pseudos/vertical/coverLetterTemplate'
 import ResumePreview from '@modules/pseudos/vertical/resumePreview'
 import Projects from '@modules/pseudos/vertical/projects'
+import DeleteVertical from '@modules/pseudos/vertical/deleteVertical'
 
 export {
     Skills,
@@ -20,4 +21,5 @@ export {
     CoverLetterTemplate,
     ResumePreview,
     Projects,
+    DeleteVertical,
 }

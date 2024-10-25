@@ -1,7 +1,13 @@
 import jwt_decode from 'jwt-decode'
 import { toPng } from 'html-to-image'
 
-import { INTERVAL_TYPE_OPTIONS, JOB_SOURCE_OPTIONS, JOB_TYPES_OPTIONS, WEEK_DAYS_OPTIONS } from '@constants/scrapper'
+import {
+    INTERVAL_TYPE_OPTIONS,
+    JOB_SOURCE_OPTIONS,
+    JOB_TYPES_OPTIONS,
+    JOB_TYPES_OPTIONS_SMALLCASE,
+    WEEK_DAYS_OPTIONS,
+} from '@constants/scrapper'
 import { validFileExtensions } from '@constants/profile'
 import { GENERIC_SKILL_TYPES, GENERIC_SKILL_TYPES_OPTIONS, SOCIAL_PLATFORM_OPTIONS } from '@constants/pseudos'
 import { today, year } from '@constants/dashboard'
@@ -12,7 +18,11 @@ export const saveRefreshToken = token => localStorage.setItem('refresh-token', J
 
 export const getToken = () => JSON.parse(localStorage.getItem('token'))
 
-export const removeToken = () => localStorage.removeItem('token')
+export const removeToken = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('refresh-token')
+    localStorage.removeItem('visited-jobs')
+}
 
 export const decodeJwt = () => (getToken() ? jwt_decode(getToken()) : { user: null })
 
@@ -20,7 +30,20 @@ export const isSuper = () => decodeJwt()?.is_superuser
 
 export const Id = () => decodeJwt()?.user_id
 
-export const getMsg = error => error?.response?.data?.detail || 'Server error'
+export const activeRole = () => ({ role: decodeJwt()?.role, id: decodeJwt()?.role_id })
+
+export const userRoles = () => (decodeJwt()?.roles?.length > 1 ? decodeJwt()?.roles : [])
+
+export const getMsg = error =>
+    error?.response?.data?.detail ||
+    (error?.response?.status === 404
+        ? '404 Error: Resource not available.'
+        : error.response?.data
+        ? 'Something went wrong on the server side.'
+        : error?.response?.statusText ||
+          (navigator?.onLine ? 'Server is down' : error?.message) ||
+          error?.message ||
+          'Network Error')
 
 export const getBaseUrl = nodeEnv => {
     switch (nodeEnv) {
@@ -100,6 +123,29 @@ export const formatDate3 = date =>
 export const formatDate4 = date =>
     new Date(date ?? today).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 
+export const formatDate5 = (dateString, format = 'yyyy-mm-dd') => {
+    const date = new Date(dateString || today)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const yearr = date.getFullYear()
+    let formattedDate = format
+    formattedDate = formattedDate.replace('mm', (month < 10 ? '0' : '') + month)
+    formattedDate = formattedDate.replace('dd', (day < 10 ? '0' : '') + day)
+    formattedDate = formattedDate.replace('yyyy', yearr)
+    return formattedDate
+}
+
+export const formatTime = (timeString, format = 'H:i') => {
+    const date = new Date(timeString || today)
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
+    let formattedTime = format
+    formattedTime = formattedTime.replace('H', hours)
+    formattedTime = formattedTime.replace('i', (minutes < 10 ? '0' : '') + minutes)
+    formattedTime = formattedTime.replace('s', (seconds < 10 ? '0' : '') + seconds)
+    return formattedTime
+}
 export const checkToken = () => {
     const user = decodeJwt()
     if (!user?.user_id) {
@@ -190,8 +236,11 @@ export const removeOrAddElementsFromArray = (array, elements) => {
     return array
 }
 
-export const parseMembers = (members, leadId) =>
-    members.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
+export const parseMembers = (members, leadId = null, all = false) => {
+    const parsedMembers = members?.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
+    // if (all) parsedMembers?.unshift({ value: 'all', label: 'All Team Members' })
+    return parsedMembers
+}
 
 export const parsePseudos = pseudos =>
     pseudos?.map(pseudo => ({ value: pseudo.id, label: pseudo.name, verticals: pseudo.verticals }))
@@ -234,9 +283,14 @@ export const parseJobSource = value => (value ? JOB_SOURCE_OPTIONS.find(row => r
 
 export const parseJobType = value => (value ? JOB_TYPES_OPTIONS.find(row => row.value === value) : null)
 
+export const parseJobType2 = value => (value ? JOB_TYPES_OPTIONS_SMALLCASE.find(row => row.value === value) : null)
+
 export const parseTechKeywords = techStacks => techStacks.map(techStack => ({ value: techStack, label: techStack }))
 
 export const parseTechKeyword = value => (value ? JOB_SOURCE_OPTIONS.find(row => row.value === value) : null)
+
+export const parseSelectedTechKeyword = (value, techStacks) =>
+    value ? techStacks.find(row => row.value === value) : null
 
 export const formatStringInPascal = str => {
     if (!str) {
@@ -258,10 +312,17 @@ export const parsePlatform = value => (value ? SOCIAL_PLATFORM_OPTIONS.find(row 
 
 export const replaceNewLine = str => str.replace(/\n/g, '<br>')
 
-export const parseVerticals = verticals =>
+export const parseVerticals = (verticals, identity = false, regions = false) =>
     verticals?.map(vertical => ({
         value: vertical.id,
-        label: `${vertical.name}${vertical.identity ? ` - ${vertical.identity}` : ''}`,
+        label: `${vertical.name}${identity && vertical.identity ? ` - ${vertical.identity}` : ''}${
+            vertical.applied_status ? ` - Already Hired` : ''
+        } ${
+            regions && vertical?.regions?.length > 0
+                ? ` - ${vertical?.regions?.map(region => region.label).join(', ')}`
+                : ''
+        }`,
+        isDisabled: vertical.applied_status,
     }))
 
 export const parseSelectedVertical = (id, verticals) => {
@@ -353,21 +414,26 @@ export const parseStatusPhases = (id, statuses) =>
 export const parseSelectedStatusPhase = (pid, sid, statuses) => {
     if (pid && sid) {
         const status = statuses.find(row => row?.id === sid)?.phases?.find(row => row.id === pid)
-        return { value: status?.id, label: status?.name }
+        return status ? { value: status?.id, label: status?.name } : null
     }
     return null
 }
 
 export const parseDesignations = designations =>
-    designations.map(designation => ({ value: designation.id, label: designation?.title }))
+    designations.map(designation => ({
+        value: designation.id,
+        label: designation?.title,
+        description: designation.description,
+    }))
 
-export const parseSelectedDesignation = (label, designations) => {
-    if (label) {
-        const designation = designations.find(row => row?.title === label)
-        return { value: designation?.id, label: designation?.title }
-    }
-    return null
-}
+export const parseSelectedDesignation = designation => ({
+    value: designation?.id,
+    label: designation?.name,
+    description: designation.description,
+})
+
+export const parseRegions = regions => regions?.map(region => ({ value: region.id, label: region.name }))
+
 export const parseGroups = groups => groups.map(group => ({ value: group.id, label: formatStringInPascal(group.name) }))
 
 export const getSelectedDays = days =>
@@ -383,15 +449,142 @@ export const getYearsOptions = () => {
     return years
 }
 
-export const htmlToPng = htmlRef => {
-    toPng(htmlRef, { cacheBust: false, backgroundColor: 'white' })
-        .then(dataUrl => {
-            const link = document.createElement('a')
-            link.download = 'export.png'
-            link.href = dataUrl
-            link.click()
-        })
-        .catch(err => {
-            console.log('Error ==>', err)
-        })
+export const htmlToPng = (htmlRef, options = null, download = true) =>
+    new Promise((resolve, reject) => {
+        toPng(htmlRef, { cacheBust: false, backgroundColor: options?.bgColor || 'white' })
+            .then(dataUrl => {
+                if (download) {
+                    const link = document.createElement('a')
+                    link.download = `${options?.name || 'export'}.png`
+                    link.href = dataUrl
+                    link.click()
+                }
+                resolve(dataUrl)
+            })
+            .catch(err => {
+                console.log('Error ==>', err)
+                reject(err)
+            })
+    })
+
+export const getSelectedVals = options =>
+    options?.length > 0 ? options?.map(m => m.value).join(',') : options?.value || ''
+
+export const convertToTitleCase = str => {
+    if (!str) {
+        return str
+    }
+    const words = str.split('_')
+    const capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    const result = capitalizedWords.join(' ')
+    return result
+}
+
+export const getWidthClass = index => {
+    const widths = {
+        0: 'w-[0%]',
+        1: 'w-[20%]',
+        2: 'w-[40%]',
+        3: 'w-[60%]',
+        4: 'w-[80%]',
+        5: 'w-[100%]',
+    }
+    return widths[index]
+}
+
+export const findRegion = (region, regions) => {
+    region = region.toLowerCase()
+    const R = regions.map(reg => reg.name)
+    return R.includes(region)
+}
+
+export const findSkill = (skill, skills) => {
+    console.log(skills)
+    skill = skill.toLowerCase()
+    const R = skills.map(reg => reg.name.toLowerCase())
+    return R.includes(skill)
+}
+
+export const parseProjects = projects =>
+    projects?.map(project => ({ name: project.name, description: project.description, tags: project.tags }))
+
+export const parseTechStacks = techStacks => techStacks.map(tech => ({ value: tech, label: tech }))
+
+export const isset = value => {
+    if (value === null || value === undefined) {
+        return false
+    }
+    if (typeof value === 'string' || Array.isArray(value)) {
+        return value.length > 0
+    }
+    if (typeof value === 'object') {
+        return Object.keys(value).length > 0
+    }
+    return true
+}
+export const parseExposedCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.name, value: candidate.id }))
+
+export const parseTeamCandidates = candidates =>
+    candidates?.map(candidate => ({ label: candidate.candidate, value: candidate.id }))
+
+export const removeFilterCounts = selected =>
+    selected?.map(obj => ({ ...obj, label: obj.label?.replace(/\s*\(\d+\)\s*/, '') })) || []
+
+export const parseModule = module => (module ? { value: module, label: module } : null)
+
+export const parseModules = modules => modules?.map(module => ({ value: module, label: module }))
+
+export const parsePermissions = permissions =>
+    permissions?.map(permission => ({ value: permission?.codename, label: permission?.name }))
+
+export const parseUserRole = role => (role ? { value: role?.id, label: role?.name } : null)
+
+export const getVisitedJobs = () => JSON.parse(localStorage.getItem('visited-jobs')) ?? []
+
+export const saveVisitedJob = jobId => {
+    const storedArray = getVisitedJobs()
+    storedArray.push(jobId)
+    const uniqueStoredArray = [...new Set(storedArray)]
+    localStorage.setItem('visited-jobs', JSON.stringify(uniqueStoredArray))
+    return uniqueStoredArray
+}
+
+export const formatOptions = options_arr =>
+    options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
+
+export const getFilterAppliedURL = (query, filters) =>
+    `limit=${filters?.limit || 15}&search=${query}&tech_keywords=${encodeURIComponent(
+        filters?.techs?.map(tech => tech.label)?.join(',')
+    )}&job_source=${filters?.sources?.join(',')}&ordering=${filters?.order ?? '-job_posted_date'}&job_visibility=${
+        filters?.visible ?? 'all'
+    }&from_date=${filters?.from}&to_date=${filters?.to}&job_type=${filters?.types?.join(',')}&blocked=${
+        filters?.blocked
+    }`
+
+export const chunkNumber = (number, chunkSize = 1) => {
+    if (chunkSize >= number) {
+        return [{ min: 0, max: number }]
+    }
+    const chunks = []
+    for (let min = 1, max; min <= number; min = max + 1) {
+        max = Math.min(min + chunkSize - 1, number)
+        chunks.push({ min, max })
+    }
+    return chunks
+}
+export const parseVals = values => values?.map(val => ({ label: val, value: val }))
+
+export const parseLinks = values => values?.map(val => val?.value)
+
+export const parseSelectedTechs = values => (values ? values?.map(value => ({ value, label: value })) : [])
+
+export const parseJobSources = values => (values ? values?.map(row => ({ value: row?.key, label: row?.name })) : [])
+
+export const parseSelectedJobSource = (key, sources) => {
+    if (key) {
+        const source = sources?.find(row => row?.key === key)
+        return source ? { value: source?.key, label: source?.name } : null
+    }
+    return null
 }

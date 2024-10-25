@@ -43,6 +43,22 @@ export const fetchLeads = url =>
         teams: data?.team ?? [],
         members: data?.members ?? [],
         stacks: data?.tech_stack ?? [],
+        candidates: data?.candidates ?? [],
+    }))
+
+export const fetchLeadsData = url =>
+    http.get(url).then(({ data }) => ({
+        leads: data?.results ?? [],
+        total: data?.count,
+        pages: data?.num_pages,
+    }))
+
+export const fetchLeadFilters = url =>
+    http.get(url).then(({ data }) => ({
+        teams: data?.team ?? [],
+        members: data?.members ?? [],
+        stacks: data?.tech_stack ?? [],
+        candidates: data?.candidates ?? [],
     }))
 
 export const changeLeadStatus = (url, { arg: status }) =>
@@ -52,12 +68,25 @@ export const fetchLead = url => http.get(url).then(({ data }) => data)
 
 export const saveNote = (url, { arg: note }) => {
     if (note?.id) {
-        return rawHttp.put(url, note).then(({ data }) => toast.success(data.detail || 'Note is updated successfully'))
+        return rawHttp
+            .put(url, note, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then(({ data }) => toast.success(data.detail || 'Note is updated successfully'))
     }
-    return rawHttp.post(url, note).then(({ data }) => toast.success(data.detail || 'Note is created successfully'))
+    return rawHttp
+        .post(url, note, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then(({ data }) => toast.success(data.detail || 'Note is created successfully'))
 }
 
-export const fetchNotes = url => http.get(url).then(({ data }) => data)
+export const fetchNotes = url =>
+    http.get(url).then(({ data }) => ({ notes: data?.results, total: data?.count, pages: data?.num_pages }))
 
 export const fetchDesignations = url =>
     http.get(url).then(({ data }) => ({ designations: data?.results, total: data?.count, pages: data?.num_pages }))
@@ -74,12 +103,17 @@ export const saveDesignation = (url, { arg: designation }) => {
 }
 
 export const fetchCandidates = url =>
-    http.get(url).then(({ data }) => ({ candidates: data?.results, total: data?.count, pages: data?.num_pages }))
+    http.get(url).then(({ data }) => ({
+        candidates: data?.results,
+        total: data?.count,
+        pages: data?.num_pages,
+        all_regions: data.regions,
+    }))
 
 export const saveCandidate = (url, { arg: candidate }) => {
     if (candidate?.id) {
         return rawHttp
-            .put(url, candidate)
+            .put(url, { ...candidate })
             .then(({ data }) => toast.success(data.detail || 'Candidate is updated successfully'))
     }
     return rawHttp
@@ -87,15 +121,37 @@ export const saveCandidate = (url, { arg: candidate }) => {
         .then(({ data }) => toast.success(data.detail || 'Candidate is created successfully'))
 }
 
+export const saveTeam = (url, { arg: team }) => {
+    if (team?.id) {
+        return rawHttp
+            .put(url, { ...team })
+            .then(({ data }) => toast.success(data.detail || 'Team updated successfully'))
+    }
+    return rawHttp.post(url, team).then(({ data }) => toast.success(data.detail || 'Team is created successfully'))
+}
+
 export const fetchCandidatesAndCompanies = url =>
     http.get(url).then(({ data }) => ({ candidates: data?.candidates, companies: data?.companies }))
+
+export const fetchTeamsCandidatesAndCompanies = url =>
+    http
+        .get(url)
+        .then(({ data }) => ({ teams: data?.teams, candidates: data?.exposed_candidates, companies: data?.companies }))
 
 export const assignCandidate = (url, { arg: candidate }) =>
     rawHttp
         .put(url, candidate)
         .then(({ data }) => toast.success(data.detail || 'Candidate is assigned / reassigned successfully'))
 
-export const allowCandidateForLeads = (url, { arg: candidate }) =>
-    rawHttp
-        .post(url, candidate)
-        .then(({ data }) => toast.success(data.detail || 'Leads for candidate are allowed / denied successfully'))
+export const changeCandidateStatus = (url, { arg: candidate }) =>
+    rawHttp.post(url, candidate).then(({ data }) => toast.success(data.detail))
+
+export const fetchMyProfile = url =>
+    http.get(url).then(({ data }) => ({ candidates: data?.candidate, regions: data?.all_regions }))
+
+export const fetchMyProjects = url => http.get(url).then(({ data }) => ({ data }))
+
+export const saveCandidateProjects = async (url, { arg: candidate }) => {
+    const { data } = await rawHttp.put(url, candidate)
+    return toast.success(data.detail || 'Candidate is updated successfully')
+}

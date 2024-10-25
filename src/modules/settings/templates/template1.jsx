@@ -6,7 +6,7 @@ import { ResumeSvgs as svgs } from '@svgs'
 
 const Template1 = ({ data: dev, hide, names }) => (
     <div className='p-8'>
-        <div className='flex flex-col mb-10'>
+        <div className='flex flex-col mb-5'>
             {hide.name && dev?.basic?.name && <p className='text-5xl font-bold'>{dev?.basic?.name}</p>}
             {hide.designation && dev?.basic?.designation && (
                 <p className='text-gray-500 text-3xl mt-3'>{dev?.basic?.designation}</p>
@@ -35,14 +35,14 @@ const Template1 = ({ data: dev, hide, names }) => (
             </div>
         )}
         {hide.summary && dev?.summary?.length > 0 && (
-            <div className='flex items-baseline justify-start mb-10 mt-10'>
+            <div className='flex items-baseline justify-start mb-5 mt-5'>
                 <div className='flex flex-col'>
                     <p className='text-gray-700 text-sm break-words'>{dev?.summary}</p>
                 </div>
             </div>
         )}
         {hide.skill && dev?.skills?.all?.length > 0 && (
-            <div className='mb-10'>
+            <div className='my-5'>
                 <div className='flex flex-row align-baseline gap-2'>
                     <div className='bg-black p-2'>
                         <p className='fill-white'>{svgs.skill1}</p>
@@ -67,7 +67,7 @@ const Template1 = ({ data: dev, hide, names }) => (
             </div>
         )}
         {hide.experience && dev?.experience?.length > 0 && (
-            <div className='mb-10 '>
+            <div className='my-5'>
                 <div className='flex flex-row align-baseline gap-2'>
                     <div className='bg-black p-2'>
                         <p className='fill-white'>{svgs.experience1}</p>
@@ -96,7 +96,7 @@ const Template1 = ({ data: dev, hide, names }) => (
             </div>
         )}
         {hide.education && dev?.education?.length > 0 && (
-            <div className='mb-10'>
+            <div className='my-5'>
                 <div className='flex flex-row align-baseline gap-2'>
                     <div className='bg-black p-2'>
                         <p className='fill-white'>{svgs.education1}</p>

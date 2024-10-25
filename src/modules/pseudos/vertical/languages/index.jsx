@@ -23,14 +23,14 @@ const Languages = ({ id }) => {
 
     if (isLoading) return <Loading />
     return (
-        <div className='max-w-full overflow-x-auto mb-2 px-1'>
+        <div className='mb-2 px-1'>
             <div className='flex items-center space-x-4 py-4'>
                 <Button label='Add Language' fit icon={CreateIcon} onClick={() => handleClick(null)} />
             </div>
-            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+            <div className='grid gap-2 md:grid-cols-2'>
                 {data?.length > 0 && !error ? (
                     data?.map((row, idx) => (
-                        <div className='bg-white rounded-md p-4 border relative' key={idx}>
+                        <div className='bg-white rounded-md p-2 md:p-4 border relative' key={idx}>
                             <h2 className='text-lg'>{row?.name ?? 'N/A'}</h2>
                             <span className='text-gray-600'>{PROFICIENCY_LEVELS[row?.level] ?? 'Others'}</span>
                             <LanguageActions id={row?.id} mutate={mutate} edit={() => handleClick(row)} />
@@ -46,7 +46,7 @@ const Languages = ({ id }) => {
                     <span className='ml-2 text-gray-500'>No languages found yet!</span>
                 )}
             </div>
-            <ActionButtons mutate={mutate} classes='mt-4 !w-1/3' />
+            <ActionButtons mutate={mutate} classes='mt-4' />
             {show && <LanguageForm show={show} setShow={setShow} mutate={mutate} language={language} id={id} />}
         </div>
     )

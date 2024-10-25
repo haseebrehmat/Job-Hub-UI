@@ -26,12 +26,24 @@ import Status from '@modules/leadManagement/status'
 import CompanyStatus from '@modules/leadManagement/companyStatus'
 import Phases from '@modules/leadManagement/phases'
 import Leads from '@modules/leadManagement/leads'
+import LeadsTable from '@modules/leadManagement/leads/table'
 import Candidates from '@modules/leadManagement/candidates'
 import Designations from '@modules/leadManagement/designations'
 import ExposedCandidates from '@modules/leadManagement/exposedCandidates'
 import ConvertToLead from '@modules/appliedJobs/convertToLead'
 import AssignCandidate from '@modules/leadManagement/assignCandidate'
 import Analytics from '@modules/analytics'
+import JobCompanies from '@modules/jobComapnies'
+import ApiLogs from '@modules/settings/apiLogs'
+import Regions from '@modules/settings/regions'
+import MyProfile from '@modules/leadManagement/candidateProfile'
+import Permissions from '@modules/settings/permissions'
+import TechStacksCategories from '@modules/settings/techStacksCategories'
+import LeadNotes from '@/modules/leadManagement/leadNotes'
+import ExposedTeams from '@modules/leadManagement/exposedTeams'
+import EditHistory from '@modules/editHistory'
+import JobPortalV2 from '@modules/jobPortal-v2'
+import JobSources from '@modules/settings/jobSources'
 
 export {
     TeamAppliedJobs,
@@ -69,4 +81,16 @@ export {
     ConvertToLead,
     AssignCandidate,
     Analytics,
+    JobCompanies,
+    ApiLogs,
+    Regions,
+    MyProfile,
+    Permissions,
+    LeadsTable,
+    TechStacksCategories,
+    LeadNotes,
+    ExposedTeams,
+    EditHistory,
+    JobPortalV2,
+    JobSources,
 }

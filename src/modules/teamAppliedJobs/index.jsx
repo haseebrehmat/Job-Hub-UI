@@ -1,160 +1,111 @@
-import { memo, useState } from 'react'
+import { memo, useState, useReducer } from 'react'
 import useSWR from 'swr'
-import toast from 'react-hot-toast'
 
-import { Loading, Tooltip } from '@components'
+import { Loading, Tooltip, Button } from '@components'
 
-import { fetchTeamAppliedJobs } from '@modules/teamAppliedJobs/api'
-import { EmptyTable, TableNavigate } from '@modules/appliedJobs/components'
-import { JobSourceAnalytics } from '@modules/teamAppliedJobs/components'
-import { checkToken, formatDate, timeSince } from '@utils/helpers'
-import { baseURL } from '@utils/http'
-import { tableHeads, jobStatus } from '@constants/teamAppliedJobs'
+import { fetchTeamAppliedJobs, fetchDropdownVals } from '@modules/teamAppliedJobs/api'
+import { JobSourceAnalytics, Filters, EmptyTable, TableNavigate } from '@modules/teamAppliedJobs/components'
 
-import { DownloadIcon } from '@icons'
+import { formatDate, timeSince, parseLinks } from '@utils/helpers'
+import { tableHeads, TEAM_APPLIED_JOBS_INITIAL_VALS } from '@constants/teamAppliedJobs'
+
+import { DownloadIcon, CandidateFilterIcon } from '@icons'
 
 const TeamAppliedJobs = memo(() => {
-    const apiUrl = baseURL
+    const [vals, dispatch] = useReducer((prev, next) => ({ ...prev, ...next }), TEAM_APPLIED_JOBS_INITIAL_VALS)
     const [page, setPage] = useState(1)
-    const [bd, setBD] = useState('all')
-    const { data, error, isLoading, mutate } = useSWR([page, bd], () =>
-        fetchTeamAppliedJobs(page, bd === 'all' ? '' : bd)
+    const { data, error, isLoading } = useSWR(
+        `/api/job_portal/team_applied_job_details/?page=${page}&end_date=${vals.end}&job_type=${parseLinks(
+            vals.types
+        ).join()}&applied_by=${vals?.bd?.value ? vals?.bd?.value : ''}&job_source=${encodeURIComponent(
+            parseLinks(vals.sources)
+        )}&start_date=${vals.start}&tech_stacks=${encodeURIComponent(parseLinks(vals.stacks))}`,
+        fetchTeamAppliedJobs
     )
+    const { data: dropdownvals } = useSWR(`api/job_portal/applied_job_filters/`, fetchDropdownVals)
     const handleClick = type => setPage(prevPage => (type === 'next' ? prevPage + 1 : prevPage - 1))
-    const jobsStatusTypes = Object.entries(jobStatus)
-
-    const handleBdChange = e => {
-        setBD(e.target.value)
-    }
-    const updateJobStatus = (id, stausValue) => {
-        checkToken()
-        fetch(`${apiUrl}api/job_portal/job_status/`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token').slice(1, -1)}`,
-            },
-            body: JSON.stringify({ status: stausValue, job: data?.jobs[id].id }),
-        })
-            .then(resp => {
-                if (!resp.ok) {
-                    throw Error(resp)
-                }
-                return resp.json()
-            })
-            .then(resp => {
-                mutate(
-                    {
-                        ...data,
-                        jobs: data?.jobs.map((item, key) => (key === id ? { ...item, status: stausValue } : item)),
-                    },
-                    false
-                )
-                toast.success('Job status updated successfully!')
-            })
-            .catch(error => {
-                toast.error('Server error!')
-            })
-    }
 
     return isLoading || error ? (
         <Loading />
     ) : (
-        <div className='max-w-full overflow-x-auto shadow-md sm:rounded-lg mb-14 px-2'>
-            <div className='flex items-center justify-between px-4'>
-                <div>
-                    <p className='py-2 pl-4 text-[#006366] font-bold text-lg'>
-                        Applied Jobs: {data.last_12_hours_count} (Last 12 hours)
-                    </p>
-                </div>
-
-                <select
-                    className='block py-2 px-4 text-sm text-gray-900 border border-gray-300 rounded-lg'
-                    value={bd}
-                    onChange={handleBdChange}
-                >
-                    <option value='all'>All</option>
-                    {data?.team_members?.length > 0 &&
-                        data.team_members.map((item, key) => (
-                            <option value={item.id} key={key}>
-                                {item.username}
-                            </option>
-                        ))}
-                </select>
-            </div>
-            <div className=''>
-                <JobSourceAnalytics
-                    job_sources={data.job_source_analytics}
-                    job_types={data.job_type_analytics}
-                    total={data.total}
+        <div className='max-w-full shadow-md sm:rounded-lg mb-14 px-2 content-center '>
+            <JobSourceAnalytics
+                job_sources={data?.job_source_analytics}
+                job_types={data?.job_type_analytics}
+                total={data?.filtered_jobs}
+            />
+            <div className='flex flex-col sm:flex-row items-center justify-between p-3'>
+                <p className='pl-2 text-[#006366] font-bold text-lg mb-3 sm:mb-0'>
+                    Applied Jobs: {data?.last_12_hours_count} (Last 12 hours)
+                </p>
+                <Button
+                    icon={CandidateFilterIcon}
+                    label='Filters'
+                    onClick={() => dispatch({ filter: !vals.filter })}
+                    fit
+                    fill={vals.filter}
                 />
             </div>
 
-            <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
-                <thead className='text-sm text-gray-700 uppercase bg-[#edfdfb] border'>
-                    <tr>
-                        {tableHeads.map(heading => (
-                            <th scope='col' className='px-4 py-6 text-[#006366]' key={heading}>
-                                {heading}
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {data?.jobs?.length > 0 ? (
-                        data.jobs.map((job, index) => (
-                            <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
-                                <td className='px-3 py-4'>
-                                    <span className='font-bold'>{timeSince(job?.applied_date)}</span>
-                                    <div>{formatDate(job?.applied_date)}</div>
-                                </td>
-                                <td className='px-3 py-4'>{job?.company_name}</td>
-                                <td className='px-3 py-4 w-96 '>
-                                    <a className='underlin' target='_blank' rel='noreferrer' href={job?.job_source_url}>
-                                        {job?.job_title}
-                                    </a>
-                                </td>
-                                <td className='px-3 py-4'>{job?.job_source}</td>
-                                <td className='px-3 py-4'>{job?.tech_keywords}</td>
-                                <td className='px-3 py-4'>{job?.job_type}</td>
-                                <td className='px-3 py-4'>{job?.applied_by_name || 'not-confirmed'}</td>
-                                <td className='px-3 py-4 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
-                                <td className='px-3 py-4'>
-                                    <div className='flex space-x-2'>
-                                        {job?.cover_letter && (
-                                            <a href={job?.cover_letter} download target='_blank' rel='noreferrer'>
-                                                <Tooltip text='Download Cover Letter'>{DownloadIcon}</Tooltip>
-                                            </a>
-                                        )}
-                                        {job?.resume && (
-                                            <a href={job?.resume} download target='_blank' rel='noreferrer'>
-                                                <Tooltip text='Download Resume'>{DownloadIcon}</Tooltip>
-                                            </a>
-                                        )}
-                                    </div>
-                                </td>
-                                {/* <td className='px-3 py-4'>
-                                    <select
-                                        name='job_status'
-                                        className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg'
-                                        value={job?.status}
-                                        onChange={e => updateJobStatus(index, e.target.value)}
-                                    >
-                                        {jobsStatusTypes.length > 0 &&
-                                            jobsStatusTypes.map((status, key) => (
-                                                <option disabled={status[0] === '0'} value={status[0]} key={key}>
-                                                    {status[1]}
-                                                </option>
-                                            ))}
-                                    </select>
-                                </td> */}
-                            </tr>
-                        ))
-                    ) : (
-                        <EmptyTable />
-                    )}
-                </tbody>
-            </table>
+            {vals.filter && <Filters filtered={vals} dispatch={dispatch} data={data} dropdowns={dropdownvals} />}
+
+            <div className='overflow-x-auto w-full hide_scrollbar'>
+                <table className='table-auto w-full text-sm text-left text-gray-500 mt-2'>
+                    <thead className='text-sm text-gray-700 uppercase bg-[#edfdfb] border'>
+                        <tr>
+                            {tableHeads.map(heading => (
+                                <th scope='col' className='px-3 py-5 text-[#006366]' key={heading}>
+                                    {heading}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data?.jobs?.length > 0 ? (
+                            data?.jobs?.map((job, index) => (
+                                <tr className='bg-white border border-slate-300 hover:bg-gray-100' key={index}>
+                                    <td className='px-3 py-4'>
+                                        <span className='font-bold'>{timeSince(job?.applied_date)}</span>
+                                        <div>{formatDate(job?.applied_date)}</div>
+                                    </td>
+                                    <td className='px-3 py-4'>{job?.company_name}</td>
+                                    <td className='px-3 py-4 w-96 '>
+                                        <a
+                                            className='underlin'
+                                            target='_blank'
+                                            rel='noreferrer'
+                                            href={job?.job_source_url}
+                                        >
+                                            {job?.job_title}
+                                        </a>
+                                    </td>
+                                    <td className='px-3 py-4'>{job?.job_source}</td>
+                                    <td className='px-3 py-4'>{job?.tech_keywords}</td>
+                                    <td className='px-3 py-4'>{job?.job_type}</td>
+                                    <td className='px-3 py-4'>{job?.applied_by_name || 'not-confirmed'}</td>
+                                    <td className='px-3 py-4 font-semibold'>{job?.vertical?.name ?? 'N/A'}</td>
+                                    <td className='px-3 py-4'>
+                                        <div className='flex space-x-2'>
+                                            {job?.cover_letter && (
+                                                <a href={job?.cover_letter} download target='_blank' rel='noreferrer'>
+                                                    <Tooltip text='Download Cover Letter'>{DownloadIcon}</Tooltip>
+                                                </a>
+                                            )}
+                                            {job?.resume && (
+                                                <a href={job?.resume} download target='_blank' rel='noreferrer'>
+                                                    <Tooltip text='Download Resume'>{DownloadIcon}</Tooltip>
+                                                </a>
+                                            )}
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <EmptyTable />
+                        )}
+                    </tbody>
+                </table>
+            </div>
             {data?.jobs?.length > 0 && <TableNavigate data={data} page={page} handleClick={handleClick} />}
         </div>
     )

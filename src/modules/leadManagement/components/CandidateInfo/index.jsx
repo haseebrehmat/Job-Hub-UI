@@ -26,11 +26,22 @@ const CandidateInfo = ({ info, exposed = false }) => {
                 )}
                 <td className='px-2'>
                     <span className='flex items-center flex-wrap space-x-1.5 gap-y-1.5'>
-                        {info?.skills?.length > 0
+                        {exposed
+                            ? info?.candidate?.skills?.length > 0
+                                ? info?.candidate?.skills?.map((skill, index) => (
+                                      <Badge
+                                          key={index}
+                                          label={skill}
+                                          type='success'
+                                          classes='text-xs border border-green-300'
+                                      />
+                                  ))
+                                : 'N/A'
+                            : info?.skills?.length > 0
                             ? info?.skills?.map((skill, index) => (
                                   <Badge
                                       key={index}
-                                      label={skill}
+                                      label={skill?.name}
                                       type='success'
                                       classes='text-xs border border-green-300'
                                   />
@@ -38,7 +49,15 @@ const CandidateInfo = ({ info, exposed = false }) => {
                             : 'N/A'}
                     </span>
                 </td>
-                <td className='px-2 py-1'>{info?.designation ? <Badge label={info?.designation} /> : 'N/A'}</td>
+                <td className='px-3 py-1'>
+                    {exposed ? (
+                        <Badge label={info?.candidate?.designation || 'N/A'} />
+                    ) : info?.designation?.name ? (
+                        <Badge label={info?.designation?.name} />
+                    ) : (
+                        'N/A'
+                    )}
+                </td>
                 {exposed ? null : (
                     <>
                         <td className='px-3 py-6 font-bold uppercase italic'>{info?.company?.name ?? 'N/A'}</td>

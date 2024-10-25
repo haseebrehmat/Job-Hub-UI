@@ -61,10 +61,11 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
             borderRadius: 5,
             marginLeft: 2.5,
             width: '98%',
-            color: '#048C8C',
+            color: state.isDisabled ? '#838080' : '#048C8C',
             borderColor: '#006366',
             boxShadow: state.isSelected ? '0 0 0 1px #0EB3AD' : '0 0 0 0.1px #006366',
             backgroundColor: state.isSelected ? '#EDFFFB' : 'white',
+            textDecoration: state.isDisabled ? 'line-through' : 'none',
             '::after': {
                 content: state.isSelected ? '"\u2713"' : '""',
                 float: 'right',
@@ -83,19 +84,42 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
     }
 
     function handleSelect(data) {
-        setSelectedOptions(data)
-        handleChange(data)
+        if (!isMulti) {
+            setSelectedOptions(data)
+            handleChange(data)
+            return
+        }
+        const selectedValues = data.map(option => option.value)
+        if (selectedValues.includes('__SELECT_ALL__')) {
+            const filteredOpts = options?.filter(opt => opt.isDisabled !== true)
+            setSelectedOptions(filteredOpts)
+            handleChange(filteredOpts)
+        } else {
+            setSelectedOptions(data)
+            handleChange(data)
+        }
     }
 
     useEffect(() => {
         setSelectedOptions(selectorValue)
     }, [selectorValue])
 
+    const extendedOptions =
+        options?.length > 0
+            ? [
+                  {
+                      label: 'Select All',
+                      value: '__SELECT_ALL__',
+                  },
+                  ...options,
+              ]
+            : []
+
     return (
         <div className='dropdown-container'>
             <Select
                 components={{ ClearIndicator, MultiValue }}
-                options={options}
+                options={isMulti ? extendedOptions : options}
                 maxMenuHeight={200}
                 placeholder={placeholder}
                 value={selectedOptions}
@@ -107,7 +131,7 @@ export default function CustomSelector({ options, handleChange, selectorValue, i
                 backgroundColor='transparent'
                 className='single-select'
                 classNamePrefix='react-select'
-                menuPlacement='auto'
+                menuPlacement='bottom'
             />
         </div>
     )

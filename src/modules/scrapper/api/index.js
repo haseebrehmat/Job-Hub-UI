@@ -38,6 +38,8 @@ export const fetchJobSourceLinks = url => http.get(url).then(({ data }) => ({ li
 export const fetchAccounts = url => http.get(url).then(({ data }) => ({ accounts: data, status: 'success' }))
 export const fetchGroupLinks = url => http.get(url).then(({ data }) => ({ grouplinks: data, status: 'success' }))
 
+export const fetchGroupLinksDetails = url => http.get(url).then(({ data }) => data)
+
 export const fetchGroupDetails = url => http.get(url).then(({ data }) => ({ groups: data, status: 'success' }))
 
 export const saveJobSourceLink = (url, { arg: link }) => {
@@ -69,4 +71,20 @@ export const toggleScrapperCycleStatus = url => {
         .then(data =>
             toast.success(`${data.data[0] === 'Sync stopped' ? 'Scrapper Cycle Stopped' : 'Scrapper Cycle Started'} `)
         )
+}
+
+export const updateGroupLink = (url, { arg: link }) =>
+    rawHttp.put(url, link).then(({ data }) => toast.success(data.detail || 'Group Scraper Link updated successfully'))
+
+export const fetchRestrictedKeywords = url => http.get(url).then(({ data }) => data)
+
+export const saveRestrictedKeyword = (url, { arg: keyword }) => {
+    if (keyword?.id) {
+        return rawHttp
+            .put(url, keyword)
+            .then(({ data }) => toast.success(data.detail || 'Restricted Keyword updated successfully'))
+    }
+    return rawHttp
+        .post(url, keyword)
+        .then(({ data }) => toast.success(data.detail || 'Restricted Keyword created successfully'))
 }

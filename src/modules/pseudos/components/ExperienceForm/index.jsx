@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import { useMutate } from '@/hooks'
 
-import { Button, Drawer, Input, Textarea } from '@components'
+import { Button, Drawer, Input, Textarea, Checkbox } from '@components'
 
 import { saveExperience } from '@modules/pseudos/api'
 
@@ -10,7 +10,7 @@ import { experienceSchema } from '@utils/schemas'
 import { today } from '@constants/dashboard'
 
 const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
-    const { values, errors, handleSubmit, resetForm, trigger, handleChange } = useMutate(
+    const { values, errors, handleSubmit, resetForm, trigger, handleChange, setFieldValue } = useMutate(
         `/api/profile/experience${experience?.id ? `/${experience?.id}/` : '/'}`,
         saveExperience,
         {
@@ -19,6 +19,7 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
             designation: experience?.designation || '',
             description: experience?.description || '',
             start_date: experience?.start_date || today,
+            currently: !!experience?.currently,
             end_date: experience?.end_date || today,
         },
         experienceSchema,
@@ -30,9 +31,8 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
         }
     )
     const flag = values.company_name.length > 0 && values.designation.length > 0
-
     return (
-        <Drawer show={show} setShow={setShow} w='320px'>
+        <Drawer show={show} setShow={setShow} w='450px' dir='bottom'>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-flow-row gap-2'>
                     <p className='font-medium text-xl'>{experience?.id ? 'Edit' : 'Create'} Experience</p>
@@ -62,9 +62,27 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
                         max={today}
                     />
                     {errors.start_date && <small className='__error'>{errors.start_date}</small>}
-                    <span className='text-xs font-semibold'>End Date*</span>
-                    <Input name='end_date' type='date' value={values.end_date} onChange={handleChange} max={today} />
-                    {errors.end_date && <small className='__error'>{errors.end_date}</small>}
+                    {!values.currently && (
+                        <>
+                            <span className='text-xs font-semibold'>End Date*</span>
+                            <Input
+                                name='end_date'
+                                type='date'
+                                value={values.end_date}
+                                onChange={handleChange}
+                                max={today}
+                            />
+                            {errors.end_date && <small className='__error'>{errors.end_date}</small>}
+                        </>
+                    )}
+                    <span className='my-1'>
+                        <Checkbox
+                            name='currently'
+                            label='Currently Working'
+                            checked={values.currently}
+                            onChange={e => setFieldValue('currently', e.target.checked)}
+                        />
+                    </span>
                     <span className='text-xs font-semibold'>Description</span>
                     <Textarea
                         name='description'
@@ -73,7 +91,7 @@ const ExperienceForm = ({ show, setShow, mutate, experience, id }) => {
                         ph='Enter description'
                     />
                     {errors.description && <small className='__error'>{errors.description}</small>}
-                    <div className='pt-4 space-y-2'>
+                    <div className='pt-4 flex gap-2'>
                         {flag && <Button label={experience?.id ? 'Update' : 'Submit'} type='submit' fill />}
                         <Button label='Cancel' onClick={() => setShow(false)} />
                     </div>
