@@ -136,7 +136,7 @@ export const SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', '']
 export const GROUP_SETTING_HEADS = ['ID', 'Source', 'Type', 'Setting', 'Days', '']
 export const LOGS_HEADS = ['ID', 'Source', 'Total jobs', 'Uploaded jobs', 'Created_at', 'Updated_at']
 export const JOB_SOURCE_LINK_HEADS = ['ID', 'Source', 'Links', '']
-export const ACCOUNTS_HEADS = ['ID', 'Email', 'Password', '']
+export const ACCOUNTS_HEADS = ['ID', 'Email', 'Password', 'Source', '']
 export const SCRAPER_STATUS_HEADS = [
     'ID',
     'Source',

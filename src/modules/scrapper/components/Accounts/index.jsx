@@ -9,7 +9,7 @@ import { AccountActions, AccountForm } from '@modules/scrapper/components'
 import { fetchAccounts } from '@modules/scrapper/api'
 
 import { can } from '@utils/helpers'
-import { ACCOUNTS_HEADS } from '@constants/scrapper'
+import { ACCOUNTS_HEADS, ACCOUNT_SOURCES } from '@constants/scrapper'
 
 import { CreateIcon, CopyToClipboardIcon } from '@icons'
 
@@ -68,6 +68,9 @@ const Accounts = () => {
                                         {CopyToClipboardIcon}
                                     </span>
                                     <Tooltip anchorSelect={`.copy-pass-${row?.id}`} content='Copy Password' />
+                                </td>
+                                <td className='px-3 py-6 tracking-wider'>
+                                    {row?.source ? ACCOUNT_SOURCES?.find(i => i?.value)?.label : '--'}
                                 </td>
                                 <td className='px-3 py-6 float-right'>
                                     {can(['edit_scrapper_account', 'delete_scrapper_account']) && (
