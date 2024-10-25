@@ -60,7 +60,7 @@ const Accounts = () => {
                             </tr>
                         ))
                     ) : (
-                        <EmptyTable cols={6} msg='No job source links / urls found yet!' />
+                        <EmptyTable cols={4} msg='No accounts found yet!' />
                     )}
                 </tbody>
             </table>
