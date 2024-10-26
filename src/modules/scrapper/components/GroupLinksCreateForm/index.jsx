@@ -35,7 +35,7 @@ const GroupLinksCreateForm = ({ show, setShow, mutate, link }) => {
     const { values, errors, handleSubmit, resetForm, trigger, setFieldValue } = useMutate(
         `/api/job_scraper/group_scheduler_link/`,
         saveGroupLink,
-        { id: link?.id, group_scraper: link?.group_scraper || '' },
+        { id: link?.id, group_scraper: link?.group_scraper?.id || '', name: link?.group_scraper?.name },
         null,
         async formValues => trigger({ ...formValues, id: link?.id, queries: fields }),
         null,
@@ -56,7 +56,11 @@ const GroupLinksCreateForm = ({ show, setShow, mutate, link }) => {
                     <hr className='mb-2' />
                     <span className='text-xs font-semibold'>Scrapper Group*</span>
                     {'edit_job_source_link' && (
-                        <GroupsDropDown value={values.group} error={errors.group} setFieldValue={setFieldValue} />
+                        <GroupsDropDown
+                            value={values.group_scraper}
+                            error={errors.group}
+                            setFieldValue={setFieldValue}
+                        />
                     )}
                     {errors.job_source && <small className='ml-1 text-xs text-red-600'>{errors.job_source}</small>}
                     <div className='flex items-center justify-between mb-1'>

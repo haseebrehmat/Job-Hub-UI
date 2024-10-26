@@ -18,14 +18,24 @@ export const saveCronjobSetting = (url, { arg: setting }) => {
         .post(url, setting)
         .then(({ data }) => toast.success(data.detail || 'Cronjob Setting created successfully'))
 }
+
 export const saveGroupSetting = (url, { arg: setting }) => {
     if (setting?.id) {
         return rawHttp.put(url, setting).then(({ data }) => toast.success(data.detail || 'Group updated successfully'))
     }
     return rawHttp.post(url, setting).then(({ data }) => toast.success(data.detail || 'Group created successfully'))
 }
+export const saveAccount = (url, { arg: account }) => {
+    if (account?.id) {
+        return rawHttp
+            .put(url, account)
+            .then(({ data }) => toast.success(data.detail || 'Account updated successfully'))
+    }
+    return rawHttp.post(url, account).then(({ data }) => toast.success(data.detail || 'Account created successfully'))
+}
 
 export const fetchJobSourceLinks = url => http.get(url).then(({ data }) => ({ links: data?.detail, status: 'success' }))
+export const fetchAccounts = url => http.get(url).then(({ data }) => ({ accounts: data, status: 'success' }))
 export const fetchGroupLinks = url => http.get(url).then(({ data }) => ({ grouplinks: data, status: 'success' }))
 
 export const fetchGroupLinksDetails = url => http.get(url).then(({ data }) => data)

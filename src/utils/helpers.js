@@ -588,3 +588,11 @@ export const parseSelectedJobSource = (key, sources) => {
     }
     return null
 }
+
+export const parseSelectedVal = (key, values) => {
+    if (key) {
+        const selected = values?.find(row => row?.value === key)
+        return selected ? { value: selected?.value, label: selected?.label } : null
+    }
+    return null
+}

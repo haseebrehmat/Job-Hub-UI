@@ -9,7 +9,6 @@ import { parseGroups, parseSelectedGroup } from '@utils/helpers'
 
 const GroupsDropdown = ({ value: selected, error = null, setFieldValue, onChange = null }) => {
     const { data, isLoading, error: fetchError } = useSWR('/api/job_scraper/group_scheduler/', fetchGroupDetails)
-    console.log(data)
 
     return isLoading ? (
         <small className='ml-1 p-3 text-xs text-gray-400'>Groups Loading...</small>
@@ -19,7 +18,7 @@ const GroupsDropdown = ({ value: selected, error = null, setFieldValue, onChange
         <>
             <CustomSelector
                 options={parseGroups(data?.groups)}
-                selected={parseSelectedGroup(selected, data?.groups)}
+                selectorValue={parseSelectedGroup(selected, data?.groups)}
                 handleChange={onChange || (({ value }) => setFieldValue('group_scraper', value))}
                 classes='text-gray-500 text-sm'
             />

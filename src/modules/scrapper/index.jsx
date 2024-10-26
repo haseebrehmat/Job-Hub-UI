@@ -9,10 +9,18 @@ import {
     ScraperStatus,
     GroupLinks,
     Logs,
+    Accounts,
     RestrictedKeywords,
 } from '@modules/scrapper/components'
 
-import { JobSourceLinkIcon, CronjobSettingIcon, RunningScrapperIcon, LogsIcon, RestrictedKeywordsIcon } from '@icons'
+import {
+    JobSourceLinkIcon,
+    CronjobSettingIcon,
+    RunningScrapperIcon,
+    LogsIcon,
+    RestrictedKeywordsIcon,
+    UsersIcon,
+} from '@icons'
 
 const Profile = () => {
     const [activeTab, setActiveTab] = useState({
@@ -21,6 +29,7 @@ const Profile = () => {
         status: false,
         logs: false,
         grouplinks: false,
+        accounts: false,
         restricted: false,
     })
 
@@ -34,7 +43,7 @@ const Profile = () => {
         <div className='p-2'>
             <div className='p-4 rounded-lg shadow-md'>
                 <div className='flex flex-col mb-4'>
-                    <div className='flex flex-col mb-4 space-y-2 md:gap-5 sm:flex-row sm:space-y-0'>
+                    <div className='flex flex-wrap gap-2 md:gap-4'>
                         <Button
                             label='Cronjob Settings'
                             fit
@@ -84,6 +93,14 @@ const Profile = () => {
                             onClick={() => handleClick('logs')}
                         />
                         <Button
+                            label='Accounts Management'
+                            fit
+                            fill={activeTab.accounts}
+                            icon={UsersIcon}
+                            classes={`md:pr-8 md:pl-6 rounded-none ${!activeTab.accounts && 'border-gray-200'}`}
+                            onClick={() => handleClick('accounts')}
+                        />
+                        <Button
                             label='Restricted Keywords'
                             fit
                             fill={activeTab.restricted}
@@ -120,6 +137,11 @@ const Profile = () => {
                     {activeTab.logs && (
                         <div className='mt-5'>
                             <Logs />
+                        </div>
+                    )}
+                    {activeTab.accounts && (
+                        <div className='mt-5'>
+                            <Accounts />
                         </div>
                     )}
                     {activeTab.restricted && (

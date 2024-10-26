@@ -86,6 +86,7 @@ import {
     FaUserEdit,
     FaUsersCog,
     FaBan,
+    FaRegCopy,
 } from 'react-icons/fa'
 import {
     BiPlusCircle,
@@ -248,3 +249,4 @@ export const RecordsLimitIcon = <BsSortNumericUpAlt style={{ fontSize: 16 }} />
 export const Enable = <BsToggleOn style={{ fontSize: 28 }} />
 export const Disable = <BsToggleOff style={{ fontSize: 28 }} />
 export const RestrictedKeywordsIcon = <ImNotification style={{ fontSize: '22px' }} />
+export const CopyToClipboardIcon = <FaRegCopy style={{ fontSize: 18 }} />
