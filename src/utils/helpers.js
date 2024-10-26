@@ -236,7 +236,7 @@ export const removeOrAddElementsFromArray = (array, elements) => {
     return array
 }
 
-export const parseMembers = (members, leadId = null, all = false) => {
+export const parseMembers = (members, leadId = null) => {
     const parsedMembers = members?.filter(m => m.id !== leadId).map(user => ({ value: user.id, label: user.username }))
     // if (all) parsedMembers?.unshift({ value: 'all', label: 'All Team Members' })
     return parsedMembers
@@ -554,7 +554,7 @@ export const formatOptions = options_arr =>
     options_arr?.map(({ name, value }) => ({ label: `${name} (${value})`, value: name }))
 
 export const getFilterAppliedURL = (query, filters) =>
-    `limit=${filters?.limit || 15}&search=${query}&tech_keywords=${encodeURIComponent(
+    `limit=${filters?.limit || 15}&search=${encodeURIComponent(query)}&tech_keywords=${encodeURIComponent(
         filters?.techs?.map(tech => tech.label)?.join(',')
     )}&job_source=${filters?.sources?.join(',')}&ordering=${filters?.order ?? '-job_posted_date'}&job_visibility=${
         filters?.visible ?? 'all'
