@@ -1,5 +1,6 @@
 import jwt_decode from 'jwt-decode'
 import { toPng } from 'html-to-image'
+import toast from 'react-hot-toast'
 
 import {
     INTERVAL_TYPE_OPTIONS,
@@ -595,4 +596,28 @@ export const parseSelectedVal = (key, values) => {
         return selected ? { value: selected?.value, label: selected?.label } : null
     }
     return null
+}
+
+export const copyToClipboard = (text, message = 'Copied') => {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard
+            .writeText(text)
+            .then(() => toast.success(message))
+            .catch(err => toast.error('Copy failed: ', err))
+    } else {
+        const textArea = document.createElement('textarea')
+        textArea.value = text
+        textArea.style.position = 'absolute'
+        textArea.style.left = '-999999px'
+        document.body.prepend(textArea)
+        textArea.select()
+        try {
+            document.execCommand('copy')
+            toast.success(message)
+        } catch (error) {
+            toast.error('Copy failed: ', error)
+        } finally {
+            textArea.remove()
+        }
+    }
 }
