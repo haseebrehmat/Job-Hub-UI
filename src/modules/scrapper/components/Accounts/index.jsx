@@ -1,6 +1,5 @@
 import { memo, useState } from 'react'
 import useSWR from 'swr'
-import toast from 'react-hot-toast'
 import { Tooltip } from 'react-tooltip'
 
 import { Button, EmptyTable, Loading } from '@components'
@@ -8,7 +7,7 @@ import { Button, EmptyTable, Loading } from '@components'
 import { AccountActions, AccountForm } from '@modules/scrapper/components'
 import { fetchAccounts } from '@modules/scrapper/api'
 
-import { can } from '@utils/helpers'
+import { can, copyToClipboard } from '@utils/helpers'
 import { ACCOUNTS_HEADS, ACCOUNT_SOURCES } from '@constants/scrapper'
 
 import { CreateIcon, CopyToClipboardIcon } from '@icons'
@@ -23,12 +22,7 @@ const Accounts = () => {
         setAccount(values)
         setShow(true)
     }
-    const copyToClipboard = text => {
-        navigator.clipboard
-            .writeText(text)
-            .then(() => toast.success(`Password Copied`))
-            .catch(err => toast.error('Copy failed:', err))
-    }
+    const clickHandler = text => copyToClipboard(text, 'Password Copied!')
 
     if (isLoading) return <Loading />
 
@@ -63,7 +57,7 @@ const Accounts = () => {
                                     ))}
                                     <span
                                         className={`ml-2 inline-flex cursor-pointer copy-pass-${row?.id}`}
-                                        onClick={() => copyToClipboard(row?.password || 'N/A')}
+                                        onClick={() => clickHandler(row?.password || 'N/A')}
                                     >
                                         {CopyToClipboardIcon}
                                     </span>
