@@ -12,8 +12,8 @@ const Dashboard = () => {
 
     return allowed ? (
         <div className='grid md:grid-cols-2'>
-            <div className='flex flex-col pb-5 justify-between pl-2'>
-                <div className='border shadow-lg p-4 rounded-xl flex items-start'>
+            <div className='pb-5 pl-2'>
+                <div className='border shadow-lg p-4 rounded-xl flex items-start md:h-full'>
                     <div className='flex flex-col tracking-widest w-full'>
                         <p className='text-lg text-gray-700 border-b font-semibold'>Jobs Stats</p>
                         <small className='text-gray-500 pb-3'>Compared to Previous Month</small>
@@ -39,7 +39,7 @@ const Dashboard = () => {
                             />
                         </div>
                         <span
-                            className={`inline-flex gap-4 pt-2.5 ${
+                            className={`inline-flex gap-4 pt-2.5  ${
                                 data?.jobs?.month?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
                             }`}
                         >
@@ -48,6 +48,8 @@ const Dashboard = () => {
                         </span>
                     </div>
                 </div>
+            </div>
+            <div className='pb-5 pl-2'>
                 <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                     <div className='flex flex-col tracking-widest w-full'>
                         <p className='text-lg text-gray-700 border-b font-semibold'>Thriving Job Source</p>
@@ -163,50 +165,33 @@ const Dashboard = () => {
             <div className='pb-5 pl-2'>
                 <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                     <div className='flex flex-col tracking-widest w-full'>
-                        <p className='text-lg text-gray-700 border-b font-semibold'>Emerging Technologies</p>
+                        <p className='text-lg text-gray-700 border-b font-semibold'>Emerging Job Titles</p>
                         <small className='text-gray-500'>
-                            List of Top 5 Emerging Technologies (from others & others dev)
+                            List of Top 5 Emerging Job Titles (from others & others dev) from current month
                         </small>
-                        {data?.emerging_techs?.month?.map((item, index) => (
-                            <div className='flex items-center justify-between pt-3' key={index}>
-                                <div className='flex flex-col'>
-                                    <p className='text-lg'>{item?.stack}</p>
-                                    <div className='inline-flex gap-3 text-slate-700'>
-                                        <AnimatedNumber2
-                                            initialValue={0}
-                                            component='span'
-                                            value={item?.previous_count}
-                                            stepPrecision={0}
-                                            style={{ fontSize: 12 }}
-                                            duration={1000}
-                                            formatValue={n => formatNum(n)}
-                                        />
-                                        {UptoIcon}
-                                        <AnimatedNumber2
-                                            initialValue={0}
-                                            component='span'
-                                            value={item?.current_count}
-                                            stepPrecision={0}
-                                            style={{ fontSize: 12 }}
-                                            duration={1000}
-                                            formatValue={n => formatNum(n)}
-                                        />
-                                    </div>
+                        {data?.thriving_titles?.month?.map((item, index) => (
+                            <div className='flex items-center justify-between pt-5' key={index}>
+                                <p className='text-opacity-50'>{item?.title}</p>
+                                <div className='inline-flex items-center gap-2 text-green-600'>
+                                    <AnimatedNumber2
+                                        className='font-mono'
+                                        initialValue={0}
+                                        component='span'
+                                        value={item?.count}
+                                        stepPrecision={0}
+                                        style={{ fontSize: 16 }}
+                                        duration={1000}
+                                        formatValue={n => formatNum(n)}
+                                    />
+                                    {UpIcon}
                                 </div>
-                                <span
-                                    className={`inline-flex gap-4 pt-2.5 ${
-                                        item?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
-                                    }`}
-                                >
-                                    {item?.percentage} %<span>{item?.alteration === 'up' ? UpIcon : DownIcon}</span>
-                                </span>
                             </div>
                         ))}
                     </div>
                 </div>
             </div>
-            <div className='pb-5 pl-2 col-span-2'>
-                <div className='border shadow-lg p-4 rounded-xl flex items-start'>
+            <div className='pb-5 pl-2'>
+                <div className='border shadow-lg p-4 rounded-xl flex items-start h-full'>
                     <div className='flex flex-col tracking-widest w-full'>
                         <p className='text-lg text-gray-700 border-b font-semibold'>Thriving Job Titles</p>
                         <small className='text-gray-500'>
