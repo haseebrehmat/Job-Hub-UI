@@ -11,7 +11,7 @@ const Dashboard = () => {
     const allowed = isSuper()
 
     return allowed ? (
-        <div className='grid md:grid-cols-2'>
+        <div className='grid lg:grid-cols-2'>
             <div className='pb-5 pl-2'>
                 <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                     <div className='flex flex-col tracking-widest w-full'>
@@ -172,7 +172,7 @@ const Dashboard = () => {
                         <small className='text-gray-500'>
                             List of Top 5 Emerging Job Titles (from others & others dev) from current month
                         </small>
-                        {data?.thriving_titles?.month?.map((item, index) => (
+                        {data?.emerging_titles?.month?.map((item, index) => (
                             <div className='flex items-center justify-between pt-5' key={index}>
                                 <p className='text-opacity-50'>{item?.title}</p>
                                 <div className='inline-flex items-center gap-2 text-green-600'>

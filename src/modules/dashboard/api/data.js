@@ -39,14 +39,14 @@ export const data = {
         ],
         week: [],
     },
-    // Those are the top 5 tech stacks from others or others dev
-    emerging_techs: {
+    // Those are the top 5 job titles from others or others dev
+    emerging_titles: {
         month: [
-            { stack: 'Hascal', current_count: 120, previous_count: 200, percentage: 66.67, alteration: 'down' },
-            { stack: 'Elixir', current_count: 235, previous_count: 240, percentage: 100, alteration: 'up' },
-            { stack: 'BambooJs', current_count: 90, previous_count: 140, percentage: 55.56, alteration: 'down' },
-            { stack: 'Sevelte', current_count: 490, previous_count: 140, percentage: 55.56, alteration: 'up' },
-            { stack: 'Service Now', current_count: 390, previous_count: 340, percentage: 277.78, alteration: 'up' },
+            { title: 'Hascal Developer', count: 120 },
+            { title: 'Java Developer', count: 2305 },
+            { title: 'Python ML Developer', count: 90 },
+            { title: 'Principal Software Engineer', count: 490 },
+            { title: 'Project Manager', count: 390 },
         ],
         week: [],
     },
