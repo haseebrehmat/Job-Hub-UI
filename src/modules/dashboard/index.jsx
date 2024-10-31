@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, SelectBox } from '@components'
 
-import { Filters, Statistics, Leads, WarmLeads, TechStacks } from '@modules/dashboard/components'
+import { Filters, Statistics, Leads, WarmLeads, TechStacks, Stats } from '@modules/dashboard/components'
 import { fetchDashboardData } from '@modules/dashboard/api'
 import { fetchCompanies } from '@modules/userManagement/api'
 
@@ -53,10 +53,11 @@ const Dashboard = () => {
             <div className='flex flex-col w-full space-y-6 md:space-y-10 pb-10'>
                 {!error ? (
                     <>
-                        <div className='flex justify-between md:justify-end md:gap-3 flex-wrap pt-4 md:pb-3'>
+                        <div className='flex justify-between md:justify-end md:gap-3 flex-wrap pt-4'>
                             <Filters filters={filters} setFilters={setFilters} />
                             {memoizedCompaniesSelect}
                         </div>
+                        {isSuper() && <Stats />}
                         {can('view_statistics') && data?.statistics && (
                             <div className='block xl:hidden'>
                                 <Statistics
