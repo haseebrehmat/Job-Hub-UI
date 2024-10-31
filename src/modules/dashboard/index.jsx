@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, SelectBox } from '@components'
 
-import { Filters, Statistics, Leads, WarmLeads, TechStacks } from '@modules/dashboard/components'
+import { Filters, Leads, WarmLeads, TechStacks, LeadsAnalytics } from '@modules/dashboard/components'
 import { fetchDashboardData } from '@modules/dashboard/api'
 import { fetchCompanies } from '@modules/userManagement/api'
 
@@ -40,7 +40,7 @@ const Dashboard = () => {
                     options={parseComapnies(fetchedCompanies?.companies)}
                     selected={parseSelectedCompany(filters.company, fetchedCompanies?.companies)}
                     handleChange={({ value }) => setFilters({ ...filters, company: value })}
-                    classes='text-gray-500 text-sm mt-2 w-[90%] md:mt-0 md:w-1/4'
+                    classes='text-gray-500 text-sm mt-2 w-full'
                 />
             )),
         [companyLoading, companyError, fetchedCompanies?.companies, filters.company]
@@ -50,39 +50,32 @@ const Dashboard = () => {
 
     return user?.permissions?.length > 0 ? (
         can(['view_dashboard', 'view_statistics']) ? (
-            <div className='flex flex-col w-full space-y-6 md:space-y-10 pb-10'>
+            <div>
                 {!error ? (
-                    <>
-                        <div className='flex justify-between md:justify-end md:gap-3 flex-wrap pt-4 md:pb-3'>
-                            <Filters filters={filters} setFilters={setFilters} />
-                            {memoizedCompaniesSelect}
+                    <div className='flex flex-col'>
+                        <div className='flex flex-col pt-4 '>
+                            <div className='w-full'>
+                                {can('view_statistics') && data?.statistics && (
+                                    <LeadsAnalytics classes='flex-col space-y-8' data={data?.statistics} />
+                                )}
+                                <div className='flex flex-row items-end float-right space-x-3 mr-4'>
+                                    <Filters filters={filters} setFilters={setFilters} />
+                                    {memoizedCompaniesSelect}
+                                </div>
+                            </div>
                         </div>
-                        {can('view_statistics') && data?.statistics && (
-                            <div className='block xl:hidden'>
-                                <Statistics
-                                    classes='grid md:grid-cols-3 space-y-4 md:space-x-3'
-                                    data={data?.statistics}
-                                />
+                        {can('view_dashboard') && (
+                            <div className='flex flex-col  space-y-7 md:space-y-16 mt-10'>
+                                {data?.leads && data?.leads?.length > 0 && (
+                                    <Leads data={data?.leads} stats={data?.statistics} />
+                                )}
+                                {data?.tech_jobs?.length > 0 && data?.tech_jobs?.length < TECH_STACKS_RANDOM_MAX && (
+                                    <TechStacks data={data?.tech_jobs} />
+                                )}
+                                {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
                             </div>
                         )}
-                        <div className='flex items-start justify-between'>
-                            {can('view_dashboard') && (
-                                <div className='flex flex-col w-4/5 space-y-7 md:space-y-16'>
-                                    {data?.leads && data?.leads?.length > 0 && <Leads data={data?.leads} />}
-                                    {data?.tech_jobs?.length > 0 &&
-                                        data?.tech_jobs?.length < TECH_STACKS_RANDOM_MAX && (
-                                            <TechStacks data={data?.tech_jobs} />
-                                        )}
-                                    {data?.leads && data?.leads?.length > 0 && <WarmLeads data={data?.leads} />}
-                                </div>
-                            )}
-                            <div className='w-1/5 pl-6 hidden xl:block'>
-                                {can('view_statistics') && data?.statistics && (
-                                    <Statistics classes='flex-col space-y-8' data={data?.statistics} />
-                                )}
-                            </div>
-                        </div>
-                    </>
+                    </div>
                 ) : (
                     <p className='mx-auto'>No Graphs or data Found!</p>
                 )}

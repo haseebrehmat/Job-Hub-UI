@@ -30,7 +30,7 @@ const Filters = ({ filters, setFilters }) => {
 
     return (
         <div>
-            <div className='flex space-x-3'>
+            <div className='flex space-x-3 justify-end mt-4'>
                 <Button label='Filter' fit icon={FilterIcon} onClick={toggleFilters} />
                 <Button fit icon={ResetIcon} onClick={resetFilters} />
             </div>
