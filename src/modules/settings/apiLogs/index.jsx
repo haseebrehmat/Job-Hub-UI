@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import { Loading, Searchbox, EmptyTable, Paginated, Button } from '@components'
 
 import { fetchApiLogs } from '@modules/settings/api'
-import { ApiLogFilters } from '@modules/settings/components'
+import { ApiLogFilters, ApiLogsAnalytics } from '@modules/settings/components'
 
 import { formatDate2, getSelectedVals, convertToTitleCase } from '@utils/helpers'
 import { API_LOGS_HEADS, API_LOGS_INITIAL_VALUES } from '@constants/settings'
@@ -26,6 +26,7 @@ const ApiLogs = () => {
     if (isLoading) return <Loading />
     return (
         <div className='max-w-full mb-14 px-5'>
+            <ApiLogsAnalytics stats={data?.stats} />
             <div className='flex items-center space-x-3 pt-6'>
                 <Searchbox query={vals.query} setQuery={query => dispatch({ query, page: 1 })} clear={clearFilters} />
                 <Button
@@ -61,7 +62,7 @@ const ApiLogs = () => {
                                     {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
                                 </td>
                                 <td className='p-3 break-words'>{formatDate2(row?.created_at)}</td>
-                                <td className='px-4 py-3 break-words font-bold text-lg'>{row?.jobs_count || 0}</td>
+                                <td className='px-4 py-3 break-words text-md'>{row?.jobs_count || 0}</td>
                                 <td className='p-3 text-2xl font-bold'>
                                     {row?.upload_status ? ValidateTrueIcon : ValidateFalseIcon}
                                 </td>
