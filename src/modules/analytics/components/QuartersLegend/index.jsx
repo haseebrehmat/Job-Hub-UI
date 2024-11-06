@@ -14,10 +14,10 @@ const QuartersLegend = () => (
             <span className='bg-[#FF5B33] px-4 py-1.5' />
             <span>Quarter 3</span>
         </div>
-        {/* <div className='flex gap-2 items-center text-[#4E6E58]'>
+        <div className='flex gap-2 items-center text-[#4E6E58]'>
             <span className='bg-[#4E6E58] px-4 py-1.5' />
             <span>Quarter 4</span>
-        </div> */}
+        </div>
     </div>
 )
 
