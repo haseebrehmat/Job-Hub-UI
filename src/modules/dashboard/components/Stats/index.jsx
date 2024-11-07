@@ -1,6 +1,8 @@
 import { memo } from 'react'
 import AnimatedNumber2 from 'react-animated-number'
+import useSWR from 'swr'
 
+import { fetchJobStats } from '@modules/dashboard/api'
 import { data } from '@modules/dashboard/api/data'
 
 import { formatNum, isSuper } from '@utils/helpers'
@@ -8,8 +10,9 @@ import { formatNum, isSuper } from '@utils/helpers'
 import { UpIcon, DownIcon, UptoIcon } from '@icons'
 
 const Dashboard = () => {
+    const resp = useSWR(`/api/job_portal/trending_jobs_stats/`, fetchJobStats)
     const allowed = isSuper()
-
+    console.log(resp?.data)
     return allowed ? (
         <div className='grid lg:grid-cols-2'>
             <div className='pb-5 pl-2'>
