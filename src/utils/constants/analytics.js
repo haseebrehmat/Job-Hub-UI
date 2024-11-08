@@ -42,12 +42,12 @@ export const JOB_TYPES = {
 }
 
 export const JOB_TYPE_COLORS2 = {
-    contract_on_site: '#532747',
-    contract_remote: '#1c5655',
+    contract_on_site: '#644897',
+    contract_remote: '#2d455c',
     full_time_on_site: '#526acb',
-    full_time_remote: '#644897',
+    full_time_remote: '#532747',
     hybrid_full_time: '#8e272b',
-    hybrid_contract: '#2d455c',
+    hybrid_contract: '#1c5655',
     total: '#4ab9a7',
 }
 

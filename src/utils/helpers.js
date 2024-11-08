@@ -621,3 +621,4 @@ export const copyToClipboard = (text, message = 'Copied') => {
         }
     }
 }
+export const parseStats = values => values?.map(val => ({ label: val.name, value: val.name }))

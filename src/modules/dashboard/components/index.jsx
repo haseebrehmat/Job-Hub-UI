@@ -3,6 +3,7 @@ import Statistics from '@modules/dashboard/components/Statistics'
 import Leads from '@modules/dashboard/components/Leads'
 import WarmLeads from '@modules/dashboard/components/WarmLeads'
 import TechStacks from '@modules/dashboard/components/TechStacks'
+import LeadsAnalytics from '@modules/dashboard/components/LeadsAnalytics'
 import JobStats from '@modules/dashboard/components/JobStats'
 import ThrivingSources from '@modules/dashboard/components/ThrivingSources'
 import JobsComparison from '@modules/dashboard/components/JobsComparison'
@@ -18,6 +19,7 @@ export {
     Leads,
     WarmLeads,
     TechStacks,
+    LeadsAnalytics,
     JobStats,
     ThrivingSources,
     JobsComparison,
