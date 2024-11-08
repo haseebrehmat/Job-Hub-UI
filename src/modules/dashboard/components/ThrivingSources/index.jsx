@@ -1,6 +1,8 @@
 import { memo } from 'react'
 import AnimatedNumber2 from 'react-animated-number'
 
+import { StatsTitle } from '@modules/dashboard/components'
+
 import { formatNum } from '@utils/helpers'
 
 import { UpIcon, UptoIcon } from '@icons'
@@ -10,8 +12,7 @@ const ThrivingSources = ({ data = null }) =>
         <div className='pb-5 pl-2'>
             <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                 <div className='flex flex-col tracking-widest w-full'>
-                    <p className='text-lg text-gray-700 border-b font-semibold'>Thriving Job Sources</p>
-                    <small className='text-gray-500'>List of Thrived Job Sources</small>
+                    <StatsTitle title='Thriving Job Sources' sub='List of Thrived Job Sources' />
                     {data?.month?.map((item, index) => (
                         <div className='flex items-center justify-between pt-3' key={index}>
                             <div className='flex flex-col'>

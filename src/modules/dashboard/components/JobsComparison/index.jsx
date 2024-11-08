@@ -1,6 +1,8 @@
 import { memo } from 'react'
 import AnimatedNumber2 from 'react-animated-number'
 
+import { StatsTitle } from '@modules/dashboard/components'
+
 import { formatNum } from '@utils/helpers'
 
 import { UpIcon, UptoIcon, DownIcon } from '@icons'
@@ -10,9 +12,8 @@ const JobsComparison = ({ data = null }) =>
         <div className='pb-5 pl-2'>
             <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                 <div className='flex flex-col tracking-widest w-full'>
-                    <p className='text-lg text-gray-700 border-b font-semibold'>Jobs Stats</p>
-                    <small className='text-gray-500 pb-3'>Market Comparison of Jobs presense</small>
-                    <div className='inline-flex gap-4 items-center text-gray-700 pb-1'>
+                    <StatsTitle title='Jobs Stats' sub='Market Comparison of Jobs presense' />
+                    <div className='inline-flex gap-4 items-center text-gray-700 pb-1 pt-3'>
                         Previous Month {UptoIcon} Current Month
                     </div>
                     <div className='inline-flex gap-4 items-center'>
