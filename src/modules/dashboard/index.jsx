@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, SelectBox } from '@components'
 
-import { Filters, Statistics, Leads, WarmLeads, TechStacks, Stats } from '@modules/dashboard/components'
+import { Filters, Statistics, Leads, WarmLeads, TechStacks, JobStats } from '@modules/dashboard/components'
 import { fetchDashboardData } from '@modules/dashboard/api'
 import { fetchCompanies } from '@modules/userManagement/api'
 
@@ -57,7 +57,7 @@ const Dashboard = () => {
                             <Filters filters={filters} setFilters={setFilters} />
                             {memoizedCompaniesSelect}
                         </div>
-                        {isSuper() && <Stats />}
+                        {isSuper() && <JobStats />}
                         {can('view_statistics') && data?.statistics && (
                             <div className='block xl:hidden'>
                                 <Statistics

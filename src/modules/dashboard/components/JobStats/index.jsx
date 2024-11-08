@@ -11,14 +11,10 @@ import {
 } from '@modules/dashboard/components'
 import { fetchJobStats } from '@modules/dashboard/api'
 
-import { isSuper } from '@utils/helpers'
-
-const Dashboard = () => {
-    const allowed = isSuper()
-
+const JobStats = () => {
     const { data, isLoading, error } = useSWR(`/api/job_portal/trending_jobs_stats/`, fetchJobStats)
 
-    return allowed && !error ? (
+    return !error ? (
         isLoading ? (
             <h1 className='mx-auto md:p-4 text-[#4f9d9b] text-lg'>Loading Trending Jobs Stats....</h1>
         ) : (
@@ -40,4 +36,4 @@ const Dashboard = () => {
     ) : null
 }
 
-export default memo(Dashboard)
+export default memo(JobStats)
