@@ -4,7 +4,7 @@ import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelL
 import { Tooltip } from '@components'
 
 import { htmlToPng } from '@utils/helpers'
-import { JOB_TYPE_COLORS, JOB_TYPES } from '@constants/analytics'
+import { JOB_TYPES, JOB_TYPE_COLORS2 } from '@constants/analytics'
 
 import { SearchClearIcon, DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
@@ -71,13 +71,18 @@ const TechStackBars = ({ data = [], type = 'total', set = null, options = {} }) 
                         {Object.keys(JOB_TYPES).map(
                             (row, index) =>
                                 type === row && (
-                                    <Bar dataKey={row} stackId='a' fill={JOB_TYPE_COLORS[index]} key={index}>
+                                    <Bar
+                                        dataKey={row}
+                                        stackId='a'
+                                        fill={JOB_TYPE_COLORS2[row] ?? '#000000'}
+                                        key={index}
+                                    >
                                         <LabelList
                                             dataKey={row}
                                             position='top'
                                             fontSize={options?.fs ?? 13}
                                             fontWeight='bold'
-                                            fill={JOB_TYPE_COLORS[index]}
+                                            fill={JOB_TYPE_COLORS2[row] ?? '#000000'}
                                         />
                                     </Bar>
                                 )

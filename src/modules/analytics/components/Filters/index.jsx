@@ -50,14 +50,14 @@ const Filters = ({ values, set, data = null }) => {
                         type='number'
                         onChange={e =>
                             e?.target?.value === '' ||
-                            (!isNaN(parseFloat(e?.target?.value)) && e?.target?.value >= 0 && e?.target?.value <= 100)
+                            (!isNaN(parseFloat(e?.target?.value)) && e?.target?.value >= 0 && e?.target?.value <= 1000)
                                 ? update({ percent: e?.target?.value })
                                 : null
                         }
                         value={vals.percent}
                         classes='!w-28 add-percent'
                         min={0}
-                        max={100}
+                        max={1000}
                     />
                     <Tooltip
                         anchorSelect='.add-percent'
