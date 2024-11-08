@@ -33,7 +33,7 @@ const ApiLogsAnalytics = ({ stats }) => {
                             formatValue={n => formatNum(n)}
                         />
                     </h1>
-                    <p>Total Hits</p>
+                    <p>{s2P ? 'Stage --> Prod' : 'Prod --> SE'}</p>
                 </div>
             </div>
             <div className='flex flex-col bg-slate-100 py-4 rounded-3xl'>
@@ -56,7 +56,7 @@ const ApiLogsAnalytics = ({ stats }) => {
                     />
                 </div>
                 <div className='grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 items-center px-10  mt-4'>
-                    {job_sources &&
+                    {/* {job_sources &&
                         job_sources.map((item, index) => (
                             <div
                                 className='border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'
@@ -65,7 +65,7 @@ const ApiLogsAnalytics = ({ stats }) => {
                                 <div>
                                     <h1 className='text-md font-bold'>
                                         <AnimatedNumber
-                                            component='p'
+                                            component='p' 
                                             initialValue={0}
                                             value={s2P ? item?.total_uploaded_jobs : item?.total_scraper_jobs}
                                             stepPrecision={0}
@@ -81,7 +81,7 @@ const ApiLogsAnalytics = ({ stats }) => {
                                     <p className='text-sm'>{item.job_source.toUpperCase()}</p>
                                 </div>
                             </div>
-                        ))}
+                        ))} */}
                 </div>
             </div>
         </div>
