@@ -7,14 +7,14 @@ import { formatNum, isset } from '@utils/helpers'
 
 import { UpIcon, UptoIcon, DownIcon } from '@icons'
 
-const ThrivingTechnologies = ({ data = null, relative = true }) =>
+const DecliningTechnologies = ({ data = null, relative = true }) =>
     isset(data) && data?.length > 0 ? (
         <div className='pb-5 pl-2'>
             <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                 <div className='flex flex-col tracking-widest w-full'>
                     <StatsTitle
-                        title='Thriving Technologies'
-                        sub={`${relative ? 'List of' : 'Relative Comparison of'} Thrived Technologies ${
+                        title='Declining Tech Stacks'
+                        sub={`${relative ? 'List of' : 'Relative Comparison of'} Declined Technologies ${
                             relative ? 'among two months' : 'for a month'
                         }`}
                     />
@@ -58,4 +58,4 @@ const ThrivingTechnologies = ({ data = null, relative = true }) =>
         </div>
     ) : null
 
-export default memo(ThrivingTechnologies)
+export default memo(DecliningTechnologies)

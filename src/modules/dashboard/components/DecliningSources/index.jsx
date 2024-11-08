@@ -21,7 +21,7 @@ const DecliningSources = ({ data = null, relative = true }) =>
                     {data?.map((item, index) => (
                         <div className='flex items-center justify-between pt-3' key={index}>
                             <div className='flex flex-col'>
-                                <p className='font-semibold text-[#4f9d9b] uppercase'>{item?.source}</p>
+                                <p className='font-semibold text-[#e06767] uppercase'>{item?.source}</p>
                                 <div className='inline-flex gap-3 text-slate-700'>
                                     <AnimatedNumber2
                                         initialValue={0}
