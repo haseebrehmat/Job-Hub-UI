@@ -5,14 +5,17 @@ import { StatsTitle } from '@modules/dashboard/components'
 
 import { formatNum } from '@utils/helpers'
 
-import { UpIcon, UptoIcon } from '@icons'
+import { UpIcon, UptoIcon, DownIcon } from '@icons'
 
-const ThrivingSources = ({ data = null }) =>
-    data ? (
+const ThrivingSources = ({ data = null, relative = false }) =>
+    data?.month?.length > 0 ? (
         <div className='pb-5 pl-2'>
             <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                 <div className='flex flex-col tracking-widest w-full'>
-                    <StatsTitle title='Thriving Job Sources' sub='List of Thrived Job Sources' />
+                    <StatsTitle
+                        title='Thriving Job Sources'
+                        sub={`${!relative ? 'List of ' : 'Relative Comparison of '} Thrived Job Sources of two months`}
+                    />
                     {data?.month?.map((item, index) => (
                         <div className='flex items-center justify-between pt-3' key={index}>
                             <div className='flex flex-col'>
@@ -39,8 +42,12 @@ const ThrivingSources = ({ data = null }) =>
                                     />
                                 </div>
                             </div>
-                            <span className='inline-flex gap-4 text-green-500'>
-                                {item?.percentage} %<span>{UpIcon}</span>
+                            <span
+                                className={`inline-flex gap-4 pt-2.5  ${
+                                    item?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
+                                }`}
+                            >
+                                {item?.percentage} %<span>{item?.alteration === 'up' ? UpIcon : DownIcon}</span>
                             </span>
                         </div>
                     ))}
