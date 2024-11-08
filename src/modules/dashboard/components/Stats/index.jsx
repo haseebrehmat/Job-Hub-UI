@@ -2,6 +2,7 @@ import { memo } from 'react'
 import AnimatedNumber2 from 'react-animated-number'
 import useSWR from 'swr'
 
+import { ThrivingSources } from '@modules/dashboard/components'
 import { fetchJobStats } from '@modules/dashboard/api'
 import { data } from '@modules/dashboard/api/data'
 
@@ -10,9 +11,9 @@ import { formatNum, isSuper } from '@utils/helpers'
 import { UpIcon, DownIcon, UptoIcon } from '@icons'
 
 const Dashboard = () => {
-    const resp = useSWR(`/api/job_portal/trending_jobs_stats/`, fetchJobStats)
+    const { data: resp } = useSWR(`/api/job_portal/trending_jobs_stats/`, fetchJobStats)
     const allowed = isSuper()
-    console.log(resp?.data)
+    console.log(resp)
     return allowed ? (
         <div className='grid lg:grid-cols-2'>
             <div className='pb-5 pl-2'>
@@ -27,7 +28,7 @@ const Dashboard = () => {
                             <AnimatedNumber2
                                 initialValue={0}
                                 component='p'
-                                value={data?.jobs?.month?.previous_count}
+                                value={resp?.jobs?.month?.previous_count}
                                 stepPrecision={0}
                                 style={{ fontSize: 24 }}
                                 duration={1000}
@@ -37,7 +38,7 @@ const Dashboard = () => {
                             <AnimatedNumber2
                                 initialValue={0}
                                 component='p'
-                                value={data?.jobs?.month?.current_count}
+                                value={resp?.jobs?.month?.current_count}
                                 stepPrecision={0}
                                 style={{ fontSize: 24 }}
                                 duration={1000}
@@ -46,15 +47,16 @@ const Dashboard = () => {
                         </div>
                         <span
                             className={`inline-flex gap-4 pt-2.5  ${
-                                data?.jobs?.month?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
+                                resp?.jobs?.month?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
                             }`}
                         >
-                            {data?.jobs?.month?.percentage} %
-                            <span>{data?.jobs?.month?.alteration === 'up' ? UpIcon : DownIcon}</span>
+                            {resp?.jobs?.month?.percentage} %
+                            <span>{resp?.jobs?.month?.alteration === 'up' ? UpIcon : DownIcon}</span>
                         </span>
                     </div>
                 </div>
             </div>
+            <ThrivingSources data={resp?.thriving_sources} />
             <div className='pb-5 pl-2'>
                 <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                     <div className='flex flex-col tracking-widest w-full'>
