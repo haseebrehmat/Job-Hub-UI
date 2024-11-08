@@ -8,6 +8,7 @@ import ThrivingSources from '@modules/dashboard/components/ThrivingSources'
 import JobsComparison from '@modules/dashboard/components/JobsComparison'
 import StatsTitle from '@modules/dashboard/components/StatsTitle'
 import DecliningSources from '@modules/dashboard/components/DecliningSources'
+import ThrivingTechnologies from '@modules/dashboard/components/ThrivingTechnologies'
 
 export {
     Filters,
@@ -20,4 +21,5 @@ export {
     JobsComparison,
     StatsTitle,
     DecliningSources,
+    ThrivingTechnologies,
 }
