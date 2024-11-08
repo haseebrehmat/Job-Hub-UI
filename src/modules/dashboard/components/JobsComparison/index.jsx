@@ -8,7 +8,7 @@ import { formatNum, isset } from '@utils/helpers'
 import { UpIcon, UptoIcon, DownIcon } from '@icons'
 
 const JobsComparison = ({ data = null }) =>
-    isset(data) ? (
+    isset(data) && (data?.current_count > 0 || data?.previous_count > 0) ? (
         <div className='pb-5 pl-2'>
             <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                 <div className='flex flex-col tracking-widest w-full'>

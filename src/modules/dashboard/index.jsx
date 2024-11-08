@@ -53,7 +53,7 @@ const Dashboard = () => {
             <div>
                 {!error ? (
                     <div className='flex flex-col'>
-                        <div className='flex flex-col pt-4 '>
+                        <div className='flex flex-col pb-4'>
                             <div className='w-full'>
                                 {can('view_statistics') && data?.statistics && (
                                     <LeadsAnalytics classes='flex-col space-y-8' data={data?.statistics} />

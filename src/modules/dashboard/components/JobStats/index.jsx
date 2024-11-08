@@ -21,10 +21,6 @@ const JobStats = () => {
             <div className='grid md:grid-cols-2'>
                 <div className='flex flex-col'>
                     <JobsComparison data={data?.jobs?.month} />
-                    <ThrivingSources data={data?.thriving_sources?.month} relative={data?.thriving_source_status} />
-                    <DecliningSources data={data?.declining_sources?.month} relative={data?.declining_source_status} />
-                </div>
-                <div className='flex flex-col'>
                     <ThrivingTechnologies
                         data={data?.thriving_tech_stacks?.month}
                         relative={data?.thriving_tech_stack_status}
@@ -33,6 +29,10 @@ const JobStats = () => {
                         data={data?.declining_tech_stacks?.month}
                         relative={data?.declining_tech_stack_status}
                     />
+                </div>
+                <div className='flex flex-col'>
+                    <ThrivingSources data={data?.thriving_sources?.month} relative={data?.thriving_source_status} />
+                    <DecliningSources data={data?.declining_sources?.month} relative={data?.declining_source_status} />
                     <ThrivingJobTitles data={data?.thriving_titles?.month} />
                 </div>
             </div>
