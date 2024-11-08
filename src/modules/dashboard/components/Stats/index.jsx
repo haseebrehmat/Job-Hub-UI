@@ -20,7 +20,7 @@ const Dashboard = () => {
 
     return allowed && !error ? (
         isLoading ? (
-            <h1 className='mx-auto p-4 text-[#4f9d9b] text-lg'>Loading Trending Jobs Stats....</h1>
+            <h1 className='mx-auto md:p-4 text-[#4f9d9b] text-lg'>Loading Trending Jobs Stats....</h1>
         ) : (
             <div className='grid lg:grid-cols-2'>
                 <JobsComparison data={data?.jobs?.month} />

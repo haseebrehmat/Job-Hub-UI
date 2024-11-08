@@ -49,7 +49,8 @@ const ThrivingSources = ({ data = null, relative = true }) =>
                                     item?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
                                 }`}
                             >
-                                {item?.percentage} %<span>{item?.alteration === 'up' ? UpIcon : DownIcon}</span>
+                                {item?.percentage?.toFixed(2)} %
+                                <span>{item?.alteration === 'up' ? UpIcon : DownIcon}</span>
                             </span>
                         </div>
                     ))}

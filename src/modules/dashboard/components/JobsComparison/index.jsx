@@ -42,7 +42,7 @@ const JobsComparison = ({ data = null }) =>
                             data?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
                         }`}
                     >
-                        {data?.percentage} %<span>{data?.alteration === 'up' ? UpIcon : DownIcon}</span>
+                        {data?.percentage?.toFixed(2)} %<span>{data?.alteration === 'up' ? UpIcon : DownIcon}</span>
                     </span>
                 </div>
             </div>
