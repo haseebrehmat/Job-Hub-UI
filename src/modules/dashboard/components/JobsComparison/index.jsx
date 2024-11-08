@@ -3,12 +3,12 @@ import AnimatedNumber2 from 'react-animated-number'
 
 import { StatsTitle } from '@modules/dashboard/components'
 
-import { formatNum } from '@utils/helpers'
+import { formatNum, isset } from '@utils/helpers'
 
 import { UpIcon, UptoIcon, DownIcon } from '@icons'
 
 const JobsComparison = ({ data = null }) =>
-    data ? (
+    isset(data) ? (
         <div className='pb-5 pl-2'>
             <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                 <div className='flex flex-col tracking-widest w-full'>
@@ -20,7 +20,7 @@ const JobsComparison = ({ data = null }) =>
                         <AnimatedNumber2
                             initialValue={0}
                             component='p'
-                            value={data?.month?.previous_count}
+                            value={data?.previous_count}
                             stepPrecision={0}
                             style={{ fontSize: 24 }}
                             duration={1000}
@@ -30,7 +30,7 @@ const JobsComparison = ({ data = null }) =>
                         <AnimatedNumber2
                             initialValue={0}
                             component='p'
-                            value={data?.month?.current_count}
+                            value={data?.current_count}
                             stepPrecision={0}
                             style={{ fontSize: 24 }}
                             duration={1000}
@@ -39,10 +39,10 @@ const JobsComparison = ({ data = null }) =>
                     </div>
                     <span
                         className={`inline-flex gap-4 pt-2.5  ${
-                            data?.month?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
+                            data?.alteration === 'up' ? 'text-green-500' : 'text-red-500'
                         }`}
                     >
-                        {data?.month?.percentage} %<span>{data?.month?.alteration === 'up' ? UpIcon : DownIcon}</span>
+                        {data?.percentage} %<span>{data?.alteration === 'up' ? UpIcon : DownIcon}</span>
                     </span>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import { memo } from 'react'
 import AnimatedNumber2 from 'react-animated-number'
 import useSWR from 'swr'
 
-import { JobsComparison, ThrivingSources } from '@modules/dashboard/components'
+import { JobsComparison, ThrivingSources, DecliningSources } from '@modules/dashboard/components'
 import { fetchJobStats } from '@modules/dashboard/api'
 import { data } from '@modules/dashboard/api/data'
 
@@ -16,43 +16,9 @@ const Dashboard = () => {
     console.log(resp)
     return allowed ? (
         <div className='grid lg:grid-cols-2'>
-            <JobsComparison data={resp?.jobs} />
-            <ThrivingSources data={resp?.thriving_sources} />
-            <div className='pb-5 pl-2'>
-                <div className='border shadow-lg p-4 rounded-xl flex items-start'>
-                    <div className='flex flex-col tracking-widest w-full'>
-                        <p className='text-lg text-gray-700 border-b font-semibold'>Thriving Job Source</p>
-                        <small className='text-gray-500'>Has Jobs More Than Previous Month</small>
-                        <p className='text-2xl font-semibold italic text-[#4f9d9b] py-2'>
-                            {data?.thriving_source?.month?.source}
-                        </p>
-                        <div className='inline-flex gap-4 items-center'>
-                            <AnimatedNumber2
-                                initialValue={0}
-                                component='p'
-                                value={data?.thriving_source?.month?.previous_count}
-                                stepPrecision={0}
-                                style={{ fontSize: 20 }}
-                                duration={1000}
-                                formatValue={n => formatNum(n)}
-                            />
-                            {UptoIcon}
-                            <AnimatedNumber2
-                                initialValue={0}
-                                component='p'
-                                value={data?.thriving_source?.month?.current_count}
-                                stepPrecision={0}
-                                style={{ fontSize: 20 }}
-                                duration={1000}
-                                formatValue={n => formatNum(n)}
-                            />
-                        </div>
-                        <span className='inline-flex gap-4 text-green-500 pt-2.5'>
-                            {data?.thriving_source?.month?.percentage} %<span>{UpIcon}</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <JobsComparison data={resp?.jobs?.month} />
+            <ThrivingSources data={resp?.thriving_sources?.month} relative={resp?.thriving_source_status} />
+            <DecliningSources data={resp?.declining_sources?.month} relative={resp?.declining_source_status} />
             <div className='pb-5 pl-2'>
                 <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                     <div className='flex flex-col tracking-widest w-full'>

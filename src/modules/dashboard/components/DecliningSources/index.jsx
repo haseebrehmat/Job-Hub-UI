@@ -7,14 +7,14 @@ import { formatNum, isset } from '@utils/helpers'
 
 import { UpIcon, UptoIcon, DownIcon } from '@icons'
 
-const ThrivingSources = ({ data = null, relative = true }) =>
+const DecliningSources = ({ data = null, relative = true }) =>
     isset(data) && data?.length > 0 ? (
         <div className='pb-5 pl-2'>
             <div className='border shadow-lg p-4 rounded-xl flex items-start'>
                 <div className='flex flex-col tracking-widest w-full'>
                     <StatsTitle
-                        title='Thriving Job Sources'
-                        sub={`${relative ? 'List of' : 'Relative Comparison of'} Thrived Job Sources among two months`}
+                        title='Declining Job Sources'
+                        sub={`${relative ? 'List of' : 'Relative Comparison of'} Declined Job Sources among two months`}
                     />
                     {data?.map((item, index) => (
                         <div className='flex items-center justify-between pt-3' key={index}>
@@ -56,4 +56,4 @@ const ThrivingSources = ({ data = null, relative = true }) =>
         </div>
     ) : null
 
-export default memo(ThrivingSources)
+export default memo(DecliningSources)

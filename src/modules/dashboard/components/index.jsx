@@ -7,5 +7,17 @@ import Stats from '@modules/dashboard/components/Stats'
 import ThrivingSources from '@modules/dashboard/components/ThrivingSources'
 import JobsComparison from '@modules/dashboard/components/JobsComparison'
 import StatsTitle from '@modules/dashboard/components/StatsTitle'
+import DecliningSources from '@modules/dashboard/components/DecliningSources'
 
-export { Filters, Statistics, Leads, WarmLeads, TechStacks, Stats, ThrivingSources, JobsComparison, StatsTitle }
+export {
+    Filters,
+    Statistics,
+    Leads,
+    WarmLeads,
+    TechStacks,
+    Stats,
+    ThrivingSources,
+    JobsComparison,
+    StatsTitle,
+    DecliningSources,
+}
