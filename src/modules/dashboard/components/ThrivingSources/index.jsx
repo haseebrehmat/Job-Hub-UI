@@ -14,7 +14,9 @@ const ThrivingSources = ({ data = null, relative = true }) =>
                 <div className='flex flex-col tracking-widest w-full'>
                     <StatsTitle
                         title='Thriving Job Sources'
-                        sub={`${relative ? 'List of' : 'Relative Comparison of'} Thrived Job Sources among two months`}
+                        sub={`${relative ? 'List of' : 'Relative Comparison of'} Thrived Job Sources ${
+                            relative ? 'among two months' : 'for a month'
+                        }`}
                     />
                     {data?.map((item, index) => (
                         <div className='flex items-center justify-between pt-3' key={index}>
