@@ -8,6 +8,7 @@ import {
     ThrivingTechnologies,
     DecliningTechnologies,
     ThrivingJobTitles,
+    StatsSkeleton,
 } from '@modules/dashboard/components'
 import { fetchJobStats } from '@modules/dashboard/api'
 
@@ -16,7 +17,7 @@ const JobStats = () => {
 
     return !error ? (
         isLoading ? (
-            <h1 className='mx-auto md:p-4 text-[#4f9d9b] text-lg'>Loading Trending Jobs Stats....</h1>
+            <StatsSkeleton />
         ) : (
             <div className='grid md:grid-cols-2'>
                 <div className='flex flex-col'>
