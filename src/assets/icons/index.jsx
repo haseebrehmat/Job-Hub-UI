@@ -57,7 +57,7 @@ import {
 import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
 import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
 import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey, TbListDetails } from 'react-icons/tb'
-import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle, FiGlobe } from 'react-icons/fi'
+import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle, FiGlobe, FiTrendingUp, FiTrendingDown } from 'react-icons/fi'
 import {
     AiOutlineSearch,
     AiOutlineEye,
@@ -250,3 +250,5 @@ export const Enable = <BsToggleOn style={{ fontSize: 28 }} />
 export const Disable = <BsToggleOff style={{ fontSize: 28 }} />
 export const RestrictedKeywordsIcon = <ImNotification style={{ fontSize: '22px' }} />
 export const CopyToClipboardIcon = <FaRegCopy style={{ fontSize: 18 }} />
+export const UpIcon = <FiTrendingUp style={{ fontSize: 22 }} />
+export const DownIcon = <FiTrendingDown style={{ fontSize: 22 }} />

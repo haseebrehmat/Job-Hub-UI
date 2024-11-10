@@ -9,3 +9,5 @@ export const fetchDashboardData = ({ from_date, to_date, company }) =>
             tech_jobs: tech_keywords_count_list,
             status: 'success',
         }))
+
+export const fetchJobStats = url => http.get(url).then(({ data }) => data)

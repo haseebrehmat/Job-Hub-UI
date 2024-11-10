@@ -4,7 +4,7 @@ import useSWR from 'swr'
 
 import { Loading, SelectBox } from '@components'
 
-import { Filters, Leads, WarmLeads, TechStacks, LeadsAnalytics } from '@modules/dashboard/components'
+import { Filters, Leads, WarmLeads, TechStacks, JobStats, LeadsAnalytics } from '@modules/dashboard/components'
 import { fetchDashboardData } from '@modules/dashboard/api'
 import { fetchCompanies } from '@modules/userManagement/api'
 
@@ -53,7 +53,7 @@ const Dashboard = () => {
             <div>
                 {!error ? (
                     <div className='flex flex-col'>
-                        <div className='flex flex-col pt-4 '>
+                        <div className='flex flex-col pb-4'>
                             <div className='w-full'>
                                 {can('view_statistics') && data?.statistics && (
                                     <LeadsAnalytics classes='flex-col space-y-8' data={data?.statistics} />
@@ -64,6 +64,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
+                        {isSuper() && <JobStats />}
                         {can('view_dashboard') && (
                             <div className='flex flex-col  space-y-7 md:space-y-16 mt-10'>
                                 {data?.leads && data?.leads?.length > 0 && (
