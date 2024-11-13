@@ -6,7 +6,7 @@ import { StacksDropdown } from '@modules/analytics/components'
 
 import { isset } from '@utils/helpers'
 
-import { SettingIcon, AllowLeadIcon, RemoveExposedToIcon } from '@icons'
+import { OtherFiltersIcon, AllowLeadIcon, RemoveExposedToIcon } from '@icons'
 
 const OtherFilters = ({ values = {}, update = null, apply = null }) => {
     const [showOptions, setShowOptions] = useState(false)
@@ -17,7 +17,7 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
             <div className='relative'>
                 <Button
                     label='Other Filters'
-                    icon={SettingIcon}
+                    icon={OtherFiltersIcon}
                     fit
                     fill={showOptions}
                     classes='!items-center !w-full !m-0 !pr-3 !py-2.5 !rounded-full'
