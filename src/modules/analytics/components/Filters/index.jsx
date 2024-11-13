@@ -6,7 +6,7 @@ import { DateRange, ExportAll, FilterOptions, FilterTypes, OtherFilters } from '
 
 import { DEFAULT_FILTER_VALS } from '@constants/analytics'
 
-import { DateTimeIcon, CandidateFilterIcon } from '@icons'
+import { DateTimeIcon, CandidateFilterIcon, ResetFilterIcon } from '@icons'
 
 const Filters = ({ values, set, data = null }) => {
     const [vals, update] = useReducer((state, newState) => ({ ...state, ...newState }), {
@@ -61,7 +61,13 @@ const Filters = ({ values, set, data = null }) => {
                         values.quarter ||
                         values.percent ||
                         values?.excluded?.length > 0) && (
-                        <Button onClick={clearFilters} label='Clear' fit classes='!px-4 !rounded-full' />
+                        <Button
+                            onClick={clearFilters}
+                            label='Clear'
+                            fit
+                            classes='!pl-2 !pr-3 !gap-1 !rounded-full text-black bg-slate-200 !border-slate-400 hover:!bg-slate-300 hover:!text-black'
+                            icon={ResetFilterIcon}
+                        />
                     )}
                     <ExportAll />
                 </div>

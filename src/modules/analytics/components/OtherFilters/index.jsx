@@ -30,7 +30,7 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
                     onClick={() => setShowOptions(!showOptions)}
                 />
                 {showOptions && (
-                    <div className='absolute right-0 w-72 md:w-max z-50 bg-white rounded border border-[#55bf84] shadow-lg mt-2'>
+                    <div className='absolute right-0 w-72 md:w-96 z-50 bg-white rounded border border-[#55bf84] shadow-lg mt-2'>
                         <div className='flex flex-col gap-3 p-4'>
                             <div className='flex flex-col gap-1'>
                                 <small className='ml-1'>Select Tech Stack(s) to Exclude</small>
