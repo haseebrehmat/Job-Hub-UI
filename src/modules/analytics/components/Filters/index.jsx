@@ -49,7 +49,7 @@ const Filters = ({ values, set, data = null }) => {
                         onClick={() => set({ filter: !values.filter })}
                         fit
                         fill={values.filter}
-                        classes='!gap-1 !pr-3 !rounded-full'
+                        classes='!gap-1 !px-3 !rounded-full'
                     />
                     <OtherFilters values={vals} update={update} apply={applyFilters} />
                     {(values.from ||

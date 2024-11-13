@@ -1,4 +1,4 @@
-import { memo, useState, useRef } from 'react'
+import { memo, useState } from 'react'
 
 import { Button, Input } from '@components'
 
@@ -6,21 +6,15 @@ import { StacksDropdown } from '@modules/analytics/components'
 
 import { isset } from '@utils/helpers'
 
-import { SettingIcon, AllowLeadIcon } from '@icons'
+import { SettingIcon, AllowLeadIcon, RemoveExposedToIcon } from '@icons'
 
 const OtherFilters = ({ values = {}, update = null, apply = null }) => {
-    const dropdownRef = useRef(null)
     const [showOptions, setShowOptions] = useState(false)
-
-    if (showOptions)
-        window.addEventListener('click', event => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) setShowOptions(false)
-        })
 
     return (
         isset(values) &&
         isset(update) && (
-            <div className='relative' ref={dropdownRef}>
+            <div className='relative'>
                 <Button
                     label='Other Filters'
                     icon={SettingIcon}
@@ -30,14 +24,15 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
                     onClick={() => setShowOptions(!showOptions)}
                 />
                 {showOptions && (
-                    <div className='absolute right-0 w-72 md:w-96 z-50 bg-white rounded border border-[#55bf84] shadow-lg mt-2'>
-                        <div className='flex flex-col gap-3 p-4'>
+                    <div className='absolute right-0 w-72 md:w-96 z-50 bg-white rounded border border-[#4ab9a7] shadow-2xl mt-3'>
+                        <div className='flex flex-col gap-3 p-3.5'>
+                            <p className='ml-1 text-lg md:text-xl tracking-wider'>Utility Filters</p>
                             <div className='flex flex-col gap-1'>
-                                <small className='ml-1'>Select Tech Stack(s) to Exclude</small>
+                                <small className='ml-1 md:tracking-wider'>Select Tech Stack(s) to Exclude</small>
                                 <StacksDropdown value={values.excluded} update={update} />
                             </div>
                             <div className='flex flex-col gap-1'>
-                                <small className='ml-1'>Enter percentage to compensate values</small>
+                                <small className='ml-1 md:tracking-wider'>Enter percentage to compensate values</small>
                                 <Input
                                     ph='Percent'
                                     type='number'
@@ -55,7 +50,7 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
                                 />
                             </div>
                             <div className='flex flex-col gap-1'>
-                                <small className='ml-1'>Enter Keywords to Search</small>
+                                <small className='ml-1 md:tracking-wider'>Enter Keywords to Search</small>
                                 <Input
                                     ph='Enter Keywords'
                                     onChange={e => update({ query: e.target.value })}
@@ -63,12 +58,20 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
                                 />
                             </div>
                             {apply && (
-                                <Button
-                                    onClick={apply}
-                                    icon={AllowLeadIcon}
-                                    classes='gap-2 !rounded-full'
-                                    label='Apply'
-                                />
+                                <div className='flex gap-4 items-center md:my-1.5'>
+                                    <Button
+                                        onClick={apply}
+                                        icon={AllowLeadIcon}
+                                        classes='gap-2 !rounded-full'
+                                        label='Apply'
+                                    />
+                                    <Button
+                                        onClick={() => setShowOptions(false)}
+                                        icon={RemoveExposedToIcon}
+                                        classes='!pl-2 !pr-3 !gap-1 !rounded-full text-black bg-slate-200 !border-slate-400 hover:!bg-slate-300 hover:!text-black'
+                                        label='Cancel'
+                                    />
+                                </div>
                             )}
                         </div>
                     </div>
