@@ -63,9 +63,9 @@ const Filters = ({ values, set, data = null }) => {
                         values?.excluded?.length > 0) && (
                         <Button
                             onClick={clearFilters}
-                            label='Clear'
+                            label='Clear Filters'
                             fit
-                            classes='!pl-2 !pr-3 !gap-1 !rounded-full text-black bg-slate-200 !border-slate-400 hover:!bg-slate-300 hover:!text-black'
+                            classes='!pl-2 !pr-3 !gap-1 !rounded-full !text-gray-700 bg-slate-200 !border-slate-400 hover:!bg-slate-300 hover:!text-black'
                             icon={ResetFilterIcon}
                         />
                     )}

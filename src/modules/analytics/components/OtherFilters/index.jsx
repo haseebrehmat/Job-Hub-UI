@@ -68,7 +68,7 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
                                     <Button
                                         onClick={() => setShowOptions(false)}
                                         icon={RemoveExposedToIcon}
-                                        classes='!pl-2 !pr-3 !gap-1 !rounded-full text-black bg-slate-200 !border-slate-400 hover:!bg-slate-300 hover:!text-black'
+                                        classes='!pl-2 !pr-3 !gap-1 !rounded-full !text-gray-700 bg-slate-200 !border-slate-400 hover:!bg-slate-300 hover:!text-black'
                                         label='Cancel'
                                     />
                                 </div>
