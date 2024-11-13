@@ -7,6 +7,9 @@ export const useAnalyticsStore = create(set => ({
     techStack: {
         months: MONTHS.reduce((acc, month) => ({ ...acc, [month.abr]: true }), {}),
     },
+    category: {
+        months: MONTHS.reduce((acc, month) => ({ ...acc, [month.abr]: true }), {}),
+    },
 
     // ------------------- Setters ------------------- //
     toggleTechStack: {
@@ -16,6 +19,16 @@ export const useAnalyticsStore = create(set => ({
                 techStack: {
                     ...state.techStack,
                     months: { ...state.techStack.months, [key]: !state.techStack.months[key] },
+                },
+            })),
+    },
+    toggleCategory: {
+        months: key =>
+            set(state => ({
+                ...state,
+                category: {
+                    ...state.category,
+                    months: { ...state.category.months, [key]: !state.category.months[key] },
                 },
             })),
     },
