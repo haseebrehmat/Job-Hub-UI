@@ -9,8 +9,8 @@ const StatsSkeleton = () => {
                 <div className='animate-pulse flex flex-col w-full gap-3'>
                     <div className='bg-gray-300 h-8 w-1/2' />
                     <div className='bg-gray-200 h-3 w-2/3' />
-                    {Array(records).fill(
-                        <div className='flex items-baseline justify-between'>
+                    {[...Array(records)].map((_, i) => (
+                        <div className='flex items-baseline justify-between' key={i}>
                             <div className='flex flex-col gap-2 w-1/3'>
                                 <div className='bg-gray-300 h-5 w-full' />
                                 {counts && (
@@ -30,7 +30,7 @@ const StatsSkeleton = () => {
                                 )}
                             </div>
                         </div>
-                    )}
+                    ))}
                 </div>
             </div>
         </div>
