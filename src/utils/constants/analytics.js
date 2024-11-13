@@ -60,3 +60,18 @@ export const GRAPHS_DIVS_IDS = [
     'jobs-trends-chart',
     'tech-stack-category-trends-bars',
 ]
+
+export const MONTHS = [
+    { name: 'January', key: 'january', abr: 'jan', color: '#C9B660' },
+    { name: 'February', key: 'february', abr: 'feb', color: '#91C960' },
+    { name: 'March', key: 'march', abr: 'mar', color: '#FF5B33' },
+    { name: 'April', key: 'april', abr: 'apr', color: '#862c4d' },
+    { name: 'May', key: 'may', abr: 'may', color: '#62c9d3' },
+    { name: 'June', key: 'june', abr: 'jun', color: '#5967ff' },
+    { name: 'July', key: 'july', abr: 'jul', color: '#0a7e8c' },
+    { name: 'August', key: 'august', abr: 'aug', color: '#895734' },
+    { name: 'September', key: 'september', abr: 'sep', color: '#890734' },
+    { name: 'October', key: 'october', abr: 'oct', color: '#240046' },
+    { name: 'November', key: 'november', abr: 'nov', color: '#3a506b' },
+    { name: 'December', key: 'december', abr: 'dec', color: '#006ba6' },
+]
