@@ -8,6 +8,7 @@ import { Tooltip as MyTooltip } from '@components'
 import { MonthsLegend } from '@modules/analytics/components'
 
 import { htmlToPng } from '@utils/helpers'
+import { MONTHS } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
@@ -75,18 +76,10 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
                                 fontWeight: 'bold',
                             }}
                         />
-                        <Bar barSize={4} dataKey='january' fill='#C9B660' />
-                        <Bar barSize={4} dataKey='february' fill='#91C960' />
-                        <Bar barSize={4} dataKey='march' fill='#FF5B33' />
-                        <Bar barSize={4} dataKey='april' fill='#862c4d' />
-                        <Bar barSize={4} dataKey='may' fill='#62c9d3' />
-                        <Bar barSize={4} dataKey='june' fill='#5967ff' />
-                        <Bar barSize={4} dataKey='july' fill='#0a7e8c' />
-                        <Bar barSize={4} dataKey='august' fill='#895734' />
-                        <Bar barSize={4} dataKey='september' fill='#890734' />
-                        <Bar barSize={4} dataKey='october' fill='#240046' />
-                        <Bar barSize={4} dataKey='november' fill='#3a506b' />
-                        <Bar barSize={4} dataKey='december' fill='#006ba6' />
+                        {MONTHS.map(
+                            ({ key, color, abr }) =>
+                                months?.[abr] && <Bar barSize={4} dataKey={key} fill={color} key={abr} />
+                        )}
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
