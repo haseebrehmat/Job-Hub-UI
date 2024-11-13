@@ -18,6 +18,7 @@ const Filters = ({ values, set, data = null }) => {
         quarter: values?.quarter,
         query: values?.query,
         percent: values?.percent,
+        minimum: values?.minimum,
         excluded: values?.excluded || [],
         tab: values?.tab || 'custom',
     })
@@ -32,11 +33,12 @@ const Filters = ({ values, set, data = null }) => {
             quarter: vals.quarter,
             tab: vals.tab,
             percent: vals.percent,
+            minimum: vals.minimum,
             excluded: vals.excluded,
         })
     const clearFilters = () => {
-        set({ query: '', percent: '', filter: false, bar: 'total', excluded: [], ...DEFAULT_FILTER_VALS })
-        update({ query: '', percent: '', excluded: [], ...DEFAULT_FILTER_VALS })
+        set({ query: '', percent: '', minimum: '', filter: false, bar: 'total', excluded: [], ...DEFAULT_FILTER_VALS })
+        update({ query: '', percent: '', minimum: '', excluded: [], ...DEFAULT_FILTER_VALS })
     }
     return (
         <div className='text-[#1E6570]'>
@@ -60,6 +62,7 @@ const Filters = ({ values, set, data = null }) => {
                         values.week ||
                         values.quarter ||
                         values.percent ||
+                        values.minimum ||
                         values?.excluded?.length > 0) && (
                         <Button
                             onClick={clearFilters}

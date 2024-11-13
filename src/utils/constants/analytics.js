@@ -23,6 +23,7 @@ export const ANALYTIC_INITIAL_VALUES = {
     filter: false,
     query: '',
     percent: '',
+    minimum: '',
     bar: 'total',
     stack: 'others dev',
     excluded: [],

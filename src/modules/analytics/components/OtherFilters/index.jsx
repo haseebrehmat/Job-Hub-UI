@@ -57,6 +57,18 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
                                     value={values.query}
                                 />
                             </div>
+                            <div className='flex flex-col gap-1'>
+                                <small className='ml-1'>
+                                    <span className='md:tracking-wide'>Enter Minimum Jobs Count</span> (equal or greater
+                                    than value)
+                                </small>
+                                <Input
+                                    ph='Enter Minimum Value'
+                                    type='number'
+                                    onChange={e => update({ minimum: parseInt(e.target.value || 0) })}
+                                    value={values.minimum}
+                                />
+                            </div>
                             {apply && (
                                 <div className='flex gap-4 items-center md:my-1.5'>
                                     <Button
