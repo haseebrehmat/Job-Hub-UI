@@ -21,6 +21,7 @@ import DateRange from '@modules/analytics/components/DateRange'
 import StacksDropdown from '@modules/analytics/components/StacksDropdown'
 import MonthWiseJobTypes from '@modules/analytics/components/MonthWiseJobTypes'
 import JobTypesLegend from '@modules/analytics/components/JobTypesLegend'
+import OtherFilters from '@modules/analytics/components/OtherFilters'
 
 export {
     JobTypeCounts,
@@ -46,4 +47,5 @@ export {
     StacksDropdown,
     MonthWiseJobTypes,
     JobTypesLegend,
+    OtherFilters,
 }
