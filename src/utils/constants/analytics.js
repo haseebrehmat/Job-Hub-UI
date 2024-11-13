@@ -76,3 +76,9 @@ export const MONTHS = [
     { name: 'November', key: 'november', abr: 'nov', color: '#3a506b' },
     { name: 'December', key: 'december', abr: 'dec', color: '#006ba6' },
 ]
+export const QUARTERS = [
+    { name: 'Quarter 1', key: 'q1', color: '#C9B660' },
+    { name: 'Quarter 2', key: 'q2', color: '#91C960' },
+    { name: 'Quarter 3', key: 'q3', color: '#FF5B33' },
+    { name: 'Quarter 4', key: 'q4', color: '#4E6E58' },
+]
