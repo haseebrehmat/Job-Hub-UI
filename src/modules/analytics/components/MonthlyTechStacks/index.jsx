@@ -1,6 +1,8 @@
 import { forwardRef, memo, useRef } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
+import { useAnalyticsStore } from '@/stores'
+
 import { Tooltip as MyTooltip } from '@components'
 
 import { MonthsLegend } from '@modules/analytics/components'
@@ -18,6 +20,8 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
         exportButton?.current?.classList.remove('hidden')
         ref?.current?.style.removeProperty('width')
     }
+
+    const [months, toggle] = useAnalyticsStore(state => [state?.techStack?.months, state?.toggleTechStack?.months])
 
     return data?.data?.length > 0 ? (
         <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative' ref={ref}>
@@ -39,7 +43,7 @@ const MonthlyTechStacks = forwardRef(({ data = [] }, ref) => {
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
             <div className='pt-7 sm:pt-0'>
-                <MonthsLegend />
+                <MonthsLegend months={months} toggle={toggle} />
             </div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
