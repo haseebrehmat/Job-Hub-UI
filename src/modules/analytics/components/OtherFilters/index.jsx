@@ -24,7 +24,7 @@ const OtherFilters = ({ values = {}, update = null, apply = null }) => {
                     onClick={() => setShowOptions(!showOptions)}
                 />
                 {showOptions && (
-                    <div className='absolute right-0 w-72 md:w-96 z-50 bg-white rounded border border-[#4ab9a7] shadow-2xl mt-3'>
+                    <div className='absolute -right-16 md:right-0 w-80 md:w-96 md:min-w-max z-50 bg-white rounded border border-[#4ab9a7] shadow-2xl mt-3'>
                         <div className='flex flex-col gap-3 p-3.5'>
                             <p className='ml-1 text-lg md:text-xl tracking-wider'>Utility Filters</p>
                             <div className='flex flex-col gap-1'>
