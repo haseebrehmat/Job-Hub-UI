@@ -6,14 +6,14 @@ import { QUARTERS } from '@constants/analytics'
 
 import { Checkedbox, unCheckedbox } from '@icons'
 
-const QuartersLegend = ({ quarters = null, toggle = null }) => {
+const QuartersLegend = ({ quarters = null, toggle = null, excluded = [] }) => {
     const toggleQuarter = quarter => {
         if (toggle) toggle(quarter)
     }
-
+    const enabledQuarters = QUARTERS.filter(q => !excluded.includes(q.key))
     return (
         <div className='w-full flex justify-end gap-6 px-4 flex-wrap'>
-            {QUARTERS.slice(0, 3).map(quarter => (
+            {enabledQuarters.map(quarter => (
                 <div className='flex gap-2 items-center' style={{ color: quarter.color }} key={quarter.key}>
                     {isset(quarters) && isset(quarters?.[quarter.key]) ? (
                         <>

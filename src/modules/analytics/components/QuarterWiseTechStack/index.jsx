@@ -47,7 +47,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
             <div className='pt-7 sm:pt-0'>
-                <QuartersLegend quarters={quarters} toggle={toggle} />
+                <QuartersLegend quarters={quarters} toggle={toggle} excluded={['q4']} />
             </div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
