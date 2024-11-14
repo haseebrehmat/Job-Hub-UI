@@ -13,7 +13,7 @@ const QuartersLegend = ({ quarters = null, toggle = null }) => {
 
     return (
         <div className='w-full flex justify-end gap-6 px-4 flex-wrap'>
-            {QUARTERS.map(quarter => (
+            {QUARTERS.slice(0, 3).map(quarter => (
                 <div className='flex gap-2 items-center' style={{ color: quarter.color }} key={quarter.key}>
                     {isset(quarters) && isset(quarters?.[quarter.key]) ? (
                         <>
