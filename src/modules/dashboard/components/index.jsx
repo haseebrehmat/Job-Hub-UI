@@ -12,6 +12,7 @@ import DecliningSources from '@modules/dashboard/components/DecliningSources'
 import ThrivingTechnologies from '@modules/dashboard/components/ThrivingTechnologies'
 import DecliningTechnologies from '@modules/dashboard/components/DecliningTechnologies'
 import ThrivingJobTitles from '@modules/dashboard/components/ThrivingJobTitles'
+import StatsSkeleton from '@modules/dashboard/components/StatsSkeleton'
 
 export {
     Filters,
@@ -28,4 +29,5 @@ export {
     ThrivingTechnologies,
     DecliningTechnologies,
     ThrivingJobTitles,
+    StatsSkeleton,
 }

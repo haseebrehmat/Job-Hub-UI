@@ -1,11 +1,14 @@
 import { forwardRef, memo, useRef } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
+import { useAnalyticsStore } from '@/stores'
+
 import { Tooltip as MyTooltip } from '@components'
 
 import { QuartersLegend } from '@modules/analytics/components'
 
 import { htmlToPng } from '@utils/helpers'
+import { QUARTERS } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
@@ -19,6 +22,11 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
         exportButton?.current?.classList.remove('hidden')
         ref?.current?.style.removeProperty('width')
     }
+
+    const [quarters, toggle] = useAnalyticsStore(state => [
+        state?.techStack?.quarters,
+        state?.toggleTechStack?.quarters,
+    ])
 
     return data?.data?.length > 0 ? (
         <div className='border px-2 pt-10 pb-20 text-[#1E6570] mt-10 relative' ref={ref}>
@@ -39,7 +47,7 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
             <div className='pt-7 sm:pt-4' id='tech-stack-category-trends-bars'>
-                <QuartersLegend />
+                <QuartersLegend quarters={quarters} toggle={toggle} />
                 <div className='flex flex-col overflow-x-auto'>
                     <ResponsiveContainer minWidth={1590} height={900}>
                         <BarChart data={data?.data} margin={{ top: 40, bottom: 100, right: 10, left: 10 }} barSize={10}>
@@ -71,10 +79,12 @@ const QuarterWiseCategory = forwardRef(({ data = [] }, ref) => {
                                     fontWeight: 'bold',
                                 }}
                             />
-                            <Bar dataKey='q1' fill='#C9B660' />
-                            <Bar dataKey='q2' fill='#91C960' />
-                            <Bar dataKey='q3' fill='#FF5B33' />
-                            <Bar dataKey='q4' fill='#4E6E58' />
+                            {QUARTERS.map(
+                                quarter =>
+                                    quarters?.[quarter.key] && (
+                                        <Bar dataKey={quarter.key} fill={quarter.color} key={quarter.key} />
+                                    )
+                            )}
                         </BarChart>
                     </ResponsiveContainer>
                     <div className='items-end justify-end mr-4 py-2 -mt-18 hidden' ref={watermark}>

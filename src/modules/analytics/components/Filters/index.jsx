@@ -1,13 +1,12 @@
 import { memo, useReducer } from 'react'
-import { Tooltip } from 'react-tooltip'
 
-import { Button, Input } from '@components'
+import { Button } from '@components'
 
-import { DateRange, ExportAll, FilterOptions, FilterTypes, StacksDropdown } from '@modules/analytics/components'
+import { DateRange, ExportAll, FilterOptions, FilterTypes, OtherFilters } from '@modules/analytics/components'
 
 import { DEFAULT_FILTER_VALS } from '@constants/analytics'
 
-import { DateTimeIcon, CandidateFilterIcon, AllowLeadIcon } from '@icons'
+import { DateTimeIcon, CandidateFilterIcon, ResetFilterIcon } from '@icons'
 
 const Filters = ({ values, set, data = null }) => {
     const [vals, update] = useReducer((state, newState) => ({ ...state, ...newState }), {
@@ -19,6 +18,7 @@ const Filters = ({ values, set, data = null }) => {
         quarter: values?.quarter,
         query: values?.query,
         percent: values?.percent,
+        minimum: values?.minimum,
         excluded: values?.excluded || [],
         tab: values?.tab || 'custom',
     })
@@ -33,53 +33,27 @@ const Filters = ({ values, set, data = null }) => {
             quarter: vals.quarter,
             tab: vals.tab,
             percent: vals.percent,
+            minimum: vals.minimum,
             excluded: vals.excluded,
         })
     const clearFilters = () => {
-        set({ query: '', percent: '', filter: false, bar: 'total', excluded: [], ...DEFAULT_FILTER_VALS })
-        update({ query: '', percent: '', excluded: [], ...DEFAULT_FILTER_VALS })
+        set({ query: '', percent: '', minimum: '', filter: false, bar: 'total', excluded: [], ...DEFAULT_FILTER_VALS })
+        update({ query: '', percent: '', minimum: '', excluded: [], ...DEFAULT_FILTER_VALS })
     }
     return (
         <div className='text-[#1E6570]'>
             <div className='flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0'>
                 <DateRange start={data?.start_date} end={data?.end_date} />
                 <div className='flex flex-wrap gap-3'>
-                    <StacksDropdown value={vals.excluded} update={update} />
-                    <Input
-                        ph='Percent'
-                        type='number'
-                        onChange={e =>
-                            e?.target?.value === '' ||
-                            (!isNaN(parseFloat(e?.target?.value)) && e?.target?.value >= 0 && e?.target?.value <= 1000)
-                                ? update({ percent: e?.target?.value })
-                                : null
-                        }
-                        value={vals.percent}
-                        classes='!w-28 add-percent'
-                        min={0}
-                        max={1000}
-                    />
-                    <Tooltip
-                        anchorSelect='.add-percent'
-                        content='Enter percentage to compensate values'
-                        className='!text-sm tracking-wide'
-                        variant='info'
-                    />
-                    <Input
-                        ph='Enter Keywords'
-                        onChange={e => update({ query: e.target.value })}
-                        value={vals.query}
-                        classes='lg:!w-56'
-                    />
-                    <Button onClick={applyFilters} icon={AllowLeadIcon} classes='!px-1 apply-btn' fit />
-                    <Tooltip anchorSelect='.apply-btn' content='Search or Apply' />
                     <Button
                         icon={CandidateFilterIcon}
-                        label='Filters'
+                        label='Date Filters'
                         onClick={() => set({ filter: !values.filter })}
                         fit
                         fill={values.filter}
+                        classes='!gap-1 !px-3 !rounded-full'
                     />
+                    <OtherFilters values={vals} update={update} apply={applyFilters} />
                     {(values.from ||
                         values.to ||
                         values.query ||
@@ -88,7 +62,16 @@ const Filters = ({ values, set, data = null }) => {
                         values.week ||
                         values.quarter ||
                         values.percent ||
-                        values?.excluded?.length > 0) && <Button onClick={clearFilters} label='Clear' fit />}
+                        values.minimum ||
+                        values?.excluded?.length > 0) && (
+                        <Button
+                            onClick={clearFilters}
+                            label='Clear Filters'
+                            fit
+                            classes='!pl-2 !pr-3 !gap-1 !rounded-full !text-gray-700 bg-slate-200 !border-slate-400 hover:!bg-slate-300 hover:!text-black'
+                            icon={ResetFilterIcon}
+                        />
+                    )}
                     <ExportAll />
                 </div>
             </div>

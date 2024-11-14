@@ -1,6 +1,8 @@
 import { forwardRef, memo, useRef } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
+import { useAnalyticsStore } from '@/stores'
+
 import { Tooltip as MyTooltip } from '@components'
 
 import { MonthsLegend } from '@modules/analytics/components'
@@ -9,6 +11,7 @@ import { htmlToPng } from '@utils/helpers'
 
 import { DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
+import { MONTHS } from '@/utils/constants/analytics'
 
 const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
     const watermark = useRef('')
@@ -18,6 +21,8 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
         exportButton?.current?.classList.remove('hidden')
         ref?.current?.style.removeProperty('width')
     }
+
+    const [months, toggle] = useAnalyticsStore(state => [state?.category?.months, state?.toggleCategory?.months])
 
     return data?.data?.length > 0 ? (
         <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative' ref={ref}>
@@ -39,7 +44,7 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
             <div className='pt-7 sm:pt-0'>
-                <MonthsLegend />
+                <MonthsLegend months={months} toggle={toggle} />
             </div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
@@ -77,18 +82,9 @@ const MonthlyCategories = forwardRef(({ data = [] }, ref) => {
                                 fontWeight: 'bold',
                             }}
                         />
-                        <Bar dataKey='january' fill='#C9B660' />
-                        <Bar dataKey='february' fill='#91C960' />
-                        <Bar dataKey='march' fill='#FF5B33' />
-                        <Bar dataKey='april' fill='#862c4d' />
-                        <Bar dataKey='may' fill='#62c9d3' />
-                        <Bar dataKey='june' fill='#5967ff' />
-                        <Bar dataKey='july' fill='#0a7e8c' />
-                        <Bar dataKey='august' fill='#895734' />
-                        <Bar dataKey='september' fill='#890734' />
-                        <Bar dataKey='october' fill='#240046' />
-                        <Bar dataKey='november' fill='#3a506b' />
-                        <Bar dataKey='december' fill='#006ba6' />
+                        {MONTHS.map(
+                            ({ key, color, abr }) => months?.[abr] && <Bar dataKey={key} fill={color} key={abr} />
+                        )}
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>

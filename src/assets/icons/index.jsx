@@ -98,6 +98,7 @@ import {
     BiBriefcaseAlt2,
     BiCheckDouble,
     BiSortUp,
+    BiFilterAlt,
 } from 'react-icons/bi'
 import {
     RiUserSettingsLine,
@@ -252,3 +253,4 @@ export const RestrictedKeywordsIcon = <ImNotification style={{ fontSize: '22px' 
 export const CopyToClipboardIcon = <FaRegCopy style={{ fontSize: 18 }} />
 export const UpIcon = <FiTrendingUp style={{ fontSize: 22 }} />
 export const DownIcon = <FiTrendingDown style={{ fontSize: 22 }} />
+export const OtherFiltersIcon = <BiFilterAlt style={{ fontSize: 20 }} />

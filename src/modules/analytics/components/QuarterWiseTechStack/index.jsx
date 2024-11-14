@@ -1,11 +1,14 @@
 import { forwardRef, memo, useRef } from 'react'
 import { CartesianGrid, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
+import { useAnalyticsStore } from '@/stores'
+
 import { Tooltip as MyTooltip } from '@components'
 
-import { htmlToPng } from '@utils/helpers'
-
 import { QuartersLegend } from '@modules/analytics/components'
+
+import { htmlToPng } from '@utils/helpers'
+import { QUARTERS } from '@constants/analytics'
 
 import { DownloadIcon2 } from '@icons'
 import logo from '@images/signin-logo.svg'
@@ -18,6 +21,11 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
         exportButton?.current?.classList.remove('hidden')
         ref?.current?.style.removeProperty('width')
     }
+
+    const [quarters, toggle] = useAnalyticsStore(state => [
+        state?.techStack?.quarters,
+        state?.toggleTechStack?.quarters,
+    ])
 
     return data?.data?.length > 0 ? (
         <div className='border px-2 pt-10 pb-10 text-[#1E6570] mt-10 relative' ref={ref}>
@@ -39,7 +47,7 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
                 <MyTooltip text='Export to png'>{DownloadIcon2}Export</MyTooltip>
             </span>
             <div className='pt-7 sm:pt-0'>
-                <QuartersLegend />
+                <QuartersLegend quarters={quarters} toggle={toggle} excluded={['q4']} />
             </div>
             <div className='overflow-x-auto'>
                 <ResponsiveContainer minWidth={1590} height={750}>
@@ -71,9 +79,12 @@ const QuarterWiseTechStack = forwardRef(({ data = [] }, ref) => {
                                 fontWeight: 'bold',
                             }}
                         />
-                        <Bar dataKey='q1' fill='#C9B660' />
-                        <Bar dataKey='q2' fill='#91C960' />
-                        <Bar dataKey='q3' fill='#FF5B33' />
+                        {QUARTERS.slice(0, 3).map(
+                            quarter =>
+                                quarters?.[quarter.key] && (
+                                    <Bar dataKey={quarter.key} fill={quarter.color} key={quarter.key} />
+                                )
+                        )}
                     </BarChart>
                 </ResponsiveContainer>
                 <div className='items-end justify-end mr-4 py-4 hidden' ref={watermark}>
