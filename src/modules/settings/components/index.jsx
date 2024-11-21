@@ -10,6 +10,7 @@ import TechStackCategoryActions from '@modules/settings/components/TechStackCate
 import ModuleInput from '@modules/settings/components/ModulesInput'
 import JobSourceForm from '@modules/settings/components/JobSourceForm'
 import JobSourceActions from '@modules/settings/components/JobSourceActions'
+import ApiLogsAnalytics from '@modules/settings/components/apiLogsAnalytics'
 
 export {
     IntegrationForm,
@@ -24,4 +25,5 @@ export {
     ModuleInput,
     JobSourceForm,
     JobSourceActions,
+    ApiLogsAnalytics,
 }

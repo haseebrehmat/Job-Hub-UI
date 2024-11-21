@@ -14,7 +14,9 @@ export const saveIntegration = (url, { arg: integration }) => {
 }
 
 export const fetchApiLogs = url =>
-    http.get(url).then(({ data }) => ({ logs: data?.data, pages: data?.links?.num_pages }))
+    http
+        .get(url)
+        .then(({ data }) => ({ logs: data?.data, pages: data?.links?.num_pages, stats: data?.additional_stats }))
 
 export const fetchRegions = url =>
     http.get(url).then(({ data }) => ({
