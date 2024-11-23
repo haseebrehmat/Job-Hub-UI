@@ -6,7 +6,7 @@ import { Loading, Searchbox, EmptyTable, Paginated, Button } from '@components'
 import { fetchApiLogs } from '@modules/settings/api'
 import { ApiLogFilters, ApiLogsAnalytics } from '@modules/settings/components'
 
-import { formatDate2, getSelectedVals, convertToTitleCase } from '@utils/helpers'
+import { formatDate, getSelectedVals, convertToTitleCase } from '@utils/helpers'
 import { API_LOGS_HEADS, API_LOGS_INITIAL_VALUES } from '@constants/settings'
 import { JOB_SOURCES } from '@constants/scrapper'
 
@@ -61,7 +61,7 @@ const ApiLogs = () => {
                                 <td className='p-3 break-words capitalize'>
                                     {JOB_SOURCES[row?.job_source ?? 'other'] ?? convertToTitleCase(row?.job_source)}
                                 </td>
-                                <td className='p-3 break-words'>{formatDate2(row?.created_at)}</td>
+                                <td className='p-3 break-words'>{formatDate(row?.created_at)}</td>
                                 <td className='px-4 py-3 break-words text-md'>{row?.jobs_count || 0}</td>
                                 <td className='p-3 text-2xl font-bold'>
                                     {row?.upload_status ? ValidateTrueIcon : ValidateFalseIcon}

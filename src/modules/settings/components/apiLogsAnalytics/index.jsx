@@ -3,7 +3,7 @@ import AnimatedNumber from 'react-animated-number'
 
 import { Button } from '@components'
 
-import { formatNum, parseAnalytics } from '@utils/helpers'
+import { convertToTitleCase, formatNum, parseAnalytics } from '@utils/helpers'
 
 import { JobsUploaderIcon } from '@icons'
 
@@ -89,7 +89,9 @@ const ApiLogsAnalytics = ({ stats }) => {
                                             formatValue={n => formatNum(n)}
                                         />
                                     </h1>
-                                    <p className=' uppercase text-xs'>{item[0]}</p>
+                                    <p className='tracking-wider text-sm whitespace-pre-line'>
+                                        {convertToTitleCase(item[0])}
+                                    </p>
                                 </div>
                             </div>
                         ))}
