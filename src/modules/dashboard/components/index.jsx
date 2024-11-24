@@ -12,6 +12,7 @@ import DecliningSources from '@modules/dashboard/components/DecliningSources'
 import ThrivingTechnologies from '@modules/dashboard/components/ThrivingTechnologies'
 import DecliningTechnologies from '@modules/dashboard/components/DecliningTechnologies'
 import ThrivingJobTitles from '@modules/dashboard/components/ThrivingJobTitles'
+import EmergingJobTitles from '@modules/dashboard/components/EmergingJobTitles'
 import StatsSkeleton from '@modules/dashboard/components/StatsSkeleton'
 
 export {
@@ -29,5 +30,6 @@ export {
     ThrivingTechnologies,
     DecliningTechnologies,
     ThrivingJobTitles,
+    EmergingJobTitles,
     StatsSkeleton,
 }
