@@ -37,8 +37,8 @@ const apiResp = {
 }
 
 const ApiJobCountsByTechs = () => {
-    const [show, type, setShow] = useApiJobCountsByTechStore(state => [state?.type, state?.show, state?.setShow])
-
+    const [type, show, setShow] = useApiJobCountsByTechStore(state => [state?.type, state?.show, state?.setShow])
+    console.log(type)
     return (
         show && (
             <Modal

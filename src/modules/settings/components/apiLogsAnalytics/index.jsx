@@ -24,14 +24,13 @@ const ApiLogsAnalytics = ({ stats }) => {
 
     const setAnalytics = val => {
         if (val === 's2P') {
-            setType('s2p')
             setS2P(false)
             setStats(parseAnalytics(stats?.stagging_to_production))
         } else {
-            setType('p2s')
             setS2P(true)
             setStats(parseAnalytics(stats?.production_to_sales_engine))
         }
+        setType(val === 's2P' ? 's2p' : 'p2s')
     }
     return (
         <div className='flex flex-row justify-center mt-8'>
