@@ -6,7 +6,7 @@ import { Modal } from '@components'
 
 import { formatDate2 } from '@utils/helpers'
 
-import { BreadIcon, UptoIcon } from '@icons'
+import { FromIcon, UptoIcon, CodeIcon, OthersIcon, DateTimeIcon } from '@icons'
 
 const apiResp = {
     primary_tech_stack_counts: {
@@ -53,19 +53,21 @@ const ApiJobCountsByTechs = () => {
                     <div className='py-2 w-full'>
                         <div className='flex flex-col overflow-y-scroll text-slate-700'>
                             <p className='text-xl'>Job Counts by Tech Stacks for API Logs</p>
-                            <div className='flex flex-col md:flex-row md:items-center gap-2 md:gap-0 justify-between mt-1'>
+                            <div className='flex flex-col md:flex-row md:items-center gap-2 md:gap-0 justify-between mt-1.5'>
                                 <p className='text-slate-500'>
                                     {type === 's2p' ? (
-                                        <span className='inline-flex items-center gap-2'>
-                                            Staging {BreadIcon} Production
+                                        <span className='inline-flex items-center gap-3'>
+                                            Staging {FromIcon} Production
                                         </span>
                                     ) : (
-                                        <span className='inline-flex items-center gap-2'>
-                                            Production {BreadIcon} Sales Engine
+                                        <span className='inline-flex items-center gap-3'>
+                                            Production <span className='text-lg font-bold'>{FromIcon}</span> Sales
+                                            Engine
                                         </span>
                                     )}
                                 </p>
                                 <span className='inline-flex items-center gap-3 text-sm'>
+                                    <span className='text-slate-500'>{DateTimeIcon}</span>
                                     {formatDate2(dates?.start ?? apiResp?.dates?.start)}
                                     {UptoIcon}
                                     {formatDate2(dates?.end ?? apiResp?.dates?.end)}
@@ -74,7 +76,9 @@ const ApiJobCountsByTechs = () => {
                             <hr className='mt-2 mb-4' />
                             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4'>
                                 <div className='flex items-center justify-evenly border border-neutral-400 tracking-wider px-4 py-2 lg:col-span-3 md:col-span-2'>
-                                    <span>Primary Tech Stacks</span>
+                                    <span className='inline-flex items-center gap-3'>
+                                        <span className='text-xl text-slate-500'>{CodeIcon}</span> Primary Tech Stacks
+                                    </span>
                                     <span className='font-mono font-semibold'>
                                         {apiResp?.primary_tech_stack_counts?.overall}
                                     </span>
@@ -88,7 +92,9 @@ const ApiJobCountsByTechs = () => {
                             </div>
                             <div className='grid md:grid-cols-2 gap-2 md:gap-4 mt-4'>
                                 <div className='flex items-center justify-evenly border border-neutral-400 tracking-wider px-4 py-2 md:col-span-2'>
-                                    <span>Others Tech Stacks</span>
+                                    <span className='inline-flex items-center gap-3'>
+                                        <span className='text-xl text-slate-600'>{OthersIcon}</span>Others Tech Stacks
+                                    </span>
                                     <span className='font-mono font-semibold'>
                                         {apiResp?.others_tech_stack_counts?.overall}
                                     </span>

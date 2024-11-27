@@ -22,6 +22,7 @@ import {
     MdBlock,
     MdOutlineHistory,
     MdOutlineNoteAlt,
+    MdOutlineCodeOff,
 } from 'react-icons/md'
 import {
     BsFillFileTextFill,
@@ -87,6 +88,8 @@ import {
     FaUsersCog,
     FaBan,
     FaRegCopy,
+    FaHandPointRight,
+    FaLaptopCode,
 } from 'react-icons/fa'
 import {
     BiPlusCircle,
@@ -254,3 +257,6 @@ export const CopyToClipboardIcon = <FaRegCopy style={{ fontSize: 18 }} />
 export const UpIcon = <FiTrendingUp style={{ fontSize: 22 }} />
 export const DownIcon = <FiTrendingDown style={{ fontSize: 22 }} />
 export const OtherFiltersIcon = <BiFilterAlt style={{ fontSize: 20 }} />
+export const FromIcon = <FaHandPointRight />
+export const CodeIcon = <FaLaptopCode />
+export const OthersIcon = <MdOutlineCodeOff />
