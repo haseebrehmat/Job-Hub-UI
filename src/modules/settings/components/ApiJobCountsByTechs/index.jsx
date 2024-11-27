@@ -37,8 +37,12 @@ const apiResp = {
 }
 
 const ApiJobCountsByTechs = () => {
-    const [type, show, setShow] = useApiJobCountsByTechStore(state => [state?.type, state?.show, state?.setShow])
-    console.log(type)
+    const [dates, type, show, setShow] = useApiJobCountsByTechStore(state => [
+        state?.dates,
+        state?.type,
+        state?.show,
+        state?.setShow,
+    ])
     return (
         show && (
             <Modal
@@ -62,7 +66,9 @@ const ApiJobCountsByTechs = () => {
                                     )}
                                 </p>
                                 <span className='inline-flex items-center gap-3 text-sm'>
-                                    {formatDate2(apiResp?.dates?.start)} {UptoIcon} {formatDate2(apiResp?.dates?.end)}
+                                    {formatDate2(dates?.start ?? apiResp?.dates?.start)}
+                                    {UptoIcon}
+                                    {formatDate2(dates?.end ?? apiResp?.dates?.end)}
                                 </span>
                             </div>
                             <hr className='mt-2 mb-4' />

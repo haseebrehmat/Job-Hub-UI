@@ -1,16 +1,24 @@
 import { memo, useReducer } from 'react'
 
+import { useApiJobCountsByTechStore } from '@/stores'
+
 import { Input, Button, CustomSelector } from '@components'
 
 import { JOB_SOURCE_OPTIONS_UNDERSCORE } from '@constants/scrapper'
 
 const ApiLogFilters = ({ filtered, dispatch }) => {
+    const [setDate] = useApiJobCountsByTechStore(state => [state?.setDates])
+
     const [vals, update] = useReducer((prev, next) => ({ ...prev, ...next }), {
         from: filtered.from,
         to: filtered.to,
         sources: filtered.sources,
     })
-    const applyFilters = () => dispatch({ from: vals.from, to: vals.to, sources: vals.sources })
+    const applyFilters = () => {
+        setDate('start', vals.from)
+        setDate('end', vals.to)
+        dispatch({ from: vals.from, to: vals.to, sources: vals.sources })
+    }
 
     return (
         <div className='flex items-end gap-x-4 gap-y-1 p-3 mt-3 text-[#338d8c] bg-slate-100 border rounded-lg'>

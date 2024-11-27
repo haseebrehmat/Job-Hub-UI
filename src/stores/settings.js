@@ -19,5 +19,5 @@ export const useApiJobCountsByTechStore = create(set => ({
 
     setShow: show => set(state => ({ ...state, show: show || !state.show })),
     setType: type => set(state => ({ ...state, type })),
-    setDates: (value, type) => set(state => ({ ...state, dates: { ...state.dates, [type]: value } })),
+    setDates: (type, value) => set(state => ({ ...state, dates: { ...state.dates, [type]: value } })),
 }))
