@@ -37,7 +37,7 @@ const apiResp = {
 }
 
 const ApiJobCountsByTechs = () => {
-    const [show, setShow] = useApiJobCountsByTechStore(state => [state?.show, state?.setShow])
+    const [show, type, setShow] = useApiJobCountsByTechStore(state => [state?.type, state?.show, state?.setShow])
 
     return (
         show && (
@@ -51,7 +51,7 @@ const ApiJobCountsByTechs = () => {
                             <p className='text-xl'>Job Counts by Tech Stacks for API Logs</p>
                             <div className='flex flex-col md:flex-row md:items-center gap-2 md:gap-0 justify-between mt-1'>
                                 <p className='text-slate-500'>
-                                    {apiResp?.type === 's2p' ? (
+                                    {type === 's2p' ? (
                                         <span className='inline-flex items-center gap-2'>
                                             Staging {BreadIcon} Production
                                         </span>
