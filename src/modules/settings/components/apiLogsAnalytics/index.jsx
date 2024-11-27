@@ -12,28 +12,27 @@ import { convertToTitleCase, formatNum, parseAnalytics } from '@utils/helpers'
 import { JobsUploaderIcon } from '@icons'
 
 const ApiLogsAnalytics = ({ stats }) => {
-    const [type, toggleShow, setType] = useApiJobCountsByTechStore(state => [
+    const [type, show, toggleShow, setType] = useApiJobCountsByTechStore(state => [
         state?.type,
+        state?.show,
         state?.setShow,
         state?.setType,
     ])
 
     const [s2P, setS2P] = useState(type === 'p2s')
     const [stat, setStats] = useState(parseAnalytics(stats?.production_to_sales_engine))
+
     const setAnalytics = val => {
-        console.log(stat)
         if (val === 's2P') {
             setType('s2p')
             setS2P(false)
             setStats(parseAnalytics(stats?.stagging_to_production))
-            console.log(stat)
         } else {
             setType('p2s')
             setS2P(true)
             setStats(parseAnalytics(stats?.production_to_sales_engine))
         }
     }
-    console.log('Here', type)
     return (
         <div className='flex flex-row justify-center mt-8'>
             <div className='border border-1 p-4 m-2 -mr-6 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%] w-48 z-10'>
@@ -116,7 +115,7 @@ const ApiLogsAnalytics = ({ stats }) => {
                         ))}
                 </div>
             </div>
-            <ApiJobCountsByTech />
+            {show && <ApiJobCountsByTech />}
         </div>
     )
 }
