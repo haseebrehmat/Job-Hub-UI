@@ -1,126 +1,126 @@
+import { Filters, Integrations, ResetFilters } from '@svgs'
 import {
-    MdSpaceDashboard,
-    MdNotifications,
-    MdOutlineLogout,
-    MdClose,
-    MdClear,
-    MdOutlineVerifiedUser,
-    MdOutlineKeyboardArrowDown,
-    MdOutlineKeyboardArrowLeft,
-    MdWorkOutline,
-    MdArrowBackIos,
-    MdArrowForwardIos,
-    MdCheckBox,
-    MdCheckBoxOutlineBlank,
-    MdOutlinePostAdd,
-    MdOutlineDriveFolderUpload,
-    MdOutlineKeyboardBackspace,
-    MdOutlineFileDownload,
-    MdLeaderboard,
-    MdCancel,
-    MdDoNotDisturbOn,
-    MdBlock,
-    MdOutlineHistory,
-    MdOutlineNoteAlt,
-    MdOutlineCodeOff,
-} from 'react-icons/md'
-import {
-    BsFillFileTextFill,
-    BsCloudUpload,
-    BsShieldShaded,
-    BsArrowLeftCircle,
-    BsArrowRightCircle,
-    BsCheck2,
-    BsSnow3,
-    BsCollectionFill,
-    BsThreeDotsVertical,
-    BsFillKeyFill,
-    BsFillPlayFill,
-    BsCardList,
-    BsCheckCircleFill,
-    BsArrowRight,
-    BsGrid,
-    BsStars,
-    BsLinkedin,
-    BsSortNumericUpAlt,
-    BsToggleOn,
-    BsToggleOff,
-} from 'react-icons/bs'
-import {
-    HiUser,
-    HiUsers,
-    HiOutlineUsers,
-    HiOutlineWifi,
-    HiOutlineOfficeBuilding,
-    HiOutlineLightBulb,
-    HiLockOpen,
-} from 'react-icons/hi'
-import { HiUserPlus, HiOutlinePencilSquare, HiOutlineSquaresPlus } from 'react-icons/hi2'
-import { IoMdSettings, IoMdContact, IoIosSettings, IoIosNotifications, IoIosCreate } from 'react-icons/io'
-import { TbRefresh, TbCalendarTime, TbBadges, TbKeyOff, TbKey, TbListDetails } from 'react-icons/tb'
-import { FiMenu, FiRefreshCw, FiUser, FiCheckCircle, FiGlobe, FiTrendingUp, FiTrendingDown } from 'react-icons/fi'
-import {
-    AiOutlineSearch,
+    AiFillSetting,
+    AiOutlineArrowDown,
+    AiOutlineCloseCircle,
+    AiOutlineCloudUpload,
     AiOutlineEye,
     AiOutlineEyeInvisible,
     AiOutlineFall,
-    AiOutlineCloseCircle,
-    AiOutlineMinusCircle,
-    AiOutlineCloudUpload,
-    AiOutlineLink,
-    AiFillSetting,
     AiOutlineHistory,
-    AiOutlinePlus,
+    AiOutlineLink,
+    AiOutlineMinusCircle,
     AiOutlinePartition,
-    AiOutlineArrowDown,
+    AiOutlinePlus,
+    AiOutlineSearch,
 } from 'react-icons/ai'
-import { ImSearch, ImCross, ImNotification } from 'react-icons/im'
-import { CgSidebarOpen, CgListTree, CgUnblock } from 'react-icons/cg'
-import { IoNewspaperSharp } from 'react-icons/io5'
 import {
-    FaBriefcase,
-    FaHotjar,
-    FaUsers,
-    FaRegTrashAlt,
-    FaPowerOff,
-    FaRegUserCircle,
-    FaUserEdit,
-    FaUsersCog,
-    FaBan,
-    FaRegCopy,
-    FaHandPointRight,
-    FaLaptopCode,
-} from 'react-icons/fa'
-import {
-    BiPlusCircle,
-    BiMessageDetail,
-    BiPause,
-    BiGitCompare,
-    BiTrendingUp,
-    BiMap,
     BiBriefcaseAlt2,
     BiCheckDouble,
-    BiSortUp,
     BiFilterAlt,
+    BiGitCompare,
+    BiMap,
+    BiMessageDetail,
+    BiPause,
+    BiPlusCircle,
+    BiSortUp,
+    BiTrendingUp,
 } from 'react-icons/bi'
 import {
-    RiUserSettingsLine,
-    RiLock2Fill,
-    RiTeamLine,
-    RiStackFill,
-    RiProfileLine,
-    RiDownloadCloudLine,
-    RiStarFill,
-    RiShieldUserLine,
-    RiMoneyEuroCircleLine,
-} from 'react-icons/ri'
-import { GrDocumentUser } from 'react-icons/gr'
-import { Integrations, Filters, ResetFilters } from '@svgs'
-import { VscVmRunning, VscSourceControl, VscSettings, VscEye } from 'react-icons/vsc'
-import { SiGoogleadsense, SiConvertio } from 'react-icons/si'
-import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
-import { TfiLayoutListThumb } from 'react-icons/tfi'
+    BsArrowLeftCircle,
+    BsArrowRight,
+    BsArrowRightCircle,
+    BsCardList,
+    BsCheck2,
+    BsCheckCircleFill,
+    BsCloudUpload,
+    BsCollectionFill,
+    BsFillFileTextFill,
+    BsFillKeyFill,
+    BsFillPlayFill,
+    BsGrid,
+    BsLinkedin,
+    BsShieldShaded,
+    BsSnow3,
+    BsSortNumericUpAlt,
+    BsStars,
+    BsThreeDotsVertical,
+    BsToggleOff,
+    BsToggleOn,
+} from 'react-icons/bs'
+import { CgListTree, CgSidebarOpen, CgUnblock } from 'react-icons/cg'
+import {
+    FaBan,
+    FaBriefcase,
+    FaHandPointRight,
+    FaHotjar,
+    FaLaptopCode,
+    FaPowerOff,
+    FaRegCopy,
+    FaRegTrashAlt,
+    FaRegUserCircle,
+    FaUserEdit,
+    FaUsers,
+    FaUsersCog,
+} from 'react-icons/fa'
+import { FiCheckCircle, FiGlobe, FiMenu, FiRefreshCw, FiTrendingDown, FiTrendingUp, FiUser } from 'react-icons/fi'
 import { GoShield } from 'react-icons/go'
+import { GrDocumentUser } from 'react-icons/gr'
+import {
+    HiLockOpen,
+    HiOutlineLightBulb,
+    HiOutlineOfficeBuilding,
+    HiOutlineUsers,
+    HiOutlineWifi,
+    HiUser,
+    HiUsers,
+} from 'react-icons/hi'
+import { HiOutlinePencilSquare, HiOutlineSquaresPlus, HiUserPlus } from 'react-icons/hi2'
+import { ImCross, ImNotification, ImSearch } from 'react-icons/im'
+import { IoIosCreate, IoIosNotifications, IoIosSettings, IoMdContact, IoMdSettings } from 'react-icons/io'
+import { IoNewspaperSharp } from 'react-icons/io5'
+import {
+    MdArrowBackIos,
+    MdArrowForwardIos,
+    MdBlock,
+    MdCancel,
+    MdCheckBox,
+    MdCheckBoxOutlineBlank,
+    MdClear,
+    MdClose,
+    MdDoNotDisturbOn,
+    MdLeaderboard,
+    MdNotifications,
+    MdOutlineCodeOff,
+    MdOutlineDriveFolderUpload,
+    MdOutlineFileDownload,
+    MdOutlineHistory,
+    MdOutlineKeyboardArrowDown,
+    MdOutlineKeyboardArrowLeft,
+    MdOutlineKeyboardBackspace,
+    MdOutlineLogout,
+    MdOutlineNoteAlt,
+    MdOutlinePostAdd,
+    MdOutlineVerifiedUser,
+    MdSpaceDashboard,
+    MdWorkOutline,
+} from 'react-icons/md'
+import {
+    RiDownloadCloudLine,
+    RiLock2Fill,
+    RiMoneyEuroCircleLine,
+    RiProfileLine,
+    RiShieldUserLine,
+    RiStackFill,
+    RiStarFill,
+    RiTeamLine,
+    RiUserSettingsLine,
+} from 'react-icons/ri'
+import { RxDoubleArrowRight, RxFace } from 'react-icons/rx'
+import { SiConvertio, SiGoogleadsense } from 'react-icons/si'
+import { TbBadges, TbCalendarTime, TbKey, TbKeyOff, TbListDetails, TbRefresh } from 'react-icons/tb'
+import { TfiLayoutListThumb } from 'react-icons/tfi'
+import { VscEye, VscSettings, VscSourceControl, VscVmRunning } from 'react-icons/vsc'
 
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
