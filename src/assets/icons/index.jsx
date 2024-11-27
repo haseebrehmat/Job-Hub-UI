@@ -122,6 +122,7 @@ import { TbBadges, TbCalendarTime, TbKey, TbKeyOff, TbListDetails, TbRefresh } f
 import { TfiLayoutListThumb } from 'react-icons/tfi'
 import { VscEye, VscSettings, VscSourceControl, VscVmRunning } from 'react-icons/vsc'
 
+// A
 export const ActionsIcons = <BsThreeDotsVertical style={{ fontSize: '20px' }} />
 export const AddSkillIcon = <AiOutlinePlus style={{ fontSize: 14 }} />
 export const AllowLeadIcon = <BsCheckCircleFill style={{ fontSize: 22 }} />
@@ -131,9 +132,11 @@ export const ApiLogsIcon = <TfiLayoutListThumb style={{ fontSize: 16 }} />
 export const AppliedJobs = <FaBriefcase style={{ fontSize: '46px' }} />
 export const AppliedJobsIcon = <BiBriefcaseAlt2 style={{ fontSize: 22 }} />
 export const AssignCandidateIcon = <FaUserEdit style={{ fontSize: 16 }} />
+// B
 export const BackToIcon = <MdOutlineKeyboardBackspace style={{ fontSize: 22 }} />
 export const BlockJobCompanyIcon = <MdBlock style={{ fontSize: 18 }} />
 export const BreadIcon = <RxDoubleArrowRight style={{ fontSize: 20 }} />
+// C
 export const CandidateFilterIcon = <VscSettings style={{ fontSize: 18 }} />
 export const CandidateIcon = <RiStarFill style={{ fontSize: 18 }} />
 export const Checkedbox = <MdCheckBox style={{ fontSize: '22px' }} />
@@ -151,6 +154,7 @@ export const CreateLetterIcon = <IoIosCreate style={{ fontSize: '22px' }} />
 export const CronjobSettingIcon = <AiFillSetting style={{ fontSize: '22px' }} />
 export const CrossIcon = <ImCross />
 export const CurrentPhaseIcon = <TbBadges style={{ fontSize: 16 }} />
+// D
 export const DashboardIcon = <MdSpaceDashboard style={{ fontSize: '20px' }} />
 export const DateTimeIcon = <TbCalendarTime style={{ fontSize: '22px' }} />
 export const DenyLeadIcon = <MdDoNotDisturbOn style={{ fontSize: 22 }} />
@@ -160,18 +164,24 @@ export const DoubleCheckIcon = <BiCheckDouble style={{ fontSize: 18 }} />
 export const DownIcon = <FiTrendingDown style={{ fontSize: 22 }} />
 export const DownloadIcon = <RiDownloadCloudLine style={{ fontSize: '22px' }} />
 export const DownloadIcon2 = <MdOutlineFileDownload style={{ fontSize: '22px' }} />
+// E
 export const EditIcon = <HiOutlinePencilSquare style={{ fontSize: '20px' }} />
 export const Enable = <BsToggleOn style={{ fontSize: 28 }} />
 export const ExpiredJobsIcon = <FaBan style={{ fontSize: 20 }} />
 export const ExposedCandidateIcon = <HiLockOpen style={{ fontSize: 18 }} />
+// F
 export const FilterIcon = <Filters />
 export const FromIcon = <FaHandPointRight />
+// G
 export const GenericSkillIcon = <HiOutlineLightBulb style={{ fontSize: 16 }} />
 export const GridViewIcon = <BsGrid style={{ fontSize: 16 }} />
+// H
 export const HidePassIcon = <AiOutlineEyeInvisible fontSize='1.4em' color='#048C8C' />
 export const HiredIcon = <MdOutlineVerifiedUser fontSize='1.4em' color='#048C8C' />
 export const HistoryIcon = <MdOutlineHistory style={{ fontSize: 20 }} />
+// I
 export const IntegrationIcon = <Integrations />
+// J
 export const JobCompaniesIcon = <FaUsersCog style={{ fontSize: 22 }} />
 export const JobPortalV2Icon = <BsStars style={{ fontSize: 24 }} />
 export const Jobs = <FaBriefcase style={{ fontSize: '22px' }} />
@@ -180,6 +190,7 @@ export const JobSourceLinkIcon = <AiOutlineLink style={{ fontSize: '22px' }} />
 export const JobSourcesIcon = <BsLinkedin style={{ fontSize: 16 }} />
 export const JobsUploaderIcon = <BsCloudUpload style={{ fontSize: '22px' }} />
 export const JobVisibilityIcon = <VscEye style={{ fontSize: 16 }} />
+// L
 export const LeadAppliedByIcon = <RxFace style={{ fontSize: 18 }} />
 export const LeadCandidateIcon = <RiShieldUserLine style={{ fontSize: 18 }} />
 export const LeadIcon = <SiGoogleadsense style={{ fontSize: 18 }} />
@@ -191,7 +202,9 @@ export const LoadMoreIcon = <AiOutlineArrowDown style={{ fontSize: 20 }} />
 export const LoggerIcon = <BsCardList style={{ fontSize: '16px' }} />
 export const LogoutIcon = <MdOutlineLogout style={{ fontSize: '22px' }} />
 export const LogsIcon = <AiOutlineHistory style={{ fontSize: '22px' }} />
+// M
 export const ManagementIcon = <HiOutlineUsers style={{ fontSize: '20px' }} />
+// N
 export const NavbarSearchIcon = <ImSearch className='w-4 h-4 text-[#048C8C]' />
 export const NavBellIcon = <IoIosNotifications fontSize='1.5em' />
 export const NavContactIcon = <IoMdContact fontSize='1.5em' />
@@ -199,11 +212,13 @@ export const NavigationIcon = <FiMenu style={{ fontSize: '22px' }} />
 export const NavSettingIcon = <IoIosSettings fontSize='1.5em' />
 export const NewUserIcon = <HiUserPlus style={{ fontSize: '22px' }} />
 export const NotificationIcon = <MdNotifications style={{ fontSize: '20px' }} />
+// O
 export const OpenSidebarIcon = <CgSidebarOpen fontSize='1.5em' />
 export const OpenSubMenuIcon = <MdOutlineKeyboardArrowDown style={{ fontSize: '22px' }} />
 export const OrderingIcon = <BiSortUp style={{ fontSize: 18 }} />
 export const OtherFiltersIcon = <BiFilterAlt style={{ fontSize: 20 }} />
 export const OthersIcon = <MdOutlineCodeOff />
+// P
 export const PageNext = <MdArrowForwardIos style={{ fontSize: 16 }} />
 export const PagePrev = <MdArrowBackIos style={{ fontSize: 16 }} />
 export const PaginateNext = <BsArrowRightCircle style={{ fontSize: '18px' }} />
@@ -215,6 +230,7 @@ export const PhaseIcon = <CgListTree style={{ fontSize: 18 }} />
 export const PostJobIcon = <MdOutlinePostAdd style={{ fontSize: '22px' }} />
 export const ProspectsIcon = <IoNewspaperSharp fontSize='1.4em' color='#048C8C' />
 export const PseudoIcon = <RiProfileLine style={{ fontSize: 16 }} />
+// R
 export const RecordsLimitIcon = <BsSortNumericUpAlt style={{ fontSize: 16 }} />
 export const RegionIcon = <BiMap style={{ fontSize: 16 }} />
 export const RejectedIcon = <AiOutlineCloseCircle fontSize='1.4em' color='#048C8C' />
@@ -230,6 +246,7 @@ export const RoleIcon = <HiUser style={{ fontSize: '22px' }} VscVmRunning />
 export const RolesIcon = <RiUserSettingsLine style={{ fontSize: '22px' }} />
 export const RunningScrapperIcon = <VscVmRunning style={{ fontSize: '22px' }} />
 export const RunScrapperIcon = <BsFillPlayFill style={{ fontSize: '20px' }} />
+// S
 export const SalaryIcon = <RiMoneyEuroCircleLine style={{ fontSize: 20 }} />
 export const ScrapperIcon = <HiOutlineWifi style={{ fontSize: '20px' }} />
 export const SearchClearIcon = <MdClear fontSize='1.5em' />
@@ -241,11 +258,13 @@ export const SettingIcon = <IoMdSettings style={{ fontSize: '20px' }} />
 export const SignOutIcon = <FaPowerOff style={{ fontSize: '22px' }} />
 export const SiteIcon = <FiGlobe style={{ fontSize: 16 }} />
 export const StatusIcon = <BiGitCompare style={{ fontSize: 18 }} />
+// T
 export const TeamAppliedJobsIcon = <BsCollectionFill style={{ fontSize: '22px' }} />
 export const TeamsIcon = <RiTeamLine style={{ fontSize: '22px' }} />
 export const TechSTack = <RiStackFill style={{ fontSize: '22px' }} />
 export const TotalIcon = <AiOutlineFall fontSize='1.4em' color='#048C8C' />
 export const TrashIcon = <FaRegTrashAlt style={{ fontSize: '16px' }} />
+// U
 export const UnblockJobCompanyIcon = <CgUnblock style={{ fontSize: 22 }} />
 export const unCheckedbox = <MdCheckBoxOutlineBlank style={{ fontSize: '22px' }} />
 export const UpdatePasswordIcon = <BsFillKeyFill style={{ fontSize: '22px' }} />
@@ -256,7 +275,9 @@ export const UptoIcon = <BsArrowRight style={{ fontSize: 14 }} />
 export const UserAppliedJobIcon = <MdWorkOutline style={{ fontSize: '22px' }} />
 export const UserIcon = <FiUser style={{ fontSize: '22px' }} />
 export const UsersIcon = <HiUsers style={{ fontSize: '22px' }} />
+// V
 export const ValidateFalseIcon = <AiOutlineMinusCircle fontSize='1.1em' color='red' />
 export const ValidateTrueIcon = <BsCheck2 fontSize='1.1em' color='green' />
 export const VerticalsAddIcon = <HiOutlineSquaresPlus style={{ fontSize: 22 }} />
+// W
 export const WarmLeadsIcon = <FaHotjar fontSize='1.4em' color='#048C8C' />
