@@ -1,25 +1,36 @@
 import { useState } from 'react'
 import AnimatedNumber from 'react-animated-number'
 
+import { useApiJobCountsByTechStore } from '@/stores'
+
 import { Button } from '@components'
+
+import { ApiJobCountsByTech } from '@modules/settings/components'
 
 import { convertToTitleCase, formatNum, parseAnalytics } from '@utils/helpers'
 
 import { JobsUploaderIcon } from '@icons'
 
 const ApiLogsAnalytics = ({ stats }) => {
-    const [s2P, setS2P] = useState(true)
+    const [type, show, toggleShow, setType] = useApiJobCountsByTechStore(state => [
+        state?.type,
+        state?.show,
+        state?.setShow,
+        state?.setType,
+    ])
+
+    const [s2P, setS2P] = useState(type === 'p2s')
     const [stat, setStats] = useState(parseAnalytics(stats?.production_to_sales_engine))
+
     const setAnalytics = val => {
-        console.log(stat)
         if (val === 's2P') {
             setS2P(false)
             setStats(parseAnalytics(stats?.stagging_to_production))
-            console.log(stat)
         } else {
             setS2P(true)
             setStats(parseAnalytics(stats?.production_to_sales_engine))
         }
+        setType(val === 's2P' ? 's2p' : 'p2s')
     }
     return (
         <div className='flex flex-row justify-center mt-8'>
@@ -45,6 +56,12 @@ const ApiLogsAnalytics = ({ stats }) => {
                             formatValue={n => formatNum(n)}
                         />
                     </h1>
+                    <span
+                        className='pt-2 underline underline-offset-4 italic cursor-pointer'
+                        onClick={() => toggleShow()}
+                    >
+                        See Details
+                    </span>
                 </div>
             </div>
             <div className='flex flex-col bg-slate-100 py-4 rounded-3xl'>
@@ -68,35 +85,39 @@ const ApiLogsAnalytics = ({ stats }) => {
                 </div>
                 <div className='grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 items-center px-10  mt-4'>
                     {stat?.length > 0 &&
-                        stat?.map((item, index) => (
-                            <div
-                                className='truncate break-words border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'
-                                key={index}
-                            >
-                                <div>
-                                    <h1 className='text-md font-bold'>
-                                        <AnimatedNumber
-                                            component='p'
-                                            initialValue={0}
-                                            value={item[1]}
-                                            stepPrecision={0}
-                                            style={{
-                                                transition: '0.8s ease-out',
-                                                fontSize: 22,
-                                                transitionProperty: 'background-color, color, opacity',
-                                            }}
-                                            duration={1000}
-                                            formatValue={n => formatNum(n)}
-                                        />
-                                    </h1>
-                                    <p className='tracking-wider text-sm whitespace-pre-line'>
-                                        {convertToTitleCase(item[0])}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                        stat?.map(
+                            (item, index) =>
+                                item[0] !== 'total_techStackWise_jobs' && (
+                                    <div
+                                        className='truncate break-words border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'
+                                        key={index}
+                                    >
+                                        <div>
+                                            <h1 className='text-md font-bold'>
+                                                <AnimatedNumber
+                                                    component='p'
+                                                    initialValue={0}
+                                                    value={item[1]}
+                                                    stepPrecision={0}
+                                                    style={{
+                                                        transition: '0.8s ease-out',
+                                                        fontSize: 22,
+                                                        transitionProperty: 'background-color, color, opacity',
+                                                    }}
+                                                    duration={1000}
+                                                    formatValue={n => formatNum(n)}
+                                                />
+                                            </h1>
+                                            <p className='tracking-wider text-sm whitespace-pre-line'>
+                                                {convertToTitleCase(item[0])}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )
+                        )}
                 </div>
             </div>
+            {show && <ApiJobCountsByTech counts={stat?.at(-1)?.at(1)} />}
         </div>
     )
 }

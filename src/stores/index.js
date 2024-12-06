@@ -1,7 +1,7 @@
 import { useJobPortalFiltersStore, useVisitedJobsStore } from '@/stores/jobPortal'
 import { useGroupLinksStore, useResctrictedKeywordsStore } from '@/stores/scraper'
 import { useJobPortalV2Store } from '@/stores/jobPortal-v2'
-import { useDynamicJobSourcesStore } from '@/stores/settings'
+import { useDynamicJobSourcesStore, useApiJobCountsByTechStore } from '@/stores/settings'
 import { useAnalyticsStore } from '@/stores/analytics'
 
 export {
@@ -12,4 +12,5 @@ export {
     useDynamicJobSourcesStore,
     useResctrictedKeywordsStore,
     useAnalyticsStore,
+    useApiJobCountsByTechStore,
 }

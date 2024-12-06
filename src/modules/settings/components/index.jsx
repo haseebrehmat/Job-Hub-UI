@@ -11,6 +11,7 @@ import ModuleInput from '@modules/settings/components/ModulesInput'
 import JobSourceForm from '@modules/settings/components/JobSourceForm'
 import JobSourceActions from '@modules/settings/components/JobSourceActions'
 import ApiLogsAnalytics from '@modules/settings/components/apiLogsAnalytics'
+import ApiJobCountsByTech from '@modules/settings/components/ApiJobCountsByTechs'
 
 export {
     IntegrationForm,
@@ -26,4 +27,5 @@ export {
     JobSourceForm,
     JobSourceActions,
     ApiLogsAnalytics,
+    ApiJobCountsByTech,
 }
