@@ -95,13 +95,13 @@ export const menuItems = [
             //     svg: Jobs,
             //     perms: ['view_job_portal'],
             // },
-            // {
-            //     label: 'Job Portal 2.0',
-            //     link: '/jobs-portal/v2',
-            //     svg: JobPortalV2Icon,
-            //     perms: ['view_job_portal'],
-            //     new: true,
-            // },
+            {
+                label: 'Job Portal v2',
+                link: '/jobs-portal/v2',
+                svg: JobPortalV2Icon,
+                perms: ['view_job_portal'],
+                // new: true,
+            },
             // {
             //     label: 'Cover Letter',
             //     link: '/coverletter',
