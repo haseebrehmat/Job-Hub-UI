@@ -4,39 +4,11 @@ import { useApiJobCountsByTechStore } from '@/stores'
 
 import { Modal } from '@components'
 
-import { formatDate2 } from '@utils/helpers'
+import { formatDate2, isset } from '@utils/helpers'
 
-import { FromIcon, UptoIcon, CodeIcon, OthersIcon, DateTimeIcon } from '@icons'
+import { FromIcon, UptoIcon, CodeIcon, DateTimeIcon } from '@icons'
 
-const apiResp = {
-    primary_tech_stack_counts: {
-        overall: 360,
-        data: [
-            { tech: 'php', jobs: 10 },
-            { tech: 'python', jobs: 20 },
-            { tech: 'java', jobs: 30 },
-            { tech: 'c++', jobs: 40 },
-            { tech: 'c#', jobs: 50 },
-            { tech: 'javascript', jobs: 60 },
-            { tech: 'ruby', jobs: 70 },
-            { tech: 'go', jobs: 80 },
-        ],
-    },
-    others_tech_stack_counts: {
-        overall: 100,
-        data: [
-            { tech: 'others', jobs: 90 },
-            { tech: 'others dev', jobs: 10 },
-        ],
-    },
-    dates: {
-        start: '2020-01-01',
-        end: '2021-01-01',
-    },
-    type: 's2p', // 'p2s'
-}
-
-const ApiJobCountsByTechs = () => {
+const ApiJobCountsByTechs = ({ counts }) => {
     const [dates, type, show, setShow] = useApiJobCountsByTechStore(state => [
         state?.dates,
         state?.type,
@@ -50,7 +22,7 @@ const ApiJobCountsByTechs = () => {
                 show={show}
                 setShow={setShow}
                 content={
-                    <div className='py-2 w-full'>
+                    <div className='pt-2 w-full'>
                         <div className='flex flex-col overflow-y-scroll text-slate-700'>
                             <p className='text-xl'>Job Counts by Tech Stacks for API Logs</p>
                             <div className='flex flex-col md:flex-row md:items-center gap-2 md:gap-0 justify-between mt-1.5'>
@@ -68,44 +40,41 @@ const ApiJobCountsByTechs = () => {
                                 </p>
                                 <span className='inline-flex items-center gap-3 text-sm'>
                                     <span className='text-slate-500'>{DateTimeIcon}</span>
-                                    {formatDate2(dates?.start ?? apiResp?.dates?.start)}
+                                    {formatDate2(dates?.start)}
                                     {UptoIcon}
-                                    {formatDate2(dates?.end ?? apiResp?.dates?.end)}
+                                    {formatDate2(dates?.end)}
                                 </span>
                             </div>
                             <hr className='mt-2 mb-4' />
                             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4'>
-                                <div className='flex items-center justify-evenly border border-neutral-400 tracking-wider px-4 py-2 lg:col-span-3 md:col-span-2'>
-                                    <span className='inline-flex items-center gap-3'>
-                                        <span className='text-xl text-slate-500'>{CodeIcon}</span> Primary Tech Stacks
-                                    </span>
-                                    <span className='font-mono font-semibold'>
-                                        {apiResp?.primary_tech_stack_counts?.overall}
-                                    </span>
-                                </div>
-                                {apiResp?.primary_tech_stack_counts?.data?.map((row, idx) => (
-                                    <div className='flex items-center justify-between border px-4 py-2' key={idx}>
-                                        <span>{row?.tech}</span>
-                                        <span className='font-mono font-semibold'>{row?.jobs}</span>
+                                {isset(counts) && counts ? (
+                                    <>
+                                        <div className='flex items-center justify-evenly border border-neutral-400 tracking-wider px-4 py-2 lg:col-span-3 md:col-span-2'>
+                                            <span className='inline-flex items-center gap-3'>
+                                                <span className='text-xl text-slate-500'>{CodeIcon}</span> Primary Tech
+                                                Stacks
+                                            </span>
+                                        </div>
+                                        {Object.keys(counts)?.map((row, idx) => (
+                                            <div
+                                                className='flex items-center justify-between border px-4 py-2'
+                                                key={idx}
+                                            >
+                                                <span>{row}</span>
+                                                <span className='font-mono font-semibold'>{counts?.[row]}</span>
+                                            </div>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <div className='lg:col-span-3 md:col-span-2 mx-auto p-3 italic'>
+                                        Not data regarding tech stacks available right now, Only
+                                        <strong className='ml-1'>Overall Count</strong> is available in Logs.
                                     </div>
-                                ))}
+                                )}
                             </div>
-                            <div className='grid md:grid-cols-2 gap-2 md:gap-4 mt-4'>
-                                <div className='flex items-center justify-evenly border border-neutral-400 tracking-wider px-4 py-2 md:col-span-2'>
-                                    <span className='inline-flex items-center gap-3'>
-                                        <span className='text-xl text-slate-600'>{OthersIcon}</span>Others Tech Stacks
-                                    </span>
-                                    <span className='font-mono font-semibold'>
-                                        {apiResp?.others_tech_stack_counts?.overall}
-                                    </span>
-                                </div>
-                                {apiResp?.others_tech_stack_counts?.data?.map((row, idx) => (
-                                    <div className='flex items-center justify-between border px-4 py-2' key={idx}>
-                                        <span>{row?.tech}</span>
-                                        <span className='font-mono font-semibold'>{row?.jobs}</span>
-                                    </div>
-                                ))}
-                            </div>
+                            <small className='italic font-semibold text-slate-500 tracking-wide mt-2'>
+                                # Data related Tech stacks only be available from Dec 08, 2023 to onwards
+                            </small>
                         </div>
                     </div>
                 }

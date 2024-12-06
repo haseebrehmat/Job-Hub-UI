@@ -85,36 +85,39 @@ const ApiLogsAnalytics = ({ stats }) => {
                 </div>
                 <div className='grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 items-center px-10  mt-4'>
                     {stat?.length > 0 &&
-                        stat?.map((item, index) => (
-                            <div
-                                className='truncate break-words border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'
-                                key={index}
-                            >
-                                <div>
-                                    <h1 className='text-md font-bold'>
-                                        <AnimatedNumber
-                                            component='p'
-                                            initialValue={0}
-                                            value={item[1]}
-                                            stepPrecision={0}
-                                            style={{
-                                                transition: '0.8s ease-out',
-                                                fontSize: 22,
-                                                transitionProperty: 'background-color, color, opacity',
-                                            }}
-                                            duration={1000}
-                                            formatValue={n => formatNum(n)}
-                                        />
-                                    </h1>
-                                    <p className='tracking-wider text-sm whitespace-pre-line'>
-                                        {convertToTitleCase(item[0])}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                        stat?.map(
+                            (item, index) =>
+                                item[0] !== 'total_techStackWise_jobs' && (
+                                    <div
+                                        className='truncate break-words border border-1 p-6 mx-4 my-2 text-center bg-[#EDFDFB] text-[#1E6570] flex justify-center rounded-xl shadow-lg hover:bg-[#e0fcf8] hover:transform hover:scale-[110%]'
+                                        key={index}
+                                    >
+                                        <div>
+                                            <h1 className='text-md font-bold'>
+                                                <AnimatedNumber
+                                                    component='p'
+                                                    initialValue={0}
+                                                    value={item[1]}
+                                                    stepPrecision={0}
+                                                    style={{
+                                                        transition: '0.8s ease-out',
+                                                        fontSize: 22,
+                                                        transitionProperty: 'background-color, color, opacity',
+                                                    }}
+                                                    duration={1000}
+                                                    formatValue={n => formatNum(n)}
+                                                />
+                                            </h1>
+                                            <p className='tracking-wider text-sm whitespace-pre-line'>
+                                                {convertToTitleCase(item[0])}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )
+                        )}
                 </div>
             </div>
-            {show && <ApiJobCountsByTech />}
+            {show && <ApiJobCountsByTech counts={stat?.at(-1)?.at(1)} />}
         </div>
     )
 }
