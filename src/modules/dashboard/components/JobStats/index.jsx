@@ -9,6 +9,7 @@ import {
     DecliningTechnologies,
     ThrivingJobTitles,
     StatsSkeleton,
+    EmergingJobTitles,
 } from '@modules/dashboard/components'
 import { fetchJobStats } from '@modules/dashboard/api'
 
@@ -35,6 +36,7 @@ const JobStats = () => {
                     <ThrivingSources data={data?.thriving_sources?.month} relative={data?.thriving_source_status} />
                     <DecliningSources data={data?.declining_sources?.month} relative={data?.declining_source_status} />
                     <ThrivingJobTitles data={data?.thriving_titles?.month} />
+                    <EmergingJobTitles data={data?.emerging_titles?.month} />
                 </div>
             </div>
         )
