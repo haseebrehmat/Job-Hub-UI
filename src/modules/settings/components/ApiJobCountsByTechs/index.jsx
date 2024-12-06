@@ -7,6 +7,7 @@ import { Modal } from '@components'
 import { formatDate2, isset } from '@utils/helpers'
 
 import { FromIcon, UptoIcon, CodeIcon, DateTimeIcon } from '@icons'
+import { today } from '@/utils/constants/dashboard'
 
 const ApiJobCountsByTechs = ({ counts }) => {
     const [dates, type, show, setShow] = useApiJobCountsByTechStore(state => [
@@ -40,9 +41,9 @@ const ApiJobCountsByTechs = ({ counts }) => {
                                 </p>
                                 <span className='inline-flex items-center gap-3 text-sm'>
                                     <span className='text-slate-500'>{DateTimeIcon}</span>
-                                    {formatDate2(dates?.start)}
+                                    {formatDate2(dates?.start ?? '2022-12-08')}
                                     {UptoIcon}
-                                    {formatDate2(dates?.end)}
+                                    {formatDate2(dates?.end ?? today)}
                                 </span>
                             </div>
                             <hr className='mt-2 mb-4' />
