@@ -1,26 +1,80 @@
- <p align="center">
-    <img width="300" src="https://user-images.githubusercontent.com/85288256/220799197-734504e0-81b7-4b0c-bd49-2225161e0045.png" alt="https://octagonapp.io/">
-    </p>
-    
-<h1 align="center">    
-Octagon - We do the hard work so you don't have to.
-  </h1>
+# React + Vite Project
 
+This project is built with React.js and Vite, providing a modern and efficient development environment for building web applications.
 
-## Tracking Project Status - Octagon (FrontEnd)
+## Features
 
-We use the [SCRUM](https://www.scrum.org/resources/what-is-scrum) framework for project management. 
-All active and closed issues can be viewed on the [Jira](https://www.atlassian.com/software/jira). Some useful links for reference:
+- ⚡️ Lightning fast development with Vite
+- ⚛️ React 18 with latest features
+- 📦 Smart bundling and optimization
+- 🔧 TypeScript support
+- 🎨 CSS modules and PostCSS support
+- 🔄 Hot Module Replacement (HMR)
 
-| Resource                      | Link                                                                                                                |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------- |     
-| Jira - Project Board          | [Octagon - Jira Software Project](https://devsinc.atlassian.net/jira/software/projects/OC/boards/22)                |
-| JSM - Help Desk               | [Octagon - Customer Support](https://devsinc.atlassian.net/servicedesk/customer/portal/8)                           |
-| Atlas - Teamwork Directory    | [Octagon - Atlas - Release Notes](https://team.atlassian.com/project/DEVSI1-4)                                      |
-| Compass - A developer Exp     | [Octagon - Compass](https://devsinc.atlassian.net/compass/component/b4c343cc-e008-4417-963d-a071155335cb)           |
-| Confluence Documentation      | [Octagon - Confluence](https://devsinc.atlassian.net/wiki/spaces/OC/overview)                                       |
-| Postman-API docs & Automation | [Octagon - PostmanTeam](https://octagonapp.postman.co/)                                                             |
-| Test Plan - Automation        | [Octagon - SQA Strategy](https://devsinc.atlassian.net/wiki/spaces/OC/pages/699367438/Octagon+-+Testing+Strategy)   | 
-| Development - Coding Standards| [Octagon - Coding Standards](https://devsinc.atlassian.net/wiki/spaces/OC/pages/687276056/Standards)                |
+## Prerequisites
 
+Before you begin, ensure you have the following installed:
+- Node.js (version 16.0 or higher)
+- npm (version 7.0 or higher)
 
+## Getting Started
+
+1. Clone the repository:
+```bash
+git clone https://github.com/haseebrehmat/Job-Hub-UI.git
+cd Job-Hub-UI
+```
+
+2. Install dependencies:
+```bash
+yarn install
+```
+
+3. Start the development server:
+```bash
+yarn run dev
+```
+
+4. Build for production:
+```bash
+yarn run build
+```
+
+## Project Structure
+
+```
+your-project-name/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── App.jsx
+│   └── main.jsx
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+## Available Scripts
+
+- `yarn run dev` - Start development server
+- `yarn run build` - Build for production
+- `yarn run preview` - Preview production build locally
+- `yarn run lint` - Run ESLint
+- `yarn test` - Run tests
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Acknowledgments
+
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [Node.js](https://nodejs.org/)
